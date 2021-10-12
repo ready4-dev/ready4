@@ -10,3 +10,4 @@
 ^data-raw/gnrcs/generics\.R$
 ^\.github$
 ^initial_setup\.R$
+^data-raw/generics/grp_generics\.R$

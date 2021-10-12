@@ -1,0 +1,25 @@
+development:
+  mode: auto
+reference:
+- title: "Functions"
+- contents:
+  - make_gnrc_imports
+- title: "Generics"
+- contents:
+  - author
+  - authorClasses
+  - authorData
+  - authorFunctions
+  - characterize
+  - enhance
+  - ingest
+  - investigate
+  - manufacture
+  - metamorphose
+  - procure
+  - prognosticate
+  - reckon
+  - renew
+  - ratify
+  - report
+  - share
