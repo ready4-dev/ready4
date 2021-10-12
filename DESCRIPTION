@@ -1,0 +1,32 @@
+Package: ready4
+Title: Generic Functions for Modular Mental Health Models
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7407-9194")),
+    person("Orygen", role = c("cph", "fnd")),
+    person("VicHealth", role = "fnd"),
+    person("Victoria University", role = "fnd")
+  )
+Description: ready4 provides a set of generic functions that are designed
+    for use across the ready4 suite of packages.  This development version
+    of the ready4 package has been made available as part of the process
+    of testing and documenting the package. If you have any questions,
+    please contact the authors (matthew.hamilton@orygen.org.au).
+License: GPL-3 + file LICENSE
+URL: https://ready4-dev.github.io/ready4/,
+    https://github.com/ready4-dev/ready4,
+    https://ready4-dev.github.io/ready4/
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    knitr,
+    lifecycle,
+    testthat
+VignetteBuilder: knitr
+Depends: 
+    generics
+Suggests: 
+    rmarkdown
