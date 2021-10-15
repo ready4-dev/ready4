@@ -1,6 +1,6 @@
 Package: ready4
 Title: Generic Functions for Modular Mental Health Models
-Version: 0.0.0.9004
+Version: 0.0.0.9005
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -22,10 +22,22 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
+    dataverse,
+    dplyr,
+    fs,
+    Hmisc,
     knitr,
     lifecycle,
-    stats,
-    testthat
+    magrittr,
+    methods,
+    purrr,
+    rlang,
+    stringi,
+    stringr,
+    testit,
+    testthat,
+    tibble,
+    utils
 VignetteBuilder: knitr
 Depends: 
     generics
