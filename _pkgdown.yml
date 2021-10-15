@@ -1,9 +1,20 @@
+home:
+  links:
+  - text: Manual - User (PDF)
+    href: https://dataverse.harvard.edu/api/access/datafile/5254672
+  - text: Manual - Developer (PDF)
+    href: https://dataverse.harvard.edu/api/access/datafile/5254671
+  - text: Project website
+    href:  https://ready4-dev.github.io/ready4/
 development:
   mode: auto
 reference:
 - title: "Functions"
 - contents:
-  - make_gnrc_imports
+  - get_dv_fls_urls
+  - get_from_lup_obj
+  - get_rds_from_dv
+  - write_ws
 - title: "Generics"
 - contents:
   - author

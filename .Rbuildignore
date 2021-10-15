@@ -11,3 +11,8 @@
 ^\.github$
 ^initial_setup\.R$
 ^data-raw/generics/grp_generics\.R$
+^data-raw/fns/add\.R$
+^data-raw/fns/get\.R$
+^data-raw/fns/remove\.R$
+^data-raw/fns/rowbind\.R$
+^data-raw/fns/write\.R$
