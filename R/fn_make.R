@@ -39,6 +39,21 @@ make_files_tb <- function(paths_to_dirs_chr, # Make output into a class? Make fn
                               length())
     return(files_tb)
 }
+make_gnrc_imports <- function(){
+  generics_chr <- methods::getGenerics("package:ready4")@.Data
+    # c(
+    # "author","authorClasses","authorData","authorFunctions",
+    # "characterize","enhance","ingest","investigate","manufacture",
+    # "metamorphose","procure","prognosticate",
+    # "reckon","renew","ratify","report","share")
+  gnrc_imports_chr <- rep("ready4",length(generics_chr)) %>% stats::setNames(generics_chr)
+  more_generics_chr <- ls("package:generics")
+  more_generics_chr <- setdiff(more_generics_chr, generics_chr)
+  gnrc_imports_chr <- c(gnrc_imports_chr,
+                        rep("generics",length(more_generics_chr)) %>% stats::setNames(more_generics_chr))
+
+  return(gnrc_imports_chr)
+}
 #' Make list phrase
 #' @description make_list_phrase() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make list phrase. The function returns List phrase (a character vector of length one).
 #' @param items_chr Items (a character vector)
