@@ -51,8 +51,7 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
         id_1L_chr <- get_from_lup_obj(ds_ls$files[, names(ds_ls$files) %>%
             unique()] %>% tibble::as_tibble(), match_var_nm_1L_chr = ifelse(fl_nm_1L_chr %in%
             ds_ls$files$originalFileName, "originalFileName",
-            "filename"), match_value_xx = fl_nm_1L_chr, target_var_nm_1L_chr = "id",
-            evaluate_1l_lgl = F)
+            "filename"), match_value_xx = fl_nm_1L_chr, target_var_nm_1L_chr = "id")
     }
     else {
         id_1L_chr <- NA_character_
@@ -65,7 +64,7 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 #' @param match_value_xx Match value (an output object of multiple potential types)
 #' @param match_var_nm_1L_chr Match variable name (a character vector of length one)
 #' @param target_var_nm_1L_chr Target variable name (a character vector of length one)
-#' @param evaluate_1L_lgl Evaluate (a logical vector), Default: TRUE
+#' @param evaluate_1L_lgl Evaluate (a logical vector), Default: FALSE
 #' @return Return object (an output object of multiple potential types)
 #' @rdname get_from_lup_obj
 #' @export
@@ -73,7 +72,7 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 #' @importFrom rlang sym
 #' @importFrom stringr str_detect str_locate str_sub
 get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_chr,
-    target_var_nm_1L_chr, evaluate_1L_lgl = TRUE)
+    target_var_nm_1L_chr, evaluate_1L_lgl = FALSE)
 {
     return_object_ref <- data_lookup_tb %>% dplyr::filter(!!rlang::sym(match_var_nm_1L_chr) ==
         match_value_xx) %>% dplyr::select(!!target_var_nm_1L_chr) %>%
