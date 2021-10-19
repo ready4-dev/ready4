@@ -9,7 +9,7 @@ get_from_lup_obj(
   match_value_xx,
   match_var_nm_1L_chr,
   target_var_nm_1L_chr,
-  evaluate_lgl = TRUE
+  evaluate_1L_lgl = TRUE
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ get_from_lup_obj(
 
 \item{target_var_nm_1L_chr}{Target variable name (a character vector of length one)}
 
-\item{evaluate_lgl}{Evaluate (a logical vector), Default: TRUE}
+\item{evaluate_1L_lgl}{Evaluate (a logical vector), Default: TRUE}
 }
 \value{
 Return object (an output object of multiple potential types)
