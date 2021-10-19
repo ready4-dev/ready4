@@ -9,6 +9,46 @@ write_all_tbs_in_tbs_r4_to_csvs <- function(tbs_r4,
                                 lup_dir_1L_chr = lup_dir_1L_chr,
                                 pfx_1L_chr = pfx_1L_chr))
 }
+write_dv_fl_to_loc <- function(ds_ui_1L_chr,
+                               fl_nm_1L_chr = NA_character_,
+                               fl_id_1L_int = NA_integer_,
+                               repo_fl_fmt_1L_chr,
+                               key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                               server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                               save_type_1L_chr = "original",
+                               dest_path_1L_chr,
+                               consent_1L_chr = ""){
+  ds_ls <- dataverse::get_dataset(ds_ui_1L_chr)
+  if(ds_ls$versionState != "DRAFT"){
+    if(!is.na(fl_id_1L_int)){
+      ds_ui_1L_chr <- NULL
+    }
+    if(!consent_1L_chr %in% c("Y", "N")){
+      consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
+                                                         paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
+                                                         " to ",
+                                                         dest_path_1L_chr),
+                                    options_chr = c("Y", "N"),
+                                    force_from_opts_1L_chr = T)
+    }
+    if(consent_1L_chr %in% c("Y")){
+      writeBin(dataverse::get_file(ifelse(is.na(fl_id_1L_int),
+                                          paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
+                                          fl_id_1L_int),
+                                   dataset = ds_ui_1L_chr,
+                                   format = save_type_1L_chr,
+                                   key = key_1L_chr,
+                                   server = server_1L_chr),
+               dest_path_1L_chr)
+      message(paste0("New file created in ",
+                     dest_path_1L_chr,
+                     " :\n",
+                     paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr)))
+    }
+  }else{
+    warning("Cannot write local copy of files from private Dataverse repo")
+  }
+}
 write_env_objs_to_dv <- function(env_objects_ls,
                                  descriptions_chr,
                                  ds_url_1L_chr,
@@ -36,6 +76,40 @@ write_env_objs_to_dv <- function(env_objects_ls,
     write_to_publish_dv_ds(dv_ds_1L_chr = ds_url_1L_chr)
   }
   return(file_ids_int)
+}
+write_fls_from_dv <- function(files_tb,
+                            fl_ids_int,
+                            ds_url_1L_chr,
+                            local_dv_dir_1L_chr,
+                            key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                            server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                            consent_1L_chr = ""){
+  if(!consent_1L_chr %in% c("Y", "N")){
+    consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
+                                                       ifelse(length(file_paths_chr)>1,"s",""),
+                                                       " to ",
+                                                       local_dv_dir_1L_chr),
+                                  options_chr = c("Y", "N"),
+                                  force_from_opts_1L_chr = T)
+  }
+  if(consent_1L_chr %in% c("Y")){
+    purrr::walk(1:length(fl_ids_int),
+                ~{
+                  if(!(ds_ls$versionState=="DRAFT" | files_tb$file_type_chr[.x]==".zip")){
+                    write_dv_fl_to_loc(ds_ui_1L_chr = ds_url_1L_chr,
+                                       fl_nm_1L_chr = files_tb$file_chr[.x],
+                                       fl_id_1L_int = fl_ids_int[.x],
+                                       repo_fl_fmt_1L_chr = files_tb$ds_file_ext_chr[.x],
+                                       key_1L_chr = key_1L_chr,
+                                       server_1L_chr = server_1L_chr,
+                                       save_type_1L_chr = "original",
+                                       dest_path_1L_chr = make_local_path_to_dv_data(save_dir_path_chr = local_dv_dir_1L_chr,
+                                                                                     filename_chr = files_tb$file_chr[.x],
+                                                                                     save_format_chr = files_tb$file_type_chr[.x]),
+                                       consent_1L_chr = consent_1L_chr)
+                  }
+                })
+  }
 }
 write_fls_to_dv <- function(file_paths_chr,
                             descriptions_chr = NULL,
@@ -245,11 +319,22 @@ write_tb_to_csv <- function(tbs_r4,
                             slot_nm_1L_chr,
                             r4_name_1L_chr,
                             lup_dir_1L_chr,
-                            pfx_1L_chr){
-  methods::slot(tbs_r4,slot_nm_1L_chr) %>%
-    dplyr::mutate_if(is.list,.funs = dplyr::funs(ifelse(stringr::str_c(.)=="NULL",NA_character_ , stringr::str_c (.)))) %>%
-    utils::write.csv(file = paste0(lup_dir_1L_chr,"/",pfx_1L_chr,"_",slot_nm_1L_chr,".csv"),
-                     row.names = F)
+                            pfx_1L_chr,
+                            consent_1L_chr = ""){
+  file_path_1L_chr <- paste0(lup_dir_1L_chr,"/",pfx_1L_chr,"_",slot_nm_1L_chr,".csv")
+  if(!consent_1L_chr %in% c("Y", "N")){
+    consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
+                                                       file_path_1L_chr,
+                                                       " ? "),
+                                  options_chr = c("Y", "N"),
+                                  force_from_opts_1L_chr = T)
+  }
+  if(consent_1L_chr %in% c("Y")){
+    methods::slot(tbs_r4,slot_nm_1L_chr) %>%
+      dplyr::mutate_if(is.list,.funs = dplyr::funs(ifelse(stringr::str_c(.)=="NULL",NA_character_ , stringr::str_c (.)))) %>%
+      utils::write.csv(file = file_path_1L_chr,
+                       row.names = F)
+  }
 }
 write_to_delete_dirs <- function(dir_paths_chr){
   dir_paths_chr <- dir_paths_chr[dir_paths_chr %>% purrr::map_lgl(~dir.exists(.x))]
@@ -308,6 +393,115 @@ write_to_delete_fls <- function(file_paths_chr){
       message("Delete files request cancelled - no files deleted")
     }
   }
+}
+write_to_dv_from_tbl <- function (files_tb, data_dir_rt_1L_chr = ".", ds_url_1L_chr,
+                             key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                             server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                             consent_1L_chr = "")
+{
+  if(!consent_1L_chr %in% c("Y", "N")){
+    paths_chr <- paste0(ifelse(identical(character(0),data_dir_rt_1L_chr),
+                                 "",
+                                 paste0(data_dir_rt_1L_chr, "/")),
+                          files_tb[,1], "/", files_tb[,2], files_tb[,3])
+    consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file",
+                                                       ifelse(length(paths_chr)>1,"s ",""),
+                                                       paths_chr,
+                                                       " ? "),
+                                  options_chr = c("Y", "N"),
+                                  force_from_opts_1L_chr = T)
+  }
+  if(consent_1L_chr %in% c("Y")){
+    ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+    is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
+    nms_chr <- ds_ls$files$filename
+    fl_ids_int <- purrr::pmap_int(files_tb, ~{
+      path_1L_chr <- paste0(ifelse(identical(character(0),data_dir_rt_1L_chr),
+                                   "",
+                                   paste0(data_dir_rt_1L_chr, "/")),
+                            ..1, "/", ..2, ..3)
+      fl_nm_1L_chr <- paste0(..2, ..3)
+      write_fls_to_dv(path_1L_chr,
+                      descriptions_chr = ..4,
+                      ds_url_1L_chr = ds_url_1L_chr,
+                      ds_ls = ds_ls,
+                      key_1L_chr = key_1L_chr,
+                      server_1L_chr = server_1L_chr,
+                      consent_1L_chr = consent_1L_chr)
+    })
+  }else{
+    fl_ids_int <- NULL
+  }
+  return(fl_ids_int)
+}
+write_to_dv_with_wait <- function(dss_tb, # RENAME & Convert to two steps: Make class, apply method.
+                                  dv_nm_1L_chr,
+                                  ds_url_1L_chr,
+                                  wait_time_in_secs_int = 5L,
+                                  make_local_copy_1L_lgl = F,
+                                  parent_dv_dir_1L_chr,
+                                  paths_to_dirs_chr,
+                                  paths_are_rltv_1L_lgl = T,
+                                  inc_fl_types_chr = NA_character_,
+                                  key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                                  server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                                  consent_1L_chr = ""){
+  ds_chr <- dss_tb$ds_obj_nm_chr
+  files_tb <- make_files_tb(paths_to_dirs_chr = paths_to_dirs_chr,
+                            recode_ls = dss_tb$title_chr %>% as.list() %>% stats::setNames(ds_chr),
+                            inc_fl_types_chr = inc_fl_types_chr)
+  if(paths_are_rltv_1L_lgl){
+    data_dir_rt_1L_chr <- "."
+  }else{
+    data_dir_rt_1L_chr <- character(0)
+  }
+  paths_chr <- paste0(ifelse(identical(character(0),data_dir_rt_1L_chr),
+                             "",
+                             paste0(data_dir_rt_1L_chr, "/")),
+                      files_tb[,1], "/", files_tb[,2], files_tb[,3])
+  if(!consent_1L_chr %in% c("Y", "N")){
+    consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file",
+                                                       ifelse(length(paths_chr)>1,"s ",""),
+                                                       paths_chr,
+                                                       "to dataverse ",
+                                                       ds_url_1L_chr,
+                                                       " ? "),
+                                  options_chr = c("Y", "N"),
+                                  force_from_opts_1L_chr = T)
+  }
+  if(consent_1L_chr %in% c("Y")){
+    fl_ids_int <- 1:nrow(files_tb) %>%
+      purrr::map_int(~{
+        Sys.sleep(wait_time_in_secs_int)
+        write_to_dv_from_tbl(files_tb[.x,],
+                             data_dir_rt_1L_chr = data_dir_rt_1L_chr,
+                             ds_url_1L_chr = ds_url_1L_chr,
+                             key_1L_chr = key_1L_chr,
+                             server_1L_chr = server_1L_chr,
+                             consent_1L_chr = consent_1L_chr)
+      }
+      )
+    ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+    if(make_local_copy_1L_lgl | ds_ls$versionState != "DRAFT"){
+      ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+      dv_dir_1L_chr <- paste0(parent_dv_dir_1L_chr,"/",dv_nm_1L_chr)
+      if(!dir.exists(dv_dir_1L_chr)){
+        dir.create(dv_dir_1L_chr)
+      }
+      local_dv_dir_1L_chr <- paste0(dv_dir_1L_chr,"/",
+                                    ds_ls$metadataBlocks$citation$fields$value[[3]])
+      if(!dir.exists(local_dv_dir_1L_chr)){
+        dir.create(local_dv_dir_1L_chr)
+      }
+      write_fls_from_dv(files_tb,
+                        fl_ids_int = fl_ids_int,
+                        ds_url_1L_chr = ds_url_1L_chr,
+                        local_dv_dir_1L_chr = local_dv_dir_1L_chr)
+    }
+  }else{
+    ds_ls <- NULL
+  }
+  return(ds_ls)
 }
 write_to_publish_dv_ds <- function(dv_ds_1L_chr){
   consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you wish to publish the current draft of dataverse ",
