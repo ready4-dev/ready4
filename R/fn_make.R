@@ -39,6 +39,28 @@ make_files_tb <- function(paths_to_dirs_chr, # Make output into a class? Make fn
                               length())
     return(files_tb)
 }
+#' Make argument description
+#' @description make_arg_desc() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make argument description. The function returns Argument description (a character vector).
+#' @param fn_args_chr Function arguments (a character vector)
+
+#' @title make_gnrc_imports
+#' @description FUNCTION_DESCRIPTION
+
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[methods]{GenericFunctions}}
+#'  \code{\link[stats]{setNames}}
+#' @rdname make_gnrc_imports
+#' @export
+#' @importFrom methods getGenerics
+#' @importFrom stats setNames
 make_gnrc_imports <- function(){
   generics_chr <- methods::getGenerics("package:ready4")@.Data
     # c(
