@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make prompt — make_prompt • ready4</title>
+<title>Make files tibble — make_files_tb • ready4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Make prompt — make_prompt" />
-<meta property="og:description" content="make_prompt() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make prompt. The function returns Response (a character vector of length one)." />
+<meta property="og:title" content="Make files tibble — make_files_tb" />
+<meta property="og:description" content="make_files_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make files tibble. The function returns Files (a tibble)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,37 +119,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make prompt</h1>
+    <h1>Make files tibble</h1>
     <small class="dont-index">Source: <a href='https://github.com/ready4-dev/ready4/blob/master/R/fn_make.R'><code>R/fn_make.R</code></a></small>
-    <div class="hidden name"><code>make_prompt.Rd</code></div>
+    <div class="hidden name"><code>make_files_tb.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>make_prompt() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make prompt. The function returns Response (a character vector of length one).</p>
+    <p>make_files_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make files tibble. The function returns Files (a tibble).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>make_prompt</span><span class='op'>(</span><span class='va'>prompt_1L_chr</span>, options_chr <span class='op'>=</span> <span class='cn'>NULL</span>, force_from_opts_1L_chr <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>make_files_tb</span><span class='op'>(</span><span class='va'>paths_to_dirs_chr</span>, <span class='va'>recode_ls</span>, inc_fl_types_chr <span class='op'>=</span> <span class='cn'>NA_character_</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>prompt_1L_chr</th>
-      <td><p>Prompt (a character vector of length one)</p></td>
+      <th>paths_to_dirs_chr</th>
+      <td><p>Paths to directories (a character vector)</p></td>
     </tr>
     <tr>
-      <th>options_chr</th>
-      <td><p>Options (a character vector), Default: NULL</p></td>
+      <th>recode_ls</th>
+      <td><p>Recode (a list)</p></td>
     </tr>
     <tr>
-      <th>force_from_opts_1L_chr</th>
-      <td><p>Force from opts (a character vector of length one), Default: F</p></td>
+      <th>inc_fl_types_chr</th>
+      <td><p>Include file types (a character vector), Default: 'NA'</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Response (a character vector of length one)</p>
+    <p>Files (a tibble)</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
