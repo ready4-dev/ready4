@@ -87,7 +87,9 @@ get_from_lup_obj <- function(data_lookup_tb,
 }
 get_r4_obj_slots <- function(fn_name_1L_chr,
                              package_1L_chr = ""){
-  slots_ls <- className(fn_name_1L_chr,update_ns(package_1L_chr)) %>% methods::getSlots()
+  slots_ls <- methods::className(fn_name_1L_chr,
+                                 ifelse(package_1L_chr=="",".GlobalEnv",package_1L_chr)) %>%
+    methods::getSlots()
   slots_chr <- purrr::map_chr(slots_ls, ~ .x)
   return(slots_chr)
 }

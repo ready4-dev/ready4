@@ -1,9 +1,9 @@
 home:
   links:
   - text: Manual - User (PDF)
-    href: https://dataverse.harvard.edu/api/access/datafile/5254672
+    href: https://dataverse.harvard.edu/api/access/datafile/5257895
   - text: Manual - Developer (PDF)
-    href: https://dataverse.harvard.edu/api/access/datafile/5254671
+    href: https://dataverse.harvard.edu/api/access/datafile/5257894
   - text: Project website
     href:  https://ready4-dev.github.io/ready4/
 development:
@@ -15,22 +15,3 @@ reference:
   - get_from_lup_obj
   - get_rds_from_dv
   - write_ws
-- title: "Generics"
-- contents:
-  - author
-  - authorClasses
-  - authorData
-  - authorFunctions
-  - characterize
-  - enhance
-  - ingest
-  - investigate
-  - manufacture
-  - metamorphose
-  - procure
-  - prognosticate
-  - reckon
-  - renew
-  - ratify
-  - report
-  - share
