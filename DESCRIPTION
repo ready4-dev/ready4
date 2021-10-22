@@ -13,35 +13,10 @@ Description: ready4 provides a set of generic functions that are designed
     of the ready4 package has been made available as part of the process
     of testing and documenting the package. If you have any questions,
     please contact the authors (matthew.hamilton@orygen.org.au).
-License: GPL-3 + file LICENSE
+License: FALSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4,
     https://ready4-dev.github.io/ready4/
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Imports: 
-    assertthat,
-    dataverse,
-    dplyr,
-    fs,
-    Hmisc,
-    knitr,
-    lifecycle,
-    magrittr,
-    methods,
-    purrr,
-    ready4,
-    rlang,
-    stats,
-    stringi,
-    stringr,
-    testit,
-    testthat,
-    tibble,
-    utils
-VignetteBuilder: knitr
-Depends: 
-    generics
-Suggests: 
-    rmarkdown

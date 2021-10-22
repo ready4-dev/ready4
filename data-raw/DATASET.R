@@ -30,7 +30,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Generic Functions for Modul
                            path_to_pkg_logo_1L_chr = "../../../../../Documentation/Images/ready4-logo/default.png",
                            pkg_dmt_dv_dss_chr = c("https://doi.org/10.7910/DVN/HLLXZN",
                                                   "https://doi.org/10.7910/DVN/2Y9VF9"),
-                           ready4_type_1L_chr = "authoring")
+                           ready4_type_1L_chr = "foundation")
 # x$subsequent_ls$s4_fns_ls$fn <- ready4class::write_r4_mthds
 # x$subsequent_ls$s4_fns_ls$args_ls <- list(fns_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/data-raw/s4_fns"),
 #                                                                import_from_chr = x$subsequent_ls$import_from_chr,
@@ -41,8 +41,10 @@ if(!is.null(x$problems_ls)){
   message("Execution halted - fix issues with manifest before making a new call to author.")
 }else{
   message("Manifest has been validated. Proceeding to package set-up.")
+  dir.create('data-raw/safety')
+  file.copy("R", "data-raw/safety", recursive=TRUE)
   ready4fun::author.ready4fun_metadata_a(x$initial_ls)
-  # ANSWER "N" TO DELETE GENERICS
+  # ANSWER "N" TO DELETE GENERICS AND FN FILES
   # ready4fun::write_to_delete_fls(c(#"R/imp_fns.R",
   #                                  "R/imp_mthds.R"))
   devtools::document()
