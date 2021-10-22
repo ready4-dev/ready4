@@ -16,3 +16,14 @@
 ^data-raw/fns/remove\.R$
 ^data-raw/fns/rowbind\.R$
 ^data-raw/fns/write\.R$
+^data-raw/safety/R/fn_add\.R$
+^data-raw/safety/R/fn_get\.R$
+^data-raw/safety/R/fn_make\.R$
+^data-raw/safety/R/fn_remove\.R$
+^data-raw/safety/R/fn_rowbind\.R$
+^data-raw/safety/R/fn_write\.R$
+^data-raw/safety/R/grp_generics\.R$
+^data-raw/safety/R/pkg_ready4\.R$
+^data-raw/safety/R/imp_fns\.R$
+^data-raw/safety/R/imp_mthds\.R$
+^data-raw/safety/R/ready4-package\.R$

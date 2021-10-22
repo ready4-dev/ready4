@@ -47,7 +47,7 @@ if(!is.null(x$problems_ls)){
   # ANSWER "N" TO DELETE GENERICS AND FN FILES
   # ready4fun::write_to_delete_fls(c(#"R/imp_fns.R",
   #                                  "R/imp_mthds.R"))
-  devtools::document()
+  # devtools::document()
   x <- ready4fun::authorData.ready4fun_manifest(x)
   # x <- ready4fun::authorClasses.ready4fun_manifest(x,
   #                                                  ##
