@@ -10,7 +10,7 @@
 remove_lbls_from_df <- function (data_df) 
 {
     lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::remove_lbls_from_df()", 
-        "ready4::remove_lbls_from_df()")
+        "remove_lbls_from_df()")
     unlabelled_data_df <- purrr::reduce(1:ncol(data_df), .init = data_df, 
         ~{
             class(.x[[.y]]) <- setdiff(class(.x[[.y]]), "labelled")

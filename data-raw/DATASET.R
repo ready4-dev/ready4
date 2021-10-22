@@ -42,8 +42,9 @@ if(!is.null(x$problems_ls)){
 }else{
   message("Manifest has been validated. Proceeding to package set-up.")
   dir.create('data-raw/safety')
-  file.copy("R", "data-raw/safety", recursive=TRUE)
+  file.copy("R", "data-raw/safety", recursive=TRUE, overwrite = T)
   ready4fun::author.ready4fun_metadata_a(x$initial_ls)
+  # file.copy( "data-raw/safety/R", ".", recursive=TRUE, overwrite = T)
   # ANSWER "N" TO DELETE GENERICS AND FN FILES
   # ready4fun::write_to_delete_fls(c(#"R/imp_fns.R",
   #                                  "R/imp_mthds.R"))
