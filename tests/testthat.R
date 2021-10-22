@@ -1,4 +1,4 @@
 library(testthat)
-library(ready4fun)
+library(ready4)
 
-test_check("ready4fun")
+test_check("ready4")
