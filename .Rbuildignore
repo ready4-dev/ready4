@@ -27,3 +27,4 @@
 ^data-raw/safety/R/imp_fns\.R$
 ^data-raw/safety/R/imp_mthds\.R$
 ^data-raw/safety/R/ready4-package\.R$
+^data-raw/fns/update\.R$

@@ -54,6 +54,10 @@ write_env_objs_to_dv <- function(env_objects_ls,
                                  ds_url_1L_chr,
                                  key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
                                  publish_dv_1L_lgl = F,
+                                 piggyback_desc_1L_chr = "Documentation",
+                                 piggyback_tag_1L_chr = "Documentation",
+                                 piggyback_to_1L_chr = character(0),
+                                 prerelease_1L_lgl = T,
                                  server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
   tmp_dir <- tempdir()
   paths_chr <- env_objects_ls %>%
@@ -64,12 +68,22 @@ write_env_objs_to_dv <- function(env_objects_ls,
                               file = path_1L_chr)
                       path_1L_chr
                     })
-  file_ids_int <- write_fls_to_dv(paths_chr,
-                                  descriptions_chr = descriptions_chr,
-                                  ds_url_1L_chr = ds_url_1L_chr,
-                                  ds_ls = dataverse::get_dataset(ds_url_1L_chr),
-                                  key_1L_chr = key_1L_chr,
-                                  server_1L_chr = server_1L_chr)
+  file_ids_int <- write_fls_to_repo(paths_chr,
+                                    descriptions_chr = descriptions_chr,
+                                    ds_url_1L_chr = ds_url_1L_chr,
+                                    ds_ls = dataverse::get_dataset(ds_url_1L_chr),
+                                    key_1L_chr = key_1L_chr,
+                                    piggyback_desc_1L_chr = piggyback_desc_1L_chr,
+                                    piggyback_tag_1L_chr = piggyback_tag_1L_chr,
+                                    piggyback_to_1L_chr = character(0),
+                                    prerelease_1L_lgl = prerelease_1L_lgl,
+                                    server_1L_chr = server_1L_chr)
+    # write_fls_to_dv(paths_chr,
+    #                               descriptions_chr = descriptions_chr,
+    #                               ds_url_1L_chr = ds_url_1L_chr,
+    #                               ds_ls = dataverse::get_dataset(ds_url_1L_chr),
+    #                               key_1L_chr = key_1L_chr,
+    #                               server_1L_chr = server_1L_chr)
   do.call(file.remove, list(paths_chr))
   unlink(tmp_dir)
   if(publish_dv_1L_lgl){
@@ -179,6 +193,39 @@ write_fls_to_dv <- function(file_paths_chr,
     }
   }else{
     ids_int <- NULL
+  }
+  return(ids_int)
+}
+write_fls_to_repo <- function(paths_chr,
+                              descriptions_chr,
+                              ds_url_1L_chr = character(0),
+                              ds_ls = NULL,
+                              key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                              server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                              piggyback_desc_1L_chr = "Documentation",
+                              piggyback_tag_1L_chr = "Documentation",
+                              piggyback_to_1L_chr = character(0),
+                              prerelease_1L_lgl = T){
+  if(!identical(piggyback_to_1L_chr,character(0))){
+    releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
+    if(!piggyback_tag_1L_chr %in% releases_df$tag)
+      piggyback::pb_new_release(piggyback_to_1L_chr,
+                                tag = piggyback_tag_1L_chr,
+                                body = piggyback_desc_1L_chr,
+                                prerelease = prerelease_1L_lgl)
+    purrr::walk(paths_chr,
+                ~ piggyback::pb_upload(.x,
+                                       repo = piggyback_to_1L_chr,
+                                       tag = piggyback_tag_1L_chr))
+    ids_int <- NULL
+  }else{
+    if(!identical(character(0),ds_url_1L_chr))
+      ids_int <- write_fls_to_dv(paths_chr,
+                                 descriptions_chr = descriptions_chr,
+                                 ds_url_1L_chr = ds_url_1L_chr,
+                                 ds_ls = ds_ls,
+                                 key_1L_chr = key_1L_chr,
+                                 server_1L_chr = server_1L_chr)
   }
   return(ids_int)
 }

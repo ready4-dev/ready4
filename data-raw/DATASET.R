@@ -33,6 +33,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Generic Functions for Modul
                            ready4_type_1L_chr = "foundation")
 # x$subsequent_ls$s4_fns_ls$fn <- ready4class::write_r4_mthds
 # x$subsequent_ls$s4_fns_ls$args_ls <- list(fns_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/data-raw/s4_fns"),
+# fn_types_lup = x$subsequent_ls$fn_types_lup,
 #                                                                import_from_chr = x$subsequent_ls$import_from_chr,
 #                                                                output_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/R"),
 #                                                                pkg_nm_1L_chr = x$initial_ls$pkg_desc_ls$Package)
