@@ -15,3 +15,22 @@ reference:
   - get_from_lup_obj
   - get_rds_from_dv
   - write_ws
+- title: "Generics"
+- contents:
+  - author
+  - authorClasses
+  - authorData
+  - authorFunctions
+  - characterize
+  - enhance
+  - ingest
+  - investigate
+  - manufacture
+  - metamorphose
+  - procure
+  - prognosticate
+  - ratify
+  - reckon
+  - renew
+  - report
+  - share

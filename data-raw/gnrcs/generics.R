@@ -1,3 +1,7 @@
+author <- function (x, ...)
+{
+  UseMethod("author", x)
+}
 authorClasses <- function (x, ...)
 {
   UseMethod("authorClasses", x)
