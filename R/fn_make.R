@@ -49,14 +49,11 @@ make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_c
 #' @return List phrase (a character vector of length one)
 #' @rdname make_list_phrase
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom stringr str_c
 #' @importFrom stringi stri_replace_last
 #' @keywords internal
 make_list_phrase <- function (items_chr) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::make_list_phrase()", 
-        "ready4::make_list_phrase()")
     list_phrase_1L_chr <- items_chr %>% stringr::str_c(sep = "", 
         collapse = ", ") %>% stringi::stri_replace_last(fixed = ",", 
         replacement = " and")
@@ -85,13 +82,9 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @return Response (a character vector of length one)
 #' @rdname make_prompt
 #' @export 
-#' @importFrom lifecycle deprecate_soft
-#' @importFrom ready4 make_prompt
 #' @keywords internal
 make_prompt <- function (prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = F) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::make_prompt()", 
-        "ready4::make_prompt()")
     acknowledgement_1L_chr <- "This function is based on: https://debruine.github.io/posts/interactive-test/"
     con_conn <- getOption("prompt_opts.con", stdin())
     options_1L_chr <- paste(options_chr, collapse = "|")
@@ -101,8 +94,8 @@ make_prompt <- function (prompt_1L_chr, options_chr = NULL, force_from_opts_1L_c
     response_1L_chr <- readLines(con = con_conn, n = 1)
     if (!is.null(options_chr) & !response_1L_chr %in% options_chr & 
         force_from_opts_1L_chr) {
-        response_1L_chr <- ready4::make_prompt(prompt_1L_chr, 
-            options_chr, force_from_opts_1L_chr = T)
+        response_1L_chr <- make_prompt(prompt_1L_chr, options_chr, 
+            force_from_opts_1L_chr = T)
     }
     return(response_1L_chr)
 }

@@ -7,17 +7,13 @@
 #' @return NULL
 #' @rdname write_all_tbs_in_tbs_r4_to_csvs
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr walk
 #' @importFrom methods getSlots
-#' @importFrom ready4 write_tb_to_csv
 #' @keywords internal
 write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_chr, pfx_1L_chr) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_all_tbs_in_tbs_r4_to_csvs()", 
-        "ready4::write_all_tbs_in_tbs_r4_to_csvs()")
     purrr::walk(methods::getSlots(r4_name_1L_chr) %>% names(), 
-        ~ready4::write_tb_to_csv(tbs_r4 = tbs_r4, slot_nm_1L_chr = .x, 
+        ~write_tb_to_csv(tbs_r4 = tbs_r4, slot_nm_1L_chr = .x, 
             r4_name_1L_chr = r4_name_1L_chr, lup_dir_1L_chr = lup_dir_1L_chr, 
             pfx_1L_chr = pfx_1L_chr))
 }
@@ -73,20 +69,22 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_i
 #' @param ds_url_1L_chr Dataset url (a character vector of length one)
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
 #' @param publish_dv_1L_lgl Publish dataverse (a logical vector of length one), Default: F
+#' @param piggyback_desc_1L_chr PARAM_DESCRIPTION, Default: 'Documentation'
+#' @param piggyback_tag_1L_chr PARAM_DESCRIPTION, Default: 'Documentation'
+#' @param piggyback_to_1L_chr PARAM_DESCRIPTION, Default: character(0)
+#' @param prerelease_1L_lgl PARAM_DESCRIPTION, Default: T
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @return File identities (an integer vector)
 #' @rdname write_env_objs_to_dv
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map2_chr
-#' @importFrom ready4 write_fls_to_dv write_to_publish_dv_ds
 #' @importFrom dataverse get_dataset
 #' @keywords internal
 write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_chr, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
-    publish_dv_1L_lgl = F, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
+    publish_dv_1L_lgl = F, piggyback_desc_1L_chr = "Documentation", 
+    piggyback_tag_1L_chr = "Documentation", piggyback_to_1L_chr = character(0), 
+    prerelease_1L_lgl = T, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_env_objs_to_dv()", 
-        "ready4::write_env_objs_to_dv()")
     tmp_dir <- tempdir()
     paths_chr <- env_objects_ls %>% purrr::map2_chr(names(env_objects_ls), 
         ~{
@@ -94,13 +92,15 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
             saveRDS(object = .x, file = path_1L_chr)
             path_1L_chr
         })
-    file_ids_int <- ready4::write_fls_to_dv(paths_chr, descriptions_chr = descriptions_chr, 
+    file_ids_int <- write_fls_to_repo(paths_chr, descriptions_chr = descriptions_chr, 
         ds_url_1L_chr = ds_url_1L_chr, ds_ls = dataverse::get_dataset(ds_url_1L_chr), 
-        key_1L_chr = key_1L_chr, server_1L_chr = server_1L_chr)
+        key_1L_chr = key_1L_chr, piggyback_desc_1L_chr = piggyback_desc_1L_chr, 
+        piggyback_tag_1L_chr = piggyback_tag_1L_chr, piggyback_to_1L_chr = character(0), 
+        prerelease_1L_lgl = prerelease_1L_lgl, server_1L_chr = server_1L_chr)
     do.call(file.remove, list(paths_chr))
     unlink(tmp_dir)
     if (publish_dv_1L_lgl) {
-        ready4::write_to_publish_dv_ds(dv_ds_1L_chr = ds_url_1L_chr)
+        write_to_publish_dv_ds(dv_ds_1L_chr = ds_url_1L_chr)
     }
     return(file_ids_int)
 }
@@ -154,23 +154,19 @@ write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir
 #' @return Identities (an integer vector)
 #' @rdname write_fls_to_dv
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map_chr map map2_int
 #' @importFrom fs path_file
-#' @importFrom ready4 make_prompt
 #' @importFrom dataverse get_dataset delete_file add_dataset_file update_dataset_file
 #' @keywords internal
 write_fls_to_dv <- function (file_paths_chr, descriptions_chr = NULL, ds_url_1L_chr, 
     ds_ls = NULL, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_fls_to_dv()", 
-        "ready4::write_fls_to_dv()")
     if (!identical(file_paths_chr, character(0))) {
         message(paste0("Are you sure that you want to upload the following file", 
             ifelse(length(file_paths_chr) > 1, "s", ""), " to dataverse ", 
             ds_url_1L_chr, ": \n", file_paths_chr %>% purrr::map_chr(~fs::path_file(.x)) %>% 
                 paste0(collapse = "\n"), "?"))
-        consent_1L_chr <- ready4::make_prompt(prompt_1L_chr = paste0("Type 'Y' to confirm that you want to upload ", 
+        consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Type 'Y' to confirm that you want to upload ", 
             ifelse(length(file_paths_chr) > 1, "these files:", 
                 "this file:")), options_chr = c("Y", "N"), force_from_opts_1L_chr = T)
         if (consent_1L_chr == "Y") {
@@ -266,16 +262,12 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, ds_url_1L_chr = char
 #' @return NULL
 #' @rdname write_from_tmp
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr pmap
 #' @importFrom rlang exec
-#' @importFrom ready4 write_to_delete_fls write_new_files
 #' @keywords internal
 write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, edit_fn_ls = list(NULL), 
     args_ls_ls = list(NULL)) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_from_tmp()", 
-        "ready4::write_from_tmp()")
     text_ls <- purrr::pmap(list(tmp_paths_chr, edit_fn_ls, args_ls_ls), 
         ~{
             fileConn <- file(..1)
@@ -291,8 +283,8 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, edit_fn_ls = list(NUL
             }
             rlang::exec(edit_fn, txt_chr, !!!..3)
         })
-    ready4::write_to_delete_fls(intersect(tmp_paths_chr, dest_paths_chr))
-    ready4::write_new_files(dest_paths_chr, text_ls = text_ls)
+    write_to_delete_fls(intersect(tmp_paths_chr, dest_paths_chr))
+    write_new_files(dest_paths_chr, text_ls = text_ls)
 }
 #' Write new directories
 #' @description write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
@@ -300,20 +292,16 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, edit_fn_ls = list(NUL
 #' @return NULL
 #' @rdname write_new_dirs
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map_lgl walk
-#' @importFrom ready4 make_prompt
 #' @keywords internal
 write_new_dirs <- function (new_dirs_chr) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_new_dirs()", 
-        "ready4::write_new_dirs()")
     new_dirs_chr <- new_dirs_chr[new_dirs_chr %>% purrr::map_lgl(~!dir.exists(.x))]
     if (!identical(new_dirs_chr, character(0))) {
         message(paste0("Are you sure that you want to write the following director", 
             ifelse(length(new_dirs_chr) > 1, "ies", "y"), " to your machine? \n", 
             new_dirs_chr %>% paste0(collapse = "\n")))
-        consent_1L_chr <- ready4::make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write ", 
+        consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write ", 
             ifelse(length(new_dirs_chr) > 1, "these directories?", 
                 "this directory?")), options_chr = c("Y", "N"), 
             force_from_opts_1L_chr = T)
@@ -339,17 +327,13 @@ write_new_dirs <- function (new_dirs_chr)
 #' @return NULL
 #' @rdname write_new_files
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map flatten_chr map_chr map_lgl walk2 walk
 #' @importFrom fs path_file
-#' @importFrom ready4 make_prompt
 #' @importFrom rlang exec
 #' @keywords internal
 write_new_files <- function (paths_chr, custom_write_ls = NULL, fl_nm_1L_chr = NULL, 
     source_paths_ls = NULL, text_ls = NULL) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_new_files()", 
-        "ready4::write_new_files()")
     if (!is.null(source_paths_ls)) {
         dest_dir_1L_chr <- paths_chr
         paths_chr <- purrr::map(source_paths_ls, ~{
@@ -375,7 +359,7 @@ write_new_files <- function (paths_chr, custom_write_ls = NULL, fl_nm_1L_chr = N
                 character(0)), "", paste0("Files that will be overwritten: \n", 
                 overwritten_files_chr %>% paste0(collapse = "\n"))), 
             "?"))
-        consent_1L_chr <- ready4::make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write ", 
+        consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write ", 
             ifelse((length(new_files_chr) + length(overwritten_files_chr)) > 
                 1, "these files:", "this file:")), options_chr = c("Y", 
             "N"), force_from_opts_1L_chr = T)
@@ -422,24 +406,31 @@ write_new_files <- function (paths_chr, custom_write_ls = NULL, fl_nm_1L_chr = N
 #' @param r4_name_1L_chr Ready4 S4 name (a character vector of length one)
 #' @param lup_dir_1L_chr Lookup table directory (a character vector of length one)
 #' @param pfx_1L_chr Prefix (a character vector of length one)
+#' @param consent_1L_chr PARAM_DESCRIPTION, Default: ''
 #' @return NULL
 #' @rdname write_tb_to_csv
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom methods slot
 #' @importFrom dplyr mutate_if funs
 #' @importFrom stringr str_c
 #' @importFrom utils write.csv
 #' @keywords internal
 write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_chr, 
-    pfx_1L_chr) 
+    pfx_1L_chr, consent_1L_chr = "") 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_tb_to_csv()", 
-        "ready4::write_tb_to_csv()")
-    methods::slot(tbs_r4, slot_nm_1L_chr) %>% dplyr::mutate_if(is.list, 
-        .funs = dplyr::funs(ifelse(stringr::str_c(.) == "NULL", 
-            NA_character_, stringr::str_c(.)))) %>% utils::write.csv(file = paste0(lup_dir_1L_chr, 
-        "/", pfx_1L_chr, "_", slot_nm_1L_chr, ".csv"), row.names = F)
+    file_path_1L_chr <- paste0(lup_dir_1L_chr, "/", pfx_1L_chr, 
+        "_", slot_nm_1L_chr, ".csv")
+    if (!consent_1L_chr %in% c("Y", "N")) {
+        consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
+            file_path_1L_chr, " ? "), options_chr = c("Y", "N"), 
+            force_from_opts_1L_chr = T)
+    }
+    if (consent_1L_chr %in% c("Y")) {
+        methods::slot(tbs_r4, slot_nm_1L_chr) %>% dplyr::mutate_if(is.list, 
+            .funs = dplyr::funs(ifelse(stringr::str_c(.) == "NULL", 
+                NA_character_, stringr::str_c(.)))) %>% utils::write.csv(file = file_path_1L_chr, 
+            row.names = F)
+    }
 }
 #' Write to delete directories
 #' @description write_to_delete_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
@@ -447,13 +438,10 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
 #' @return NULL
 #' @rdname write_to_delete_dirs
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map_lgl map flatten_chr walk
 #' @keywords internal
 write_to_delete_dirs <- function (dir_paths_chr) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_to_delete_dirs()", 
-        "ready4::write_to_delete_dirs()")
     dir_paths_chr <- dir_paths_chr[dir_paths_chr %>% purrr::map_lgl(~dir.exists(.x))]
     if (!identical(dir_paths_chr, character(0))) {
         fls_to_be_purged_chr <- dir_paths_chr %>% purrr::map(~list.files(.x, 
@@ -485,13 +473,10 @@ write_to_delete_dirs <- function (dir_paths_chr)
 #' @return NULL
 #' @rdname write_to_delete_fls
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map_lgl
 #' @keywords internal
 write_to_delete_fls <- function (file_paths_chr) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_to_delete_fls()", 
-        "ready4::write_to_delete_fls()")
     file_paths_chr <- file_paths_chr[file_paths_chr %>% purrr::map_lgl(~file.exists(.x))]
     if (!identical(file_paths_chr, character(0))) {
         message(paste0("Are you sure that you want to delete the following file", 
@@ -635,13 +620,10 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, wait_tim
 #' @return NULL
 #' @rdname write_to_publish_dv_ds
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom dataverse publish_dataset
 #' @keywords internal
 write_to_publish_dv_ds <- function (dv_ds_1L_chr) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_to_publish_dv_ds()", 
-        "ready4::write_to_publish_dv_ds()")
     consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you wish to publish the current draft of dataverse ", 
         dv_ds_1L_chr, "?"), options_chr = c("Y", "N"), force_from_opts_1L_chr = T)
     if (consent_1L_chr == "Y") {
@@ -654,13 +636,9 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr)
 #' @return NULL
 #' @rdname write_ws
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map_chr
-#' @importFrom ready4 write_new_dirs
 write_ws <- function (path_1L_chr) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::write_ws()", 
-        "ready4::write_ws()")
     top_level_chr <- paste0(path_1L_chr, "/ready4/", c("Code", 
         "Data", "Documentation", "Insight"))
     code_top_lvl_chr <- c("Application", "Authoring", "Brochure", 
@@ -687,5 +665,5 @@ write_ws <- function (path_1L_chr)
         code_top_lvl_chr, code_sub_dirs_chr, data_top_lvl_chr, 
         data_sub_dirs_chr, dcmntn_top_lvl_chr, dcmntn_sub_dirs_chr, 
         insight_top_lvl_chr)
-    ready4::write_new_dirs(new_dirs_chr)
+    write_new_dirs(new_dirs_chr)
 }

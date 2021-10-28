@@ -28,3 +28,4 @@
 ^data-raw/safety/R/imp_mthds\.R$
 ^data-raw/safety/R/ready4-package\.R$
 ^data-raw/fns/update\.R$
+^data-raw/safety/R/fn_update\.R$

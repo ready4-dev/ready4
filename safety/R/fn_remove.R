@@ -3,12 +3,12 @@
 #' @param data_df Data (a data.frame)
 #' @return Unlabelled data (a data.frame)
 #' @rdname remove_lbls_from_df
-#' @export
+#' @export 
 #' @importFrom purrr reduce
 #' @keywords internal
-remove_lbls_from_df <- function (data_df)
+remove_lbls_from_df <- function (data_df) 
 {
-    unlabelled_data_df <- purrr::reduce(1:ncol(data_df), .init = data_df,
+    unlabelled_data_df <- purrr::reduce(1:ncol(data_df), .init = data_df, 
         ~{
             class(.x[[.y]]) <- setdiff(class(.x[[.y]]), "labelled")
             attr(.x[[.y]], "label") <- NULL

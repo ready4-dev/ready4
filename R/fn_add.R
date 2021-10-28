@@ -7,17 +7,13 @@
 #' @return Combined (lookup tables)
 #' @rdname add_lups
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom testit assert
 #' @importFrom dplyr filter pull bind_rows arrange
 #' @importFrom rlang sym
 #' @importFrom Hmisc label
-#' @importFrom ready4 remove_lbls_from_df
 #' @keywords internal
 add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for_dupls_1L_chr = "template") 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::add_lups()", 
-        "ready4::add_lups()")
     testit::assert("Look up tables must have same column names", 
         names(template_lup) == names(new_lup))
     if (priority_lup_for_dupls_1L_chr == "template") {
@@ -31,8 +27,8 @@ add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for
         labels_chr <- Hmisc::label(new_lup) %>% unname()
     }
     if (!all(labels_chr %>% unique() == "")) {
-        template_lup <- template_lup %>% ready4::remove_lbls_from_df()
-        new_lup <- new_lup %>% ready4::remove_lbls_from_df()
+        template_lup <- template_lup %>% remove_lbls_from_df()
+        new_lup <- new_lup %>% remove_lbls_from_df()
         Hmisc::label(template_lup) <- as.list(labels_chr %>% 
             unname())
         Hmisc::label(new_lup) <- as.list(labels_chr %>% unname())

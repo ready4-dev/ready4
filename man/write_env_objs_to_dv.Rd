@@ -10,6 +10,10 @@ write_env_objs_to_dv(
   ds_url_1L_chr,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
   publish_dv_1L_lgl = F,
+  piggyback_desc_1L_chr = "Documentation",
+  piggyback_tag_1L_chr = "Documentation",
+  piggyback_to_1L_chr = character(0),
+  prerelease_1L_lgl = T,
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
 )
 }
@@ -23,6 +27,14 @@ write_env_objs_to_dv(
 \item{key_1L_chr}{Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")}
 
 \item{publish_dv_1L_lgl}{Publish dataverse (a logical vector of length one), Default: F}
+
+\item{piggyback_desc_1L_chr}{PARAM_DESCRIPTION, Default: 'Documentation'}
+
+\item{piggyback_tag_1L_chr}{PARAM_DESCRIPTION, Default: 'Documentation'}
+
+\item{piggyback_to_1L_chr}{PARAM_DESCRIPTION, Default: character(0)}
+
+\item{prerelease_1L_lgl}{PARAM_DESCRIPTION, Default: T}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }

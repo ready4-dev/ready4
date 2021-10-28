@@ -8,14 +8,11 @@
 #' @return Urls (a character vector)
 #' @rdname get_dv_fls_urls
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom dataverse dataset_files
 #' @importFrom purrr map_chr
 get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = character(0), 
     server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), key_1L_chr = NULL) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::get_dv_fls_urls()", 
-        "ready4::get_dv_fls_urls()")
     if (identical(dv_url_pfx_1L_chr, character(0))) 
         dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr, 
             "/api/access/datafile/")
@@ -41,21 +38,17 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
 #' @return Identity (a character vector of length one)
 #' @rdname get_fl_id_from_dv_ls
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom purrr map2_chr
-#' @importFrom ready4 get_from_lup_obj
 #' @importFrom tibble as_tibble
 #' @keywords internal
 get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::get_fl_id_from_dv_ls()", 
-        "ready4::get_fl_id_from_dv_ls()")
     if (is.na(nms_chr[1])) {
         nms_chr <- purrr::map2_chr(ds_ls$files$originalFileName, 
             ds_ls$files$filename, ~ifelse(is.na(.x), .y, .x))
     }
     if (fl_nm_1L_chr %in% nms_chr) {
-        id_1L_chr <- ready4::get_from_lup_obj(ds_ls$files[, names(ds_ls$files) %>% 
+        id_1L_chr <- get_from_lup_obj(ds_ls$files[, names(ds_ls$files) %>% 
             unique()] %>% tibble::as_tibble(), match_var_nm_1L_chr = ifelse(fl_nm_1L_chr %in% 
             ds_ls$files$originalFileName, "originalFileName", 
             "filename"), match_value_xx = fl_nm_1L_chr, target_var_nm_1L_chr = "id", 
@@ -72,19 +65,16 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 #' @param match_value_xx Match value (an output object of multiple potential types)
 #' @param match_var_nm_1L_chr Match variable name (a character vector of length one)
 #' @param target_var_nm_1L_chr Target variable name (a character vector of length one)
-#' @param evaluate_1L_lgl Evaluate (a logical vector of length one), Default: TRUE
+#' @param evaluate_1L_lgl Evaluate (a logical vector of length one), Default: FALSE
 #' @return Return object (an output object of multiple potential types)
 #' @rdname get_from_lup_obj
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom dplyr filter select pull
 #' @importFrom rlang sym
 #' @importFrom stringr str_detect str_locate str_sub
 get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_chr, 
-    target_var_nm_1L_chr, evaluate_1L_lgl = TRUE) 
+    target_var_nm_1L_chr, evaluate_1L_lgl = FALSE) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::get_from_lup_obj()", 
-        "ready4::get_from_lup_obj()")
     return_object_ref <- data_lookup_tb %>% dplyr::filter(!!rlang::sym(match_var_nm_1L_chr) == 
         match_value_xx) %>% dplyr::select(!!target_var_nm_1L_chr) %>% 
         dplyr::pull()
@@ -126,16 +116,13 @@ get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_ch
 #' @return Slots (a character vector)
 #' @rdname get_r4_obj_slots
 #' @export 
-#' @importFrom lifecycle deprecate_soft
-#' @importFrom methods getSlots
+#' @importFrom methods className getSlots
 #' @importFrom purrr map_chr
 #' @keywords internal
 get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "") 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::get_r4_obj_slots()", 
-        "ready4::get_r4_obj_slots()")
-    slots_ls <- className(fn_name_1L_chr, update_ns(package_1L_chr)) %>% 
-        methods::getSlots()
+    slots_ls <- methods::className(fn_name_1L_chr, ifelse(package_1L_chr == 
+        "", ".GlobalEnv", package_1L_chr)) %>% methods::getSlots()
     slots_chr <- purrr::map_chr(slots_ls, ~.x)
     return(slots_chr)
 }
@@ -149,14 +136,11 @@ get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "")
 #' @return R object (an output object of multiple potential types)
 #' @rdname get_rds_from_dv
 #' @export 
-#' @importFrom lifecycle deprecate_soft
 #' @importFrom dataverse dataset_files
 #' @importFrom purrr map_chr
 get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9", 
     dv_url_pfx_1L_chr = character(0), key_1L_chr = NULL, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
-    lifecycle::deprecate_soft("0.0.0.9446", "ready4fun::get_rds_from_dv()", 
-        "ready4::get_rds_from_dv()")
     if (identical(dv_url_pfx_1L_chr, character(0))) 
         dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr, 
             "/api/access/datafile/")
