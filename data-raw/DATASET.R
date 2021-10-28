@@ -334,4 +334,7 @@ if(!is.null(x$problems_ls)){
   ready4fun::report.ready4fun_manifest(pkg_setup_ls,
          key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
 }
-# still need to manually add generics
+#doi_1L_chr <- "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)"
+usethis::use_badge(badge_name = "DOI",
+                   src = "https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg",
+                   href = "https://doi.org/10.5281/zenodo.5606250")
