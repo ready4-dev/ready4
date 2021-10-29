@@ -338,3 +338,4 @@ if(!is.null(x$problems_ls)){
 usethis::use_badge(badge_name = "DOI",
                    src = "https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg",
                    href = "https://doi.org/10.5281/zenodo.5606250")
+ready4fun::write_to_delete_dirs("safety")

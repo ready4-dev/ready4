@@ -92,11 +92,17 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
             saveRDS(object = .x, file = path_1L_chr)
             path_1L_chr
         })
+    if (identical(piggyback_to_1L_chr, character(0))) {
+        ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+    }
+    else {
+        ds_ls <- NULL
+    }
     file_ids_int <- write_fls_to_repo(paths_chr, descriptions_chr = descriptions_chr, 
-        ds_url_1L_chr = ds_url_1L_chr, ds_ls = dataverse::get_dataset(ds_url_1L_chr), 
-        key_1L_chr = key_1L_chr, piggyback_desc_1L_chr = piggyback_desc_1L_chr, 
-        piggyback_tag_1L_chr = piggyback_tag_1L_chr, piggyback_to_1L_chr = character(0), 
-        prerelease_1L_lgl = prerelease_1L_lgl, server_1L_chr = server_1L_chr)
+        ds_url_1L_chr = ds_url_1L_chr, ds_ls = ds_ls, key_1L_chr = key_1L_chr, 
+        piggyback_desc_1L_chr = piggyback_desc_1L_chr, piggyback_tag_1L_chr = piggyback_tag_1L_chr, 
+        piggyback_to_1L_chr = piggyback_to_1L_chr, prerelease_1L_lgl = prerelease_1L_lgl, 
+        server_1L_chr = server_1L_chr)
     do.call(file.remove, list(paths_chr))
     unlink(tmp_dir)
     if (publish_dv_1L_lgl) {
@@ -222,7 +228,7 @@ write_fls_to_dv <- function (file_paths_chr, descriptions_chr = NULL, ds_url_1L_
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @param piggyback_desc_1L_chr Piggyback description (a character vector of length one), Default: 'Documentation'
-#' @param piggyback_tag_1L_chr Piggyback tag (a character vector of length one), Default: 'Documentation'
+#' @param piggyback_tag_1L_chr Piggyback tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param piggyback_to_1L_chr Piggyback to (a character vector of length one), Default: character(0)
 #' @param prerelease_1L_lgl Prerelease (a logical vector of length one), Default: T
 #' @return Identities (an integer vector)
@@ -233,7 +239,7 @@ write_fls_to_dv <- function (file_paths_chr, descriptions_chr = NULL, ds_url_1L_
 #' @keywords internal
 write_fls_to_repo <- function (paths_chr, descriptions_chr, ds_url_1L_chr = character(0), 
     ds_ls = NULL, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), 
-    piggyback_desc_1L_chr = "Documentation", piggyback_tag_1L_chr = "Documentation", 
+    piggyback_desc_1L_chr = "Documentation", piggyback_tag_1L_chr = "Documentation_0.0", 
     piggyback_to_1L_chr = character(0), prerelease_1L_lgl = T) 
 {
     if (!identical(piggyback_to_1L_chr, character(0))) {

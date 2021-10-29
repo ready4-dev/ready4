@@ -12,7 +12,7 @@ write_fls_to_repo(
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
   piggyback_desc_1L_chr = "Documentation",
-  piggyback_tag_1L_chr = "Documentation",
+  piggyback_tag_1L_chr = "Documentation_0.0",
   piggyback_to_1L_chr = character(0),
   prerelease_1L_lgl = T
 )
@@ -32,7 +32,7 @@ write_fls_to_repo(
 
 \item{piggyback_desc_1L_chr}{Piggyback description (a character vector of length one), Default: 'Documentation'}
 
-\item{piggyback_tag_1L_chr}{Piggyback tag (a character vector of length one), Default: 'Documentation'}
+\item{piggyback_tag_1L_chr}{Piggyback tag (a character vector of length one), Default: 'Documentation_0.0'}
 
 \item{piggyback_to_1L_chr}{Piggyback to (a character vector of length one), Default: character(0)}
 

@@ -68,22 +68,21 @@ write_env_objs_to_dv <- function(env_objects_ls,
                               file = path_1L_chr)
                       path_1L_chr
                     })
+  if(identical(piggyback_to_1L_chr,character(0))){
+    ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+  }else{
+    ds_ls <- NULL
+  }
   file_ids_int <- write_fls_to_repo(paths_chr,
                                     descriptions_chr = descriptions_chr,
                                     ds_url_1L_chr = ds_url_1L_chr,
-                                    ds_ls = dataverse::get_dataset(ds_url_1L_chr),
+                                    ds_ls = ds_ls,
                                     key_1L_chr = key_1L_chr,
                                     piggyback_desc_1L_chr = piggyback_desc_1L_chr,
                                     piggyback_tag_1L_chr = piggyback_tag_1L_chr,
-                                    piggyback_to_1L_chr = character(0),
+                                    piggyback_to_1L_chr = piggyback_to_1L_chr,
                                     prerelease_1L_lgl = prerelease_1L_lgl,
                                     server_1L_chr = server_1L_chr)
-    # write_fls_to_dv(paths_chr,
-    #                               descriptions_chr = descriptions_chr,
-    #                               ds_url_1L_chr = ds_url_1L_chr,
-    #                               ds_ls = dataverse::get_dataset(ds_url_1L_chr),
-    #                               key_1L_chr = key_1L_chr,
-    #                               server_1L_chr = server_1L_chr)
   do.call(file.remove, list(paths_chr))
   unlink(tmp_dir)
   if(publish_dv_1L_lgl){
@@ -203,7 +202,7 @@ write_fls_to_repo <- function(paths_chr,
                               key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
                               server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
                               piggyback_desc_1L_chr = "Documentation",
-                              piggyback_tag_1L_chr = "Documentation",
+                              piggyback_tag_1L_chr = "Documentation_0.0",
                               piggyback_to_1L_chr = character(0),
                               prerelease_1L_lgl = T){
   if(!identical(piggyback_to_1L_chr,character(0))){
