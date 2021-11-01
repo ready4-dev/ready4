@@ -11,7 +11,7 @@ write_env_objs_to_dv(
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
   publish_dv_1L_lgl = F,
   piggyback_desc_1L_chr = "Documentation",
-  piggyback_tag_1L_chr = "Documentation",
+  piggyback_tag_1L_chr = "Documentation_0.0",
   piggyback_to_1L_chr = character(0),
   prerelease_1L_lgl = T,
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
@@ -30,7 +30,7 @@ write_env_objs_to_dv(
 
 \item{piggyback_desc_1L_chr}{PARAM_DESCRIPTION, Default: 'Documentation'}
 
-\item{piggyback_tag_1L_chr}{PARAM_DESCRIPTION, Default: 'Documentation'}
+\item{piggyback_tag_1L_chr}{PARAM_DESCRIPTION, Default: 'Documentation_0.0'}
 
 \item{piggyback_to_1L_chr}{PARAM_DESCRIPTION, Default: character(0)}
 

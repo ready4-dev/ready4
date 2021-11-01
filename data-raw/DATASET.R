@@ -38,7 +38,6 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Generic Functions for Modul
 #                                                                import_from_chr = x$subsequent_ls$import_from_chr,
 #                                                                output_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/R"),
 #                                                                pkg_nm_1L_chr = x$initial_ls$pkg_desc_ls$Package)
-
 ## Functions adapted from ready4fun
 ##
 write_all_fn_dmt <- function(pkg_setup_ls,
@@ -211,8 +210,7 @@ if(!is.null(x$problems_ls)){
     purrr::walk(~file.copy(paste0("data-raw/fns/",.x),
                            "R"))
   ready4fun::author.ready4fun_metadata_a(x$initial_ls)
-  # file.copy( "safety/R", ".", recursive=TRUE, overwrite = T)
-  # ANSWER "N" TO DELETE GENERICS AND FN FILES
+  # important: ANSWER "N" TO DELETE GENERICS AND FN FILES
   # ready4fun::write_to_delete_fls(c(#"R/imp_fns.R",
   #                                  "R/imp_mthds.R"))
   # devtools::document()
@@ -225,7 +223,6 @@ if(!is.null(x$problems_ls)){
   fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb
   x$subsequent_ls$fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb %>%
     dplyr::filter(!file_nm_chr %>% endsWith("generics.R"))
-  #
   pkg_setup_ls <- x
   ready4fun::add_build_ignore(pkg_setup_ls$subsequent_ls$build_ignore_ls)
   ready4fun::add_addl_pkgs(pkg_setup_ls$subsequent_ls$addl_pkgs_ls)

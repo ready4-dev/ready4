@@ -70,7 +70,7 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_i
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
 #' @param publish_dv_1L_lgl Publish dataverse (a logical vector of length one), Default: F
 #' @param piggyback_desc_1L_chr PARAM_DESCRIPTION, Default: 'Documentation'
-#' @param piggyback_tag_1L_chr PARAM_DESCRIPTION, Default: 'Documentation'
+#' @param piggyback_tag_1L_chr PARAM_DESCRIPTION, Default: 'Documentation_0.0'
 #' @param piggyback_to_1L_chr PARAM_DESCRIPTION, Default: character(0)
 #' @param prerelease_1L_lgl PARAM_DESCRIPTION, Default: T
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
@@ -82,7 +82,7 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_i
 #' @keywords internal
 write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_chr, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
     publish_dv_1L_lgl = F, piggyback_desc_1L_chr = "Documentation", 
-    piggyback_tag_1L_chr = "Documentation", piggyback_to_1L_chr = character(0), 
+    piggyback_tag_1L_chr = "Documentation_0.0", piggyback_to_1L_chr = character(0), 
     prerelease_1L_lgl = T, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
     tmp_dir <- tempdir()
@@ -648,13 +648,14 @@ write_ws <- function (path_1L_chr)
     top_level_chr <- paste0(path_1L_chr, "/ready4/", c("Code", 
         "Data", "Documentation", "Insight"))
     code_top_lvl_chr <- c("Application", "Authoring", "Brochure", 
-        "Description", "Modelling", "Prediction") %>% purrr::map_chr(~paste0(top_level_chr[1], 
-        "/", .x))
+        "Description", "Modelling", "Prediction", "Foundation") %>% 
+        purrr::map_chr(~paste0(top_level_chr[1], "/", .x))
     code_sub_dirs_chr <- c(paste0(code_top_lvl_chr[2], "/Workflows", 
         c("", "/R")), paste0(code_top_lvl_chr[3], "/HTML"), paste0(code_top_lvl_chr[4], 
         "/Datatypes", c("", "/R")), paste0(code_top_lvl_chr[5], 
         "/Templates", c("", "/R")), paste0(code_top_lvl_chr[6], 
-        "/Example", c("", "/Toolkit_1", "/Toolkit_1/R")))
+        "/Example", c("", "/Toolkit_1", "/Toolkit_1/R")), paste0(code_top_lvl_chr[7], 
+        "/Representations", c("", "/R")))
     data_top_lvl_chr <- c("Dataverse", "Project", "R_Format", 
         "Raw_Format") %>% purrr::map_chr(~paste0(top_level_chr[2], 
         "/", .x))
