@@ -88,7 +88,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
     tmp_dir <- tempdir()
     paths_chr <- env_objects_ls %>% purrr::map2_chr(names(env_objects_ls), 
         ~{
-            path_1L_chr <- paste0(tmp_dir, "/", .y, ".RDS")
+            path_1L_chr <- paste0(tmp_dir, "/", .y, ".Rds")
             saveRDS(object = .x, file = path_1L_chr)
             path_1L_chr
         })
@@ -105,7 +105,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
         server_1L_chr = server_1L_chr)
     do.call(file.remove, list(paths_chr))
     unlink(tmp_dir)
-    if (publish_dv_1L_lgl) {
+    if (publish_dv_1L_lgl & identical(piggyback_to_1L_chr, character(0))) {
         write_to_publish_dv_ds(dv_ds_1L_chr = ds_url_1L_chr)
     }
     return(file_ids_int)

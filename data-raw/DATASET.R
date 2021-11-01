@@ -198,141 +198,144 @@ write_fn_fl <- function(fns_env_ls,
   }
 }
 ##
-x <- ready4fun::ratify.ready4fun_manifest(x)
-if(!is.null(x$problems_ls)){
-  message("Execution halted - fix issues with manifest before making a new call to author.")
-}else{
-  message("Manifest has been validated. Proceeding to package set-up.")
-  dir.create('safety')
-  file.copy("R", "safety", recursive=TRUE, overwrite = T)
-  fn_fls_chr <- list.files("data-raw/fns")
-  fn_fls_chr %>%
-    purrr::walk(~file.copy(paste0("data-raw/fns/",.x),
-                           "R"))
-  ready4fun::author.ready4fun_metadata_a(x$initial_ls)
-  # important: ANSWER "N" TO DELETE GENERICS AND FN FILES
-  # ready4fun::write_to_delete_fls(c(#"R/imp_fns.R",
-  #                                  "R/imp_mthds.R"))
-  # devtools::document()
-  x <- ready4fun::authorData.ready4fun_manifest(x)
-  # x <- ready4fun::authorClasses.ready4fun_manifest(x,
-  #                                                  ##
-  #                                                  self_serve_1L_lgl = T)
-  x <- ready4fun::renew.ready4fun_manifest(x,
-                                           type_1L_chr = "fns_dmt")
-  fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb
-  x$subsequent_ls$fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb %>%
-    dplyr::filter(!file_nm_chr %>% endsWith("generics.R"))
-  pkg_setup_ls <- x
-  ready4fun::add_build_ignore(pkg_setup_ls$subsequent_ls$build_ignore_ls)
-  ready4fun::add_addl_pkgs(pkg_setup_ls$subsequent_ls$addl_pkgs_ls)
-  dev_pkgs_chr <- pkg_setup_ls$subsequent_ls$dev_pkgs_chr
-  r_dir_1L_chr <- paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,"/R")
-  fns_env_ls <- ready4fun::read_fns()
-  fns_env_ls$fns_env$write_new_dirs(c(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,
-                           paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/Developer"),
-                           paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/User")))
-  fns_env_ls <- ready4fun::read_fns(ready4fun::make_undmtd_fns_dir_chr(paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,
-                                                        "/data-raw"),
-                                                 drop_empty_1L_lgl = T))
-  s4_mthds_ls_ls <- purrr::map2(list(paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/Developer"),
-                                     paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/User")),
-                                c(T,F),
-                                ~ {
-                                  s4_mthds_ls <- write_all_fn_dmt(pkg_setup_ls,
-                                                                  fns_env_ls = fns_env_ls,
-                                                                  document_unexp_lgl = .y)
-                                  ready4fun::write_ns_imps_to_desc(dev_pkgs_chr = dev_pkgs_chr,
-                                                        incr_ver_1L_lgl = .y)
-                                  devtools::load_all()
-                                  if(T)
-                                    devtools::build_manual(path = .x)
-                                  s4_mthds_ls
-                                })
-  pkg_setup_ls$subsequent_ls$fns_dmt_tb <-  fns_dmt_tb
-  if(T){
-    datasets_chr <- utils::data(package = ready4fun::get_dev_pkg_nm(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr),
-                                envir = environment())$results[,3]
-    list_generics_1L_lgl <- T
+write_self_srvc_pkg <- function(x){
+  x <- ready4fun::ratify.ready4fun_manifest(x)
+  if(!is.null(x$problems_ls)){
+    message("Execution halted - fix issues with manifest before making a new call to author.")
+  }else{
+    message("Manifest has been validated. Proceeding to package set-up.")
+    dir.create('safety')
+    file.copy("R", "safety", recursive=TRUE, overwrite = T)
+    fn_fls_chr <- list.files("data-raw/fns")
+    fn_fls_chr %>%
+      purrr::walk(~file.copy(paste0("data-raw/fns/",.x),
+                             "R"))
+    ready4fun::author.ready4fun_metadata_a(x$initial_ls)
+    # important: ANSWER "N" TO DELETE GENERICS AND FN FILES
+    # ready4fun::write_to_delete_fls(c(#"R/imp_fns.R",
+    #                                  "R/imp_mthds.R"))
+    # devtools::document()
+    x <- ready4fun::authorData.ready4fun_manifest(x)
+    # x <- ready4fun::authorClasses.ready4fun_manifest(x,
+    #                                                  ##
+    #                                                  self_serve_1L_lgl = T)
+    x <- ready4fun::renew.ready4fun_manifest(x,
+                                             type_1L_chr = "fns_dmt")
+    fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb
+    x$subsequent_ls$fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb %>%
+      dplyr::filter(!file_nm_chr %>% endsWith("generics.R"))
+    pkg_setup_ls <- x
+    ready4fun::add_build_ignore(pkg_setup_ls$subsequent_ls$build_ignore_ls)
+    ready4fun::add_addl_pkgs(pkg_setup_ls$subsequent_ls$addl_pkgs_ls)
+    dev_pkgs_chr <- pkg_setup_ls$subsequent_ls$dev_pkgs_chr
+    r_dir_1L_chr <- paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,"/R")
+    fns_env_ls <- ready4fun::read_fns()
+    fns_env_ls$fns_env$write_new_dirs(c(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,
+                                        paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/Developer"),
+                                        paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/User")))
+    fns_env_ls <- ready4fun::read_fns(ready4fun::make_undmtd_fns_dir_chr(paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,
+                                                                                "/data-raw"),
+                                                                         drop_empty_1L_lgl = T))
+    s4_mthds_ls_ls <- purrr::map2(list(paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/Developer"),
+                                       paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/User")),
+                                  c(T,F),
+                                  ~ {
+                                    s4_mthds_ls <- write_all_fn_dmt(pkg_setup_ls,
+                                                                    fns_env_ls = fns_env_ls,
+                                                                    document_unexp_lgl = .y)
+                                    ready4fun::write_ns_imps_to_desc(dev_pkgs_chr = dev_pkgs_chr,
+                                                                     incr_ver_1L_lgl = .y)
+                                    devtools::load_all()
+                                    if(T)
+                                      devtools::build_manual(path = .x)
+                                    s4_mthds_ls
+                                  })
+    pkg_setup_ls$subsequent_ls$fns_dmt_tb <-  fns_dmt_tb
+    if(T){
+      datasets_chr <- utils::data(package = ready4fun::get_dev_pkg_nm(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr),
+                                  envir = environment())$results[,3]
+      list_generics_1L_lgl <- T
 
-    writeLines(c("development:",
-                 "  mode: auto",
-                 "reference:",
-                 {
-                   if(length(datasets_chr)>0){
-                     c(paste0("- title: \"",
-                              "Datasets",
-                              "\""),
-                       "- contents:",
-                       paste0("  - ", datasets_chr))
-                   }
-                 },
-                 {
-                   if(!is.null(pkg_setup_ls$subsequent_ls$prototype_lup)){
-                     classes_tb <- pkg_setup_ls$subsequent_ls$prototype_lup %>% dplyr::filter(pt_ns_chr == pkg_setup_ls$initial_ls$pkg_desc_ls$Package)
-                     purrr::map(c("S3","S4"),
-                                ~ {
-                                  fns_chr <- classes_tb %>% dplyr::filter(old_class_lgl == (.x=="S3")) %>%
-                                    dplyr::pull(fn_to_call_chr)
-                                  if(length(fns_chr)>0){
-                                    txt_chr <- c(paste0("- title: \"",
-                                                        paste0(.x," Classes"),
-                                                        "\""),
-                                                 "- contents:",
-                                                 paste0("  - ", fns_chr))
-                                  }else{
-                                    txt_chr <- ""
-                                  }
-                                  txt_chr
-                                }) %>%
-                       purrr::flatten_chr() %>%
-                       purrr::discard(~.x=="")
+      writeLines(c("development:",
+                   "  mode: auto",
+                   "reference:",
+                   {
+                     if(length(datasets_chr)>0){
+                       c(paste0("- title: \"",
+                                "Datasets",
+                                "\""),
+                         "- contents:",
+                         paste0("  - ", datasets_chr))
+                     }
+                   },
+                   {
+                     if(!is.null(pkg_setup_ls$subsequent_ls$prototype_lup)){
+                       classes_tb <- pkg_setup_ls$subsequent_ls$prototype_lup %>% dplyr::filter(pt_ns_chr == pkg_setup_ls$initial_ls$pkg_desc_ls$Package)
+                       purrr::map(c("S3","S4"),
+                                  ~ {
+                                    fns_chr <- classes_tb %>% dplyr::filter(old_class_lgl == (.x=="S3")) %>%
+                                      dplyr::pull(fn_to_call_chr)
+                                    if(length(fns_chr)>0){
+                                      txt_chr <- c(paste0("- title: \"",
+                                                          paste0(.x," Classes"),
+                                                          "\""),
+                                                   "- contents:",
+                                                   paste0("  - ", fns_chr))
+                                    }else{
+                                      txt_chr <- ""
+                                    }
+                                    txt_chr
+                                  }) %>%
+                         purrr::flatten_chr() %>%
+                         purrr::discard(~.x=="")
 
-                   }
-                 },
-                 purrr::map2(c("fn_",
-                               ifelse(!list_generics_1L_lgl,NA_character_,"grp_"),
-                               "mthd_") %>% purrr::discard(is.na),
-                             c("Functions",
-                               ifelse(!list_generics_1L_lgl,NA_character_,"Generics"),
-                               "Methods")  %>% purrr::discard(is.na),
-                             ~{
-                               is_gnrc_1L_lgl <- (.x == "grp_")
-                               fns_chr <- dplyr::filter(pkg_setup_ls$subsequent_ls$fns_dmt_tb,
-                                                        inc_for_main_user_lgl %>% purrr::map_lgl(~ifelse(is_gnrc_1L_lgl,T,.x)) & file_pfx_chr == .x) %>%
-                                 dplyr::pull(fns_chr)
-                               if(.x=="mthd_" & !is.null(s4_mthds_ls_ls)){
-                                 fns_chr <- c(fns_chr,
-                                              s4_mthds_ls_ls[[2]]$mthds_ls %>%
-                                                purrr::map2(names(s4_mthds_ls_ls[[2]]$mthds_ls),
-                                                            ~{
-                                                              mthd_nm_1L_chr <- .y
-                                                              s4_cls_nms_chr <- names(.x)
-                                                              paste0(mthd_nm_1L_chr,"-",s4_cls_nms_chr)
-                                                            }) %>% purrr::flatten_chr()) %>% sort()
-                               }
-                               if(length(fns_chr)>0){
-                                 txt_chr  <- c( paste0("- title: \"",.y,"\""),
-                                                "- contents:",
-                                                paste0("  - ",
-                                                       fns_chr))
-                               }else{
-                                 txt_chr  <- ""
-                               }
-                             }) %>% purrr::flatten_chr() %>% purrr::discard(~.x=="")),
-               con = paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,"/_pkgdown.yml"))
+                     }
+                   },
+                   purrr::map2(c("fn_",
+                                 ifelse(!list_generics_1L_lgl,NA_character_,"grp_"),
+                                 "mthd_") %>% purrr::discard(is.na),
+                               c("Functions",
+                                 ifelse(!list_generics_1L_lgl,NA_character_,"Generics"),
+                                 "Methods")  %>% purrr::discard(is.na),
+                               ~{
+                                 is_gnrc_1L_lgl <- (.x == "grp_")
+                                 fns_chr <- dplyr::filter(pkg_setup_ls$subsequent_ls$fns_dmt_tb,
+                                                          inc_for_main_user_lgl %>% purrr::map_lgl(~ifelse(is_gnrc_1L_lgl,T,.x)) & file_pfx_chr == .x) %>%
+                                   dplyr::pull(fns_chr)
+                                 if(.x=="mthd_" & !is.null(s4_mthds_ls_ls)){
+                                   fns_chr <- c(fns_chr,
+                                                s4_mthds_ls_ls[[2]]$mthds_ls %>%
+                                                  purrr::map2(names(s4_mthds_ls_ls[[2]]$mthds_ls),
+                                                              ~{
+                                                                mthd_nm_1L_chr <- .y
+                                                                s4_cls_nms_chr <- names(.x)
+                                                                paste0(mthd_nm_1L_chr,"-",s4_cls_nms_chr)
+                                                              }) %>% purrr::flatten_chr()) %>% sort()
+                                 }
+                                 if(length(fns_chr)>0){
+                                   txt_chr  <- c( paste0("- title: \"",.y,"\""),
+                                                  "- contents:",
+                                                  paste0("  - ",
+                                                         fns_chr))
+                                 }else{
+                                   txt_chr  <- ""
+                                 }
+                               }) %>% purrr::flatten_chr() %>% purrr::discard(~.x=="")),
+                 con = paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,"/_pkgdown.yml"))
+    }
+    fn_fls_chr %>%
+      purrr::walk(~unlink(paste0("R/",.x)))
+    # file.copy("data-raw/generics/grp_generics.R",
+    #           "R/grp_generics.R")
+    # devtools::document()
+    #x$subsequent_ls$fns_dmt_tb <-  fns_dmt_tb
+    ready4fun::report.ready4fun_manifest(pkg_setup_ls,
+                                         key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
   }
-  fn_fls_chr %>%
-    purrr::walk(~unlink(paste0("R/",.x)))
-  # file.copy("data-raw/generics/grp_generics.R",
-  #           "R/grp_generics.R")
-  # devtools::document()
- #x$subsequent_ls$fns_dmt_tb <-  fns_dmt_tb
-  ready4fun::report.ready4fun_manifest(pkg_setup_ls,
-         key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
+  usethis::use_badge(badge_name = "DOI",
+                     src = "https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg",
+                     href = "https://doi.org/10.5281/zenodo.5606250")
+  ready4fun::write_to_delete_dirs("safety")
+
 }
-#doi_1L_chr <- "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)"
-usethis::use_badge(badge_name = "DOI",
-                   src = "https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg",
-                   href = "https://doi.org/10.5281/zenodo.5606250")
-ready4fun::write_to_delete_dirs("safety")
+write_self_srvc_pkg(x)
