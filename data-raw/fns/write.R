@@ -63,7 +63,7 @@ write_env_objs_to_dv <- function(env_objects_ls,
   paths_chr <- env_objects_ls %>%
     purrr::map2_chr(names(env_objects_ls),
                     ~{
-                      path_1L_chr <- paste0(tmp_dir,"/",.y,".Rds")
+                      path_1L_chr <- paste0(tmp_dir,"/",.y,".RDS")
                       saveRDS(object = .x,
                               file = path_1L_chr)
                       path_1L_chr
