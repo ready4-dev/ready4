@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • ready4</title>
+<title>Transform class type list — transform_cls_type_ls • ready4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="Implements: https://github.com/sckott/analogsea/issues/32
-and https://github.com/rstudio/ggvis/blob/master/R/pipe.R." />
+<meta property="og:title" content="Transform class type list — transform_cls_type_ls" />
+<meta property="og:description" content="transform_cls_type_ls() is a Transform function that edits an object in such a way that core object attributes - e.g. shape, dimensions, elements, type - are altered. Specifically, this function implements an algorithm to transform class type list. Function argument cls_type_ls specifies the object to be updated. The function returns Tfmd class type (a list)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -120,26 +119,29 @@ and https://github.com/rstudio/ggvis/blob/master/R/pipe.R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ready4-dev/ready4/blob/master/R/imp_fns.R'><code>R/imp_fns.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Transform class type list</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ready4-dev/ready4/blob/master/R/fn_transform.R'><code>R/fn_transform.R</code></a></small>
+    <div class="hidden name"><code>transform_cls_type_ls.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Implements: https://github.com/sckott/analogsea/issues/32
-and https://github.com/rstudio/ggvis/blob/master/R/pipe.R.</p>
+    <p>transform_cls_type_ls() is a Transform function that edits an object in such a way that core object attributes - e.g. shape, dimensions, elements, type - are altered. Specifically, this function implements an algorithm to transform class type list. Function argument cls_type_ls specifies the object to be updated. The function returns Tfmd class type (a list).</p>
     </div>
 
+    <pre class="usage"><span class='fu'>transform_cls_type_ls</span><span class='op'>(</span><span class='va'>cls_type_ls</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lhs, rhs</th>
-      <td><p>An object and a function to apply to it</p></td>
+      <th>cls_type_ls</th>
+      <td><p>Class type (a list)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Tfmd class type (a list)</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
