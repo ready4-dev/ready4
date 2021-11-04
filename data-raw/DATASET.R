@@ -293,9 +293,9 @@ write_self_srvc_pkg <- function(x){
     ready4fun::report.ready4fun_manifest(pkg_setup_ls,
                                          key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
   }
-  usethis::use_badge(badge_name = "DOI",
-                     src = "https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg",
-                     href = "https://doi.org/10.5281/zenodo.5606250")
+  # usethis::use_badge(badge_name = "DOI",
+  #                    src = "https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg",
+  #                    href = "https://doi.org/10.5281/zenodo.5606250")
   ready4fun::write_to_delete_dirs("safety")
 
 }
@@ -332,7 +332,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
                            # pkg_dmt_dv_dss_chr = c("https://doi.org/10.7910/DVN/HLLXZN",
                            #                        "https://doi.org/10.7910/DVN/2Y9VF9"),
                            ready4_type_1L_chr = "foundation",
-                           zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5612842.svg)](https://doi.org/10.5281/zenodo.5612842)")
+                           zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)")
 # x$subsequent_ls$s4_fns_ls$fn <- ready4class::write_r4_mthds
 # x$subsequent_ls$s4_fns_ls$args_ls <- list(fns_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/data-raw/s4_fns"),
 write_self_srvc_pkg(x)
