@@ -4,7 +4,7 @@
 \name{ready4-package}
 \alias{ready4}
 \alias{ready4-package}
-\title{ready4: Generic Functions for Modular Mental Health Models}
+\title{ready4: A Framework for Open and Modular Mental Health Systems Models}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 

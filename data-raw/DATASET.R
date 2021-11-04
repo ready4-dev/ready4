@@ -300,7 +300,7 @@ write_self_srvc_pkg <- function(x){
 
 }
 ready4fun::write_fn_type_dirs()
-x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Generic Functions for Modular Mental Health Models" %>% tools::toTitleCase(),
+x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Modular Mental Health Systems Models" %>% tools::toTitleCase(),
                                                     pkg_desc_1L_chr = "ready4 provides a set of generic functions that are designed for use across the ready4 suite of packages.
   This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
                                                     authors_prsn = c(utils::person(
@@ -328,9 +328,11 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Generic Functions for Modul
                            import_from_chr = NA_character_,
                            lifecycle_stage_1L_chr = "experimental",
                            path_to_pkg_logo_1L_chr = "../../../../../Documentation/Images/ready4-logo/default.png",
-                           pkg_dmt_dv_dss_chr = c("https://doi.org/10.7910/DVN/HLLXZN",
-                                                  "https://doi.org/10.7910/DVN/2Y9VF9"),
-                           ready4_type_1L_chr = "foundation")
+                           piggyback_to_1L_chr = "ready4-dev/ready4",
+                           # pkg_dmt_dv_dss_chr = c("https://doi.org/10.7910/DVN/HLLXZN",
+                           #                        "https://doi.org/10.7910/DVN/2Y9VF9"),
+                           ready4_type_1L_chr = "foundation",
+                           zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5612842.svg)](https://doi.org/10.5281/zenodo.5612842)")
 # x$subsequent_ls$s4_fns_ls$fn <- ready4class::write_r4_mthds
 # x$subsequent_ls$s4_fns_ls$args_ls <- list(fns_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/data-raw/s4_fns"),
 write_self_srvc_pkg(x)
