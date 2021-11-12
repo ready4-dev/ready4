@@ -1,6 +1,6 @@
 Package: ready4
 Title: A Framework for Open and Modular Mental Health Systems Models
-Version: 0.0.0.9035
+Version: 0.0.0.9036
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -14,7 +14,7 @@ Description: ready4 provides bare bones foundational elements (classes,
     models.  This development version of the ready4 package has been made
     available as part of the process of testing and documenting the
     package. If you have any questions, please contact the authors
-    (matthew.hamilton@orygen.org.au).
+    (matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>
 License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4,
