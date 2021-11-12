@@ -187,7 +187,7 @@ write_new_generic_descs <- function(x){
                                     })
   generics_txt_chr %>%
     writeLines("R/grp_generics.R")
-
+  devtools::load_all()
 }
 write_to_copy_s4_cls_fls <- function(x,#ready4fun_manifest or pkg_setup_ls
                                      class_pt_lup,
@@ -364,6 +364,7 @@ write_self_srvc_pkg <- function(x){
     #           "R/grp_generics.R")
     # devtools::document()
     #x$subsequent_ls$fns_dmt_tb <-  fns_dmt_tb
+    devtools::document()
     ready4fun::report.ready4fun_manifest(pkg_setup_ls,
                                          key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
   }
@@ -376,7 +377,7 @@ return(x)
 ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Modular Mental Health Systems Models" %>% tools::toTitleCase(),
                                                     pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models.
-  This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
+  This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
                                                         "matthew.hamilton@orygen.org.au",role = c("aut",

@@ -26,7 +26,6 @@ Collate:
     'C4_Ready4Launch.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
-    'add.R'
     'fn_add.R'
     'fn_get.R'
     'fn_make.R'
@@ -35,18 +34,11 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
-    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
-    'make.R'
     'pkg_ready4.R'
     'ready4-package.R'
-    'remove.R'
-    'rowbind.R'
-    'transform.R'
-    'update.R'
-    'write.R'
 Imports: 
     assertthat,
     dataverse,

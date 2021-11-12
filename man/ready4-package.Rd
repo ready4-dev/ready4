@@ -8,11 +8,11 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>
 
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>
 }
 \seealso{
 Useful links:
