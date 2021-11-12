@@ -377,7 +377,7 @@ return(x)
 ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Modular Mental Health Systems Models" %>% tools::toTitleCase(),
                                                     pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models.
-  This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>",
+  This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
                                                         "matthew.hamilton@orygen.org.au",role = c("aut",
@@ -389,7 +389,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
                                                     ),
                                                     urls_chr = c("https://ready4-dev.github.io/ready4/",
                                                                  "https://github.com/ready4-dev/ready4",
-                                                                 "https://ready4-dev.github.io/ready4/")) %>%
+                                                                 "https://www.ready4-dev.com/")) %>%
   ready4fun::make_manifest(addl_pkgs_ls = ready4fun::make_addl_pkgs_ls(depends_chr = "generics",
                                                                        suggests_chr = "rmarkdown"),
                            build_ignore_ls = ready4fun::make_build_ignore_ls(file_nms_chr = c("initial_setup.R")),
@@ -412,3 +412,4 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
+#usethis::use_citation() # Then manual edit
