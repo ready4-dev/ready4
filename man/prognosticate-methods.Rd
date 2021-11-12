@@ -12,5 +12,5 @@ prognosticate(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-prognosticate() is a Prognosticate function that executes an algorithm for solving forward problems through simulation or prediction. Specifically, this function implements an algorithm to prognosticate. The function is called for its side effects and does not return a value.
+prognosticate() is a method that executes an algorithm for solving forward problems through simulation or prediction.
 }

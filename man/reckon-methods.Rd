@@ -12,5 +12,5 @@ reckon(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-reckon() is a Reckon function that performs a calculation. Specifically, this function implements an algorithm to reckon. The function is called for its side effects and does not return a value.
+reckon() is a method that performs a calculation.
 }

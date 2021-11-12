@@ -30,3 +30,8 @@
 ^data-raw/fns/update\.R$
 ^data-raw/safety/R/fn_update\.R$
 ^data-raw/fns/transform\.R$
+^data-raw/clss/C4_Ready4Launch\.R$
+^data-raw/clss/C4_Ready4Private\.R$
+^data-raw/clss/C4_Ready4Public\.R$
+^data-raw/NOTES\.R$
+^data-raw/s4_fns/renewSlot\.R$

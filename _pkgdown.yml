@@ -9,6 +9,11 @@ home:
 development:
   mode: auto
 reference:
+- title: "S4 Classes"
+- contents:
+  - Ready4Launch
+  - Ready4Private
+  - Ready4Public
 - title: "Functions"
 - contents:
   - get_dv_fls_urls
@@ -32,5 +37,6 @@ reference:
   - ratify
   - reckon
   - renew
+  - renewSlot
   - report
   - share

@@ -158,6 +158,68 @@ write_fn_fl <- function(fns_env_ls,
       )
   }
 }
+write_new_generic_descs <- function(x){
+  generics_txt_chr <- readLines("R/grp_generics.R")
+  descriptions_idcs_int <- generics_txt_chr %>% startsWith("#' @description") %>% which()
+  descriptions_chr <- generics_txt_chr[descriptions_idcs_int]
+  end_idcs_int <- (descriptions_chr %>% stringi::stri_locate_first_fixed("()") %>% `[`(,1)) - 1
+  replacements_chr <- purrr::map2_chr(descriptions_chr,
+                                      end_idcs_int,
+                                      ~ {
+                                        original_1L_chr <- generic_1L_chr <- stringr::str_sub(.x, start = 17, end = .y)
+                                        substr(generic_1L_chr, 1, 1) <- toupper(substr(generic_1L_chr, 1, 1))
+                                        mthd_desc_1L_chr <- get_from_lup_obj(x$subsequent_ls$fn_types_lup,
+                                                                             match_value_xx = generic_1L_chr,
+                                                                             match_var_nm_1L_chr = "fn_type_nm_chr",
+                                                                             target_var_nm_1L_chr = "fn_type_desc_chr")
+                                        substr(mthd_desc_1L_chr, 1, 1) <- tolower(substr(mthd_desc_1L_chr, 1, 1))
+                                        paste0("#' @description ",
+                                               original_1L_chr,
+                                               "() is a method that ",
+                                               mthd_desc_1L_chr)
+                                      }
+  )
+  generics_txt_chr <- purrr::reduce(1:length(replacements_chr),
+                                    .init = generics_txt_chr,
+                                    ~ {
+                                      .x[descriptions_idcs_int[.y]] <- replacements_chr[.y]
+                                      .x
+                                    })
+  generics_txt_chr %>%
+    writeLines("R/grp_generics.R")
+
+}
+write_to_copy_s4_cls_fls <- function(x,#ready4fun_manifest or pkg_setup_ls
+                                     class_pt_lup,
+                                     dev_pkg_nm_1L_chr,
+                                     path_to_cls_fls_1L_chr = "data-raw/clss"){
+  cls_fls_chr <- list.files(path_to_cls_fls_1L_chr)
+  if(!identical(character(0),cls_fls_chr)){
+    cls_fls_chr %>%
+      purrr::walk(~file.copy(paste0(path_to_cls_fls_1L_chr,"/",.x),
+                             "R"))
+    devtools::document()
+    clss_chr <- cls_fls_chr %>% stringr::str_sub(start=4,end=-3)
+
+    prototype_lup <- class_pt_lup %>%
+      dplyr::filter(pt_ns_chr != dev_pkg_nm_1L_chr) %>%
+      tibble::add_case(type_chr = clss_chr,
+                       val_chr = paste0(clss_chr,"()"),
+                       pt_ns_chr = dev_pkg_nm_1L_chr,
+                       fn_to_call_chr = clss_chr,
+                       old_class_lgl = F)
+    x$subsequent_ls$prototype_lup <- prototype_lup
+    if(!identical(class_pt_lup,
+                  prototype_lup) & !is.null(class_pt_lup)){
+      write_env_objs_to_dv(list(prototype_lup = prototype_lup),
+                           descriptions_chr = "Class prototype lookup table",
+                           ds_url_1L_chr = x$subsequent_ls$pkg_dmt_dv_dss_chr[2],
+                           piggyback_to_1L_chr = x$subsequent_ls$piggyback_to_1L_chr,
+                           publish_dv_1L_lgl = F)
+    }
+  }
+  return(x)
+}
 ## Single use custom function
 write_self_srvc_pkg <- function(x){
   x <- ready4fun::ratify.ready4fun_manifest(x)
@@ -177,9 +239,11 @@ write_self_srvc_pkg <- function(x){
     #                                  "R/imp_mthds.R"))
     # devtools::document()
     x <- ready4fun::authorData.ready4fun_manifest(x)
-    # x <- ready4fun::authorClasses.ready4fun_manifest(x,
-    #                                                  ##
-    #                                                  self_serve_1L_lgl = T)
+    x <- write_to_copy_s4_cls_fls(x,
+                                  class_pt_lup = ready4fun::get_rds_from_pkg_dmt(x,
+                                                                                 fl_nm_1L_chr = "prototype_lup"),
+                                  dev_pkg_nm_1L_chr = "ready4")
+
     x <- ready4fun::renew.ready4fun_manifest(x,
                                              type_1L_chr = "fns_dmt")
     fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb
@@ -197,6 +261,15 @@ write_self_srvc_pkg <- function(x){
     fns_env_ls <- ready4fun::read_fns(ready4fun::make_undmtd_fns_dir_chr(paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,
                                                                                 "/data-raw"),
                                                                          drop_empty_1L_lgl = T))
+    #
+    x$subsequent_ls$s4_fns_ls$fn <- ready4class::write_r4_mthds
+    x$subsequent_ls$s4_fns_ls$args_ls <- list(fns_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/data-raw/s4_fns"),
+                                                                   fn_types_lup = x$subsequent_ls$fn_types_lup,
+                                                                   import_from_chr = x$subsequent_ls$import_from_chr,
+                                                                   output_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/R"),
+                                                                   pkg_nm_1L_chr = x$initial_ls$pkg_desc_ls$Package)
+
+    #
     s4_mthds_ls_ls <- purrr::map2(list(paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/Developer"),
                                        paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/User")),
                                   c(T,F),
@@ -211,7 +284,8 @@ write_self_srvc_pkg <- function(x){
                                       devtools::build_manual(path = .x)
                                     s4_mthds_ls
                                   })
-    pkg_setup_ls$subsequent_ls$fns_dmt_tb <-  fns_dmt_tb
+    pkg_setup_ls$subsequent_ls$fns_dmt_tb <- fns_dmt_tb
+    write_new_generic_descs(pkg_setup_ls)
     if(T){
       datasets_chr <- utils::data(package = ready4fun::get_dev_pkg_nm(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr),
                                   envir = environment())$results[,3]
@@ -297,11 +371,11 @@ write_self_srvc_pkg <- function(x){
   #                    src = "https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg",
   #                    href = "https://doi.org/10.5281/zenodo.5606250")
   ready4fun::write_to_delete_dirs("safety")
-
+return(x)
 }
 ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Modular Mental Health Systems Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "ready4 provides a set of generic functions that are designed for use across the ready4 suite of packages.
+                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models.
   This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
@@ -329,10 +403,11 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
                            lifecycle_stage_1L_chr = "experimental",
                            path_to_pkg_logo_1L_chr = "../../../../../Documentation/Images/ready4-logo/default.png",
                            piggyback_to_1L_chr = "ready4-dev/ready4",
-                           # pkg_dmt_dv_dss_chr = c("https://doi.org/10.7910/DVN/HLLXZN",
-                           #                        "https://doi.org/10.7910/DVN/2Y9VF9"),
                            ready4_type_1L_chr = "foundation",
                            zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)")
-# x$subsequent_ls$s4_fns_ls$fn <- ready4class::write_r4_mthds
-# x$subsequent_ls$s4_fns_ls$args_ls <- list(fns_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/data-raw/s4_fns"),
-write_self_srvc_pkg(x)
+##
+## Reminder
+## Unlike other workflows in the ready4 suite, in this instance it is necessary to answer "N", the FIRST time the following prompt appears:
+## Do you confirm ('Y') that you want to delete these files: [Y|N]
+## After doing so, all other such prompts should be answered in the affirmative.
+x <- write_self_srvc_pkg(x)

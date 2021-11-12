@@ -12,5 +12,5 @@ share(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-share() is a Share function that processes output for public disemination and uploads to an online repository along with required metadata. Specifically, this function implements an algorithm to share. The function is called for its side effects and does not return a value.
+share() is a method that processes output for public disemination and uploads to an online repository along with required metadata.
 }

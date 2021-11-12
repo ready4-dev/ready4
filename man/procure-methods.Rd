@@ -12,5 +12,5 @@ procure(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-procure() is a Procure function that searches and retrieves requested data from a specified source. Specifically, this function implements an algorithm to procure. The function is called for its side effects and does not return a value.
+procure() is a method that searches and retrieves requested data from a specified source.
 }

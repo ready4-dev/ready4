@@ -12,5 +12,5 @@ report(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-report() is a Report function that authors a report. Specifically, this function implements an algorithm to report. The function is called for its side effects and does not return a value.
+report() is a method that authors a report.
 }

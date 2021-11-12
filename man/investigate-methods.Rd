@@ -12,5 +12,5 @@ investigate(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-investigate() is an Investigate function that executes an algorithm so solve an inverse problem, often through estimating statistical models. Specifically, this function implements an algorithm to investigate. The function is called for its side effects and does not return a value.
+investigate() is a method that executes an algorithm so solve an inverse problem, often through estimating statistical models.
 }

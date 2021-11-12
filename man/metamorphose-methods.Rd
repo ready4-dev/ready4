@@ -12,5 +12,5 @@ metamorphose(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-metamorphose() is a Metamorphose function that transforms an instance of a class into an object with different structural properties. Specifically, this function implements an algorithm to metamorphose. The function is called for its side effects and does not return a value.
+metamorphose() is a method that transforms an instance of a class into an object with different structural properties.
 }

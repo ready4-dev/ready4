@@ -12,5 +12,5 @@ ratify(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-ratify() is a Ratify function that checks whether an instance of a class conforms to required criteria, potentially modifying that instance to ensure that it is valid. Specifically, this function implements an algorithm to ratify. The function is called for its side effects and does not return a value.
+ratify() is a method that checks whether an instance of a class conforms to required criteria, potentially modifying that instance to ensure that it is valid.
 }

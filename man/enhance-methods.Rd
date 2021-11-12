@@ -12,5 +12,5 @@ enhance(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-enhance() is an Enhance function that enhances an instance of a class by adding one or more elements. Specifically, this function implements an algorithm to enhance. The function is called for its side effects and does not return a value.
+enhance() is a method that enhances an instance of a class by adding one or more elements.
 }

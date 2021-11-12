@@ -12,5 +12,5 @@ authorClasses(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-authorClasses() is an AuthorClasses function that authors and saves files necessary for creating and documenting classes. Specifically, this function implements an algorithm to authorclasses. The function is called for its side effects and does not return a value.
+authorClasses() is a method that authors and saves files necessary for creating and documenting classes.
 }

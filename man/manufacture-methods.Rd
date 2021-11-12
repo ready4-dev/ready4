@@ -12,5 +12,5 @@ manufacture(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-manufacture() is a Manufacture function that creates a novel R object. Specifically, this function implements an algorithm to manufacture. The function is called for its side effects and does not return a value.
+manufacture() is a method that creates a novel R object.
 }

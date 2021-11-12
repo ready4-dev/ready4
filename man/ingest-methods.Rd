@@ -12,5 +12,5 @@ ingest(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-ingest() is an Ingest function that imports objects in external file formats into R objects stored in working memory. Specifically, this function implements an algorithm to ingest. The function is called for its side effects and does not return a value.
+ingest() is a method that imports objects in external file formats into R objects stored in working memory.
 }

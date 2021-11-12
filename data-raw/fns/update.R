@@ -17,7 +17,9 @@ update_pt_fn_args_ls <- function(args_ls){
                                                                    "NA_real_",
                                                                    ifelse(is.logical(val_xx),
                                                                           "NA",
-                                                                          ifelse("list" %in% class(val_xx),"list(NULL)","identity(.x)")))))))
+                                                                          ifelse("list" %in% class(val_xx),
+                                                                                 "list(NULL)",
+                                                                                 "identity(.x)")))))))
 
                                      val_xx <- parse(text=val_xx) %>% eval()
 

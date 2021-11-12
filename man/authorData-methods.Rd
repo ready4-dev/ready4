@@ -12,5 +12,5 @@ authorData(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-authorData() is an AuthorData function that authors and saves files necessary for creating and documenting datasets. Specifically, this function implements an algorithm to authordata. The function is called for its side effects and does not return a value.
+authorData() is a method that authors and saves files necessary for creating and documenting datasets.
 }

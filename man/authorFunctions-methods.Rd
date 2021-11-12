@@ -12,5 +12,5 @@ authorFunctions(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-authorFunctions() is an AuthorFunctions function that authors and saves files necessary for creating and documenting functions. Specifically, this function implements an algorithm to authorfunctions. The function is called for its side effects and does not return a value.
+authorFunctions() is a method that authors and saves files necessary for creating and documenting functions.
 }

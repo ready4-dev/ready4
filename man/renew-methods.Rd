@@ -12,5 +12,5 @@ renew(x, ...)
 \item{...}{Additional arguments (an additional arguments)}
 }
 \description{
-renew() is a Renew function that updates an instance of a class with new values. Specifically, this function implements an algorithm to renew. The function is called for its side effects and does not return a value.
+renew() is a method that updates an instance of a class with new values.
 }

@@ -58,6 +58,10 @@ renew <- function (x, ...)
 {
   UseMethod("renew", x)
 }
+renewSlot <- function (x, ...)
+{
+  UseMethod("renew", x)
+}
 report <- function (x, ...)
 {
   UseMethod("report", x)
