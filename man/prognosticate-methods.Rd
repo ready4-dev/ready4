@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{prognosticate}
 \alias{prognosticate}
-\title{Prognosticate}
+\title{Execute an algorithm for solving forward problems through simulation or prediction.}
 \usage{
 prognosticate(x, ...)
 }

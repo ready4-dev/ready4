@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{enhance}
 \alias{enhance}
-\title{Enhance}
+\title{Enhance an instance of a class by adding one or more elements.}
 \usage{
 enhance(x, ...)
 }

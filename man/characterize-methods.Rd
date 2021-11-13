@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{characterize}
 \alias{characterize}
-\title{Characterize}
+\title{Generate descriptive information about a dataset.}
 \usage{
 characterize(x, ...)
 }

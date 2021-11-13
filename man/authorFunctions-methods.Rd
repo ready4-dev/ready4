@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorFunctions}
 \alias{authorFunctions}
-\title{AuthorFunctions}
+\title{Author and save files necessary for creating and documenting functions.}
 \usage{
 authorFunctions(x, ...)
 }

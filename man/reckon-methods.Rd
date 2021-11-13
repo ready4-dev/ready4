@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{reckon}
 \alias{reckon}
-\title{Reckon}
+\title{Perform a calculation.}
 \usage{
 reckon(x, ...)
 }

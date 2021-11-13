@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{metamorphose}
 \alias{metamorphose}
-\title{Metamorphose}
+\title{Transform an instance of a class into an object with different structural properties.}
 \usage{
 metamorphose(x, ...)
 }

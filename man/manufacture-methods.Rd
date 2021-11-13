@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{manufacture}
 \alias{manufacture}
-\title{Manufacture}
+\title{Create a novel R object.}
 \usage{
 manufacture(x, ...)
 }

@@ -8,18 +8,18 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>
+ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
 
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>
+ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a representational system to support implementation of open and modular mental health systems models. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://ready4-dev.github.io/ready4/}
   \item \url{https://github.com/ready4-dev/ready4}
-  \item \url{https://ready4-dev.github.io/ready4/}
+  \item \url{https://www.ready4-dev.com/}
 }
 
 
@@ -27,7 +27,7 @@ Useful links:
 \itemize{
   \item \url{https://ready4-dev.github.io/ready4/}
   \item \url{https://github.com/ready4-dev/ready4}
-  \item \url{https://ready4-dev.github.io/ready4/}
+  \item \url{https://www.ready4-dev.com/}
 }
 
 }

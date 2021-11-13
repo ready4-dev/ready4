@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{procure}
 \alias{procure}
-\title{Procure}
+\title{Search and retrieve requested data from a specified source.}
 \usage{
 procure(x, ...)
 }

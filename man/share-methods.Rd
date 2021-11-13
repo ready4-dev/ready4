@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{share}
 \alias{share}
-\title{Share}
+\title{Process output for public disemination and upload to an online repository along with required metadata.}
 \usage{
 share(x, ...)
 }

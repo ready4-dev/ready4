@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{ratify}
 \alias{ratify}
-\title{Ratify}
+\title{Check whether an instance of a class conforms to required criteria, potentially modifying that instance to ensure that it is valid.}
 \usage{
 ratify(x, ...)
 }

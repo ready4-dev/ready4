@@ -1,4 +1,4 @@
-citHeader("To cite ready4 in publications use:")
+citHeader(paste0("To cite ",meta$Package," in publications use:"))
 
 citEntry(
   entry    = "Manual",
@@ -8,7 +8,7 @@ citEntry(
   year     = "2021",
   note     = sprintf("R package version %s", meta$Version),
   url      = "https://ready4-dev.github.io/ready4/",
-  textVersion = paste("Matthew P Hamilton, ",
+  textVersion = paste("Matthew P Hamilton ",
   "(2021).",
   paste0(meta$Package,": ",meta$Title,
   "."),

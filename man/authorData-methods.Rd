@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorData}
 \alias{authorData}
-\title{AuthorData}
+\title{Author and save files necessary for creating and documenting datasets.}
 \usage{
 authorData(x, ...)
 }

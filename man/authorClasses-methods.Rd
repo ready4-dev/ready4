@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorClasses}
 \alias{authorClasses}
-\title{AuthorClasses}
+\title{Author and save files necessary for creating and documenting classes.}
 \usage{
 authorClasses(x, ...)
 }

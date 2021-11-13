@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{author}
 \alias{author}
-\title{Author}
+\title{Write files to local or remote locations.}
 \usage{
 author(x, ...)
 }

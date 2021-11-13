@@ -160,6 +160,8 @@ write_fn_fl <- function(fns_env_ls,
 }
 write_new_generic_descs <- function(x){
   generics_txt_chr <- readLines("R/grp_generics.R")
+  title_idcs_int <- (generics_txt_chr %>% startsWith("#' @rdname") %>% which())-1
+  titles_chr <- generics_txt_chr[title_idcs_int]
   descriptions_idcs_int <- generics_txt_chr %>% startsWith("#' @description") %>% which()
   descriptions_chr <- generics_txt_chr[descriptions_idcs_int]
   end_idcs_int <- (descriptions_chr %>% stringi::stri_locate_first_fixed("()") %>% `[`(,1)) - 1
@@ -179,6 +181,29 @@ write_new_generic_descs <- function(x){
                                                mthd_desc_1L_chr)
                                       }
   )
+  new_titles_ls <- replacements_chr %>% stringr::str_replace_all("@description ","") %>%
+    stringr::str_replace_all("\\(\\) is a method that", " -") %>% strsplit("- ")
+  new_titles_chr <- new_titles_ls %>% purrr::map_chr(~{
+    first_1L_chr <- .x[2] %>% stringr::word()
+    new_first_1L_chr <- stringr::str_sub(first_1L_chr, end = -2) %>% Hmisc::capitalize()
+    remainder_1L_chr <- stringr::str_remove(.x[2],first_1L_chr)
+    if(startsWith(.x[2],paste0(first_1L_chr," and "))){
+      second_1L_chr <- stringr::str_remove(.x[2],paste0(first_1L_chr," and ")) %>% stringr::word()
+      new_second_1L_chr <- stringr::str_sub(second_1L_chr, end = -2)
+      remainder_1L_chr <- stringr::str_remove(.x[2],paste0(first_1L_chr," and ", second_1L_chr))
+      new_first_1L_chr <- paste0(new_first_1L_chr, " and ", new_second_1L_chr)
+    }
+    paste0("#' ",new_first_1L_chr, remainder_1L_chr)
+  }) %>% stringr::str_replace_all("Searche ","Search ") %>%
+    stringr::str_replace_all("Processe ","Process ") %>%
+    stringr::str_replace("and uploads to an online repository","and upload to an online repository")
+
+  generics_txt_chr <- purrr::reduce(1:length(new_titles_chr),
+                                    .init = generics_txt_chr,
+                                    ~ {
+                                      .x[title_idcs_int[.y]] <- new_titles_chr[.y]
+                                      .x
+                                    })
   generics_txt_chr <- purrr::reduce(1:length(replacements_chr),
                                     .init = generics_txt_chr,
                                     ~ {
@@ -412,4 +437,4 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
-#usethis::use_citation() # Then manual edit
+# ready4fun::write_citation_fl(x) or manual edit

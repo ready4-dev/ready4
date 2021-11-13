@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{renew}
 \alias{renew}
-\title{Renew}
+\title{Update an instance of a class with new values.}
 \usage{
 renew(x, ...)
 }

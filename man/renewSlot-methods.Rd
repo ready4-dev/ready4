@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{renewSlot}
 \alias{renewSlot}
-\title{RenewSlot}
+\title{Update a specified slot of a class instance with new values.}
 \usage{
 renewSlot(x, ...)
 }

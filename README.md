@@ -14,7 +14,7 @@ support implementation of open and modular mental health systems
 models.  This development version of the ready4 package has been made
 available as part of the process of testing and documenting the
 package. If you have any questions, please contact the authors
-(matthew.hamilton@orygen.org.au). <doi:10.5281/zenodo.5606250>
+(matthew.hamilton@orygen.org.au).
 
 To install a development version of this software, run the following commands in your R console:
 

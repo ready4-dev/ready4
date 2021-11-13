@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{ingest}
 \alias{ingest}
-\title{Ingest}
+\title{Import objects in external file formats into R objects stored in working memory.}
 \usage{
 ingest(x, ...)
 }

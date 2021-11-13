@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{report}
 \alias{report}
-\title{Report}
+\title{Author a report.}
 \usage{
 report(x, ...)
 }

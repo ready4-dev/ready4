@@ -5,7 +5,7 @@ home:
   - text: Manual - Developer (PDF)
     href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/abbreviations_lup.RDS
   - text: Project website
-    href:  https://ready4-dev.github.io/ready4/
+    href:  https://www.ready4-dev.com/
 development:
   mode: auto
 reference:
