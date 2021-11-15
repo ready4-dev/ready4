@@ -1,6 +1,6 @@
 Package: ready4
 Title: A Framework for Open and Modular Mental Health Systems Models
-Version: 0.0.0.9039
+Version: 0.0.0.9040
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -15,7 +15,7 @@ Description: ready4 provides bare bones foundational elements (classes,
     available as part of the process of testing and documenting the
     package. If you have any questions, please contact the authors
     (matthew.hamilton@orygen.org.au).
-License: GPL (>= 3)
+License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4, https://www.ready4-dev.com/
 Encoding: UTF-8
@@ -25,6 +25,7 @@ Collate:
     'C4_Ready4Launch.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
     'fn_add.R'
     'fn_get.R'
     'fn_make.R'
@@ -33,13 +34,40 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'pkg_ready4.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Imports: 
+    assertthat,
+    dataverse,
+    dplyr,
+    fs,
+    Hmisc,
     knitr,
     lifecycle,
-    testthat
+    magrittr,
+    methods,
+    piggyback,
+    purrr,
+    rlang,
+    stats,
+    stringi,
+    stringr,
+    testit,
+    testthat,
+    tibble,
+    utils
 VignetteBuilder: knitr
+Depends: 
+    generics
+Suggests: 
+    rmarkdown
