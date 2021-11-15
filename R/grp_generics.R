@@ -251,3 +251,14 @@ shareSlot <- function (x, ...)
   UseMethod("shareSlot", x)
 }
 methods::setGeneric("shareSlot")
+#' report
+#' @rdname report-methods
+#' @description report() is a method that reports.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+report <- function (x, ...)
+{
+  UseMethod("report", x)
+}
+methods::setGeneric("report")
