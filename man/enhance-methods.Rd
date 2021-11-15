@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{enhance}
 \alias{enhance}
-\title{Enhance an instance of a class by adding one or more elements.}
+\title{Enhance an instance of a class with new data, transforming the original object into an instance of a child class}
 \usage{
 enhance(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-enhance() is a method that enhances an instance of a class by adding one or more elements.
+enhance() is a method that enhances an instance of a class with new data, transforming the original object into an instance of a child class.
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{reckon}
 \alias{reckon}
-\title{Perform a calculation.}
+\title{Reckon a value by performing a calculation using data contained in an instance of a class}
 \usage{
 reckon(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-reckon() is a method that performs a calculation.
+reckon() is a method that reckons a value by performing a calculation using data contained in an instance of a class.
 }

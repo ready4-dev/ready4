@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{metamorphose}
 \alias{metamorphose}
-\title{Transform an instance of a class into an object with different structural properties.}
+\title{Metamorphose an instance of a class into an instance of a different (non-child) class}
 \usage{
 metamorphose(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-metamorphose() is a method that transforms an instance of a class into an object with different structural properties.
+metamorphose() is a method that metamorphoses an instance of a class into an instance of a different (non-child) class.
 }

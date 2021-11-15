@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{ratify}
 \alias{ratify}
-\title{Check whether an instance of a class conforms to required criteria, potentially modifying that instance to ensure that it is valid.}
+\title{Ratifie that an instance of a class conforms to specified criteria}
 \usage{
 ratify(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-ratify() is a method that checks whether an instance of a class conforms to required criteria, potentially modifying that instance to ensure that it is valid.
+ratify() is a method that ratifies that an instance of a class conforms to specified criteria.
 }

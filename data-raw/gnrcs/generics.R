@@ -14,13 +14,25 @@ authorFunctions <- function (x, ...)
 {
   UseMethod("authorFunctions", x)
 }
+authorReport <- function (x, ...)
+{
+  UseMethod("authorReport", x)
+}
 characterize <- function (x, ...)
 {
   UseMethod("characterize", x)
 }
+characterizeSlot <- function (x, ...)
+{
+  UseMethod("characterizeSlot", x)
+}
 enhance <- function (x, ...)
 {
   UseMethod("enhance", x)
+}
+enhanceSlot <- function (x, ...)
+{
+  UseMethod("enhanceSlot", x)
 }
 ingest <- function (x, ...)
 {
@@ -38,6 +50,10 @@ metamorphose <- function (x, ...)
 {
   UseMethod("metamorphose", x)
 }
+metamorphoseSlot <- function (x, ...)
+{
+  UseMethod("metamorphoseSlot", x)
+}
 procure <- function (x, ...)
 {
   UseMethod("procure", x)
@@ -50,6 +66,10 @@ ratify <- function (x, ...)
 {
   UseMethod("ratify", x)
 }
+ratifySlot <- function (x, ...)
+{
+  UseMethod("ratifySlot", x)
+}
 reckon <- function (x, ...)
 {
   UseMethod("reckon", x)
@@ -60,13 +80,13 @@ renew <- function (x, ...)
 }
 renewSlot <- function (x, ...)
 {
-  UseMethod("renew", x)
-}
-report <- function (x, ...)
-{
-  UseMethod("report", x)
+  UseMethod("renewSlot", x)
 }
 share <- function (x, ...)
 {
   UseMethod("share", x)
+}
+shareSlot <- function (x, ...)
+{
+  UseMethod("shareSlot", x)
 }

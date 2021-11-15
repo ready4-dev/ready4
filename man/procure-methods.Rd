@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{procure}
 \alias{procure}
-\title{Search and retrieve requested data from a specified source.}
+\title{Procure data by executing a search and retrieval algorithm using data contained in an instance of a class}
 \usage{
 procure(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-procure() is a method that searches and retrieves requested data from a specified source.
+procure() is a method that procures data by executing a search and retrieval algorithm using data contained in an instance of a class.
 }

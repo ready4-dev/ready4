@@ -169,7 +169,7 @@ write_new_generic_descs <- function(x){
                                       end_idcs_int,
                                       ~ {
                                         original_1L_chr <- generic_1L_chr <- stringr::str_sub(.x, start = 17, end = .y)
-                                        substr(generic_1L_chr, 1, 1) <- toupper(substr(generic_1L_chr, 1, 1))
+                                        #substr(generic_1L_chr, 1, 1) <- toupper(substr(generic_1L_chr, 1, 1))
                                         mthd_desc_1L_chr <- get_from_lup_obj(x$subsequent_ls$fn_types_lup,
                                                                              match_value_xx = generic_1L_chr,
                                                                              match_var_nm_1L_chr = "fn_type_nm_chr",
@@ -182,6 +182,7 @@ write_new_generic_descs <- function(x){
                                       }
   )
   new_titles_ls <- replacements_chr %>% stringr::str_replace_all("@description ","") %>%
+    stringi::stri_replace_last_regex(".","") %>%
     stringr::str_replace_all("\\(\\) is a method that", " -") %>% strsplit("- ")
   new_titles_chr <- new_titles_ls %>% purrr::map_chr(~{
     first_1L_chr <- .x[2] %>% stringr::word()
@@ -194,9 +195,10 @@ write_new_generic_descs <- function(x){
       new_first_1L_chr <- paste0(new_first_1L_chr, " and ", new_second_1L_chr)
     }
     paste0("#' ",new_first_1L_chr, remainder_1L_chr)
-  }) %>% stringr::str_replace_all("Searche ","Search ") %>%
-    stringr::str_replace_all("Processe ","Process ") %>%
-    stringr::str_replace("and uploads to an online repository","and upload to an online repository")
+  })
+  # %>% stringr::str_replace_all("Searche ","Search ") %>%
+  #   stringr::str_replace_all("Processe ","Process ") %>%
+  #   stringr::str_replace("and uploads to an online repository","and upload to an online repository")
 
   generics_txt_chr <- purrr::reduce(1:length(new_titles_chr),
                                     .init = generics_txt_chr,
@@ -268,7 +270,6 @@ write_self_srvc_pkg <- function(x){
                                   class_pt_lup = ready4fun::get_rds_from_pkg_dmt(x,
                                                                                  fl_nm_1L_chr = "prototype_lup"),
                                   dev_pkg_nm_1L_chr = "ready4")
-
     x <- ready4fun::renew.ready4fun_manifest(x,
                                              type_1L_chr = "fns_dmt")
     fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb
@@ -286,7 +287,6 @@ write_self_srvc_pkg <- function(x){
     fns_env_ls <- ready4fun::read_fns(ready4fun::make_undmtd_fns_dir_chr(paste0(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr,
                                                                                 "/data-raw"),
                                                                          drop_empty_1L_lgl = T))
-    #
     x$subsequent_ls$s4_fns_ls$fn <- ready4class::write_r4_mthds
     x$subsequent_ls$s4_fns_ls$args_ls <- list(fns_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/data-raw/s4_fns"),
                                                                    fn_types_lup = x$subsequent_ls$fn_types_lup,
@@ -294,7 +294,6 @@ write_self_srvc_pkg <- function(x){
                                                                    output_dir_1L_chr = paste0(x$initial_ls$path_to_pkg_rt_1L_chr,"/R"),
                                                                    pkg_nm_1L_chr = x$initial_ls$pkg_desc_ls$Package)
 
-    #
     s4_mthds_ls_ls <- purrr::map2(list(paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/Developer"),
                                        paste0(pkg_setup_ls$subsequent_ls$path_to_dmt_dir_1L_chr,"/User")),
                                   c(T,F),

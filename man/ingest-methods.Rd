@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{ingest}
 \alias{ingest}
-\title{Import objects in external file formats into R objects stored in working memory.}
+\title{Ingest data saved in external files into R objects stored in working memory}
 \usage{
 ingest(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-ingest() is a method that imports objects in external file formats into R objects stored in working memory.
+ingest() is a method that ingests data saved in external files into R objects stored in working memory.
 }

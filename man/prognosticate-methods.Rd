@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{prognosticate}
 \alias{prognosticate}
-\title{Execute an algorithm for solving forward problems through simulation or prediction.}
+\title{Prognosticate by applying an algorithm to solve a forward problem through simulation or prediction}
 \usage{
 prognosticate(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-prognosticate() is a method that executes an algorithm for solving forward problems through simulation or prediction.
+prognosticate() is a method that prognosticates by applying an algorithm to solve a forward problem through simulation or prediction.
 }

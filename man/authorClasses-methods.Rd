@@ -2,14 +2,14 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorClasses}
 \alias{authorClasses}
-\title{Author and save files necessary for creating and documenting classes.}
+\title{Author and save files necessary for creating and documenting classes}
 \usage{
 authorClasses(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
 authorClasses() is a method that authors and saves files necessary for creating and documenting classes.

@@ -2,15 +2,15 @@
 % Please edit documentation in R/grp_generics.R
 \name{manufacture}
 \alias{manufacture}
-\title{Create a novel R object.}
+\title{Manufacture a novel R object using data contained in an instance of a class}
 \usage{
 manufacture(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
-manufacture() is a method that creates a novel R object.
+manufacture() is a method that manufactures a novel R object using data contained in an instance of a class.
 }

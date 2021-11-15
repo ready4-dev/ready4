@@ -2,14 +2,14 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorData}
 \alias{authorData}
-\title{Author and save files necessary for creating and documenting datasets.}
+\title{Author and save files necessary for creating and documenting datasets}
 \usage{
 authorData(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
 authorData() is a method that authors and saves files necessary for creating and documenting datasets.

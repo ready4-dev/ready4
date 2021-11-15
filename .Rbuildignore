@@ -35,3 +35,8 @@
 ^data-raw/clss/C4_Ready4Public\.R$
 ^data-raw/NOTES\.R$
 ^data-raw/s4_fns/renewSlot\.R$
+^data-raw/s4_fns/characterizeSlot\.R$
+^data-raw/s4_fns/enhanceSlot\.R$
+^data-raw/s4_fns/metamorphoseSlot\.R$
+^data-raw/s4_fns/ratifySlot\.R$
+^data-raw/s4_fns/shareSlot\.R$

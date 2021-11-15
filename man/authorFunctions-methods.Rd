@@ -2,14 +2,14 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorFunctions}
 \alias{authorFunctions}
-\title{Author and save files necessary for creating and documenting functions.}
+\title{Author and save files necessary for creating and documenting functions}
 \usage{
 authorFunctions(x, ...)
 }
 \arguments{
 \item{x}{An object}
 
-\item{...}{Additional arguments (an additional arguments)}
+\item{...}{Additional arguments}
 }
 \description{
 authorFunctions() is a method that authors and saves files necessary for creating and documenting functions.
