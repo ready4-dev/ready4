@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_fls_to_dv}
 \alias{write_fls_to_dv}
-\title{Write files to dataverse}
+\title{write files to dataverse}
 \usage{
 write_fls_to_dv(
   file_paths_chr,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_prompt}
 \alias{make_prompt}
-\title{Make prompt}
+\title{make prompt}
 \usage{
 make_prompt(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = F)
 }

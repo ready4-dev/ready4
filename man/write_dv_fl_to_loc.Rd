@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_dv_fl_to_loc}
 \alias{write_dv_fl_to_loc}
-\title{Write dataverse file to local}
+\title{write dataverse file to local}
 \usage{
 write_dv_fl_to_loc(
   ds_ui_1L_chr,

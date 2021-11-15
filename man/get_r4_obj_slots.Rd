@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_r4_obj_slots}
 \alias{get_r4_obj_slots}
-\title{Get ready4 S4 object slots}
+\title{get ready4 S4 object slots}
 \usage{
 get_r4_obj_slots(fn_name_1L_chr, package_1L_chr = "")
 }

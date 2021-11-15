@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_update.R
 \name{update_pt_fn_args_ls}
 \alias{update_pt_fn_args_ls}
-\title{Update prototype function arguments list}
+\title{update prototype function arguments list}
 \usage{
 update_pt_fn_args_ls(args_ls)
 }

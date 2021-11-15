@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_add.R
 \name{add_lups}
 \alias{add_lups}
-\title{Add lookup tables}
+\title{add lookup tables}
 \usage{
 add_lups(
   template_lup,

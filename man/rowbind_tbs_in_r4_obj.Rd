@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_rowbind.R
 \name{rowbind_tbs_in_r4_obj}
 \alias{rowbind_tbs_in_r4_obj}
-\title{Rowbind tibbles in ready4 S4 object}
+\title{rowbind tibbles in ready4 S4 object}
 \usage{
 rowbind_tbs_in_r4_obj(tbs_r4, slot_nm_1L_chr, second_tbs_r4, r4_name_1L_chr)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_env_objs_to_dv}
 \alias{write_env_objs_to_dv}
-\title{Write environment objects to dataverse}
+\title{write environment objects to dataverse}
 \usage{
 write_env_objs_to_dv(
   env_objects_ls,

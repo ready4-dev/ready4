@@ -309,7 +309,7 @@ write_self_srvc_pkg <- function(x){
                                     s4_mthds_ls
                                   })
     pkg_setup_ls$subsequent_ls$fns_dmt_tb <- fns_dmt_tb
-    write_new_generic_descs(pkg_setup_ls)
+    #write_new_generic_descs(pkg_setup_ls)
     if(T){
       datasets_chr <- utils::data(package = ready4fun::get_dev_pkg_nm(pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr),
                                   envir = environment())$results[,3]
@@ -389,7 +389,7 @@ write_self_srvc_pkg <- function(x){
     # devtools::document()
     #x$subsequent_ls$fns_dmt_tb <-  fns_dmt_tb
     devtools::document()
-    ready4fun::report.ready4fun_manifest(pkg_setup_ls,
+    ready4fun::authorReport.ready4fun_manifest(pkg_setup_ls,
                                          key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
   }
   # usethis::use_badge(badge_name = "DOI",

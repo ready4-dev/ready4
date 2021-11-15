@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_fls_from_dv}
 \alias{write_fls_from_dv}
-\title{Write files from dataverse}
+\title{write files from dataverse}
 \usage{
 write_fls_from_dv(
   files_tb,

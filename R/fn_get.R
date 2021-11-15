@@ -1,5 +1,5 @@
-#' Get dataverse files urls
-#' @description get_dv_fls_urls() is a Get Data function that retrieves data from R objects loaded in memory. Specifically, this function implements an algorithm to get dataverse files urls. The function returns Urls (a character vector).
+#' get dataverse files urls
+#' @description get_dv_fls_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get dataverse files urls. Function argument file_nms_chr specifies the where to look for the required object. The function returns Urls (a character vector).
 #' @param file_nms_chr File names (a character vector)
 #' @param dv_ds_nm_1L_chr Dataverse dataset name (a character vector of length one)
 #' @param dv_url_pfx_1L_chr Dataverse url prefix (a character vector of length one), Default: character(0)
@@ -30,7 +30,7 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
     })
     return(urls_chr)
 }
-#' Get file identity from dataverse list
+#' get file identity from dataverse list
 #' @description get_fl_id_from_dv_ls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get file identity from dataverse list. Function argument ds_ls specifies the where to look for the required object. The function returns Identity (a character vector of length one).
 #' @param ds_ls Dataset (a list)
 #' @param fl_nm_1L_chr File name (a character vector of length one)
@@ -59,7 +59,7 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
     }
     return(id_1L_chr)
 }
-#' Get from lookup table object
+#' get from lookup table object
 #' @description get_from_lup_obj() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get from lookup table object. Function argument data_lookup_tb specifies the where to look for the required object. The function returns Return object (an output object of multiple potential types).
 #' @param data_lookup_tb Data lookup (a tibble)
 #' @param match_value_xx Match value (an output object of multiple potential types)
@@ -109,7 +109,7 @@ get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_ch
     }
     return(return_object_xx)
 }
-#' Get ready4 S4 object slots
+#' get ready4 S4 object slots
 #' @description get_r4_obj_slots() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get ready4 s4 object slots. Function argument fn_name_1L_chr specifies the where to look for the required object. The function returns Slots (a character vector).
 #' @param fn_name_1L_chr Function name (a character vector of length one)
 #' @param package_1L_chr Package (a character vector of length one), Default: ''
@@ -126,7 +126,7 @@ get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "")
     slots_chr <- purrr::map_chr(slots_ls, ~.x)
     return(slots_chr)
 }
-#' Get rds from dataverse
+#' get rds from dataverse
 #' @description get_rds_from_dv() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get rds from dataverse. Function argument file_nm_1L_chr specifies the where to look for the required object. The function returns R object (an output object of multiple potential types).
 #' @param file_nm_1L_chr File name (a character vector of length one)
 #' @param dv_ds_nm_1L_chr Dataverse dataset name (a character vector of length one), Default: 'https://doi.org/10.7910/DVN/2Y9VF9'

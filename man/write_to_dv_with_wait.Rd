@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_to_dv_with_wait}
 \alias{write_to_dv_with_wait}
-\title{Write to dataverse with wait}
+\title{write to dataverse with wait}
 \usage{
 write_to_dv_with_wait(
   dss_tb,

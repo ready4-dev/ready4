@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_ws}
 \alias{write_ws}
-\title{Write workspace}
+\title{write workspace}
 \usage{
 write_ws(path_1L_chr)
 }

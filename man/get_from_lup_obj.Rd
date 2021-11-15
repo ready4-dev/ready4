@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_from_lup_obj}
 \alias{get_from_lup_obj}
-\title{Get from lookup table object}
+\title{get from lookup table object}
 \usage{
 get_from_lup_obj(
   data_lookup_tb,

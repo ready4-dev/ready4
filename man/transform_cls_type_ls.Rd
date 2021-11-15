@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_transform.R
 \name{transform_cls_type_ls}
 \alias{transform_cls_type_ls}
-\title{Transform class type list}
+\title{transform class type list}
 \usage{
 transform_cls_type_ls(cls_type_ls)
 }

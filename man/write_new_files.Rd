@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_new_files}
 \alias{write_new_files}
-\title{Write new files}
+\title{write new files}
 \usage{
 write_new_files(
   paths_chr,

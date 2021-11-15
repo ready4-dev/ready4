@@ -1,4 +1,4 @@
-#' Write all tibbles in tibbles ready4 S4 to comma separated variables files
+#' write all tibbles in tibbles ready4 S4 to comma separated variables files
 #' @description write_all_tbs_in_tbs_r4_to_csvs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write all tibbles in tibbles ready4 s4 to comma separated variables files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param tbs_r4 Tibbles (a ready4 S4)
 #' @param r4_name_1L_chr Ready4 S4 name (a character vector of length one)
@@ -17,7 +17,7 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
             r4_name_1L_chr = r4_name_1L_chr, lup_dir_1L_chr = lup_dir_1L_chr, 
             pfx_1L_chr = pfx_1L_chr))
 }
-#' Write dataverse file to local
+#' write dataverse file to local
 #' @description write_dv_fl_to_loc() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write dataverse file to local. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param ds_ui_1L_chr Dataset user interface (a character vector of length one)
 #' @param fl_nm_1L_chr File name (a character vector of length one), Default: 'NA'
@@ -62,7 +62,7 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_i
         warning("Cannot write local copy of files from private Dataverse repo")
     }
 }
-#' Write environment objects to dataverse
+#' write environment objects to dataverse
 #' @description write_env_objs_to_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write environment objects to dataverse. The function returns File identities (an integer vector).
 #' @param env_objects_ls Environment objects (a list)
 #' @param descriptions_chr Descriptions (a character vector)
@@ -110,7 +110,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
     }
     return(file_ids_int)
 }
-#' Write files from dataverse
+#' write files from dataverse
 #' @description write_fls_from_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files from dataverse. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param files_tb Files (a tibble)
 #' @param fl_ids_int File identities (an integer vector)
@@ -149,7 +149,7 @@ write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir
         })
     }
 }
-#' Write files to dataverse
+#' write files to dataverse
 #' @description write_fls_to_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files to dataverse. The function returns Identities (an integer vector).
 #' @param file_paths_chr File paths (a character vector)
 #' @param descriptions_chr Descriptions (a character vector), Default: NULL
@@ -219,7 +219,7 @@ write_fls_to_dv <- function (file_paths_chr, descriptions_chr = NULL, ds_url_1L_
     }
     return(ids_int)
 }
-#' Write files to repository
+#' write files to repository
 #' @description write_fls_to_repo() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files to repository. The function returns Identities (an integer vector).
 #' @param paths_chr Paths (a character vector)
 #' @param descriptions_chr Descriptions (a character vector)
@@ -259,7 +259,7 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, ds_url_1L_chr = char
     }
     return(ids_int)
 }
-#' Write from temporary
+#' write from temporary
 #' @description write_from_tmp() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write from temporary. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param tmp_paths_chr Temporary paths (a character vector)
 #' @param dest_paths_chr Destination paths (a character vector)
@@ -292,7 +292,7 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, edit_fn_ls = list(NUL
     write_to_delete_fls(intersect(tmp_paths_chr, dest_paths_chr))
     write_new_files(dest_paths_chr, text_ls = text_ls)
 }
-#' Write new directories
+#' write new directories
 #' @description write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param new_dirs_chr New directories (a character vector)
 #' @return NULL
@@ -323,7 +323,7 @@ write_new_dirs <- function (new_dirs_chr)
         }
     }
 }
-#' Write new files
+#' write new files
 #' @description write_new_files() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param paths_chr Paths (a character vector)
 #' @param custom_write_ls Custom write (a list), Default: NULL
@@ -405,7 +405,7 @@ write_new_files <- function (paths_chr, custom_write_ls = NULL, fl_nm_1L_chr = N
         }
     }
 }
-#' Write tibble to comma separated variables file
+#' write tibble to comma separated variables file
 #' @description write_tb_to_csv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write tibble to comma separated variables file. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param tbs_r4 Tibbles (a ready4 S4)
 #' @param slot_nm_1L_chr Slot name (a character vector of length one)
@@ -438,7 +438,7 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
             row.names = F)
     }
 }
-#' Write to delete directories
+#' write to delete directories
 #' @description write_to_delete_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param dir_paths_chr Directory paths (a character vector)
 #' @return NULL
@@ -473,7 +473,7 @@ write_to_delete_dirs <- function (dir_paths_chr)
         }
     }
 }
-#' Write to delete files
+#' write to delete files
 #' @description write_to_delete_fls() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param file_paths_chr File paths (a character vector)
 #' @return NULL
@@ -499,7 +499,7 @@ write_to_delete_fls <- function (file_paths_chr)
         }
     }
 }
-#' Write to dataverse from table
+#' write to dataverse from table
 #' @description write_to_dv_from_tbl() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to dataverse from table. The function returns File identities (an integer vector).
 #' @param files_tb Files (a tibble)
 #' @param data_dir_rt_1L_chr Data directory root (a character vector of length one), Default: '.'
@@ -545,7 +545,7 @@ write_to_dv_from_tbl <- function (files_tb, data_dir_rt_1L_chr = ".", ds_url_1L_
     }
     return(fl_ids_int)
 }
-#' Write to dataverse with wait
+#' write to dataverse with wait
 #' @description write_to_dv_with_wait() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to dataverse with wait. The function returns Dataset (a list).
 #' @param dss_tb Datasets (a tibble)
 #' @param dv_nm_1L_chr Dataverse name (a character vector of length one)
@@ -620,7 +620,7 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, wait_tim
     }
     return(ds_ls)
 }
-#' Write to publish dataverse dataset
+#' write to publish dataverse dataset
 #' @description write_to_publish_dv_ds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to publish dataverse dataset. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param dv_ds_1L_chr Dataverse dataset (a character vector of length one)
 #' @return NULL
@@ -636,7 +636,7 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr)
         dataverse::publish_dataset(dv_ds_1L_chr, minor = F)
     }
 }
-#' Write workspace
+#' write workspace
 #' @description write_ws() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write workspace. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param path_1L_chr Path (a character vector of length one)
 #' @return NULL

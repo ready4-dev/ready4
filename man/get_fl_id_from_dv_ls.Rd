@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_fl_id_from_dv_ls}
 \alias{get_fl_id_from_dv_ls}
-\title{Get file identity from dataverse list}
+\title{get file identity from dataverse list}
 \usage{
 get_fl_id_from_dv_ls(ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_to_publish_dv_ds}
 \alias{write_to_publish_dv_ds}
-\title{Write to publish dataverse dataset}
+\title{write to publish dataverse dataset}
 \usage{
 write_to_publish_dv_ds(dv_ds_1L_chr)
 }

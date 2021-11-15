@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_to_delete_fls}
 \alias{write_to_delete_fls}
-\title{Write to delete files}
+\title{write to delete files}
 \usage{
 write_to_delete_fls(file_paths_chr)
 }

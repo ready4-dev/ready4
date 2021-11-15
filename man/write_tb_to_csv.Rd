@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_tb_to_csv}
 \alias{write_tb_to_csv}
-\title{Write tibble to comma separated variables file}
+\title{write tibble to comma separated variables file}
 \usage{
 write_tb_to_csv(
   tbs_r4,

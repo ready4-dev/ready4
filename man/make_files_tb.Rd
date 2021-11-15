@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_files_tb}
 \alias{make_files_tb}
-\title{Make files tibble}
+\title{make files tibble}
 \usage{
 make_files_tb(paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_character_)
 }

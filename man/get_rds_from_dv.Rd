@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_rds_from_dv}
 \alias{get_rds_from_dv}
-\title{Get rds from dataverse}
+\title{get rds from dataverse}
 \usage{
 get_rds_from_dv(
   file_nm_1L_chr,

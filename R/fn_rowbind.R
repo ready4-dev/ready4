@@ -1,4 +1,4 @@
-#' Rowbind all tibbles in ready4 S4 object
+#' rowbind all tibbles in ready4 S4 object
 #' @description rowbind_all_tbs_in_r4_obj() is a Rowbind function that performs custom rowbind operations on table objects. Specifically, this function implements an algorithm to rowbind all tibbles in ready4 s4 object. The function returns Tibbles (a ready4 S4).
 #' @param tbs_r4 Tibbles (a ready4 S4)
 #' @param second_tbs_r4 Second tibbles (a ready4 S4)
@@ -16,7 +16,7 @@ rowbind_all_tbs_in_r4_obj <- function (tbs_r4, second_tbs_r4, r4_name_1L_chr)
         slot_nm_1L_chr = .y, second_tbs_r4 = second_tbs_r4, r4_name_1L_chr = r4_name_1L_chr))
     return(tbs_r4)
 }
-#' Rowbind tibbles in ready4 S4 object
+#' rowbind tibbles in ready4 S4 object
 #' @description rowbind_tbs_in_r4_obj() is a Rowbind function that performs custom rowbind operations on table objects. Specifically, this function implements an algorithm to rowbind tibbles in ready4 s4 object. The function returns Tibbles (a ready4 S4).
 #' @param tbs_r4 Tibbles (a ready4 S4)
 #' @param slot_nm_1L_chr Slot name (a character vector of length one)

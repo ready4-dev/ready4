@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_dv_fls_urls}
 \alias{get_dv_fls_urls}
-\title{Get dataverse files urls}
+\title{get dataverse files urls}
 \usage{
 get_dv_fls_urls(
   file_nms_chr,
@@ -27,5 +27,5 @@ get_dv_fls_urls(
 Urls (a character vector)
 }
 \description{
-get_dv_fls_urls() is a Get Data function that retrieves data from R objects loaded in memory. Specifically, this function implements an algorithm to get dataverse files urls. The function returns Urls (a character vector).
+get_dv_fls_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get dataverse files urls. Function argument file_nms_chr specifies the where to look for the required object. The function returns Urls (a character vector).
 }
