@@ -1,6 +1,6 @@
 Package: ready4
 Title: A Framework for Open and Modular Mental Health Systems Models
-Version: 0.0.0.9043
+Version: 0.0.0.9044
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -39,6 +39,12 @@ Collate:
     'imp_fns.R'
     'imp_mthds.R'
     'make.R'
+    'mthd_characterizeSlot.R'
+    'mthd_enhanceSlot.R'
+    'mthd_metamorphoseSlot.R'
+    'mthd_ratifySlot.R'
+    'mthd_renewSlot.R'
+    'mthd_shareSlot.R'
     'pkg_ready4.R'
     'ready4-package.R'
     'remove.R'
