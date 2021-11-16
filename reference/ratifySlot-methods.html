@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Ratifie that data contained in a slot of a class instance conforms to specified criteria — ratifySlot" />
-<meta property="og:description" content="ratifySlot() is a method that ratifies that data contained in a slot of a class instance conforms to specified criteria." />
+<meta property="og:description" content="ratifySlot() is a method that ratifies that data contained in a slot of a class instance conforms to specified criteria.
+ratifySlot method applied to Ready4Launch" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ready4</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9041</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9046</span>
       </span>
     </div>
 
@@ -120,26 +121,34 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Ratifie that data contained in a slot of a class instance conforms to specified criteria</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ready4-dev/ready4/blob/master/R/grp_generics.R'><code>R/grp_generics.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/ready4-dev/ready4/blob/master/R/grp_generics.R'><code>R/grp_generics.R</code></a>, <a href='https://github.com/ready4-dev/ready4/blob/master/R/mthd_ratifySlot.R'><code>R/mthd_ratifySlot.R</code></a></small>
     <div class="hidden name"><code>ratifySlot-methods.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>ratifySlot() is a method that ratifies that data contained in a slot of a class instance conforms to specified criteria.</p>
+<p>ratifySlot method applied to Ready4Launch</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ratifySlot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ratifySlot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for Ready4Launch</span>
+<span class='fu'>ratifySlot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>slot_nm_1L_chr</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An object</p></td>
+      <td><p>An object of class Ready4Launch</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Additional arguments</p></td>
+    </tr>
+    <tr>
+      <th>slot_nm_1L_chr</th>
+      <td><p>Slot name (a length one character vector)</p></td>
     </tr>
     </table>
 
