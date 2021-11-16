@@ -75,9 +75,20 @@ characterizeSlot <- function (x, ...)
   UseMethod("characterizeSlot", x)
 }
 methods::setGeneric("characterizeSlot")
-#' Enhance an instance of a class with new data, transforming the original object into an instance of a child class
-#' @rdname enhance-methods
-#' @description enhance() is a method that enhances an instance of a class with new data, transforming the original object into an instance of a child class.
+#' Depict features of an instance of a class by generating a plot
+#' @rdname depict-methods
+#' @description depict() is a method that depicts features of an instance of a class by generating a plot.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+depict <- function (x, ...)
+{
+  UseMethod("depict", x)
+}
+methods::setGeneric("depict")
+#' Enhance an instance of a class by adding new data fields and values to an object stored in a slot of that instance
+#' @rdname enhanceSlot-methods
+#' @description enhanceSlot() is a method that enhances an instance of a class by adding new data fields and values to an object stored in a slot of that instance.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -97,6 +108,19 @@ enhanceSlot <- function (x, ...)
   UseMethod("enhanceSlot", x)
 }
 methods::setGeneric("enhanceSlot")
+#' Exhibit features of a class instance by printing to console
+#' @rdname exhibit-methods
+#' @description exhibit() is a method that exhibits features of a class instance by printing to console.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+exhibit <- function (x, ...)
+{
+  UseMethod("exhibit", x)
+}
+methods::setGeneric("exhibit")
+
+
 #' Ingest data saved in external files into R objects stored in working memory
 #' @rdname ingest-methods
 #' @description ingest() is a method that ingests data saved in external files into R objects stored in working memory.

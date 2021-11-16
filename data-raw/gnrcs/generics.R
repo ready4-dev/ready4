@@ -26,6 +26,10 @@ characterizeSlot <- function (x, ...)
 {
   UseMethod("characterizeSlot", x)
 }
+depict <- function (x, ...)
+{
+  UseMethod("depict", x)
+}
 enhance <- function (x, ...)
 {
   UseMethod("enhance", x)
@@ -33,6 +37,10 @@ enhance <- function (x, ...)
 enhanceSlot <- function (x, ...)
 {
   UseMethod("enhanceSlot", x)
+}
+exhibit <- function (x, ...)
+{
+  UseMethod("exhibit", x)
 }
 ingest <- function (x, ...)
 {
