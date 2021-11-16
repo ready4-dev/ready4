@@ -64,9 +64,9 @@ characterize <- function (x, ...)
   UseMethod("characterize", x)
 }
 methods::setGeneric("characterize")
-#' Characterize a an object stored in a slot of a class instance by generating descriptive information
+#' Characterize an object stored in a slot of a class instance by generating descriptive information
 #' @rdname characterizeSlot-methods
-#' @description characterizeSlot() is a method that characterizes a an object stored in a slot of a class instance by generating descriptive information.
+#' @description characterizeSlot() is a method that characterizes an object stored in a slot of a class instance by generating descriptive information.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export

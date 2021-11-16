@@ -4,7 +4,7 @@
 \alias{characterizeSlot}
 \alias{characterizeSlot-Ready4Launch}
 \alias{characterizeSlot,Ready4Launch-method}
-\title{Characterize a an object stored in a slot of a class instance by generating descriptive information}
+\title{Characterize an object stored in a slot of a class instance by generating descriptive information}
 \usage{
 characterizeSlot(x, ...)
 
@@ -18,7 +18,7 @@ characterizeSlot(x, ...)
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 }
 \description{
-characterizeSlot() is a method that characterizes a an object stored in a slot of a class instance by generating descriptive information.
+characterizeSlot() is a method that characterizes an object stored in a slot of a class instance by generating descriptive information.
 
 characterizeSlot method applied to Ready4Launch
 }
