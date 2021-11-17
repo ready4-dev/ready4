@@ -87,8 +87,8 @@ depict <- function (x, ...)
 }
 methods::setGeneric("depict")
 #' Enhance an instance of a class by adding new data fields and values to an object stored in a slot of that instance
-#' @rdname enhanceSlot-methods
-#' @description enhanceSlot() is a method that enhances an instance of a class by adding new data fields and values to an object stored in a slot of that instance.
+#' @rdname enhance-methods
+#' @description enhance() is a method that enhances an instance of a class by adding new data fields and values to an object stored in a slot of that instance.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
