@@ -1,16 +1,16 @@
 #'
 #' enhanceSlot
-#' @name enhanceSlot-Ready4Launch
-#' @description enhanceSlot method applied to Ready4Launch
-#' @param x An object of class Ready4Launch
+#' @name enhanceSlot-Ready4Module
+#' @description enhanceSlot method applied to Ready4Module
+#' @param x An object of class Ready4Module
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
 #' @return NULL
 #' @rdname enhanceSlot-methods
-#' @aliases enhanceSlot,Ready4Launch-method
+#' @aliases enhanceSlot,Ready4Module-method
 #' @export
 
-methods::setMethod("enhanceSlot", "Ready4Launch", function(x,
+methods::setMethod("enhanceSlot", "Ready4Module", function(x,
                                                                 slot_nm_1L_chr,
                                                                 ...){
   slot_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))

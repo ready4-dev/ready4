@@ -1,16 +1,16 @@
 #'
 #' metamorphoseSlot
-#' @name metamorphoseSlot-Ready4Launch
-#' @description metamorphoseSlot method applied to Ready4Launch
-#' @param x An object of class Ready4Launch
+#' @name metamorphoseSlot-Ready4Module
+#' @description metamorphoseSlot method applied to Ready4Module
+#' @param x An object of class Ready4Module
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
 #' @return NULL
 #' @rdname metamorphoseSlot-methods
-#' @aliases metamorphoseSlot,Ready4Launch-method
+#' @aliases metamorphoseSlot,Ready4Module-method
 #' @export
 
-methods::setMethod("metamorphoseSlot", "Ready4Launch", function(x,
+methods::setMethod("metamorphoseSlot", "Ready4Module", function(x,
                                                                 slot_nm_1L_chr,
                                                                 ...){
   slot_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))

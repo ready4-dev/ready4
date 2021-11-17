@@ -3,18 +3,18 @@
 \name{enhance}
 \alias{enhance}
 \alias{enhanceSlot}
-\alias{enhanceSlot-Ready4Launch}
-\alias{enhanceSlot,Ready4Launch-method}
+\alias{enhanceSlot-Ready4Module}
+\alias{enhanceSlot,Ready4Module-method}
 \title{Enhance an instance of a class by adding new data fields and values to an object stored in a slot of that instance}
 \usage{
 enhance(x, ...)
 
 enhanceSlot(x, ...)
 
-\S4method{enhanceSlot}{Ready4Launch}(x, slot_nm_1L_chr, ...)
+\S4method{enhanceSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Launch}
+\item{x}{An object of class Ready4Module}
 
 \item{...}{Additional arguments}
 
@@ -25,5 +25,5 @@ enhanceSlot() is a method that enhances an instance of a class by adding new dat
 
 enhanceSlot() is a method that enhances an instance of a class by adding new data fields and values to an object stored in a slot of that instance.
 
-enhanceSlot method applied to Ready4Launch
+enhanceSlot method applied to Ready4Module
 }

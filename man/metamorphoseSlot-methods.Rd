@@ -2,16 +2,16 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_metamorphoseSlot.R
 \name{metamorphoseSlot}
 \alias{metamorphoseSlot}
-\alias{metamorphoseSlot-Ready4Launch}
-\alias{metamorphoseSlot,Ready4Launch-method}
+\alias{metamorphoseSlot-Ready4Module}
+\alias{metamorphoseSlot,Ready4Module-method}
 \title{Metamorphose data stored in a slot of a class instance into an object of a different (non-child) class}
 \usage{
 metamorphoseSlot(x, ...)
 
-\S4method{metamorphoseSlot}{Ready4Launch}(x, slot_nm_1L_chr, ...)
+\S4method{metamorphoseSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Launch}
+\item{x}{An object of class Ready4Module}
 
 \item{...}{Additional arguments}
 
@@ -20,5 +20,5 @@ metamorphoseSlot(x, ...)
 \description{
 metamorphoseSlot() is a method that metamorphoses data stored in a slot of a class instance into an object of a different (non-child) class.
 
-metamorphoseSlot method applied to Ready4Launch
+metamorphoseSlot method applied to Ready4Module
 }

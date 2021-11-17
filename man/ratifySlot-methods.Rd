@@ -2,16 +2,16 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_ratifySlot.R
 \name{ratifySlot}
 \alias{ratifySlot}
-\alias{ratifySlot-Ready4Launch}
-\alias{ratifySlot,Ready4Launch-method}
+\alias{ratifySlot-Ready4Module}
+\alias{ratifySlot,Ready4Module-method}
 \title{Ratifie that data contained in a slot of a class instance conforms to specified criteria}
 \usage{
 ratifySlot(x, ...)
 
-\S4method{ratifySlot}{Ready4Launch}(x, slot_nm_1L_chr, ...)
+\S4method{ratifySlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Launch}
+\item{x}{An object of class Ready4Module}
 
 \item{...}{Additional arguments}
 
@@ -20,5 +20,5 @@ ratifySlot(x, ...)
 \description{
 ratifySlot() is a method that ratifies that data contained in a slot of a class instance conforms to specified criteria.
 
-ratifySlot method applied to Ready4Launch
+ratifySlot method applied to Ready4Module
 }

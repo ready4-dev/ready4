@@ -11,7 +11,7 @@ development:
 reference:
 - title: "S4 Classes"
 - contents:
-  - Ready4Launch
+  - Ready4Module
   - Ready4Private
   - Ready4Public
 - title: "Functions"
@@ -49,9 +49,9 @@ reference:
   - shareSlot
 - title: "Methods"
 - contents:
-  - characterizeSlot-Ready4Launch
-  - enhanceSlot-Ready4Launch
-  - metamorphoseSlot-Ready4Launch
-  - ratifySlot-Ready4Launch
-  - renewSlot-Ready4Launch
-  - shareSlot-Ready4Launch
+  - characterizeSlot-Ready4Module
+  - enhanceSlot-Ready4Module
+  - metamorphoseSlot-Ready4Module
+  - ratifySlot-Ready4Module
+  - renewSlot-Ready4Module
+  - shareSlot-Ready4Module

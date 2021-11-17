@@ -227,7 +227,7 @@ write_to_copy_s4_mthds <- function(fns_dir_1L_chr,
                ~   write_new_files(output_dir_1L_chr,
                                    source_paths_ls = list(paste0(fns_dir_1L_chr,"/",.x)),
                                    fl_nm_1L_chr = paste0("mthd_",.x)))
-  s4_mthds_ls <- list(mthds_ls = mthd_nms_chr %>% purrr::map(~c(Ready4Launch = .x)) %>%
+  s4_mthds_ls <- list(mthds_ls = mthd_nms_chr %>% purrr::map(~c(Ready4Module = .x)) %>%
                         stats::setNames(mthd_nms_chr))
   return(s4_mthds_ls)
 }

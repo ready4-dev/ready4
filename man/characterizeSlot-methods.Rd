@@ -2,16 +2,16 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_characterizeSlot.R
 \name{characterizeSlot}
 \alias{characterizeSlot}
-\alias{characterizeSlot-Ready4Launch}
-\alias{characterizeSlot,Ready4Launch-method}
+\alias{characterizeSlot-Ready4Module}
+\alias{characterizeSlot,Ready4Module-method}
 \title{Characterize an object stored in a slot of a class instance by generating descriptive information}
 \usage{
 characterizeSlot(x, ...)
 
-\S4method{characterizeSlot}{Ready4Launch}(x, slot_nm_1L_chr, ...)
+\S4method{characterizeSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Launch}
+\item{x}{An object of class Ready4Module}
 
 \item{...}{Additional arguments}
 
@@ -20,5 +20,5 @@ characterizeSlot(x, ...)
 \description{
 characterizeSlot() is a method that characterizes an object stored in a slot of a class instance by generating descriptive information.
 
-characterizeSlot method applied to Ready4Launch
+characterizeSlot method applied to Ready4Module
 }

@@ -6,5 +6,11 @@
 \alias{Ready4Private}
 \title{Ready4Private}
 \description{
-A virtual S4 class used to signify that a class extending the ready4 representational system contains data not intended for public dissemination.
+A module of the ready4 representational system that contains data not intended for public dissemination.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{dissemination_1L_chr}}{Dissemination (a character vector of length one)}
+}}
+

@@ -1,16 +1,16 @@
 #'
 #' ratifySlot
-#' @name ratifySlot-Ready4Launch
-#' @description ratifySlot method applied to Ready4Launch
-#' @param x An object of class Ready4Launch
+#' @name ratifySlot-Ready4Module
+#' @description ratifySlot method applied to Ready4Module
+#' @param x An object of class Ready4Module
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
 #' @return NULL
 #' @rdname ratifySlot-methods
-#' @aliases ratifySlot,Ready4Launch-method
+#' @aliases ratifySlot,Ready4Module-method
 #' @export
 
-methods::setMethod("ratifySlot", "Ready4Launch", function(x,
+methods::setMethod("ratifySlot", "Ready4Module", function(x,
                                                                  slot_nm_1L_chr,
                                                                  ...){
   slot_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))

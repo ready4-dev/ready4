@@ -2,16 +2,16 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_renewSlot.R
 \name{renewSlot}
 \alias{renewSlot}
-\alias{renewSlot-Ready4Launch}
-\alias{renewSlot,Ready4Launch-method}
+\alias{renewSlot-Ready4Module}
+\alias{renewSlot,Ready4Module-method}
 \title{Renew a slot of a class instance by updating it with new data}
 \usage{
 renewSlot(x, ...)
 
-\S4method{renewSlot}{Ready4Launch}(x, new_val_xx, slot_nm_1L_chr)
+\S4method{renewSlot}{Ready4Module}(x, new_val_xx, slot_nm_1L_chr)
 }
 \arguments{
-\item{x}{An object of class Ready4Launch}
+\item{x}{An object of class Ready4Module}
 
 \item{...}{Additional arguments}
 
@@ -22,5 +22,5 @@ renewSlot(x, ...)
 \description{
 renewSlot() is a method that renews a slot of a class instance by updating it with new data.
 
-renewSlot method applied to Ready4Launch
+renewSlot method applied to Ready4Module
 }

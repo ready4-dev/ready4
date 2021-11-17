@@ -2,16 +2,16 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_shareSlot.R
 \name{shareSlot}
 \alias{shareSlot}
-\alias{shareSlot-Ready4Launch}
-\alias{shareSlot,Ready4Launch-method}
+\alias{shareSlot-Ready4Module}
+\alias{shareSlot,Ready4Module-method}
 \title{Share data contained in a slot of a class instance via an online repository}
 \usage{
 shareSlot(x, ...)
 
-\S4method{shareSlot}{Ready4Launch}(x, slot_nm_1L_chr, ...)
+\S4method{shareSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Launch}
+\item{x}{An object of class Ready4Module}
 
 \item{...}{Additional arguments}
 
@@ -20,5 +20,5 @@ shareSlot(x, ...)
 \description{
 shareSlot() is a method that shares data contained in a slot of a class instance via an online repository.
 
-shareSlot method applied to Ready4Launch
+shareSlot method applied to Ready4Module
 }
