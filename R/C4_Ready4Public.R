@@ -11,4 +11,4 @@
 Ready4Public <- setClass("Ready4Public",
                          contains = "Ready4Module",
                          slots = c(dissemination_1L_chr = "character"),
-                         prototype = list(dissemination_1L_chr = "Public: All of the data contained in this object is appropriate for public dissemination. This object can be shared publicly in its current form, under licensing terms defined by the data custodian."))
+                         prototype = list(dissemination_1L_chr = "Public"))

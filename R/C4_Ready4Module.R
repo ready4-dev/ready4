@@ -9,5 +9,5 @@
 #' @exportClass Ready4Module
 Ready4Module <- setClass("Ready4Module",
                          slots = c(dissemination_1L_chr = "character"),
-                         prototype = list(dissemination_1L_chr = "Undefined: Some or all of the data contained in this object may be appropriate for public dissemination, but this has yet to be confirmed or detailed by the relevant data custodians."))
+                         prototype = list(dissemination_1L_chr = NA_character_))
 

@@ -11,4 +11,4 @@
 Ready4Private <- setClass("Ready4Private",
                           contains = "Ready4Module",
                           slots = c(dissemination_1L_chr = "character"),
-                          prototype = list(dissemination_1L_chr = "Private: Some or all of the data contained in this object is not appropriate for public dissemination. This object cannot be shared publicly in its current form."))
+                          prototype = list(dissemination_1L_chr = "Private"))
