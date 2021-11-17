@@ -6,11 +6,5 @@
 \alias{Ready4Module}
 \title{Ready4Module}
 \description{
-A module, the foundational component of the ready4 representational system.
+A virtual class denoting a module of the ready4 representational system.
 }
-\section{Slots}{
-
-\describe{
-\item{\code{dissemination_1L_chr}}{Dissemination (a character vector of length one)}
-}}
-

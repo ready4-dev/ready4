@@ -6,11 +6,5 @@
 \alias{Ready4Public}
 \title{Ready4Public}
 \description{
-A module of the ready4 representational system hat is suitable for public dissemination in its current form.
+A virtual class denoting a module of the ready4 representational system hat is suitable for public dissemination in its current form.
 }
-\section{Slots}{
-
-\describe{
-\item{\code{dissemination_1L_chr}}{Dissemination (a character vector of length one)}
-}}
-
