@@ -8,3 +8,9 @@
 \description{
 A virtual class denoting a module of the ready4 representational system hat is suitable for public dissemination in its current form.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{dissemination_1L_chr}}{Dissemination (a character vector of length one)}
+}}
+
