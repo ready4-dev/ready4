@@ -39,6 +39,7 @@ Collate:
     'mthd_characterizeSlot.R'
     'mthd_enhanceSlot.R'
     'mthd_metamorphoseSlot.R'
+    'mthd_procureSlot.R'
     'mthd_ratifySlot.R'
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'

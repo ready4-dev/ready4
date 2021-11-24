@@ -185,6 +185,17 @@ procure <- function (x, ...)
   UseMethod("procure", x)
 }
 methods::setGeneric("procure")
+#' Procure data contained in a slot of a class instance
+#' @rdname procureSlot-methods
+#' @description procureSlot() is a method that procures data contained in a slot of an instance of a class.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+procureSlot <- function (x, ...)
+{
+  UseMethod("procureSlot", x)
+}
+methods::setGeneric("procureSlot")
 #' Prognosticate by applying an algorithm to solve a forward problem through simulation or prediction
 #' @rdname prognosticate-methods
 #' @description prognosticate() is a method that prognosticates by applying an algorithm to solve a forward problem through simulation or prediction.

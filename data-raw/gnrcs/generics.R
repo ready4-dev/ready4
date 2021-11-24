@@ -66,6 +66,10 @@ procure <- function (x, ...)
 {
   UseMethod("procure", x)
 }
+procureSlot <- function (x, ...)
+{
+  UseMethod("procureSlot", x)
+}
 prognosticate <- function (x, ...)
 {
   UseMethod("prognosticate", x)
