@@ -69,10 +69,10 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_i
 #' @param ds_url_1L_chr Dataset url (a character vector of length one)
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
 #' @param publish_dv_1L_lgl Publish dataverse (a logical vector of length one), Default: F
-#' @param piggyback_desc_1L_chr PARAM_DESCRIPTION, Default: 'Documentation'
-#' @param piggyback_tag_1L_chr PARAM_DESCRIPTION, Default: 'Documentation_0.0'
-#' @param piggyback_to_1L_chr PARAM_DESCRIPTION, Default: character(0)
-#' @param prerelease_1L_lgl PARAM_DESCRIPTION, Default: T
+#' @param piggyback_desc_1L_chr Piggyback description (a character vector of length one), Default: 'Documentation'
+#' @param piggyback_tag_1L_chr Piggyback tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param piggyback_to_1L_chr Piggyback to (a character vector of length one), Default: character(0)
+#' @param prerelease_1L_lgl Prerelease (a logical vector of length one), Default: T
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @return File identities (an integer vector)
 #' @rdname write_env_objs_to_dv
@@ -88,10 +88,15 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
     tmp_dir <- tempdir()
     paths_chr <- env_objects_ls %>% purrr::map2_chr(names(env_objects_ls), 
         ~{
-            path_1L_chr <- paste0(tmp_dir, "/", .y, ".RDS")
-            saveRDS(object = .x, file = path_1L_chr)
+            path_1L_chr <- ifelse(is.null(.x), NA_character_, 
+                paste0(tmp_dir, "/", .y, ".RDS"))
+            if (!is.na(path_1L_chr)) {
+                saveRDS(object = .x, file = path_1L_chr)
+            }
             path_1L_chr
         })
+    descriptions_chr <- descriptions_chr[!is.na(paths_chr)]
+    paths_chr <- paths_chr[!is.na(paths_chr)]
     if (identical(piggyback_to_1L_chr, character(0))) {
         ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
     }
@@ -247,8 +252,12 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, ds_url_1L_chr = char
         if (!piggyback_tag_1L_chr %in% releases_df$tag) 
             piggyback::pb_new_release(piggyback_to_1L_chr, tag = piggyback_tag_1L_chr, 
                 body = piggyback_desc_1L_chr, prerelease = prerelease_1L_lgl)
-        purrr::walk(paths_chr, ~piggyback::pb_upload(.x, repo = piggyback_to_1L_chr, 
-            tag = piggyback_tag_1L_chr))
+        purrr::walk(paths_chr, ~{
+            if (file.exists(.x)) {
+                piggyback::pb_upload(.x, repo = piggyback_to_1L_chr, 
+                  tag = piggyback_tag_1L_chr)
+            }
+        })
         ids_int <- NULL
     }
     else {
@@ -412,7 +421,7 @@ write_new_files <- function (paths_chr, custom_write_ls = NULL, fl_nm_1L_chr = N
 #' @param r4_name_1L_chr Ready4 S4 name (a character vector of length one)
 #' @param lup_dir_1L_chr Lookup table directory (a character vector of length one)
 #' @param pfx_1L_chr Prefix (a character vector of length one)
-#' @param consent_1L_chr PARAM_DESCRIPTION, Default: ''
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @return NULL
 #' @rdname write_tb_to_csv
 #' @export 

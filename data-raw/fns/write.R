@@ -63,11 +63,17 @@ write_env_objs_to_dv <- function(env_objects_ls,
   paths_chr <- env_objects_ls %>%
     purrr::map2_chr(names(env_objects_ls),
                     ~{
-                      path_1L_chr <- paste0(tmp_dir,"/",.y,".RDS")
-                      saveRDS(object = .x,
-                              file = path_1L_chr)
+                      path_1L_chr <- ifelse(is.null(.x),
+                                            NA_character_,
+                                            paste0(tmp_dir,"/",.y,".RDS"))
+                      if(!is.na(path_1L_chr)){
+                        saveRDS(object = .x,
+                                file = path_1L_chr)
+                      }
                       path_1L_chr
                     })
+  descriptions_chr <- descriptions_chr[!is.na(paths_chr)]
+  paths_chr <- paths_chr[!is.na(paths_chr)]
   if(identical(piggyback_to_1L_chr,character(0))){
     ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
   }else{
@@ -213,10 +219,15 @@ write_fls_to_repo <- function(paths_chr,
                                 body = piggyback_desc_1L_chr,
                                 prerelease = prerelease_1L_lgl)
     purrr::walk(paths_chr,
-                ~ piggyback::pb_upload(.x,
+                ~ {
+                  if(file.exists(.x)){
+                  piggyback::pb_upload(.x,
                                        repo = piggyback_to_1L_chr,
                                        #overwrite = T,
-                                       tag = piggyback_tag_1L_chr))
+                                       tag = piggyback_tag_1L_chr)
+                  }
+                  }
+                )
     ids_int <- NULL
   }else{
     if(!identical(character(0),ds_url_1L_chr))

@@ -119,8 +119,6 @@ exhibit <- function (x, ...)
   UseMethod("exhibit", x)
 }
 methods::setGeneric("exhibit")
-
-
 #' Ingest data saved in external files into R objects stored in working memory
 #' @rdname ingest-methods
 #' @description ingest() is a method that ingests data saved in external files into R objects stored in working memory.

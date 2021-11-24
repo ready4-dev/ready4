@@ -28,13 +28,13 @@ write_env_objs_to_dv(
 
 \item{publish_dv_1L_lgl}{Publish dataverse (a logical vector of length one), Default: F}
 
-\item{piggyback_desc_1L_chr}{PARAM_DESCRIPTION, Default: 'Documentation'}
+\item{piggyback_desc_1L_chr}{Piggyback description (a character vector of length one), Default: 'Documentation'}
 
-\item{piggyback_tag_1L_chr}{PARAM_DESCRIPTION, Default: 'Documentation_0.0'}
+\item{piggyback_tag_1L_chr}{Piggyback tag (a character vector of length one), Default: 'Documentation_0.0'}
 
-\item{piggyback_to_1L_chr}{PARAM_DESCRIPTION, Default: character(0)}
+\item{piggyback_to_1L_chr}{Piggyback to (a character vector of length one), Default: character(0)}
 
-\item{prerelease_1L_lgl}{PARAM_DESCRIPTION, Default: T}
+\item{prerelease_1L_lgl}{Prerelease (a logical vector of length one), Default: T}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }
