@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{ratify}
 \alias{ratify}
-\title{Ratifie that an instance of a class conforms to specified criteria}
+\title{Ratify that an instance of a class conforms to specified criteria}
 \usage{
 ratify(x, ...)
 }

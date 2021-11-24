@@ -4,7 +4,7 @@
 \alias{ratifySlot}
 \alias{ratifySlot-Ready4Module}
 \alias{ratifySlot,Ready4Module-method}
-\title{Ratifie that data contained in a slot of a class instance conforms to specified criteria}
+\title{Ratify that data contained in a slot of a class instance conforms to specified criteria}
 \usage{
 ratifySlot(x, ...)
 

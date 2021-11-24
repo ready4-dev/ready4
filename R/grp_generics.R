@@ -198,7 +198,7 @@ prognosticate <- function (x, ...)
   UseMethod("prognosticate", x)
 }
 methods::setGeneric("prognosticate")
-#' Ratifie that an instance of a class conforms to specified criteria
+#' Ratify that an instance of a class conforms to specified criteria
 #' @rdname ratify-methods
 #' @description ratify() is a method that ratifies that an instance of a class conforms to specified criteria.
 #' @param x An object
@@ -209,7 +209,7 @@ ratify <- function (x, ...)
   UseMethod("ratify", x)
 }
 methods::setGeneric("ratify")
-#' Ratifie that data contained in a slot of a class instance conforms to specified criteria
+#' Ratify that data contained in a slot of a class instance conforms to specified criteria
 #' @rdname ratifySlot-methods
 #' @description ratifySlot() is a method that ratifies that data contained in a slot of a class instance conforms to specified criteria.
 #' @param x An object

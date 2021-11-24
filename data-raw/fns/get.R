@@ -25,15 +25,12 @@ get_dv_fls_urls <- function(file_nms_chr,
 get_fl_id_from_dv_ls <-  function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 {
   if (is.na(nms_chr[1])) {
-    nms_chr <- purrr::map2_chr(ds_ls$files$originalFileName,
-                               ds_ls$files$filename, ~ifelse(is.na(.x), .y, .x))
+    nms_chr <- purrr::map_chr(ds_ls$files$filename, ~ifelse(is.na(.x), .y, .x))
   }
   if (fl_nm_1L_chr %in% nms_chr) {
     id_1L_chr <- get_from_lup_obj(ds_ls$files[, names(ds_ls$files) %>% unique()] %>%
                                             tibble::as_tibble(),
-                                          match_var_nm_1L_chr = ifelse(fl_nm_1L_chr %in% ds_ls$files$originalFileName,
-                                                                       "originalFileName",
-                                                                       "filename"),
+                                          match_var_nm_1L_chr = "filename",
                                           match_value_xx = fl_nm_1L_chr,
                                           target_var_nm_1L_chr = "id",
                                           evaluate_1L_lgl = F)
