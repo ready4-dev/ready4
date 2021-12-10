@@ -102,8 +102,11 @@ get_rds_from_dv <- function(file_nm_1L_chr,
   ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr,
                                     server = server_1L_chr,
                                     key = key_1L_chr)
-  all_items_chr <- purrr::map_chr(ds_ls,~.x$label)
-  idx_1L_int <- which(all_items_chr == paste0(file_nm_1L_chr,".RDS"))
+  all_items_chr <- purrr::map_chr(ds_ls,~.x$label) %>%
+    stringi::stri_replace_last_regex("\\.RDS","") %>%
+    stringi::stri_replace_last_regex("\\.Rds","") %>%
+    stringi::stri_replace_last_regex("\\.rds","")
+  idx_1L_int <- which(all_items_chr == file_nm_1L_chr) #paste0(file_nm_1L_chr,".RDS")
   if(identical(idx_1L_int, integer(0))){
     r_object_xx <- NULL
   }else{

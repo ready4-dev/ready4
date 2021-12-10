@@ -55,7 +55,7 @@ characterize <- function (x, ...)
 methods::setGeneric("characterize")
 #' Enhance
 #' @rdname enhance-methods
-#' @description enhance() is an Enhance function that enhances an instance of a class by adding one or more elements. Specifically, this function implements an algorithm to enhance. The function is called for its side effects and does not return a value.
+#' @description enhance() is a method that enhances an instance of a class by adding new data fields and values to objects contained in that instance.
 #' @param x An object
 #' @param ... Additional arguments (an additional arguments)
 #' @export

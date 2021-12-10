@@ -137,6 +137,7 @@ get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "")
 #' @export 
 #' @importFrom dataverse dataset_files
 #' @importFrom purrr map_chr
+#' @importFrom stringi stri_replace_last_regex
 get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9", 
     dv_url_pfx_1L_chr = character(0), key_1L_chr = NULL, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
@@ -145,9 +146,10 @@ get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/
             "/api/access/datafile/")
     ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr, server = server_1L_chr, 
         key = key_1L_chr)
-    all_items_chr <- purrr::map_chr(ds_ls, ~.x$label)
-    idx_1L_int <- which(all_items_chr == paste0(file_nm_1L_chr, 
-        ".RDS"))
+    all_items_chr <- purrr::map_chr(ds_ls, ~.x$label) %>% stringi::stri_replace_last_regex("\\.RDS", 
+        "") %>% stringi::stri_replace_last_regex("\\.Rds", "") %>% 
+        stringi::stri_replace_last_regex("\\.rds", "")
+    idx_1L_int <- which(all_items_chr == file_nm_1L_chr)
     if (identical(idx_1L_int, integer(0))) {
         r_object_xx <- NULL
     }

@@ -39,6 +39,7 @@ reference:
   - metamorphose
   - metamorphoseSlot
   - procure
+  - procureSlot
   - prognosticate
   - ratify
   - ratifySlot
@@ -52,6 +53,7 @@ reference:
   - characterizeSlot-Ready4Module
   - enhanceSlot-Ready4Module
   - metamorphoseSlot-Ready4Module
+  - procureSlot-Ready4Module
   - ratifySlot-Ready4Module
   - renewSlot-Ready4Module
   - shareSlot-Ready4Module

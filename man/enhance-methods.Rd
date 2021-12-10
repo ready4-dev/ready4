@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{enhance}
 \alias{enhance}
-\title{Enhance an instance of a class by adding new data fields and values to an object stored in a slot of that instance}
+\title{Enhance an instance of a class by adding new data fields and values to objects contained in that instance}
 \usage{
 enhance(x, ...)
 }
@@ -12,5 +12,5 @@ enhance(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-enhance() is a method that enhances an instance of a class by adding new data fields and values to an object stored in a slot of that instance.
+enhance() is a method that enhances an instance of a class by adding new data fields and values to objects contained in that instance.
 }

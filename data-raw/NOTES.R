@@ -1,18 +1,17 @@
 fn_types_lup <- ready4fun::get_rds_from_pkg_dmt(fl_nm_1L_chr = "fn_types_lup",
                                                 piggyback_to_1L_chr = "ready4-dev/ready4")
 fn_types_lup <- fn_types_lup %>%
-  dplyr::filter(!fn_type_nm_chr %in% c("Add Class", "Analyse", "Report","get_read_fn")) %>%
-  tibble::add_case(fn_type_nm_chr = c("depict","exhibit"),
-                   fn_type_desc_chr = c("Depicts features of a class instance by generating a plot",
-                                        "Exhibits features of a class instance by printing to console."),
+  #dplyr::filter(!fn_type_nm_chr %in% c("Add Class", "Analyse", "Report","get_read_fn")) %>%
+  tibble::add_case(fn_type_nm_chr = c("procureSlot"),
+                   fn_type_desc_chr = c("Procures data contained in the slot of a class instance"),
                    is_generic_lgl = T,
                    is_method_lgl = T) %>%
   dplyr::arrange(fn_type_nm_chr)
-generics_chr <- c("author","authorClasses", "authorData","authorFunctions", "authorReport",
-                  "characterize","characterizeSlot","depict","enhance","enhanceSlot","exhibit","ingest",
-                  "investigate","manufacture", "metamorphose","metamorphoseSlot", "procure",
-                  "prognosticate","ratify","ratifySlot","reckon","renew",
-                  "renewSlot","share","shareSlot")
+# generics_chr <- c("author","authorClasses", "authorData","authorFunctions", "authorReport",
+#                   "characterize","characterizeSlot","depict","enhance","enhanceSlot","exhibit","ingest",
+#                   "investigate","manufacture", "metamorphose","metamorphoseSlot", "procure",
+#                   "prognosticate","ratify","ratifySlot","reckon","renew",
+#                   "renewSlot","share","shareSlot")
 
 # fn_types_lup <- fn_types_lup %>%
 #   dplyr::filter(!fn_type_nm_chr %in% c("Add Class", "Analyse", "Report")) %>%
