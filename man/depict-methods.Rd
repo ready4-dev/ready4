@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{depict}
 \alias{depict}
-\title{Depict features of an instance of a class by generating a plot}
+\title{Depict (plot) an object}
 \usage{
 depict(x, ...)
 }
@@ -12,5 +12,5 @@ depict(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-depict() is a method that depicts features of an instance of a class by generating a plot.
+depict() is a method that plots an object.
 }

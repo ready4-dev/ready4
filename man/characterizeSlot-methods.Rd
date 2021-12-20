@@ -4,7 +4,7 @@
 \alias{characterizeSlot}
 \alias{characterizeSlot-Ready4Module}
 \alias{characterizeSlot,Ready4Module-method}
-\title{Characterize an object stored in a slot of a class instance by generating descriptive information}
+\title{Characterize one element of an object}
 \usage{
 characterizeSlot(x, ...)
 
@@ -18,7 +18,7 @@ characterizeSlot(x, ...)
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 }
 \description{
-characterizeSlot() is a method that characterizes an object stored in a slot of a class instance by generating descriptive information.
+characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.
 
 characterizeSlot method applied to Ready4Module
 }

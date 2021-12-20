@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{share}
 \alias{share}
-\title{Share data contained in an instance of a class via an online repository}
+\title{Share (publish) open data}
 \usage{
 share(x, ...)
 }
@@ -12,5 +12,5 @@ share(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-share() is a method that shares data contained in an instance of a class via an online repository.
+share() is a method that uploads data to an online repository. If requested, the method will also publish the updated repository.
 }

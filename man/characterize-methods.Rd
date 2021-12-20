@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{characterize}
 \alias{characterize}
-\title{Characterize a class instance by generating descriptive information}
+\title{Characterize the features of an object}
 \usage{
 characterize(x, ...)
 }
@@ -12,5 +12,5 @@ characterize(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-characterize() is a method that characterizes a class instance by generating descriptive information.
+characterize() is a method that generates descriptive information about the features of an object.
 }

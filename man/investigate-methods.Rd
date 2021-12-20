@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{investigate}
 \alias{investigate}
-\title{Investigate data stored in an instance of a class by executing an algorithm to solve an inverse problem}
+\title{Investigate a dataset}
 \usage{
 investigate(x, ...)
 }
@@ -12,5 +12,5 @@ investigate(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-investigate() is a method that investigates data stored in an instance of a class by executing an algorithm to solve an inverse problem.
+investigate() is a method that applies an algorithm to solve an inverse problem to data contained in an object.
 }

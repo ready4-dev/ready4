@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{author}
 \alias{author}
-\title{Author and save files to local or remote locations}
+\title{Author and save files}
 \usage{
 author(x, ...)
 }
@@ -12,5 +12,5 @@ author(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-author() is a method that authors and saves files to local or remote locations.
+author() is a method that authors and saves files.
 }

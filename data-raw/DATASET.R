@@ -103,7 +103,9 @@ write_fn_fl <- function(fns_env_ls,
                                                                        fn = fn,
                                                                        fn_desc_1L_chr = tb[[.x,3]],
                                                                        fn_out_type_1L_chr = tb[[.x,6]],
-                                                                       fn_title_1L_chr = tb[[.x,2]],
+                                                                       fn_title_1L_chr = ifelse(tb$file_pfx_chr[1] %in% c("mthd_","grp_"),
+                                                                                                tb[[.x,2]],
+                                                                                                Hmisc::capitalize(tb[[.x,2]])),
                                                                        example_1L_lgl = tb[[.x,7]],
                                                                        export_1L_lgl = T,
                                                                        class_name_1L_chr = "",
@@ -408,7 +410,7 @@ return(x)
 }
 ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Modular Mental Health Systems Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods and functions) of a framework to support implementation of open and modular mental health systems models.
+                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods) of a framework to support implementation of open and modular mental health systems models.
   This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
@@ -427,10 +429,9 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
                            build_ignore_ls = ready4fun::make_build_ignore_ls(file_nms_chr = c("initial_setup.R")),
                            check_type_1L_chr = "ready4",
                            cls_fn_ls = list(),
-                           custom_dmt_ls = ready4fun::make_custom_dmt_ls(user_manual_fns_chr = c("get_dv_fls_urls",
-                                                                                                 "get_from_lup_obj",
-                                                                                                 "get_rds_from_dv",
-                                                                                                 "write_ws")),
+                           custom_dmt_ls = ready4fun::make_custom_dmt_ls(
+                             # user_manual_fns_chr = c("get_dv_fls_urls","get_from_lup_obj","get_rds_from_dv","write_ws")
+                                                                         ),
                            copyright_holders_chr = "Orygen",
                            import_from_chr = NA_character_,
                            lifecycle_stage_1L_chr = "experimental",

@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{metamorphose}
 \alias{metamorphose}
-\title{Metamorphose an instance of a class into an instance of a different (non-child) class}
+\title{Metamorphose an object}
 \usage{
 metamorphose(x, ...)
 }
@@ -12,5 +12,5 @@ metamorphose(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-metamorphose() is a method that metamorphoses an instance of a class into an instance of a different (non-child) class.
+metamorphose() is a method that transforms one ready4 object into a ready4 object of a different class.
 }

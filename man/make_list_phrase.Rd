@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_list_phrase}
 \alias{make_list_phrase}
-\title{make list phrase}
+\title{Make list phrase}
 \usage{
 make_list_phrase(items_chr)
 }

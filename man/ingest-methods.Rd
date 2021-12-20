@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{ingest}
 \alias{ingest}
-\title{Ingest data saved in external files into R objects stored in working memory}
+\title{Ingest data}
 \usage{
 ingest(x, ...)
 }

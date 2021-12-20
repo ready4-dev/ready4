@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_from_tmp}
 \alias{write_from_tmp}
-\title{write from temporary}
+\title{Write from temporary}
 \usage{
 write_from_tmp(
   tmp_paths_chr,

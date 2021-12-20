@@ -4,7 +4,7 @@
 \alias{ratifySlot}
 \alias{ratifySlot-Ready4Module}
 \alias{ratifySlot,Ready4Module-method}
-\title{Ratify that data contained in a slot of a class instance conforms to specified criteria}
+\title{Ratify an element of an object}
 \usage{
 ratifySlot(x, ...)
 
@@ -18,7 +18,7 @@ ratifySlot(x, ...)
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 }
 \description{
-ratifySlot() is a method that ratifies that data contained in a slot of a class instance conforms to specified criteria.
+ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.
 
 ratifySlot method applied to Ready4Module
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_all_tbs_in_tbs_r4_to_csvs}
 \alias{write_all_tbs_in_tbs_r4_to_csvs}
-\title{write all tibbles in tibbles ready4 S4 to comma separated variables files}
+\title{Write all tibbles in tibbles ready4 S4 to comma separated variables files}
 \usage{
 write_all_tbs_in_tbs_r4_to_csvs(
   tbs_r4,

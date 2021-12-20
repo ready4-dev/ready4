@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_from_lup_obj}
 \alias{get_from_lup_obj}
-\title{get from lookup table object}
+\title{Get from lookup table object}
 \usage{
 get_from_lup_obj(
   data_lookup_tb,
@@ -29,3 +29,4 @@ Return object (an output object of multiple potential types)
 \description{
 get_from_lup_obj() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get from lookup table object. Function argument data_lookup_tb specifies the where to look for the required object. The function returns Return object (an output object of multiple potential types).
 }
+\keyword{internal}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_ws}
 \alias{write_ws}
-\title{write workspace}
+\title{Write workspace}
 \usage{
 write_ws(path_1L_chr)
 }
@@ -12,3 +12,4 @@ write_ws(path_1L_chr)
 \description{
 write_ws() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write workspace. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 }
+\keyword{internal}

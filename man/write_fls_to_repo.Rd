@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_fls_to_repo}
 \alias{write_fls_to_repo}
-\title{write files to repository}
+\title{Write files to repository}
 \usage{
 write_fls_to_repo(
   paths_chr,

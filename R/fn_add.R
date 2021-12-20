@@ -1,4 +1,4 @@
-#' add lookup tables
+#' Add lookup tables
 #' @description add_lups() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add lookup tables. Function argument template_lup specifies the object to be updated. The function is called for its side effects and does not return a value.
 #' @param template_lup Template (a lookup table)
 #' @param new_lup New (a lookup table)

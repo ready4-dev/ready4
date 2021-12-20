@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{renew}
 \alias{renew}
-\title{Renew an instance of a class by updating it with new data}
+\title{Renew (update) an object}
 \usage{
 renew(x, ...)
 }
@@ -12,5 +12,5 @@ renew(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-renew() is a method that renews an instance of a class by updating it with new data.
+renew() is a method that updates an object with new data.
 }

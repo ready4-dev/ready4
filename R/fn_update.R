@@ -1,4 +1,4 @@
-#' update prototype function arguments list
+#' Update prototype function arguments list
 #' @description update_pt_fn_args_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update prototype function arguments list. Function argument args_ls specifies the object to be updated. The function returns Updated arguments (a list).
 #' @param args_ls Arguments (a list)
 #' @return Updated arguments (a list)

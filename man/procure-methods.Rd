@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{procure}
 \alias{procure}
-\title{Procure data by executing a search and retrieval algorithm using data contained in an instance of a class}
+\title{Procure (get) data}
 \usage{
 procure(x, ...)
 }
@@ -12,5 +12,5 @@ procure(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-procure() is a method that procures data by executing a search and retrieval algorithm using data contained in an instance of a class.
+procure() is a method that retrieves data contained within an object.
 }

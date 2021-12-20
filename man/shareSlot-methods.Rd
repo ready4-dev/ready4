@@ -4,7 +4,7 @@
 \alias{shareSlot}
 \alias{shareSlot-Ready4Module}
 \alias{shareSlot,Ready4Module-method}
-\title{Share data contained in a slot of a class instance via an online repository}
+\title{Share (publish) an element of an object}
 \usage{
 shareSlot(x, ...)
 
@@ -18,7 +18,7 @@ shareSlot(x, ...)
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 }
 \description{
-shareSlot() is a method that shares data contained in a slot of a class instance via an online repository.
+shareSlot() is a method that uploads data contained in a slot of an S4 object to an online repository. If requested, the method will also publish the updated repository.
 
 shareSlot method applied to Ready4Module
 }

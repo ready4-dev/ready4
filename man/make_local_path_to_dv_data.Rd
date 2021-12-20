@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_local_path_to_dv_data}
 \alias{make_local_path_to_dv_data}
-\title{make local path to dataverse data}
+\title{Make local path to dataverse data}
 \usage{
 make_local_path_to_dv_data(save_dir_path_1L_chr, fl_nm_1L_chr, save_fmt_1L_chr)
 }

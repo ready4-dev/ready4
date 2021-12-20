@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_to_dv_from_tbl}
 \alias{write_to_dv_from_tbl}
-\title{write to dataverse from table}
+\title{Write to dataverse from table}
 \usage{
 write_to_dv_from_tbl(
   files_tb,

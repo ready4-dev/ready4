@@ -1,187 +1,286 @@
-#' Author
+#' Author and save files
 #' @rdname author-methods
-#' @description author() is an Author function that writes files to local or remote locations. Specifically, this function implements an algorithm to author. The function is called for its side effects and does not return a value.
+#' @description author() is a method that authors and saves files.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 author <- function (x, ...)
 {
   UseMethod("author", x)
 }
 methods::setGeneric("author")
-#' AuthorClasses
+#' Author and document classes
 #' @rdname authorClasses-methods
-#' @description authorClasses() is an AuthorClasses function that authors and saves files necessary for creating and documenting classes. Specifically, this function implements an algorithm to authorclasses. The function is called for its side effects and does not return a value.
+#' @description authorClasses() is a method that authors and saves code files for creating and documenting classes in an R package directory.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 authorClasses <- function (x, ...)
 {
   UseMethod("authorClasses", x)
 }
 methods::setGeneric("authorClasses")
-#' AuthorData
+#' Author and document package datasets
 #' @rdname authorData-methods
-#' @description authorData() is an AuthorData function that authors and saves files necessary for creating and documenting datasets. Specifically, this function implements an algorithm to authordata. The function is called for its side effects and does not return a value.
+#' @description authorData() is a method that authors and saves code files for creating and documenting datasets in an R package directory.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 authorData <- function (x, ...)
 {
   UseMethod("authorData", x)
 }
 methods::setGeneric("authorData")
-#' AuthorFunctions
+#' Author and document functions
 #' @rdname authorFunctions-methods
-#' @description authorFunctions() is an AuthorFunctions function that authors and saves files necessary for creating and documenting functions. Specifically, this function implements an algorithm to authorfunctions. The function is called for its side effects and does not return a value.
+#' @description authorFunctions() is a method that authors and saves files necessary for creating and documenting functions in an R package directory.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 authorFunctions <- function (x, ...)
 {
   UseMethod("authorFunctions", x)
 }
 methods::setGeneric("authorFunctions")
-#' Characterize
-#' @rdname characterize-methods
-#' @description characterize() is a Characterize function that generates descriptive information about a dataset. Specifically, this function implements an algorithm to characterize. The function is called for its side effects and does not return a value.
+#' Author and save a report
+#' @rdname authorReport-methods
+#' @description authorReport() is a method that authors and saves a report.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
+#' @export
+authorReport <- function (x, ...)
+{
+  UseMethod("authorReport", x)
+}
+methods::setGeneric("authorReport")
+#' Characterize the features of an object
+#' @rdname characterize-methods
+#' @description characterize() is a method that generates descriptive information about the features of an object.
+#' @param x An object
+#' @param ... Additional arguments
 #' @export
 characterize <- function (x, ...)
 {
   UseMethod("characterize", x)
 }
 methods::setGeneric("characterize")
-#' Enhance
-#' @rdname enhance-methods
-#' @description enhance() is a method that enhances an instance of a class by adding new data fields and values to objects contained in that instance.
+#' Characterize one element of an object
+#' @rdname characterizeSlot-methods
+#' @description characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
+#' @export
+characterizeSlot <- function (x, ...)
+{
+  UseMethod("characterizeSlot", x)
+}
+methods::setGeneric("characterizeSlot")
+#' Depict (plot) an object
+#' @rdname depict-methods
+#' @description depict() is a method that plots an object.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+depict <- function (x, ...)
+{
+  UseMethod("depict", x)
+}
+methods::setGeneric("depict")
+#' Enhance an object with new data items
+#' @rdname enhance-methods
+#' @description enhance() is a method that adds new data fields and values to objects contained in that instance.
+#' @param x An object
+#' @param ... Additional arguments
 #' @export
 enhance <- function (x, ...)
 {
   UseMethod("enhance", x)
 }
 methods::setGeneric("enhance")
-#' Ingest
-#' @rdname ingest-methods
-#' @description ingest() is an Ingest function that imports objects in external file formats into R objects stored in working memory. Specifically, this function implements an algorithm to ingest. The function is called for its side effects and does not return a value.
+#' Enhance an element of an object with new data items
+#' @rdname enhanceSlot-methods
+#' @description enhanceSlot() is a method that adds new data fields and values to an object stored in a slot of that instance.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
+#' @export
+enhanceSlot <- function (x, ...)
+{
+  UseMethod("enhanceSlot", x)
+}
+methods::setGeneric("enhanceSlot")
+#' Exhibit (print to console) an object
+#' @rdname exhibit-methods
+#' @description exhibit() is a method that prints salient features of an object to console.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+exhibit <- function (x, ...)
+{
+  UseMethod("exhibit", x)
+}
+methods::setGeneric("exhibit")
+#' Ingest data
+#' @rdname ingest-methods
+#' @description ingest() is a method that ingests data saved in external files into R objects stored in working memory.
+#' @param x An object
+#' @param ... Additional arguments
 #' @export
 ingest <- function (x, ...)
 {
   UseMethod("ingest", x)
 }
 methods::setGeneric("ingest")
-#' Investigate
+#' Investigate a dataset
 #' @rdname investigate-methods
-#' @description investigate() is an Investigate function that executes an algorithm so solve an inverse problem, often through estimating statistical models. Specifically, this function implements an algorithm to investigate. The function is called for its side effects and does not return a value.
+#' @description investigate() is a method that applies an algorithm to solve an inverse problem to data contained in an object.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 investigate <- function (x, ...)
 {
   UseMethod("investigate", x)
 }
 methods::setGeneric("investigate")
-#' Manufacture
+#' Manufacture a new object
 #' @rdname manufacture-methods
-#' @description manufacture() is a Manufacture function that creates a novel R object. Specifically, this function implements an algorithm to manufacture. The function is called for its side effects and does not return a value.
+#' @description manufacture() is a method that creates a new object (other than a ready4 class instance).
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 manufacture <- function (x, ...)
 {
   UseMethod("manufacture", x)
 }
 methods::setGeneric("manufacture")
-#' Metamorphose
+#' Metamorphose an object
 #' @rdname metamorphose-methods
-#' @description metamorphose() is a Metamorphose function that transforms an instance of a class into an object with different structural properties. Specifically, this function implements an algorithm to metamorphose. The function is called for its side effects and does not return a value.
+#' @description metamorphose() is a method that transforms one ready4 object into a ready4 object of a different class.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 metamorphose <- function (x, ...)
 {
   UseMethod("metamorphose", x)
 }
 methods::setGeneric("metamorphose")
-#' Procure
-#' @rdname procure-methods
-#' @description procure() is a Procure function that searches and retrieves requested data from a specified source. Specifically, this function implements an algorithm to procure. The function is called for its side effects and does not return a value.
+#' Metamorphose an element of an object
+#' @rdname metamorphoseSlot-methods
+#' @description metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
+#' @export
+metamorphoseSlot <- function (x, ...)
+{
+  UseMethod("metamorphoseSlot", x)
+}
+methods::setGeneric("metamorphoseSlot")
+#' Procure (get) data
+#' @rdname procure-methods
+#' @description procure() is a method that retrieves data contained within an object.
+#' @param x An object
+#' @param ... Additional arguments
 #' @export
 procure <- function (x, ...)
 {
   UseMethod("procure", x)
 }
 methods::setGeneric("procure")
-#' Prognosticate
-#' @rdname prognosticate-methods
-#' @description prognosticate() is a Prognosticate function that executes an algorithm for solving forward problems through simulation or prediction. Specifically, this function implements an algorithm to prognosticate. The function is called for its side effects and does not return a value.
+#' Procure (get) data from an element of an object
+#' @rdname procureSlot-methods
+#' @description procureSlot() is a "getter" method that retrieves data contained in a slot of an S4 object.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
+#' @export
+procureSlot <- function (x, ...)
+{
+  UseMethod("procureSlot", x)
+}
+methods::setGeneric("procureSlot")
+#' Prognosticate (predict)
+#' @rdname prognosticate-methods
+#' @description prognosticate() is a method that uses statistical or simulation models to solve a forward problem.
+#' @param x An object
+#' @param ... Additional arguments
 #' @export
 prognosticate <- function (x, ...)
 {
   UseMethod("prognosticate", x)
 }
 methods::setGeneric("prognosticate")
-#' Ratify
+#' Ratify (validate) an object
 #' @rdname ratify-methods
-#' @description ratify() is a Ratify function that checks whether an instance of a class conforms to required criteria, potentially modifying that instance to ensure that it is valid. Specifically, this function implements an algorithm to ratify. The function is called for its side effects and does not return a value.
+#' @description ratify() is a method that validates that an object conforms to specified criteria, potentially modifying the object so that these criteria are met.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 ratify <- function (x, ...)
 {
   UseMethod("ratify", x)
 }
 methods::setGeneric("ratify")
-#' Reckon
-#' @rdname reckon-methods
-#' @description reckon() is a Reckon function that performs a calculation. Specifically, this function implements an algorithm to reckon. The function is called for its side effects and does not return a value.
+#' Ratify an element of an object
+#' @rdname ratifySlot-methods
+#' @description ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
+#' @export
+ratifySlot <- function (x, ...)
+{
+  UseMethod("ratifySlot", x)
+}
+methods::setGeneric("ratifySlot")
+#' Reckon (calculate) a value
+#' @rdname reckon-methods
+#' @description reckon() is a method that  performs a calculation using data contained in an object.
+#' @param x An object
+#' @param ... Additional arguments
 #' @export
 reckon <- function (x, ...)
 {
   UseMethod("reckon", x)
 }
 methods::setGeneric("reckon")
-#' Renew
+#' Renew (update) an object
 #' @rdname renew-methods
-#' @description renew() is a Renew function that updates an instance of a class with new values. Specifically, this function implements an algorithm to renew. The function is called for its side effects and does not return a value.
+#' @description renew() is a method that updates an object with new data.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 renew <- function (x, ...)
 {
   UseMethod("renew", x)
 }
 methods::setGeneric("renew")
-#' Report
-#' @rdname report-methods
-#' @description report() is a Report function that authors a report. Specifically, this function implements an algorithm to report. The function is called for its side effects and does not return a value.
+#' Renew (update) an element of an object
+#' @rdname renewSlot-methods
+#' @description renewSlot() is a "setter" method that updates a slot of a S4 object with new data.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
-report <- function (x, ...)
+renewSlot <- function (x, ...)
 {
-  UseMethod("report", x)
+  UseMethod("renewSlot", x)
 }
-methods::setGeneric("report")
-#' Share
+methods::setGeneric("renewSlot")
+#' Share (publish) open data
 #' @rdname share-methods
-#' @description share() is a Share function that processes output for public disemination and uploads to an online repository along with required metadata. Specifically, this function implements an algorithm to share. The function is called for its side effects and does not return a value.
+#' @description share() is a method that uploads data to an online repository. If requested, the method will also publish the updated repository.
 #' @param x An object
-#' @param ... Additional arguments (an additional arguments)
+#' @param ... Additional arguments
 #' @export
 share <- function (x, ...)
 {
   UseMethod("share", x)
 }
 methods::setGeneric("share")
+#' Share (publish) an element of an object
+#' @rdname shareSlot-methods
+#' @description shareSlot() is a method that uploads data contained in a slot of an S4 object to an online repository. If requested, the method will also publish the updated repository.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+shareSlot <- function (x, ...)
+{
+  UseMethod("shareSlot", x)
+}
+methods::setGeneric("shareSlot")

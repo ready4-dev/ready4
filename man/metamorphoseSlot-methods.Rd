@@ -4,7 +4,7 @@
 \alias{metamorphoseSlot}
 \alias{metamorphoseSlot-Ready4Module}
 \alias{metamorphoseSlot,Ready4Module-method}
-\title{Metamorphose data stored in a slot of a class instance into an object of a different (non-child) class}
+\title{Metamorphose an element of an object}
 \usage{
 metamorphoseSlot(x, ...)
 
@@ -18,7 +18,7 @@ metamorphoseSlot(x, ...)
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 }
 \description{
-metamorphoseSlot() is a method that metamorphoses data stored in a slot of a class instance into an object of a different (non-child) class.
+metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.
 
 metamorphoseSlot method applied to Ready4Module
 }

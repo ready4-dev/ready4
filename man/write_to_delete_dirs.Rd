@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_to_delete_dirs}
 \alias{write_to_delete_dirs}
-\title{write to delete directories}
+\title{Write to delete directories}
 \usage{
 write_to_delete_dirs(dir_paths_chr)
 }

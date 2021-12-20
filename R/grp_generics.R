@@ -1,6 +1,6 @@
-#' Author and save files to local or remote locations
+#' Author and save files
 #' @rdname author-methods
-#' @description author() is a method that authors and saves files to local or remote locations.
+#' @description author() is a method that authors and saves files.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -9,9 +9,9 @@ author <- function (x, ...)
   UseMethod("author", x)
 }
 methods::setGeneric("author")
-#' Author and save files necessary for creating and documenting classes
+#' Author and document classes
 #' @rdname authorClasses-methods
-#' @description authorClasses() is a method that authors and saves files necessary for creating and documenting classes.
+#' @description authorClasses() is a method that authors and saves code files for creating and documenting classes in an R package directory.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -20,9 +20,9 @@ authorClasses <- function (x, ...)
   UseMethod("authorClasses", x)
 }
 methods::setGeneric("authorClasses")
-#' Author and save files necessary for creating and documenting datasets
+#' Author and document package datasets
 #' @rdname authorData-methods
-#' @description authorData() is a method that authors and saves files necessary for creating and documenting datasets.
+#' @description authorData() is a method that authors and saves code files for creating and documenting datasets in an R package directory.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -31,9 +31,9 @@ authorData <- function (x, ...)
   UseMethod("authorData", x)
 }
 methods::setGeneric("authorData")
-#' Author and save files necessary for creating and documenting functions
+#' Author and document functions
 #' @rdname authorFunctions-methods
-#' @description authorFunctions() is a method that authors and saves files necessary for creating and documenting functions.
+#' @description authorFunctions() is a method that authors and saves files necessary for creating and documenting functions in an R package directory.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -53,9 +53,9 @@ authorReport <- function (x, ...)
   UseMethod("authorReport", x)
 }
 methods::setGeneric("authorReport")
-#' Characterize a class instance by generating descriptive information
+#' Characterize the features of an object
 #' @rdname characterize-methods
-#' @description characterize() is a method that characterizes a class instance by generating descriptive information.
+#' @description characterize() is a method that generates descriptive information about the features of an object.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -64,9 +64,9 @@ characterize <- function (x, ...)
   UseMethod("characterize", x)
 }
 methods::setGeneric("characterize")
-#' Characterize an object stored in a slot of a class instance by generating descriptive information
+#' Characterize one element of an object
 #' @rdname characterizeSlot-methods
-#' @description characterizeSlot() is a method that characterizes an object stored in a slot of a class instance by generating descriptive information.
+#' @description characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -75,9 +75,9 @@ characterizeSlot <- function (x, ...)
   UseMethod("characterizeSlot", x)
 }
 methods::setGeneric("characterizeSlot")
-#' Depict features of an instance of a class by generating a plot
+#' Depict (plot) an object
 #' @rdname depict-methods
-#' @description depict() is a method that depicts features of an instance of a class by generating a plot.
+#' @description depict() is a method that plots an object.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -86,9 +86,9 @@ depict <- function (x, ...)
   UseMethod("depict", x)
 }
 methods::setGeneric("depict")
-#' Enhance an instance of a class by adding new data fields and values to objects contained in that instance
+#' Enhance an object with new data items
 #' @rdname enhance-methods
-#' @description enhance() is a method that enhances an instance of a class by adding new data fields and values to objects contained in that instance.
+#' @description enhance() is a method that adds new data fields and values to objects contained in that instance.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -97,9 +97,9 @@ enhance <- function (x, ...)
   UseMethod("enhance", x)
 }
 methods::setGeneric("enhance")
-#' Enhance an instance of a class by adding new data fields and values to an object stored in a slot of that instance
+#' Enhance an element of an object with new data items
 #' @rdname enhanceSlot-methods
-#' @description enhanceSlot() is a method that enhances an instance of a class by adding new data fields and values to an object stored in a slot of that instance.
+#' @description enhanceSlot() is a method that adds new data fields and values to an object stored in a slot of that instance.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -108,9 +108,9 @@ enhanceSlot <- function (x, ...)
   UseMethod("enhanceSlot", x)
 }
 methods::setGeneric("enhanceSlot")
-#' Exhibit features of a class instance by printing to console
+#' Exhibit (print to console) an object
 #' @rdname exhibit-methods
-#' @description exhibit() is a method that exhibits features of a class instance by printing to console.
+#' @description exhibit() is a method that prints salient features of an object to console.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -119,7 +119,7 @@ exhibit <- function (x, ...)
   UseMethod("exhibit", x)
 }
 methods::setGeneric("exhibit")
-#' Ingest data saved in external files into R objects stored in working memory
+#' Ingest data
 #' @rdname ingest-methods
 #' @description ingest() is a method that ingests data saved in external files into R objects stored in working memory.
 #' @param x An object
@@ -130,9 +130,9 @@ ingest <- function (x, ...)
   UseMethod("ingest", x)
 }
 methods::setGeneric("ingest")
-#' Investigate data stored in an instance of a class by executing an algorithm to solve an inverse problem
+#' Investigate a dataset
 #' @rdname investigate-methods
-#' @description investigate() is a method that investigates data stored in an instance of a class by executing an algorithm to solve an inverse problem.
+#' @description investigate() is a method that applies an algorithm to solve an inverse problem to data contained in an object.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -141,9 +141,9 @@ investigate <- function (x, ...)
   UseMethod("investigate", x)
 }
 methods::setGeneric("investigate")
-#' Manufacture a novel R object using data contained in an instance of a class
+#' Manufacture a new object
 #' @rdname manufacture-methods
-#' @description manufacture() is a method that manufactures a novel R object using data contained in an instance of a class.
+#' @description manufacture() is a method that creates a new object (other than a ready4 class instance).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -152,9 +152,9 @@ manufacture <- function (x, ...)
   UseMethod("manufacture", x)
 }
 methods::setGeneric("manufacture")
-#' Metamorphose an instance of a class into an instance of a different (non-child) class
+#' Metamorphose an object
 #' @rdname metamorphose-methods
-#' @description metamorphose() is a method that metamorphoses an instance of a class into an instance of a different (non-child) class.
+#' @description metamorphose() is a method that transforms one ready4 object into a ready4 object of a different class.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -163,9 +163,9 @@ metamorphose <- function (x, ...)
   UseMethod("metamorphose", x)
 }
 methods::setGeneric("metamorphose")
-#' Metamorphose data stored in a slot of a class instance into an object of a different (non-child) class
+#' Metamorphose an element of an object
 #' @rdname metamorphoseSlot-methods
-#' @description metamorphoseSlot() is a method that metamorphoses data stored in a slot of a class instance into an object of a different (non-child) class.
+#' @description metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -174,9 +174,9 @@ metamorphoseSlot <- function (x, ...)
   UseMethod("metamorphoseSlot", x)
 }
 methods::setGeneric("metamorphoseSlot")
-#' Procure data by executing a search and retrieval algorithm using data contained in an instance of a class
+#' Procure (get) data
 #' @rdname procure-methods
-#' @description procure() is a method that procures data by executing a search and retrieval algorithm using data contained in an instance of a class.
+#' @description procure() is a method that retrieves data contained within an object.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -185,9 +185,9 @@ procure <- function (x, ...)
   UseMethod("procure", x)
 }
 methods::setGeneric("procure")
-#' Procure data contained in a slot of a class instance
+#' Procure (get) data from an element of an object
 #' @rdname procureSlot-methods
-#' @description procureSlot() is a method that procures data contained in a slot of an instance of a class.
+#' @description procureSlot() is a "getter" method that retrieves data contained in a slot of an S4 object.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -196,9 +196,9 @@ procureSlot <- function (x, ...)
   UseMethod("procureSlot", x)
 }
 methods::setGeneric("procureSlot")
-#' Prognosticate by applying an algorithm to solve a forward problem through simulation or prediction
+#' Prognosticate (predict)
 #' @rdname prognosticate-methods
-#' @description prognosticate() is a method that prognosticates by applying an algorithm to solve a forward problem through simulation or prediction.
+#' @description prognosticate() is a method that uses statistical or simulation models to solve a forward problem.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -207,9 +207,9 @@ prognosticate <- function (x, ...)
   UseMethod("prognosticate", x)
 }
 methods::setGeneric("prognosticate")
-#' Ratify that an instance of a class conforms to specified criteria
+#' Ratify (validate) an object
 #' @rdname ratify-methods
-#' @description ratify() is a method that ratifies that an instance of a class conforms to specified criteria.
+#' @description ratify() is a method that validates that an object conforms to specified criteria, potentially modifying the object so that these criteria are met.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -218,9 +218,9 @@ ratify <- function (x, ...)
   UseMethod("ratify", x)
 }
 methods::setGeneric("ratify")
-#' Ratify that data contained in a slot of a class instance conforms to specified criteria
+#' Ratify an element of an object
 #' @rdname ratifySlot-methods
-#' @description ratifySlot() is a method that ratifies that data contained in a slot of a class instance conforms to specified criteria.
+#' @description ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -229,9 +229,9 @@ ratifySlot <- function (x, ...)
   UseMethod("ratifySlot", x)
 }
 methods::setGeneric("ratifySlot")
-#' Reckon a value by performing a calculation using data contained in an instance of a class
+#' Reckon (calculate) a value
 #' @rdname reckon-methods
-#' @description reckon() is a method that reckons a value by performing a calculation using data contained in an instance of a class.
+#' @description reckon() is a method that  performs a calculation using data contained in an object.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -240,9 +240,9 @@ reckon <- function (x, ...)
   UseMethod("reckon", x)
 }
 methods::setGeneric("reckon")
-#' Renew an instance of a class by updating it with new data
+#' Renew (update) an object
 #' @rdname renew-methods
-#' @description renew() is a method that renews an instance of a class by updating it with new data.
+#' @description renew() is a method that updates an object with new data.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -251,9 +251,9 @@ renew <- function (x, ...)
   UseMethod("renew", x)
 }
 methods::setGeneric("renew")
-#' Renew a slot of a class instance by updating it with new data
+#' Renew (update) an element of an object
 #' @rdname renewSlot-methods
-#' @description renewSlot() is a method that renews a slot of a class instance by updating it with new data.
+#' @description renewSlot() is a "setter" method that updates a slot of a S4 object with new data.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -262,9 +262,9 @@ renewSlot <- function (x, ...)
   UseMethod("renewSlot", x)
 }
 methods::setGeneric("renewSlot")
-#' Share data contained in an instance of a class via an online repository
+#' Share (publish) open data
 #' @rdname share-methods
-#' @description share() is a method that shares data contained in an instance of a class via an online repository.
+#' @description share() is a method that uploads data to an online repository. If requested, the method will also publish the updated repository.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -273,9 +273,9 @@ share <- function (x, ...)
   UseMethod("share", x)
 }
 methods::setGeneric("share")
-#' Share data contained in a slot of a class instance via an online repository
+#' Share (publish) an element of an object
 #' @rdname shareSlot-methods
-#' @description shareSlot() is a method that shares data contained in a slot of a class instance via an online repository.
+#' @description shareSlot() is a method that uploads data contained in a slot of an S4 object to an online repository. If requested, the method will also publish the updated repository.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -284,14 +284,3 @@ shareSlot <- function (x, ...)
   UseMethod("shareSlot", x)
 }
 methods::setGeneric("shareSlot")
-#' report
-#' @rdname report-methods
-#' @description report() is a method that reports.
-#' @param x An object
-#' @param ... Additional arguments
-#' @export
-report <- function (x, ...)
-{
-  UseMethod("report", x)
-}
-methods::setGeneric("report")

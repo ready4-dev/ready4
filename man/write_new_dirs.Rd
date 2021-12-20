@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_new_dirs}
 \alias{write_new_dirs}
-\title{write new directories}
+\title{Write new directories}
 \usage{
 write_new_dirs(new_dirs_chr)
 }

@@ -1,4 +1,4 @@
-#' make files tibble
+#' Make files tibble
 #' @description make_files_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make files tibble. The function returns Files (a tibble).
 #' @param paths_to_dirs_chr Paths to directories (a character vector)
 #' @param recode_ls Recode (a list)
@@ -43,7 +43,7 @@ make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_c
         files_tb$file_type_chr) %>% unique() %>% length())
     return(files_tb)
 }
-#' make list phrase
+#' Make list phrase
 #' @description make_list_phrase() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make list phrase. The function returns List phrase (a character vector of length one).
 #' @param items_chr Items (a character vector)
 #' @return List phrase (a character vector of length one)
@@ -59,7 +59,7 @@ make_list_phrase <- function (items_chr)
         replacement = " and")
     return(list_phrase_1L_chr)
 }
-#' make local path to dataverse data
+#' Make local path to dataverse data
 #' @description make_local_path_to_dv_data() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make local path to dataverse data. The function returns Path (a character vector).
 #' @param save_dir_path_1L_chr Save directory path (a character vector of length one)
 #' @param fl_nm_1L_chr File name (a character vector of length one)
@@ -74,7 +74,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
         "/"), ""), fl_nm_1L_chr, save_fmt_1L_chr)
     return(path_chr)
 }
-#' make prompt
+#' Make prompt
 #' @description make_prompt() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make prompt. The function returns Response (a character vector of length one).
 #' @param prompt_1L_chr Prompt (a character vector of length one)
 #' @param options_chr Options (a character vector), Default: NULL

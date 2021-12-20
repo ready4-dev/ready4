@@ -4,7 +4,7 @@
 \alias{procureSlot}
 \alias{procureSlot-Ready4Module}
 \alias{procureSlot,Ready4Module-method}
-\title{Procure data contained in a slot of a class instance}
+\title{Procure (get) data from an element of an object}
 \usage{
 procureSlot(x, ...)
 
@@ -17,8 +17,11 @@ procureSlot(x, ...)
 
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 }
+\value{
+y (an object)
+}
 \description{
-procureSlot() is a method that procures data contained in a slot of an instance of a class.
+procureSlot() is a "getter" method that retrieves data contained in a slot of an S4 object.
 
 procureSlot method applied to Ready4Module
 }
