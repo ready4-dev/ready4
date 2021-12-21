@@ -6,16 +6,16 @@
 \alias{procureSlot,Ready4Module-method}
 \title{Procure (get) data from an element of an object}
 \usage{
-procureSlot(x, ...)
+procureSlot(x, slot_nm_1L_chr, ...)
 
 \S4method{procureSlot}{Ready4Module}(x, slot_nm_1L_chr)
 }
 \arguments{
 \item{x}{An object of class Ready4Module}
 
-\item{...}{Additional arguments}
-
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+
+\item{...}{Additional arguments}
 }
 \value{
 y (an object)

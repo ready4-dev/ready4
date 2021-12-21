@@ -6,16 +6,16 @@
 \alias{shareSlot,Ready4Module-method}
 \title{Share (publish) an element of an object}
 \usage{
-shareSlot(x, ...)
+shareSlot(x, slot_nm_1L_chr, ...)
 
 \S4method{shareSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
 \item{x}{An object of class Ready4Module}
 
-\item{...}{Additional arguments}
-
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+
+\item{...}{Additional arguments}
 }
 \description{
 shareSlot() is a method that uploads data contained in a slot of an S4 object to an online repository. If requested, the method will also publish the updated repository.

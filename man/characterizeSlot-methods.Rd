@@ -6,16 +6,16 @@
 \alias{characterizeSlot,Ready4Module-method}
 \title{Characterize one element of an object}
 \usage{
-characterizeSlot(x, ...)
+characterizeSlot(x, slot_nm_1L_chr, ...)
 
 \S4method{characterizeSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
 \item{x}{An object of class Ready4Module}
 
-\item{...}{Additional arguments}
-
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+
+\item{...}{Additional arguments}
 }
 \description{
 characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.

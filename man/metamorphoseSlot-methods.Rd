@@ -6,16 +6,16 @@
 \alias{metamorphoseSlot,Ready4Module-method}
 \title{Metamorphose an element of an object}
 \usage{
-metamorphoseSlot(x, ...)
+metamorphoseSlot(x, slot_nm_1L_chr, ...)
 
 \S4method{metamorphoseSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
 \item{x}{An object of class Ready4Module}
 
-\item{...}{Additional arguments}
-
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+
+\item{...}{Additional arguments}
 }
 \description{
 metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.

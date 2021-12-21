@@ -6,16 +6,16 @@
 \alias{ratifySlot,Ready4Module-method}
 \title{Ratify an element of an object}
 \usage{
-ratifySlot(x, ...)
+ratifySlot(x, slot_nm_1L_chr, ...)
 
 \S4method{ratifySlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
 \item{x}{An object of class Ready4Module}
 
-\item{...}{Additional arguments}
-
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+
+\item{...}{Additional arguments}
 }
 \description{
 ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.

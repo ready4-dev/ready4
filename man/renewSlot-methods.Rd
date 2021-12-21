@@ -6,18 +6,18 @@
 \alias{renewSlot,Ready4Module-method}
 \title{Renew (update) an element of an object}
 \usage{
-renewSlot(x, ...)
+renewSlot(x, slot_nm_1L_chr, new_val_xx, ...)
 
 \S4method{renewSlot}{Ready4Module}(x, slot_nm_1L_chr, new_val_xx)
 }
 \arguments{
 \item{x}{An object of class Ready4Module}
 
-\item{...}{Additional arguments}
-
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 
 \item{new_val_xx}{New value (slot dependent object type)}
+
+\item{...}{Additional arguments}
 }
 \description{
 renewSlot() is a "setter" method that updates a slot of a S4 object with new data.
