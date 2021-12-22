@@ -1,4 +1,4 @@
-# ready4 <img src="man/figures/fav120.png" align="right" />
+# ready4
 
 ## A Framework for Open and Modular Mental Health Systems Models
 
