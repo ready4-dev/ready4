@@ -445,3 +445,16 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
+#
+# This next bit is required to tidyup the prototypes lookup table
+a <- ready4use::Ready4useRepos(gh_repo_1L_chr = "ready4-dev/ready4",
+                               gh_tag_1L_chr = "Documentation_0.0")
+b <- a %>%
+  ingest(fls_to_ingest_chr = "prototype_lup",
+         metadata_1L_lgl = F)
+b <- b %>% dplyr::mutate(default_val_chr = dplyr::case_when(pt_ns_chr == "ready4" ~ "",
+                                                            T ~ default_val_chr)) %>%
+  dplyr::arrange(pt_ns_chr)
+a <- share(a,
+           obj_to_share_xx = b,
+           fl_nm_1L_chr = "prototype_lup")

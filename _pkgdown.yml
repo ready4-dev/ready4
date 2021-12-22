@@ -1,3 +1,7 @@
+url: https://ready4-dev.github.io/ready4/
+template:
+  bootstrap: 5
+  bootswatch: materia
 home:
   links:
   - text: Manual - User (PDF)
