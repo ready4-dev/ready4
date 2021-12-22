@@ -1,216 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/ready4.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/articles/ready4.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/index.html</loc>
   </url>
   <url>
-    <loc>/reference/Ready4Module-class.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/Ready4Module-class.html</loc>
   </url>
   <url>
-    <loc>/reference/Ready4Private-class.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/Ready4Private-class.html</loc>
   </url>
   <url>
-    <loc>/reference/Ready4Public-class.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/Ready4Public-class.html</loc>
   </url>
   <url>
-    <loc>/reference/add_lups.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/add_lups.html</loc>
   </url>
   <url>
-    <loc>/reference/author-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/author-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/authorClasses-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/authorClasses-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/authorData-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/authorData-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/authorFunctions-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/authorFunctions-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/authorReport-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/authorReport-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/characterize-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/characterize-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/characterizeSlot-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/depict-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/depict-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/deprecated.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/deprecated.html</loc>
   </url>
   <url>
-    <loc>/reference/enhance-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/enhance-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/enhanceSlot-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/exhibit-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/exhibit-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/get_dv_fls_urls.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_dv_fls_urls.html</loc>
   </url>
   <url>
-    <loc>/reference/get_fl_id_from_dv_ls.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_fl_id_from_dv_ls.html</loc>
   </url>
   <url>
-    <loc>/reference/get_from_lup_obj.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_from_lup_obj.html</loc>
   </url>
   <url>
-    <loc>/reference/get_r4_obj_slots.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_r4_obj_slots.html</loc>
   </url>
   <url>
-    <loc>/reference/get_rds_from_dv.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_rds_from_dv.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/ingest-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/ingest-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/investigate-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/investigate-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/make_files_tb.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_files_tb.html</loc>
   </url>
   <url>
-    <loc>/reference/make_list_phrase.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_list_phrase.html</loc>
   </url>
   <url>
-    <loc>/reference/make_local_path_to_dv_data.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_local_path_to_dv_data.html</loc>
   </url>
   <url>
-    <loc>/reference/make_prompt.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_prompt.html</loc>
   </url>
   <url>
-    <loc>/reference/manufacture-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/manufacture-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/metamorphose-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/metamorphose-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/metamorphoseSlot-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/pipe.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/procure-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/procure-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/procureSlot-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/prognosticate-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/prognosticate-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/ratify-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/ratify-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/ratifySlot-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/ready4-package.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/ready4-package.html</loc>
   </url>
   <url>
-    <loc>/reference/reckon-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/reckon-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/remove_lbls_from_df.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/remove_lbls_from_df.html</loc>
   </url>
   <url>
-    <loc>/reference/renew-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/renew-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/renewSlot-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/renewSlot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/rowbind_all_tbs_in_r4_obj.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/rowbind_all_tbs_in_r4_obj.html</loc>
   </url>
   <url>
-    <loc>/reference/rowbind_tbs_in_r4_obj.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/rowbind_tbs_in_r4_obj.html</loc>
   </url>
   <url>
-    <loc>/reference/share-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/share-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/shareSlot-methods.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/shareSlot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_cls_type_ls.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/transform_cls_type_ls.html</loc>
   </url>
   <url>
-    <loc>/reference/update_pt_fn_args_ls.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/update_pt_fn_args_ls.html</loc>
   </url>
   <url>
-    <loc>/reference/write_all_tbs_in_tbs_r4_to_csvs.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_all_tbs_in_tbs_r4_to_csvs.html</loc>
   </url>
   <url>
-    <loc>/reference/write_dv_fl_to_loc.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_dv_fl_to_loc.html</loc>
   </url>
   <url>
-    <loc>/reference/write_env_objs_to_dv.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_env_objs_to_dv.html</loc>
   </url>
   <url>
-    <loc>/reference/write_fls_from_dv.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_fls_from_dv.html</loc>
   </url>
   <url>
-    <loc>/reference/write_fls_to_dv.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_fls_to_dv.html</loc>
   </url>
   <url>
-    <loc>/reference/write_fls_to_repo.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_fls_to_repo.html</loc>
   </url>
   <url>
-    <loc>/reference/write_from_tmp.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_from_tmp.html</loc>
   </url>
   <url>
-    <loc>/reference/write_new_dirs.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_new_dirs.html</loc>
   </url>
   <url>
-    <loc>/reference/write_new_files.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_new_files.html</loc>
   </url>
   <url>
-    <loc>/reference/write_tb_to_csv.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_tb_to_csv.html</loc>
   </url>
   <url>
-    <loc>/reference/write_to_delete_dirs.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_delete_dirs.html</loc>
   </url>
   <url>
-    <loc>/reference/write_to_delete_fls.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_delete_fls.html</loc>
   </url>
   <url>
-    <loc>/reference/write_to_dv_from_tbl.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_dv_from_tbl.html</loc>
   </url>
   <url>
-    <loc>/reference/write_to_dv_with_wait.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_dv_with_wait.html</loc>
   </url>
   <url>
-    <loc>/reference/write_to_publish_dv_ds.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_publish_dv_ds.html</loc>
   </url>
   <url>
-    <loc>/reference/write_ws.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_ws.html</loc>
   </url>
 </urlset>
