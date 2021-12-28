@@ -49,6 +49,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/authorReport-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/authorSlot-methods.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/characterize-methods.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/depict-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/depictSlot-methods.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/deprecated.html</loc>
@@ -68,6 +74,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/exhibit-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_dv_fls_urls.html</loc>
@@ -91,7 +100,13 @@
     <loc>https://ready4-dev.github.io/ready4/reference/ingest-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/investigate-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_files_tb.html</loc>
@@ -107,6 +122,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/manufacture-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/metamorphose-methods.html</loc>
@@ -127,6 +145,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/prognosticate-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/ratify-methods.html</loc>
   </url>
   <url>
@@ -137,6 +158,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/reckon-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/remove_lbls_from_df.html</loc>
