@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{exhibit}
 \alias{exhibit}
-\title{Exhibit (print to console) an object}
+\title{Exhibit (print to console) features of an object}
 \usage{
 exhibit(x, ...)
 }

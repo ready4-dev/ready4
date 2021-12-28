@@ -42,3 +42,11 @@
 ^data-raw/s4_fns/shareSlot\.R$
 ^data-raw/clss/C4_Ready4Module\.R$
 ^data-raw/s4_fns/procureSlot\.R$
+^data-raw/s4_fns/authorSlot\.R$
+^data-raw/s4_fns/depictSlot\.R$
+^data-raw/s4_fns/exhibitSlot\.R$
+^data-raw/s4_fns/ingestSlot\.R$
+^data-raw/s4_fns/investigateSlot\.R$
+^data-raw/s4_fns/manufactureSlot\.R$
+^data-raw/s4_fns/prognosticateSlot\.R$
+^data-raw/s4_fns/reckonSlot\.R$

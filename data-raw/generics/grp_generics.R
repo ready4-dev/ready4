@@ -64,20 +64,6 @@ characterize <- function (x, ...)
   UseMethod("characterize", x)
 }
 methods::setGeneric("characterize")
-#' Characterize one element of an object
-#' @rdname characterizeSlot-methods
-#' @description characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.
-#' @param x An object
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @export
-characterizeSlot <- function (x,
-                              slot_nm_1L_chr,
-                              ...)
-{
-  UseMethod("characterizeSlot", x)
-}
-methods::setGeneric("characterizeSlot")
 #' Depict (plot) an object
 #' @rdname depict-methods
 #' @description depict() is a method that plots an object.
@@ -100,21 +86,8 @@ enhance <- function (x, ...)
   UseMethod("enhance", x)
 }
 methods::setGeneric("enhance")
-#' Enhance an element of an object with new data items
-#' @rdname enhanceSlot-methods
-#' @description enhanceSlot() is a method that adds new data fields and values to an object stored in a slot of that instance.
-#' @param x An object
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @export
-enhanceSlot <- function (x,
-                         slot_nm_1L_chr,
-                         ...)
-{
-  UseMethod("enhanceSlot", x)
-}
-methods::setGeneric("enhanceSlot")
-#' Exhibit (print to console) an object
+
+#' Exhibit (print to console) features of an object
 #' @rdname exhibit-methods
 #' @description exhibit() is a method that prints salient features of an object to console.
 #' @param x An object
@@ -136,7 +109,7 @@ ingest <- function (x, ...)
   UseMethod("ingest", x)
 }
 methods::setGeneric("ingest")
-#' Investigate a dataset
+#' Investigate solutions to an inverse problem
 #' @rdname investigate-methods
 #' @description investigate() is a method that applies an algorithm to solve an inverse problem to data contained in an object.
 #' @param x An object
@@ -169,20 +142,7 @@ metamorphose <- function (x, ...)
   UseMethod("metamorphose", x)
 }
 methods::setGeneric("metamorphose")
-#' Metamorphose an element of an object
-#' @rdname metamorphoseSlot-methods
-#' @description metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.
-#' @param x An object
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @export
-metamorphoseSlot <- function (x,
-                              slot_nm_1L_chr,
-                              ...)
-{
-  UseMethod("metamorphoseSlot", x)
-}
-methods::setGeneric("metamorphoseSlot")
+
 #' Procure (get) data
 #' @rdname procure-methods
 #' @description procure() is a method that retrieves data contained within an object.
@@ -193,22 +153,7 @@ procure <- function (x, ...)
 {
   UseMethod("procure", x)
 }
-methods::setGeneric("procure")
-#' Procure (get) data from an element of an object
-#' @rdname procureSlot-methods
-#' @description procureSlot() is a "getter" method that retrieves data contained in a slot of an S4 object.
-#' @param x An object
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @export
-procureSlot <- function (x,
-                         slot_nm_1L_chr,
-                         ...)
-{
-  UseMethod("procureSlot", x)
-}
-methods::setGeneric("procureSlot")
-#' Prognosticate (predict)
+#' Prognosticate (predict) solutions to a forward problem
 #' @rdname prognosticate-methods
 #' @description prognosticate() is a method that uses statistical or simulation models to solve a forward problem.
 #' @param x An object
@@ -230,20 +175,6 @@ ratify <- function (x, ...)
   UseMethod("ratify", x)
 }
 methods::setGeneric("ratify")
-#' Ratify an element of an object
-#' @rdname ratifySlot-methods
-#' @description ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.
-#' @param x An object
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @export
-ratifySlot <- function (x,
-                        slot_nm_1L_chr,
-                        ...)
-{
-  UseMethod("ratifySlot", x)
-}
-methods::setGeneric("ratifySlot")
 #' Reckon (calculate) a value
 #' @rdname reckon-methods
 #' @description reckon() is a method that  performs a calculation using data contained in an object.
@@ -266,9 +197,211 @@ renew <- function (x, ...)
   UseMethod("renew", x)
 }
 methods::setGeneric("renew")
-#' Renew (update) an element of an object
+#' Share (publish) open data
+#' @rdname share-methods
+#' @description share() is a method that uploads data to an online repository. If requested, the method will also publish the updated repository.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+share <- function (x, ...)
+{
+  UseMethod("share", x)
+}
+methods::setGeneric("share")
+
+#' Apply the author method to a slot
+#' @rdname authorSlot-methods
+#' @description authorSlot() is a convenience method that applies the author method to a specified slot of an object.
+#' @param x An object
+#' @param ... Additional arguments
+#' @export
+authorSlot <- function (x,
+                        slot_nm_1L_chr,
+                        ...)
+{
+  UseMethod("authorSlot", x)
+}
+methods::setGeneric("authorSlot")
+
+#' Apply the characterize method to a slot
+#' @rdname characterizeSlot-methods
+#' @description characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+characterizeSlot <- function (x,
+                              slot_nm_1L_chr,
+                              ...)
+{
+  UseMethod("characterizeSlot", x)
+}
+methods::setGeneric("characterizeSlot")
+
+#' Apply the depict method to a slot
+#' @rdname depictSlot-methods
+#' @description depictSlot() is a convenience method that applies the depict method to a specified slot of an object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+depictSlot <- function (x,
+                        slot_nm_1L_chr,
+                        ...)
+{
+  UseMethod("depictSlot", x)
+}
+methods::setGeneric("depictSlot")
+
+#' Apply the enhance method to a slot
+#' @rdname enhanceSlot-methods
+#' @description enhanceSlot() is a method that adds new data fields and values to an object stored in a slot of that instance.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+enhanceSlot <- function (x,
+                         slot_nm_1L_chr,
+                         ...)
+{
+  UseMethod("enhanceSlot", x)
+}
+methods::setGeneric("enhanceSlot")
+
+
+#' Apply the exhibit method to a slot
+#' @rdname exhibitSlot-methods
+#' @description exhibitSlot() is a convenience method that applies the exhibit method to a specified slot of an object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+exhibitSlot <- function (x,
+                         slot_nm_1L_chr,
+                         ...)
+{
+  UseMethod("exhibitSlot", x)
+}
+methods::setGeneric("exhibitSlot")
+
+#' Apply the ingest method to a slot
+#' @rdname ingestSlot-methods
+#' @description ingestSlot() is a convenience method that applies the ingest method to a specified slot of an object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+ingestSlot <- function (x,
+                        slot_nm_1L_chr,
+                        ...)
+{
+  UseMethod("ingestSlot", x)
+}
+methods::setGeneric("ingestSlot")
+
+#' Apply the investigate method to a slot
+#' @rdname investigateSlot-methods
+#' @description investigateSlot() is a convenience method that applies the investigate method to a specified slot of an object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+investigateSlot <- function (x,
+                             slot_nm_1L_chr,
+                             ...)
+{
+  UseMethod("investigateSlot", x)
+}
+methods::setGeneric("investigateSlot")
+
+#' Apply the manufacture method to a slot
+#' @rdname manufactureSlot-methods
+#' @description manufactureSlot() is a convenience method that applies the manufacture method to a specified slot of an object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+manufactureSlot <- function (x,
+                             slot_nm_1L_chr,
+                             ...)
+{
+  UseMethod("manufactureSlot", x)
+}
+methods::setGeneric("manufactureSlot")
+#' Apply the metamorphose method to a slot
+#' @rdname metamorphoseSlot-methods
+#' @description metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+metamorphoseSlot <- function (x,
+                              slot_nm_1L_chr,
+                              ...)
+{
+  UseMethod("metamorphoseSlot", x)
+}
+methods::setGeneric("metamorphoseSlot")
+methods::setGeneric("procure")
+#' Procure (get) data from a slot
+#' @rdname procureSlot-methods
+#' @description procureSlot() is a "getter" method that procures (gets) the value of a specified slot (default behaviour) or the value returned by applying the procure method to the slot.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+procureSlot <- function (x,
+                         slot_nm_1L_chr,
+                         ...)
+{
+  UseMethod("procureSlot", x)
+}
+methods::setGeneric("procureSlot")
+#' Apply the prognosticate method to a slot
+#' @rdname prognosticateSlot-methods
+#' @description prognosticateSlot() is a convenience method that applies the prognosticate method to a specified slot of an object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+prognosticateSlot <- function (x,
+                               slot_nm_1L_chr,
+                               ...)
+{
+  UseMethod("prognosticateSlot", x)
+}
+methods::setGeneric("prognosticateSlot")
+#' Apply the ratify method to a slot
+#' @rdname ratifySlot-methods
+#' @description ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+ratifySlot <- function (x,
+                        slot_nm_1L_chr,
+                        ...)
+{
+  UseMethod("ratifySlot", x)
+}
+methods::setGeneric("ratifySlot")
+#' Apply the reckon method to a slot
+#' @rdname reckonSlot-methods
+#' @description reckonSlot() is a convenience method that applies the reckon method to a specified slot of an object.
+#' @param x An object
+#' @param slot_nm_1L_chr Slot name (a length one character vector)
+#' @param ... Additional arguments
+#' @export
+reckonSlot <- function (x,
+                        slot_nm_1L_chr,
+                        ...)
+{
+  UseMethod("reckonSlot", x)
+}
+methods::setGeneric("reckonSlot")
+#' Apply the renew method to a slot
 #' @rdname renewSlot-methods
-#' @description renewSlot() is a "setter" method that updates a slot of a S4 object with new data.
+#' @description renewSlot() is a "setter" method that renews (sets) the value of a specified slot with either a supplied new value or the value returned by applying the renew method to the slot (default behaviour).
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param new_val_xx New value (an object)
@@ -282,18 +415,7 @@ renewSlot <- function (x,
   UseMethod("renewSlot", x)
 }
 methods::setGeneric("renewSlot")
-#' Share (publish) open data
-#' @rdname share-methods
-#' @description share() is a method that uploads data to an online repository. If requested, the method will also publish the updated repository.
-#' @param x An object
-#' @param ... Additional arguments
-#' @export
-share <- function (x, ...)
-{
-  UseMethod("share", x)
-}
-methods::setGeneric("share")
-#' Share (publish) an element of an object
+#' Apply the share method to a slot
 #' @rdname shareSlot-methods
 #' @description shareSlot() is a method that uploads data contained in a slot of an S4 object to an online repository. If requested, the method will also publish the updated repository.
 #' @param x An object

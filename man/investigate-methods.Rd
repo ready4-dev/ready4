@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{investigate}
 \alias{investigate}
-\title{Investigate a dataset}
+\title{Investigate solutions to an inverse problem}
 \usage{
 investigate(x, ...)
 }

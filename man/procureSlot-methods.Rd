@@ -4,11 +4,11 @@
 \alias{procureSlot}
 \alias{procureSlot-Ready4Module}
 \alias{procureSlot,Ready4Module-method}
-\title{Procure (get) data from an element of an object}
+\title{Procure (get) data from a slot}
 \usage{
 procureSlot(x, slot_nm_1L_chr, ...)
 
-\S4method{procureSlot}{Ready4Module}(x, slot_nm_1L_chr)
+\S4method{procureSlot}{Ready4Module}(x, slot_nm_1L_chr, use_procure_mthd_1L_lgl = F, ...)
 }
 \arguments{
 \item{x}{An object of class Ready4Module}
@@ -16,12 +16,14 @@ procureSlot(x, slot_nm_1L_chr, ...)
 \item{slot_nm_1L_chr}{Slot name (a length one character vector)}
 
 \item{...}{Additional arguments}
+
+\item{use_procure_mthd_1L_lgl}{Use procure method (a length one logical vector)}
 }
 \value{
 y (an object)
 }
 \description{
-procureSlot() is a "getter" method that retrieves data contained in a slot of an S4 object.
+procureSlot() is a "getter" method that procures (gets) the value of a specified slot (default behaviour) or the value returned by applying the procure method to the slot.
 
 procureSlot method applied to Ready4Module
 }

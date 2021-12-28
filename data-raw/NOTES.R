@@ -2,11 +2,16 @@ fn_types_lup <- ready4fun::get_rds_from_pkg_dmt(fl_nm_1L_chr = "fn_types_lup",
                                                 piggyback_to_1L_chr = "ready4-dev/ready4")
 fn_types_lup <- fn_types_lup %>%
   #dplyr::filter(!fn_type_nm_chr %in% c("Add Class", "Analyse", "Report","get_read_fn")) %>%
-  tibble::add_case(fn_type_nm_chr = c("procureSlot"),
-                   fn_type_desc_chr = c("Procures data contained in the slot of a class instance"),
+  tibble::add_case(fn_type_nm_chr = c("authorSlot", "depictSlot", "exhibitSlot", "ingestSlot", "investigateSlot", "manufactureSlot", "prognosticateSlot", "reckonSlot"),
+                   #fn_type_desc_chr = c("Procures data contained in the slot of a class instance"),
                    is_generic_lgl = T,
                    is_method_lgl = T) %>%
-  dplyr::arrange(fn_type_nm_chr)
+  dplyr::arrange(fn_type_nm_chr) %>%
+  dplyr::mutate(fn_type_desc_chr = dplyr::case_when(fn_type_nm_chr %>% purrr::map_lgl(~ endsWith(.x,"Slot")) ~ paste0("Applies the ",fn_type_nm_chr %>% stringr::str_remove_all("Slot"), " method to a specified slot"),
+                                                    T ~ fn_type_desc_chr)) %>%
+  dplyr::mutate(fn_type_desc_chr = dplyr::case_when(fn_type_nm_chr == "procureSlot" ~ "Procures (gets) the value of a specified slot (default behaviour) or the value returned by applying the procure method to the slot",
+                                                    fn_type_nm_chr == "renewSlot" ~ "Renews (sets) the value of a specified slot with either a specified new value or the value returned by applying the renew method to the slot (default behaviour)",
+                                                    T ~ fn_type_desc_chr))
 # generics_chr <- c("author","authorClasses", "authorData","authorFunctions", "authorReport",
 #                   "characterize","characterizeSlot","depict","enhance","enhanceSlot","exhibit","ingest",
 #                   "investigate","manufacture", "metamorphose","metamorphoseSlot", "procure",

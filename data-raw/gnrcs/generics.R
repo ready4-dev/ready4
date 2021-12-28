@@ -18,6 +18,10 @@ authorReport <- function (x, ...)
 {
   UseMethod("authorReport", x)
 }
+authorSlot <- function (x, ...)
+{
+  UseMethod("authorSlot", x)
+}
 characterize <- function (x, ...)
 {
   UseMethod("characterize", x)
@@ -29,6 +33,10 @@ characterizeSlot <- function (x, ...)
 depict <- function (x, ...)
 {
   UseMethod("depict", x)
+}
+depictSlot <- function (x, ...)
+{
+  UseMethod("depictSlot", x)
 }
 enhance <- function (x, ...)
 {
@@ -42,17 +50,33 @@ exhibit <- function (x, ...)
 {
   UseMethod("exhibit", x)
 }
+exhibitSlot <- function (x, ...)
+{
+  UseMethod("exhibitSlot", x)
+}
 ingest <- function (x, ...)
 {
   UseMethod("ingest", x)
+}
+ingestSlot <- function (x, ...)
+{
+  UseMethod("ingestSlot", x)
 }
 investigate <- function (x, ...)
 {
   UseMethod("investigate", x)
 }
+investigateSlot <- function (x, ...)
+{
+  UseMethod("investigateSlot", x)
+}
 manufacture <- function (x, ...)
 {
   UseMethod("manufacture", x)
+}
+manufactureSlot <- function (x, ...)
+{
+  UseMethod("manufactureSlot", x)
 }
 metamorphose <- function (x, ...)
 {
@@ -74,6 +98,10 @@ prognosticate <- function (x, ...)
 {
   UseMethod("prognosticate", x)
 }
+prognosticateSlot <- function (x, ...)
+{
+  UseMethod("prognosticateSlot", x)
+}
 ratify <- function (x, ...)
 {
   UseMethod("ratify", x)
@@ -85,6 +113,10 @@ ratifySlot <- function (x, ...)
 reckon <- function (x, ...)
 {
   UseMethod("reckon", x)
+}
+reckonSlot <- function (x, ...)
+{
+  UseMethod("reckonSlot", x)
 }
 renew <- function (x, ...)
 {

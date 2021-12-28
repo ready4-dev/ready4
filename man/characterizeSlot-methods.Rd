@@ -4,7 +4,7 @@
 \alias{characterizeSlot}
 \alias{characterizeSlot-Ready4Module}
 \alias{characterizeSlot,Ready4Module-method}
-\title{Characterize one element of an object}
+\title{Apply the characterize method to a slot}
 \usage{
 characterizeSlot(x, slot_nm_1L_chr, ...)
 

@@ -4,7 +4,7 @@
 \alias{enhanceSlot}
 \alias{enhanceSlot-Ready4Module}
 \alias{enhanceSlot,Ready4Module-method}
-\title{Enhance an element of an object with new data items}
+\title{Apply the enhance method to a slot}
 \usage{
 enhanceSlot(x, slot_nm_1L_chr, ...)
 

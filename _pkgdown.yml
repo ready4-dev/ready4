@@ -7,10 +7,10 @@ template:
 home:
   links:
   - text: Manual - User (PDF)
-    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/ready4_User.pdf
+    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/fn_types_lup.RDS
   - text: Manual - Developer (PDF)
-    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/ready4_Developer.pdf
-  - text: Project website
+    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/abbreviations_lup.RDS
+  - text: ready4 framework
     href:  https://www.ready4-dev.com/
 development:
   mode: auto
@@ -27,33 +27,49 @@ reference:
   - authorData
   - authorFunctions
   - authorReport
+  - authorSlot
   - characterize
   - characterizeSlot
   - depict
+  - depictSlot
   - enhance
   - enhanceSlot
   - exhibit
+  - exhibitSlot
   - ingest
+  - ingestSlot
   - investigate
+  - investigateSlot
   - manufacture
+  - manufactureSlot
   - metamorphose
   - metamorphoseSlot
   - procure
   - procureSlot
   - prognosticate
+  - prognosticateSlot
   - ratify
   - ratifySlot
   - reckon
+  - reckonSlot
   - renew
   - renewSlot
   - share
   - shareSlot
 - title: "Methods"
 - contents:
+  - authorSlot-Ready4Module
   - characterizeSlot-Ready4Module
+  - depictSlot-Ready4Module
   - enhanceSlot-Ready4Module
+  - exhibitSlot-Ready4Module
+  - ingestSlot-Ready4Module
+  - investigateSlot-Ready4Module
+  - manufactureSlot-Ready4Module
   - metamorphoseSlot-Ready4Module
   - procureSlot-Ready4Module
+  - prognosticateSlot-Ready4Module
   - ratifySlot-Ready4Module
+  - reckonSlot-Ready4Module
   - renewSlot-Ready4Module
   - shareSlot-Ready4Module
