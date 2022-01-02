@@ -449,12 +449,17 @@ x <- write_self_srvc_pkg(x)
 # This next bit is required to tidyup the prototypes lookup table
 a <- ready4use::Ready4useRepos(gh_repo_1L_chr = "ready4-dev/ready4",
                                gh_tag_1L_chr = "Documentation_0.0")
-b <- a %>%
-  ingest(fls_to_ingest_chr = "prototype_lup",
-         metadata_1L_lgl = F)
+dmt_urls_chr <- piggyback::pb_download_url(repo = a@gh_repo_1L_chr,
+                                           tag = a@gh_tag_1L_chr,
+                                           .token = "")
+b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("prototype_lup.RDS")]))
 b <- b %>% dplyr::mutate(default_val_chr = dplyr::case_when(pt_ns_chr == "ready4" ~ "",
                                                             T ~ default_val_chr)) %>%
   dplyr::arrange(pt_ns_chr)
-a <- share(a,
-           obj_to_share_xx = b,
-           fl_nm_1L_chr = "prototype_lup")
+write_env_objs_to_dv(env_objects_ls = list(prototype_lup = b),
+                     descriptions_chr = NULL,
+                     ds_url_1L_chr = character(0),
+                     piggyback_desc_1L_chr = "Supplementary Files",
+                     piggyback_tag_1L_chr =  a@gh_tag_1L_chr,
+                     piggyback_to_1L_chr = a@gh_repo_1L_chr,
+                     prerelease_1L_lgl = T)
