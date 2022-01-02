@@ -7,13 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-**Insert Lead paragraph here.**
 
-```{r echo = F}
+```{r}
 library("ready4") 
 ```
 
-```{r}
+```{r echo = F}
 get_cls_extensions <- function(pkg_extensions_tb,
                                gh_repo_1L_chr = "ready4-dev/ready4",
                                gh_tag_1L_chr = "Documentation_0.0"){
@@ -158,19 +157,7 @@ pkg_extensions_tb <- pkg_extensions_tb %>%
 
                                         }
                                       ))
-return(pkg_extensions_tb)
-}
-
-```
-
-```{r}
-x <- make_pkg_extensions_tb()
-```
-
-# Libraries that extend ready4
-
-```{r}
-purrr::map_dfr(x$pt_ns_chr,
+y_tb <- purrr::map_dfr(pkg_extensions_tb$pt_ns_chr,
                ~ {
                  if(!.x %in% c("TTU","youthu")){
                                     f <- tempfile(fileext = ".bib")
@@ -193,17 +180,27 @@ purrr::map_dfr(x$pt_ns_chr,
                    }
 
                  }
-
-                 
-                 # title_1L_chr <- stringr::str_match(citation_1L_chr,
-                 #                    paste0("title\\s*(.*?)\\s*\\n"))[,2]
-               }) 
+               }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr)
+pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb,y_tb) %>%
+    dplyr::mutate(TITLE = purrr::map2_chr(TITLE,
+                                        pt_ns_chr,
+                                        ~stringr::str_replace(.x,
+                                                              paste0(.y,": "),
+                                                              ""))) %>%
+return(pkg_extensions_tb)
+}
 
 ```
 
 ```{r}
+x <- make_pkg_extensions_tb()
+```
+
+# Libraries that extend ready4
+
+```{r}
 x %>%
-  dplyr::select(Purpose, Library) %>%
+  dplyr::select(Purpose, Library, TITLE, AUTHOR, DOI) %>%
   kableExtra::kable("html", escape = FALSE) %>%
   kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
 ```
@@ -219,7 +216,8 @@ S4 Classes
 ```{r echo = FALSE}
 z <- x %>%
   dplyr::filter(!old_class_lgl) %>%
-  dplyr::select(-old_class_lgl)
+  dplyr::select(-old_class_lgl,
+                -Library)
 ```
 ```{r echo = FALSE}
 z %>%
@@ -233,7 +231,8 @@ S3 Classes
 ```{r echo = FALSE}
 y <- x %>%
   dplyr::filter(old_class_lgl) %>%
-  dplyr::select(-old_class_lgl)
+  dplyr::select(-old_class_lgl,
+                -Library)
 ```
 
 ```{r echo = FALSE}
