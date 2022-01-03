@@ -1,6 +1,6 @@
 Package: ready4
 Title: A Framework for Open and Modular Mental Health Systems Models
-Version: 0.0.0.9060
+Version: 0.0.0.9061
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -24,17 +24,21 @@ Collate:
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
     'fn_add.R'
     'fn_get.R'
     'fn_make.R'
+    'fn_print.R'
     'fn_remove.R'
     'fn_rowbind.R'
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'mthd_authorSlot.R'
     'mthd_characterizeSlot.R'
     'mthd_depictSlot.R'
@@ -51,13 +55,21 @@ Collate:
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'
     'pkg_ready4.R'
+    'print.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Imports: 
     assertthat,
+    bib2df,
     dataverse,
     dplyr,
     fs,
     Hmisc,
+    kableExtra,
     knitr,
     lifecycle,
     magrittr,
@@ -65,6 +77,7 @@ Imports:
     piggyback,
     purrr,
     rlang,
+    rvest,
     stats,
     stringi,
     stringr,
