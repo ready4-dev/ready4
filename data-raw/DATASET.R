@@ -463,3 +463,13 @@ write_env_objs_to_dv(env_objects_ls = list(prototype_lup = b),
                      piggyback_tag_1L_chr =  a@gh_tag_1L_chr,
                      piggyback_to_1L_chr = a@gh_repo_1L_chr,
                      prerelease_1L_lgl = T)
+# data("badges_lup", package = "ready4fun")
+# badges_lup <- badges_lup[,c(2,4)]
+# write_env_objs_to_dv(env_objects_ls = list(ready4_badges_lup = badges_lup),
+#                      descriptions_chr = NULL,
+#                      ds_url_1L_chr = character(0),
+#                      piggyback_desc_1L_chr = "Supplementary Files",
+#                      piggyback_tag_1L_chr =  a@gh_tag_1L_chr,
+#                      piggyback_to_1L_chr = a@gh_repo_1L_chr,
+#                      prerelease_1L_lgl = T)
+devtools::build_vignettes()

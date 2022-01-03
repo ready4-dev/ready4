@@ -1,3 +1,35 @@
+get_badges_lup <- function(gh_repo_1L_chr = "ready4-dev/ready4",
+                           gh_tag_1L_chr = "Documentation_0.0"){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
+                                             tag = gh_tag_1L_chr,
+                                             .token = "")
+  ready4_badges_lup <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
+                                                  endsWith("ready4_badges_lup.RDS")]))
+  return(ready4_badges_lup)
+}
+get_badge_urls <- function(pkg_nm_1L_chr){
+  images_chr <- rvest::read_html(paste0("https://ready4-dev.github.io/",pkg_nm_1L_chr,"/index.html")) %>%
+    rvest::html_elements("img")  %>%
+    rvest::html_attr("src")
+  badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% startsWith("https://img.shields.io/badge/ready4")],
+                        zenodo_1L_chr = images_chr[images_chr %>% startsWith("https://zenodo.org/badge/DOI/")])
+  return(badge_urls_ls)
+}
+get_cls_extensions <- function(pkg_extensions_tb,
+                               gh_repo_1L_chr = "ready4-dev/ready4",
+                               gh_tag_1L_chr = "Documentation_0.0"){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
+                                             tag = gh_tag_1L_chr,
+                                             .token = "")
+  cls_extensions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
+                                                  endsWith("prototype_lup.RDS")])) %>%
+    tibble::as_tibble() %>%
+    dplyr::arrange(pt_ns_chr) %>%
+    dplyr::filter(pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
+    dplyr::arrange(pt_ns_chr) %>%
+    dplyr::select(type_chr, pt_ns_chr, old_class_lgl)
+  return(cls_extensions_tb)
+}
 get_dv_fls_urls <- function(file_nms_chr,
                             dv_ds_nm_1L_chr,
                             dv_url_pfx_1L_chr = character(0),
@@ -21,6 +53,29 @@ get_dv_fls_urls <- function(file_nms_chr,
       }
     })
   return(urls_chr)
+}
+get_examples <- function(vignettes_chr,
+                         term_1L_chr){
+  if(is.na(vignettes_chr[1])){
+    examples_chr <- ""
+  }else{
+    examples_chr <- vignettes_chr %>%
+      purrr::map_chr(~{
+        code_chr <- rvest::read_html((.x %>%
+                                        stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[,2]) %>%
+          rvest::html_elements(".r") %>%
+          rvest::html_text2()
+        ifelse(stringr::str_detect(paste0(code_chr, collapse = "/n"),
+                                   paste0(term_1L_chr,"\\(")),
+               .x,
+               NA_character_)
+
+      }) %>%
+      purrr::discard(is.na)
+    if(identical(character(0),examples_chr))
+      examples_chr <- ""
+  }
+  return(examples_chr)
 }
 get_fl_id_from_dv_ls <-  function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 {

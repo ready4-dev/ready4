@@ -1,18 +1,7 @@
----
-title: "Extending The Ready4 Framework"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Extending The Ready4 Framework}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-
-```{r}
+## -----------------------------------------------------------------------------
 library("ready4") 
-```
 
-```{r echo = F}
+## ----echo = F-----------------------------------------------------------------
 # get_badges_lup <- function(gh_repo_1L_chr = "ready4-dev/ready4",
 #                                gh_tag_1L_chr = "Documentation_0.0"){
 #     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
@@ -266,42 +255,10 @@ library("ready4")
 #                           link = homepages_chr)
 # return(pkg_extensions_kbl)
 # }
-```
 
-# R packages that extend ready4
-
-```{r warning=FALSE, message=FALSE}
+## ----warning=FALSE, message=FALSE---------------------------------------------
 x <- make_pkg_extensions_tb()
-```
-```{r warning=FALSE, message=FALSE}
+
+## ----warning=FALSE, message=FALSE---------------------------------------------
 print_pkg_extensions(x)
-```
-
-
-# Classes that extend ready4
-
-```{r warning=FALSE, message=FALSE}
-y <- make_modules_tb(x)
-```
-
-## Modules (S4 Classes)
-
-```{r }
-print_modules(y,
-              what_1L_chr = "S4")
-
-```
-
-## Sub-modules (S3 Classes)
-```{r }
-print_modules(y,
-              what_1L_chr = "S3")
-
-```
-
-
-
-
-
-
 
