@@ -51,3 +51,5 @@
 ^data-raw/s4_fns/prognosticateSlot\.R$
 ^data-raw/s4_fns/reckonSlot\.R$
 ^data-raw/fns/print\.R$
+^doc$
+^Meta$

@@ -1,5 +1,8 @@
 library(magrittr)
 library(lifecycle)
+## This initial section is ugly and bespoke to this package. Its a hacky solution to the problem that the packages
+## that format code and documentation using the ready4 house-style are dependencies of the ready4 package.
+## The following lines enables these dependencies to be deployed in authoring this parent package.
 ## Functions adapted from ready4fun
 write_all_fn_dmt <- function(pkg_setup_ls,
                              fns_env_ls,
@@ -456,13 +459,16 @@ b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("prototype_lup.RDS")]))
 b <- b %>% dplyr::mutate(default_val_chr = dplyr::case_when(pt_ns_chr == "ready4" ~ "",
                                                             T ~ default_val_chr)) %>%
   dplyr::arrange(pt_ns_chr)
-write_env_objs_to_dv(env_objects_ls = list(prototype_lup = b),
+c <- tibble::as_tibble(b)
+write_env_objs_to_dv(env_objects_ls = list(prototype_lup = b,
+                                           classes_lup = c),
                      descriptions_chr = NULL,
                      ds_url_1L_chr = character(0),
                      piggyback_desc_1L_chr = "Supplementary Files",
                      piggyback_tag_1L_chr =  a@gh_tag_1L_chr,
                      piggyback_to_1L_chr = a@gh_repo_1L_chr,
                      prerelease_1L_lgl = T)
+# This next section is only run if the ready4fun badges table has been updated.
 # data("badges_lup", package = "ready4fun")
 # badges_lup <- badges_lup[,c(2,4)]
 # write_env_objs_to_dv(env_objects_ls = list(ready4_badges_lup = badges_lup),

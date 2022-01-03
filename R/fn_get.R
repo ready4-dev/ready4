@@ -51,7 +51,7 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
         tag = gh_tag_1L_chr, .token = "")
     cls_extensions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
-        endsWith("prototype_lup.RDS")])) %>% tibble::as_tibble() %>% 
+        endsWith("classes_lup.RDS")])) %>% tibble::as_tibble() %>% 
         dplyr::arrange(pt_ns_chr) %>% dplyr::filter(pt_ns_chr %in% 
         pkg_extensions_tb$pt_ns_chr) %>% dplyr::arrange(pt_ns_chr) %>% 
         dplyr::select(type_chr, pt_ns_chr, old_class_lgl)

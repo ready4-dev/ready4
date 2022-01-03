@@ -7,7 +7,7 @@ template:
 home:
   links:
   - text: Manual - User (PDF)
-    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/fn_types_lup.RDS
+    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/classes_lup.RDS
   - text: Manual - Developer (PDF)
     href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/abbreviations_lup.RDS
   - text: ready4 framework

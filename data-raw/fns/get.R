@@ -22,7 +22,7 @@ get_cls_extensions <- function(pkg_extensions_tb,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
   cls_extensions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
-                                                  endsWith("prototype_lup.RDS")])) %>%
+                                                  endsWith("classes_lup.RDS")])) %>%
     tibble::as_tibble() %>%
     dplyr::arrange(pt_ns_chr) %>%
     dplyr::filter(pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
