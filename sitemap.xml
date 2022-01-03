@@ -10,6 +10,9 @@
     <loc>https://ready4-dev.github.io/ready4/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/articles/V_01.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/articles/index.html</loc>
   </url>
   <url>
@@ -79,7 +82,19 @@
     <loc>https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_badge_urls.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_badges_lup.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_cls_extensions.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_dv_fls_urls.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_examples.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_fl_id_from_dv_ls.html</loc>
@@ -118,6 +133,12 @@
     <loc>https://ready4-dev.github.io/ready4/reference/make_local_path_to_dv_data.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_modules_tb.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_pkg_extensions_tb.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_prompt.html</loc>
   </url>
   <url>
@@ -134,6 +155,12 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_modules.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_pkg_extensions.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/procure-methods.html</loc>
