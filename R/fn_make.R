@@ -125,7 +125,8 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @importFrom dplyr mutate case_when arrange select rename left_join
 #' @importFrom purrr map_chr map keep compact flatten_chr reduce pluck pmap map_dfr
 #' @importFrom kableExtra cell_spec
-#' @importFrom rvest read_html html_elements html_text2
+#' @importFrom rvest read_html html_elements html_attr html_text2
+#' @importFrom stringr str_remove
 #' @importFrom bib2df bib2df
 #' @keywords internal
 make_pkg_extensions_tb <- function () 
@@ -149,8 +150,10 @@ make_pkg_extensions_tb <- function ()
         ~paste0("https://ready4-dev.github.io/", .x, "/index", 
             ".html"))) %>% dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
         "html", link = Link)) %>% dplyr::mutate(Vignettes = purrr::map(pt_ns_chr, 
-        ~as.vector(browseVignettes(.x)[[.x]][, 7]) %>% purrr::keep(~startsWith(.x, 
-            "V_")) %>% sort()))
+        ~rvest::read_html(paste0("https://ready4-dev.github.io/", 
+            .x, "/index.html")) %>% rvest::html_elements(".dropdown-item") %>% 
+            rvest::html_attr("href") %>% stringr::str_remove("articles/") %>% 
+            purrr::keep(~startsWith(.x, "V_")) %>% sort()))
     examples_1L_int <- pkg_extensions_tb$Vignettes %>% purrr::compact() %>% 
         purrr::flatten_chr() %>% length()
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Reference = Vignettes %>% 

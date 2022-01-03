@@ -123,7 +123,12 @@ make_pkg_extensions_tb <- function(){
                                                  "/index",#"/articles/",.x,
                                                  ".html"))) %>%
     dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, "html", link = Link)) %>%
-    dplyr::mutate(Vignettes = purrr::map(pt_ns_chr,~as.vector(browseVignettes(.x)[[.x]][,7]) %>% purrr::keep(~startsWith(.x,"V_")) %>% sort()))
+    dplyr::mutate(Vignettes = purrr::map(pt_ns_chr,
+                                         ~ rvest::read_html(paste0("https://ready4-dev.github.io/",.x,"/index.html")) %>%
+                                           rvest::html_elements(".dropdown-item")  %>%
+                                           rvest::html_attr("href") %>%
+                                           stringr::str_remove("articles/") %>%#as.vector(browseVignettes(.x)[[.x]][,7]) %>%
+                                           purrr::keep(~startsWith(.x,"V_")) %>% sort()))
   examples_1L_int <- pkg_extensions_tb$Vignettes %>%
     purrr::compact() %>%
     purrr::flatten_chr() %>%
