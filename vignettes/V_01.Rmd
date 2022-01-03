@@ -12,25 +12,31 @@ vignette: >
 library("ready4") 
 ```
 
+The `ready4` package provides a "bare-bones" framework that is designed to be extended by other work. This vignette briefly summarises some examples of current extensions to the framework.
 
-# R packages that extend ready4
+## R packages
+A table of the most up to date list of R packages that extend the `ready4` framework can be generated using the `make_pkg_extensions_tb` function.
 
 ```{r warning=FALSE, message=FALSE}
 x <- make_pkg_extensions_tb()
 ```
 
+A HTML version of the table can be printed using `print_pkg_extensions`.
+
 ```{r warning=FALSE, message=FALSE}
 print_pkg_extensions(x)
 ```
 
-
-# Classes that extend ready4
+## Classes that extend ready4
+A table of the modules (S4 classes) and sub-modules (S3 classes) that extend the parent classes shipped with `ready4` can be generated using `make_modules_tb`.
 
 ```{r warning=FALSE, message=FALSE}
 y <- make_modules_tb(x)
 ```
 
-## Modules (S4 Classes)
+HTML versions of the table can be printed using the `print_modules` function.
+
+### Modules (S4 Classes)
 
 ```{r }
 print_modules(y,
@@ -38,7 +44,7 @@ print_modules(y,
 
 ```
 
-## Sub-modules (S3 Classes)
+### Sub-modules (S3 Classes)
 ```{r }
 print_modules(y,
               what_1L_chr = "S3")

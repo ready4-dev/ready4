@@ -20,6 +20,12 @@ reference:
   - Ready4Module
   - Ready4Private
   - Ready4Public
+- title: "Functions"
+- contents:
+  - get_from_lup_obj
+  - make_modules_tb
+  - print_modules
+  - print_pkg_extensions
 - title: "Generics"
 - contents:
   - author

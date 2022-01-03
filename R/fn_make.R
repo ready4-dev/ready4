@@ -89,7 +89,6 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringr str_match
 #' @importFrom stringi stri_replace_last_regex
-#' @keywords internal
 make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {

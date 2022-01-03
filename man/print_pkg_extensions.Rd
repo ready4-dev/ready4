@@ -15,4 +15,3 @@ pkg_extensions_kbl (An object)
 \description{
 print_pkg_extensions() is a Print function that prints output to console Specifically, this function implements an algorithm to print package extensions. The function is called for its side effects and does not return a value.
 }
-\keyword{internal}

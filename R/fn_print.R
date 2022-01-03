@@ -7,7 +7,6 @@
 #' @export 
 #' @importFrom dplyr filter select
 #' @importFrom kableExtra kable kable_styling
-#' @keywords internal
 print_modules <- function (modules_tb, what_1L_chr = "All") 
 {
     if (what_1L_chr == "S4") {
@@ -31,7 +30,6 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
 #' @importFrom dplyr mutate select
 #' @importFrom purrr map map_chr
 #' @importFrom kableExtra kbl kable_paper column_spec spec_image
-#' @keywords internal
 print_pkg_extensions <- function (pkg_extensions_tb = NULL) 
 {
     if (is.null(pkg_extensions_tb)) 

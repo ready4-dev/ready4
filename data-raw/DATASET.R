@@ -433,7 +433,13 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Mo
                            check_type_1L_chr = "ready4",
                            cls_fn_ls = list(),
                            custom_dmt_ls = ready4fun::make_custom_dmt_ls(
-                             # user_manual_fns_chr = c("get_dv_fls_urls","get_from_lup_obj","get_rds_from_dv","write_ws")
+                             user_manual_fns_chr = c(
+                               #"get_dv_fls_urls",
+                               "get_from_lup_obj",#"get_rds_from_dv",
+                              " make_pkg_extensions_tb", "make_modules_tb",
+                               "print_modules", "print_pkg_extensions"
+                               #"write_ws"
+                               )
                                                                          ),
                            copyright_holders_chr = "Orygen",
                            import_from_chr = NA_character_,

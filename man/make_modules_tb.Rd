@@ -26,4 +26,3 @@ Modules (a tibble)
 \description{
 make_modules_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make modules tibble. The function returns Modules (a tibble).
 }
-\keyword{internal}
