@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9063</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9064</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,11 +93,14 @@
 <span class="co">## </span>
 <span class="co">##     as.difftime, as.factor, as.ordered, intersect, is.element, setdiff,</span>
 <span class="co">##     setequal, union</span></code></pre>
-<div class="section level1">
-<h1 id="r-packages-that-extend-ready4">R packages that extend ready4<a class="anchor" aria-label="anchor" href="#r-packages-that-extend-ready4"></a>
-</h1>
+<p>The <code>ready4</code> package provides a “bare-bones” framework that is designed to be extended by other work. This vignette briefly summarises some examples of current extensions to the framework.</p>
+<div class="section level2">
+<h2 id="r-packages">R packages<a class="anchor" aria-label="anchor" href="#r-packages"></a>
+</h2>
+<p>A table of the most up to date list of R packages that extend the <code>ready4</code> framework can be generated using the <code>make_pkg_extensions_tb</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_pkg_extensions_tb.html">make_pkg_extensions_tb</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>A HTML version of the table can be printed using <code>print_pkg_extensions</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_pkg_extensions.html">print_pkg_extensions</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
 <table class="table  lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'>
@@ -292,14 +295,16 @@ Matthew Hamilton, Caroline Gao
 </tbody>
 </table>
 </div>
-<div class="section level1">
-<h1 id="classes-that-extend-ready4">Classes that extend ready4<a class="anchor" aria-label="anchor" href="#classes-that-extend-ready4"></a>
-</h1>
+<div class="section level2">
+<h2 id="classes-that-extend-ready4">Classes that extend ready4<a class="anchor" aria-label="anchor" href="#classes-that-extend-ready4"></a>
+</h2>
+<p>A table of the modules (S4 classes) and sub-modules (S3 classes) that extend the parent classes shipped with <code>ready4</code> can be generated using <code>make_modules_tb</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_modules_tb.html">make_modules_tb</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
-<div class="section level2">
-<h2 id="modules-s4-classes">Modules (S4 Classes)<a class="anchor" aria-label="anchor" href="#modules-s4-classes"></a>
-</h2>
+<p>HTML versions of the table can be printed using the <code>print_modules</code> function.</p>
+<div class="section level3">
+<h3 id="modules-s4-classes">Modules (S4 Classes)<a class="anchor" aria-label="anchor" href="#modules-s4-classes"></a>
+</h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">y</span>,
               what_1L_chr <span class="op">=</span> <span class="st">"S4"</span><span class="op">)</span></code></pre></div>
@@ -597,9 +602,9 @@ A longitudinal dataset and its associated dictionary, descriptive statistics and
 </tbody>
 </table>
 </div>
-<div class="section level2">
-<h2 id="sub-modules-s3-classes">Sub-modules (S3 Classes)<a class="anchor" aria-label="anchor" href="#sub-modules-s3-classes"></a>
-</h2>
+<div class="section level3">
+<h3 id="sub-modules-s3-classes">Sub-modules (S3 Classes)<a class="anchor" aria-label="anchor" href="#sub-modules-s3-classes"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">y</span>,
               what_1L_chr <span class="op">=</span> <span class="st">"S3"</span><span class="op">)</span></code></pre></div>
