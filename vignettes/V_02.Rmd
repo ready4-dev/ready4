@@ -1,0 +1,82 @@
+---
+title: "Use A Consistent And Simple Syntax When Implementing Computational Models Of Mental Health Systems"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Use A Consistent And Simple Syntax When Implementing Computational Models Of Mental Health Systems}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r results='hide', message=FALSE}
+library("ready4") 
+```
+```{r echo=F}
+get_generics <- function(pkg_nm_1L_chr = "ready4",
+                         return_1L_lgl = "all",
+                         exclude_mthds_for_chr = NA_character_
+                         ){
+  generics_chr <- methods::getGenerics(paste0("package:",pkg_nm_1L_chr))@.Data
+  generics_chr <- generics_chr[generics_chr %>%
+    purrr::map_lgl(~{
+      generic_1L_chr <- .x
+      any(letters %>% purrr::map_lgl(~startsWith(generic_1L_chr,.x)))
+    })]
+  if(!is.na(exclude_mthds_for_chr[1])){
+    generics_chr <- setdiff(generics_chr,
+            purrr::map(exclude_mthds_for_chr,
+                           ~ get_methods(pkg_nm_1L_chr = pkg_nm_1L_chr,
+                                     cls_nm_1L_chr = .x)) %>%
+              purrr::flatten_chr() %>%
+                             unique())
+  }
+  if(return_1L_lgl == "core"){
+    generics_chr <- generics_chr[tolower(generics_chr)==generics_chr]
+  }
+  if(return_1L_lgl == "extended")
+        generics_chr <- generics_chr[tolower(generics_chr)!=generics_chr]
+    if(return_1L_lgl == "slot"){
+    generics_chr <- generics_chr[endsWith(generics_chr,"Slot")]
+  }
+  return(generics_chr)
+}
+get_methods <- function(pkg_nm_1L_chr = "ready4",
+                        cls_nm_1L_chr =  "Ready4Module"){
+  methods_chr <- showMethods(class="Ready4Module", printTo =FALSE )
+methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(cls_nm_1L_chr))-1]
+methods_chr <- methods_chr[which(methods_chr%>% stringr::str_detect(paste0("package ",pkg_nm_1L_chr)))] %>%
+  stringr::str_remove_all("Function: ") %>%
+  stringr::str_remove_all(paste0(" \\(package ",pkg_nm_1L_chr,"\\)"))
+return(methods_chr)
+}
+
+
+```
+## Core syntax
+
+```{r}
+get_generics(return_1L_lgl = "core")
+```
+
+## Extended syntax
+
+### Extensions for slots
+
+```{r}
+get_generics(return_1L_lgl = "slot")
+```
+
+### Extensions of `author` generic
+
+```{r}
+get_generics(return_1L_lgl = "extended",
+             exclude_mthds_for_chr = "Ready4Module")
+```
+
+## Ready4Module Methods
+
+```{r}
+get_methods()
+```

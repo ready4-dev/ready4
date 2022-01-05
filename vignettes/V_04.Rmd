@@ -1,0 +1,48 @@
+---
+title: "Find And Author Extensions To The Ready4 Framework"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Find And Author Extensions To The Ready4 Framework}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r message=FALSE}
+library("ready4") 
+```
+
+## Motivation
+The `ready4` package provides a "bare-bones" framework that is designed to be extended by other work. This vignette briefly summarises some examples of current extensions to the framework.
+
+```{r echo=FALSE}
+## NETWORK EFFECTS
+## CODE LIBRARIES
+## DATASETS
+## PROGRAMS
+## BROCHURE
+```
+
+## Code libraries
+A [standardised workflow for authoring code libraries (R packages) that extend the ready4 framework](https://ready4-dev.github.io/ready4pack/articles/V_01.html) is supported by the [ready4pack package](https://ready4-dev.github.io/ready4pack/index.html). A table of the most up to date list of R package extensions to the `ready4` framework can be generated using the `make_pkg_extensions_tb` function.
+
+```{r warning=FALSE, message=FALSE}
+x <- make_pkg_extensions_tb()
+```
+
+A HTML version of the table can be printed using `print_pkg_extensions`.
+
+```{r warning=FALSE, message=FALSE}
+print_pkg_extensions(x)
+```
+
+```{r echo=FALSE}
+## DATASETS
+## PROGRAMS
+```
+
+
+
+
+
+
+

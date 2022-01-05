@@ -412,8 +412,8 @@ write_self_srvc_pkg <- function(x){
 return(x)
 }
 ready4fun::write_fn_type_dirs()
-x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "A Framework for Open and Modular Mental Health Systems Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods) of a framework to support implementation of open and modular mental health systems models.
+x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Computational Models of Mental Health Systems" %>% tools::toTitleCase(),
+                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for ensuring that the computational model components of mental health systems modelling projects adhere to open science principles.
   This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =

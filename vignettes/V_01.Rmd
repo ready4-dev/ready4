@@ -1,5 +1,5 @@
 ---
-title: "Extending The Ready4 Framework"
+title: "Adopt A Modular Approach To Computational Model Development With Ready4Module"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Extending The Ready4 Framework}
@@ -7,46 +7,83 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-```{r}
+```{r results='hide', message=FALSE}
 library("ready4") 
 ```
 
-The `ready4` package provides a "bare-bones" framework that is designed to be extended by other work. This vignette briefly summarises some examples of current extensions to the framework.
+## Motivation
+The social, economic and service systems that shape population mental health are complex and interconnected. Developing models to adequately represent salient features of these complex systems can be major undertakings. Large scale computational modelling projects may be made more tractable if broken into smaller tasks, potentially progressed by multiple teams. Such phased and collaborative approaches require all project outputs ("modules") to readily integrate with each other. 
 
-## R packages
-A table of the most up to date list of R packages that extend the `ready4` framework can be generated using the `make_pkg_extensions_tb` function.
+## Modules
+`ready4` takes advantage of the [encapsulation and inheritance features of Object Oriented Programming (OOP)](V_03.html) to support modular approaches to the development of computational models of mental health systems. A modular approach allows us to progressively build up more complex representations of mental health systems through the linking of multiple modelling projects that each describe distinctive features of these systems.
 
-```{r warning=FALSE, message=FALSE}
-x <- make_pkg_extensions_tb()
+### Foundation
+The foundational element of `ready4` that facilitates the development of modular computational models of mental health systems is the `Ready4Module` class.
+
+We can create an instance (`x`) of `Ready4Module` using the following command.
+
+```{r}
+x <- ready4::Ready4Module()
 ```
 
-A HTML version of the table can be printed using `print_pkg_extensions`.
+However, `x` is of limited use as it contains no data other than an empty element called `dissemination_1L_chr`.
 
-```{r warning=FALSE, message=FALSE}
-print_pkg_extensions(x)
+```{r}
+str(x)
 ```
 
-## Classes that extend ready4
-A table of the modules (S4 classes) and sub-modules (S3 classes) that extend the parent classes shipped with `ready4` can be generated using `make_modules_tb`.
+The `Ready4Module` class is therefore not intended to be used directly. Instead, the  purpose of `Ready4Module` is to be the parent-class of all modules used in the `ready4` framework. A `ready4` framework module is defined as "a Ready4Module child-class that structures data for use in computational models of mental health systems." All ready4 framework modules therefore inherit [the methods that are defined for Ready4Module](V_02.html).
 
-```{r warning=FALSE, message=FALSE}
-y <- make_modules_tb(x)
+### Dissemination Policies
+`ready4` includes two child classes of `Ready4Module`. These are `Ready4Public` and `Ready4Private` and both are almost as minimally informative as their parent (the only difference being that their instances have the values "Public" or "Private" assigned to the `dissemination_1L_chr` slot). 
+
+```{r}
+y <- Ready4Public()
+str(y)
 ```
 
-HTML versions of the table can be printed using the `print_modules` function.
+```{r}
+z <- Ready4Private()
+str(z)
+```
 
-### Modules (S4 Classes)
+Like the `Ready4Module` class they inherit from, the purpose of `Ready4Public` and `Ready4Private` is to be used as parent classes. If **all** the data contained in a module can **always** be shared publicly, it may be convenient to note this by creating that module as child-class of `Ready4Public`. Similarly, if at least some of the data contained in a module will always be unsuitable for public dissemination, it can be useful to create that module as a child of `Ready4Private`. When the dissemination policy for data contained in a module will vary depending on user or context, it is better to make that class as a child of `Ready4Module` without using either `Ready4Public` and `Ready4Private`. Users can then define that value themselves using the `renewSlot` method and inspect that policy with the `procureSlot`.
+
+```{r}
+x <- renewSlot(x,
+               "dissemination_1L_chr",
+               "Staff and students of research institutes")
+procureSlot(x,
+            "dissemination_1L_chr")
+```
+### Sub-modules
+The `ready4` framework uses two systems for implementing OOP - S3 and S4. An in-depth explanation of R's different class system is beyond the scope of this article, but is explored in [Hadley Wickham's Advanced R handbook](https://adv-r.hadley.nz/oo.html). However, it is useful to know some very high level information about S3 and S4 classes:
+
+ - S4 classes are frequently said to be "formal", "strict" or "rigorous". The elements of an S4 class are called slots and the type of data that each slot is allowed to contain is specified in the class definition. An S4 class can be comprised of slots that all contain different types of data (e.g. a slot that contains a character vector and another slot that contains tabular data).  `Ready4Module` and all of its child-classes (ie all `ready4` framework modules) are "S4" classes. 
+ 
+ - S3 classes are often described as "simple", "informal" and "flexible". S3 objects attach an attribute label to base type objects (e.g. a character vector, a data.frame, a list), which in turn is used to work out what methods should be applied to the class. In the `ready4` framework, S3 classes are principally used to help define the structural properties of slots of `ready4` framework modules and the methods that can be applied to these slots. S3 classes created for these purposes are called **sub-modules**.
+ 
+R provides an array of potential approaches to creating and documenting S3 and S4 classes. However, standardisation is an important enabler of modular approaches to computational model development, so [all ready4 framework modules and sub-modules are authored using the same workflow](https://ready4-dev.github.io/ready4class/articles/V_01.html).
+ 
+## Examples
+A table of all currently available `ready4` framework modules (S4 classes) and sub-modules (S3 classes) can be generated using `make_modules_tb`.
+
+```{r warning=FALSE, message=FALSE}
+x <- make_modules_tb()
+```
+
+HTML versions of the table can be printed using the `print_modules` function. To display a table of `ready4` framework modules, supply the value "S4" to the `what_1L_chr` argument.
 
 ```{r }
-print_modules(y,
+print_modules(x,
               what_1L_chr = "S4")
 
 ```
 
-### Sub-modules (S3 Classes)
+
+To display a table of `ready4` framework aub-modules , supply the value "S3" to the `what_1L_chr` argument.
 ```{r }
-print_modules(y,
+print_modules(x,
               what_1L_chr = "S3")
 
 ```

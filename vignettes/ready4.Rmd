@@ -17,6 +17,12 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ready4)
 ```
-This development version of the `ready4` package has been made available as part of the process of testing and documenting the package. A brief overview of the intended use of `ready4` is available in the following article:
+This development version of the `ready4` package has been made available as part of the process of testing and documenting the package. A brief overview of the intended use of `ready4` is available in the following articles:
 
-- [Extending The Ready4 Framework](V_01.html)
+- [Adopt A Modular Approach To Computational Model Development With Ready4Module](V_01.html)
+
+- [Use A Consistent And Simple Syntax When Implementing Computational Models Of Mental Health Systems](V_02.html)
+
+- [Leverage An Object-Oriented Paradigm To Develop Modular and Transparent Computational Models Of Mental Health Systems](V_03.html)
+
+- [Find And Author Extensions To The Ready4 Framework](V_041.html)
