@@ -436,8 +436,10 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Comp
                              user_manual_fns_chr = c(
                                #"get_dv_fls_urls",
                                "get_from_lup_obj",#"get_rds_from_dv",
-                              " make_pkg_extensions_tb", "make_modules_tb",
-                               "print_modules", "print_pkg_extensions"
+                               "get_methods",
+                              "make_methods_tb",
+                              "make_pkg_extensions_tb", "make_modules_tb",
+                               "print_methods","print_modules", "print_pkg_extensions"
                                #"write_ws"
                                )
                                                                          ),

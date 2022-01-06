@@ -54,3 +54,19 @@ print_pkg_extensions <- function(pkg_extensions_tb = NULL){
                             link = homepages_chr)
   return(pkg_extensions_kbl)
 }
+print_methods <- function(methods_tb = NULL,
+                          exclude_mthds_for_chr = NA_character_,
+                          methods_chr = NULL,
+                          return_1L_chr = "all"){
+  if(is.null(methods_tb))
+    methods_tb <- make_methods_tb()
+  if(is.null(methods_chr))
+    methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
+                                return_1L_lgl = return_1L_chr)
+  methods_tb <- methods_tb %>%
+    dplyr::filter(Method %in% methods_chr)
+  methods_kbl <- methods_tb %>%
+    kableExtra::kable("html", escape = FALSE) %>%
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+  return(methods_kbl)
+}

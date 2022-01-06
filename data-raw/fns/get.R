@@ -137,6 +137,84 @@ get_from_lup_obj <- function(data_lookup_tb,
   }
   return(return_object_xx)
 }
+get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
+                             gh_tag_1L_chr = "Documentation_0.0",
+                             return_1L_chr = "all"){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
+                                             tag = gh_tag_1L_chr,
+                                             .token = "")
+  functions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
+                                             endsWith("fn_types_lup.RDS")]))
+  if(return_1L_chr == "methods"){
+    functions_tb <- functions_tb %>%
+      dplyr::filter(is_method_lgl)
+  }
+  if(return_1L_chr == "types"){
+    functions_tb <- functions_tb %>%
+      dplyr::filter(!is_method_lgl)
+  }
+  functions_tb <- functions_tb %>%
+    dplyr::select(fn_type_nm_chr,fn_type_desc_chr)
+  return(functions_tb)
+}
+get_generics <- function(pkg_nm_1L_chr = "ready4",
+                         return_1L_lgl = "all",
+                         exclude_mthds_for_chr = NA_character_
+){
+  generics_chr <- methods::getGenerics(paste0("package:",pkg_nm_1L_chr))@.Data
+  generics_chr <- generics_chr[generics_chr %>%
+                                 purrr::map_lgl(~{
+                                   generic_1L_chr <- .x
+                                   any(letters %>% purrr::map_lgl(~startsWith(generic_1L_chr,.x)))
+                                 })]
+  if(!is.na(exclude_mthds_for_chr[1])){
+    generics_chr <- setdiff(generics_chr,
+                            purrr::map(exclude_mthds_for_chr,
+                                       ~ get_methods(pkg_nm_1L_chr = pkg_nm_1L_chr,
+                                                     cls_nm_1L_chr = .x)) %>%
+                              purrr::flatten_chr() %>%
+                              unique())
+  }
+  if(return_1L_lgl == "core"){
+    generics_chr <- generics_chr[tolower(generics_chr)==generics_chr]
+  }
+  if(return_1L_lgl == "extended")
+    generics_chr <- generics_chr[tolower(generics_chr)!=generics_chr]
+  if(return_1L_lgl == "slot"){
+    generics_chr <- generics_chr[endsWith(generics_chr,"Slot")]
+  }
+  return(generics_chr)
+}
+get_methods <- function(pkg_nm_1L_chr = "ready4",
+                        cls_nm_1L_chr =  "Ready4Module"){
+  methods_chr <- showMethods(class="Ready4Module", printTo =FALSE )
+  methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(cls_nm_1L_chr))-1]
+  methods_chr <- methods_chr[which(methods_chr%>% stringr::str_detect(paste0("package ",pkg_nm_1L_chr)))] %>%
+    stringr::str_remove_all("Function: ") %>%
+    stringr::str_remove_all(paste0(" \\(package ",pkg_nm_1L_chr,"\\)"))
+  return(methods_chr)
+}
+get_mthd_titles <- function(mthd_nms_chr, #NEED TO DEPRECATE IN READY4FUN
+                            pkg_nm_1L_chr = "ready4"){
+  mthd_titles_chr <-  mthd_nms_chr %>%
+    purrr::map_chr(~{
+      mthd_nm_1L_chr <- .x
+      df <- mthd_nm_1L_chr %>% stringr::str_locate("\\.")
+      if(!is.na(df[[1,1]])){
+        mthd_nm_1L_chr <- stringr::str_sub(mthd_nm_1L_chr,
+                                           end = (df[[1,1]]-1))
+      }
+      gnrc_dmt_ls <- tools::Rd_db(pkg_nm_1L_chr) %>%
+        purrr::pluck(paste0(mthd_nm_1L_chr,"-methods.Rd"))
+      ifelse(!is.null(gnrc_dmt_ls),
+             gnrc_dmt_ls %>%
+               purrr::pluck(1) %>%
+               purrr::pluck(1) %>%
+               as.vector(),
+             mthd_nm_1L_chr)
+    })
+  return(mthd_titles_chr)
+}
 get_r4_obj_slots <- function(fn_name_1L_chr,
                              package_1L_chr = ""){
   slots_ls <- methods::className(fn_name_1L_chr,

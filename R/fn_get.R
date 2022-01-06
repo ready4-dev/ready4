@@ -196,6 +196,116 @@ get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_ch
     }
     return(return_object_xx)
 }
+#' Get functions tibble
+#' @description get_functions_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get functions tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Functions (a tibble).
+#' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
+#' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param return_1L_chr Return (a character vector of length one), Default: 'all'
+#' @return Functions (a tibble)
+#' @rdname get_functions_tb
+#' @export 
+#' @importFrom piggyback pb_download_url
+#' @importFrom dplyr filter select
+#' @keywords internal
+get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
+    return_1L_chr = "all") 
+{
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+        tag = gh_tag_1L_chr, .token = "")
+    functions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+        endsWith("fn_types_lup.RDS")]))
+    if (return_1L_chr == "methods") {
+        functions_tb <- functions_tb %>% dplyr::filter(is_method_lgl)
+    }
+    if (return_1L_chr == "types") {
+        functions_tb <- functions_tb %>% dplyr::filter(!is_method_lgl)
+    }
+    functions_tb <- functions_tb %>% dplyr::select(fn_type_nm_chr, 
+        fn_type_desc_chr)
+    return(functions_tb)
+}
+#' Get generics
+#' @description get_generics() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get generics. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Generics (a character vector).
+#' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
+#' @param return_1L_lgl Return (a logical vector of length one), Default: 'all'
+#' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
+#' @return Generics (a character vector)
+#' @rdname get_generics
+#' @export 
+#' @importFrom methods getGenerics
+#' @importFrom purrr map_lgl map flatten_chr
+#' @keywords internal
+get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_lgl = "all", exclude_mthds_for_chr = NA_character_) 
+{
+    generics_chr <- methods::getGenerics(paste0("package:", pkg_nm_1L_chr))@.Data
+    generics_chr <- generics_chr[generics_chr %>% purrr::map_lgl(~{
+        generic_1L_chr <- .x
+        any(letters %>% purrr::map_lgl(~startsWith(generic_1L_chr, 
+            .x)))
+    })]
+    if (!is.na(exclude_mthds_for_chr[1])) {
+        generics_chr <- setdiff(generics_chr, purrr::map(exclude_mthds_for_chr, 
+            ~get_methods(pkg_nm_1L_chr = pkg_nm_1L_chr, cls_nm_1L_chr = .x)) %>% 
+            purrr::flatten_chr() %>% unique())
+    }
+    if (return_1L_lgl == "core") {
+        generics_chr <- generics_chr[tolower(generics_chr) == 
+            generics_chr]
+    }
+    if (return_1L_lgl == "extended") 
+        generics_chr <- generics_chr[tolower(generics_chr) != 
+            generics_chr]
+    if (return_1L_lgl == "slot") {
+        generics_chr <- generics_chr[endsWith(generics_chr, "Slot")]
+    }
+    return(generics_chr)
+}
+#' Get methods
+#' @description get_methods() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get methods. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Methods (a character vector).
+#' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
+#' @param cls_nm_1L_chr Class name (a character vector of length one), Default: 'Ready4Module'
+#' @return Methods (a character vector)
+#' @rdname get_methods
+#' @export 
+#' @importFrom stringr str_detect str_remove_all
+get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module") 
+{
+    methods_chr <- showMethods(class = "Ready4Module", printTo = FALSE)
+    methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(cls_nm_1L_chr)) - 
+        1]
+    methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(paste0("package ", 
+        pkg_nm_1L_chr)))] %>% stringr::str_remove_all("Function: ") %>% 
+        stringr::str_remove_all(paste0(" \\(package ", pkg_nm_1L_chr, 
+            "\\)"))
+    return(methods_chr)
+}
+#' Get method titles
+#' @description get_mthd_titles() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get method titles. Function argument mthd_nms_chr specifies the where to look for the required object. The function returns Method titles (a character vector).
+#' @param mthd_nms_chr Method names (a character vector)
+#' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
+#' @return Method titles (a character vector)
+#' @rdname get_mthd_titles
+#' @export 
+#' @importFrom purrr map_chr pluck
+#' @importFrom stringr str_locate str_sub
+#' @importFrom tools Rd_db
+#' @keywords internal
+get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4") 
+{
+    mthd_titles_chr <- mthd_nms_chr %>% purrr::map_chr(~{
+        mthd_nm_1L_chr <- .x
+        df <- mthd_nm_1L_chr %>% stringr::str_locate("\\.")
+        if (!is.na(df[[1, 1]])) {
+            mthd_nm_1L_chr <- stringr::str_sub(mthd_nm_1L_chr, 
+                end = (df[[1, 1]] - 1))
+        }
+        gnrc_dmt_ls <- tools::Rd_db(pkg_nm_1L_chr) %>% purrr::pluck(paste0(mthd_nm_1L_chr, 
+            "-methods.Rd"))
+        ifelse(!is.null(gnrc_dmt_ls), gnrc_dmt_ls %>% purrr::pluck(1) %>% 
+            purrr::pluck(1) %>% as.vector(), mthd_nm_1L_chr)
+    })
+    return(mthd_titles_chr)
+}
 #' Get ready4 S4 object slots
 #' @description get_r4_obj_slots() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get ready4 s4 object slots. Function argument fn_name_1L_chr specifies the where to look for the required object. The function returns Slots (a character vector).
 #' @param fn_name_1L_chr Function name (a character vector of length one)

@@ -1,3 +1,28 @@
+#' Print methods
+#' @description print_methods() is a Print function that prints output to console Specifically, this function implements an algorithm to print methods. The function is called for its side effects and does not return a value.
+#' @param methods_tb Methods (a tibble), Default: NULL
+#' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
+#' @param methods_chr Methods (a character vector), Default: NULL
+#' @param return_1L_chr Return (a character vector of length one), Default: 'all'
+#' @return methods_kbl (An object)
+#' @rdname print_methods
+#' @export 
+#' @importFrom dplyr filter
+#' @importFrom kableExtra kable kable_styling
+print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
+    methods_chr = NULL, return_1L_chr = "all") 
+{
+    if (is.null(methods_tb)) 
+        methods_tb <- make_methods_tb()
+    if (is.null(methods_chr)) 
+        methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
+            return_1L_lgl = return_1L_chr)
+    methods_tb <- methods_tb %>% dplyr::filter(Method %in% methods_chr)
+    methods_kbl <- methods_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
+        kableExtra::kable_styling(bootstrap_options = c("hover", 
+            "condensed"))
+    return(methods_kbl)
+}
 #' Print modules
 #' @description print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
 #' @param modules_tb Modules (a tibble)

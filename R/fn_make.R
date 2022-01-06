@@ -74,6 +74,36 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
         "/"), ""), fl_nm_1L_chr, save_fmt_1L_chr)
     return(path_chr)
 }
+#' Make methods tibble
+#' @description make_methods_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make methods tibble. The function returns Methods (a tibble).
+#' @param packages_tb Packages (a tibble), Default: NULL
+#' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
+#' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
+#' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
+#' @param return_1L_lgl Return (a logical vector of length one), Default: 'all'
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
+#' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
+#' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
+#' @return Methods (a tibble)
+#' @rdname make_methods_tb
+#' @export 
+#' @importFrom tibble tibble
+#' @importFrom purrr map flatten_chr discard
+make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_character_, 
+    ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_1L_chr = "Reference", 
+    return_1L_lgl = "all", url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
+{
+    packages_tb <- make_pkg_extensions_tb(ns_var_nm_1L_chr = ns_var_nm_1L_chr, 
+        reference_var_nm_1L_chr = reference_var_nm_1L_chr, url_stub_1L_chr = url_stub_1L_chr, 
+        vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
+    methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
+        return_1L_lgl = return_1L_lgl), Purpose = get_mthd_titles(Method), 
+        Examples = purrr::map(Method, ~get_examples(packages_tb$Vignettes_URLs %>% 
+            purrr::flatten_chr() %>% unique() %>% purrr::discard(is.na), 
+            term_1L_chr = .x)))
+    return(methods_tb)
+}
 #' Make modules tibble
 #' @description make_modules_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make modules tibble. The function returns Modules (a tibble).
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
@@ -116,19 +146,23 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 }
 #' Make package extensions tibble
 #' @description make_pkg_extensions_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make package extensions tibble. The function returns Package extensions (a tibble).
-
+#' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
+#' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
+#' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
+#' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
 #' @return Package extensions (a tibble)
 #' @rdname make_pkg_extensions_tb
 #' @export 
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate case_when arrange select rename left_join
-#' @importFrom purrr map_chr map keep compact flatten_chr reduce pluck pmap map_dfr
+#' @importFrom purrr map_chr map_dfr
 #' @importFrom kableExtra cell_spec
-#' @importFrom rvest read_html html_elements html_attr html_text2
-#' @importFrom stringr str_remove
+#' @importFrom rvest read_html html_elements html_text2
 #' @importFrom bib2df bib2df
-#' @keywords internal
-make_pkg_extensions_tb <- function () 
+make_pkg_extensions_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_1L_chr = "Reference", 
+    url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
+    vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
 {
     pkg_extensions_tb <- tibble::tibble(pt_ns_chr = c("scorz", 
         "specific", "TTU", "youthvars", "ready4show", "ready4use", 
@@ -146,41 +180,18 @@ make_pkg_extensions_tb <- function ()
             "TTU" ~ "Modelling (health utility)", pt_ns_chr == 
             "youthu" ~ "Prediction (health utility)", T ~ "")) %>% 
         dplyr::arrange(Purpose) %>% dplyr::mutate(Link = purrr::map_chr(pt_ns_chr, 
-        ~paste0("https://ready4-dev.github.io/", .x, "/index", 
-            ".html"))) %>% dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
-        "html", link = Link)) %>% dplyr::mutate(Vignettes = purrr::map(pt_ns_chr, 
-        ~rvest::read_html(paste0("https://ready4-dev.github.io/", 
-            .x, "/index.html")) %>% rvest::html_elements(".dropdown-item") %>% 
-            rvest::html_attr("href") %>% stringr::str_remove("articles/") %>% 
-            purrr::keep(~startsWith(.x, "V_")) %>% sort()))
-    examples_1L_int <- pkg_extensions_tb$Vignettes %>% purrr::compact() %>% 
-        purrr::flatten_chr() %>% length()
-    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Reference = Vignettes %>% 
-        purrr::reduce(.init = list(ref_int = c(0, 0), content_ls = NULL), 
-            ~{
-                if (is.null(.y) | identical(.y, character(0))) {
-                  .x$content_ls <- append(.x$content_ls, list(NA_integer_))
-                }
-                else {
-                  .x$ref_int <- .x$ref_int + 1:length(.y)
-                  .x$content_ls <- append(.x$content_ls, list((1:examples_1L_int)[.x$ref_int]))
-                }
-                .x
-            }) %>% purrr::pluck(2)) %>% dplyr::mutate(Vignette_URLs = purrr::pmap(list(pt_ns_chr, 
-        Vignettes, Reference), ~{
-        if (is.na(..3[1])) {
-            NA_character_
-        }
-        else {
-            kableExtra::cell_spec(..3, "html", link = paste0("https://ready4-dev.github.io/", 
-                ..1, "/articles/", ..2))
-        }
-    }))
+        ~paste0(url_stub_1L_chr, .x, "/index", ".html"))) %>% 
+        dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
+            "html", link = Link))
+    pkg_extensions_tb <- add_vignette_links(pkg_extensions_tb, 
+        ns_var_nm_1L_chr = ns_var_nm_1L_chr, reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
+        url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
+        vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
     y_tb <- purrr::map_dfr(pkg_extensions_tb$pt_ns_chr, ~{
         if (!.x %in% c("TTU", "youthu")) {
             f <- tempfile(fileext = ".bib")
             sink(f)
-            writeLines(rvest::read_html(paste0("https://ready4-dev.github.io/", 
+            writeLines(rvest::read_html(paste0(url_stub_1L_chr, 
                 .x, "/authors.html")) %>% rvest::html_elements("pre") %>% 
                 rvest::html_text2())
             sink(NULL)

@@ -34,239 +34,8 @@ library("ready4")
 #   }
 #   return(fn_descs_chr)
 # }
-get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
-                             gh_tag_1L_chr = "Documentation_0.0",
-                             return_1L_chr = "all"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
-  functions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
-                                                  endsWith("fn_types_lup.RDS")]))
-  if(return_1L_chr == "methods"){
-    functions_tb <- functions_tb %>%
-      dplyr::filter(is_method_lgl)
-  }
-  if(return_1L_chr == "types"){
-        functions_tb <- functions_tb %>%
-      dplyr::filter(!is_method_lgl)
-  }
-    functions_tb <- functions_tb %>%
-    dplyr::select(fn_type_nm_chr,fn_type_desc_chr)
-  return(functions_tb)
-}
-get_generics <- function(pkg_nm_1L_chr = "ready4",
-                         return_1L_lgl = "all",
-                         exclude_mthds_for_chr = NA_character_
-                         ){
-  generics_chr <- methods::getGenerics(paste0("package:",pkg_nm_1L_chr))@.Data
-  generics_chr <- generics_chr[generics_chr %>%
-    purrr::map_lgl(~{
-      generic_1L_chr <- .x
-      any(letters %>% purrr::map_lgl(~startsWith(generic_1L_chr,.x)))
-    })]
-  if(!is.na(exclude_mthds_for_chr[1])){
-    generics_chr <- setdiff(generics_chr,
-            purrr::map(exclude_mthds_for_chr,
-                           ~ get_methods(pkg_nm_1L_chr = pkg_nm_1L_chr,
-                                     cls_nm_1L_chr = .x)) %>%
-              purrr::flatten_chr() %>%
-                             unique())
-  }
-  if(return_1L_lgl == "core"){
-    generics_chr <- generics_chr[tolower(generics_chr)==generics_chr]
-  }
-  if(return_1L_lgl == "extended")
-    generics_chr <- generics_chr[tolower(generics_chr)!=generics_chr]
-  if(return_1L_lgl == "slot"){
-      generics_chr <- generics_chr[endsWith(generics_chr,"Slot")]
-      }
-  return(generics_chr)
-}
-get_methods <- function(pkg_nm_1L_chr = "ready4",
-                        cls_nm_1L_chr =  "Ready4Module"){
-  methods_chr <- showMethods(class="Ready4Module", printTo =FALSE )
-methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(cls_nm_1L_chr))-1]
-methods_chr <- methods_chr[which(methods_chr%>% stringr::str_detect(paste0("package ",pkg_nm_1L_chr)))] %>%
-  stringr::str_remove_all("Function: ") %>%
-  stringr::str_remove_all(paste0(" \\(package ",pkg_nm_1L_chr,"\\)"))
-return(methods_chr)
-}
-get_mthd_titles <- function(mthd_nms_chr, #NEED TO DEPRECATE IN READY4FUN
-                           pkg_nm_1L_chr = "ready4"){
- mthd_titles_chr <-  mthd_nms_chr %>% 
-    purrr::map_chr(~{
-      mthd_nm_1L_chr <- .x
-      df <- mthd_nm_1L_chr %>% stringr::str_locate("\\.")
-  if(!is.na(df[[1,1]])){
-    mthd_nm_1L_chr <- stringr::str_sub(mthd_nm_1L_chr,
-                                       end = (df[[1,1]]-1))
-  }
-  gnrc_dmt_ls <- tools::Rd_db(pkg_nm_1L_chr) %>%
-    purrr::pluck(paste0(mthd_nm_1L_chr,"-methods.Rd"))
-  ifelse(!is.null(gnrc_dmt_ls),
-                              gnrc_dmt_ls %>%
-                                purrr::pluck(1) %>%
-                                purrr::pluck(1) %>%
-                                as.vector(),
-                              mthd_nm_1L_chr)
-    })
-  return(mthd_titles_chr)
-}
-add_vignette_links <- function(pkg_extensions_tb,
-                                 namespace_var_nms_1L_chr = "pt_ns_chr",
-                                 reference_var_nm_1L_chr = "Reference",
-                                 url_stub_1L_chr = "https://ready4-dev.github.io/",
-                                 vignette_var_nm_1L_chr = "Vignettes",
-                                 vignette_url_var_nm_1L_chr = "Vignettes_URLs"){
-    pkg_extensions_tb <- pkg_extensions_tb %>%
-      dplyr::mutate(!!rlang::sym(vignette_var_nm_1L_chr) := purrr::map(!!rlang::sym(namespace_var_nms_1L_chr),
-                                           ~ rvest::read_html(paste0(url_stub_1L_chr,.x,"/index.html")) %>%
-                                             rvest::html_elements(".dropdown-item")  %>%
-                                             rvest::html_attr("href") %>%
-                                             stringr::str_remove("articles/") %>% #as.vector(browseVignettes(.x)[[.x]][,7]) %>%
-                                             purrr::keep(~startsWith(.x,"V_")) %>% sort())) %>%
-      dplyr::mutate(!!rlang::sym(vignette_var_nm_1L_chr) := purrr::map2(!!rlang::sym(namespace_var_nms_1L_chr),
-                                                                        !!rlang::sym(vignette_var_nm_1L_chr) ,
-                                            ~if(!identical(.y, character(0))){
-                                              paste0(url_stub_1L_chr,.x,"/articles/",.y)
-                                            }else{
-                                              NA_character_
-                                            }))
-    examples_1L_int <- pkg_extensions_tb %>%
-      dplyr::pull(!!rlang::sym(vignette_var_nm_1L_chr)) %>%
-      purrr::compact() %>%
-      purrr::flatten_chr() %>%
-      length()
-    pkg_extensions_tb <- pkg_extensions_tb %>%
-      dplyr::mutate(!!rlang::sym(reference_var_nm_1L_chr) := !!rlang::sym(vignette_var_nm_1L_chr) %>%
-                      purrr::reduce(.init = list(ref_int = c(0,0),
-                                                 content_ls = NULL),
-                                    ~{
-                                      if(is.null(.y) | identical(.y, character(0)) | is.na(.y[1])){
-                                        .x$content_ls <- append(.x$content_ls,list(NA_integer_))
-                                      }else{
-                                        .x$ref_int <- c(.x$ref_int[2] + 1,
-                                                        .x$ref_int[2] +length(.y))
-                                        .x$content_ls <- append(.x$content_ls,
-                                                                list((1:examples_1L_int)[.x$ref_int]))
-                                      }
-                                      .x
-                                    }) %>%
-                      purrr::pluck(2)) %>%
-      dplyr::mutate(!!rlang::sym(vignette_url_var_nm_1L_chr) := purrr::map2(!!rlang::sym(reference_var_nm_1L_chr),
-                                                !!rlang::sym(vignette_var_nm_1L_chr),
-                                                ~ {
-                                                  if(is.na(.x[1])){
-                                                    NA_character_
-                                                  }else{
-                                                    kableExtra::cell_spec(.x,
-                                                                          "html",
-                                                                          link = .y)
-                                                  }
+# NEED TO DEPRECATE GET_MTHD_TITLE IN READY4FUN
 
-                                                }
-      ))
-    return(pkg_extensions_tb)
-  }
-make_pkg_extensions_tb <- function(namespace_var_nms_1L_chr = "pt_ns_chr",
-                                   reference_var_nm_1L_chr = "Reference",
-                                   url_stub_1L_chr = "https://ready4-dev.github.io/",
-                                   vignette_var_nm_1L_chr = "Vignettes",
-                                   vignette_url_var_nm_1L_chr = "Vignettes_URLs"
-                                   ){
-  pkg_extensions_tb <- tibble::tibble(pt_ns_chr = c("scorz","specific","TTU", "youthvars","ready4show","ready4use","ready4fun","ready4class","ready4pack","youthu")) %>%
-    dplyr::mutate(Purpose = dplyr::case_when(pt_ns_chr == "ready4class" ~ "Authoring (code - classes)",
-                                             pt_ns_chr == "ready4fun" ~ "Authoring (code - functions)",
-                                             pt_ns_chr == "ready4pack" ~ "Authoring (code - libraries)",
-                                             pt_ns_chr == "ready4show" ~ "Authoring (code - programs)",
-                                             pt_ns_chr == "ready4use" ~ "Authoring (datasets)",
-                                             pt_ns_chr == "youthvars" ~ "Description (datasets)",
-                                             pt_ns_chr == "scorz" ~ "Description (variable scoring)",
-                                             pt_ns_chr == "specific" ~ "Modelling (inverse problems)",
-                                             pt_ns_chr == "heterodox" ~ "Modelling (heterogeneity)",
-                                             pt_ns_chr == "TTU" ~ "Modelling (health utility)",
-                                             pt_ns_chr == "youthu" ~ "Prediction (health utility)",
-                                             T ~ "")) %>%
-    dplyr::arrange(Purpose) %>%
-    dplyr::mutate(Link = purrr::map_chr(pt_ns_chr,
-                                        ~ paste0(url_stub_1L_chr,.x,
-                                                 "/index",#"/articles/",.x,
-                                                 ".html"))) %>%
-    dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, "html", link = Link))
-  pkg_extensions_tb <-  add_vignette_links(pkg_extensions_tb,
-                                           namespace_var_nms_1L_chr = namespace_var_nms_1L_chr,
-                                           reference_var_nm_1L_chr = reference_var_nm_1L_chr,
-                                           url_stub_1L_chr = url_stub_1L_chr,
-                                           vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
-                                           vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
-
-  y_tb <- purrr::map_dfr(pkg_extensions_tb$pt_ns_chr,
-                         ~ {
-                           if(!.x %in% c("TTU","youthu")){
-                             f <- tempfile(fileext = ".bib")
-                             sink(f)
-                             writeLines(rvest::read_html(paste0(url_stub_1L_chr,.x,"/authors.html")) %>%
-                                          rvest::html_elements("pre") %>%
-                                          rvest::html_text2())
-                             sink(NULL)
-                             bib2df::bib2df(f) %>%
-                               dplyr::select(AUTHOR, TITLE, DOI)
-                           }else{
-                             if(.x == "TTU"){
-                               tibble::tibble(AUTHOR = list(c("Caroline Gao","Matthew Hamilton")),
-                                              TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms",
-                                              DOI = "10.5281/zenodo.5646593")
-                             }else{
-                               tibble::tibble(AUTHOR = list(c("Matthew Hamilton","Caroline Gao")),
-                                              TITLE = "youthu: Map Youth Outcomes to Health Utility",
-                                              DOI = "10.5281/zenodo.5646668")
-                             }
-
-                           }
-                         }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>%
-    dplyr::rename(DOI_chr = DOI,
-                  Package = TITLE,
-                  Authors = AUTHOR)
-  pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb,y_tb)
-  return(pkg_extensions_tb)
-}
-make_methods_tb <- function(packages_tb  = NULL,
-                            exclude_mthds_for_chr = NA_character_,
-                            namespace_var_nms_1L_chr = "pt_ns_chr",
-                            reference_var_nm_1L_chr = "Reference",
-                            return_1L_lgl = "all",
-                            url_stub_1L_chr = "https://ready4-dev.github.io/",
-                            vignette_var_nm_1L_chr = "Vignettes",
-                            vignette_url_var_nm_1L_chr = "Vignettes_URLs"){
-  packages_tb <- make_pkg_extensions_tb(namespace_var_nms_1L_chr = namespace_var_nms_1L_chr,
-                                 reference_var_nm_1L_chr = reference_var_nm_1L_chr,
-                                 url_stub_1L_chr = url_stub_1L_chr,
-                                 vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
-                                 vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr )
-methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
-                                                   return_1L_lgl = return_1L_lgl),
-               Purpose = get_mthd_titles(Method),
-               Examples =  purrr::map(Method,
-                                         ~ get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>% unique() %>% purrr::discard(is.na),
-                                                        term_1L_chr = .x)))
-return(methods_tb)
-}
-print_methods <- function(methods_tb = NULL, 
-                          exclude_mthds_for_chr = NA_character_,
-                          methods_chr = NULL,
-                          return_1L_chr = "all"){
-  if(is.null(methods_tb))
-    methods_tb <- make_methods_tb()
-  if(is.null(methods_chr))
-    methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
-                                return_1L_lgl = return_1L_chr)
-  methods_tb <- methods_tb %>%
-    dplyr::filter(Method %in% methods_chr)
-  methods_kbl <- methods_tb %>%
-    kableExtra::kable("html", escape = FALSE) %>%
-    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
-  return(methods_kbl)
-}
 ```
 
 ## Motivation
@@ -275,26 +44,25 @@ Transparency is one of the underpinning principles of open science. One way to i
 ## Implementation
 `ready4` provides a simple syntax that can be consistently applied across multiple types of mental health computational modelling projects. It does so by taking advantage of the [polymorphism and abstraction features of Object Oriented Programing](V_03.html) and R's use of generic functions for [S4 and S3 classes (the types used for ready4 framework modules and sub-modules)](V_01.html).
 
-## Core syntax
+## Finding ready4 Framework Methods
 
 ```{r warning=F}
 x <- make_methods_tb()
 ```
+### Core methods
 ```{r}
 print_methods(x,
               return_1L_chr = "core")
 ```
 
-## Extended syntax
-
-### Extensions for slots
+### Slot methods
 
 ```{r}
 print_methods(x,
               return_1L_chr = "slot")
 ```
 
-### Extensions of `author` generic
+### Extended `author` methods
 
 ```{r}
 print_methods(x,
