@@ -1,6 +1,7 @@
 Package: ready4
-Title: A Framework for Open and Modular Mental Health Systems Models
-Version: 0.0.0.9064
+Title: Implement Open Science Computational Models of Mental Health
+    Systems
+Version: 0.0.0.9065
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -9,11 +10,12 @@ Authors@R: c(
     person("Victoria University", role = "fnd")
   )
 Description: ready4 provides bare bones foundational elements (classes,
-    generics, methods) of a framework to support implementation of open
-    and modular mental health systems models.  This development version of
-    the ready4 package has been made available as part of the process of
-    testing and documenting the package. If you have any questions, please
-    contact the authors (matthew.hamilton@orygen.org.au).
+    generics, methods, functions) of a framework for ensuring that the
+    computational model components of mental health systems modelling
+    projects adhere to open science principles.  This development version
+    of the ready4 package has been made available as part of the process
+    of testing and documenting the package. If you have any questions,
+    please contact the authors (matthew.hamilton@orygen.org.au).
 License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4, https://www.ready4-dev.com/
@@ -24,6 +26,7 @@ Collate:
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
     'fn_add.R'
     'fn_get.R'
     'fn_make.R'
@@ -33,9 +36,11 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'mthd_authorSlot.R'
     'mthd_characterizeSlot.R'
     'mthd_depictSlot.R'
@@ -52,7 +57,13 @@ Collate:
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'
     'pkg_ready4.R'
+    'print.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Imports: 
     assertthat,
     bib2df,
@@ -75,6 +86,7 @@ Imports:
     testit,
     testthat,
     tibble,
+    tools,
     utils
 VignetteBuilder: knitr
 Depends: 
