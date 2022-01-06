@@ -46,12 +46,11 @@ Definition
 
 ::: {.card-body}
 ::: {.card-title}
-`ready4` Framework Module
+####`ready4` Framework Module
 :::
 A formal (S4) `Ready4Module` child-class that structures data for use in computational models of mental health systems
 :::
 :::
-
 
 
 #### Specifying Dissemination Policies
@@ -88,9 +87,9 @@ Definition
 
 ::: {.card-body}
 ::: {.card-title}
-`ready4` Framework Sub-Module
+####`ready4` Framework Sub-Module
 :::
-An informal (S3) class that describes, validates and assigns methods to slots of a `ready4` Framework Module.
+An informal (S3) class that describes, validates and assigns methods to a slot of a `Ready4Module` child-class.
 :::
 :::
 
@@ -99,14 +98,14 @@ An informal (S3) class that describes, validates and assigns methods to slots of
 A table of all currently available `ready4` framework modules (S4 classes) and sub-modules (S3 classes) can be generated using `make_modules_tb`.
 
 ```{r warning=FALSE, message=FALSE}
-x <- make_modules_tb()
+a <- make_modules_tb()
 ```
 
 ### Current ready4 Framework Modules
 HTML versions of the table can be printed using the `print_modules` function. To display a table of `ready4` framework modules, supply the value "S4" to the `what_1L_chr` argument.
 
 ```{r }
-print_modules(x,
+print_modules(a,
               what_1L_chr = "S4")
 
 ```
@@ -115,7 +114,7 @@ print_modules(x,
 To display a table of `ready4` framework sub-modules , supply the value "S3" to the `what_1L_chr` argument.
 
 ```{r }
-print_modules(x,
+print_modules(a,
               what_1L_chr = "S3")
 
 ```

@@ -1,5 +1,5 @@
 ---
-title: "Leverage An Object-Oriented Paradigm To Develop Modular and Transparent Computational Models Of Mental Health Systems"
+title: "Apply An Object-Oriented Paradigm To Developing Computational Models Of Mental Health Systems"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -35,7 +35,7 @@ The examples highlighted in the previous section have some potential limitations
 Similarly, inheritance would allow re-use of much of the code from a model of the Australian mental health system when exploring similar topics within the UK context, while making it straightforward to develop additional code that addresses relevant divergence in features between the two jurisdictions. In practical terms, this would mean developing two child classes of **X** - class **Y** for use with Australian data and class **Z** for use in the UK system. All methods that are not specific to a particular jurisdiction are defined for **X** and inherited by **Y** and **Z**. Methods that are only appropriate for use in the Australian context are defined for **Y**, while UK specific methods are defined for **Z**.
 
 ## Transparent Computational Models
-To make computational models of mental health systems more readily understood, the `ready4` framework supports use of a simple and consistent syntax that makes programs easier to read and understand. Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.
+To make computational models of mental health systems more readily understood, the `ready4` framework supports use of [a simple and consistent syntax](V_02.html) that makes programs easier to read and understand. Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.
 
 ### Polymorphism
 Polymorphism allows for similar concepts to be represented using consistent syntax. The same top level code can therefore be generalised to multiple model implementations, making algorithms  simpler to understand and easier to re-use.
