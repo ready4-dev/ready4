@@ -1,7 +1,7 @@
 Package: ready4
 Title: Implement Open Science Computational Models of Mental Health
     Systems
-Version: 0.0.0.9066
+Version: 0.0.0.9067
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
