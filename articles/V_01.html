@@ -52,8 +52,8 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/V_01.html">Develop Modular Computational Models Of Mental Health Systems</a>
-    <a class="dropdown-item" href="../articles/V_02.html">Use A Consistent And Simple Syntax When Implementing Computational Models Of Mental Health Systems</a>
-    <a class="dropdown-item" href="../articles/V_03.html">Leverage An Object-Oriented Paradigm To Develop Modular and Transparent Computational Models Of Mental Health Systems</a>
+    <a class="dropdown-item" href="../articles/V_02.html">Make Computational Models Of Mental Health Systems More Transparent By Using A Simple And Consistent Syntax</a>
+    <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Developing Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_04.html">Find And Author Extensions To The Ready4 Framework</a>
   </div>
 </li>
@@ -121,7 +121,7 @@
 </div>
 <div class="card-body">
 <div class="card-title">
-<p><code>ready4</code> Framework Module</p>
+<p>####<code>ready4</code> Framework Module</p>
 </div>
 <p>A formal (S4) <code>Ready4Module</code> child-class that structures data for use in computational models of mental health systems</p>
 </div>
@@ -160,9 +160,9 @@
 </div>
 <div class="card-body">
 <div class="card-title">
-<p><code>ready4</code> Framework Sub-Module</p>
+<p>####<code>ready4</code> Framework Sub-Module</p>
 </div>
-<p>An informal (S3) class that describes, validates and assigns methods to slots of a <code>ready4</code> Framework Module.</p>
+<p>An informal (S3) class that describes, validates and assigns methods to a slot of a <code>Ready4Module</code> child-class.</p>
 </div>
 </div>
 </div>
@@ -172,13 +172,13 @@
 </h2>
 <p>A table of all currently available <code>ready4</code> framework modules (S4 classes) and sub-modules (S3 classes) can be generated using <code>make_modules_tb</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_modules_tb.html">make_modules_tb</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_modules_tb.html">make_modules_tb</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="section level3">
 <h3 id="current-ready4-framework-modules">Current ready4 Framework Modules<a class="anchor" aria-label="anchor" href="#current-ready4-framework-modules"></a>
 </h3>
 <p>HTML versions of the table can be printed using the <code>print_modules</code> function. To display a table of <code>ready4</code> framework modules, supply the value “S4” to the <code>what_1L_chr</code> argument.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">x</span>,
+<code class="sourceCode R"><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">a</span>,
               what_1L_chr <span class="op">=</span> <span class="st">"S4"</span><span class="op">)</span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -479,7 +479,7 @@ A longitudinal dataset and its associated dictionary, descriptive statistics and
 </h3>
 <p>To display a table of <code>ready4</code> framework sub-modules , supply the value “S3” to the <code>what_1L_chr</code> argument.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">x</span>,
+<code class="sourceCode R"><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">a</span>,
               what_1L_chr <span class="op">=</span> <span class="st">"S3"</span><span class="op">)</span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
