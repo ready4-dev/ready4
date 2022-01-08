@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9064</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9068</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,13 +100,16 @@
 <p><code>ready4</code> provides a simple syntax that can be consistently applied across multiple types of mental health computational modelling projects. It does so by taking advantage of the <a href="V_03.html">polymorphism and abstraction features of Object Oriented Programing</a> and R’s use of generic functions for <a href="V_01.html">S4 and S3 classes (the types used for ready4 framework modules and sub-modules)</a>.</p>
 </div>
 <div class="section level2">
-<h2 id="core-syntax">Core syntax<a class="anchor" aria-label="anchor" href="#core-syntax"></a>
+<h2 id="finding-ready4-framework-methods">Finding ready4 Framework Methods<a class="anchor" aria-label="anchor" href="#finding-ready4-framework-methods"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">make_methods_tb</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_methods_tb.html">make_methods_tb</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Joining, by = "pt_ns_chr"</span></code></pre>
+<div class="section level3">
+<h3 id="core-methods">Core methods<a class="anchor" aria-label="anchor" href="#core-methods"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">print_methods</span><span class="op">(</span><span class="va">x</span>,
+<code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
               return_1L_chr <span class="op">=</span> <span class="st">"core"</span><span class="op">)</span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -283,14 +286,11 @@ Share (publish) open data
 </tbody>
 </table>
 </div>
-<div class="section level2">
-<h2 id="extended-syntax">Extended syntax<a class="anchor" aria-label="anchor" href="#extended-syntax"></a>
-</h2>
 <div class="section level3">
-<h3 id="extensions-for-slots">Extensions for slots<a class="anchor" aria-label="anchor" href="#extensions-for-slots"></a>
+<h3 id="slot-methods">Slot methods<a class="anchor" aria-label="anchor" href="#slot-methods"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">print_methods</span><span class="op">(</span><span class="va">x</span>,
+<code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
               return_1L_chr <span class="op">=</span> <span class="st">"slot"</span><span class="op">)</span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -461,10 +461,10 @@ Apply the share method to a slot
 </table>
 </div>
 <div class="section level3">
-<h3 id="extensions-of-author-generic">Extensions of <code>author</code> generic<a class="anchor" aria-label="anchor" href="#extensions-of-author-generic"></a>
+<h3 id="extended-author-methods">Extended <code>author</code> methods<a class="anchor" aria-label="anchor" href="#extended-author-methods"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">print_methods</span><span class="op">(</span><span class="va">x</span>,
+<code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
               exclude_mthds_for_chr <span class="op">=</span> <span class="st">"Ready4Module"</span>,
               return_1L_chr <span class="op">=</span> <span class="st">"extended"</span><span class="op">)</span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
@@ -528,7 +528,7 @@ Author and save a report
 <h2 id="ready4module-methods">Ready4Module Methods<a class="anchor" aria-label="anchor" href="#ready4module-methods"></a>
 </h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">get_methods</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/get_methods.html">get_methods</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##  [1] "authorSlot"        "characterizeSlot"  "depictSlot"       </span>
 <span class="co">##  [4] "enhanceSlot"       "exhibitSlot"       "ingestSlot"       </span>
 <span class="co">##  [7] "investigateSlot"   "manufactureSlot"   "metamorphoseSlot" </span>

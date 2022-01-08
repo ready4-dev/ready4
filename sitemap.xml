@@ -46,6 +46,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/add_lups.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/add_vignette_links.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/author-methods.html</loc>
   </url>
   <url>
@@ -112,6 +115,18 @@
     <loc>https://ready4-dev.github.io/ready4/reference/get_from_lup_obj.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_functions_tb.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_generics.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_mthd_titles.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_r4_obj_slots.html</loc>
   </url>
   <url>
@@ -142,6 +157,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/make_local_path_to_dv_data.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_methods_tb.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_modules_tb.html</loc>
   </url>
   <url>
@@ -164,6 +182,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_methods.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/print_modules.html</loc>
