@@ -133,7 +133,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
             kableExtra::cell_spec(..2, "html", link = paste0("https://ready4-dev.github.io/", 
                 ..1, "/reference/", ifelse(..3, ..2, paste0(..2, 
                   "-class")), ".html"))
-        })) %>% dplyr::mutate(Examples = purrr::map2(Vignette_URLs, 
+        })) %>% dplyr::mutate(Examples = purrr::map2(Vignettes_URLs, 
         type_chr, ~get_examples(.x, term_1L_chr = .y))) %>% dplyr::mutate(Description = purrr::map2_chr(Class, 
         old_class_lgl, ~{
             rvest::read_html((.x %>% stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[, 

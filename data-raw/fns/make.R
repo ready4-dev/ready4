@@ -105,7 +105,7 @@ make_modules_tb <- function(pkg_extensions_tb = NULL,
 
                                       }
     )) %>%
-    dplyr::mutate(Examples = purrr::map2(Vignette_URLs,
+    dplyr::mutate(Examples = purrr::map2(Vignettes_URLs,
                                          type_chr,
                                          ~ get_examples(.x,
                                                         term_1L_chr = .y))) %>%

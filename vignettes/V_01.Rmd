@@ -24,16 +24,16 @@ The `ready4` framework uses two systems for implementing OOP - S3 and S4. An in-
  - S3 classes are often described as "simple", "informal" and "flexible". S3 objects attach an attribute label to base type objects (e.g. a character vector, a data.frame, a list), which in turn is used to work out what methods should be applied to the class. 
  
 ### Modules
-The foundational element of `ready4` that facilitates the development of modular computational models of mental health systems is the `Ready4Module` class. We can create an instance (`x`) of `Ready4Module` using the following command.
+The foundational element of `ready4` that facilitates the development of modular computational models of mental health systems is the `Ready4Module` class. We can create an instance (`X`) of `Ready4Module` using the following command.
 
 ```{r}
-x <- ready4::Ready4Module()
+X <- ready4::Ready4Module()
 ```
 
-However, if we inspect `x` we can see it is of limited use as it contains no data other than an empty element called `dissemination_1L_chr`.
+However, if we inspect `X` we can see it is of limited use as it contains no data other than an empty element called `dissemination_1L_chr`.
 
 ```{r}
-str(x)
+str(X)
 ```
 
 The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent-class of all modules used in the `ready4` framework, which thereby inherit [all methods that are defined for Ready4Module](V_02.html). `Ready4Module` and all of its child-classes (ie all `ready4` framework modules) are "S4" classes. 
@@ -46,7 +46,7 @@ Definition
 
 ::: {.card-body}
 ::: {.card-title}
-####`ready4` Framework Module
+#### `ready4` Framework Module
 :::
 A formal (S4) `Ready4Module` child-class that structures data for use in computational models of mental health systems
 :::
@@ -57,22 +57,22 @@ A formal (S4) `Ready4Module` child-class that structures data for use in computa
 `ready4` includes two child classes of `Ready4Module`. These are `Ready4Public` and `Ready4Private` and both are almost as minimally informative as their parent (the only difference being that their instances have the values "Public" or "Private" assigned to the `dissemination_1L_chr` slot). 
 
 ```{r}
-y <- Ready4Public()
-str(y)
+Y <- Ready4Public()
+str(Y)
 ```
 
 ```{r}
-z <- Ready4Private()
-str(z)
+Z <- Ready4Private()
+str(Z)
 ```
 
 Like the `Ready4Module` class they inherit from, the purpose of `Ready4Public` and `Ready4Private` is to be used as parent classes. If **all** the data contained in a module can **always** be shared publicly, it may be convenient to note this by creating that module as child-class of `Ready4Public`. Similarly, if at least some of the data contained in a module will always be unsuitable for public dissemination, it can be useful to create that module as a child of `Ready4Private`. When the dissemination policy for data contained in a module will vary depending on user or context, that module should be created as a direct child of `Ready4Module` without using either `Ready4Public` and `Ready4Private`. Users can then define that value themselves using the `renewSlot` method and inspect the dissemination policy with the `procureSlot`.
 
 ```{r}
-x <- renewSlot(x,
+X <- renewSlot(X,
                "dissemination_1L_chr",
                "Staff and students of research institutes")
-procureSlot(x,
+procureSlot(X,
             "dissemination_1L_chr")
 ```
 
@@ -87,7 +87,7 @@ Definition
 
 ::: {.card-body}
 ::: {.card-title}
-####`ready4` Framework Sub-Module
+#### `ready4` Framework Sub-Module
 :::
 An informal (S3) class that describes, validates and assigns methods to a slot of a `Ready4Module` child-class.
 :::
