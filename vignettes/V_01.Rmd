@@ -41,12 +41,12 @@ The `Ready4Module` class is therefore not intended to be called directly. Instea
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
 ::: {.card-header}
-Definition
+`ready4` Framework Concept
 :::
 
 ::: {.card-body}
 ::: {.card-title}
-#### `ready4` Framework Module
+#### Module
 :::
 A formal (S4) `Ready4Module` child-class that structures data for use in computational models of mental health systems
 :::
@@ -66,7 +66,7 @@ Z <- Ready4Private()
 str(Z)
 ```
 
-Like the `Ready4Module` class they inherit from, the purpose of `Ready4Public` and `Ready4Private` is to be used as parent classes. If **all** the data contained in a module can **always** be shared publicly, it may be convenient to note this by creating that module as child-class of `Ready4Public`. Similarly, if at least some of the data contained in a module will always be unsuitable for public dissemination, it can be useful to create that module as a child of `Ready4Private`. When the dissemination policy for data contained in a module will vary depending on user or context, that module should be created as a direct child of `Ready4Module` without using either `Ready4Public` and `Ready4Private`. Users can then define that value themselves using the `renewSlot` method and inspect the dissemination policy with the `procureSlot`.
+Like the `Ready4Module` class they inherit from, the purpose of `Ready4Public` and `Ready4Private` is to be used as parent classes. If **all** the data contained in a module can **always** be shared publicly, it may be convenient to note this by creating that module as child-class of `Ready4Public`. Similarly, if at least some of the data contained in a module will always be unsuitable for public dissemination, it can be useful to create that module as a child of `Ready4Private`. When the dissemination policy for data contained in a module will vary depending on user or context, that module should be created as a direct child of `Ready4Module` without using either `Ready4Public` and `Ready4Private`. Users can then define that value themselves using the `renewSlot` method and inspect the dissemination policy with the `procureSlot` method.
 
 ```{r}
 X <- renewSlot(X,
@@ -82,12 +82,12 @@ In the `ready4` framework, S3 classes are principally used to help define the st
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
 ::: {.card-header}
-Definition
+`ready4` Framework Concept
 :::
 
 ::: {.card-body}
 ::: {.card-title}
-#### `ready4` Framework Sub-Module
+#### Sub-Module
 :::
 An informal (S3) class that describes, validates and assigns methods to a slot of a `Ready4Module` child-class.
 :::
@@ -107,7 +107,6 @@ HTML versions of the table can be printed using the `print_modules` function. To
 ```{r }
 print_modules(a,
               what_1L_chr = "S4")
-
 ```
 
 ### Current ready4 Framework Sub-Modules
@@ -116,11 +115,8 @@ To display a table of `ready4` framework sub-modules , supply the value "S3" to 
 ```{r }
 print_modules(a,
               what_1L_chr = "S3")
-
 ```
 
 ## Authoring ready4 Framework Modules and Sub-Modules
 R provides an array of potential approaches to creating and documenting S3 and S4 classes. However, standardisation is an important enabler of modular approaches to computational model development, so [all ready4 framework modules and sub-modules are authored using the same workflow](https://ready4-dev.github.io/ready4class/articles/V_01.html).
-
-
 

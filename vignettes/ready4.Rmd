@@ -21,7 +21,7 @@ This development version of the `ready4` package has been made available as part
 
 - [Develop Modular Computational Models Of Mental Health Systems](V_01.html)
 
-- [Make Computational Models Of Mental Health Systems More Transparent By Using A Simple And Consistent Syntax](V_02.html)
+- [Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems](V_02.html)
 
 - [Apply An Object-Oriented Paradigm To Developing Computational Models Of Mental Health Systems](V_03.html)
 
