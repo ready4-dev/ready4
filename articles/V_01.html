@@ -52,7 +52,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/V_01.html">Develop Modular Computational Models Of Mental Health Systems</a>
-    <a class="dropdown-item" href="../articles/V_02.html">Make Computational Models Of Mental Health Systems More Transparent By Using A Simple And Consistent Syntax</a>
+    <a class="dropdown-item" href="../articles/V_02.html">Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Developing Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_04.html">Find And Author Extensions To The Ready4 Framework</a>
   </div>
@@ -117,12 +117,11 @@
 <p>The <code>Ready4Module</code> class is therefore not intended to be called directly. Instead, the purpose of <code>Ready4Module</code> is to be the parent-class of all modules used in the <code>ready4</code> framework, which thereby inherit <a href="V_02.html">all methods that are defined for Ready4Module</a>. <code>Ready4Module</code> and all of its child-classes (ie all <code>ready4</code> framework modules) are “S4” classes.</p>
 <div class="card border-primary mb-3" style="max-width: 20rem;">
 <div class="card-header">
-<p>Definition</p>
+<p><code>ready4</code> Framework Concept</p>
 </div>
 <div class="card-body">
 <div class="card-title">
-<h4 id="ready4-framework-module">
-<code>ready4</code> Framework Module</h4>
+<h4 id="module">Module</h4>
 </div>
 <p>A formal (S4) <code>Ready4Module</code> child-class that structures data for use in computational models of mental health systems</p>
 </div>
@@ -141,7 +140,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Formal class 'Ready4Private' [package "ready4"] with 1 slot</span>
 <span class="co">##   ..@ dissemination_1L_chr: chr "Private"</span></code></pre>
-<p>Like the <code>Ready4Module</code> class they inherit from, the purpose of <code>Ready4Public</code> and <code>Ready4Private</code> is to be used as parent classes. If <strong>all</strong> the data contained in a module can <strong>always</strong> be shared publicly, it may be convenient to note this by creating that module as child-class of <code>Ready4Public</code>. Similarly, if at least some of the data contained in a module will always be unsuitable for public dissemination, it can be useful to create that module as a child of <code>Ready4Private</code>. When the dissemination policy for data contained in a module will vary depending on user or context, that module should be created as a direct child of <code>Ready4Module</code> without using either <code>Ready4Public</code> and <code>Ready4Private</code>. Users can then define that value themselves using the <code>renewSlot</code> method and inspect the dissemination policy with the <code>procureSlot</code>.</p>
+<p>Like the <code>Ready4Module</code> class they inherit from, the purpose of <code>Ready4Public</code> and <code>Ready4Private</code> is to be used as parent classes. If <strong>all</strong> the data contained in a module can <strong>always</strong> be shared publicly, it may be convenient to note this by creating that module as child-class of <code>Ready4Public</code>. Similarly, if at least some of the data contained in a module will always be unsuitable for public dissemination, it can be useful to create that module as a child of <code>Ready4Private</code>. When the dissemination policy for data contained in a module will vary depending on user or context, that module should be created as a direct child of <code>Ready4Module</code> without using either <code>Ready4Public</code> and <code>Ready4Private</code>. Users can then define that value themselves using the <code>renewSlot</code> method and inspect the dissemination policy with the <code>procureSlot</code> method.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/renewSlot-methods.html">renewSlot</a></span><span class="op">(</span><span class="va">X</span>,
                <span class="st">"dissemination_1L_chr"</span>,
@@ -157,12 +156,11 @@
 <p>In the <code>ready4</code> framework, S3 classes are principally used to help define the structural properties of slots of <code>ready4</code> framework modules and the methods that can be applied to these slots. S3 classes created for these purposes are called <strong>sub-modules</strong>.</p>
 <div class="card border-primary mb-3" style="max-width: 20rem;">
 <div class="card-header">
-<p>Definition</p>
+<p><code>ready4</code> Framework Concept</p>
 </div>
 <div class="card-body">
 <div class="card-title">
-<h4 id="ready4-framework-sub-module">
-<code>ready4</code> Framework Sub-Module</h4>
+<h4 id="sub-module">Sub-Module</h4>
 </div>
 <p>An informal (S3) class that describes, validates and assigns methods to a slot of a <code>Ready4Module</code> child-class.</p>
 </div>
