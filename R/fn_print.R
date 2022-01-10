@@ -50,17 +50,17 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
             "condensed"))
     return(modules_kbl)
 }
-#' Print package extensions
-#' @description print_pkg_extensions() is a Print function that prints output to console Specifically, this function implements an algorithm to print package extensions. The function is called for its side effects and does not return a value.
+#' Print packages
+#' @description print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @return pkg_extensions_kbl (An object)
-#' @rdname print_pkg_extensions
+#' @rdname print_packages
 #' @export 
 #' @importFrom dplyr mutate rename select
-#' @importFrom purrr map map_chr map2_chr
+#' @importFrom purrr map map_chr map2_chr pmap
 #' @importFrom stringr str_remove
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
-print_pkg_extensions <- function (pkg_extensions_tb = NULL) 
+print_packages <- function (pkg_extensions_tb = NULL) 
 {
     if (is.null(pkg_extensions_tb)) 
         pkg_extensions_tb <- make_pkg_extensions_tb()
@@ -82,27 +82,33 @@ print_pkg_extensions <- function (pkg_extensions_tb = NULL)
         purrr::map2_chr(pt_ns_chr, ~stringr::str_remove(.x, paste0(.y, 
             ": ")))) %>% dplyr::rename(Package = Logo, Website = pt_ns_chr, 
         Examples = Vignettes_URLs)
-    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(`:=`(Manuals, 
-        purrr::map(manual_urls_ls, ~{
-            if (identical(.x, character(0)) | is.na(.x[1]) | 
-                length(.x) != 2) {
-                NA_character_
-            }
-            else {
-                kableExtra::cell_spec(c("Modeller (PDF)", "Developer (PDF)"), 
-                  "html", link = .x)
-            }
-        }))) %>% dplyr::mutate(`:=`(`Source Code`, purrr::map(code_urls_ls, 
-        ~{
-            if (is.na(.x[1])) {
-                NA_character_
-            }
-            else {
-                kableExtra::cell_spec(c("Development", "Archived"), 
-                  "html", link = .x)
-            }
-        }))) %>% dplyr::select(Type, Package, Purpose, Authors, 
-        DOI, Website, Manuals, `Source Code`, Examples)
+    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Examples = purrr::map(Examples, 
+        ~if (is.na(.x[1])) {
+            ""
+        }
+        else {
+            .x
+        })) %>% dplyr::mutate(Documentation = purrr::pmap(list(manual_urls_ls, 
+        Citation, Website), ~{
+        if (identical(..1, character(0)) | is.na(..1[1]) | length(..1) != 
+            2) {
+            manual_txt_chr <- character(0)
+        }
+        else {
+            manual_txt_chr <- c("Manual - Short (PDF)", "Manual - Full (PDF)")
+        }
+        kableExtra::cell_spec(c("Citation", "Website", manual_txt_chr), 
+            "html", link = c(..3, ..2, ..1))
+    })) %>% dplyr::mutate(Code = purrr::map(code_urls_ls, ~{
+        if (is.na(.x[1])) {
+            ""
+        }
+        else {
+            kableExtra::cell_spec(c("Dev", "Archive"), "html", 
+                link = .x)
+        }
+    })) %>% dplyr::select(Type, Package, Purpose, Documentation, 
+        Code, Examples)
     pkg_extensions_kbl <- pkg_extensions_tb %>% kableExtra::kable("html", 
         escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("hover", 
         "condensed")) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
@@ -112,4 +118,35 @@ print_pkg_extensions <- function (pkg_extensions_tb = NULL)
         height = 160, width = 160)) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
         "Website"), link = homepages_chr)
     return(pkg_extensions_kbl)
+}
+#' Print vignettes
+#' @description print_vignettes() is a Print function that prints output to console Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.
+#' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
+#' @return vignettes_kbl (An object)
+#' @rdname print_vignettes
+#' @export 
+#' @importFrom purrr flatten_chr map_chr map2
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate select
+#' @importFrom rvest read_html html_elements html_text2 html_attr
+#' @importFrom kableExtra cell_spec kable kable_styling
+#' @keywords internal
+print_vignettes <- function (pkg_extensions_tb = NULL) 
+{
+    if (is.null(pkg_extensions_tb)) 
+        pkg_extensions_tb <- make_pkg_extensions_tb()
+    vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
+    keep_lgl <- !is.na(vignettes_chr)
+    vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]) %>% 
+        dplyr::mutate(Title = purrr::map_chr(HTML, ~rvest::read_html(.x) %>% 
+            rvest::html_elements("h1") %>% rvest::html_text2()), 
+            RMD = purrr::map_chr(HTML, ~rvest::read_html(.x) %>% 
+                rvest::html_elements(".dont-index") %>% rvest::html_elements("a") %>% 
+                rvest::html_attr("href"))) %>% dplyr::mutate(Program = purrr::map2(HTML, 
+        RMD, ~kableExtra::cell_spec(c("HTML", "RMD"), "html", 
+            link = c(.x, .y))))
+    vignettes_kbl <- vignettes_tb %>% dplyr::select(Title, Program) %>% 
+        kableExtra::kable("html", escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("hover", 
+        "condensed"))
+    return(vignettes_kbl)
 }

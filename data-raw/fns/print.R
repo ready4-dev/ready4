@@ -37,7 +37,7 @@ print_modules <- function(modules_tb,
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
   return(modules_kbl)
 }
-print_pkg_extensions <- function(pkg_extensions_tb = NULL){
+print_packages <- function(pkg_extensions_tb = NULL){
   if(is.null(pkg_extensions_tb))
     pkg_extensions_tb <- make_pkg_extensions_tb()
   pkg_extensions_tb <- pkg_extensions_tb %>%
@@ -66,31 +66,58 @@ print_pkg_extensions <- function(pkg_extensions_tb = NULL){
                   Website = pt_ns_chr,
                   Examples = Vignettes_URLs)
   pkg_extensions_tb <- pkg_extensions_tb %>%
-    dplyr::mutate(Manuals := purrr::map(manual_urls_ls,
-                                        ~ {
-                                             if(identical(.x,
-                                                          character(0)) | is.na(.x[1]) | length(.x) != 2){
-                                               NA_character_
+    dplyr::mutate(Examples = purrr::map(Examples,
+                                        ~ if(is.na(.x[1])){
+                                            ""
+                                          }else{
+                                            .x
+                                          }
+                                        )) %>%
+    dplyr::mutate(Documentation = purrr::pmap(list(manual_urls_ls,
+                                              Citation, Website),
+                                             ~ {
+                                               if(identical(..1,
+                                                            character(0)) | is.na(..1[1]) | length(..1) != 2){
+                                                 manual_txt_chr <- character(0)
                                                }else{
-                                                 kableExtra::cell_spec(c("Modeller (PDF)",
-                                                                         "Developer (PDF)"),
-                                                                       "html",
-                                                                       link = .x)
-                                                                            }
+                                                 manual_txt_chr <- c("Manual - Short (PDF)",
+                                                                     "Manual - Full (PDF)")
 
-                                                                          })) %>%
-    dplyr::mutate(`Source Code` := purrr::map(code_urls_ls,
+                                               }
+                                               kableExtra::cell_spec(c("Citation",
+                                                                       "Website",
+                                                                       manual_txt_chr),
+                                                                     "html",
+                                                                     link = c(..3,..2,..1))
+
+                                             })) %>%
+    # dplyr::mutate(Manuals = purrr::map(manual_urls_ls,
+    #                                     ~ {
+    #                                          if(identical(.x,
+    #                                                       character(0)) | is.na(.x[1]) | length(.x) != 2){
+    #                                            ""
+    #                                            }else{
+    #                                              kableExtra::cell_spec(c("Modeller (PDF)",
+    #                                                                      "Developer (PDF)"),
+    #                                                                    "html",
+    #                                                                    link = .x)
+    #                                                                         }
+    #
+    #                                                                       })) %>%
+    dplyr::mutate(Code = purrr::map(code_urls_ls,
                                            ~ {
                                              if(is.na(.x[1])){
-                                               NA_character_
+                                               ""
                                              }else{
-                                               kableExtra::cell_spec(c("Development", "Archived"),
+                                               kableExtra::cell_spec(c("Dev", "Archive"),
                                                                      "html",
                                                                      link = .x)
                                              }
 
                                            })) %>%
-    dplyr::select(Type, Package, Purpose, Authors, DOI, Website, Manuals, `Source Code`, Examples)
+    dplyr::select(Type, Package, Purpose, Documentation,
+                  #Authors, DOI, Website, Manuals,
+                  Code, Examples)
   pkg_extensions_kbl <- pkg_extensions_tb %>%
     # kableExtra::kbl(booktabs = T) %>%
     # kableExtra::kable_paper(full_width = F) %>%
@@ -107,5 +134,35 @@ print_pkg_extensions <- function(pkg_extensions_tb = NULL){
     kableExtra::column_spec(which(names(pkg_extensions_tb)=="Website"),
                             link = homepages_chr)
   return(pkg_extensions_kbl)
+}
+print_vignettes <- function(pkg_extensions_tb = NULL){
+  if(is.null(pkg_extensions_tb))
+    pkg_extensions_tb <- make_pkg_extensions_tb()
+  vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
+  keep_lgl <- !is.na(vignettes_chr)
+  vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]#,
+                                 # HTML = pkg_extensions_tb$Examples %>%
+                                 #   purrr::flatten_chr() %>%
+                                 #   purrr::keep(keep_lgl)
+                                 ) %>%
+    dplyr::mutate(Title = purrr::map_chr(HTML,
+                                         ~ rvest::read_html(.x) %>%
+                    rvest::html_elements("h1")  %>%
+                    rvest::html_text2()),
+                  RMD = purrr::map_chr(HTML,
+                                       ~ rvest::read_html(.x) %>%
+                    rvest::html_elements(".dont-index")  %>%
+                      rvest::html_elements("a") %>%
+                      rvest::html_attr("href"))) %>%
+    dplyr::mutate(Program = purrr::map2(HTML, RMD,
+                                        ~kableExtra::cell_spec(c("HTML",
+                                                                 "RMD"),
+                                                               "html",
+                                                               link = c(.x,.y))))
+  vignettes_kbl <- vignettes_tb %>%
+    dplyr::select(Title, Program) %>%
+    kableExtra::kable("html", escape = FALSE) %>%
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+  return(vignettes_kbl)
 }
 

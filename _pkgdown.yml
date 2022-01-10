@@ -29,7 +29,7 @@ reference:
   - make_pkg_extensions_tb
   - print_methods
   - print_modules
-  - print_pkg_extensions
+  - print_packages
 - title: "Generics"
 - contents:
   - author

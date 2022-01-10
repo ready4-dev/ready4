@@ -439,7 +439,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Comp
                                "get_methods",
                               "make_methods_tb",
                               "make_pkg_extensions_tb", "make_modules_tb",
-                               "print_methods","print_modules", "print_pkg_extensions"
+                               "print_methods","print_modules", "print_packages"
                                #"write_ws"
                                )
                                                                          ),

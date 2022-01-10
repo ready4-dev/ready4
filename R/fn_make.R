@@ -167,36 +167,36 @@ make_pkg_extensions_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_va
     pkg_extensions_tb <- tibble::tibble(pt_ns_chr = c("scorz", 
         "specific", "TTU", "youthvars", "ready4show", "ready4use", 
         "ready4fun", "ready4class", "ready4pack", "youthu")) %>% 
-        dplyr::mutate(Purpose = dplyr::case_when(pt_ns_chr == 
-            "ready4class" ~ "Authoring (code - classes)", pt_ns_chr == 
-            "ready4fun" ~ "Authoring (code - functions)", pt_ns_chr == 
-            "ready4pack" ~ "Authoring (code - libraries)", pt_ns_chr == 
-            "ready4show" ~ "Authoring (code - programs)", pt_ns_chr == 
-            "ready4use" ~ "Authoring (datasets)", pt_ns_chr == 
-            "youthvars" ~ "Description (datasets)", pt_ns_chr == 
-            "scorz" ~ "Description (variable scoring)", pt_ns_chr == 
-            "specific" ~ "Modelling (inverse problems)", pt_ns_chr == 
-            "heterodox" ~ "Modelling (heterogeneity)", pt_ns_chr == 
-            "TTU" ~ "Modelling (health utility)", pt_ns_chr == 
-            "youthu" ~ "Prediction (health utility)", T ~ "")) %>% 
-        dplyr::arrange(Purpose) %>% dplyr::mutate(Link = purrr::map_chr(pt_ns_chr, 
-        ~paste0(url_stub_1L_chr, .x, "/index", ".html"))) %>% 
-        dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
-            "html", link = Link))
+        dplyr::mutate(Type = dplyr::case_when(pt_ns_chr == "ready4class" ~ 
+            "Authoring (code - classes)", pt_ns_chr == "ready4fun" ~ 
+            "Authoring (code - functions)", pt_ns_chr == "ready4pack" ~ 
+            "Authoring (code - libraries)", pt_ns_chr == "ready4show" ~ 
+            "Authoring (code - programs)", pt_ns_chr == "ready4use" ~ 
+            "Authoring (datasets)", pt_ns_chr == "youthvars" ~ 
+            "Description (datasets)", pt_ns_chr == "scorz" ~ 
+            "Description (variable scoring)", pt_ns_chr == "specific" ~ 
+            "Modelling (inverse problems)", pt_ns_chr == "heterodox" ~ 
+            "Modelling (heterogeneity)", pt_ns_chr == "TTU" ~ 
+            "Modelling (health utility)", pt_ns_chr == "youthu" ~ 
+            "Prediction (health utility)", T ~ "")) %>% dplyr::arrange(Type) %>% 
+        dplyr::mutate(Link = purrr::map_chr(pt_ns_chr, ~paste0(url_stub_1L_chr, 
+            .x, "/index", ".html"))) %>% dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
+        "html", link = Link))
     pkg_extensions_tb <- add_vignette_links(pkg_extensions_tb, 
         ns_var_nm_1L_chr = ns_var_nm_1L_chr, reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
         url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
         vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
-    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr, 
+    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Citation = paste0(url_stub_1L_chr, 
+        pt_ns_chr, "/authors.html")) %>% dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr, 
         Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>% 
         dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr, Link, 
             ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
-    y_tb <- purrr::map_dfr(pkg_extensions_tb$pt_ns_chr, ~{
-        if (!.x %in% c("TTU", "youthu")) {
+    y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation, ~{
+        if (!.x %in% c("https://ready4-dev.github.io/TTU/authors.html", 
+            "https://ready4-dev.github.io/youthu/authors.html")) {
             f <- tempfile(fileext = ".bib")
             sink(f)
-            writeLines(rvest::read_html(paste0(url_stub_1L_chr, 
-                .x, "/authors.html")) %>% rvest::html_elements("pre") %>% 
+            writeLines(rvest::read_html(.x) %>% rvest::html_elements("pre") %>% 
                 rvest::html_text2())
             sink(NULL)
             bib2df::bib2df(f) %>% dplyr::select(AUTHOR, TITLE, 

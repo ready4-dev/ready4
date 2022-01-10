@@ -32,7 +32,7 @@ x <- make_pkg_extensions_tb()
 A HTML version of the table can be printed using `print_pkg_extensions`.
 
 ```{r warning=FALSE, message=FALSE}
-print_pkg_extensions(x) 
+print_packages(x) 
 ```
 
 ## Authoring code libraries to extend the `ready4` framework
@@ -43,7 +43,10 @@ As `ready4` provides a framework for modular development of computational models
 ## PROGRAMS
 ```
 
-
+## Finding programs that illustrate the `ready4` framework
+```{r}
+print_vignettes(x)
+```
 
 
 
