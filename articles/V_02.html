@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9068</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9069</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,11 +105,15 @@
 <p>To generate a table that summarises the syntax used to implement <code>ready4</code> methods, use the <code>make_methods_tb</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_methods_tb.html">make_methods_tb</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Joining, by = "pt_ns_chr"</span></code></pre>
+<pre><code><span class="co">## Warning: `as_data_frame()` was deprecated in tibble 2.0.0.</span>
+<span class="co">## Please use `as_tibble()` instead.</span>
+<span class="co">## The signature and semantics have changed, see `?as_tibble`.</span>
+<span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span>
+<span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span></code></pre>
 <div class="section level3">
 <h3 id="core-generics">Core generics<a class="anchor" aria-label="anchor" href="#core-generics"></a>
 </h3>
-<p>A HTML table of the core generics bundled with <code>ready4</code> and examples of methods that implement each generic can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "core"</code> argument. This table returns the generic / method name, the purpose of each method.</p>
+<p><code>ready4</code> includes a number of core generic functions which describe the main types of method to be implemented by the <code>ready4</code> framework. Notably, the <code>ready4</code> package does not include methods for any of these core generics. Instead, methods are defined for these generics in <a href="V_04.html">R packages that extend the <code>ready4</code> framework</a>. A HTML table of the core generics bundled with <code>ready4</code> and examples of methods that implement each generic can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "core"</code> argument.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
               return_1L_chr <span class="op">=</span> <span class="st">"core"</span><span class="op">)</span></code></pre></div>
@@ -128,7 +132,7 @@ Examples
 <tbody>
 <tr>
 <td style="text-align:left;">
-author
+<a href="https://ready4-dev.github.io/ready4/reference/author-methods.html"> author </a>
 </td>
 <td style="text-align:left;">
 Author and save files
@@ -139,7 +143,7 @@ Author and save files
 </tr>
 <tr>
 <td style="text-align:left;">
-characterize
+<a href="https://ready4-dev.github.io/ready4/reference/characterize-methods.html"> characterize </a>
 </td>
 <td style="text-align:left;">
 Characterize the features of an object
@@ -149,7 +153,7 @@ Characterize the features of an object
 </tr>
 <tr>
 <td style="text-align:left;">
-depict
+<a href="https://ready4-dev.github.io/ready4/reference/depict-methods.html"> depict </a>
 </td>
 <td style="text-align:left;">
 Depict (plot) an object
@@ -160,7 +164,7 @@ Depict (plot) an object
 </tr>
 <tr>
 <td style="text-align:left;">
-enhance
+<a href="https://ready4-dev.github.io/ready4/reference/enhance-methods.html"> enhance </a>
 </td>
 <td style="text-align:left;">
 Enhance an object with new data items
@@ -170,7 +174,7 @@ Enhance an object with new data items
 </tr>
 <tr>
 <td style="text-align:left;">
-exhibit
+<a href="https://ready4-dev.github.io/ready4/reference/exhibit-methods.html"> exhibit </a>
 </td>
 <td style="text-align:left;">
 Exhibit (print to console) features of an object
@@ -181,7 +185,7 @@ Exhibit (print to console) features of an object
 </tr>
 <tr>
 <td style="text-align:left;">
-ingest
+<a href="https://ready4-dev.github.io/ready4/reference/ingest-methods.html"> ingest </a>
 </td>
 <td style="text-align:left;">
 Ingest data
@@ -192,7 +196,7 @@ Ingest data
 </tr>
 <tr>
 <td style="text-align:left;">
-investigate
+<a href="https://ready4-dev.github.io/ready4/reference/investigate-methods.html"> investigate </a>
 </td>
 <td style="text-align:left;">
 Investigate solutions to an inverse problem
@@ -203,7 +207,7 @@ Investigate solutions to an inverse problem
 </tr>
 <tr>
 <td style="text-align:left;">
-manufacture
+<a href="https://ready4-dev.github.io/ready4/reference/manufacture-methods.html"> manufacture </a>
 </td>
 <td style="text-align:left;">
 Manufacture a new object
@@ -213,7 +217,7 @@ Manufacture a new object
 </tr>
 <tr>
 <td style="text-align:left;">
-metamorphose
+<a href="https://ready4-dev.github.io/ready4/reference/metamorphose-methods.html"> metamorphose </a>
 </td>
 <td style="text-align:left;">
 Metamorphose an object
@@ -223,7 +227,7 @@ Metamorphose an object
 </tr>
 <tr>
 <td style="text-align:left;">
-procure
+<a href="https://ready4-dev.github.io/ready4/reference/procure-methods.html"> procure </a>
 </td>
 <td style="text-align:left;">
 Procure (get) data
@@ -234,7 +238,7 @@ Procure (get) data
 </tr>
 <tr>
 <td style="text-align:left;">
-prognosticate
+<a href="https://ready4-dev.github.io/ready4/reference/prognosticate-methods.html"> prognosticate </a>
 </td>
 <td style="text-align:left;">
 Prognosticate (predict) solutions to a forward problem
@@ -244,7 +248,7 @@ Prognosticate (predict) solutions to a forward problem
 </tr>
 <tr>
 <td style="text-align:left;">
-ratify
+<a href="https://ready4-dev.github.io/ready4/reference/ratify-methods.html"> ratify </a>
 </td>
 <td style="text-align:left;">
 Ratify (validate) an object
@@ -255,7 +259,7 @@ Ratify (validate) an object
 </tr>
 <tr>
 <td style="text-align:left;">
-reckon
+<a href="https://ready4-dev.github.io/ready4/reference/reckon-methods.html"> reckon </a>
 </td>
 <td style="text-align:left;">
 Reckon (calculate) a value
@@ -265,7 +269,7 @@ Reckon (calculate) a value
 </tr>
 <tr>
 <td style="text-align:left;">
-renew
+<a href="https://ready4-dev.github.io/ready4/reference/renew-methods.html"> renew </a>
 </td>
 <td style="text-align:left;">
 Renew (update) an object
@@ -276,7 +280,7 @@ Renew (update) an object
 </tr>
 <tr>
 <td style="text-align:left;">
-share
+<a href="https://ready4-dev.github.io/ready4/reference/share-methods.html"> share </a>
 </td>
 <td style="text-align:left;">
 Share (publish) open data
@@ -289,12 +293,12 @@ Share (publish) open data
 </table>
 </div>
 <div class="section level3">
-<h3 id="slot-methods">Slot methods<a class="anchor" aria-label="anchor" href="#slot-methods"></a>
+<h3 id="slot-generics-and-methods">Slot generics and methods<a class="anchor" aria-label="anchor" href="#slot-generics-and-methods"></a>
 </h3>
-<p>Each of the “core” methods also has a “slot” version. This is a method that applies the corresponding core method to a specified slot of a class. Two of these “slot” versions have additional purposes.</p>
+<p>Each of the “core” generics also has a “slot” version, for use when applying a core method to a specified slot of a class. The <code>ready4</code> package defines methods for each of these “slot” generics for <a href="V_01.html">the <code>Ready4Module</code> class</a>. Two of these “slot” methods can also be used for additional purposes:</p>
 <ul>
-<li><p><a href="/reference/procureSlot-methods.html">procureSlot</a> is a “getter” method - its default behaviour is to return the value of a specified slot. To instead use a call to <code>procureSlot</code> to apply the <code>procure</code> method to a specified slot, the argument <code>use_procure_mthd_1L_lgl = T</code> must be included in the method call.</p></li>
-<li><p><a href="/reference/procureSlot-methods.html">renewSlot</a> is a “setter” method - if any value other than “use_renew_mthd” (the default) is passed to the <code>new_val_xx</code> argument, that value will be assigned to the specified slot.</p></li>
+<li><p><a href="/ready4/reference/procureSlot-methods.html">procureSlot</a> is a “getter” method - its default behaviour is to return the value of a specified slot. If the argument <code>use_procure_mthd_1L_lgl = T</code> is included in the method call, <code>procureSlot</code> will instead apply the <code>procure</code> method to a specified slot.</p></li>
+<li><p><a href="/ready4/reference/procureSlot-methods.html">renewSlot</a> is a “setter” method - if any value other than “use_renew_mthd” (the default) is passed to the <code>new_val_xx</code> argument, that value will be assigned to the specified slot.</p></li>
 </ul>
 <p>A HTML table of the slot generics bundled with <code>ready4</code> can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "slot"</code> argument.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -315,7 +319,7 @@ Examples
 <tbody>
 <tr>
 <td style="text-align:left;">
-authorSlot
+<a href="https://ready4-dev.github.io/ready4/reference/authorSlot-methods.html"> authorSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the author method to a slot
@@ -325,7 +329,7 @@ Apply the author method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-characterizeSlot
+<a href="https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.html"> characterizeSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the characterize method to a slot
@@ -335,7 +339,7 @@ Apply the characterize method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-depictSlot
+<a href="https://ready4-dev.github.io/ready4/reference/depictSlot-methods.html"> depictSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the depict method to a slot
@@ -345,7 +349,7 @@ Apply the depict method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-enhanceSlot
+<a href="https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.html"> enhanceSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the enhance method to a slot
@@ -355,7 +359,7 @@ Apply the enhance method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-exhibitSlot
+<a href="https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.html"> exhibitSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the exhibit method to a slot
@@ -365,7 +369,7 @@ Apply the exhibit method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-ingestSlot
+<a href="https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.html"> ingestSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the ingest method to a slot
@@ -375,7 +379,7 @@ Apply the ingest method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-investigateSlot
+<a href="https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html"> investigateSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the investigate method to a slot
@@ -385,7 +389,7 @@ Apply the investigate method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-manufactureSlot
+<a href="https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.html"> manufactureSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the manufacture method to a slot
@@ -395,7 +399,7 @@ Apply the manufacture method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-metamorphoseSlot
+<a href="https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.html"> metamorphoseSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the metamorphose method to a slot
@@ -405,7 +409,7 @@ Apply the metamorphose method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-procureSlot
+<a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html"> procureSlot </a>
 </td>
 <td style="text-align:left;">
 Procure (get) data from a slot
@@ -416,7 +420,7 @@ Procure (get) data from a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-prognosticateSlot
+<a href="https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.html"> prognosticateSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the prognosticate method to a slot
@@ -426,7 +430,7 @@ Apply the prognosticate method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-ratifySlot
+<a href="https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.html"> ratifySlot </a>
 </td>
 <td style="text-align:left;">
 Apply the ratify method to a slot
@@ -436,7 +440,7 @@ Apply the ratify method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-reckonSlot
+<a href="https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.html"> reckonSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the reckon method to a slot
@@ -446,7 +450,7 @@ Apply the reckon method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-renewSlot
+<a href="https://ready4-dev.github.io/ready4/reference/renewSlot-methods.html"> renewSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the renew method to a slot
@@ -457,7 +461,7 @@ Apply the renew method to a slot
 </tr>
 <tr>
 <td style="text-align:left;">
-shareSlot
+<a href="https://ready4-dev.github.io/ready4/reference/shareSlot-methods.html"> shareSlot </a>
 </td>
 <td style="text-align:left;">
 Apply the share method to a slot
@@ -469,9 +473,9 @@ Apply the share method to a slot
 </table>
 </div>
 <div class="section level3">
-<h3 id="extended-author-methods">Extended <code>author</code> methods<a class="anchor" aria-label="anchor" href="#extended-author-methods"></a>
+<h3 id="extended-author-generics">Extended <code>author</code> generics<a class="anchor" aria-label="anchor" href="#extended-author-generics"></a>
 </h3>
-<p>Finally, there are a small number of other generics that are more general extensions of the core functions. Currently, these extended methods are all variants on the <code>author</code> method, with each specifying the type of output to be authored by the method. A HTML table of the extended generics bundled with <code>ready4</code> can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "extended"</code> argument.</p>
+<p>Finally, there are a small number of other generics that are more general extensions of the core functions. Currently, these extended generics are all variants on the <code>author</code> generics, with each specifying the type of output to be authored by the method. The <code>ready4</code> package does not include methods for any of these extended generics. A HTML table of the extended generics bundled with <code>ready4</code> can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "extended"</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
               exclude_mthds_for_chr <span class="op">=</span> <span class="st">"Ready4Module"</span>,
@@ -491,7 +495,7 @@ Examples
 <tbody>
 <tr>
 <td style="text-align:left;">
-authorClasses
+<a href="https://ready4-dev.github.io/ready4/reference/authorClasses-methods.html"> authorClasses </a>
 </td>
 <td style="text-align:left;">
 Author and document classes
@@ -501,7 +505,7 @@ Author and document classes
 </tr>
 <tr>
 <td style="text-align:left;">
-authorData
+<a href="https://ready4-dev.github.io/ready4/reference/authorData-methods.html"> authorData </a>
 </td>
 <td style="text-align:left;">
 Author and document package datasets
@@ -511,7 +515,7 @@ Author and document package datasets
 </tr>
 <tr>
 <td style="text-align:left;">
-authorFunctions
+<a href="https://ready4-dev.github.io/ready4/reference/authorFunctions-methods.html"> authorFunctions </a>
 </td>
 <td style="text-align:left;">
 Author and document functions
@@ -521,7 +525,7 @@ Author and document functions
 </tr>
 <tr>
 <td style="text-align:left;">
-authorReport
+<a href="https://ready4-dev.github.io/ready4/reference/authorReport-methods.html"> authorReport </a>
 </td>
 <td style="text-align:left;">
 Author and save a report
@@ -532,17 +536,6 @@ Author and save a report
 </tbody>
 </table>
 </div>
-</div>
-<div class="section level2">
-<h2 id="ready4module-methods">Ready4Module Methods<a class="anchor" aria-label="anchor" href="#ready4module-methods"></a>
-</h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/get_methods.html">get_methods</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##  [1] "authorSlot"        "characterizeSlot"  "depictSlot"       </span>
-<span class="co">##  [4] "enhanceSlot"       "exhibitSlot"       "ingestSlot"       </span>
-<span class="co">##  [7] "investigateSlot"   "manufactureSlot"   "metamorphoseSlot" </span>
-<span class="co">## [10] "procureSlot"       "prognosticateSlot" "ratifySlot"       </span>
-<span class="co">## [13] "reckonSlot"        "renewSlot"         "shareSlot"</span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
