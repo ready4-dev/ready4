@@ -196,7 +196,10 @@
     <loc>https://ready4-dev.github.io/ready4/reference/print_modules.html</loc>
   </url>
   <url>
-    <loc>https://ready4-dev.github.io/ready4/reference/print_pkg_extensions.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_packages.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_vignettes.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/procure-methods.html</loc>
