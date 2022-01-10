@@ -12,7 +12,7 @@ library("ready4")
 ```
 
 ## Motivation
-The social, economic and service systems that shape population mental health are complex and interconnected. Developing models that adequately represent salient features of these complex systems can therefore be major undertakings. However, such large scale computational modelling projects may be made more tractable if broken into smaller tasks and progressed by multiple teams. Modellers can then progressively develop more complex representations of mental health systems by linking multiple  modelling projects that independently describe distinct system features. Such phased and collaborative approaches require all individual project outputs to readily integrate with each other as "modules". 
+The social, economic and service systems that shape population mental health are complex and interconnected. Developing models that adequately represent salient features of these complex systems can therefore be major undertakings. However, such large scale computational modelling projects may be made more tractable if broken into smaller tasks and advanced by multiple teams. Modellers can then start simply and progressively develop more complex representations of mental health systems by linking multiple modelling projects that independently describe distinct system features. Such phased and collaborative approaches require all individual project outputs to readily integrate with each other as "modules". 
 
 ## Implementation
 `ready4` takes advantage of the [encapsulation and inheritance features of Object Oriented Programming (OOP)](V_03.html) to support modular approaches to the development of computational models of mental health systems. 
@@ -36,12 +36,12 @@ However, if we inspect `X` we can see it is of limited use as it contains no dat
 str(X)
 ```
 
-The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent-class of all modules used in the `ready4` framework, which thereby inherit [all methods that are defined for Ready4Module](V_02.html). `Ready4Module` and all of its child-classes (ie all `ready4` framework modules) are "S4" classes. 
+The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent-class of all modules used in the `ready4` framework. `Ready4Module` and all of its child-classes (ie all `ready4` framework modules) are "S4" classes. 
 
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
 ::: {.card-header}
-`ready4` Framework Concept
+**`ready4` Framework Concept**
 :::
 
 ::: {.card-body}
@@ -51,6 +51,13 @@ The `Ready4Module` class is therefore not intended to be called directly. Instea
 A formal (S4) `Ready4Module` child-class that structures data for use in computational models of mental health systems
 :::
 :::
+
+#### Ready4Module Methods
+All Modules in the `ready4` Framework by default inherit all methods that are defined for `Ready4Module`, which can be itemised using the `get_methods` function. Currently, the only methods defined for `Ready4Module` are [slot-methods](V_02.html#slot-generics).
+
+```{r}
+get_methods()
+```
 
 
 #### Specifying Dissemination Policies
@@ -82,7 +89,7 @@ In the `ready4` framework, S3 classes are principally used to help define the st
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
 ::: {.card-header}
-`ready4` Framework Concept
+**`ready4` Framework Concept**
 :::
 
 ::: {.card-body}

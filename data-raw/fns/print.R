@@ -1,3 +1,25 @@
+print_methods <- function(methods_tb = NULL,
+                          exclude_mthds_for_chr = NA_character_,
+                          methods_chr = NULL,
+                          return_1L_chr = "all"){
+  if(is.null(methods_tb))
+    methods_tb <- make_methods_tb()
+  if(is.null(methods_chr))
+    methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
+                                return_1L_lgl = return_1L_chr)
+  methods_tb <- methods_tb %>%
+    dplyr::filter(Method %in% methods_chr)
+  links_chr <- methods_tb$Method %>%
+    purrr::map_chr(~paste0("https://ready4-dev.github.io/ready4/reference/",.x,"-methods.html"))
+  methods_kbl <- methods_tb %>%
+    # kableExtra::kbl(booktabs = T) %>%
+    # kableExtra::kable_paper(full_width = F) %>%
+    kableExtra::kable("html", escape = FALSE) %>%
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
+    kableExtra::column_spec(which(names(methods_tb)=="Method"),
+                            link = links_chr)
+  return(methods_kbl)
+}
 print_modules <- function(modules_tb,
                           what_1L_chr = "All"){
   if(what_1L_chr == "S4"){
@@ -8,7 +30,6 @@ print_modules <- function(modules_tb,
     modules_tb <- modules_tb %>%
       dplyr::filter(old_class_lgl)
   }
-
   modules_kbl <- modules_tb %>%
     dplyr::select(-old_class_lgl,
                   -Library)  %>%
@@ -38,35 +59,53 @@ print_pkg_extensions <- function(pkg_extensions_tb = NULL){
                               ~paste0("https://ready4-dev.github.io/",.x,"/logo.png"))
   homepages_chr <- pkg_extensions_tb$Link
   pkg_extensions_tb <- pkg_extensions_tb %>%
-    dplyr::select(Type, Logo, Package, Authors, DOI)
+    dplyr::mutate(Purpose = Title %>%
+                    purrr::map2_chr(pt_ns_chr,
+                                    ~ stringr::str_remove(.x,paste0(.y,": ")))) %>%
+    dplyr::rename(Package = Logo,
+                  Website = pt_ns_chr,
+                  Examples = Vignettes_URLs)
+  pkg_extensions_tb <- pkg_extensions_tb %>%
+    dplyr::mutate(Manuals := purrr::map(manual_urls_ls,
+                                        ~ {
+                                             if(identical(.x,
+                                                          character(0)) | is.na(.x[1]) | length(.x) != 2){
+                                               NA_character_
+                                               }else{
+                                                 kableExtra::cell_spec(c("Modeller (PDF)",
+                                                                         "Developer (PDF)"),
+                                                                       "html",
+                                                                       link = .x)
+                                                                            }
+
+                                                                          })) %>%
+    dplyr::mutate(`Source Code` := purrr::map(code_urls_ls,
+                                           ~ {
+                                             if(is.na(.x[1])){
+                                               NA_character_
+                                             }else{
+                                               kableExtra::cell_spec(c("Development", "Archived"),
+                                                                     "html",
+                                                                     link = .x)
+                                             }
+
+                                           })) %>%
+    dplyr::select(Type, Package, Purpose, Authors, DOI, Website, Manuals, `Source Code`, Examples)
   pkg_extensions_kbl <- pkg_extensions_tb %>%
-    kableExtra::kbl(booktabs = T) %>%
-    kableExtra::kable_paper(full_width = F) %>%
+    # kableExtra::kbl(booktabs = T) %>%
+    # kableExtra::kable_paper(full_width = F) %>%
+    kableExtra::kable("html", escape = FALSE) %>%
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
     kableExtra::column_spec(which(names(pkg_extensions_tb)=="Type"),
                             image = ready4_badges_chr) %>%
     kableExtra::column_spec(which(names(pkg_extensions_tb)=="DOI"),
                             image = zenodo_badges_chr) %>%
-    kableExtra::column_spec(which(names(pkg_extensions_tb)=="Logo"),
-                            image = kableExtra::spec_image(logos_chr,
-                                                           height = 100,
-                                                           width = 100)) %>%
     kableExtra::column_spec(which(names(pkg_extensions_tb)=="Package"),
+                            image = kableExtra::spec_image(logos_chr,
+                                                           height = 160,
+                                                           width = 160)) %>%
+    kableExtra::column_spec(which(names(pkg_extensions_tb)=="Website"),
                             link = homepages_chr)
   return(pkg_extensions_kbl)
 }
-print_methods <- function(methods_tb = NULL,
-                          exclude_mthds_for_chr = NA_character_,
-                          methods_chr = NULL,
-                          return_1L_chr = "all"){
-  if(is.null(methods_tb))
-    methods_tb <- make_methods_tb()
-  if(is.null(methods_chr))
-    methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
-                                return_1L_lgl = return_1L_chr)
-  methods_tb <- methods_tb %>%
-    dplyr::filter(Method %in% methods_chr)
-  methods_kbl <- methods_tb %>%
-    kableExtra::kable("html", escape = FALSE) %>%
-    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
-  return(methods_kbl)
-}
+

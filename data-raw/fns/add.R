@@ -71,7 +71,7 @@ add_vignette_links <- function(pkg_extensions_tb,
                                                                             if(is.na(.x[1])){
                                                                               NA_character_
                                                                             }else{
-                                                                              kableExtra::cell_spec(.x,
+                                                                              kableExtra::cell_spec(unique(.x),
                                                                                                     "html",
                                                                                                     link = .y)
                                                                             }

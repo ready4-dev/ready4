@@ -95,7 +95,7 @@ add_vignette_links <- function (pkg_extensions_tb, ns_var_nm_1L_chr = "pt_ns_chr
                   NA_character_
                 }
                 else {
-                  kableExtra::cell_spec(.x, "html", link = .y)
+                  kableExtra::cell_spec(unique(.x), "html", link = .y)
                 }
             })))
     return(pkg_extensions_tb)

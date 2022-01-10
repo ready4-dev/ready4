@@ -456,6 +456,9 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Comp
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
+##
+## CHECK IF PKGDOWN MANUAL LINKS ARE CORRECT
+##
 #
 # This next bit is required to tidyup the prototypes lookup table
 a <- ready4use::Ready4useRepos(gh_repo_1L_chr = "ready4-dev/ready4",

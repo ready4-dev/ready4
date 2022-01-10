@@ -95,6 +95,26 @@ get_fl_id_from_dv_ls <-  function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
   }
   return(id_1L_chr)
 }
+# get_fn_descs <- function(fn_nms_chr = NULL,
+#                          functions_tb = NULL,
+#                          gh_repo_1L_chr = "ready4-dev/ready4",
+#                          gh_tag_1L_chr = "Documentation_0.0",
+#                          return_1L_chr = "all"){
+#   if(is.null(functions_tb))
+#     functions_tb <- get_functions_tb(gh_repo_1L_chr = gh_repo_1L_chr,
+#                              gh_tag_1L_chr = gh_tag_1L_chr,
+#                              return_1L_chr = return_1L_chr)
+#   if(is.null(fn_nms_chr)){
+#         fn_descs_chr <- functions_tb$fn_type_desc_chr
+#   }else{
+#       fn_descs_chr <- purrr::map_chr(fn_nms_chr,
+#                                  ~get_from_lup_obj(functions_tb,
+#                                                    match_value_xx = .x,
+#                                                    match_var_nm_1L_chr = "fn_type_nm_chr",
+#                                                    target_var_nm_1L_chr = "fn_type_desc_chr"))
+#   }
+#   return(fn_descs_chr)
+# }
 get_from_lup_obj <- function(data_lookup_tb,
                              match_value_xx,
                              match_var_nm_1L_chr,
@@ -185,6 +205,19 @@ get_generics <- function(pkg_nm_1L_chr = "ready4",
   }
   return(generics_chr)
 }
+get_manual_urls <- function(pkg_nm_1L_chr = "ready4",
+                            pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html"){
+  urls_chr <- rvest::read_html(pkg_url_1L_chr) %>%
+    rvest::html_elements(".external-link") %>%
+    rvest::html_attr("href")
+  idcs_int <- urls_chr %>%
+    purrr::map_lgl(~endsWith(.x,
+                             paste0(pkg_nm_1L_chr,"_User.pdf"))|endsWith(.x,
+                                                                         paste0(pkg_nm_1L_chr,"_Developer.pdf"))) %>%
+    which()
+  urls_chr <- sort(urls_chr[idcs_int], decreasing = T)
+  return(urls_chr)
+}
 get_methods <- function(pkg_nm_1L_chr = "ready4",
                         cls_nm_1L_chr =  "Ready4Module"){
   methods_chr <- showMethods(class="Ready4Module", printTo =FALSE )
@@ -247,4 +280,17 @@ get_rds_from_dv <- function(file_nm_1L_chr,
                                       ds_ls[[idx_1L_int]]$dataFile$id)))
   }
   return(r_object_xx)
+}
+get_source_code_urls <- function(pkg_nm_1L_chr = "ready4",
+                                 pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html"){
+  urls_chr <- rvest::read_html(pkg_url_1L_chr) %>%
+    rvest::html_elements(".external-link") %>%
+    rvest::html_attr("href")
+  idcs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>%
+                         rvest::html_elements(".external-link") %>%
+                         rvest::html_text()) == "Browse source code"),
+                which(startsWith(urls_chr,
+                                 "https://doi.org/10.5281/zenodo.")))
+  urls_chr <- urls_chr[idcs_int]
+  return(urls_chr)
 }

@@ -260,6 +260,26 @@ get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_lgl = "all", exclu
     }
     return(generics_chr)
 }
+#' Get manual urls
+#' @description get_manual_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get manual urls. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Urls (a character vector).
+#' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
+#' @param pkg_url_1L_chr Package url (a character vector of length one), Default: 'https://ready4-dev.github.io/ready4/index.html'
+#' @return Urls (a character vector)
+#' @rdname get_manual_urls
+#' @export 
+#' @importFrom rvest read_html html_elements html_attr
+#' @importFrom purrr map_lgl
+#' @keywords internal
+get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html") 
+{
+    urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
+        rvest::html_attr("href")
+    idcs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr, 
+        "_User.pdf")) | endsWith(.x, paste0(pkg_nm_1L_chr, "_Developer.pdf"))) %>% 
+        which()
+    urls_chr <- sort(urls_chr[idcs_int], decreasing = T)
+    return(urls_chr)
+}
 #' Get methods
 #' @description get_methods() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get methods. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Methods (a character vector).
 #' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
@@ -357,4 +377,23 @@ get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/
             ds_ls[[idx_1L_int]]$dataFile$id)))
     }
     return(r_object_xx)
+}
+#' Get source code urls
+#' @description get_source_code_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get source code urls. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Urls (a character vector).
+#' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
+#' @param pkg_url_1L_chr Package url (a character vector of length one), Default: 'https://ready4-dev.github.io/ready4/index.html'
+#' @return Urls (a character vector)
+#' @rdname get_source_code_urls
+#' @export 
+#' @importFrom rvest read_html html_elements html_attr html_text
+#' @keywords internal
+get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html") 
+{
+    urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
+        rvest::html_attr("href")
+    idcs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>% 
+        rvest::html_elements(".external-link") %>% rvest::html_text()) == 
+        "Browse source code"), which(startsWith(urls_chr, "https://doi.org/10.5281/zenodo.")))
+    urls_chr <- urls_chr[idcs_int]
+    return(urls_chr)
 }

@@ -8,7 +8,8 @@
 #' @rdname print_methods
 #' @export 
 #' @importFrom dplyr filter
-#' @importFrom kableExtra kable kable_styling
+#' @importFrom purrr map_chr
+#' @importFrom kableExtra kable kable_styling column_spec
 print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
     methods_chr = NULL, return_1L_chr = "all") 
 {
@@ -18,9 +19,12 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
         methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
             return_1L_lgl = return_1L_chr)
     methods_tb <- methods_tb %>% dplyr::filter(Method %in% methods_chr)
+    links_chr <- methods_tb$Method %>% purrr::map_chr(~paste0("https://ready4-dev.github.io/ready4/reference/", 
+        .x, "-methods.html"))
     methods_kbl <- methods_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
-            "condensed"))
+            "condensed")) %>% kableExtra::column_spec(which(names(methods_tb) == 
+        "Method"), link = links_chr)
     return(methods_kbl)
 }
 #' Print modules
@@ -52,9 +56,10 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
 #' @return pkg_extensions_kbl (An object)
 #' @rdname print_pkg_extensions
 #' @export 
-#' @importFrom dplyr mutate select
-#' @importFrom purrr map map_chr
-#' @importFrom kableExtra kbl kable_paper column_spec spec_image
+#' @importFrom dplyr mutate rename select
+#' @importFrom purrr map map_chr map2_chr
+#' @importFrom stringr str_remove
+#' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
 print_pkg_extensions <- function (pkg_extensions_tb = NULL) 
 {
     if (is.null(pkg_extensions_tb)) 
@@ -73,14 +78,38 @@ print_pkg_extensions <- function (pkg_extensions_tb = NULL)
     logos_chr <- purrr::map_chr(pkg_extensions_tb$pt_ns_chr, 
         ~paste0("https://ready4-dev.github.io/", .x, "/logo.png"))
     homepages_chr <- pkg_extensions_tb$Link
-    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::select(Type, 
-        Logo, Package, Authors, DOI)
-    pkg_extensions_kbl <- pkg_extensions_tb %>% kableExtra::kbl(booktabs = T) %>% 
-        kableExtra::kable_paper(full_width = F) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
+    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Purpose = Title %>% 
+        purrr::map2_chr(pt_ns_chr, ~stringr::str_remove(.x, paste0(.y, 
+            ": ")))) %>% dplyr::rename(Package = Logo, Website = pt_ns_chr, 
+        Examples = Vignettes_URLs)
+    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(`:=`(Manuals, 
+        purrr::map(manual_urls_ls, ~{
+            if (identical(.x, character(0)) | is.na(.x[1]) | 
+                length(.x) != 2) {
+                NA_character_
+            }
+            else {
+                kableExtra::cell_spec(c("Modeller (PDF)", "Developer (PDF)"), 
+                  "html", link = .x)
+            }
+        }))) %>% dplyr::mutate(`:=`(`Source Code`, purrr::map(code_urls_ls, 
+        ~{
+            if (is.na(.x[1])) {
+                NA_character_
+            }
+            else {
+                kableExtra::cell_spec(c("Development", "Archived"), 
+                  "html", link = .x)
+            }
+        }))) %>% dplyr::select(Type, Package, Purpose, Authors, 
+        DOI, Website, Manuals, `Source Code`, Examples)
+    pkg_extensions_kbl <- pkg_extensions_tb %>% kableExtra::kable("html", 
+        escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("hover", 
+        "condensed")) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
         "Type"), image = ready4_badges_chr) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
         "DOI"), image = zenodo_badges_chr) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
-        "Logo"), image = kableExtra::spec_image(logos_chr, height = 100, 
-        width = 100)) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
-        "Package"), link = homepages_chr)
+        "Package"), image = kableExtra::spec_image(logos_chr, 
+        height = 160, width = 160)) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
+        "Website"), link = homepages_chr)
     return(pkg_extensions_kbl)
 }

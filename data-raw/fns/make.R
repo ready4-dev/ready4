@@ -65,7 +65,7 @@ make_methods_tb <- function(packages_tb  = NULL,
                                         reference_var_nm_1L_chr = reference_var_nm_1L_chr,
                                         url_stub_1L_chr = url_stub_1L_chr,
                                         vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
-                                        vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr )
+                                        vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
   methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
                                                      return_1L_lgl = return_1L_lgl),
                                Purpose = get_mthd_titles(Method),
@@ -155,6 +155,16 @@ make_pkg_extensions_tb <- function(ns_var_nm_1L_chr = "pt_ns_chr",
                                            url_stub_1L_chr = url_stub_1L_chr,
                                            vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
                                            vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
+  pkg_extensions_tb <- pkg_extensions_tb %>%
+    dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr,
+                                               Link,
+                                               ~ get_manual_urls(.x,
+                                                                 pkg_url_1L_chr = .y))) %>%
+    dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr,
+                                               Link,
+                                               ~ get_source_code_urls(.x,
+                                                                      pkg_url_1L_chr = .y)))
+
 
   y_tb <- purrr::map_dfr(pkg_extensions_tb$pt_ns_chr,
                          ~ {
@@ -181,9 +191,11 @@ make_pkg_extensions_tb <- function(ns_var_nm_1L_chr = "pt_ns_chr",
                            }
                          }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>%
     dplyr::rename(DOI_chr = DOI,
-                  Package = TITLE,
+                  Title = TITLE,
                   Authors = AUTHOR)
-  pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb,y_tb)
+  pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb,
+                                        y_tb,
+                                        by = "pt_ns_chr")
   return(pkg_extensions_tb)
 }
 

@@ -13,30 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r results='hide', message=FALSE}
 library("ready4") 
 ```
-```{r echo=F}
-# get_fn_descs <- function(fn_nms_chr = NULL,
-#                          functions_tb = NULL,
-#                          gh_repo_1L_chr = "ready4-dev/ready4",
-#                          gh_tag_1L_chr = "Documentation_0.0",
-#                          return_1L_chr = "all"){
-#   if(is.null(functions_tb))
-#     functions_tb <- get_functions_tb(gh_repo_1L_chr = gh_repo_1L_chr,
-#                              gh_tag_1L_chr = gh_tag_1L_chr,
-#                              return_1L_chr = return_1L_chr)
-#   if(is.null(fn_nms_chr)){
-#         fn_descs_chr <- functions_tb$fn_type_desc_chr
-#   }else{
-#       fn_descs_chr <- purrr::map_chr(fn_nms_chr,
-#                                  ~get_from_lup_obj(functions_tb,
-#                                                    match_value_xx = .x,
-#                                                    match_var_nm_1L_chr = "fn_type_nm_chr",               
-#                                                    target_var_nm_1L_chr = "fn_type_desc_chr"))
-#   }
-#   return(fn_descs_chr)
-# }
-# NEED TO DEPRECATE GET_MTHD_TITLE IN READY4FUN
-
-```
 
 ## Motivation
 Transparency is one of the underpinning principles of open science. One way to improve the transparency of computational models of mental health systems is to ensure that the programs implementing these models can be meaningfully inspected by readers with different levels of technical expertise. Even non-technical readers should be able to follow the high-level logic implemented by model algorithms. Consistent use of simple programming syntax in the main program implementing an analysis can help ensure that readers need to contend with relatively few new concepts when reviewing the code. 
@@ -47,32 +23,34 @@ Transparency is one of the underpinning principles of open science. One way to i
 ## Finding ready4 Framework Methods
 To generate a table that summarises the syntax used to implement `ready4` methods, use the `make_methods_tb` function.
 
-```{r warning=F}
+```{r}
 x <- make_methods_tb()
 ```
+
 ### Core generics
-A HTML table of the core generics bundled with `ready4` and examples of methods that implement each generic can be displayed using the `print_methods` function, using the `return_1L_chr = "core"` argument. This table returns the generic / method name, the purpose of each method.
+`ready4` includes a number of core generic functions which describe the main types of method to be implemented by the `ready4` framework. Notably, the `ready4` package does not include methods for any of these core generics. Instead, methods are defined for these generics in [R packages that extend the `ready4` framework](V_04.html). A HTML table of the core generics bundled with `ready4` and examples of methods that implement each generic can be displayed using the `print_methods` function, using the `return_1L_chr = "core"` argument. 
 
 ```{r}
 print_methods(x,
               return_1L_chr = "core")
 ```
 
-### Slot methods
-Each of the "core" methods also has a "slot" version. This is a method that applies the corresponding core method to a specified slot of a class. Two of these "slot" versions have additional purposes.
+### Slot generics and methods
+Each of the "core" generics also has a "slot" version, for use when applying a core method to a specified slot of a class. The `ready4` package defines methods for each of these "slot" generics for [the `Ready4Module` class](V_01.html). Two of these "slot" methods can also be used for additional purposes:
 
- - [procureSlot](/reference/procureSlot-methods.html) is a "getter" method - its default behaviour is to return the value of a specified slot. To instead use a call to `procureSlot` to apply the `procure` method to a specified slot, the argument `use_procure_mthd_1L_lgl = T` must be included in the method call.
+ - [procureSlot](/ready4/reference/procureSlot-methods.html) is a "getter" method - its default behaviour is to return the value of a specified slot. If the argument `use_procure_mthd_1L_lgl = T` is included in the method call, `procureSlot` will instead apply the `procure` method to a specified slot.
  
- - [renewSlot](/reference/procureSlot-methods.html) is a "setter" method - if any value other than "use_renew_mthd" (the default) is passed to the `new_val_xx` argument, that value will be assigned to the specified slot.
+ - [renewSlot](/ready4/reference/procureSlot-methods.html) is a "setter" method - if any value other than "use_renew_mthd" (the default) is passed to the `new_val_xx` argument, that value will be assigned to the specified slot.
  
 A HTML table of the slot generics bundled with `ready4` can be displayed using the `print_methods` function, using the `return_1L_chr = "slot"` argument.
+
 ```{r}
 print_methods(x,
               return_1L_chr = "slot")
 ```
 
-### Extended `author` methods
-Finally, there are a small number of other generics that are more general extensions of the core functions. Currently, these extended methods are all variants on the `author` method, with each specifying the type of output to be authored by the method. A HTML table of the extended generics bundled with `ready4` can be displayed using the `print_methods` function, using the `return_1L_chr = "extended"` argument.
+### Extended `author` generics
+Finally, there are a small number of other generics that are more general extensions of the core functions. Currently, these extended generics are all variants on the `author` generics, with each specifying the type of output to be authored by the method. The `ready4` package does not include methods for any of these extended generics. A HTML table of the extended generics bundled with `ready4` can be displayed using the `print_methods` function, using the `return_1L_chr = "extended"` argument.
 
 ```{r}
 print_methods(x,
@@ -80,8 +58,4 @@ print_methods(x,
               return_1L_chr = "extended")
 ```
 
-## Ready4Module Methods
 
-```{r}
-get_methods()
-```

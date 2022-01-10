@@ -7,9 +7,9 @@ template:
 home:
   links:
   - text: Manual - User (PDF)
-    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/classes_lup.RDS
+    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/ready4_User.pdf
   - text: Manual - Developer (PDF)
-    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/abbreviations_lup.RDS
+    href: https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/ready4_Developer.pdf
   - text: ready4 framework
     href:  https://www.ready4-dev.com/
 development:

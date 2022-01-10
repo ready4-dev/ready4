@@ -156,7 +156,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @export 
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate case_when arrange select rename left_join
-#' @importFrom purrr map_chr map_dfr
+#' @importFrom purrr map_chr map2 map_dfr
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom bib2df bib2df
@@ -187,6 +187,10 @@ make_pkg_extensions_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_va
         ns_var_nm_1L_chr = ns_var_nm_1L_chr, reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
         url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
         vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
+    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr, 
+        Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>% 
+        dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr, Link, 
+            ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
     y_tb <- purrr::map_dfr(pkg_extensions_tb$pt_ns_chr, ~{
         if (!.x %in% c("TTU", "youthu")) {
             f <- tempfile(fileext = ".bib")
@@ -211,9 +215,9 @@ make_pkg_extensions_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_va
             }
         }
     }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>% 
-        dplyr::rename(DOI_chr = DOI, Package = TITLE, Authors = AUTHOR)
+        dplyr::rename(DOI_chr = DOI, Title = TITLE, Authors = AUTHOR)
     pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb, 
-        y_tb)
+        y_tb, by = "pt_ns_chr")
     return(pkg_extensions_tb)
 }
 #' Make prompt
