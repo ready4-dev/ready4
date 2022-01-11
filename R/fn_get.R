@@ -90,6 +90,38 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
     })
     return(urls_chr)
 }
+#' Get dataverses
+#' @description get_dvs() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get dataverses. Function argument dv_nm_1L_chr specifies the where to look for the required object. The function returns Dataverse (a tibble).
+#' @param dv_nm_1L_chr Dataverse name (a character vector of length one), Default: 'ready4'
+#' @param key_1L_chr Key (a character vector of length one), Default: NULL
+#' @param server_1L_chr Server (a character vector of length one), Default: 'dataverse.harvard.edu'
+#' @return Dataverse (a tibble)
+#' @rdname get_dvs
+#' @export 
+#' @importFrom dataverse dataverse_contents get_dataverse
+#' @importFrom purrr map_dfr map map_chr
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate
+#' @keywords internal
+get_dvs <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu") 
+{
+    ds_ls <- dataverse::dataverse_contents(dv_nm_1L_chr, key = key_1L_chr, 
+        server = server_1L_chr)
+    dv_tb <- ds_ls %>% purrr::map_dfr(~{
+        dv_ls <- dataverse::get_dataverse(.x)
+        tibble::tibble(Alias = dv_ls$alias, Name = dv_ls$name, 
+            Description = dv_ls$description, Publisher = dv_ls$affiliation) %>% 
+            dplyr::mutate(Contents = purrr::map(Alias, ~dataverse::dataverse_contents(.x, 
+                key = key_1L_chr, server = server_1L_chr) %>% 
+                purrr::map_chr(~if ("persistentUrl" %in% names(.x)) {
+                  .x$persistentUrl
+                }
+                else {
+                  NA_character_
+                })))
+    })
+    return(dv_tb)
+}
 #' Get examples
 #' @description get_examples() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get examples. Function argument vignettes_chr specifies the where to look for the required object. The function returns Examples (a character vector).
 #' @param vignettes_chr Vignettes (a character vector)

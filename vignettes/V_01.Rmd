@@ -12,7 +12,7 @@ library("ready4")
 ```
 
 ## Motivation
-The social, economic and service systems that shape population mental health are complex and interconnected. Developing models that adequately represent salient features of these complex systems can therefore be major undertakings. However, such large scale computational modelling projects may be made more tractable if broken into smaller tasks and advanced by multiple teams. Modellers can then start simply and progressively develop more complex representations of mental health systems by linking multiple modelling projects that independently describe distinct system features. Such phased and collaborative approaches require all individual project outputs to readily integrate with each other as "modules". 
+One potentially attractive approach to modelling complex mental health systems is to begin with a relatively simple computational model and to progressively extend its scope and sophistication. Such an approach can be aided by linking multiple modelling projects (potentially from different modelling groups) that each independently describe distinct aspects of the system to be modelled. Such phased and collaborative approaches require all individual project outputs to readily integrate with each other as "modules". 
 
 ## Implementation
 `ready4` takes advantage of the [encapsulation and inheritance features of Object Oriented Programming (OOP)](V_03.html) to support modular approaches to the development of computational models of mental health systems. 

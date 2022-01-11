@@ -54,6 +54,30 @@ get_dv_fls_urls <- function(file_nms_chr,
     })
   return(urls_chr)
 }
+get_dvs <- function(dv_nm_1L_chr = "ready4",
+                    key_1L_chr = NULL,
+                    server_1L_chr = "dataverse.harvard.edu"){
+  ds_ls <- dataverse::dataverse_contents(dv_nm_1L_chr,
+                                         key = key_1L_chr, server = server_1L_chr)
+  dv_tb <- ds_ls %>%
+    purrr::map_dfr(~{
+      dv_ls <- dataverse::get_dataverse(.x)
+      tibble::tibble(Alias = dv_ls$alias,
+                     Name = dv_ls$name,
+                     Description = dv_ls$description,
+                     Publisher = dv_ls$affiliation) %>%
+        dplyr::mutate(Contents =  purrr::map(Alias,
+                                             ~dataverse::dataverse_contents(.x,
+                                                                            key = key_1L_chr,
+                                                                            server = server_1L_chr) %>%
+                                               purrr::map_chr(~if("persistentUrl" %in% names(.x)){
+                                                 .x$persistentUrl
+                                               }else{
+                                                 NA_character_
+                                               })))
+    })
+  return(dv_tb)
+}
 get_examples <- function(vignettes_chr,
                          term_1L_chr){
   if(is.na(vignettes_chr[1])){

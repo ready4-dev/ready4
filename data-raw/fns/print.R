@@ -1,3 +1,12 @@
+print_dvs <- function(dvs_tb){
+  dvs_kbl <- add_references(dvs_tb,
+                                   data_var_nm_1L_chr = "Contents",
+                                   data_url_var_nm_1L_chr = "Datasets") %>%
+    dplyr::select(Alias, Name, Description, Publisher, Datasets)%>%
+    kableExtra::kable("html", escape = FALSE) %>%
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+  return(dvs_kbl)
+}
 print_methods <- function(methods_tb = NULL,
                           exclude_mthds_for_chr = NA_character_,
                           methods_chr = NULL,
@@ -63,7 +72,7 @@ print_packages <- function(pkg_extensions_tb = NULL){
                     purrr::map2_chr(pt_ns_chr,
                                     ~ stringr::str_remove(.x,paste0(.y,": ")))) %>%
     dplyr::rename(Package = Logo,
-                  Website = pt_ns_chr,
+                  Website = Link,
                   Examples = Vignettes_URLs)
   pkg_extensions_tb <- pkg_extensions_tb %>%
     dplyr::mutate(Examples = purrr::map(Examples,
@@ -88,7 +97,7 @@ print_packages <- function(pkg_extensions_tb = NULL){
                                                                        "Website",
                                                                        manual_txt_chr),
                                                                      "html",
-                                                                     link = c(..3,..2,..1))
+                                                                     link = c(..2,..3,..1))
 
                                              })) %>%
     # dplyr::mutate(Manuals = purrr::map(manual_urls_ls,

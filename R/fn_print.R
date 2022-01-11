@@ -1,3 +1,21 @@
+#' Print dataverses
+#' @description print_dvs() is a Print function that prints output to console Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.
+#' @param dvs_tb Dataverses (a tibble)
+#' @return dvs_kbl (An object)
+#' @rdname print_dvs
+#' @export 
+#' @importFrom dplyr select
+#' @importFrom kableExtra kable kable_styling
+#' @keywords internal
+print_dvs <- function (dvs_tb) 
+{
+    dvs_kbl <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", 
+        data_url_var_nm_1L_chr = "Datasets") %>% dplyr::select(Alias, 
+        Name, Description, Publisher, Datasets) %>% kableExtra::kable("html", 
+        escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("hover", 
+        "condensed"))
+    return(dvs_kbl)
+}
 #' Print methods
 #' @description print_methods() is a Print function that prints output to console Specifically, this function implements an algorithm to print methods. The function is called for its side effects and does not return a value.
 #' @param methods_tb Methods (a tibble), Default: NULL
@@ -80,7 +98,7 @@ print_packages <- function (pkg_extensions_tb = NULL)
     homepages_chr <- pkg_extensions_tb$Link
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Purpose = Title %>% 
         purrr::map2_chr(pt_ns_chr, ~stringr::str_remove(.x, paste0(.y, 
-            ": ")))) %>% dplyr::rename(Package = Logo, Website = pt_ns_chr, 
+            ": ")))) %>% dplyr::rename(Package = Logo, Website = Link, 
         Examples = Vignettes_URLs)
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Examples = purrr::map(Examples, 
         ~if (is.na(.x[1])) {
@@ -98,7 +116,7 @@ print_packages <- function (pkg_extensions_tb = NULL)
             manual_txt_chr <- c("Manual - Short (PDF)", "Manual - Full (PDF)")
         }
         kableExtra::cell_spec(c("Citation", "Website", manual_txt_chr), 
-            "html", link = c(..3, ..2, ..1))
+            "html", link = c(..2, ..3, ..1))
     })) %>% dplyr::mutate(Code = purrr::map(code_urls_ls, ~{
         if (is.na(.x[1])) {
             ""

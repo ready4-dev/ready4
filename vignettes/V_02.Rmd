@@ -15,7 +15,7 @@ library("ready4")
 ```
 
 ## Motivation
-Transparency is one of the underpinning principles of open science. One way to improve the transparency of computational models of mental health systems is to ensure that the programs implementing these models can be meaningfully inspected by readers with different levels of technical expertise. Even non-technical readers should be able to follow the high-level logic implemented by model algorithms. Consistent use of simple programming syntax in the main program implementing an analysis can help ensure that readers need to contend with relatively few new concepts when reviewing the code. 
+Transparency is one of the underpinning principles of open science. One way to improve the transparency of computational models of mental health systems is to ensure that the programs implementing these models can be meaningfully inspected by readers with different levels of technical expertise. Even non-technical readers should be able to follow the high-level logic implemented by model algorithms. Consistent use of simple programming syntax in the main programS implementing analyses can help ensure that readers need to contend with relatively few new concepts when reviewing the code. 
 
 ## Implementation
 `ready4` provides a simple syntax that can be consistently applied across multiple types of mental health computational modelling projects. It does so by taking advantage of the [polymorphism and abstraction features of Object Oriented Programing](V_03.html) and R's use of generic functions. Generic functions don't obviously do anything by themselves - their most salient features are a name and a high level description of the type of task that any method using that name should perform. Whenever a method is defined for [classes using R's S4 and S3 systems (the types used for ready4 framework modules and sub-modules)](V_01.html), it is assigned to the generic that is the best match for the algorithm it implements.
@@ -28,7 +28,7 @@ x <- make_methods_tb()
 ```
 
 ### Core generics
-`ready4` includes a number of core generic functions which describe the main types of method to be implemented by the `ready4` framework. Notably, the `ready4` package does not include methods for any of these core generics. Instead, methods are defined for these generics in [R packages that extend the `ready4` framework](V_04.html). A HTML table of the core generics bundled with `ready4` and examples of methods that implement each generic can be displayed using the `print_methods` function, using the `return_1L_chr = "core"` argument. 
+`ready4` includes a number of core generic functions which describe the main types of method to be implemented by the `ready4` framework. Notably, the `ready4` package does not define methods for any of these core generics. Instead, methods are defined for these generics in [R packages that extend the `ready4` framework](V_04.html). A HTML table of the core generics bundled with `ready4` and examples of methods that implement each generic can be displayed using the `print_methods` function, using the `return_1L_chr = "core"` argument. 
 
 ```{r}
 print_methods(x,

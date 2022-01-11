@@ -44,13 +44,24 @@ add_vignette_links <- function(pkg_extensions_tb,
                                                                       }else{
                                                                         NA_character_
                                                                       }))
-  examples_1L_int <- pkg_extensions_tb %>%
-    dplyr::pull(!!rlang::sym(vignette_var_nm_1L_chr)) %>%
+  pkg_extensions_tb <- add_references(pkg_extensions_tb,
+                                      data_var_nm_1L_chr = vignette_var_nm_1L_chr,
+                                      data_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr,
+                                      reference_var_nm_1L_chr = reference_var_nm_1L_chr)
+
+  return(pkg_extensions_tb)
+}
+add_references <- function(ds_tb,
+                           data_var_nm_1L_chr = "URL",
+                           data_url_var_nm_1L_chr = "REF_URL",
+                           reference_var_nm_1L_chr = "Reference"){
+  examples_1L_int <- ds_tb %>%
+    dplyr::pull(!!rlang::sym(data_var_nm_1L_chr)) %>%
     purrr::compact() %>%
     purrr::flatten_chr() %>%
     length()
-  pkg_extensions_tb <- pkg_extensions_tb %>%
-    dplyr::mutate(!!rlang::sym(reference_var_nm_1L_chr) := !!rlang::sym(vignette_var_nm_1L_chr) %>%
+  ds_tb <- ds_tb %>%
+    dplyr::mutate(!!rlang::sym(reference_var_nm_1L_chr) := !!rlang::sym(data_var_nm_1L_chr) %>%
                     purrr::reduce(.init = list(ref_int = c(0,0),
                                                content_ls = NULL),
                                   ~{
@@ -58,25 +69,25 @@ add_vignette_links <- function(pkg_extensions_tb,
                                       .x$content_ls <- append(.x$content_ls,list(NA_integer_))
                                     }else{
                                       .x$ref_int <- c(.x$ref_int[2] + 1,
-                                                      .x$ref_int[2] +length(.y))
+                                                      .x$ref_int[2] + length(.y))
                                       .x$content_ls <- append(.x$content_ls,
                                                               list((1:examples_1L_int)[.x$ref_int]))
                                     }
                                     .x
                                   }) %>%
                     purrr::pluck(2)) %>%
-    dplyr::mutate(!!rlang::sym(vignette_url_var_nm_1L_chr) := purrr::map2(!!rlang::sym(reference_var_nm_1L_chr),
-                                                                          !!rlang::sym(vignette_var_nm_1L_chr),
+    dplyr::mutate(!!rlang::sym(data_url_var_nm_1L_chr) := purrr::map2(!!rlang::sym(reference_var_nm_1L_chr),
+                                                                          !!rlang::sym(data_var_nm_1L_chr),
                                                                           ~ {
                                                                             if(is.na(.x[1])){
                                                                               NA_character_
                                                                             }else{
-                                                                              kableExtra::cell_spec(unique(.x),
+                                                                              kableExtra::cell_spec(.x[1]:.x[2],
                                                                                                     "html",
                                                                                                     link = .y)
                                                                             }
 
                                                                           }
     ))
-  return(pkg_extensions_tb)
+  return(ds_tb)
 }

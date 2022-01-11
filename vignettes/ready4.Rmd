@@ -17,7 +17,11 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ready4)
 ```
-This development version of the `ready4` package has been made available as part of the process of testing and documenting the package. A brief overview of the intended use of `ready4` is available in the following articles:
+
+## Motivation
+The social, economic and service systems that shape population mental health are complex and thus can be challenging to model. Some mental health systems modelling projects may therefore be more tractable if broken into smaller tasks and advanced by multiple teams. Such phased and collaborative approaches can be facilitated by use of common frameworks for the development of computational models that are both open and modular.
+
+The `ready4` package provides a bare bones initial outline of a framework for open science computational models of mental health systems. This initial framework is extended by multiple other R packages. The following vignette articles introduce the `ready4` framework and provide details of how the framework has been extended and applied:
 
 - [Develop Modular Computational Models Of Mental Health Systems](V_01.html)
 

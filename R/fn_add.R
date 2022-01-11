@@ -39,6 +39,50 @@ add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for
         ncol(combined_lups), ]
     return(combined_lups)
 }
+#' Add references
+#' @description add_references() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add references. Function argument ds_tb specifies the object to be updated. The function returns Dataset (a tibble).
+#' @param ds_tb Dataset (a tibble)
+#' @param data_var_nm_1L_chr Data variable name (a character vector of length one), Default: 'URL'
+#' @param data_url_var_nm_1L_chr Data url variable name (a character vector of length one), Default: 'REF_URL'
+#' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
+#' @return Dataset (a tibble)
+#' @rdname add_references
+#' @export 
+#' @importFrom dplyr pull mutate
+#' @importFrom rlang sym
+#' @importFrom purrr compact flatten_chr reduce pluck map2
+#' @importFrom kableExtra cell_spec
+#' @keywords internal
+add_references <- function (ds_tb, data_var_nm_1L_chr = "URL", data_url_var_nm_1L_chr = "REF_URL", 
+    reference_var_nm_1L_chr = "Reference") 
+{
+    examples_1L_int <- ds_tb %>% dplyr::pull(!!rlang::sym(data_var_nm_1L_chr)) %>% 
+        purrr::compact() %>% purrr::flatten_chr() %>% length()
+    ds_tb <- ds_tb %>% dplyr::mutate(`:=`(!!rlang::sym(reference_var_nm_1L_chr), 
+        !!rlang::sym(data_var_nm_1L_chr) %>% purrr::reduce(.init = list(ref_int = c(0, 
+            0), content_ls = NULL), ~{
+            if (is.null(.y) | identical(.y, character(0)) | is.na(.y[1])) {
+                .x$content_ls <- append(.x$content_ls, list(NA_integer_))
+            }
+            else {
+                .x$ref_int <- c(.x$ref_int[2] + 1, .x$ref_int[2] + 
+                  length(.y))
+                .x$content_ls <- append(.x$content_ls, list((1:examples_1L_int)[.x$ref_int]))
+            }
+            .x
+        }) %>% purrr::pluck(2))) %>% dplyr::mutate(`:=`(!!rlang::sym(data_url_var_nm_1L_chr), 
+        purrr::map2(!!rlang::sym(reference_var_nm_1L_chr), !!rlang::sym(data_var_nm_1L_chr), 
+            ~{
+                if (is.na(.x[1])) {
+                  NA_character_
+                }
+                else {
+                  kableExtra::cell_spec(.x[1]:.x[2], "html", 
+                    link = .y)
+                }
+            })))
+    return(ds_tb)
+}
 #' Add vignette links
 #' @description add_vignette_links() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add vignette links. Function argument pkg_extensions_tb specifies the object to be updated. The function returns Package extensions (a tibble).
 #' @param pkg_extensions_tb Package extensions (a tibble)
@@ -50,12 +94,11 @@ add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for
 #' @return Package extensions (a tibble)
 #' @rdname add_vignette_links
 #' @export 
-#' @importFrom dplyr mutate pull
+#' @importFrom dplyr mutate
 #' @importFrom rlang sym
-#' @importFrom purrr map keep map2 compact flatten_chr reduce pluck
+#' @importFrom purrr map keep map2
 #' @importFrom rvest read_html html_elements html_attr
 #' @importFrom stringr str_remove
-#' @importFrom kableExtra cell_spec
 #' @keywords internal
 add_vignette_links <- function (pkg_extensions_tb, ns_var_nm_1L_chr = "pt_ns_chr", 
     reference_var_nm_1L_chr = "Reference", url_stub_1L_chr = "https://ready4-dev.github.io/", 
@@ -74,29 +117,8 @@ add_vignette_links <- function (pkg_extensions_tb, ns_var_nm_1L_chr = "pt_ns_chr
                 else {
                   NA_character_
                 })))
-    examples_1L_int <- pkg_extensions_tb %>% dplyr::pull(!!rlang::sym(vignette_var_nm_1L_chr)) %>% 
-        purrr::compact() %>% purrr::flatten_chr() %>% length()
-    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(`:=`(!!rlang::sym(reference_var_nm_1L_chr), 
-        !!rlang::sym(vignette_var_nm_1L_chr) %>% purrr::reduce(.init = list(ref_int = c(0, 
-            0), content_ls = NULL), ~{
-            if (is.null(.y) | identical(.y, character(0)) | is.na(.y[1])) {
-                .x$content_ls <- append(.x$content_ls, list(NA_integer_))
-            }
-            else {
-                .x$ref_int <- c(.x$ref_int[2] + 1, .x$ref_int[2] + 
-                  length(.y))
-                .x$content_ls <- append(.x$content_ls, list((1:examples_1L_int)[.x$ref_int]))
-            }
-            .x
-        }) %>% purrr::pluck(2))) %>% dplyr::mutate(`:=`(!!rlang::sym(vignette_url_var_nm_1L_chr), 
-        purrr::map2(!!rlang::sym(reference_var_nm_1L_chr), !!rlang::sym(vignette_var_nm_1L_chr), 
-            ~{
-                if (is.na(.x[1])) {
-                  NA_character_
-                }
-                else {
-                  kableExtra::cell_spec(unique(.x), "html", link = .y)
-                }
-            })))
+    pkg_extensions_tb <- add_references(pkg_extensions_tb, data_var_nm_1L_chr = vignette_var_nm_1L_chr, 
+        data_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr, 
+        reference_var_nm_1L_chr = reference_var_nm_1L_chr)
     return(pkg_extensions_tb)
 }
