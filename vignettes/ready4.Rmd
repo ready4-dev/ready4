@@ -27,6 +27,6 @@ The `ready4` package provides a bare bones initial outline of a framework for op
 
 - [Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems](V_02.html)
 
-- [Apply An Object-Oriented Paradigm To Developing Computational Models Of Mental Health Systems](V_03.html)
+- [Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems](V_03.html)
 
-- [Find And Author Extensions To The Ready4 Framework](V_041.html)
+- [Find And Author Extensions To The Ready4 Framework](V_04.html)

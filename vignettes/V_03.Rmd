@@ -1,5 +1,5 @@
 ---
-title: "Apply An Object-Oriented Paradigm To Developing Computational Models Of Mental Health Systems"
+title: "Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -7,7 +7,7 @@ output:
     highlight: null
     number_sections: yes
 vignette: >
-  %\VignetteIndexEntry{Leverage An Object-Oriented Paradigm To Develop Modular and Transparent Computational Models Of Mental Health Systems}
+  %\VignetteIndexEntry{Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
