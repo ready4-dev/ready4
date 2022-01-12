@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9070</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9074</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/V_01.html">Develop Modular Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_02.html">Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems</a>
-    <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Developing Computational Models Of Mental Health Systems</a>
+    <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_04.html">Find And Author Extensions To The Ready4 Framework</a>
   </div>
 </li>
@@ -92,7 +92,7 @@
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<p>Transparency is one of the underpinning principles of open science. One way to improve the transparency of computational models of mental health systems is to ensure that the programs implementing these models can be meaningfully inspected by readers with different levels of technical expertise. Even non-technical readers should be able to follow the high-level logic implemented by model algorithms. Consistent use of simple programming syntax in the main program implementing an analysis can help ensure that readers need to contend with relatively few new concepts when reviewing the code.</p>
+<p>Transparency is one of the underpinning principles of open science. One way to improve the transparency of computational models of mental health systems is to ensure that the programs implementing these models can be meaningfully inspected by readers with different levels of technical expertise. Even non-technical readers should be able to follow the high-level logic implemented by model algorithms. Consistent use of simple programming syntax in the main programS implementing analyses can help ensure that readers need to contend with relatively few new concepts when reviewing the code.</p>
 </div>
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
@@ -113,7 +113,7 @@
 <div class="section level3">
 <h3 id="core-generics">Core generics<a class="anchor" aria-label="anchor" href="#core-generics"></a>
 </h3>
-<p><code>ready4</code> includes a number of core generic functions which describe the main types of method to be implemented by the <code>ready4</code> framework. Notably, the <code>ready4</code> package does not include methods for any of these core generics. Instead, methods are defined for these generics in <a href="V_04.html">R packages that extend the <code>ready4</code> framework</a>. A HTML table of the core generics bundled with <code>ready4</code> and examples of methods that implement each generic can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "core"</code> argument.</p>
+<p><code>ready4</code> includes a number of core generic functions which describe the main types of method to be implemented by the <code>ready4</code> framework. Notably, the <code>ready4</code> package does not define methods for any of these core generics. Instead, methods are defined for these generics in <a href="V_04.html">R packages that extend the <code>ready4</code> framework</a>. A HTML table of the core generics bundled with <code>ready4</code> and examples of methods that implement each generic can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "core"</code> argument.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
               return_1L_chr <span class="op">=</span> <span class="st">"core"</span><span class="op">)</span></code></pre></div>

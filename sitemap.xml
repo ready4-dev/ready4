@@ -46,6 +46,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/add_lups.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/add_references.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/add_vignette_links.html</loc>
   </url>
   <url>
@@ -104,6 +107,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_dv_fls_urls.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_dvs.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_examples.html</loc>
@@ -188,6 +194,12 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_dss.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_dvs.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/print_methods.html</loc>
