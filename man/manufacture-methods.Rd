@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{manufacture}
 \alias{manufacture}
-\title{Manufacture a new object}
+\title{Manufacture a (non ready4 framework) object}
 \usage{
 manufacture(x, ...)
 }
@@ -12,5 +12,5 @@ manufacture(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-manufacture() is a method that creates a new object (other than a ready4 class instance).
+manufacture() is a method that creates a new object (other than a ready4 framework module / sub-module).
 }

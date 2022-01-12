@@ -93,7 +93,7 @@ print_modules <- function(modules_tb,
 }
 print_packages <- function(pkg_extensions_tb = NULL){
   if(is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_pkg_extensions_tb()
+    pkg_extensions_tb <- make_libraries_tb()
   pkg_extensions_tb <- pkg_extensions_tb %>%
     dplyr::mutate(Badges = purrr::map(pt_ns_chr,
                                       ~ get_badge_urls(.x))) %>%
@@ -191,7 +191,7 @@ print_packages <- function(pkg_extensions_tb = NULL){
 }
 print_vignettes <- function(pkg_extensions_tb = NULL){
   if(is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_pkg_extensions_tb()
+    pkg_extensions_tb <- make_libraries_tb()
   vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
   keep_lgl <- !is.na(vignettes_chr)
   vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]#,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{exhibit}
 \alias{exhibit}
-\title{Exhibit (print to console) features of an object}
+\title{Exhibit (print to console) features of a ready4 framework module / sub-module}
 \usage{
 exhibit(x, ...)
 }
@@ -12,5 +12,5 @@ exhibit(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-exhibit() is a method that prints salient features of an object to console.
+exhibit() is a method that prints salient features of a ready4 framework module / sub-module to console.
 }

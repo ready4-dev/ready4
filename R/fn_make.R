@@ -1,3 +1,87 @@
+#' Make dataverses tibble
+#' @description make_dvs_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make dataverses tibble. The function returns Dataverses (a tibble).
+#' @param dv_nm_1L_chr Dataverse name (a character vector of length one), Default: 'ready4'
+#' @param key_1L_chr Key (a character vector of length one), Default: NULL
+#' @param server_1L_chr Server (a character vector of length one), Default: 'dataverse.harvard.edu'
+#' @return Dataverses (a tibble)
+#' @rdname make_dvs_tb
+#' @export 
+#' @importFrom dataverse dataverse_contents get_dataverse dataset_metadata
+#' @importFrom purrr map_lgl map_dfr map map_chr map2 discard flatten_chr compact
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate arrange
+make_dvs_tb <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu") 
+{
+    contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr, 
+        key = key_1L_chr, server = server_1L_chr)
+    dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == 
+        "dataverse")]
+    ds_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == 
+        "dataset")]
+    if (identical(ds_ls, list())) {
+        ds_ls <- NULL
+    }
+    else {
+        extra_dv_ls <- dataverse::get_dataverse(dv_nm_1L_chr, 
+            key = key_1L_chr, server = server_1L_chr)
+        dv_ls <- append(extra_dv_ls, dv_ls)
+    }
+    dvs_tb <- dv_ls %>% purrr::map_dfr(~{
+        dv_ls <- dataverse::get_dataverse(.x, key = key_1L_chr, 
+            server = server_1L_chr)
+        tb <- tibble::tibble(Dataverse = dv_ls$alias, Name = dv_ls$name, 
+            Description = dv_ls$description, Creator = dv_ls$affiliation)
+        tb %>% dplyr::mutate(Contents = purrr::map(Dataverse, 
+            ~{
+                dv_all_ls <- dataverse::dataverse_contents(.x, 
+                  key = key_1L_chr, server = server_1L_chr)
+                dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == 
+                  "dataset")] %>% purrr::map_chr(~if ("persistentUrl" %in% 
+                  names(.x)) {
+                  .x$persistentUrl
+                }
+                else {
+                  NA_character_
+                })
+            }))
+    })
+    dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = Contents %>% 
+        purrr::map(~.x %>% purrr::map(~.x %>% dataverse::dataset_metadata(key = key_1L_chr, 
+            server = server_1L_chr) %>% tryCatch(error = function(e) "ERROR")))) %>% 
+        dplyr::mutate(Contents = Contents %>% purrr::map2(Datasets_Meta, 
+            ~{
+                entry_ls <- .x %>% purrr::map2(.y, ~if (identical(.y, 
+                  "ERROR")) {
+                  NA_character_
+                }
+                else {
+                  .x
+                }) %>% purrr::discard(is.na)
+                if (identical(entry_ls, list())) {
+                  NA_character_
+                }
+                else {
+                  entry_ls %>% purrr::flatten_chr()
+                }
+            }))
+    dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = Datasets_Meta %>% 
+        purrr::map(~{
+            entry_ls <- .x %>% purrr::map(~if (identical(.x, 
+                "ERROR")) {
+                NULL
+            }
+            else {
+                .x
+            }) %>% purrr::compact()
+            if (identical(entry_ls, list())) {
+                NULL
+            }
+            else {
+                entry_ls
+            }
+        })) %>% dplyr::arrange(Dataverse)
+    return(dvs_tb)
+}
 #' Make files tibble
 #' @description make_files_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make files tibble. The function returns Files (a tibble).
 #' @param paths_to_dirs_chr Paths to directories (a character vector)
@@ -42,6 +126,82 @@ make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_c
     assertthat::are_equal(nrow(files_tb), paste0(files_tb$file_chr, 
         files_tb$file_type_chr) %>% unique() %>% length())
     return(files_tb)
+}
+#' Make libraries tibble
+#' @description make_libraries_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make libraries tibble. The function returns Package extensions (a tibble).
+#' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
+#' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
+#' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
+#' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
+#' @return Package extensions (a tibble)
+#' @rdname make_libraries_tb
+#' @export 
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate case_when arrange select rename left_join
+#' @importFrom purrr map_chr map2 map_dfr
+#' @importFrom kableExtra cell_spec
+#' @importFrom rvest read_html html_elements html_text2
+#' @importFrom bib2df bib2df
+make_libraries_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_1L_chr = "Reference", 
+    url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
+    vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
+{
+    pkg_extensions_tb <- tibble::tibble(pt_ns_chr = c("scorz", 
+        "specific", "TTU", "youthvars", "ready4show", "ready4use", 
+        "ready4fun", "ready4class", "ready4pack", "youthu")) %>% 
+        dplyr::mutate(Type = dplyr::case_when(pt_ns_chr == "ready4class" ~ 
+            "Authoring (code - classes)", pt_ns_chr == "ready4fun" ~ 
+            "Authoring (code - functions)", pt_ns_chr == "ready4pack" ~ 
+            "Authoring (code - libraries)", pt_ns_chr == "ready4show" ~ 
+            "Authoring (code - programs)", pt_ns_chr == "ready4use" ~ 
+            "Authoring (datasets)", pt_ns_chr == "youthvars" ~ 
+            "Description (datasets)", pt_ns_chr == "scorz" ~ 
+            "Description (variable scoring)", pt_ns_chr == "specific" ~ 
+            "Modelling (inverse problems)", pt_ns_chr == "heterodox" ~ 
+            "Modelling (heterogeneity)", pt_ns_chr == "TTU" ~ 
+            "Modelling (health utility)", pt_ns_chr == "youthu" ~ 
+            "Prediction (health utility)", T ~ "")) %>% dplyr::arrange(Type) %>% 
+        dplyr::mutate(Link = purrr::map_chr(pt_ns_chr, ~paste0(url_stub_1L_chr, 
+            .x, "/index", ".html"))) %>% dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
+        "html", link = Link))
+    pkg_extensions_tb <- add_vignette_links(pkg_extensions_tb, 
+        ns_var_nm_1L_chr = ns_var_nm_1L_chr, reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
+        url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
+        vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
+    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Citation = paste0(url_stub_1L_chr, 
+        pt_ns_chr, "/authors.html")) %>% dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr, 
+        Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>% 
+        dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr, Link, 
+            ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
+    y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation, ~{
+        if (!.x %in% c("https://ready4-dev.github.io/TTU/authors.html", 
+            "https://ready4-dev.github.io/youthu/authors.html")) {
+            f <- tempfile(fileext = ".bib")
+            sink(f)
+            writeLines(rvest::read_html(.x) %>% rvest::html_elements("pre") %>% 
+                rvest::html_text2())
+            sink(NULL)
+            suppressWarnings(bib2df::bib2df(f)) %>% dplyr::select(AUTHOR, 
+                TITLE, DOI)
+        }
+        else {
+            if (.x == "TTU") {
+                tibble::tibble(AUTHOR = list(c("Caroline Gao", 
+                  "Matthew Hamilton")), TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms", 
+                  DOI = "10.5281/zenodo.5646593")
+            }
+            else {
+                tibble::tibble(AUTHOR = list(c("Matthew Hamilton", 
+                  "Caroline Gao")), TITLE = "youthu: Map Youth Outcomes to Health Utility", 
+                  DOI = "10.5281/zenodo.5646668")
+            }
+        }
+    }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>% 
+        dplyr::rename(DOI_chr = DOI, Title = TITLE, Authors = AUTHOR)
+    pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb, 
+        y_tb, by = "pt_ns_chr")
+    return(pkg_extensions_tb)
 }
 #' Make list phrase
 #' @description make_list_phrase() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make list phrase. The function returns List phrase (a character vector of length one).
@@ -94,7 +254,7 @@ make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_char
     return_1L_lgl = "all", url_stub_1L_chr = "https://ready4-dev.github.io/", 
     vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
 {
-    packages_tb <- make_pkg_extensions_tb(ns_var_nm_1L_chr = ns_var_nm_1L_chr, 
+    packages_tb <- make_libraries_tb(ns_var_nm_1L_chr = ns_var_nm_1L_chr, 
         reference_var_nm_1L_chr = reference_var_nm_1L_chr, url_stub_1L_chr = url_stub_1L_chr, 
         vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
     methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
@@ -123,7 +283,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_pkg_extensions_tb()
+        pkg_extensions_tb <- make_libraries_tb()
     if (is.null(cls_extensions_tb)) 
         cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb, 
             gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
@@ -143,82 +303,6 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
         dplyr::select(Class, Description, Library, Examples, 
             old_class_lgl)
     return(modules_tb)
-}
-#' Make package extensions tibble
-#' @description make_pkg_extensions_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make package extensions tibble. The function returns Package extensions (a tibble).
-#' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
-#' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
-#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
-#' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
-#' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
-#' @return Package extensions (a tibble)
-#' @rdname make_pkg_extensions_tb
-#' @export 
-#' @importFrom tibble tibble
-#' @importFrom dplyr mutate case_when arrange select rename left_join
-#' @importFrom purrr map_chr map2 map_dfr
-#' @importFrom kableExtra cell_spec
-#' @importFrom rvest read_html html_elements html_text2
-#' @importFrom bib2df bib2df
-make_pkg_extensions_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_1L_chr = "Reference", 
-    url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
-    vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
-{
-    pkg_extensions_tb <- tibble::tibble(pt_ns_chr = c("scorz", 
-        "specific", "TTU", "youthvars", "ready4show", "ready4use", 
-        "ready4fun", "ready4class", "ready4pack", "youthu")) %>% 
-        dplyr::mutate(Type = dplyr::case_when(pt_ns_chr == "ready4class" ~ 
-            "Authoring (code - classes)", pt_ns_chr == "ready4fun" ~ 
-            "Authoring (code - functions)", pt_ns_chr == "ready4pack" ~ 
-            "Authoring (code - libraries)", pt_ns_chr == "ready4show" ~ 
-            "Authoring (code - programs)", pt_ns_chr == "ready4use" ~ 
-            "Authoring (datasets)", pt_ns_chr == "youthvars" ~ 
-            "Description (datasets)", pt_ns_chr == "scorz" ~ 
-            "Description (variable scoring)", pt_ns_chr == "specific" ~ 
-            "Modelling (inverse problems)", pt_ns_chr == "heterodox" ~ 
-            "Modelling (heterogeneity)", pt_ns_chr == "TTU" ~ 
-            "Modelling (health utility)", pt_ns_chr == "youthu" ~ 
-            "Prediction (health utility)", T ~ "")) %>% dplyr::arrange(Type) %>% 
-        dplyr::mutate(Link = purrr::map_chr(pt_ns_chr, ~paste0(url_stub_1L_chr, 
-            .x, "/index", ".html"))) %>% dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
-        "html", link = Link))
-    pkg_extensions_tb <- add_vignette_links(pkg_extensions_tb, 
-        ns_var_nm_1L_chr = ns_var_nm_1L_chr, reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
-        url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
-        vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
-    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Citation = paste0(url_stub_1L_chr, 
-        pt_ns_chr, "/authors.html")) %>% dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr, 
-        Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>% 
-        dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr, Link, 
-            ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
-    y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation, ~{
-        if (!.x %in% c("https://ready4-dev.github.io/TTU/authors.html", 
-            "https://ready4-dev.github.io/youthu/authors.html")) {
-            f <- tempfile(fileext = ".bib")
-            sink(f)
-            writeLines(rvest::read_html(.x) %>% rvest::html_elements("pre") %>% 
-                rvest::html_text2())
-            sink(NULL)
-            bib2df::bib2df(f) %>% dplyr::select(AUTHOR, TITLE, 
-                DOI)
-        }
-        else {
-            if (.x == "TTU") {
-                tibble::tibble(AUTHOR = list(c("Caroline Gao", 
-                  "Matthew Hamilton")), TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms", 
-                  DOI = "10.5281/zenodo.5646593")
-            }
-            else {
-                tibble::tibble(AUTHOR = list(c("Matthew Hamilton", 
-                  "Caroline Gao")), TITLE = "youthu: Map Youth Outcomes to Health Utility", 
-                  DOI = "10.5281/zenodo.5646668")
-            }
-        }
-    }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>% 
-        dplyr::rename(DOI_chr = DOI, Title = TITLE, Authors = AUTHOR)
-    pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb, 
-        y_tb, by = "pt_ns_chr")
-    return(pkg_extensions_tb)
 }
 #' Make prompt
 #' @description make_prompt() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make prompt. The function returns Response (a character vector of length one).

@@ -21,12 +21,19 @@ library(ready4)
 ## Motivation
 The social, economic and service systems that shape population mental health are complex and thus can be challenging to model. Some mental health systems modelling projects may therefore be more tractable if broken into smaller tasks and advanced by multiple teams. Such phased and collaborative approaches can be facilitated by use of common frameworks for the development of computational models that are both open and modular.
 
-The `ready4` package provides a bare bones initial outline of a framework for open science computational models of mental health systems. This initial framework is extended by multiple other R packages. The following vignette articles introduce the `ready4` framework and provide details of how the framework has been extended and applied:
+## Implementation
+The `ready4` package provides a bare bones initial outline of a framework for open science computational models of mental health systems. This initial framework is extended by multiple other R packages. 
+
+### A toolkit for open and modular computational models of mental health systems
+The `ready4` package introduces some simple classes (data-structures) and methods (algorithms) that can be useful for phased and collaborative approaches to modelling mental health systems. These concepts are discussed in the following articles:
 
 - [Develop Modular Computational Models Of Mental Health Systems](V_01.html)
 
 - [Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems](V_02.html)
 
 - [Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems](V_03.html)
+
+### Applying and extending the `ready4` framework
+The bare-bones framework outlined in the `ready4` package is extended through code-libraries of additional classes and methods, repositories of data that can be fed to framework classes and methods and literate programs that transparently link algorithms to data. An overview of each of these framework extensions is described in the following article:
 
 - [Apply And Extend The Ready4 Framework With Code Libraries, Datasets and Literate Programs](V_04.html)

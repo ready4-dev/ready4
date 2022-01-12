@@ -14,14 +14,6 @@ library("ready4")
 ## Motivation
 The `ready4` package provides a "bare-bones" framework that is designed to be extended by other work. This vignette briefly summarises some examples of current extensions to the framework.
 
-```{r echo=FALSE}
-## NETWORK EFFECTS
-## CODE LIBRARIES
-## DATASETS
-## PROGRAMS
-## BROCHURE
-```
-
 ## Implementation
 The three types of tools available to implement the `ready4` framework are code libraries, datasets and literate programs.
 
@@ -29,7 +21,7 @@ The three types of tools available to implement the `ready4` framework are code 
 All `ready4` framework classes and methods (as well as the underpinning code that helps implement them) are organised and distributed as code libraries. Code libraries are collections of pre-written code that can be flexibly combined to perform multiple different tasks. In the R language in which the `ready4` framework is implemented, a code library is frequently called a "package".
 
 #### Current `ready4` framework code libraries
-There are currently four types of `ready4` framework code library:
+In addition to the foundational `ready4` package, there  are currently four types of `ready4` framework code library:
 
 - ![](https://img.shields.io/badge/ready4-authoring-maroon?style=flat&labelColor=black&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABdUlEQVQ4T42TO0gDQRCGv3tsLqawEwtBsbOws7ExIIrYi02sLATBUkFQrG1E8IEPUOwsLMS0Wola2AiawkcZLG2SQnNe7kY2dyHhzEW32WLm//af2RmjVEBwwXyBYABwaHuMIiAgfWGaUXpE0jkwnyEYBHc9WW8+gbMWAtwN8Mc14A7JjEQiIwxIggs7D/ZVmFvNwfeyBhQQtQv2KVRnwFtoOLBPwB8D6Y3sFsFZAqMMlX2Q/gigwzVAriFWO6COQLqhou8IojOsU/Cj3JqDOEBtgzpuwOKQtoD6y/FWNkMSAdIJzmryLwR9UDkH6yyphGlwFsG6/g2RNLhbEAz/1QPvN6RZ/K8m0gSJi1sCrEtQB+DNgz8R2fcgtQLVqdB27ZQhtQnmG3hz4I/qObhHMlnQr6Lg8xZIt26k2gN12Jjar7wGPCAdk2B8gHSBN6s3pDXAfAX7Ig4oIMY7WDfgZ0F62iyjgHUFeqmCoXoJ0SS2X+Lk6A8CAbAFEGOxOgAAAABJRU5ErkJggg==) libraries that support standardised workflows for authoring extensions to `ready4` framework;
  
@@ -47,10 +39,10 @@ Different copies of `ready4` code libraries are stored in different types of cod
 
 - Archive versions of `ready4` code libraries are **permanent copies** of `ready4` code libraries that are stored by Zenodo and accessible through [ready4's Zenodo community page](https://zenodo.org/communities/ready4). Multiple copies of each code library - capturing the evolution of the code at different points in its lifecycle - can be archived, with each copy assigned its own DOI. Archived code is the most appropriate type to cite in peer-reviewed publications. 
 
-A table of the most up to date list of R package extensions to the `ready4` framework can be generated using the `make_pkg_extensions_tb` function. It should be noted that in addition to the information for citing each code library, the documentation for each library consists of a website (normally the first resource that should be visited prior to installing the software) and two versions of a PDF manual (a brief version suitable for most users and a longer version aimed at developers).
+A table of the most up to date list of R package extensions to the `ready4` framework can be generated using the `make_libraries_tb` function. It should be noted that in addition to the information for citing each code library, the documentation for each library consists of a website (normally the first resource that should be visited prior to installing the software) and two versions of a PDF manual (a brief version suitable for most users and a longer version aimed at developers).
 
 ```{r warning=FALSE, message=FALSE}
-x <- make_pkg_extensions_tb()
+x <- make_libraries_tb()
 ```
 
 A HTML version of the table can be printed using `print_pkg_extensions`.
@@ -62,11 +54,6 @@ print_packages(x)
 #### Authoring `ready4` framework code libraries
 As `ready4` provides a framework for modular development of computational models of mental health systems, developers of framework extensions are expected to adopt a common set of standards. A [standardised workflow for authoring code libraries (R packages) that extend the ready4 framework](https://ready4-dev.github.io/ready4pack/articles/V_01.html) is supported by the [ready4pack package](https://ready4-dev.github.io/ready4pack/index.html).
 
-```{r echo=FALSE}
-## DATASETS
-## PROGRAMS
-```
-
 ### Datasets
 To undertake an analysis, `ready4` framework classes and methods need to be applied to data. As `ready4` is an open-science framework, to the greatest extent feasible, it is encouraged to share analysis data (input and output) via online data repositories.
 
@@ -76,9 +63,10 @@ There are two types of data repository currently supported by the `ready4` frame
  - Citable, permanent copies of data are stored in [ready4's corner of the Harvard Dataverse](https://dataverse.harvard.edu/dataverse/ready4).
  - Working copies of data required for the operation or documentation of `ready4` framework are hosted in GitHub Releases of the relevant code-library's sub-directory of the [`ready4-dev` GitHub organisation](https://github.com/ready4-dev).
  
-A summary table of currently publicly available data stored in `ready4`'s Dataverses can be generated using the `get_dvs` function. A HTML version of the table can be displayed using `print_dvs`.
+A summary table of currently publicly available data stored in `ready4`'s Dataverses can be generated using the `make_dvs_tb` function. A HTML version of the table can be displayed using `print_dvs`.
+
 ```{r}
-y <- get_dvs()
+y <- make_dvs_tb()
 ```
 ```{r}
 print_dvs(y)
@@ -105,7 +93,7 @@ To author `ready4` framework datasets, a standardised workflow, supported by the
 Model algorithms (classes and methods from code libraries) and data (datasets) are connected to one another via a program. Unlike its constituent parts, programs are intended to perform one task only. There are multiple ways to write programs, but one popular method that is particularly relevant to open science projects is called literate programming. In Literate Programming, the program is structured so that its logic can more naturally be understood by humans and each section of logic is explained by including words in a language such as English.
 
 #### Finding `ready4` framework literate programs
-Currently, the main source of examples of `ready4` framework literate programs are the vignette articles from code libraries. A HTML table summarising these literate programs can be generated by applying the `print_vignettes` function to the output (`x`) from our prior call to the `make_pkg_extensions_tb` function. The table includes links to both the HTML version (for reading - and which displays program outputs) and RMD version (input only and which can be executed by R) of each literate program.
+Currently, the main source of examples of `ready4` framework literate programs are the vignette articles from code libraries. A HTML table summarising these literate programs can be generated by applying the `print_vignettes` function to the output (`x`) from our prior call to the `make_libraries_tb` function. The table includes links to both the HTML version (for reading - and which displays program outputs) and RMD version (input only and which can be executed by R) of each literate program.
 
 ```{r}
 print_vignettes(x)
@@ -114,6 +102,3 @@ print_vignettes(x)
 
 #### Authoring `ready4` framework literate programs
 To author `ready4` framework literate programs, tools from the [ready4show package](https://ready4-dev.github.io/ready4show/) are recommended. 
-
-
-

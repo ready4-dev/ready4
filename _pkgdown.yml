@@ -24,9 +24,12 @@ reference:
 - contents:
   - get_from_lup_obj
   - get_methods
+  - make_dvs_tb
+  - make_libraries_tb
   - make_methods_tb
   - make_modules_tb
-  - make_pkg_extensions_tb
+  - print_dss
+  - print_dvs
   - print_methods
   - print_modules
   - print_packages

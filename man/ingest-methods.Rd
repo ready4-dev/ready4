@@ -12,5 +12,5 @@ ingest(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-ingest() is a method that ingests data saved in external files into R objects stored in working memory.
+ingest() is a method that ingests data saved in external files into a ready4 framework module / sub-module.
 }

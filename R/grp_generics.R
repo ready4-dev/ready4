@@ -20,9 +20,9 @@ authorClasses <- function (x, ...)
   UseMethod("authorClasses", x)
 }
 methods::setGeneric("authorClasses")
-#' Author and document package datasets
+#' Author and document datasets
 #' @rdname authorData-methods
-#' @description authorData() is a method that authors and saves code files for creating and documenting datasets in an R package directory.
+#' @description authorData() is a method that authors and saves code files for creating and documenting datasets.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -53,9 +53,9 @@ authorReport <- function (x, ...)
   UseMethod("authorReport", x)
 }
 methods::setGeneric("authorReport")
-#' Characterize the features of an object
+#' Characterize the features of a ready4 framework module / sub-module
 #' @rdname characterize-methods
-#' @description characterize() is a method that generates descriptive information about the features of an object.
+#' @description characterize() is a method that generates descriptive information about the features of a ready4 framework module / sub-module.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -64,9 +64,9 @@ characterize <- function (x, ...)
   UseMethod("characterize", x)
 }
 methods::setGeneric("characterize")
-#' Depict (plot) an object
+#' Depict (plot) features of a ready4 framework module / sub-module
 #' @rdname depict-methods
-#' @description depict() is a method that plots an object.
+#' @description depict() is a method that plots features of a ready4 framework module / sub-module.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -75,9 +75,9 @@ depict <- function (x, ...)
   UseMethod("depict", x)
 }
 methods::setGeneric("depict")
-#' Enhance an object with new data items
+#' Enhance a ready4 framework module / sub-module with new data items
 #' @rdname enhance-methods
-#' @description enhance() is a method that adds new data fields and values to objects contained in that instance.
+#' @description enhance() is a method that adds new data fields and values to extendable objects in a ready4 framework module / sub-module.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -87,9 +87,9 @@ enhance <- function (x, ...)
 }
 methods::setGeneric("enhance")
 
-#' Exhibit (print to console) features of an object
+#' Exhibit (print to console) features of a ready4 framework module / sub-module
 #' @rdname exhibit-methods
-#' @description exhibit() is a method that prints salient features of an object to console.
+#' @description exhibit() is a method that prints salient features of a ready4 framework module / sub-module to console.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -100,7 +100,7 @@ exhibit <- function (x, ...)
 methods::setGeneric("exhibit")
 #' Ingest data
 #' @rdname ingest-methods
-#' @description ingest() is a method that ingests data saved in external files into R objects stored in working memory.
+#' @description ingest() is a method that ingests data saved in external files into a ready4 framework module / sub-module.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -111,7 +111,7 @@ ingest <- function (x, ...)
 methods::setGeneric("ingest")
 #' Investigate solutions to an inverse problem
 #' @rdname investigate-methods
-#' @description investigate() is a method that applies an algorithm to solve an inverse problem to data contained in an object.
+#' @description investigate() is a method that applies an algorithm to solve an inverse problem (ie, given the data,  identify a statistical model that can generate approximations of that data) to data contained in a ready4 framework module / sub-module.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -120,9 +120,9 @@ investigate <- function (x, ...)
   UseMethod("investigate", x)
 }
 methods::setGeneric("investigate")
-#' Manufacture a new object
+#' Manufacture a (non ready4 framework) object
 #' @rdname manufacture-methods
-#' @description manufacture() is a method that creates a new object (other than a ready4 class instance).
+#' @description manufacture() is a method that creates a new object (other than a ready4 framework module / sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -131,9 +131,9 @@ manufacture <- function (x, ...)
   UseMethod("manufacture", x)
 }
 methods::setGeneric("manufacture")
-#' Metamorphose an object
+#' Metamorphose from one ready4 framework module / sub-module class to another
 #' @rdname metamorphose-methods
-#' @description metamorphose() is a method that transforms one ready4 object into a ready4 object of a different class.
+#' @description metamorphose() is a method that transforms a ready4 framework module / sub-module into a different class of ready4 framework module / sub-module.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -155,7 +155,7 @@ procure <- function (x, ...)
 }
 #' Prognosticate (predict) solutions to a forward problem
 #' @rdname prognosticate-methods
-#' @description prognosticate() is a method that uses statistical or simulation models to solve a forward problem.
+#' @description prognosticate() is a method that uses statistical or simulation models to solve a forward problem (i.e., given a model, calculate what is expected to be observed).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -164,9 +164,9 @@ prognosticate <- function (x, ...)
   UseMethod("prognosticate", x)
 }
 methods::setGeneric("prognosticate")
-#' Ratify (validate) an object
+#' Ratify (validate) a ready4 framework module / sub-module
 #' @rdname ratify-methods
-#' @description ratify() is a method that validates that an object conforms to specified criteria, potentially modifying the object so that these criteria are met.
+#' @description ratify() is a method that validates that a ready4 framework module / sub-module conforms to specified criteria, potentially modifying the object so that these criteria are met.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -177,7 +177,7 @@ ratify <- function (x, ...)
 methods::setGeneric("ratify")
 #' Reckon (calculate) a value
 #' @rdname reckon-methods
-#' @description reckon() is a method that  performs a calculation using data contained in an object.
+#' @description reckon() is a method that  performs a calculation using data contained in a ready4 framework module / sub-module.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -186,9 +186,9 @@ reckon <- function (x, ...)
   UseMethod("reckon", x)
 }
 methods::setGeneric("reckon")
-#' Renew (update) an object
+#' Renew (update) a ready4 framework module / sub-module
 #' @rdname renew-methods
-#' @description renew() is a method that updates an object with new data.
+#' @description renew() is a method that updates a ready4 framework module / sub-module with new values.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export

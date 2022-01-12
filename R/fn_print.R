@@ -9,7 +9,6 @@
 #' @importFrom purrr pmap_dfr map_dfr
 #' @importFrom tibble tibble
 #' @importFrom kableExtra kable kable_styling
-#' @keywords internal
 print_dss <- function (dvs_tb, what_1L_chr = "all") 
 {
     dss_tb <- dvs_tb %>% dplyr::filter(!is.na(Contents)) %>% 
@@ -42,7 +41,6 @@ print_dss <- function (dvs_tb, what_1L_chr = "all")
 #' @importFrom dplyr select mutate filter
 #' @importFrom purrr map
 #' @importFrom kableExtra kable kable_styling column_spec
-#' @keywords internal
 print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     what_1L_chr = "all") 
 {
@@ -130,7 +128,7 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
 print_packages <- function (pkg_extensions_tb = NULL) 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_pkg_extensions_tb()
+        pkg_extensions_tb <- make_libraries_tb()
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Badges = purrr::map(pt_ns_chr, 
         ~get_badge_urls(.x))) %>% dplyr::mutate(Type = "") %>% 
         dplyr::mutate(DOI = "") %>% dplyr::mutate(Logo = "")
@@ -201,7 +199,7 @@ print_packages <- function (pkg_extensions_tb = NULL)
 print_vignettes <- function (pkg_extensions_tb = NULL) 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_pkg_extensions_tb()
+        pkg_extensions_tb <- make_libraries_tb()
     vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
     keep_lgl <- !is.na(vignettes_chr)
     vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]) %>% 

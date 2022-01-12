@@ -12,5 +12,5 @@ prognosticate(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-prognosticate() is a method that uses statistical or simulation models to solve a forward problem.
+prognosticate() is a method that uses statistical or simulation models to solve a forward problem (i.e., given a model, calculate what is expected to be observed).
 }

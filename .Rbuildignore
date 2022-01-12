@@ -53,3 +53,4 @@
 ^data-raw/fns/print\.R$
 ^doc$
 ^Meta$
+^data-raw/FUNCTIONS\.R$

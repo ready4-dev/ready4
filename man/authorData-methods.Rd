@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorData}
 \alias{authorData}
-\title{Author and document package datasets}
+\title{Author and document datasets}
 \usage{
 authorData(x, ...)
 }
@@ -12,5 +12,5 @@ authorData(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-authorData() is a method that authors and saves code files for creating and documenting datasets in an R package directory.
+authorData() is a method that authors and saves code files for creating and documenting datasets.
 }
