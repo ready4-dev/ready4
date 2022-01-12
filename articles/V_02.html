@@ -54,7 +54,8 @@
     <a class="dropdown-item" href="../articles/V_01.html">Develop Modular Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_02.html">Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems</a>
-    <a class="dropdown-item" href="../articles/V_04.html">Find And Author Extensions To The Ready4 Framework</a>
+    <a class="dropdown-item" href="../articles/V_04.html">Apply And Extend The Ready4 Framework With Code Libraries, Datasets and Literate Programs</a>
+    <a class="dropdown-item" href="../articles/hjhj.html">Untitled</a>
   </div>
 </li>
       </ul>
@@ -97,11 +98,10 @@
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
 </h2>
-<p><code>ready4</code> provides a simple syntax that can be consistently applied across multiple types of mental health computational modelling projects. It does so by taking advantage of the <a href="V_03.html">polymorphism and abstraction features of Object Oriented Programing</a> and R’s use of generic functions. Generic functions don’t obviously do anything by themselves - their most salient features are a name and a high level description of the type of task that any method using that name should perform. Whenever a method is defined for <a href="V_01.html">classes using R’s S4 and S3 systems (the types used for ready4 framework modules and sub-modules)</a>, it is assigned to the generic that is the best match for the algorithm it implements.</p>
-</div>
-<div class="section level2">
-<h2 id="finding-ready4-framework-methods">Finding ready4 Framework Methods<a class="anchor" aria-label="anchor" href="#finding-ready4-framework-methods"></a>
-</h2>
+<p><code>ready4</code> provides a simple syntax that can be consistently applied across multiple types of mental health computational modelling projects. It does so by taking advantage of the <a href="V_03.html">polymorphism and abstraction features of Object Oriented Programing</a> and R’s use of generic functions. Generic functions don’t obviously do anything by themselves - their most salient features are a name and a high level description of the type of task that any method using that name should perform. Whenever a method is defined for <a href="V_01.html">classes that use R’s S4 and S3 systems (the types used for ready4 framework modules and sub-modules)</a>, it is assigned to the generic that is the best match for the algorithm it implements.</p>
+<div class="section level3">
+<h3 id="finding-ready4-framework-methods">Finding ready4 Framework Methods<a class="anchor" aria-label="anchor" href="#finding-ready4-framework-methods"></a>
+</h3>
 <p>To generate a table that summarises the syntax used to implement <code>ready4</code> methods, use the <code>make_methods_tb</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/make_methods_tb.html">make_methods_tb</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -110,9 +110,9 @@
 <span class="co">## The signature and semantics have changed, see `?as_tibble`.</span>
 <span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span>
 <span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span></code></pre>
-<div class="section level3">
-<h3 id="core-generics">Core generics<a class="anchor" aria-label="anchor" href="#core-generics"></a>
-</h3>
+<div class="section level4">
+<h4 id="core-generics">Core generics<a class="anchor" aria-label="anchor" href="#core-generics"></a>
+</h4>
 <p><code>ready4</code> includes a number of core generic functions which describe the main types of method to be implemented by the <code>ready4</code> framework. Notably, the <code>ready4</code> package does not define methods for any of these core generics. Instead, methods are defined for these generics in <a href="V_04.html">R packages that extend the <code>ready4</code> framework</a>. A HTML table of the core generics bundled with <code>ready4</code> and examples of methods that implement each generic can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "core"</code> argument.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
@@ -292,9 +292,9 @@ Share (publish) open data
 </tbody>
 </table>
 </div>
-<div class="section level3">
-<h3 id="slot-generics-and-methods">Slot generics and methods<a class="anchor" aria-label="anchor" href="#slot-generics-and-methods"></a>
-</h3>
+<div class="section level4">
+<h4 id="slot-generics-and-methods">Slot generics and methods<a class="anchor" aria-label="anchor" href="#slot-generics-and-methods"></a>
+</h4>
 <p>Each of the “core” generics also has a “slot” version, for use when applying a core method to a specified slot of a class. The <code>ready4</code> package defines methods for each of these “slot” generics for <a href="V_01.html">the <code>Ready4Module</code> class</a>. Two of these “slot” methods can also be used for additional purposes:</p>
 <ul>
 <li><p><a href="/ready4/reference/procureSlot-methods.html">procureSlot</a> is a “getter” method - its default behaviour is to return the value of a specified slot. If the argument <code>use_procure_mthd_1L_lgl = T</code> is included in the method call, <code>procureSlot</code> will instead apply the <code>procure</code> method to a specified slot.</p></li>
@@ -472,9 +472,9 @@ Apply the share method to a slot
 </tbody>
 </table>
 </div>
-<div class="section level3">
-<h3 id="extended-author-generics">Extended <code>author</code> generics<a class="anchor" aria-label="anchor" href="#extended-author-generics"></a>
-</h3>
+<div class="section level4">
+<h4 id="extended-author-generics">Extended <code>author</code> generics<a class="anchor" aria-label="anchor" href="#extended-author-generics"></a>
+</h4>
 <p>Finally, there are a small number of other generics that are more general extensions of the core functions. Currently, these extended generics are all variants on the <code>author</code> generics, with each specifying the type of output to be authored by the method. The <code>ready4</code> package does not include methods for any of these extended generics. A HTML table of the extended generics bundled with <code>ready4</code> can be displayed using the <code>print_methods</code> function, using the <code>return_1L_chr = "extended"</code> argument.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,
@@ -535,6 +535,7 @@ Author and save a report
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -54,7 +54,8 @@
     <a class="dropdown-item" href="../articles/V_01.html">Develop Modular Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_02.html">Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems</a>
-    <a class="dropdown-item" href="../articles/V_04.html">Find And Author Extensions To The Ready4 Framework</a>
+    <a class="dropdown-item" href="../articles/V_04.html">Apply And Extend The Ready4 Framework With Code Libraries, Datasets and Literate Programs</a>
+    <a class="dropdown-item" href="../articles/hjhj.html">Untitled</a>
   </div>
 </li>
       </ul>
@@ -94,36 +95,40 @@
 <p>The practical utility and ease of use of computational models of mental health systems are in part shaped by the choice of programming paradigm used to develop them. The <code>ready4</code> framework adopts an object oriented programming (OOP) paradigm which in practice means that the framework principally consists of classes (representations of data structures useful for modelling mental health systems) and methods (algorithms that can be applied to these data-structures to generate insight useful for policy-making). An OOP approach is particular useful for developing computational models of mental health systems that are both modular and transparent.</p>
 </div>
 <div class="section level2">
-<h2 id="modular-computational-models">Modular Computational Models<a class="anchor" aria-label="anchor" href="#modular-computational-models"></a>
+<h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
 </h2>
-<p>Two commonly noted features of OOP - encapsulation and inheritance are particularly useful when developing <a href="V_01.html">modular computational models</a>.</p>
 <div class="section level3">
-<h3 id="encapsulation">Encapsulation<a class="anchor" aria-label="anchor" href="#encapsulation"></a>
+<h3 id="modular-computational-models">Modular Computational Models<a class="anchor" aria-label="anchor" href="#modular-computational-models"></a>
 </h3>
+<p>Two commonly noted features of OOP - encapsulation and inheritance are particularly useful when developing <a href="V_01.html">modular computational models</a>.</p>
+<div class="section level4">
+<h4 id="encapsulation">Encapsulation<a class="anchor" aria-label="anchor" href="#encapsulation"></a>
+</h4>
 <p>Encapsulation allows us to define the data structures (“classes”) used in computational modelling projects in a manner that allows them to be safely combined. For example, assume there are two computational models, one (<strong>A</strong>) focused on predicting the types and intensity of services used by individuals that present to mental health services and the other (<strong>B</strong>) that <a href="https://ready4-dev.github.io/youthu/articles/Prediction_With_Mdls.html" class="external-link">predicts outcomes for recipients of these services</a>. It may be desirable to develop a new model (<strong>C</strong>) that combines <strong>A</strong> and <strong>B</strong> to model both service use and outcomes. Using encapsulated code allows all of the features and functionality of <strong>A</strong> can be made available to <strong>B</strong> in a manner that protects the integrity of <strong>A</strong>. Specifically, <strong>B</strong> can only interact with <strong>A</strong> using the algorithms (“methods”) that have been already defined for <strong>A</strong>.</p>
 <p>Furthermore, if appropriately implemented, methods associated with a class will work with any combination of input values that can be encapsulated by that class - making computational models more generalisabe. For example, imagine a class (<strong>X</strong>) that is used to structure summary data relevant to mental health systems. Methods associated with <strong>X</strong> (e.g. a method to derive an unmet need statistic) can then applied to two instances of <strong>X</strong> - one containing data relevant to the Australian context and one with data from the UK context.</p>
 </div>
-<div class="section level3">
-<h3 id="inheritence">Inheritence<a class="anchor" aria-label="anchor" href="#inheritence"></a>
-</h3>
+<div class="section level4">
+<h4 id="inheritence">Inheritence<a class="anchor" aria-label="anchor" href="#inheritence"></a>
+</h4>
 <p>The examples highlighted in the previous section have some potential limitations. What if the developers of <strong>A</strong> didn’t define methods that would allow <strong>B</strong> to interact with it in the desired way? Or what if there are a number of differences between the Australian and UK system that need to be accounted for when generalising a method from the former to the latter? These types of issues can be addressed by another key feature of OOP - inheritance. Inheritance allows for a “child” class to be created from a “parent” class. By default, the “child” inherits all of the features of the “parent” including all methods associated with the “parent” class. Importantly however, alternative or additional features can also be specified for the “child” to allow it to implement different methods where necessary. For example, when developing our new computational model <strong>C</strong> we could create a number of new classes that are children of the classes defined in <strong>A</strong>. We can then define any additional/alternative methods for these classes that overcome any integration issues between the classes and methods of <strong>A</strong> and <strong>B</strong>. In this way, we can enjoy the best of both worlds - leveraging all relevant algorithms from <strong>A</strong> and <strong>B</strong> (as there is no need to re-invent the wheel), while ensuring that we transparently develop the additional code required for <strong>C</strong>. This approach also ensures that the respective contributions of the (potentially different) authorship teams behind <strong>A</strong>, <strong>B</strong> and <strong>C</strong> is clearer.</p>
 <p>Similarly, inheritance would allow re-use of much of the code from a model of the Australian mental health system when exploring similar topics within the UK context, while making it straightforward to develop additional code that addresses relevant divergence in features between the two jurisdictions. In practical terms, this would mean developing two child classes of <strong>X</strong> - class <strong>Y</strong> for use with Australian data and class <strong>Z</strong> for use in the UK system. All methods that are not specific to a particular jurisdiction are defined for <strong>X</strong> and inherited by <strong>Y</strong> and <strong>Z</strong>. Methods that are only appropriate for use in the Australian context are defined for <strong>Y</strong>, while UK specific methods are defined for <strong>Z</strong>.</p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="transparent-computational-models">Transparent Computational Models<a class="anchor" aria-label="anchor" href="#transparent-computational-models"></a>
-</h2>
-<p>To make computational models of mental health systems more readily understood, the <code>ready4</code> framework supports use of <a href="V_02.html">a simple and consistent syntax</a> that makes programs easier to read and understand. Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.</p>
 <div class="section level3">
-<h3 id="polymorphism">Polymorphism<a class="anchor" aria-label="anchor" href="#polymorphism"></a>
+<h3 id="transparent-computational-models">Transparent Computational Models<a class="anchor" aria-label="anchor" href="#transparent-computational-models"></a>
 </h3>
+<p>To make computational models of mental health systems more readily understood, the <code>ready4</code> framework supports use of <a href="V_02.html">a simple and consistent syntax</a> that makes programs easier to read and understand. Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.</p>
+<div class="section level4">
+<h4 id="polymorphism">Polymorphism<a class="anchor" aria-label="anchor" href="#polymorphism"></a>
+</h4>
 <p>Polymorphism allows for similar concepts to be represented using consistent syntax. The same top level code can therefore be generalised to multiple model implementations, making algorithms simpler to understand and easier to re-use.</p>
 <p>Returning to a previous example, the exact same command (e.g. a call to the method <a href="https://ready4-dev.github.io/ready4/reference/exhibit-methods.html">exhibit</a>) can be applied to both <strong>Y</strong> (used for Australian data) and <strong>Z</strong> (used for UK data). However, the algorithm implemented by that command can vary based on the class that each method is applied to (ie a different algorithm is applied when the data is specified as being from the UK compared to being specified as Australian).</p>
 </div>
-<div class="section level3">
-<h3 id="abstraction">Abstraction<a class="anchor" aria-label="anchor" href="#abstraction"></a>
-</h3>
+<div class="section level4">
+<h4 id="abstraction">Abstraction<a class="anchor" aria-label="anchor" href="#abstraction"></a>
+</h4>
 <p>The simplicity enabled by polymorphism is enhanced by Abstraction, which basically means that only the briefest and easiest to comprehend parts of the code are exposed by default to potential users. Once an instance of a class is created, the entire program to ingest model data, analyse it and produce a scientific summary can be represented in a few brief lines of code, readily comprehensible to non-coders. When using open source languages, the elegance and simplicity of abstraction <a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html">does not restrict the ability of more technically minded users exploring the detailed workings of the underpinning code</a>.</p>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
