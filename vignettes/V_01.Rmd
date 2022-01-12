@@ -53,7 +53,7 @@ A formal (S4) `Ready4Module` child-class that structures data for use in computa
 :::
 
 #### Ready4Module Methods
-All Modules in the `ready4` Framework by default inherit all methods that are defined for `Ready4Module`, which can be itemised using the `get_methods` function. Currently, the only methods defined for `Ready4Module` are [slot-methods](V_02.html#slot-generics).
+All Modules in the `ready4` Framework by default inherit all methods that are defined for `Ready4Module`, which can be itemised using the `get_methods` function. Currently, the only methods defined for `Ready4Module` are [slot-methods](V_02.html#slot-generics-and-methods).
 
 ```{r}
 get_methods()

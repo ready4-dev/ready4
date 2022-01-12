@@ -177,7 +177,7 @@ make_pkg_extensions_tb <- function(ns_var_nm_1L_chr = "pt_ns_chr",
                                           rvest::html_elements("pre") %>%
                                           rvest::html_text2())
                              sink(NULL)
-                             bib2df::bib2df(f) %>%
+                             suppressWarnings(bib2df::bib2df(f)) %>%
                                dplyr::select(AUTHOR, TITLE, DOI)
                            }else{
                              if(.x == "TTU"){
