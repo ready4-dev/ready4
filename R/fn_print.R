@@ -1,7 +1,7 @@
 #' Print datasets
 #' @description print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)
-#' @param what_1L_chr What (a character vector of length one), Default: 'real'
+#' @param what_1L_chr What (a character vector of length one), Default: 'all'
 #' @return dss_kbl (An object)
 #' @rdname print_dss
 #' @export 
@@ -10,7 +10,7 @@
 #' @importFrom tibble tibble
 #' @importFrom kableExtra kable kable_styling
 #' @keywords internal
-print_dss <- function (dvs_tb, what_1L_chr = "real") 
+print_dss <- function (dvs_tb, what_1L_chr = "all") 
 {
     dss_tb <- dvs_tb %>% dplyr::filter(!is.na(Contents)) %>% 
         dplyr::select(Contents, Datasets_Meta, Alias) %>% purrr::pmap_dfr(~{
@@ -22,9 +22,9 @@ print_dss <- function (dvs_tb, what_1L_chr = "real")
         }) %>% dplyr::mutate(Dataverse = ..3, DOI_chr = ..1)
     })
     if (what_1L_chr == "real") 
-        dss_tb <- dss_tb %>% dplyr::filter(!Dataverse %in% "fakes")
+        dss_tb <- dss_tb %>% dplyr::filter(Dataverse != "fakes")
     if (what_1L_chr == "fakes") 
-        dss_tb <- dss_tb %>% dplyr::filter(Dataverse %in% "fakes")
+        dss_tb <- dss_tb %>% dplyr::filter(Dataverse == "fakes")
     dss_kbl <- dss_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
             "condensed"))

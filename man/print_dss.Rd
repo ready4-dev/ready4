@@ -4,12 +4,12 @@
 \alias{print_dss}
 \title{Print datasets}
 \usage{
-print_dss(dvs_tb, what_1L_chr = "real")
+print_dss(dvs_tb, what_1L_chr = "all")
 }
 \arguments{
 \item{dvs_tb}{Dataverses (a tibble)}
 
-\item{what_1L_chr}{What (a character vector of length one), Default: 'real'}
+\item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 }
 \value{
 dss_kbl (An object)

@@ -1,5 +1,5 @@
 print_dss <- function(dvs_tb,
-                      what_1L_chr = "real"){
+                      what_1L_chr = "all"){
 dss_tb <- dvs_tb %>%
     dplyr::filter(!is.na(Contents)) %>%
   dplyr::select(Contents,
@@ -17,15 +17,14 @@ dss_tb <- dvs_tb %>%
     })
 if(what_1L_chr == "real")
   dss_tb <- dss_tb %>%
-    dplyr::filter(!Dataverse %in% "fakes")
+    dplyr::filter(Dataverse != "fakes")
 if(what_1L_chr == "fakes")
   dss_tb <- dss_tb %>%
-    dplyr::filter(Dataverse %in% "fakes")
+    dplyr::filter(Dataverse == "fakes")
 dss_kbl <- dss_tb %>%
   kableExtra::kable("html", escape = FALSE) %>%
   kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
 return(dss_kbl)
-
 }
 print_dvs <- function(dvs_tb){
   dvs_kbl <- add_references(dvs_tb,

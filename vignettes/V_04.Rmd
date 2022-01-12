@@ -52,7 +52,15 @@ y <- get_dvs()
 print_dvs(y)
 ```
 
+```{r}
+print_dss(y,
+          what_1L_chr = "real")
+```
 
+```{r}
+print_dss(y,
+          what_1L_chr = "fakes")
+```
 
 ## Finding programs that illustrate the `ready4` framework
 ```{r}
@@ -60,9 +68,7 @@ print_vignettes(x)
 ```
 
 
-```{r}
-print_dss(y)
-```
+
 
 
 
