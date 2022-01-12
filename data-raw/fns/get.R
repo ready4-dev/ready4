@@ -57,26 +57,89 @@ get_dv_fls_urls <- function(file_nms_chr,
 get_dvs <- function(dv_nm_1L_chr = "ready4",
                     key_1L_chr = NULL,
                     server_1L_chr = "dataverse.harvard.edu"){
-  ds_ls <- dataverse::dataverse_contents(dv_nm_1L_chr,
-                                         key = key_1L_chr, server = server_1L_chr)
-  dv_tb <- ds_ls %>%
+  contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr,
+                                         key = key_1L_chr,
+                                         server = server_1L_chr)
+  dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == "dataverse")]
+  ds_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == "dataset")]
+  if(identical(ds_ls,list())){
+    ds_ls <- NULL
+  }else{
+    extra_dv_ls <- dataverse::get_dataverse(dv_nm_1L_chr,
+                                            key = key_1L_chr,
+                                            server = server_1L_chr)
+    dv_ls <- append(extra_dv_ls,
+                    dv_ls)
+  }
+  dvs_tb <- dv_ls %>%
     purrr::map_dfr(~{
-      dv_ls <- dataverse::get_dataverse(.x)
-      tibble::tibble(Alias = dv_ls$alias,
+      dv_ls <- dataverse::get_dataverse(.x,
+                                        key = key_1L_chr,
+                                        server = server_1L_chr)
+      tb <- tibble::tibble(Alias = dv_ls$alias,
                      Name = dv_ls$name,
                      Description = dv_ls$description,
-                     Publisher = dv_ls$affiliation) %>%
+                     Creator = dv_ls$affiliation)
+      tb %>%
         dplyr::mutate(Contents =  purrr::map(Alias,
-                                             ~dataverse::dataverse_contents(.x,
-                                                                            key = key_1L_chr,
-                                                                            server = server_1L_chr) %>%
+                                             ~{
+                                               dv_all_ls <- dataverse::dataverse_contents(.x,
+                                                                                            key = key_1L_chr,
+                                                                                            server = server_1L_chr)
+                                               #dv_ls <- dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == "dataverse")]
+                                               dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == "dataset")] %>%
                                                purrr::map_chr(~if("persistentUrl" %in% names(.x)){
                                                  .x$persistentUrl
                                                }else{
                                                  NA_character_
-                                               })))
+                                               })
+                                               }))
     })
-  return(dv_tb)
+  dvs_tb <- dvs_tb %>%
+    dplyr::mutate(Datasets_Meta = Contents %>%
+                    purrr::map(~.x %>%
+                                 purrr::map(~ .x %>%
+                                              dataverse::dataset_metadata() %>%
+                                              tryCatch(error = function(e) "ERROR")))) %>%
+    dplyr::mutate(Contents = Contents %>%
+                    purrr::map2(Datasets_Meta,
+                                ~ {
+                                  entry_ls <- .x %>%
+                                    purrr::map2(.y,
+                                                ~ if(identical(.y, "ERROR")){
+                                                  NA_character_
+                                                  }else{
+                                                    .x
+                                                    }
+                                                ) %>%
+                                  purrr::discard(is.na)
+                                if(identical(entry_ls, list())){
+                                  NA_character_
+                                }else{
+                                  entry_ls  %>%
+                                    purrr::flatten_chr()
+                                }
+                                }
+                                ))
+  dvs_tb <- dvs_tb %>%
+    dplyr::mutate(Datasets_Meta = Datasets_Meta %>%
+                    purrr::map(~ {
+                                  entry_ls <- .x %>%
+                                    purrr::map(~ if(identical(.x, "ERROR")){
+                                                  NULL
+                                                }else{
+                                                  .x
+                                                }
+                                    ) %>%
+                                    purrr::compact()
+                                  if(identical(entry_ls, list())){
+                                    NULL
+                                  }else{
+                                    entry_ls
+                                  }
+                                }
+                    ))
+  return(dvs_tb)
 }
 get_examples <- function(vignettes_chr,
                          term_1L_chr){

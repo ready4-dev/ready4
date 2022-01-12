@@ -18,9 +18,9 @@ get_dvs(
 \item{server_1L_chr}{Server (a character vector of length one), Default: 'dataverse.harvard.edu'}
 }
 \value{
-Dataverse (a tibble)
+Dataverses (a tibble)
 }
 \description{
-get_dvs() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get dataverses. Function argument dv_nm_1L_chr specifies the where to look for the required object. The function returns Dataverse (a tibble).
+get_dvs() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get dataverses. Function argument dv_nm_1L_chr specifies the where to look for the required object. The function returns Dataverses (a tibble).
 }
 \keyword{internal}

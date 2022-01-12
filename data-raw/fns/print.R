@@ -1,8 +1,42 @@
+print_dss <- function(dvs_tb,
+                      what_1L_chr = "real"){
+dss_tb <- dvs_tb %>%
+    dplyr::filter(!is.na(Contents)) %>%
+  dplyr::select(Contents,
+                Datasets_Meta,
+                Alias) %>%
+  purrr::pmap_dfr(~ {
+    ..2 %>%
+                    purrr::map_dfr(~{
+                      fields_ls <- .x$fields
+                      tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == "title")][[1]],
+                             Description = fields_ls$value[which(fields_ls$typeName == "dsDescription")][[1]][[1]][[4]])
+                      }) %>%
+      dplyr::mutate(Dataverse = ..3,
+                    DOI_chr = ..1)
+    })
+if(what_1L_chr == "real")
+  dss_tb <- dss_tb %>%
+    dplyr::filter(!Dataverse %in% "fakes")
+if(what_1L_chr == "fakes")
+  dss_tb <- dss_tb %>%
+    dplyr::filter(Dataverse %in% "fakes")
+dss_kbl <- dss_tb %>%
+  kableExtra::kable("html", escape = FALSE) %>%
+  kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+return(dss_kbl)
+
+}
 print_dvs <- function(dvs_tb){
   dvs_kbl <- add_references(dvs_tb,
-                                   data_var_nm_1L_chr = "Contents",
-                                   data_url_var_nm_1L_chr = "Datasets") %>%
-    dplyr::select(Alias, Name, Description, Publisher, Datasets)%>%
+                            data_var_nm_1L_chr = "Contents",
+                            data_url_var_nm_1L_chr = "Datasets") %>%
+    dplyr::select(Alias, Name, Description, Creator, Datasets) %>%
+    dplyr::mutate(Datasets = Datasets %>% purrr::map(~
+                                                       if(identical(.x,NA_character_)){
+                                                         ""}else{
+                                                           .x
+                                                         })) %>%
     kableExtra::kable("html", escape = FALSE) %>%
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
   return(dvs_kbl)

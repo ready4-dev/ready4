@@ -1,19 +1,58 @@
+#' Print datasets
+#' @description print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
+#' @param dvs_tb Dataverses (a tibble)
+#' @param what_1L_chr What (a character vector of length one), Default: 'real'
+#' @return dss_kbl (An object)
+#' @rdname print_dss
+#' @export 
+#' @importFrom dplyr filter select mutate
+#' @importFrom purrr pmap_dfr map_dfr
+#' @importFrom tibble tibble
+#' @importFrom kableExtra kable kable_styling
+#' @keywords internal
+print_dss <- function (dvs_tb, what_1L_chr = "real") 
+{
+    dss_tb <- dvs_tb %>% dplyr::filter(!is.na(Contents)) %>% 
+        dplyr::select(Contents, Datasets_Meta, Alias) %>% purrr::pmap_dfr(~{
+        ..2 %>% purrr::map_dfr(~{
+            fields_ls <- .x$fields
+            tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == 
+                "title")][[1]], Description = fields_ls$value[which(fields_ls$typeName == 
+                "dsDescription")][[1]][[1]][[4]])
+        }) %>% dplyr::mutate(Dataverse = ..3, DOI_chr = ..1)
+    })
+    if (what_1L_chr == "real") 
+        dss_tb <- dss_tb %>% dplyr::filter(!Dataverse %in% "fakes")
+    if (what_1L_chr == "fakes") 
+        dss_tb <- dss_tb %>% dplyr::filter(Dataverse %in% "fakes")
+    dss_kbl <- dss_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
+        kableExtra::kable_styling(bootstrap_options = c("hover", 
+            "condensed"))
+    return(dss_kbl)
+}
 #' Print dataverses
 #' @description print_dvs() is a Print function that prints output to console Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)
 #' @return dvs_kbl (An object)
 #' @rdname print_dvs
 #' @export 
-#' @importFrom dplyr select
+#' @importFrom dplyr select mutate
+#' @importFrom purrr map
 #' @importFrom kableExtra kable kable_styling
 #' @keywords internal
 print_dvs <- function (dvs_tb) 
 {
     dvs_kbl <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", 
         data_url_var_nm_1L_chr = "Datasets") %>% dplyr::select(Alias, 
-        Name, Description, Publisher, Datasets) %>% kableExtra::kable("html", 
-        escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("hover", 
-        "condensed"))
+        Name, Description, Creator, Datasets) %>% dplyr::mutate(Datasets = Datasets %>% 
+        purrr::map(~if (identical(.x, NA_character_)) {
+            ""
+        }
+        else {
+            .x
+        })) %>% kableExtra::kable("html", escape = FALSE) %>% 
+        kableExtra::kable_styling(bootstrap_options = c("hover", 
+            "condensed"))
     return(dvs_kbl)
 }
 #' Print methods

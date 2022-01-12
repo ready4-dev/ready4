@@ -47,8 +47,12 @@ As `ready4` provides a framework for modular development of computational models
 
 ```{r}
 y <- get_dvs()
+```
+```{r}
 print_dvs(y)
 ```
+
+
 
 ## Finding programs that illustrate the `ready4` framework
 ```{r}
@@ -56,6 +60,9 @@ print_vignettes(x)
 ```
 
 
+```{r}
+print_dss(y)
+```
 
 
 
