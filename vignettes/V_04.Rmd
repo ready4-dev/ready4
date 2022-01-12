@@ -63,6 +63,7 @@ print_dss(y,
 ```
 
 ## Finding programs that illustrate the `ready4` framework
+
 ```{r}
 print_vignettes(x)
 ```

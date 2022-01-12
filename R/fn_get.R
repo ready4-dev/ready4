@@ -101,7 +101,7 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
 #' @importFrom dataverse dataverse_contents get_dataverse dataset_metadata
 #' @importFrom purrr map_lgl map_dfr map map_chr map2 discard flatten_chr compact
 #' @importFrom tibble tibble
-#' @importFrom dplyr mutate
+#' @importFrom dplyr mutate arrange
 #' @keywords internal
 get_dvs <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu") 
 {
@@ -122,39 +122,41 @@ get_dvs <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr =
     dvs_tb <- dv_ls %>% purrr::map_dfr(~{
         dv_ls <- dataverse::get_dataverse(.x, key = key_1L_chr, 
             server = server_1L_chr)
-        tb <- tibble::tibble(Alias = dv_ls$alias, Name = dv_ls$name, 
+        tb <- tibble::tibble(Dataverse = dv_ls$alias, Name = dv_ls$name, 
             Description = dv_ls$description, Creator = dv_ls$affiliation)
-        tb %>% dplyr::mutate(Contents = purrr::map(Alias, ~{
-            dv_all_ls <- dataverse::dataverse_contents(.x, key = key_1L_chr, 
-                server = server_1L_chr)
-            dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == 
-                "dataset")] %>% purrr::map_chr(~if ("persistentUrl" %in% 
-                names(.x)) {
-                .x$persistentUrl
-            }
-            else {
-                NA_character_
-            })
-        }))
+        tb %>% dplyr::mutate(Contents = purrr::map(Dataverse, 
+            ~{
+                dv_all_ls <- dataverse::dataverse_contents(.x, 
+                  key = key_1L_chr, server = server_1L_chr)
+                dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == 
+                  "dataset")] %>% purrr::map_chr(~if ("persistentUrl" %in% 
+                  names(.x)) {
+                  .x$persistentUrl
+                }
+                else {
+                  NA_character_
+                })
+            }))
     })
     dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = Contents %>% 
-        purrr::map(~.x %>% purrr::map(~.x %>% dataverse::dataset_metadata() %>% 
-            tryCatch(error = function(e) "ERROR")))) %>% dplyr::mutate(Contents = Contents %>% 
-        purrr::map2(Datasets_Meta, ~{
-            entry_ls <- .x %>% purrr::map2(.y, ~if (identical(.y, 
-                "ERROR")) {
-                NA_character_
-            }
-            else {
-                .x
-            }) %>% purrr::discard(is.na)
-            if (identical(entry_ls, list())) {
-                NA_character_
-            }
-            else {
-                entry_ls %>% purrr::flatten_chr()
-            }
-        }))
+        purrr::map(~.x %>% purrr::map(~.x %>% dataverse::dataset_metadata(key = key_1L_chr, 
+            server = server_1L_chr) %>% tryCatch(error = function(e) "ERROR")))) %>% 
+        dplyr::mutate(Contents = Contents %>% purrr::map2(Datasets_Meta, 
+            ~{
+                entry_ls <- .x %>% purrr::map2(.y, ~if (identical(.y, 
+                  "ERROR")) {
+                  NA_character_
+                }
+                else {
+                  .x
+                }) %>% purrr::discard(is.na)
+                if (identical(entry_ls, list())) {
+                  NA_character_
+                }
+                else {
+                  entry_ls %>% purrr::flatten_chr()
+                }
+            }))
     dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = Datasets_Meta %>% 
         purrr::map(~{
             entry_ls <- .x %>% purrr::map(~if (identical(.x, 
@@ -170,7 +172,7 @@ get_dvs <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr =
             else {
                 entry_ls
             }
-        }))
+        })) %>% dplyr::arrange(Dataverse)
     return(dvs_tb)
 }
 #' Get examples

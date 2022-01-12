@@ -76,12 +76,12 @@ get_dvs <- function(dv_nm_1L_chr = "ready4",
       dv_ls <- dataverse::get_dataverse(.x,
                                         key = key_1L_chr,
                                         server = server_1L_chr)
-      tb <- tibble::tibble(Alias = dv_ls$alias,
+      tb <- tibble::tibble(Dataverse = dv_ls$alias,
                      Name = dv_ls$name,
                      Description = dv_ls$description,
                      Creator = dv_ls$affiliation)
       tb %>%
-        dplyr::mutate(Contents =  purrr::map(Alias,
+        dplyr::mutate(Contents =  purrr::map(Dataverse,
                                              ~{
                                                dv_all_ls <- dataverse::dataverse_contents(.x,
                                                                                             key = key_1L_chr,
@@ -99,7 +99,8 @@ get_dvs <- function(dv_nm_1L_chr = "ready4",
     dplyr::mutate(Datasets_Meta = Contents %>%
                     purrr::map(~.x %>%
                                  purrr::map(~ .x %>%
-                                              dataverse::dataset_metadata() %>%
+                                              dataverse::dataset_metadata(key = key_1L_chr,
+                                                                          server = server_1L_chr) %>%
                                               tryCatch(error = function(e) "ERROR")))) %>%
     dplyr::mutate(Contents = Contents %>%
                     purrr::map2(Datasets_Meta,
@@ -138,7 +139,8 @@ get_dvs <- function(dv_nm_1L_chr = "ready4",
                                     entry_ls
                                   }
                                 }
-                    ))
+                    )) %>%
+    dplyr::arrange(Dataverse)
   return(dvs_tb)
 }
 get_examples <- function(vignettes_chr,

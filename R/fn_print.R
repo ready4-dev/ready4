@@ -13,14 +13,15 @@
 print_dss <- function (dvs_tb, what_1L_chr = "all") 
 {
     dss_tb <- dvs_tb %>% dplyr::filter(!is.na(Contents)) %>% 
-        dplyr::select(Contents, Datasets_Meta, Alias) %>% purrr::pmap_dfr(~{
-        ..2 %>% purrr::map_dfr(~{
-            fields_ls <- .x$fields
-            tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == 
-                "title")][[1]], Description = fields_ls$value[which(fields_ls$typeName == 
-                "dsDescription")][[1]][[1]][[4]])
-        }) %>% dplyr::mutate(Dataverse = ..3, DOI_chr = ..1)
-    })
+        dplyr::select(Contents, Datasets_Meta, Dataverse) %>% 
+        purrr::pmap_dfr(~{
+            ..2 %>% purrr::map_dfr(~{
+                fields_ls <- .x$fields
+                tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == 
+                  "title")][[1]], Description = fields_ls$value[which(fields_ls$typeName == 
+                  "dsDescription")][[1]][[1]][[4]])
+            }) %>% dplyr::mutate(Dataverse = ..3, DOI = ..1)
+        })
     if (what_1L_chr == "real") 
         dss_tb <- dss_tb %>% dplyr::filter(Dataverse != "fakes")
     if (what_1L_chr == "fakes") 
@@ -33,26 +34,35 @@ print_dss <- function (dvs_tb, what_1L_chr = "all")
 #' Print dataverses
 #' @description print_dvs() is a Print function that prints output to console Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)
+#' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
+#' @param what_1L_chr What (a character vector of length one), Default: 'all'
 #' @return dvs_kbl (An object)
 #' @rdname print_dvs
 #' @export 
-#' @importFrom dplyr select mutate
+#' @importFrom dplyr select mutate filter
 #' @importFrom purrr map
-#' @importFrom kableExtra kable kable_styling
+#' @importFrom kableExtra kable kable_styling column_spec
 #' @keywords internal
-print_dvs <- function (dvs_tb) 
+print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
+    what_1L_chr = "all") 
 {
-    dvs_kbl <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", 
-        data_url_var_nm_1L_chr = "Datasets") %>% dplyr::select(Alias, 
+    dvs_tb <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", 
+        data_url_var_nm_1L_chr = "Datasets") %>% dplyr::select(Dataverse, 
         Name, Description, Creator, Datasets) %>% dplyr::mutate(Datasets = Datasets %>% 
         purrr::map(~if (identical(.x, NA_character_)) {
             ""
         }
         else {
             .x
-        })) %>% kableExtra::kable("html", escape = FALSE) %>% 
+        }))
+    if (what_1L_chr == "real") 
+        dvs_tb <- dvs_tb %>% dplyr::filter(Dataverse != "fakes")
+    if (what_1L_chr == "fakes") 
+        dvs_tb <- dvs_tb %>% dplyr::filter(Dataverse == "fakes")
+    dvs_kbl <- dvs_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
-            "condensed"))
+            "condensed")) %>% kableExtra::column_spec(which(names(dvs_tb) == 
+        "Dataverse"), link = paste0(root_1L_chr, dvs_tb$Dataverse))
     return(dvs_kbl)
 }
 #' Print methods

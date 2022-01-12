@@ -4,10 +4,18 @@
 \alias{print_dvs}
 \title{Print dataverses}
 \usage{
-print_dvs(dvs_tb)
+print_dvs(
+  dvs_tb,
+  root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
+  what_1L_chr = "all"
+)
 }
 \arguments{
 \item{dvs_tb}{Dataverses (a tibble)}
+
+\item{root_1L_chr}{Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'}
+
+\item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 }
 \value{
 dvs_kbl (An object)

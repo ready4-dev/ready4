@@ -4,7 +4,7 @@ dss_tb <- dvs_tb %>%
     dplyr::filter(!is.na(Contents)) %>%
   dplyr::select(Contents,
                 Datasets_Meta,
-                Alias) %>%
+                Dataverse) %>%
   purrr::pmap_dfr(~ {
     ..2 %>%
                     purrr::map_dfr(~{
@@ -13,7 +13,7 @@ dss_tb <- dvs_tb %>%
                              Description = fields_ls$value[which(fields_ls$typeName == "dsDescription")][[1]][[1]][[4]])
                       }) %>%
       dplyr::mutate(Dataverse = ..3,
-                    DOI_chr = ..1)
+                    DOI = ..1)
     })
 if(what_1L_chr == "real")
   dss_tb <- dss_tb %>%
@@ -26,18 +26,30 @@ dss_kbl <- dss_tb %>%
   kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
 return(dss_kbl)
 }
-print_dvs <- function(dvs_tb){
-  dvs_kbl <- add_references(dvs_tb,
+print_dvs <- function(dvs_tb,
+                      root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
+                      what_1L_chr = "all"){
+  dvs_tb <- add_references(dvs_tb,
                             data_var_nm_1L_chr = "Contents",
                             data_url_var_nm_1L_chr = "Datasets") %>%
-    dplyr::select(Alias, Name, Description, Creator, Datasets) %>%
+    dplyr::select(Dataverse, Name, Description, Creator, Datasets) %>%
     dplyr::mutate(Datasets = Datasets %>% purrr::map(~
                                                        if(identical(.x,NA_character_)){
                                                          ""}else{
                                                            .x
-                                                         })) %>%
+                                                         }))
+  if(what_1L_chr == "real")
+    dvs_tb <- dvs_tb %>%
+      dplyr::filter(Dataverse != "fakes")
+  if(what_1L_chr == "fakes")
+    dvs_tb <- dvs_tb %>%
+      dplyr::filter(Dataverse == "fakes")
+  dvs_kbl <- dvs_tb %>%
     kableExtra::kable("html", escape = FALSE) %>%
-    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
+    kableExtra::column_spec(which(names(dvs_tb)=="Dataverse"),
+                            link = paste0(root_1L_chr,
+                                          dvs_tb$Dataverse))
   return(dvs_kbl)
 }
 print_methods <- function(methods_tb = NULL,
