@@ -109,9 +109,6 @@
     <loc>https://ready4-dev.github.io/ready4/reference/get_dv_fls_urls.html</loc>
   </url>
   <url>
-    <loc>https://ready4-dev.github.io/ready4/reference/get_dvs.html</loc>
-  </url>
-  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_examples.html</loc>
   </url>
   <url>
@@ -160,7 +157,13 @@
     <loc>https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_dvs_tb.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_files_tb.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_libraries_tb.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_list_phrase.html</loc>
@@ -173,9 +176,6 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_modules_tb.html</loc>
-  </url>
-  <url>
-    <loc>https://ready4-dev.github.io/ready4/reference/make_pkg_extensions_tb.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_prompt.html</loc>
