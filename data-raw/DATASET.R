@@ -46,14 +46,6 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Comp
 x <- write_self_srvc_pkg(x)
 #
 write_prototypes() # Required to tidyup the prototypes lookup table
-# This next section is only run if the ready4fun badges table has been updated.
-# data("badges_lup", package = "ready4fun")
-# badges_lup <- badges_lup[,c(2,4)]
-# write_env_objs_to_dv(env_objects_ls = list(ready4_badges_lup = badges_lup),
-#                      descriptions_chr = NULL,
-#                      ds_url_1L_chr = character(0),
-#                      piggyback_desc_1L_chr = "Supplementary Files",
-#                      piggyback_tag_1L_chr =  a@gh_tag_1L_chr,
-#                      piggyback_to_1L_chr = a@gh_repo_1L_chr,
-#                      prerelease_1L_lgl = T)
+# write_badges() # Only run if the ready4fun badges table has been updated.
+#
 devtools::build_vignettes()

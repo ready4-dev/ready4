@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, results='hide', message=FALSE}
 library(ready4)
 ```
 
@@ -25,7 +25,7 @@ The social, economic and service systems that shape population mental health are
 The `ready4` package provides a bare bones initial outline of a framework for open science computational models of mental health systems. This initial framework is extended by multiple other R packages. 
 
 ### A toolkit for open and modular computational models of mental health systems
-The `ready4` package introduces some simple classes (data-structures) and methods (algorithms) that can be useful for phased and collaborative approaches to modelling mental health systems. These concepts are discussed in the following articles:
+The `ready4` package introduces some simple classes (data-structures) and methods (algorithms) that can be useful for modelling mental health systems. These concepts are discussed in the following articles:
 
 - [Develop Modular Computational Models Of Mental Health Systems](V_01.html)
 
