@@ -4,7 +4,7 @@
 \alias{manufactureSlot}
 \alias{manufactureSlot-Ready4Module}
 \alias{manufactureSlot,Ready4Module-method}
-\title{Apply the manufacture method to a slot}
+\title{Apply the manufacture method to a Ready4Module slot}
 \usage{
 manufactureSlot(x, slot_nm_1L_chr, ...)
 

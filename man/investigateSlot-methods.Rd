@@ -4,7 +4,7 @@
 \alias{investigateSlot}
 \alias{investigateSlot-Ready4Module}
 \alias{investigateSlot,Ready4Module-method}
-\title{Apply the investigate method to a slot}
+\title{Apply the investigate method to a Ready4Module slot}
 \usage{
 investigateSlot(x, slot_nm_1L_chr, ...)
 

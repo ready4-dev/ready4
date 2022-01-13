@@ -4,7 +4,7 @@
 \alias{metamorphoseSlot}
 \alias{metamorphoseSlot-Ready4Module}
 \alias{metamorphoseSlot,Ready4Module-method}
-\title{Apply the metamorphose method to a slot}
+\title{Apply the metamorphose method to a Ready4Module slot}
 \usage{
 metamorphoseSlot(x, slot_nm_1L_chr, ...)
 

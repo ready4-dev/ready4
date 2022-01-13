@@ -4,7 +4,7 @@
 \alias{ratifySlot}
 \alias{ratifySlot-Ready4Module}
 \alias{ratifySlot,Ready4Module-method}
-\title{Apply the ratify method to a slot}
+\title{Apply the ratify method to a Ready4Module slot}
 \usage{
 ratifySlot(x, slot_nm_1L_chr, ...)
 

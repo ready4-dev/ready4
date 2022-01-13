@@ -4,7 +4,7 @@
 \alias{prognosticateSlot}
 \alias{prognosticateSlot-Ready4Module}
 \alias{prognosticateSlot,Ready4Module-method}
-\title{Apply the prognosticate method to a slot}
+\title{Apply the prognosticate method to a Ready4Module slot}
 \usage{
 prognosticateSlot(x, slot_nm_1L_chr, ...)
 

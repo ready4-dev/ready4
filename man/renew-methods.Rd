@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{renew}
 \alias{renew}
-\title{Renew (update) a ready4 framework module / sub-module}
+\title{Renew (update) a ready4 framework module (or sub-module)}
 \usage{
 renew(x, ...)
 }
@@ -12,5 +12,5 @@ renew(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-renew() is a method that updates a ready4 framework module / sub-module with new values.
+renew() is a method that updates a ready4 framework module (or sub-module) with new values.
 }

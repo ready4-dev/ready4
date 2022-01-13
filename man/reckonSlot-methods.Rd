@@ -4,7 +4,7 @@
 \alias{reckonSlot}
 \alias{reckonSlot-Ready4Module}
 \alias{reckonSlot,Ready4Module-method}
-\title{Apply the reckon method to a slot}
+\title{Apply the reckon method to a Ready4Module slot}
 \usage{
 reckonSlot(x, slot_nm_1L_chr, ...)
 

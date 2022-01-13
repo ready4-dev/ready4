@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{metamorphose}
 \alias{metamorphose}
-\title{Metamorphose from one ready4 framework module / sub-module class to another}
+\title{Metamorphose from one ready4 framework module (or sub-module) class to another}
 \usage{
 metamorphose(x, ...)
 }
@@ -12,5 +12,5 @@ metamorphose(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-metamorphose() is a method that transforms a ready4 framework module / sub-module into a different class of ready4 framework module / sub-module.
+metamorphose() is a method that transforms a ready4 framework module (or sub-module) into a different class of ready4 framework module (or sub-module).
 }

@@ -4,7 +4,7 @@
 \alias{shareSlot}
 \alias{shareSlot-Ready4Module}
 \alias{shareSlot,Ready4Module-method}
-\title{Apply the share method to a slot}
+\title{Apply the share method to a Ready4Module slot}
 \usage{
 shareSlot(x, slot_nm_1L_chr, ...)
 

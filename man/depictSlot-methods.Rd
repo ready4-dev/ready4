@@ -4,7 +4,7 @@
 \alias{depictSlot}
 \alias{depictSlot-Ready4Module}
 \alias{depictSlot,Ready4Module-method}
-\title{Apply the depict method to a slot}
+\title{Apply the depict method to a Ready4Module slot}
 \usage{
 depictSlot(x, slot_nm_1L_chr, ...)
 

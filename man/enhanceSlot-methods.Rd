@@ -4,7 +4,7 @@
 \alias{enhanceSlot}
 \alias{enhanceSlot-Ready4Module}
 \alias{enhanceSlot,Ready4Module-method}
-\title{Apply the enhance method to a slot}
+\title{Apply the enhance method to a Ready4Module slot}
 \usage{
 enhanceSlot(x, slot_nm_1L_chr, ...)
 

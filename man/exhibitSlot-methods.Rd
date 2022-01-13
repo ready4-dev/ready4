@@ -4,7 +4,7 @@
 \alias{exhibitSlot}
 \alias{exhibitSlot-Ready4Module}
 \alias{exhibitSlot,Ready4Module-method}
-\title{Apply the exhibit method to a slot}
+\title{Apply the exhibit method to a Ready4Module slot}
 \usage{
 exhibitSlot(x, slot_nm_1L_chr, ...)
 

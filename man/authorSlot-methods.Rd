@@ -4,7 +4,7 @@
 \alias{authorSlot}
 \alias{authorSlot-Ready4Module}
 \alias{authorSlot,Ready4Module-method}
-\title{Apply the author method to a slot}
+\title{Apply the author method to a Ready4Module slot}
 \usage{
 authorSlot(x, slot_nm_1L_chr, ...)
 

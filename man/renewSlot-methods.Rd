@@ -4,7 +4,7 @@
 \alias{renewSlot}
 \alias{renewSlot-Ready4Module}
 \alias{renewSlot,Ready4Module-method}
-\title{Apply the renew method to a slot}
+\title{Apply the renew method to a Ready4Module slot}
 \usage{
 renewSlot(x, slot_nm_1L_chr, new_val_xx, ...)
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{depict}
 \alias{depict}
-\title{Depict (plot) features of a ready4 framework module / sub-module}
+\title{Depict (plot) features of a ready4 framework module (or sub-module)}
 \usage{
 depict(x, ...)
 }
@@ -12,5 +12,5 @@ depict(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-depict() is a method that plots features of a ready4 framework module / sub-module.
+depict() is a method that plots features of a ready4 framework module (or sub-module).
 }

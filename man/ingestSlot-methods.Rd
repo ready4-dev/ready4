@@ -4,7 +4,7 @@
 \alias{ingestSlot}
 \alias{ingestSlot-Ready4Module}
 \alias{ingestSlot,Ready4Module-method}
-\title{Apply the ingest method to a slot}
+\title{Apply the ingest method to a Ready4Module slot}
 \usage{
 ingestSlot(x, slot_nm_1L_chr, ...)
 

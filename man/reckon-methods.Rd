@@ -12,5 +12,5 @@ reckon(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-reckon() is a method that  performs a calculation using data contained in a ready4 framework module / sub-module.
+reckon() is a method that  performs a calculation using data contained in a ready4 framework module (or sub-module).
 }

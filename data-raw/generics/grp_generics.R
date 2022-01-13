@@ -53,9 +53,9 @@ authorReport <- function (x, ...)
   UseMethod("authorReport", x)
 }
 methods::setGeneric("authorReport")
-#' Characterize the features of a ready4 framework module / sub-module
+#' Characterize the features of a ready4 framework module (or sub-module)
 #' @rdname characterize-methods
-#' @description characterize() is a method that generates descriptive information about the features of a ready4 framework module / sub-module.
+#' @description characterize() is a method that generates descriptive information about the features of a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -64,9 +64,9 @@ characterize <- function (x, ...)
   UseMethod("characterize", x)
 }
 methods::setGeneric("characterize")
-#' Depict (plot) features of a ready4 framework module / sub-module
+#' Depict (plot) features of a ready4 framework module (or sub-module)
 #' @rdname depict-methods
-#' @description depict() is a method that plots features of a ready4 framework module / sub-module.
+#' @description depict() is a method that plots features of a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -75,9 +75,9 @@ depict <- function (x, ...)
   UseMethod("depict", x)
 }
 methods::setGeneric("depict")
-#' Enhance a ready4 framework module / sub-module with new data items
+#' Enhance a ready4 framework module (or sub-module) with new data items
 #' @rdname enhance-methods
-#' @description enhance() is a method that adds new data fields and values to extendable objects in a ready4 framework module / sub-module.
+#' @description enhance() is a method that adds new data fields and values to extendable objects in a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -87,9 +87,9 @@ enhance <- function (x, ...)
 }
 methods::setGeneric("enhance")
 
-#' Exhibit (print to console) features of a ready4 framework module / sub-module
+#' Exhibit (print to console) features of a ready4 framework module (or sub-module)
 #' @rdname exhibit-methods
-#' @description exhibit() is a method that prints salient features of a ready4 framework module / sub-module to console.
+#' @description exhibit() is a method that prints salient features of a ready4 framework module (or sub-module) to console.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -100,7 +100,7 @@ exhibit <- function (x, ...)
 methods::setGeneric("exhibit")
 #' Ingest data
 #' @rdname ingest-methods
-#' @description ingest() is a method that ingests data saved in external files into a ready4 framework module / sub-module.
+#' @description ingest() is a method that ingests data saved in external files into a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -111,7 +111,7 @@ ingest <- function (x, ...)
 methods::setGeneric("ingest")
 #' Investigate solutions to an inverse problem
 #' @rdname investigate-methods
-#' @description investigate() is a method that applies an algorithm to solve an inverse problem (ie, given the data,  identify a statistical model that can generate approximations of that data) to data contained in a ready4 framework module / sub-module.
+#' @description investigate() is a method that applies an algorithm to solve an inverse problem (ie, given the data,  identify a statistical model that can generate approximations of that data) to data contained in a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -122,7 +122,7 @@ investigate <- function (x, ...)
 methods::setGeneric("investigate")
 #' Manufacture a (non ready4 framework) object
 #' @rdname manufacture-methods
-#' @description manufacture() is a method that creates a new object (other than a ready4 framework module / sub-module).
+#' @description manufacture() is a method that creates a new object (other than a ready4 framework module or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -131,9 +131,9 @@ manufacture <- function (x, ...)
   UseMethod("manufacture", x)
 }
 methods::setGeneric("manufacture")
-#' Metamorphose from one ready4 framework module / sub-module class to another
+#' Metamorphose from one ready4 framework module (or sub-module) class to another
 #' @rdname metamorphose-methods
-#' @description metamorphose() is a method that transforms a ready4 framework module / sub-module into a different class of ready4 framework module / sub-module.
+#' @description metamorphose() is a method that transforms a ready4 framework module (or sub-module) into a different class of ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -164,9 +164,9 @@ prognosticate <- function (x, ...)
   UseMethod("prognosticate", x)
 }
 methods::setGeneric("prognosticate")
-#' Ratify (validate) a ready4 framework module / sub-module
+#' Ratify (validate) a ready4 framework module (or sub-module)
 #' @rdname ratify-methods
-#' @description ratify() is a method that validates that a ready4 framework module / sub-module conforms to specified criteria, potentially modifying the object so that these criteria are met.
+#' @description ratify() is a method that validates that a ready4 framework module (or sub-module) conforms to specified criteria, potentially modifying the object so that these criteria are met.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -177,7 +177,7 @@ ratify <- function (x, ...)
 methods::setGeneric("ratify")
 #' Reckon (calculate) a value
 #' @rdname reckon-methods
-#' @description reckon() is a method that  performs a calculation using data contained in a ready4 framework module / sub-module.
+#' @description reckon() is a method that  performs a calculation using data contained in a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -186,9 +186,9 @@ reckon <- function (x, ...)
   UseMethod("reckon", x)
 }
 methods::setGeneric("reckon")
-#' Renew (update) a ready4 framework module / sub-module
+#' Renew (update) a ready4 framework module (or sub-module)
 #' @rdname renew-methods
-#' @description renew() is a method that updates a ready4 framework module / sub-module with new values.
+#' @description renew() is a method that updates a ready4 framework module (or sub-module) with new values.
 #' @param x An object
 #' @param ... Additional arguments
 #' @export
@@ -209,7 +209,7 @@ share <- function (x, ...)
 }
 methods::setGeneric("share")
 
-#' Apply the author method to a slot
+#' Apply the author method to a Ready4Module slot
 #' @rdname authorSlot-methods
 #' @description authorSlot() is a convenience method that applies the author method to a specified slot of an object.
 #' @param x An object
@@ -223,7 +223,7 @@ authorSlot <- function (x,
 }
 methods::setGeneric("authorSlot")
 
-#' Apply the characterize method to a slot
+#' Apply the characterize method to a Ready4Module slot
 #' @rdname characterizeSlot-methods
 #' @description characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.
 #' @param x An object
@@ -238,7 +238,7 @@ characterizeSlot <- function (x,
 }
 methods::setGeneric("characterizeSlot")
 
-#' Apply the depict method to a slot
+#' Apply the depict method to a Ready4Module slot
 #' @rdname depictSlot-methods
 #' @description depictSlot() is a convenience method that applies the depict method to a specified slot of an object.
 #' @param x An object
@@ -253,7 +253,7 @@ depictSlot <- function (x,
 }
 methods::setGeneric("depictSlot")
 
-#' Apply the enhance method to a slot
+#' Apply the enhance method to a Ready4Module slot
 #' @rdname enhanceSlot-methods
 #' @description enhanceSlot() is a method that adds new data fields and values to an object stored in a slot of that instance.
 #' @param x An object
@@ -269,7 +269,7 @@ enhanceSlot <- function (x,
 methods::setGeneric("enhanceSlot")
 
 
-#' Apply the exhibit method to a slot
+#' Apply the exhibit method to a Ready4Module slot
 #' @rdname exhibitSlot-methods
 #' @description exhibitSlot() is a convenience method that applies the exhibit method to a specified slot of an object.
 #' @param x An object
@@ -284,7 +284,7 @@ exhibitSlot <- function (x,
 }
 methods::setGeneric("exhibitSlot")
 
-#' Apply the ingest method to a slot
+#' Apply the ingest method to a Ready4Module slot
 #' @rdname ingestSlot-methods
 #' @description ingestSlot() is a convenience method that applies the ingest method to a specified slot of an object.
 #' @param x An object
@@ -299,7 +299,7 @@ ingestSlot <- function (x,
 }
 methods::setGeneric("ingestSlot")
 
-#' Apply the investigate method to a slot
+#' Apply the investigate method to a Ready4Module slot
 #' @rdname investigateSlot-methods
 #' @description investigateSlot() is a convenience method that applies the investigate method to a specified slot of an object.
 #' @param x An object
@@ -314,7 +314,7 @@ investigateSlot <- function (x,
 }
 methods::setGeneric("investigateSlot")
 
-#' Apply the manufacture method to a slot
+#' Apply the manufacture method to a Ready4Module slot
 #' @rdname manufactureSlot-methods
 #' @description manufactureSlot() is a convenience method that applies the manufacture method to a specified slot of an object.
 #' @param x An object
@@ -328,7 +328,7 @@ manufactureSlot <- function (x,
   UseMethod("manufactureSlot", x)
 }
 methods::setGeneric("manufactureSlot")
-#' Apply the metamorphose method to a slot
+#' Apply the metamorphose method to a Ready4Module slot
 #' @rdname metamorphoseSlot-methods
 #' @description metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.
 #' @param x An object
@@ -357,7 +357,7 @@ procureSlot <- function (x,
   UseMethod("procureSlot", x)
 }
 methods::setGeneric("procureSlot")
-#' Apply the prognosticate method to a slot
+#' Apply the prognosticate method to a Ready4Module slot
 #' @rdname prognosticateSlot-methods
 #' @description prognosticateSlot() is a convenience method that applies the prognosticate method to a specified slot of an object.
 #' @param x An object
@@ -371,7 +371,7 @@ prognosticateSlot <- function (x,
   UseMethod("prognosticateSlot", x)
 }
 methods::setGeneric("prognosticateSlot")
-#' Apply the ratify method to a slot
+#' Apply the ratify method to a Ready4Module slot
 #' @rdname ratifySlot-methods
 #' @description ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.
 #' @param x An object
@@ -385,7 +385,7 @@ ratifySlot <- function (x,
   UseMethod("ratifySlot", x)
 }
 methods::setGeneric("ratifySlot")
-#' Apply the reckon method to a slot
+#' Apply the reckon method to a Ready4Module slot
 #' @rdname reckonSlot-methods
 #' @description reckonSlot() is a convenience method that applies the reckon method to a specified slot of an object.
 #' @param x An object
@@ -399,7 +399,7 @@ reckonSlot <- function (x,
   UseMethod("reckonSlot", x)
 }
 methods::setGeneric("reckonSlot")
-#' Apply the renew method to a slot
+#' Apply the renew method to a Ready4Module slot
 #' @rdname renewSlot-methods
 #' @description renewSlot() is a "setter" method that renews (sets) the value of a specified slot with either a supplied new value or the value returned by applying the renew method to the slot (default behaviour).
 #' @param x An object
@@ -415,7 +415,7 @@ renewSlot <- function (x,
   UseMethod("renewSlot", x)
 }
 methods::setGeneric("renewSlot")
-#' Apply the share method to a slot
+#' Apply the share method to a Ready4Module slot
 #' @rdname shareSlot-methods
 #' @description shareSlot() is a method that uploads data contained in a slot of an S4 object to an online repository. If requested, the method will also publish the updated repository.
 #' @param x An object
