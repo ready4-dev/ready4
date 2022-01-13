@@ -404,12 +404,12 @@ methods::setGeneric("reckonSlot")
 #' @description renewSlot() is a "setter" method that renews (sets) the value of a specified slot with either a supplied new value or the value returned by applying the renew method to the slot (default behaviour).
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param new_val_xx New value (an object)
+#' @param new_val_xx New value (slot dependent object type), Default 'use_renew_mthd'
 #' @param ... Additional arguments
 #' @export
 renewSlot <- function (x,
                        slot_nm_1L_chr,
-                       new_val_xx,
+                       new_val_xx = "use_renew_mthd",
                        ...)
 {
   UseMethod("renewSlot", x)
