@@ -45,7 +45,9 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Comp
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
 #
-write_prototypes() # Required to tidyup the prototypes lookup table
+# write_extensions() # Required only if extensions have changed since last build
 # write_badges() # Only run if the ready4fun badges table has been updated.
 #
 devtools::build_vignettes()
+#
+

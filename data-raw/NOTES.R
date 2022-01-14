@@ -1,3 +1,4 @@
+# write_words("datasets")
 fn_types_lup <- ready4fun::get_rds_from_pkg_dmt(fl_nm_1L_chr = "fn_types_lup",
                                                 piggyback_to_1L_chr = "ready4-dev/ready4")
 fn_types_lup <- fn_types_lup %>%

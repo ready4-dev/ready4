@@ -1,4 +1,4 @@
-make_dvs_tb <- function(dv_nm_1L_chr = "ready4",
+make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
                         key_1L_chr = NULL,
                         server_1L_chr = "dataverse.harvard.edu"){
   contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr,

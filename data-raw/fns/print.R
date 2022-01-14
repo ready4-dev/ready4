@@ -1,3 +1,17 @@
+print_data <- function(datasets_tb,
+                       by_dv_1L_lgl = F,
+                       root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
+                       what_1L_chr = "all"){
+  if(by_dv_1L_lgl){
+    datasets_kbl <- print_dvs(datasets_tb,
+              root_1L_chr = root_1L_chr,
+              what_1L_chr = what_1L_chr)
+  }else{
+    datasets_kbl <- print_dss(datasets_tb,
+                              what_1L_chr = what_1L_chr)
+  }
+  return(datasets_kbl)
+}
 print_dss <- function(dvs_tb,
                       what_1L_chr = "all"){
 dss_tb <- dvs_tb %>%

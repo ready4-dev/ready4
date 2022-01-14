@@ -1,16 +1,17 @@
-#' Make dataverses tibble
-#' @description make_dvs_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make dataverses tibble. The function returns Dataverses (a tibble).
+#' Make datasets tibble
+#' @description make_datasets_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make datasets tibble. The function returns Dataverses (a tibble).
 #' @param dv_nm_1L_chr Dataverse name (a character vector of length one), Default: 'ready4'
 #' @param key_1L_chr Key (a character vector of length one), Default: NULL
 #' @param server_1L_chr Server (a character vector of length one), Default: 'dataverse.harvard.edu'
 #' @return Dataverses (a tibble)
-#' @rdname make_dvs_tb
+#' @rdname make_datasets_tb
 #' @export 
 #' @importFrom dataverse dataverse_contents get_dataverse dataset_metadata
 #' @importFrom purrr map_lgl map_dfr map map_chr map2 discard flatten_chr compact
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate arrange
-make_dvs_tb <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu") 
+#' @keywords internal
+make_datasets_tb <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu") 
 {
     contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr, 
         key = key_1L_chr, server = server_1L_chr)

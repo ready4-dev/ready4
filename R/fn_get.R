@@ -57,6 +57,23 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
         dplyr::select(type_chr, pt_ns_chr, old_class_lgl)
     return(cls_extensions_tb)
 }
+#' Get datasets tibble
+#' @description get_datasets_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get datasets tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Datasets (a tibble).
+#' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
+#' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @return Datasets (a tibble)
+#' @rdname get_datasets_tb
+#' @export 
+#' @importFrom piggyback pb_download_url
+#' @keywords internal
+get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+{
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+        tag = gh_tag_1L_chr, .token = "")
+    datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+        endsWith("datasets_tb.RDS")]))
+    return(datasets_tb)
+}
 #' Get dataverse files urls
 #' @description get_dv_fls_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get dataverse files urls. Function argument file_nms_chr specifies the where to look for the required object. The function returns Urls (a character vector).
 #' @param file_nms_chr File names (a character vector)
@@ -260,6 +277,23 @@ get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_lgl = "all", exclu
     }
     return(generics_chr)
 }
+#' Get libraries tibble
+#' @description get_libraries_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get libraries tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Libraries (a tibble).
+#' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
+#' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @return Libraries (a tibble)
+#' @rdname get_libraries_tb
+#' @export 
+#' @importFrom piggyback pb_download_url
+#' @keywords internal
+get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+{
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+        tag = gh_tag_1L_chr, .token = "")
+    libraries_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+        endsWith("libraries_tb.RDS")]))
+    return(libraries_tb)
+}
 #' Get manual urls
 #' @description get_manual_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get manual urls. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Urls (a character vector).
 #' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
@@ -274,10 +308,10 @@ get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https:/
 {
     urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
         rvest::html_attr("href")
-    idcs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr, 
+    idxs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr, 
         "_User.pdf")) | endsWith(.x, paste0(pkg_nm_1L_chr, "_Developer.pdf"))) %>% 
         which()
-    urls_chr <- sort(urls_chr[idcs_int], decreasing = T)
+    urls_chr <- sort(urls_chr[idxs_int], decreasing = T)
     return(urls_chr)
 }
 #' Get methods
@@ -298,6 +332,38 @@ get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module
         stringr::str_remove_all(paste0(" \\(package ", pkg_nm_1L_chr, 
             "\\)"))
     return(methods_chr)
+}
+#' Get methods tibble
+#' @description get_methods_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get methods tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Methods (a tibble).
+#' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
+#' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @return Methods (a tibble)
+#' @rdname get_methods_tb
+#' @export 
+#' @importFrom piggyback pb_download_url
+#' @keywords internal
+get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+{
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+        tag = gh_tag_1L_chr, .token = "")
+    methods_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("methods_tb.RDS")]))
+    return(methods_tb)
+}
+#' Get modules tibble
+#' @description get_modules_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get modules tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Modules (a tibble).
+#' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
+#' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @return Modules (a tibble)
+#' @rdname get_modules_tb
+#' @export 
+#' @importFrom piggyback pb_download_url
+#' @keywords internal
+get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+{
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+        tag = gh_tag_1L_chr, .token = "")
+    modules_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")]))
+    return(modules_tb)
 }
 #' Get method titles
 #' @description get_mthd_titles() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get method titles. Function argument mthd_nms_chr specifies the where to look for the required object. The function returns Method titles (a character vector).
@@ -391,9 +457,9 @@ get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "ht
 {
     urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
         rvest::html_attr("href")
-    idcs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>% 
+    idxs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>% 
         rvest::html_elements(".external-link") %>% rvest::html_text()) == 
         "Browse source code"), which(startsWith(urls_chr, "https://doi.org/10.5281/zenodo.")))
-    urls_chr <- urls_chr[idcs_int]
+    urls_chr <- urls_chr[idxs_int]
     return(urls_chr)
 }

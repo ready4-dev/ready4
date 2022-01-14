@@ -1,3 +1,25 @@
+#' Print data
+#' @description print_data() is a Print function that prints output to console Specifically, this function implements an algorithm to print data. The function is called for its side effects and does not return a value.
+#' @param datasets_tb Datasets (a tibble)
+#' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: F
+#' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
+#' @param what_1L_chr What (a character vector of length one), Default: 'all'
+#' @return datasets_kbl (An object)
+#' @rdname print_data
+#' @export 
+#' @keywords internal
+print_data <- function (datasets_tb, by_dv_1L_lgl = F, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
+    what_1L_chr = "all") 
+{
+    if (by_dv_1L_lgl) {
+        datasets_kbl <- print_dvs(datasets_tb, root_1L_chr = root_1L_chr, 
+            what_1L_chr = what_1L_chr)
+    }
+    else {
+        datasets_kbl <- print_dss(datasets_tb, what_1L_chr = what_1L_chr)
+    }
+    return(datasets_kbl)
+}
 #' Print datasets
 #' @description print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)

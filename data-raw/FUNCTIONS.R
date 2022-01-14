@@ -163,13 +163,13 @@ write_fn_fl <- function(fns_env_ls,
 }
 write_new_generic_descs <- function(x){
   generics_txt_chr <- readLines("R/grp_generics.R")
-  title_idcs_int <- (generics_txt_chr %>% startsWith("#' @rdname") %>% which())-1
-  titles_chr <- generics_txt_chr[title_idcs_int]
-  descriptions_idcs_int <- generics_txt_chr %>% startsWith("#' @description") %>% which()
-  descriptions_chr <- generics_txt_chr[descriptions_idcs_int]
-  end_idcs_int <- (descriptions_chr %>% stringi::stri_locate_first_fixed("()") %>% `[`(,1)) - 1
+  title_idxs_int <- (generics_txt_chr %>% startsWith("#' @rdname") %>% which())-1
+  titles_chr <- generics_txt_chr[title_idxs_int]
+  descriptions_idxs_int <- generics_txt_chr %>% startsWith("#' @description") %>% which()
+  descriptions_chr <- generics_txt_chr[descriptions_idxs_int]
+  end_idxs_int <- (descriptions_chr %>% stringi::stri_locate_first_fixed("()") %>% `[`(,1)) - 1
   replacements_chr <- purrr::map2_chr(descriptions_chr,
-                                      end_idcs_int,
+                                      end_idxs_int,
                                       ~ {
                                         original_1L_chr <- generic_1L_chr <- stringr::str_sub(.x, start = 17, end = .y)
                                         #substr(generic_1L_chr, 1, 1) <- toupper(substr(generic_1L_chr, 1, 1))
@@ -206,13 +206,13 @@ write_new_generic_descs <- function(x){
   generics_txt_chr <- purrr::reduce(1:length(new_titles_chr),
                                     .init = generics_txt_chr,
                                     ~ {
-                                      .x[title_idcs_int[.y]] <- new_titles_chr[.y]
+                                      .x[title_idxs_int[.y]] <- new_titles_chr[.y]
                                       .x
                                     })
   generics_txt_chr <- purrr::reduce(1:length(replacements_chr),
                                     .init = generics_txt_chr,
                                     ~ {
-                                      .x[descriptions_idcs_int[.y]] <- replacements_chr[.y]
+                                      .x[descriptions_idxs_int[.y]] <- replacements_chr[.y]
                                       .x
                                     })
   generics_txt_chr %>%
@@ -407,6 +407,7 @@ write_self_srvc_pkg <- function(x){
                                                key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
   }
   write_to_delete_dirs("safety")
+  write_prototypes()
   return(x)
 }
 write_prototypes <- function(gh_repo_1L_chr = "ready4-dev/ready4",
@@ -430,14 +431,47 @@ write_prototypes <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                        piggyback_to_1L_chr = a@gh_repo_1L_chr,
                        prerelease_1L_lgl = T)
 }
-write_badges <- function(){
+write_badges <- function(gh_repo_1L_chr = "ready4-dev/ready4",
+                         gh_tag_1L_chr = "Documentation_0.0"){
   data("badges_lup", package = "ready4fun")
   badges_lup <- badges_lup[,c(2,4)]
   write_env_objs_to_dv(env_objects_ls = list(ready4_badges_lup = badges_lup),
                        descriptions_chr = NULL,
                        ds_url_1L_chr = character(0),
                        piggyback_desc_1L_chr = "Supplementary Files",
-                       piggyback_tag_1L_chr =  a@gh_tag_1L_chr,
-                       piggyback_to_1L_chr = a@gh_repo_1L_chr,
+                       piggyback_tag_1L_chr =  gh_tag_1L_chr,
+                       piggyback_to_1L_chr = gh_repo_1L_chr,
                        prerelease_1L_lgl = T)
 }
+write_extensions <- function(gh_repo_1L_chr = "ready4-dev/ready4",
+                             gh_tag_1L_chr = "Documentation_0.0"){
+  env_objects_ls = list(datasets_tb = make_datasets_tb(),
+                        libraries_tb = make_libraries_tb(),
+                        methods_tb = make_methods_tb(),
+                        modules_tb = make_modules_tb())
+  write_env_objs_to_dv(env_objects_ls,
+                       descriptions_chr = NULL,
+                       ds_url_1L_chr = character(0),
+                       piggyback_desc_1L_chr = "Supplementary Files",
+                       piggyback_tag_1L_chr =  gh_tag_1L_chr,
+                       piggyback_to_1L_chr = gh_repo_1L_chr,
+                       prerelease_1L_lgl = T)
+}
+write_words <- function(new_words_chr,
+                        gh_repo_1L_chr = "ready4-dev/ready4",
+                        gh_tag_1L_chr = "Documentation_0.0"){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
+                                             tag = gh_tag_1L_chr,
+                                             .token = "")
+  b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("treat_as_words_chr.RDS")]))
+  b <- c(b,new_words_chr) %>% sort()
+  write_env_objs_to_dv(env_objects_ls = list(treat_as_words_chr = b),
+                       descriptions_chr = NULL,
+                       ds_url_1L_chr = character(0),
+                       piggyback_desc_1L_chr = "Supplementary Files",
+                       piggyback_tag_1L_chr =  gh_tag_1L_chr,
+                       piggyback_to_1L_chr = gh_repo_1L_chr,
+                       prerelease_1L_lgl = T)
+}
+
+

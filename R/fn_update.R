@@ -26,3 +26,21 @@ update_pt_fn_args_ls <- function (args_ls)
     }) %>% stats::setNames(names(args_ls))
     return(updated_args_ls)
 }
+#' Update tibble ready4 S3
+#' @description update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 s3. Function argument tb_r3 specifies the object to be updated. Argument filter_cdn_1L_chr provides the object to be updated. The function returns Tibble ready4 S3 (a ready4 S3 extension of tibble).
+#' @param tb_r3 Tibble ready4 S3 (a ready4 S3 extension of tibble)
+#' @param filter_cdn_1L_chr Filter condition (a character vector of length one), Default: 'NA'
+#' @param slice_idxs_int Slice indices (an integer vector), Default: NA
+#' @return Tibble ready4 S3 (a ready4 S3 extension of tibble)
+#' @rdname update_tb_r3
+#' @export 
+#' @importFrom dplyr slice filter
+#' @keywords internal
+update_tb_r3 <- function (tb_r3, filter_cdn_1L_chr = NA_character_, slice_idxs_int = NA_integer_) 
+{
+    if (!is.na(slice_idxs_int)) 
+        tb_r3 <- tb_r3 %>% dplyr::slice(slice_idxs_int)
+    if (!is.na(filter_cdn_1L_chr)) 
+        tb_r3 <- tb_r3 %>% dplyr::filter(eval(parse(text = filter_cdn_1L_chr)))
+    return(tb_r3)
+}

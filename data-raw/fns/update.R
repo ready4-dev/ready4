@@ -29,3 +29,14 @@ update_pt_fn_args_ls <- function(args_ls){
     stats::setNames(names(args_ls))
   return(updated_args_ls)
 }
+update_tb_r3 <- function(tb_r3,
+                         filter_cdn_1L_chr = NA_character_,
+                         slice_idxs_int = NA_integer_){
+  if(!is.na(slice_idxs_int))
+    tb_r3 <- tb_r3 %>%
+      dplyr::slice(slice_idxs_int)
+  if(!is.na(filter_cdn_1L_chr))
+    tb_r3 <- tb_r3 %>%
+      dplyr::filter(eval(parse(text=filter_cdn_1L_chr)))
+  return(tb_r3)
+}
