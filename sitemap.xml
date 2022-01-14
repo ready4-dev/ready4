@@ -106,6 +106,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/get_cls_extensions.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_datasets_tb.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_dv_fls_urls.html</loc>
   </url>
   <url>
@@ -124,10 +127,19 @@
     <loc>https://ready4-dev.github.io/ready4/reference/get_generics.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_libraries_tb.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_manual_urls.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_methods_tb.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_modules_tb.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_mthd_titles.html</loc>
@@ -157,7 +169,7 @@
     <loc>https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html</loc>
   </url>
   <url>
-    <loc>https://ready4-dev.github.io/ready4/reference/make_dvs_tb.html</loc>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_datasets_tb.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_files_tb.html</loc>
@@ -194,6 +206,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/print_data.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/print_dss.html</loc>
@@ -266,6 +281,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/update_pt_fn_args_ls.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/update_tb_r3.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_all_tbs_in_tbs_r4_to_csvs.html</loc>
