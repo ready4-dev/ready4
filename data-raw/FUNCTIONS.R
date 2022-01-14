@@ -474,4 +474,16 @@ write_words <- function(new_words_chr,
                        prerelease_1L_lgl = T)
 }
 
-
+write_housestyle_fls <- function(){ # Use sparingly [Max 4 times a year]
+  X <- ready4use::Ready4useRepos(dv_nm_1L_chr = "ready4fw",
+                                 dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK",
+                                 dv_server_1L_chr = "dataverse.harvard.edu",
+                                 gh_repo_1L_chr = "ready4-dev/ready4",
+                                 gh_tag_1L_chr = "Documentation_0.0")
+  X <- ready4::ingest(X)
+  X <- ready4::share(X@a_Ready4usePointer@b_Ready4useRepos,
+                     obj_to_share_xx = X@b_Ready4useIngest@objects_ls,
+                     fl_nm_1L_chr = "framework_metadata_ls",
+                     description_1L_chr = "R objects useful for implementation of standardised ready4 framework workflows")
+  return(X)
+}
