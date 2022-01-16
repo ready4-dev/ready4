@@ -353,14 +353,14 @@ write_new_files <- function (paths_chr, custom_write_ls = NULL, fl_nm_1L_chr = N
         dest_dir_1L_chr <- paths_chr
         paths_chr <- purrr::map(source_paths_ls, ~{
             if (dir.exists(.x)) {
-                list.files(.x)
+                list.files(.x, recursive = T)
             }
             else {
                 fs::path_file(.x)
             }
         }) %>% purrr::flatten_chr() %>% purrr::map_chr(~paste0(dest_dir_1L_chr, 
             "/", ifelse(is.null(fl_nm_1L_chr), .x, fl_nm_1L_chr)))
-        recursive_1L_lgl <- ifelse(paths_chr %>% purrr::map_lgl(~dir.exists(.x)) %>% 
+        recursive_1L_lgl <- ifelse(source_paths_ls %>% purrr::map_lgl(~dir.exists(.x)) %>% 
             any(), T, F)
     }
     new_files_chr <- paths_chr[paths_chr %>% purrr::map_lgl(~!file.exists(.x))]

@@ -47,7 +47,7 @@ x <- write_self_srvc_pkg(x)
 #
 # write_extensions() # Required only if extensions have changed since last build
 # write_badges() # Only run if the ready4fun badges table has been updated.
-#
+# Very occasional calls to write_housestyle_fls (four a year tops)
 devtools::build_vignettes()
 #
 
