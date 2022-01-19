@@ -61,5 +61,3 @@ print_methods(x,
               exclude_mthds_for_chr = "Ready4Module",
               return_1L_chr = "extended")
 ```
-
-

@@ -129,4 +129,3 @@ print_modules(a,
 
 ## Authoring ready4 Framework Modules and Sub-Modules
 R provides an array of potential approaches to creating and documenting S3 and S4 classes. However, standardisation is an important enabler of modular approaches to computational model development, so [all ready4 framework modules and sub-modules are authored using the same workflow](https://ready4-dev.github.io/ready4class/articles/V_01.html).
-

@@ -50,4 +50,3 @@ x <- write_self_srvc_pkg(x)
 # Very occasional calls to write_housestyle_fls (four a year tops)
 devtools::build_vignettes()
 #
-
