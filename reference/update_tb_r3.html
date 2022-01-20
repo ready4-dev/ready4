@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9081</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9082</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +63,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">update_tb_r3</span><span class="op">(</span>
   <span class="va">tb_r3</span>,
   filter_cdn_1L_chr <span class="op">=</span> <span class="cn">NA_character_</span>,
+  fn <span class="op">=</span> <span class="cn">NULL</span>,
+  fn_env_ls <span class="op">=</span> <span class="cn">NULL</span>,
   slice_idxs_int <span class="op">=</span> <span class="cn">NA_integer_</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -73,6 +75,10 @@
 <dd><p>Tibble ready4 S3 (a ready4 S3 extension of tibble)</p></dd>
 <dt>filter_cdn_1L_chr</dt>
 <dd><p>Filter condition (a character vector of length one), Default: 'NA'</p></dd>
+<dt>fn</dt>
+<dd><p>Function (a function), Default: NULL</p></dd>
+<dt>fn_env_ls</dt>
+<dd><p>Function (a list of environments), Default: NULL</p></dd>
 <dt>slice_idxs_int</dt>
 <dd><p>Slice indices (an integer vector), Default: NA</p></dd>
 </dl></div>
