@@ -7,6 +7,8 @@
 update_tb_r3(
   tb_r3,
   filter_cdn_1L_chr = NA_character_,
+  fn = NULL,
+  fn_env_ls = NULL,
   slice_idxs_int = NA_integer_
 )
 }
@@ -14,6 +16,10 @@ update_tb_r3(
 \item{tb_r3}{Tibble ready4 S3 (a ready4 S3 extension of tibble)}
 
 \item{filter_cdn_1L_chr}{Filter condition (a character vector of length one), Default: 'NA'}
+
+\item{fn}{Function (a function), Default: NULL}
+
+\item{fn_env_ls}{Function (a list of environments), Default: NULL}
 
 \item{slice_idxs_int}{Slice indices (an integer vector), Default: NA}
 }

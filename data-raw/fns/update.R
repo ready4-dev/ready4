@@ -31,6 +31,8 @@ update_pt_fn_args_ls <- function(args_ls){
 }
 update_tb_r3 <- function(tb_r3,
                          filter_cdn_1L_chr = NA_character_,
+                         fn = NULL,
+                         fn_env_ls = NULL,
                          slice_idxs_int = NA_integer_){
   if(!is.na(slice_idxs_int))
     tb_r3 <- tb_r3 %>%
@@ -38,5 +40,9 @@ update_tb_r3 <- function(tb_r3,
   if(!is.na(filter_cdn_1L_chr))
     tb_r3 <- tb_r3 %>%
       dplyr::filter(eval(parse(text=filter_cdn_1L_chr)))
+  if(!is.null(fn_env_ls) & !is.null(fn))
+    tb_r3 <- add_rows_from_fn_args(tb_r3,
+                                   fn = fn,
+                                   fn_env_ls = fn_env_ls)
   return(tb_r3)
 }
