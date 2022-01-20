@@ -128,6 +128,23 @@ make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_c
         files_tb$file_type_chr) %>% unique() %>% length())
     return(files_tb)
 }
+#' Make function defaults list
+#' @description make_fn_defaults_ls() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make function defaults list. The function returns Function defaults (a list).
+#' @param fn Function (a function)
+#' @return Function defaults (a list)
+#' @rdname make_fn_defaults_ls
+#' @export 
+#' @importFrom purrr map_lgl
+#' @keywords internal
+make_fn_defaults_ls <- function (fn) 
+{
+    fn_defaults_ls <- as.list(args(fn))
+    fn_defaults_ls <- fn_defaults_ls[fn_defaults_ls %>% purrr::map_lgl(~!identical(.x %>% 
+        deparse(), "deprecated()"))]
+    fn_defaults_ls <- fn_defaults_ls[2:(length(fn_defaults_ls) - 
+        1)]
+    return(fn_defaults_ls)
+}
 #' Make libraries tibble
 #' @description make_libraries_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make libraries tibble. The function returns Package extensions (a tibble).
 #' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'

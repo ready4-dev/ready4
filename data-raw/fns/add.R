@@ -91,3 +91,25 @@ add_references <- function(ds_tb,
     ))
   return(ds_tb)
 }
+add_rows_from_fn_args <- function(tbl_r3,
+                                  fn,
+                                  fn_env_ls){
+  fn_defaults_ls <- make_fn_defaults_ls(fn)
+  tbl_args_ls <- fn_env_ls[names(tbl_r3)]
+  bind_1L_lgl <- names(tbl_args_ls) %>%
+    purrr::map_lgl(~{
+      !identical(fn_defaults_ls[[.x]],tbl_args_ls[[.x]])
+    }) %>% any()
+  if(bind_1L_lgl){
+    new_tb <- tibble::as_tibble(tbl_args_ls)
+    labels_chr <- Hmisc::label(tbl_r3) %>% unname()
+    if (!all(labels_chr %>% unique() == "")) {
+      tbl_r3 <- tbl_r3 %>% remove_lbls_from_df()
+      Hmisc::label(tbl_r3) <- as.list(labels_chr %>% unname())
+      Hmisc::label(new_tb) <- as.list(labels_chr %>% unname())
+    }
+    tbl_r3 <- dplyr::bind_rows(tbl_r3,
+                               new_tb)
+  }
+  return(tbl_r3)
+}

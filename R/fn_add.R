@@ -83,6 +83,38 @@ add_references <- function (ds_tb, data_var_nm_1L_chr = "URL", data_url_var_nm_1
             })))
     return(ds_tb)
 }
+#' Add rows from function arguments
+#' @description add_rows_from_fn_args() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add rows from function arguments. Function argument tbl_r3 specifies the object to be updated. The function returns Table (a ready4 S3).
+#' @param tbl_r3 Table (a ready4 S3)
+#' @param fn Function (a function)
+#' @param fn_env_ls Function (a list of environments)
+#' @return Table (a ready4 S3)
+#' @rdname add_rows_from_fn_args
+#' @export 
+#' @importFrom purrr map_lgl
+#' @importFrom tibble as_tibble
+#' @importFrom Hmisc label
+#' @importFrom dplyr bind_rows
+#' @keywords internal
+add_rows_from_fn_args <- function (tbl_r3, fn, fn_env_ls) 
+{
+    fn_defaults_ls <- make_fn_defaults_ls(fn)
+    tbl_args_ls <- fn_env_ls[names(tbl_r3)]
+    bind_1L_lgl <- names(tbl_args_ls) %>% purrr::map_lgl(~{
+        !identical(fn_defaults_ls[[.x]], tbl_args_ls[[.x]])
+    }) %>% any()
+    if (bind_1L_lgl) {
+        new_tb <- tibble::as_tibble(tbl_args_ls)
+        labels_chr <- Hmisc::label(tbl_r3) %>% unname()
+        if (!all(labels_chr %>% unique() == "")) {
+            tbl_r3 <- tbl_r3 %>% remove_lbls_from_df()
+            Hmisc::label(tbl_r3) <- as.list(labels_chr %>% unname())
+            Hmisc::label(new_tb) <- as.list(labels_chr %>% unname())
+        }
+        tbl_r3 <- dplyr::bind_rows(tbl_r3, new_tb)
+    }
+    return(tbl_r3)
+}
 #' Add vignette links
 #' @description add_vignette_links() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add vignette links. Function argument pkg_extensions_tb specifies the object to be updated. The function returns Package extensions (a tibble).
 #' @param pkg_extensions_tb Package extensions (a tibble)

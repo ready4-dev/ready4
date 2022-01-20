@@ -128,6 +128,13 @@ make_files_tb <- function(paths_to_dirs_chr, # Make output into a class? Make fn
                           length())
   return(files_tb)
 }
+make_fn_defaults_ls <- function(fn){
+  fn_defaults_ls <- as.list(args(fn))
+  fn_defaults_ls <- fn_defaults_ls[fn_defaults_ls %>%
+                                     purrr::map_lgl(~!identical(.x %>% deparse(),"deprecated()"))]
+  fn_defaults_ls <- fn_defaults_ls[2:(length(fn_defaults_ls)-1)]
+  return(fn_defaults_ls)
+}
 make_list_phrase <- function(items_chr){
   list_phrase_1L_chr <- items_chr %>%
     stringr::str_c(sep="",collapse=", ") %>%
