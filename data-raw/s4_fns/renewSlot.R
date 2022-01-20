@@ -14,7 +14,8 @@ methods::setMethod("renewSlot", "Ready4Module", function(x,
                                                          slot_nm_1L_chr,
                                                          new_val_xx = "use_renew_mthd",
                                                          ...){
-  if(new_val_xx == "use_renew_mthd"){
+  if(identical(new_val_xx,
+               "use_renew_mthd")){
     new_val_xx <- renew(procureSlot(x,
                                     slot_nm_1L_chr = slot_nm_1L_chr),
                         ...)
