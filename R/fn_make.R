@@ -193,8 +193,7 @@ make_libraries_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_
         dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr, Link, 
             ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
     y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation, ~{
-        if (!.x %in% c("https://ready4-dev.github.io/TTU/authors.html", 
-            "https://ready4-dev.github.io/youthu/authors.html")) {
+        if (T) {
             f <- tempfile(fileext = ".bib")
             sink(f)
             writeLines(rvest::read_html(.x) %>% rvest::html_elements("pre") %>% 
@@ -204,16 +203,6 @@ make_libraries_tb <- function (ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_
                 TITLE, DOI)
         }
         else {
-            if (.x == "TTU") {
-                tibble::tibble(AUTHOR = list(c("Caroline Gao", 
-                  "Matthew Hamilton")), TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms", 
-                  DOI = "10.5281/zenodo.5646593")
-            }
-            else {
-                tibble::tibble(AUTHOR = list(c("Matthew Hamilton", 
-                  "Caroline Gao")), TITLE = "youthu: Map Youth Outcomes to Health Utility", 
-                  DOI = "10.5281/zenodo.5646668")
-            }
         }
     }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>% 
         dplyr::rename(DOI_chr = DOI, Title = TITLE, Authors = AUTHOR)

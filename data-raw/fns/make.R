@@ -265,8 +265,7 @@ make_libraries_tb <- function(ns_var_nm_1L_chr = "pt_ns_chr",
 
   y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation,
                          ~ {
-                           if(!.x %in% c("https://ready4-dev.github.io/TTU/authors.html",
-                                         "https://ready4-dev.github.io/youthu/authors.html")){
+                           if(T){ #!.x %in% c("https://ready4-dev.github.io/TTU/authors.html", "https://ready4-dev.github.io/youthu/authors.html")
                              f <- tempfile(fileext = ".bib")
                              sink(f)
                              writeLines(rvest::read_html(.x) %>% #paste0(url_stub_1L_chr,.x,"/authors.html")
@@ -276,16 +275,15 @@ make_libraries_tb <- function(ns_var_nm_1L_chr = "pt_ns_chr",
                              suppressWarnings(bib2df::bib2df(f)) %>%
                                dplyr::select(AUTHOR, TITLE, DOI)
                            }else{
-                             if(.x == "TTU"){
-                               tibble::tibble(AUTHOR = list(c("Caroline Gao","Matthew Hamilton")),
-                                              TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms",
-                                              DOI = "10.5281/zenodo.5646593")
-                             }else{
-                               tibble::tibble(AUTHOR = list(c("Matthew Hamilton","Caroline Gao")),
-                                              TITLE = "youthu: Map Youth Outcomes to Health Utility",
-                                              DOI = "10.5281/zenodo.5646668")
-                             }
-
+                             # if(.x == "TTU"){
+                             #   tibble::tibble(AUTHOR = list(c("Caroline Gao","Matthew Hamilton")),
+                             #                  TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms",
+                             #                  DOI = "10.5281/zenodo.5646593")
+                             # }else{
+                             #   tibble::tibble(AUTHOR = list(c("Matthew Hamilton","Caroline Gao")),
+                             #                  TITLE = "youthu: Map Youth Outcomes to Health Utility",
+                             #                  DOI = "10.5281/zenodo.5646668")
+                             # }
                            }
                          }) %>%
     dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>%
