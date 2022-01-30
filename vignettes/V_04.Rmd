@@ -110,3 +110,4 @@ print_vignettes(x)
 
 #### Authoring `ready4` framework literate programs
 To author `ready4` framework literate programs, tools from the [ready4show package](https://ready4-dev.github.io/ready4show/) are recommended. 
+

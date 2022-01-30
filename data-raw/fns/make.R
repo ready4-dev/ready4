@@ -1,6 +1,6 @@
 make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
-                        key_1L_chr = NULL,
-                        server_1L_chr = "dataverse.harvard.edu"){
+                             key_1L_chr = NULL,
+                             server_1L_chr = "dataverse.harvard.edu"){
   contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr,
                                                key = key_1L_chr,
                                                server = server_1L_chr)
@@ -181,11 +181,11 @@ make_modules_tb <- function(pkg_extensions_tb = NULL,
                                             gh_repo_1L_chr = gh_repo_1L_chr,
                                             gh_tag_1L_chr = gh_tag_1L_chr)
   modules_tb <- dplyr::inner_join(cls_extensions_tb,
-                                  pkg_extensions_tb) %>%
+                                  pkg_extensions_tb,
+                                  by = "pt_ns_chr") %>%
     dplyr::mutate(Class = purrr::pmap(list(pt_ns_chr,
                                            type_chr,
                                            old_class_lgl),
-
                                       ~ {
                                         kableExtra::cell_spec(..2,
                                                               "html",
@@ -204,7 +204,8 @@ make_modules_tb <- function(pkg_extensions_tb = NULL,
     dplyr::mutate(Examples = purrr::map2(Vignettes_URLs,
                                          type_chr,
                                          ~ get_examples(.x,
-                                                        term_1L_chr = .y))) %>%
+                                                        term_1L_chr = .y)))
+  modules_tb <-  modules_tb %>%
     dplyr::mutate(Description = purrr::map2_chr(Class,
                                                 old_class_lgl,
                                                 ~{
@@ -214,17 +215,18 @@ make_modules_tb <- function(pkg_extensions_tb = NULL,
                                                     rvest::html_text2() %>%
                                                     purrr::pluck(1)
 
-                                                }) %>% stringi::stri_replace_last_regex("\\.","")) %>%
+                                                }) %>%
+                    stringi::stri_replace_last_regex("\\.","")) %>%
     # dplyr::rename(Class = type_chr) %>%
     dplyr::select(Class,Description,Library,
                   Examples,old_class_lgl)
   return(modules_tb)
 }
 make_libraries_tb <- function(ns_var_nm_1L_chr = "pt_ns_chr",
-                                   reference_var_nm_1L_chr = "Reference",
-                                   url_stub_1L_chr = "https://ready4-dev.github.io/",
-                                   vignette_var_nm_1L_chr = "Vignettes",
-                                   vignette_url_var_nm_1L_chr = "Vignettes_URLs"
+                              reference_var_nm_1L_chr = "Reference",
+                              url_stub_1L_chr = "https://ready4-dev.github.io/",
+                              vignette_var_nm_1L_chr = "Vignettes",
+                              vignette_url_var_nm_1L_chr = "Vignettes_URLs"
 ){
   pkg_extensions_tb <- tibble::tibble(pt_ns_chr = c("scorz","specific","TTU", "youthvars","ready4show","ready4use","ready4fun","ready4class","ready4pack","youthu")) %>%
     dplyr::mutate(Type = dplyr::case_when(pt_ns_chr == "ready4class" ~ "Authoring (code - classes)",

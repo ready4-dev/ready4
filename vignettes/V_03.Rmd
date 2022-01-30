@@ -45,3 +45,4 @@ Returning to a previous example, the exact same command (e.g. a call to the meth
 
 #### Abstraction
 The simplicity enabled by polymorphism is enhanced by Abstraction, which basically means that only the briefest and easiest to comprehend parts of the code are exposed by default to potential users. Once an instance of a class is created, the entire program to ingest model data, analyse it and produce a scientific summary can be represented in a few brief lines of code, readily comprehensible to non-coders. When using open source languages, the elegance and simplicity of abstraction [does not restrict the ability of more technically minded users exploring the detailed workings of the underpinning code](https://ready4-dev.github.io/ready4fun/articles/V_01.html).
+

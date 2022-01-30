@@ -59,7 +59,6 @@ All Modules in the `ready4` Framework by default inherit all methods that are de
 get_methods()
 ```
 
-
 #### Specifying Dissemination Policies
 `ready4` includes two child classes of `Ready4Module`. These are `Ready4Public` and `Ready4Private` and both are almost as minimally informative as their parent (the only difference being that their instances have the values "Public" or "Private" assigned to the `dissemination_1L_chr` slot). 
 
@@ -129,3 +128,4 @@ print_modules(a,
 
 ## Authoring ready4 Framework Modules and Sub-Modules
 R provides an array of potential approaches to creating and documenting S3 and S4 classes. However, standardisation is an important enabler of modular approaches to computational model development, so [all ready4 framework modules and sub-modules are authored using the same workflow](https://ready4-dev.github.io/ready4class/articles/V_01.html).
+
