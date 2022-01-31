@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r results='hide', message=FALSE}
+```{r results='hide', message=FALSE, warning=F}
 library("ready4") 
 ```
 
