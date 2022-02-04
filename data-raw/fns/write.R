@@ -485,8 +485,7 @@ write_to_dv_from_tbl <- function (files_tb, data_dir_rt_1L_chr = ".", ds_url_1L_
                       ds_url_1L_chr = ds_url_1L_chr,
                       ds_ls = ds_ls,
                       key_1L_chr = key_1L_chr,
-                      server_1L_chr = server_1L_chr,
-                      consent_1L_chr = consent_1L_chr)
+                      server_1L_chr = server_1L_chr)
     })
   }else{
     fl_ids_int <- NULL

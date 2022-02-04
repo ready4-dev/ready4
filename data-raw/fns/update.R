@@ -34,10 +34,10 @@ update_tb_r3 <- function(tb_r3,
                          fn = NULL,
                          fn_env_ls = NULL,
                          slice_idxs_int = NA_integer_){
-  if(!is.na(slice_idxs_int))
+  if(!is.na(slice_idxs_int[1]))
     tb_r3 <- tb_r3 %>%
       dplyr::slice(slice_idxs_int)
-  if(!is.na(filter_cdn_1L_chr))
+  if(!is.na(filter_cdn_1L_chr[1]))
     tb_r3 <- tb_r3 %>%
       dplyr::filter(eval(parse(text=filter_cdn_1L_chr)))
   if(!is.null(fn_env_ls) & !is.null(fn))

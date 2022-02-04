@@ -294,14 +294,15 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     if (is.null(cls_extensions_tb)) 
         cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb, 
             gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
-    modules_tb <- dplyr::inner_join(cls_extensions_tb, pkg_extensions_tb) %>% 
-        dplyr::mutate(Class = purrr::pmap(list(pt_ns_chr, type_chr, 
-            old_class_lgl), ~{
-            kableExtra::cell_spec(..2, "html", link = paste0("https://ready4-dev.github.io/", 
-                ..1, "/reference/", ifelse(..3, ..2, paste0(..2, 
-                  "-class")), ".html"))
-        })) %>% dplyr::mutate(Examples = purrr::map2(Vignettes_URLs, 
-        type_chr, ~get_examples(.x, term_1L_chr = .y))) %>% dplyr::mutate(Description = purrr::map2_chr(Class, 
+    modules_tb <- dplyr::inner_join(cls_extensions_tb, pkg_extensions_tb, 
+        by = "pt_ns_chr") %>% dplyr::mutate(Class = purrr::pmap(list(pt_ns_chr, 
+        type_chr, old_class_lgl), ~{
+        kableExtra::cell_spec(..2, "html", link = paste0("https://ready4-dev.github.io/", 
+            ..1, "/reference/", ifelse(..3, ..2, paste0(..2, 
+                "-class")), ".html"))
+    })) %>% dplyr::mutate(Examples = purrr::map2(Vignettes_URLs, 
+        type_chr, ~get_examples(.x, term_1L_chr = .y)))
+    modules_tb <- modules_tb %>% dplyr::mutate(Description = purrr::map2_chr(Class, 
         old_class_lgl, ~{
             rvest::read_html((.x %>% stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[, 
                 2]) %>% rvest::html_elements(ifelse(.y, "h1", 
