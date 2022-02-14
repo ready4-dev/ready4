@@ -27,7 +27,8 @@ get_cls_extensions <- function(pkg_extensions_tb,
     dplyr::arrange(pt_ns_chr) %>%
     dplyr::filter(pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
     dplyr::arrange(pt_ns_chr) %>%
-    dplyr::select(type_chr, pt_ns_chr, old_class_lgl)
+    dplyr::select(type_chr, pt_ns_chr, old_class_lgl) %>%
+    dplyr::filter(type_chr != "TTU_predictors_lup")
   return(cls_extensions_tb)
 }
 get_datasets_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
