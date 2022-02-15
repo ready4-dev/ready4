@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "Matthew P Hamilton  (2021). ready4: Implement Open Science Computational Models of Mental Health
 Systems. Version 0.0.0.9089. Zenodo. https://doi.org/10.5281/zenodo.5606250"
 authors:
-  - family-names: "Matthew P"
-    given-names: "Hamilton"
+  - family-names: "Hamilton"
+    given-names: "Matthew P"
 title: "ready4: Implement Open Science Computational Models of Mental Health
 Systems"
 version: 0.0.0.9089
