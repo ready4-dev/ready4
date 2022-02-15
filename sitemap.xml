@@ -295,6 +295,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/write_all_tbs_in_tbs_r4_to_csvs.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_citation_cff.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_dv_fl_to_loc.html</loc>
   </url>
   <url>
@@ -335,6 +338,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_to_publish_dv_ds.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_words.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_ws.html</loc>
