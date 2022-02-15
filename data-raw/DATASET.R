@@ -8,7 +8,8 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Comp
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
                                                         "matthew.hamilton@orygen.org.au",role = c("aut",
-                                                                                                  "cre"),comment = c(ORCID = "0000-0001-7407-9194")
+                                                                                                  "cre"),
+                                                      comment = c(ORCID = "0000-0001-7407-9194")
                                                     ),
                                                     utils::person("Orygen", role = c("cph", "fnd")),
                                                     utils::person("VicHealth",role = c("fnd")),
@@ -44,9 +45,9 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Comp
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
+ # ADD DOI OVERRIDE FOR RELEASES
 #
 # write_extensions() # Required only if extensions have changed since last build
 # write_badges() # Only run if the ready4fun badges table has been updated.
 # Very occasional calls to write_housestyle_fls (four a year tops)
 devtools::build_vignettes()
-#

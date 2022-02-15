@@ -408,6 +408,8 @@ write_self_srvc_pkg <- function(x){
   }
   write_to_delete_dirs("safety")
   write_prototypes()
+  write_citation_cff(packageDescription("ready4"),
+                     citation_chr = readLines("inst/CITATION"))
   return(x)
 }
 write_prototypes <- function(gh_repo_1L_chr = "ready4-dev/ready4",
@@ -458,22 +460,7 @@ write_extensions <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                        piggyback_to_1L_chr = gh_repo_1L_chr,
                        prerelease_1L_lgl = T)
 }
-write_words <- function(new_words_chr,
-                        gh_repo_1L_chr = "ready4-dev/ready4",
-                        gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
-  b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("treat_as_words_chr.RDS")]))
-  b <- c(b,new_words_chr) %>% sort()
-  write_env_objs_to_dv(env_objects_ls = list(treat_as_words_chr = b),
-                       descriptions_chr = NULL,
-                       ds_url_1L_chr = character(0),
-                       piggyback_desc_1L_chr = "Supplementary Files",
-                       piggyback_tag_1L_chr =  gh_tag_1L_chr,
-                       piggyback_to_1L_chr = gh_repo_1L_chr,
-                       prerelease_1L_lgl = T)
-}
+
 
 write_housestyle_fls <- function(){ # Use sparingly [Max 4 times a year]
   X <- ready4use::Ready4useRepos(dv_nm_1L_chr = "ready4fw",

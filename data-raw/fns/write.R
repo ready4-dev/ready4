@@ -9,6 +9,42 @@ write_all_tbs_in_tbs_r4_to_csvs <- function(tbs_r4,
                                 lup_dir_1L_chr = lup_dir_1L_chr,
                                 pfx_1L_chr = pfx_1L_chr))
 }
+write_citation_cff <- function(pkg_desc_ls,
+                               citation_chr,
+                               publisher_1L_chr = "Zenodo"){
+  meta <- pkg_desc_ls
+  authors_ls <- parse(text=paste0("list(",
+                                  citation_chr[startsWith(citation_chr,"  author   = ")] %>%
+                                    stringr::str_sub(start=16, end=-3) %>%
+                                    stringr::str_replace_all("person","c"),
+                                  ")")) %>%
+    eval()
+  citation_cff_chr <- c("cff-version: 1.2.0",
+                        paste0("message: \"",
+                               parse(text = citation_chr[which(citation_chr %>%
+                                                                 startsWith("  textVersion = ")):(length(citation_chr)-1)] %>%
+                                       stringr::str_remove("  textVersion = ") %>%
+                                       paste0(collapse = "\n")) %>%
+                                 eval() %>%
+                                 stringr::str_replace(paste0(meta$Version,"."),
+                                                      paste0(meta$Version,". ",publisher_1L_chr,".")),
+                               "\""),
+                        "authors:",
+                        purrr::map2_chr(authors_ls,
+                                        1:length(authors_ls),
+                                        ~ paste0("  - family-names: \"",.x[1],"\"\n",
+                                                 "    given-names: \"",.x[2],ifelse(.y==length(authors_ls),"\"","\"\n")#"    orcid: ",
+                                        )),
+                        paste0("title: \"",paste0(meta$Package,": ",meta$Title),"\""),
+                        paste0("version: ",meta$Version),
+                        paste0("doi: ",citation_chr[startsWith(citation_chr,"  doi      = ")] %>% stringr::str_sub(start=15,end=-3)),
+                        paste0("date-released: ",Sys.Date()),
+                        paste0("url: \"",citation_chr[startsWith(citation_chr,"  url      = ")] %>% stringr::str_sub(start=15,end=-3),"\""))
+  write_new_files("CITATION.cff",
+                  fl_nm_1L_chr = "CITATION",
+                  text_ls = list(citation_cff_chr))
+
+}
 write_dv_fl_to_loc <- function(ds_ui_1L_chr,
                                fl_nm_1L_chr = NA_character_,
                                fl_id_1L_int = NA_integer_,
@@ -571,6 +607,22 @@ write_to_publish_dv_ds <- function(dv_ds_1L_chr){
     dataverse::publish_dataset(dv_ds_1L_chr,
                                minor = F)
   }
+}
+write_words <- function(new_words_chr,
+                        gh_repo_1L_chr = "ready4-dev/ready4",
+                        gh_tag_1L_chr = "Documentation_0.0"){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
+                                             tag = gh_tag_1L_chr,
+                                             .token = "")
+  b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("treat_as_words_chr.RDS")]))
+  b <- c(b,new_words_chr) %>% sort()
+  write_env_objs_to_dv(env_objects_ls = list(treat_as_words_chr = b),
+                       descriptions_chr = NULL,
+                       ds_url_1L_chr = character(0),
+                       piggyback_desc_1L_chr = "Supplementary Files",
+                       piggyback_tag_1L_chr =  gh_tag_1L_chr,
+                       piggyback_to_1L_chr = gh_repo_1L_chr,
+                       prerelease_1L_lgl = T)
 }
 write_ws <- function(path_1L_chr){
   top_level_chr <- paste0(path_1L_chr,
