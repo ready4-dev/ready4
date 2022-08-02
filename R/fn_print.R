@@ -140,6 +140,7 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
 #' Print packages
 #' @description print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
+#' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
 #' @return pkg_extensions_kbl (An object)
 #' @rdname print_packages
 #' @export 
@@ -147,10 +148,10 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
 #' @importFrom purrr map map_chr map2_chr pmap
 #' @importFrom stringr str_remove
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
-print_packages <- function (pkg_extensions_tb = NULL) 
+print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules") 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_libraries_tb()
+        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Badges = purrr::map(pt_ns_chr, 
         ~get_badge_urls(.x))) %>% dplyr::mutate(Type = "") %>% 
         dplyr::mutate(DOI = "") %>% dplyr::mutate(Logo = "")
@@ -209,6 +210,7 @@ print_packages <- function (pkg_extensions_tb = NULL)
 #' Print vignettes
 #' @description print_vignettes() is a Print function that prints output to console Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
+#' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
 #' @return vignettes_kbl (An object)
 #' @rdname print_vignettes
 #' @export 
@@ -218,10 +220,10 @@ print_packages <- function (pkg_extensions_tb = NULL)
 #' @importFrom rvest read_html html_elements html_text2 html_attr
 #' @importFrom kableExtra cell_spec kable kable_styling
 #' @keywords internal
-print_vignettes <- function (pkg_extensions_tb = NULL) 
+print_vignettes <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules") 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_libraries_tb()
+        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
     vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
     keep_lgl <- !is.na(vignettes_chr)
     vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]) %>% 

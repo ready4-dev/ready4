@@ -5,6 +5,7 @@
 \title{Make libraries tibble}
 \usage{
 make_libraries_tb(
+  include_1L_chr = "modules",
   ns_var_nm_1L_chr = "pt_ns_chr",
   reference_var_nm_1L_chr = "Reference",
   url_stub_1L_chr = "https://ready4-dev.github.io/",
@@ -13,6 +14,8 @@ make_libraries_tb(
 )
 }
 \arguments{
+\item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
+
 \item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 
 \item{reference_var_nm_1L_chr}{Reference variable name (a character vector of length one), Default: 'Reference'}

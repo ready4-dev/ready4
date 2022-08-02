@@ -4,10 +4,12 @@
 \alias{print_vignettes}
 \title{Print vignettes}
 \usage{
-print_vignettes(pkg_extensions_tb = NULL)
+print_vignettes(pkg_extensions_tb = NULL, include_1L_chr = "modules")
 }
 \arguments{
 \item{pkg_extensions_tb}{Package extensions (a tibble), Default: NULL}
+
+\item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
 }
 \value{
 vignettes_kbl (An object)

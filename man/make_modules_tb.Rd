@@ -8,7 +8,8 @@ make_modules_tb(
   pkg_extensions_tb = NULL,
   cls_extensions_tb = NULL,
   gh_repo_1L_chr = "ready4-dev/ready4",
-  gh_tag_1L_chr = "Documentation_0.0"
+  gh_tag_1L_chr = "Documentation_0.0",
+  include_1L_chr = "modules"
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ make_modules_tb(
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
+
+\item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
 }
 \value{
 Modules (a tibble)

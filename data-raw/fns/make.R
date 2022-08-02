@@ -135,6 +135,91 @@ make_fn_defaults_ls <- function(fn){
   fn_defaults_ls <- fn_defaults_ls[2:(length(fn_defaults_ls)-1)]
   return(fn_defaults_ls)
 }
+make_libraries_tb <- function(include_1L_chr = "modules",
+                              ns_var_nm_1L_chr = "pt_ns_chr",
+                              reference_var_nm_1L_chr = "Reference",
+                              url_stub_1L_chr = "https://ready4-dev.github.io/",
+                              vignette_var_nm_1L_chr = "Vignettes",
+                              vignette_url_var_nm_1L_chr = "Vignettes_URLs"
+){
+  modules_chr <- c("scorz","specific","TTU","youthu","youthvars")
+  fw_chr <- c("ready4show","ready4use","ready4fun","ready4class","ready4pack")
+  if(include_1L_chr == "modules"){
+    libraries_chr <- modules_chr
+  }else{
+    if(include_1L_chr == "framework"){
+      libraries_chr <- fw_chr
+    }
+      libraries_chr <- c(fw_chr, modules_chr)
+  }
+  pkg_extensions_tb <- tibble::tibble(pt_ns_chr = libraries_chr#c("scorz","specific","TTU","youthvars", "ready4show","ready4use","ready4fun","ready4class","ready4pack","youthu")
+                                      ) %>%
+    dplyr::mutate(Type = dplyr::case_when(pt_ns_chr == "ready4class" ~ "Authoring (code - classes)",
+                                          pt_ns_chr == "ready4fun" ~ "Authoring (code - functions)",
+                                          pt_ns_chr == "ready4pack" ~ "Authoring (code - libraries)",
+                                          pt_ns_chr == "ready4show" ~ "Authoring (code - programs)",
+                                          pt_ns_chr == "ready4use" ~ "Authoring (datasets)",
+                                          pt_ns_chr == "youthvars" ~ "Description (datasets)",
+                                          pt_ns_chr == "scorz" ~ "Description (variable scoring)",
+                                          pt_ns_chr == "specific" ~ "Modelling (inverse problems)",
+                                          pt_ns_chr == "heterodox" ~ "Modelling (heterogeneity)",
+                                          pt_ns_chr == "TTU" ~ "Modelling (health utility)",
+                                          pt_ns_chr == "youthu" ~ "Prediction (health utility)",
+                                          T ~ "")) %>%
+    dplyr::arrange(Type) %>%
+    dplyr::mutate(Link = purrr::map_chr(pt_ns_chr,
+                                        ~ paste0(url_stub_1L_chr,.x,
+                                                 "/index",#"/articles/",.x,
+                                                 ".html"))) %>%
+    dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, "html", link = Link))
+  pkg_extensions_tb <-  add_vignette_links(pkg_extensions_tb,
+                                           ns_var_nm_1L_chr = ns_var_nm_1L_chr,
+                                           reference_var_nm_1L_chr = reference_var_nm_1L_chr,
+                                           url_stub_1L_chr = url_stub_1L_chr,
+                                           vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
+                                           vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
+  pkg_extensions_tb <- pkg_extensions_tb %>%
+    dplyr::mutate(Citation = paste0(url_stub_1L_chr,pt_ns_chr,"/authors.html")) %>%
+    dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr,
+                                               Link,
+                                               ~ get_manual_urls(.x,
+                                                                 pkg_url_1L_chr = .y))) %>%
+    dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr,
+                                             Link,
+                                             ~ get_source_code_urls(.x,
+                                                                    pkg_url_1L_chr = .y)))
+  y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation,
+                         ~ {
+                           if(T){ #!.x %in% c("https://ready4-dev.github.io/TTU/authors.html", "https://ready4-dev.github.io/youthu/authors.html")
+                             f <- tempfile(fileext = ".bib")
+                             sink(f)
+                             writeLines(rvest::read_html(.x) %>% #paste0(url_stub_1L_chr,.x,"/authors.html")
+                                          rvest::html_elements("pre") %>%
+                                          rvest::html_text2())
+                             sink(NULL)
+                             suppressWarnings(bib2df::bib2df(f)) %>%
+                               dplyr::select(AUTHOR, TITLE, DOI)
+                           }else{
+                             # if(.x == "TTU"){
+                             #   tibble::tibble(AUTHOR = list(c("Caroline Gao","Matthew Hamilton")),
+                             #                  TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms",
+                             #                  DOI = "10.5281/zenodo.5646593")
+                             # }else{
+                             #   tibble::tibble(AUTHOR = list(c("Matthew Hamilton","Caroline Gao")),
+                             #                  TITLE = "youthu: Map Youth Outcomes to Health Utility",
+                             #                  DOI = "10.5281/zenodo.5646668")
+                             # }
+                           }
+                         }) %>%
+    dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>%
+    dplyr::rename(DOI_chr = DOI,
+                  Title = TITLE,
+                  Authors = AUTHOR)
+  pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb,
+                                        y_tb,
+                                        by = "pt_ns_chr")
+  return(pkg_extensions_tb)
+}
 make_list_phrase <- function(items_chr){
   list_phrase_1L_chr <- items_chr %>%
     stringr::str_c(sep="",collapse=", ") %>%
@@ -151,17 +236,23 @@ make_local_path_to_dv_data <- function(save_dir_path_1L_chr,
 }
 make_methods_tb <- function(packages_tb  = NULL,
                             exclude_mthds_for_chr = NA_character_,
+                            include_1L_chr = "modules",
                             ns_var_nm_1L_chr = "pt_ns_chr",
                             reference_var_nm_1L_chr = "Reference",
                             return_1L_lgl = "all",
                             url_stub_1L_chr = "https://ready4-dev.github.io/",
                             vignette_var_nm_1L_chr = "Vignettes",
                             vignette_url_var_nm_1L_chr = "Vignettes_URLs"){
-  packages_tb <- make_libraries_tb(ns_var_nm_1L_chr = ns_var_nm_1L_chr,
-                                        reference_var_nm_1L_chr = reference_var_nm_1L_chr,
-                                        url_stub_1L_chr = url_stub_1L_chr,
-                                        vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
-                                        vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
+
+
+  if(is.null(packages_tb)){
+    packages_tb <- make_libraries_tb(include_1L_chr = include_1L_chr,
+                                     ns_var_nm_1L_chr = ns_var_nm_1L_chr,
+                                     reference_var_nm_1L_chr = reference_var_nm_1L_chr,
+                                     url_stub_1L_chr = url_stub_1L_chr,
+                                     vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
+                                     vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
+  }
   methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
                                                      return_1L_lgl = return_1L_lgl),
                                Purpose = get_mthd_titles(Method),
@@ -173,13 +264,15 @@ make_methods_tb <- function(packages_tb  = NULL,
 make_modules_tb <- function(pkg_extensions_tb = NULL,
                             cls_extensions_tb = NULL,
                             gh_repo_1L_chr = "ready4-dev/ready4",
-                            gh_tag_1L_chr = "Documentation_0.0"){
+                            gh_tag_1L_chr = "Documentation_0.0",
+                            include_1L_chr = "modules"){
   if(is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_libraries_tb()
+    pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
   if(is.null(cls_extensions_tb))
     cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb,
                                             gh_repo_1L_chr = gh_repo_1L_chr,
-                                            gh_tag_1L_chr = gh_tag_1L_chr)
+                                            gh_tag_1L_chr = gh_tag_1L_chr,
+                                            validate_1L_lgl = T)
   modules_tb <- dplyr::inner_join(cls_extensions_tb,
                                   pkg_extensions_tb,
                                   by = "pt_ns_chr") %>%
@@ -222,82 +315,6 @@ make_modules_tb <- function(pkg_extensions_tb = NULL,
                   Examples,old_class_lgl)
   return(modules_tb)
 }
-make_libraries_tb <- function(ns_var_nm_1L_chr = "pt_ns_chr",
-                              reference_var_nm_1L_chr = "Reference",
-                              url_stub_1L_chr = "https://ready4-dev.github.io/",
-                              vignette_var_nm_1L_chr = "Vignettes",
-                              vignette_url_var_nm_1L_chr = "Vignettes_URLs"
-){
-  pkg_extensions_tb <- tibble::tibble(pt_ns_chr = c("scorz","specific","TTU", "youthvars","ready4show","ready4use","ready4fun","ready4class","ready4pack","youthu")) %>%
-    dplyr::mutate(Type = dplyr::case_when(pt_ns_chr == "ready4class" ~ "Authoring (code - classes)",
-                                             pt_ns_chr == "ready4fun" ~ "Authoring (code - functions)",
-                                             pt_ns_chr == "ready4pack" ~ "Authoring (code - libraries)",
-                                             pt_ns_chr == "ready4show" ~ "Authoring (code - programs)",
-                                             pt_ns_chr == "ready4use" ~ "Authoring (datasets)",
-                                             pt_ns_chr == "youthvars" ~ "Description (datasets)",
-                                             pt_ns_chr == "scorz" ~ "Description (variable scoring)",
-                                             pt_ns_chr == "specific" ~ "Modelling (inverse problems)",
-                                             pt_ns_chr == "heterodox" ~ "Modelling (heterogeneity)",
-                                             pt_ns_chr == "TTU" ~ "Modelling (health utility)",
-                                             pt_ns_chr == "youthu" ~ "Prediction (health utility)",
-                                             T ~ "")) %>%
-    dplyr::arrange(Type) %>%
-    dplyr::mutate(Link = purrr::map_chr(pt_ns_chr,
-                                        ~ paste0(url_stub_1L_chr,.x,
-                                                 "/index",#"/articles/",.x,
-                                                 ".html"))) %>%
-    dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, "html", link = Link))
-  pkg_extensions_tb <-  add_vignette_links(pkg_extensions_tb,
-                                           ns_var_nm_1L_chr = ns_var_nm_1L_chr,
-                                           reference_var_nm_1L_chr = reference_var_nm_1L_chr,
-                                           url_stub_1L_chr = url_stub_1L_chr,
-                                           vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
-                                           vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
-  pkg_extensions_tb <- pkg_extensions_tb %>%
-    dplyr::mutate(Citation = paste0(url_stub_1L_chr,pt_ns_chr,"/authors.html")) %>%
-    dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr,
-                                               Link,
-                                               ~ get_manual_urls(.x,
-                                                                 pkg_url_1L_chr = .y))) %>%
-    dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr,
-                                               Link,
-                                               ~ get_source_code_urls(.x,
-                                                                      pkg_url_1L_chr = .y)))
-
-
-  y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation,
-                         ~ {
-                           if(T){ #!.x %in% c("https://ready4-dev.github.io/TTU/authors.html", "https://ready4-dev.github.io/youthu/authors.html")
-                             f <- tempfile(fileext = ".bib")
-                             sink(f)
-                             writeLines(rvest::read_html(.x) %>% #paste0(url_stub_1L_chr,.x,"/authors.html")
-                                          rvest::html_elements("pre") %>%
-                                          rvest::html_text2())
-                             sink(NULL)
-                             suppressWarnings(bib2df::bib2df(f)) %>%
-                               dplyr::select(AUTHOR, TITLE, DOI)
-                           }else{
-                             # if(.x == "TTU"){
-                             #   tibble::tibble(AUTHOR = list(c("Caroline Gao","Matthew Hamilton")),
-                             #                  TITLE = "TTU: Specify, Report and Share Transfer to Utility Mapping Algorithms",
-                             #                  DOI = "10.5281/zenodo.5646593")
-                             # }else{
-                             #   tibble::tibble(AUTHOR = list(c("Matthew Hamilton","Caroline Gao")),
-                             #                  TITLE = "youthu: Map Youth Outcomes to Health Utility",
-                             #                  DOI = "10.5281/zenodo.5646668")
-                             # }
-                           }
-                         }) %>%
-    dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>%
-    dplyr::rename(DOI_chr = DOI,
-                  Title = TITLE,
-                  Authors = AUTHOR)
-  pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb,
-                                        y_tb,
-                                        by = "pt_ns_chr")
-  return(pkg_extensions_tb)
-}
-
 make_prompt <- function(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = F) {
   acknowledgement_1L_chr <- "This function is based on: https://debruine.github.io/posts/interactive-test/"
   con_conn <- getOption("prompt_opts.con", stdin())

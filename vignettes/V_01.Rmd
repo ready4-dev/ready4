@@ -1,5 +1,5 @@
 ---
-title: "Develop Modular Computational Models Of Mental Health Systems"
+title: "Develop Modular Computational Models Of Youth Mental Health Systems"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Develop Modular Computational Models Of Mental Health Systems}
@@ -12,19 +12,17 @@ library("ready4")
 ```
 
 ## Motivation
-One potentially attractive approach to modelling complex mental health systems is to begin with a relatively simple computational model and to progressively extend its scope and sophistication. Such an approach can be aided by linking multiple modelling projects (potentially from different modelling groups) that each independently describe distinct aspects of the system to be modelled. Such phased and collaborative approaches require all individual project outputs to readily integrate with each other as "modules". 
+One potentially attractive approach to modelling complex youth mental health systems is to begin with a relatively simple computational model and to progressively extend its scope and sophistication. Such an approach can be aided by linking multiple modelling projects (potentially developed by different modelling teams) that each independently describe distinct aspects of the system to be modelled. The `ready4` package provides tools to enable such a modular approach be used in the development of readyforwhatsnext - an open source health economic model of the systems shaping mental health and wellbeing in young people. 
 
 ## Implementation
-`ready4` takes advantage of the [encapsulation and inheritance features of Object Oriented Programming (OOP)](V_03.html) to support modular approaches to the development of computational models of mental health systems. 
-
-The `ready4` framework uses two systems for implementing OOP - S3 and S4. An in-depth explanation of R's different class system is beyond the scope of this article, but is explored in [Hadley Wickham's Advanced R handbook](https://adv-r.hadley.nz/oo.html). However, it is useful to know some very high level information about S3 and S4 classes:
+The readyforwhatsnext model is being implemented in R and takes advantage of the [encapsulation and inheritance features of Object Oriented Programming (OOP)](V_03.html). Specifically, the model uses two of R's systems for implementing OOP - S3 and S4. An in-depth explanation of R's different class system is beyond the scope of this article, but is explored in [Hadley Wickham's Advanced R handbook](https://adv-r.hadley.nz/oo.html). However, it is useful to know some very high level information about S3 and S4 classes:
 
  - S4 classes are frequently said to be "formal", "strict" or "rigorous". The elements of an S4 class are called slots and the type of data that each slot is allowed to contain is specified in the class definition. An S4 class can be comprised of slots that contain different types of data (e.g. a slot that contains a character vector and another slot that contains tabular data). 
  
  - S3 classes are often described as "simple", "informal" and "flexible". S3 objects attach an attribute label to base type objects (e.g. a character vector, a data.frame, a list), which in turn is used to work out what methods should be applied to the class. 
  
 ### Modules
-The foundational element of `ready4` that facilitates the development of modular computational models of mental health systems is the `Ready4Module` class. We can create an instance (`X`) of `Ready4Module` using the following command.
+A readyforwhatsnext model module comprises a data-structure and its associated algorithms and is used to model a discrete component of a system relevant to young people's mental health. Each readyforwhatsnext model module is created using the `ready4` package's `Ready4Module` class. We can create an instance (`X`) of `Ready4Module` using the following command.
 
 ```{r}
 X <- ready4::Ready4Module()
@@ -36,24 +34,24 @@ However, if we inspect `X` we can see it is of limited use as it contains no dat
 str(X)
 ```
 
-The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent-class of all modules used in the `ready4` framework. `Ready4Module` and all of its child-classes (ie all `ready4` framework modules) are "S4" classes. 
+The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent-class of all readyforwhatsnext model modules. `Ready4Module` and all of its child-classes (ie all readyforwhatsnext model modules) are "S4" classes. 
 
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
 ::: {.card-header}
-**`ready4` Framework Concept**
+**readyforwhatnext Concept**
 :::
 
 ::: {.card-body}
 ::: {.card-title}
 #### Module
 :::
-A formal (S4) `Ready4Module` child-class that structures data for use in computational models of mental health systems
+A formal (S4) `Ready4Module` child-class and its associated methods that models a discrete sub-component of the readyforwhatsnext youth mental health model.
 :::
 :::
 
 #### Ready4Module Methods
-All Modules in the `ready4` Framework by default inherit all methods that are defined for `Ready4Module`, which can be itemised using the `get_methods` function. Currently, the only methods defined for `Ready4Module` are [slot-methods](V_02.html#slot-generics-and-methods).
+All readyforwhatsnext modules a number of methods that are defined for `Ready4Module` and which can be itemised using the `get_methods` function. Currently, the only methods defined for `Ready4Module` are [slot-methods](V_02.html#slot-generics-and-methods).
 
 ```{r}
 get_methods()
@@ -83,12 +81,12 @@ procureSlot(X,
 ```
 
 ### Sub-modules
-In the `ready4` framework, S3 classes are principally used to help define the structural properties of slots of `ready4` framework modules and the methods that can be applied to these slots. S3 classes created for these purposes are called **sub-modules**.
+In the readyforwhatsnext model, S3 classes are principally used to help define the structural properties of slots (array elements) of model modules and the methods that can be applied to these slots. S3 classes created for these purposes are called **sub-modules**.
  
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
 ::: {.card-header}
-**`ready4` Framework Concept**
+**`readyforwhatnext Concept**
 :::
 
 ::: {.card-body}
@@ -101,7 +99,7 @@ An informal (S3) class that describes, validates and assigns methods to a slot o
 
 
 ## Finding Modules and Sub-Modules
-A table of all currently available `ready4` framework modules (S4 classes) and sub-modules (S3 classes) can be generated by web-scraping using `make_modules_tb` (produces up to date results but a little slow) or alternatively downloaded from a periodically updated database using `get_modules_tb` (quicker to implement, but may miss the most recent additions).
+A table of all currently available readyforwhatsnext model modules (S4 classes) and sub-modules (S3 classes) can be generated by web-scraping using `make_modules_tb`. This function produces up to date results but is a little slow, so an alternative is to downloaded a periodically updated model modules database using `get_modules_tb`. Note, this quicker to implement method may omit the most recently authored model modules.
 
 ```{r warning=FALSE, message=FALSE}
 # Not run
@@ -110,16 +108,17 @@ A table of all currently available `ready4` framework modules (S4 classes) and s
 ```{r warning=FALSE, message=FALSE}
 a <- get_modules_tb()
 ```
-### Current ready4 Framework Modules
-HTML versions of the table can be printed using the `print_modules` function. To display a table of `ready4` framework modules, supply the value "S4" to the `what_1L_chr` argument.
+
+### Current readyforwhatsnext Modules
+HTML versions of the table can be printed using the `print_modules` function. To display a table of readyforwhatsnext model modules, supply the value "S4" to the `what_1L_chr` argument.
 
 ```{r }
 print_modules(a,
               what_1L_chr = "S4")
 ```
 
-### Current ready4 Framework Sub-Modules
-To display a table of `ready4` framework sub-modules , supply the value "S3" to the `what_1L_chr` argument.
+### Current readyforwhatsnext Sub-Modules
+To display a table of readyforwhatsnext model sub-modules , supply the value "S3" to the `what_1L_chr` argument.
 
 ```{r }
 print_modules(a,
@@ -127,5 +126,5 @@ print_modules(a,
 ```
 
 ## Authoring ready4 Framework Modules and Sub-Modules
-R provides an array of potential approaches to creating and documenting S3 and S4 classes. However, standardisation is an important enabler of modular approaches to computational model development, so [all ready4 framework modules and sub-modules are authored using the same workflow](https://ready4-dev.github.io/ready4class/articles/V_01.html).
+R provides an array of potential approaches to creating and documenting S3 and S4 classes. However, standardisation is an important enabler of modular approaches to computational model development, so [all readyforwhatsnext modules and sub-modules are authored using the same workflow](https://ready4-dev.github.io/ready4class/articles/V_01.html).
 

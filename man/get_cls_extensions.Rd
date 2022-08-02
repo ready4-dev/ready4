@@ -7,7 +7,8 @@
 get_cls_extensions(
   pkg_extensions_tb,
   gh_repo_1L_chr = "ready4-dev/ready4",
-  gh_tag_1L_chr = "Documentation_0.0"
+  gh_tag_1L_chr = "Documentation_0.0",
+  validate_1L_lgl = F
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ get_cls_extensions(
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
+
+\item{validate_1L_lgl}{Validate (a logical vector of length one), Default: F}
 }
 \value{
 Class extensions (a tibble)

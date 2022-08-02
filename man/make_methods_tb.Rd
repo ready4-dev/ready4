@@ -7,6 +7,7 @@
 make_methods_tb(
   packages_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
+  include_1L_chr = "modules",
   ns_var_nm_1L_chr = "pt_ns_chr",
   reference_var_nm_1L_chr = "Reference",
   return_1L_lgl = "all",
@@ -19,6 +20,8 @@ make_methods_tb(
 \item{packages_tb}{Packages (a tibble), Default: NULL}
 
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
+
+\item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
 
 \item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 

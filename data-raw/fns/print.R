@@ -105,9 +105,10 @@ print_modules <- function(modules_tb,
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
   return(modules_kbl)
 }
-print_packages <- function(pkg_extensions_tb = NULL){
+print_packages <- function(pkg_extensions_tb = NULL,
+                           include_1L_chr = "modules"){
   if(is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_libraries_tb()
+    pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
   pkg_extensions_tb <- pkg_extensions_tb %>%
     dplyr::mutate(Badges = purrr::map(pt_ns_chr,
                                       ~ get_badge_urls(.x))) %>%
@@ -203,9 +204,10 @@ print_packages <- function(pkg_extensions_tb = NULL){
                             link = homepages_chr)
   return(pkg_extensions_kbl)
 }
-print_vignettes <- function(pkg_extensions_tb = NULL){
+print_vignettes <- function(pkg_extensions_tb = NULL,
+                            include_1L_chr = "modules"){
   if(is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_libraries_tb()
+    pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
   vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
   keep_lgl <- !is.na(vignettes_chr)
   vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]#,

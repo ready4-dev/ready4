@@ -38,15 +38,19 @@ get_badges_lup <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @param pkg_extensions_tb Package extensions (a tibble)
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param validate_1L_lgl Validate (a logical vector of length one), Default: F
 #' @return Class extensions (a tibble)
 #' @rdname get_cls_extensions
 #' @export 
 #' @importFrom piggyback pb_download_url
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr arrange filter select
+#' @importFrom purrr map_dfr
+#' @importFrom rvest read_html html_elements html_text2
+#' @importFrom stringi stri_replace_last_fixed
 #' @keywords internal
 get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/ready4", 
-    gh_tag_1L_chr = "Documentation_0.0") 
+    gh_tag_1L_chr = "Documentation_0.0", validate_1L_lgl = F) 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
         tag = gh_tag_1L_chr, .token = "")
@@ -54,8 +58,23 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
         endsWith("classes_lup.RDS")])) %>% tibble::as_tibble() %>% 
         dplyr::arrange(pt_ns_chr) %>% dplyr::filter(pt_ns_chr %in% 
         pkg_extensions_tb$pt_ns_chr) %>% dplyr::arrange(pt_ns_chr) %>% 
-        dplyr::select(type_chr, pt_ns_chr, old_class_lgl) %>% 
-        dplyr::filter(type_chr != "TTU_predictors_lup")
+        dplyr::select(type_chr, pt_ns_chr, old_class_lgl)
+    if (validate_1L_lgl) {
+        cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>% 
+            unique() %>% purrr::map_dfr(~{
+            url_1L_chr <- paste0("https://ready4-dev.github.io/", 
+                .x, "/reference/index", ".html")
+            allowable_chr <- rvest::read_html((url_1L_chr)) %>% 
+                rvest::html_elements("a") %>% rvest::html_text2()
+            allowable_chr <- allowable_chr[(allowable_chr %>% 
+                endsWith("-class") | allowable_chr %>% startsWith(.x)) & 
+                allowable_chr != .x] %>% stringi::stri_replace_last_fixed("-class", 
+                "") %>% stringi::stri_replace_last_fixed("()", 
+                "")
+            cls_extensions_tb %>% dplyr::filter(pt_ns_chr == 
+                .x) %>% dplyr::filter(type_chr %in% allowable_chr)
+        })
+    }
     return(cls_extensions_tb)
 }
 #' Get datasets tibble

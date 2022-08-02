@@ -4,10 +4,12 @@
 \alias{print_packages}
 \title{Print packages}
 \usage{
-print_packages(pkg_extensions_tb = NULL)
+print_packages(pkg_extensions_tb = NULL, include_1L_chr = "modules")
 }
 \arguments{
 \item{pkg_extensions_tb}{Package extensions (a tibble), Default: NULL}
+
+\item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
 }
 \value{
 pkg_extensions_kbl (An object)

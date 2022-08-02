@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "Matthew P Hamilton  (2021). ready4: Implement Open Source Computational Models of Youth Mental Health
-Systems. Version 0.0.0.9093. Zenodo. https://doi.org/10.5281/zenodo.5606250"
+Systems. Version 0.0.0.9095. Zenodo. https://doi.org/10.5281/zenodo.5606250"
 authors:
   - family-names: "Hamilton"
     given-names: "Matthew P"
 title: "ready4: Implement Open Source Computational Models of Youth Mental Health
 Systems"
-version: 0.0.0.9093
+version: 0.0.0.9095
 doi: 10.5281/zenodo.5606250
 date-released: 2022-08-02
 url: "https://ready4-dev.github.io/ready4/"
