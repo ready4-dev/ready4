@@ -552,12 +552,16 @@ write_to_dv_with_wait <- function(dss_tb, # RENAME & Convert to two steps: Make 
   paths_chr <- paste0(ifelse(identical(character(0),data_dir_rt_1L_chr),
                              "",
                              paste0(data_dir_rt_1L_chr, "/")),
-                      files_tb[,1], "/", files_tb[,2], files_tb[,3])
+                      files_tb %>%
+                        purrr::pmap(~paste0(paste0(..1,
+                                                   "/",
+                                                   ..2,
+                                                   ..3))))
   if(!consent_1L_chr %in% c("Y", "N")){
     consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file",
-                                                       ifelse(length(paths_chr)>1,"s ",""),
-                                                       paths_chr,
-                                                       "to dataverse ",
+                                                       ifelse(length(paths_chr)>1,"s "," "),
+                                                       make_list_phrase(paths_chr),
+                                                       " to dataverse ",
                                                        ds_url_1L_chr,
                                                        " ? "),
                                   options_chr = c("Y", "N"),

@@ -2,8 +2,8 @@ library(magrittr)
 library(lifecycle)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 ready4fun::write_fn_type_dirs()
-x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Science Computational Models of Mental Health Systems" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for ensuring that the computational model components of mental health systems modelling projects adhere to open science principles.
+x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Source Computational Models of Youth Mental Health Systems" %>% tools::toTitleCase(),
+                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for developing, extending and applying readyforwhatsnext - a modular, open source health economic model of young people's mental health.
   This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =

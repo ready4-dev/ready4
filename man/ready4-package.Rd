@@ -4,15 +4,15 @@
 \name{ready4-package}
 \alias{ready4}
 \alias{ready4-package}
-\title{ready4: Implement Open Science Computational Models of Mental Health Systems}
+\title{ready4: Implement Open Source Computational Models of Youth Mental Health Systems}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for ensuring that the computational model components of mental health systems modelling projects adhere to open science principles. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for developing, extending and applying readyforwhatsnext - a modular, open source health economic model of young people's mental health. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
 
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for ensuring that the computational model components of mental health systems modelling projects adhere to open science principles. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for developing, extending and applying readyforwhatsnext - a modular, open source health economic model of young people's mental health. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
 }
 \seealso{
 Useful links:
@@ -32,16 +32,6 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Matthew Hamilton \email{matthew.hamilton@orygen.org.au} (\href{https://orcid.org/0000-0001-7407-9194}{ORCID})
-
-Other contributors:
-\itemize{
-  \item Orygen [copyright holder, funder]
-  \item VicHealth [funder]
-  \item Victoria University [funder]
-}
-
-
 \strong{Maintainer}: Matthew Hamilton \email{matthew.hamilton@orygen.org.au} (\href{https://orcid.org/0000-0001-7407-9194}{ORCID})
 
 Other contributors:

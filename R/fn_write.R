@@ -606,7 +606,7 @@ write_to_dv_from_tbl <- function (files_tb, data_dir_rt_1L_chr = ".", ds_url_1L_
 #' @rdname write_to_dv_with_wait
 #' @export 
 #' @importFrom stats setNames
-#' @importFrom purrr map_int
+#' @importFrom purrr pmap map_int
 #' @importFrom dataverse get_dataset
 #' @keywords internal
 write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, wait_time_in_secs_int = 5L, 
@@ -626,12 +626,12 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, wait_tim
         data_dir_rt_1L_chr <- character(0)
     }
     paths_chr <- paste0(ifelse(identical(character(0), data_dir_rt_1L_chr), 
-        "", paste0(data_dir_rt_1L_chr, "/")), files_tb[, 1], 
-        "/", files_tb[, 2], files_tb[, 3])
+        "", paste0(data_dir_rt_1L_chr, "/")), files_tb %>% purrr::pmap(~paste0(paste0(..1, 
+        "/", ..2, ..3))))
     if (!consent_1L_chr %in% c("Y", "N")) {
         consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file", 
-            ifelse(length(paths_chr) > 1, "s ", ""), paths_chr, 
-            "to dataverse ", ds_url_1L_chr, " ? "), options_chr = c("Y", 
+            ifelse(length(paths_chr) > 1, "s ", " "), make_list_phrase(paths_chr), 
+            " to dataverse ", ds_url_1L_chr, " ? "), options_chr = c("Y", 
             "N"), force_from_opts_1L_chr = T)
     }
     if (consent_1L_chr %in% c("Y")) {
