@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9093</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9095</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/V_01.html">Develop Modular Computational Models Of Mental Health Systems</a>
+    <a class="dropdown-item" href="../articles/V_01.html">Develop Modular Computational Models Of Youth Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_02.html">Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems</a>
     <a class="dropdown-item" href="../articles/V_04.html">Apply And Extend The Ready4 Framework With Code Libraries, Datasets and Literate Programs</a>
@@ -63,6 +63,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_methods_tb</span><span class="op">(</span></span>
 <span>  packages_tb <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  exclude_mthds_for_chr <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
+<span>  include_1L_chr <span class="op">=</span> <span class="st">"modules"</span>,</span>
 <span>  ns_var_nm_1L_chr <span class="op">=</span> <span class="st">"pt_ns_chr"</span>,</span>
 <span>  reference_var_nm_1L_chr <span class="op">=</span> <span class="st">"Reference"</span>,</span>
 <span>  return_1L_lgl <span class="op">=</span> <span class="st">"all"</span>,</span>
@@ -80,6 +81,10 @@
 
 <dt>exclude_mthds_for_chr</dt>
 <dd><p>Exclude methods for (a character vector), Default: 'NA'</p></dd>
+
+
+<dt>include_1L_chr</dt>
+<dd><p>Include (a character vector of length one), Default: 'modules'</p></dd>
 
 
 <dt>ns_var_nm_1L_chr</dt>
