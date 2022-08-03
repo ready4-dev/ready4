@@ -1,8 +1,8 @@
 ---
-title: "Apply And Extend The Ready4 Framework With Code Libraries, Datasets and Literate Programs"
+title: "Apply And Extend The Readyforwhatsnext Model With Modules, Datasets and Analyses"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Apply And Extend The Ready4 Framework With Code Libraries, Datasets and Literate Programs}
+  %\VignetteIndexEntry{Apply And Extend The Readyforwhatsnext Model With Modules, Datasets and Analyses}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,7 +12,7 @@ library("ready4")
 ```
 
 ## Motivation
-The `ready4` package provides a "bare-bones" framework that is designed to be extended by other work. This vignette briefly summarises some examples of current extensions to the framework.
+The `ready4` package provides a "bare-bones" initial framework for applying and extending the  [readyforwhatsnext model](https://www.ready4-dev.com). This vignette briefly summarises some examples of current extensions to the framework.
 
 ## Implementation
 The three types of tools available to implement the `ready4` framework are code libraries, datasets and literate programs.

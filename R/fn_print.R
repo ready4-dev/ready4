@@ -90,6 +90,7 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @param methods_tb Methods (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param methods_chr Methods (a character vector), Default: NULL
+#' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @param return_1L_chr Return (a character vector of length one), Default: 'all'
 #' @return methods_kbl (An object)
 #' @rdname print_methods
@@ -98,13 +99,13 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @importFrom purrr map_chr
 #' @importFrom kableExtra kable kable_styling column_spec
 print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
-    methods_chr = NULL, return_1L_chr = "all") 
+    methods_chr = NULL, path_1L_chr = character(0), return_1L_chr = "all") 
 {
     if (is.null(methods_tb)) 
-        methods_tb <- make_methods_tb()
+        methods_tb <- make_methods_tb(path_1L_chr = path_1L_chr)
     if (is.null(methods_chr)) 
         methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
-            return_1L_lgl = return_1L_chr)
+            return_1L_chr = return_1L_chr)
     methods_tb <- methods_tb %>% dplyr::filter(Method %in% methods_chr)
     links_chr <- methods_tb$Method %>% purrr::map_chr(~paste0("https://ready4-dev.github.io/ready4/reference/", 
         .x, "-methods.html"))

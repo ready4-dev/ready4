@@ -23,7 +23,7 @@ procureSlot(x, slot_nm_1L_chr, ...)
 y (an object)
 }
 \description{
-procureSlot() is a "getter" method that procures (gets) the value of a specified slot (default behaviour) or the value returned by applying the procure method to the slot.
+procureSlot() is a "getter" method that, depending on input arguments, retrieves either the value of data contained in a specified model module slot (default behaviour) or the value returned by applying the procure method to the slot.
 
 procureSlot method applied to Ready4Module
 }

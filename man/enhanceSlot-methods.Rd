@@ -4,7 +4,7 @@
 \alias{enhanceSlot}
 \alias{enhanceSlot-Ready4Module}
 \alias{enhanceSlot,Ready4Module-method}
-\title{Apply the enhance method to a Ready4Module slot}
+\title{Apply the enhance method to a model module slot}
 \usage{
 enhanceSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ enhanceSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-enhanceSlot() is a method that adds new data fields and values to an object stored in a slot of that instance.
+enhanceSlot() is a convenience method that applies the enhance method to a specified slot a model module.
 
 enhanceSlot method applied to Ready4Module
 }

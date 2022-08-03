@@ -4,7 +4,7 @@
 \alias{shareSlot}
 \alias{shareSlot-Ready4Module}
 \alias{shareSlot,Ready4Module-method}
-\title{Apply the share method to a Ready4Module slot}
+\title{Apply the share method to a model module slot}
 \usage{
 shareSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ shareSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-shareSlot() is a method that uploads data contained in a slot of an S4 object to an online repository. If requested, the method will also publish the updated repository.
+shareSlot() is a convenience method that applies the share method to a specified slot of a model module.
 
 shareSlot method applied to Ready4Module
 }

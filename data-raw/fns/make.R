@@ -238,8 +238,9 @@ make_methods_tb <- function(packages_tb  = NULL,
                             exclude_mthds_for_chr = NA_character_,
                             include_1L_chr = "modules",
                             ns_var_nm_1L_chr = "pt_ns_chr",
+                            path_1L_chr = character(0),
                             reference_var_nm_1L_chr = "Reference",
-                            return_1L_lgl = "all",
+                            return_1L_chr = "all",
                             url_stub_1L_chr = "https://ready4-dev.github.io/",
                             vignette_var_nm_1L_chr = "Vignettes",
                             vignette_url_var_nm_1L_chr = "Vignettes_URLs"){
@@ -254,8 +255,9 @@ make_methods_tb <- function(packages_tb  = NULL,
                                      vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
   }
   methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
-                                                     return_1L_lgl = return_1L_lgl),
-                               Purpose = get_mthd_titles(Method),
+                                                     return_1L_chr = return_1L_chr),
+                               Purpose = get_mthd_titles(Method,
+                                                         path_1L_chr = path_1L_chr),
                                Examples =  purrr::map(Method,
                                                       ~ get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>% unique() %>% purrr::discard(is.na),
                                                                      term_1L_chr = .x)))

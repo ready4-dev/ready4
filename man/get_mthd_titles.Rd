@@ -4,12 +4,18 @@
 \alias{get_mthd_titles}
 \title{Get method titles}
 \usage{
-get_mthd_titles(mthd_nms_chr, pkg_nm_1L_chr = "ready4")
+get_mthd_titles(
+  mthd_nms_chr,
+  pkg_nm_1L_chr = "ready4",
+  path_1L_chr = character(0)
+)
 }
 \arguments{
 \item{mthd_nms_chr}{Method names (a character vector)}
 
 \item{pkg_nm_1L_chr}{Package name (a character vector of length one), Default: 'ready4'}
+
+\item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
 }
 \value{
 Method titles (a character vector)

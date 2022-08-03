@@ -1,5 +1,6 @@
 library(magrittr)
 library(lifecycle)
+library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Source Computational Models of Youth Mental Health Systems" %>% tools::toTitleCase(),
@@ -18,7 +19,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Source Compu
                                                     urls_chr = c("https://ready4-dev.github.io/ready4/",
                                                                  "https://github.com/ready4-dev/ready4",
                                                                  "https://www.ready4-dev.com/")) %>%
-  ready4fun::make_manifest(addl_pkgs_ls = ready4fun::make_addl_pkgs_ls(depends_chr = "generics",
+  ready4fun::make_manifest(addl_pkgs_ls = ready4fun::make_addl_pkgs_ls(#depends_chr = "generics",
                                                                        suggests_chr = "rmarkdown"),
                            build_ignore_ls = ready4fun::make_build_ignore_ls(file_nms_chr = c("initial_setup.R")),
                            check_type_1L_chr = "ready4",

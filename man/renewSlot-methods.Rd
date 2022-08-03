@@ -4,7 +4,7 @@
 \alias{renewSlot}
 \alias{renewSlot-Ready4Module}
 \alias{renewSlot,Ready4Module-method}
-\title{Apply the renew method to a Ready4Module slot}
+\title{Apply the renew method to a model module slot}
 \usage{
 renewSlot(x, slot_nm_1L_chr, new_val_xx = "use_renew_mthd", ...)
 
@@ -20,7 +20,7 @@ renewSlot(x, slot_nm_1L_chr, new_val_xx = "use_renew_mthd", ...)
 \item{...}{Additional arguments}
 }
 \description{
-renewSlot() is a "setter" method that renews (sets) the value of a specified slot with either a supplied new value or the value returned by applying the renew method to the slot (default behaviour).
+renewSlot() is a "setter" method that renews (sets) the value of a specified model module slot with either a supplied new value or the value returned by applying the renew method to the slot (default behaviour).
 
 renewSlot method applied to Ready4Module
 }

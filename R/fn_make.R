@@ -258,8 +258,9 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
 #' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
+#' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
-#' @param return_1L_lgl Return (a logical vector of length one), Default: 'all'
+#' @param return_1L_chr Return (a character vector of length one), Default: 'all'
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
 #' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
@@ -270,9 +271,9 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @importFrom purrr map flatten_chr discard
 make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_character_, 
     include_1L_chr = "modules", ns_var_nm_1L_chr = "pt_ns_chr", 
-    reference_var_nm_1L_chr = "Reference", return_1L_lgl = "all", 
-    url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
-    vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
+    path_1L_chr = character(0), reference_var_nm_1L_chr = "Reference", 
+    return_1L_chr = "all", url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
 {
     if (is.null(packages_tb)) {
         packages_tb <- make_libraries_tb(include_1L_chr = include_1L_chr, 
@@ -281,10 +282,10 @@ make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_char
             vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
     }
     methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
-        return_1L_lgl = return_1L_lgl), Purpose = get_mthd_titles(Method), 
-        Examples = purrr::map(Method, ~get_examples(packages_tb$Vignettes_URLs %>% 
-            purrr::flatten_chr() %>% unique() %>% purrr::discard(is.na), 
-            term_1L_chr = .x)))
+        return_1L_chr = return_1L_chr), Purpose = get_mthd_titles(Method, 
+        path_1L_chr = path_1L_chr), Examples = purrr::map(Method, 
+        ~get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>% 
+            unique() %>% purrr::discard(is.na), term_1L_chr = .x)))
     return(methods_tb)
 }
 #' Make modules tibble

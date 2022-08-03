@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{characterize}
 \alias{characterize}
-\title{Characterize the features of a ready4 framework module (or sub-module)}
+\title{Characterize data by generating (tabular) descriptive statistics}
 \usage{
 characterize(x, ...)
 }
@@ -12,5 +12,5 @@ characterize(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-characterize() is a method that generates descriptive information about the features of a ready4 framework module (or sub-module).
+characterize() is a method that generates descriptive tabular summaries about a dataset.
 }

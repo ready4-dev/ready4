@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{ratify}
 \alias{ratify}
-\title{Ratify (validate) a ready4 framework module (or sub-module)}
+\title{Ratify that a dataset meets validity criteria}
 \usage{
 ratify(x, ...)
 }
@@ -12,5 +12,5 @@ ratify(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-ratify() is a method that validates that a ready4 framework module (or sub-module) conforms to specified criteria, potentially modifying the object so that these criteria are met.
+ratify() is a method that validates that a model dataset conforms to specified internal consistency criteria, potentially modifying the dataset so that these criteria are met.
 }

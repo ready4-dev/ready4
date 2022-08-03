@@ -4,7 +4,7 @@
 \alias{authorSlot}
 \alias{authorSlot-Ready4Module}
 \alias{authorSlot,Ready4Module-method}
-\title{Apply the author method to a Ready4Module slot}
+\title{Apply the author method to a model module slot}
 \usage{
 authorSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ authorSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-authorSlot() is a convenience method that applies the author method to a specified slot of an object.
+authorSlot() is a convenience method that applies the author method to a specified slot of a model module.
 
 authorSlot method applied to Ready4Module
 }

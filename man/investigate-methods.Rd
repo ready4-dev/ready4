@@ -12,5 +12,5 @@ investigate(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-investigate() is a method that applies an algorithm to solve an inverse problem (ie, given the data,  identify a statistical model that can generate approximations of that data) to data contained in a ready4 framework module (or sub-module).
+investigate() is a method that applies an algorithm to solve an inverse problem (ie, given the data,  identify a statistical model that can generate approximations of that data).
 }

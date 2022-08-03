@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{procure}
 \alias{procure}
-\title{Procure (get) data}
+\title{Procure items from a dataset}
 \usage{
 procure(x, ...)
 }
@@ -12,5 +12,5 @@ procure(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-procure() is a method that retrieves data contained within an object.
+procure() is a method that retrieves data contained within a model module or sub-module instance. A "getter" method.
 }

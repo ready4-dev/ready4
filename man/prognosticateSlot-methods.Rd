@@ -4,7 +4,7 @@
 \alias{prognosticateSlot}
 \alias{prognosticateSlot-Ready4Module}
 \alias{prognosticateSlot,Ready4Module-method}
-\title{Apply the prognosticate method to a Ready4Module slot}
+\title{Apply the prognosticate method to a model module slot}
 \usage{
 prognosticateSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ prognosticateSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-prognosticateSlot() is a convenience method that applies the prognosticate method to a specified slot of an object.
+prognosticateSlot() is a convenience method that applies the prognosticate method to a specified slot of a model module.
 
 prognosticateSlot method applied to Ready4Module
 }

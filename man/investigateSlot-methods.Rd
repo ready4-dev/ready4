@@ -4,7 +4,7 @@
 \alias{investigateSlot}
 \alias{investigateSlot-Ready4Module}
 \alias{investigateSlot,Ready4Module-method}
-\title{Apply the investigate method to a Ready4Module slot}
+\title{Apply the investigate method to a model module slot}
 \usage{
 investigateSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ investigateSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-investigateSlot() is a convenience method that applies the investigate method to a specified slot of an object.
+investigateSlot() is a convenience method that applies the investigate method to a specified slot of a model module.
 
 investigateSlot method applied to Ready4Module
 }

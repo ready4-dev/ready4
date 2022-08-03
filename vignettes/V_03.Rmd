@@ -1,5 +1,5 @@
 ---
-title: "Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems"
+title: "Apply An Object-Oriented Paradigm To Computational Models Of Youth Mental Health Systems"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -7,7 +7,7 @@ output:
     highlight: null
     number_sections: yes
 vignette: >
-  %\VignetteIndexEntry{Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems}
+  %\VignetteIndexEntry{Apply An Object-Oriented Paradigm To Computational Models Of Youth Mental Health Systems}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
@@ -19,7 +19,7 @@ library(ready4)
 ```
 
 ## Motivation
-The practical utility and ease of use of computational models of mental health systems are in part shaped by the choice of programming paradigm used to develop them. The `ready4` framework adopts an object oriented programming (OOP) paradigm which in practice means that the framework principally consists of classes (representations of data structures useful for modelling mental health systems) and methods (algorithms that can be applied to these data-structures to generate insight useful for policy-making). An OOP approach is particular useful for developing computational models of mental health systems that are both modular and transparent.  
+The practical utility and ease of use of computational models of mental health systems are in part shaped by the choice of programming paradigm used to develop them. [The framework being used to develop the readyforwhatsnext model](https://www.ready4-dev.com/framework/) adopts an object oriented programming (OOP) paradigm which in practice means that the framework principally consists of classes (representations of data structures useful for modelling mental health systems) and methods (algorithms that can be applied to these data-structures to generate insight useful for policy-making). Adopting an OOP approach is particular useful for making the [readyforwhatsnext model](https://www.ready4-dev.com) both modular and transparent.  
 
 ## Implementation
 ### Modular Computational Models
@@ -36,7 +36,7 @@ The examples highlighted in the previous section have some potential limitations
 Similarly, inheritance would allow re-use of much of the code from a model of the Australian mental health system when exploring similar topics within the UK context, while making it straightforward to develop additional code that addresses relevant divergence in features between the two jurisdictions. In practical terms, this would mean developing two child classes of **X** - class **Y** for use with Australian data and class **Z** for use in the UK system. All methods that are not specific to a particular jurisdiction are defined for **X** and inherited by **Y** and **Z**. Methods that are only appropriate for use in the Australian context are defined for **Y**, while UK specific methods are defined for **Z**.
 
 ### Transparent Computational Models
-To make computational models of mental health systems more readily understood, the `ready4` framework supports use of [a simple and consistent syntax](V_02.html) that makes programs easier to read and understand. Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.
+To make analyses implemented using the readyforwhatsnext model more readily understood, the `ready4` package provides the model's [simple and consistent syntax](V_02.html). Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.
 
 #### Polymorphism
 Polymorphism allows for similar concepts to be represented using consistent syntax. The same top level code can therefore be generalised to multiple model implementations, making algorithms  simpler to understand and easier to re-use.

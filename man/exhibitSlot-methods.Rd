@@ -4,7 +4,7 @@
 \alias{exhibitSlot}
 \alias{exhibitSlot-Ready4Module}
 \alias{exhibitSlot,Ready4Module-method}
-\title{Apply the exhibit method to a Ready4Module slot}
+\title{Apply the exhibit method to a model module slot}
 \usage{
 exhibitSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ exhibitSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-exhibitSlot() is a convenience method that applies the exhibit method to a specified slot of an object.
+exhibitSlot() is a convenience method that applies the exhibit method to a specified slot a model module.
 
 exhibitSlot method applied to Ready4Module
 }

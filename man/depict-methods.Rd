@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{depict}
 \alias{depict}
-\title{Depict (plot) features of a ready4 framework module (or sub-module)}
+\title{Depict (plot) features of a dataset}
 \usage{
 depict(x, ...)
 }

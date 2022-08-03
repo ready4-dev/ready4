@@ -207,9 +207,9 @@ get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
   return(functions_tb)
 }
 get_generics <- function(pkg_nm_1L_chr = "ready4",
-                         return_1L_lgl = "all",
-                         exclude_mthds_for_chr = NA_character_
-){
+                         return_1L_chr = "all",
+                         exclude_mthds_for_chr = NA_character_,
+                         framework_only_1L_lgl = T){
   generics_chr <- methods::getGenerics(paste0("package:",pkg_nm_1L_chr))@.Data
   generics_chr <- generics_chr[generics_chr %>%
                                  purrr::map_lgl(~{
@@ -224,12 +224,18 @@ get_generics <- function(pkg_nm_1L_chr = "ready4",
                               purrr::flatten_chr() %>%
                               unique())
   }
-  if(return_1L_lgl == "core"){
+  if(framework_only_1L_lgl){
+    generics_chr <- setdiff(generics_chr,
+                            c("addNextMethod", "body<-", "cbind2", "coerce", "coerce<-",
+                              "kronecker", "loadMethod", "rbind2", "show", "slotsFromS3" ))
+
+  }
+  if(return_1L_chr == "core"){
     generics_chr <- generics_chr[tolower(generics_chr)==generics_chr]
   }
-  if(return_1L_lgl == "extended")
+  if(return_1L_chr == "extended")
     generics_chr <- generics_chr[tolower(generics_chr)!=generics_chr]
-  if(return_1L_lgl == "slot"){
+  if(return_1L_chr == "slot"){
     generics_chr <- generics_chr[endsWith(generics_chr,"Slot")]
   }
   return(generics_chr)
@@ -281,7 +287,8 @@ get_modules_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
   return(modules_tb)
 }
 get_mthd_titles <- function(mthd_nms_chr, #NEED TO DEPRECATE IN READY4FUN
-                            pkg_nm_1L_chr = "ready4"){
+                            pkg_nm_1L_chr = "ready4",
+                            path_1L_chr = character(0)){
   mthd_titles_chr <-  mthd_nms_chr %>%
     purrr::map_chr(~{
       mthd_nm_1L_chr <- .x
@@ -290,7 +297,12 @@ get_mthd_titles <- function(mthd_nms_chr, #NEED TO DEPRECATE IN READY4FUN
         mthd_nm_1L_chr <- stringr::str_sub(mthd_nm_1L_chr,
                                            end = (df[[1,1]]-1))
       }
-      gnrc_dmt_ls <- tools::Rd_db(pkg_nm_1L_chr) %>%
+      if(!identical(path_1L_chr, character(0))){
+        dmtn_tb <- tools::Rd_db(dir = path_1L_chr)
+      }else{
+        dmtn_tb <- tools::Rd_db(pkg_nm_1L_chr)
+      }
+      gnrc_dmt_ls <- dmtn_tb %>%
         purrr::pluck(paste0(mthd_nm_1L_chr,"-methods.Rd"))
       ifelse(!is.null(gnrc_dmt_ls),
              gnrc_dmt_ls %>%

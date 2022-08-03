@@ -4,7 +4,7 @@
 \alias{metamorphoseSlot}
 \alias{metamorphoseSlot-Ready4Module}
 \alias{metamorphoseSlot,Ready4Module-method}
-\title{Apply the metamorphose method to a Ready4Module slot}
+\title{Apply the metamorphose method to a model module slot}
 \usage{
 metamorphoseSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ metamorphoseSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-metamorphoseSlot() is a method that transforms a ready4 object stored in a slot of an object into a ready4 object of a different class.
+metamorphoseSlot() is a convenience method that applies the metamorphose method to a specified slot of a model module.
 
 metamorphoseSlot method applied to Ready4Module
 }

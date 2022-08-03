@@ -4,7 +4,7 @@
 \alias{ratifySlot}
 \alias{ratifySlot-Ready4Module}
 \alias{ratifySlot,Ready4Module-method}
-\title{Apply the ratify method to a Ready4Module slot}
+\title{Apply the ratify method to a model module slot}
 \usage{
 ratifySlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ ratifySlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-ratifySlot() is a method that validates that data in a slot of an S4 object conforms to specified criteria, potentially modifying that data so that these criteria are met.
+ratifySlot() is a convenience method that applies the ratify method to a specified slot of a model module.
 
 ratifySlot method applied to Ready4Module
 }

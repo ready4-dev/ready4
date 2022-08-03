@@ -4,7 +4,7 @@
 \alias{reckonSlot}
 \alias{reckonSlot-Ready4Module}
 \alias{reckonSlot,Ready4Module-method}
-\title{Apply the reckon method to a Ready4Module slot}
+\title{Apply the reckon method to a model module slot}
 \usage{
 reckonSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ reckonSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-reckonSlot() is a convenience method that applies the reckon method to a specified slot of an object.
+reckonSlot() is a convenience method that applies the reckon method to a specified slot of a model module.
 
 reckonSlot method applied to Ready4Module
 }

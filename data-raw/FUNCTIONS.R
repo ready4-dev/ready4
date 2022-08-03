@@ -447,11 +447,13 @@ write_badges <- function(gh_repo_1L_chr = "ready4-dev/ready4",
 }
 write_extensions <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0",
-                             include_1L_chr = "modules"){
+                             include_1L_chr = "modules",
+                             path_1L_chr = getwd()){
   libraries_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
   env_objects_ls <- list(datasets_tb = make_datasets_tb(),
                          libraries_tb = libraries_tb,
-                         methods_tb = make_methods_tb(packages_tb = libraries_tb),
+                         methods_tb = make_methods_tb(packages_tb = libraries_tb,
+                                                      path_1L_chr = path_1L_chr),
                          modules_tb = make_modules_tb(pkg_extensions_tb = libraries_tb))
   write_env_objs_to_dv(env_objects_ls,
                        descriptions_chr = NULL,

@@ -9,8 +9,9 @@ make_methods_tb(
   exclude_mthds_for_chr = NA_character_,
   include_1L_chr = "modules",
   ns_var_nm_1L_chr = "pt_ns_chr",
+  path_1L_chr = character(0),
   reference_var_nm_1L_chr = "Reference",
-  return_1L_lgl = "all",
+  return_1L_chr = "all",
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   vignette_var_nm_1L_chr = "Vignettes",
   vignette_url_var_nm_1L_chr = "Vignettes_URLs"
@@ -25,9 +26,11 @@ make_methods_tb(
 
 \item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 
+\item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
+
 \item{reference_var_nm_1L_chr}{Reference variable name (a character vector of length one), Default: 'Reference'}
 
-\item{return_1L_lgl}{Return (a logical vector of length one), Default: 'all'}
+\item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
 
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 

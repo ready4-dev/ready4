@@ -27,13 +27,13 @@ The `ready4` package provides a bare bones initial outline of a framework for op
 ### A toolkit for open and modular computational models of mental health systems
 The `ready4` package introduces some simple classes (data-structures) and methods (algorithms) that can be useful for modelling mental health systems. These concepts are discussed in the following articles:
 
-- [Develop Modular Computational Models Of Mental Health Systems](V_01.html)
+- [Implement A Modular Computational Model Of Youth Mental Health Systems](V_01.html)
 
-- [Use A Simple And Consistent Syntax In Computational Models Of Mental Health Systems](V_02.html)
+- [Use A Simple And Consistent Syntax To Model Youth Mental Health Systems](V_02.html)
 
-- [Apply An Object-Oriented Paradigm To Computational Models Of Mental Health Systems](V_03.html)
+- [Apply An Object-Oriented Paradigm To Computational Models Of Youth Mental Health Systems](V_03.html)
 
 ### Applying and extending the `ready4` framework
 The bare-bones framework outlined in the `ready4` package is extended through code-libraries of additional classes and methods, repositories of data that can be fed to framework classes and methods and literate programs that transparently link algorithms to data. An overview of each of these framework extensions is described in the following article:
 
-- [Apply And Extend The Ready4 Framework With Code Libraries, Datasets and Literate Programs](V_04.html)
+- [Apply And Extend The Readyforwhatsnext Model With Modules, Datasets and Analyses](V_04.html)

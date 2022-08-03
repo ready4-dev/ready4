@@ -8,6 +8,7 @@ print_methods(
   methods_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
   methods_chr = NULL,
+  path_1L_chr = character(0),
   return_1L_chr = "all"
 )
 }
@@ -17,6 +18,8 @@ print_methods(
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
 
 \item{methods_chr}{Methods (a character vector), Default: NULL}
+
+\item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
 
 \item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
 }

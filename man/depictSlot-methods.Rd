@@ -4,7 +4,7 @@
 \alias{depictSlot}
 \alias{depictSlot-Ready4Module}
 \alias{depictSlot,Ready4Module-method}
-\title{Apply the depict method to a Ready4Module slot}
+\title{Apply the depict method to a model module slot}
 \usage{
 depictSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ depictSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-depictSlot() is a convenience method that applies the depict method to a specified slot of an object.
+depictSlot() is a convenience method that applies the depict method to a specified slot of a model module.
 
 depictSlot method applied to Ready4Module
 }

@@ -6,16 +6,19 @@
 \usage{
 get_generics(
   pkg_nm_1L_chr = "ready4",
-  return_1L_lgl = "all",
-  exclude_mthds_for_chr = NA_character_
+  return_1L_chr = "all",
+  exclude_mthds_for_chr = NA_character_,
+  framework_only_1L_lgl = T
 )
 }
 \arguments{
 \item{pkg_nm_1L_chr}{Package name (a character vector of length one), Default: 'ready4'}
 
-\item{return_1L_lgl}{Return (a logical vector of length one), Default: 'all'}
+\item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
 
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
+
+\item{framework_only_1L_lgl}{Framework only (a logical vector of length one), Default: T}
 }
 \value{
 Generics (a character vector)

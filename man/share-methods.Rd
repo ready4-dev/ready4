@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{share}
 \alias{share}
-\title{Share (publish) open data}
+\title{Share data via an online repository}
 \usage{
 share(x, ...)
 }

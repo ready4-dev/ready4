@@ -69,12 +69,13 @@ print_dvs <- function(dvs_tb,
 print_methods <- function(methods_tb = NULL,
                           exclude_mthds_for_chr = NA_character_,
                           methods_chr = NULL,
+                          path_1L_chr = character(0),
                           return_1L_chr = "all"){
   if(is.null(methods_tb))
-    methods_tb <- make_methods_tb()
+    methods_tb <- make_methods_tb(path_1L_chr = path_1L_chr)
   if(is.null(methods_chr))
     methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
-                                return_1L_lgl = return_1L_chr)
+                                return_1L_chr = return_1L_chr)
   methods_tb <- methods_tb %>%
     dplyr::filter(Method %in% methods_chr)
   links_chr <- methods_tb$Method %>%

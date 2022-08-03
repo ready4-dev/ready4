@@ -4,7 +4,7 @@
 \alias{ingestSlot}
 \alias{ingestSlot-Ready4Module}
 \alias{ingestSlot,Ready4Module-method}
-\title{Apply the ingest method to a Ready4Module slot}
+\title{Apply the ingest method to a model module slot}
 \usage{
 ingestSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ ingestSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-ingestSlot() is a convenience method that applies the ingest method to a specified slot of an object.
+ingestSlot() is a convenience method that applies the ingest method to a specified slot of a model module.
 
 ingestSlot method applied to Ready4Module
 }

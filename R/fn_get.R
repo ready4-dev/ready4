@@ -264,15 +264,17 @@ get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' Get generics
 #' @description get_generics() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get generics. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Generics (a character vector).
 #' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
-#' @param return_1L_lgl Return (a logical vector of length one), Default: 'all'
+#' @param return_1L_chr Return (a character vector of length one), Default: 'all'
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
+#' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: T
 #' @return Generics (a character vector)
 #' @rdname get_generics
 #' @export 
 #' @importFrom methods getGenerics
 #' @importFrom purrr map_lgl map flatten_chr
 #' @keywords internal
-get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_lgl = "all", exclude_mthds_for_chr = NA_character_) 
+get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclude_mthds_for_chr = NA_character_, 
+    framework_only_1L_lgl = T) 
 {
     generics_chr <- methods::getGenerics(paste0("package:", pkg_nm_1L_chr))@.Data
     generics_chr <- generics_chr[generics_chr %>% purrr::map_lgl(~{
@@ -285,14 +287,19 @@ get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_lgl = "all", exclu
             ~get_methods(pkg_nm_1L_chr = pkg_nm_1L_chr, cls_nm_1L_chr = .x)) %>% 
             purrr::flatten_chr() %>% unique())
     }
-    if (return_1L_lgl == "core") {
+    if (framework_only_1L_lgl) {
+        generics_chr <- setdiff(generics_chr, c("addNextMethod", 
+            "body<-", "cbind2", "coerce", "coerce<-", "kronecker", 
+            "loadMethod", "rbind2", "show", "slotsFromS3"))
+    }
+    if (return_1L_chr == "core") {
         generics_chr <- generics_chr[tolower(generics_chr) == 
             generics_chr]
     }
-    if (return_1L_lgl == "extended") 
+    if (return_1L_chr == "extended") 
         generics_chr <- generics_chr[tolower(generics_chr) != 
             generics_chr]
-    if (return_1L_lgl == "slot") {
+    if (return_1L_chr == "slot") {
         generics_chr <- generics_chr[endsWith(generics_chr, "Slot")]
     }
     return(generics_chr)
@@ -389,6 +396,7 @@ get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @description get_mthd_titles() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get method titles. Function argument mthd_nms_chr specifies the where to look for the required object. The function returns Method titles (a character vector).
 #' @param mthd_nms_chr Method names (a character vector)
 #' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
+#' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @return Method titles (a character vector)
 #' @rdname get_mthd_titles
 #' @export 
@@ -396,7 +404,7 @@ get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @importFrom stringr str_locate str_sub
 #' @importFrom tools Rd_db
 #' @keywords internal
-get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4") 
+get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr = character(0)) 
 {
     mthd_titles_chr <- mthd_nms_chr %>% purrr::map_chr(~{
         mthd_nm_1L_chr <- .x
@@ -405,7 +413,13 @@ get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4")
             mthd_nm_1L_chr <- stringr::str_sub(mthd_nm_1L_chr, 
                 end = (df[[1, 1]] - 1))
         }
-        gnrc_dmt_ls <- tools::Rd_db(pkg_nm_1L_chr) %>% purrr::pluck(paste0(mthd_nm_1L_chr, 
+        if (!identical(path_1L_chr, character(0))) {
+            dmtn_tb <- tools::Rd_db(dir = path_1L_chr)
+        }
+        else {
+            dmtn_tb <- tools::Rd_db(pkg_nm_1L_chr)
+        }
+        gnrc_dmt_ls <- dmtn_tb %>% purrr::pluck(paste0(mthd_nm_1L_chr, 
             "-methods.Rd"))
         ifelse(!is.null(gnrc_dmt_ls), gnrc_dmt_ls %>% purrr::pluck(1) %>% 
             purrr::pluck(1) %>% as.vector(), mthd_nm_1L_chr)

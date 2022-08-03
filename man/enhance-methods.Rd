@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{enhance}
 \alias{enhance}
-\title{Enhance a ready4 framework module (or sub-module) with new data items}
+\title{Enhance a dataset by adding new elements}
 \usage{
 enhance(x, ...)
 }
@@ -12,5 +12,5 @@ enhance(x, ...)
 \item{...}{Additional arguments}
 }
 \description{
-enhance() is a method that adds new data fields and values to extendable objects in a ready4 framework module (or sub-module).
+enhance() is a method that adds new data fields (columns for tabular data, elements for arrays) and values to extendable objects.
 }

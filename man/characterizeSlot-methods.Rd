@@ -4,7 +4,7 @@
 \alias{characterizeSlot}
 \alias{characterizeSlot-Ready4Module}
 \alias{characterizeSlot,Ready4Module-method}
-\title{Apply the characterize method to a Ready4Module slot}
+\title{Apply the characterize method to a model module slot}
 \usage{
 characterizeSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ characterizeSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-characterizeSlot() is a method that generates descriptive information about data stored in a slot of an S4 object.
+characterizeSlot() is a convenience method that applies the characterize method to a specified slot of a model module.
 
 characterizeSlot method applied to Ready4Module
 }

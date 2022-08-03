@@ -4,7 +4,7 @@
 \alias{manufactureSlot}
 \alias{manufactureSlot-Ready4Module}
 \alias{manufactureSlot,Ready4Module-method}
-\title{Apply the manufacture method to a Ready4Module slot}
+\title{Apply the manufacture method to a model module slot}
 \usage{
 manufactureSlot(x, slot_nm_1L_chr, ...)
 
@@ -18,7 +18,7 @@ manufactureSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \description{
-manufactureSlot() is a convenience method that applies the manufacture method to a specified slot of an object.
+manufactureSlot() is a convenience method that applies the manufacture method to a specified slot of a model module.
 
 manufactureSlot method applied to Ready4Module
 }
