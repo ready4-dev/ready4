@@ -73,6 +73,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/authorSlot-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/bind_tables_from_loc_files.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/characterize-methods.html</loc>
   </url>
   <url>
@@ -110,6 +113,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_datasets_tb.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_digits_from_text.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_dv_fls_urls.html</loc>
@@ -155,6 +161,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_source_code_urls.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_table_from_loc_file.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/index.html</loc>
@@ -283,6 +292,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/shareSlot-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/transform_chr_to_num.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/transform_cls_type_ls.html</loc>
   </url>
   <url>
@@ -320,6 +332,12 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_new_files.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_obj_with_prompt.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_prj_outp_dirs.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_tb_to_csv.html</loc>
