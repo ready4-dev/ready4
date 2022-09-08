@@ -410,6 +410,7 @@ write_self_srvc_pkg <- function(x){
   write_prototypes()
   fns_env_ls$fns_env$write_citation_cff(packageDescription("ready4"),
                      citation_chr = readLines("inst/CITATION"))
+  ready4fun::write_fns_dmt_tb(x)
   return(x)
 }
 write_prototypes <- function(gh_repo_1L_chr = "ready4-dev/ready4",
