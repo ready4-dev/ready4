@@ -286,9 +286,10 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
     if (!identical(piggyback_to_1L_chr, character(0))) {
         if (!consent_1L_chr %in% c("Y", "N")) {
             consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
-                ifelse(length(paths_chr) > 1, "s", ""), " to release ", 
-                piggyback_tag_1L_chr, " in ", piggyback_to_1L_chr), 
-                options_chr = c("Y", "N"), force_from_opts_1L_chr = T)
+                ifelse(length(paths_chr) > 1, "s ", " "), basename(paths_chr), 
+                " to release ", piggyback_tag_1L_chr, " in ", 
+                piggyback_to_1L_chr), options_chr = c("Y", "N"), 
+                force_from_opts_1L_chr = T)
         }
         if (consent_1L_chr %in% c("Y")) {
             releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
