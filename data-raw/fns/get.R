@@ -59,6 +59,11 @@ get_datasets_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
   datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("datasets_tb.RDS")]))
   return(datasets_tb)
 }
+get_digits_from_text <- function(text_1L_chr){
+  fn_attribution_1L_chr <- "This function is based on: http://stla.github.io/stlapblog/posts/Numextract.html"
+  digits_chr <- unlist(regmatches(text_1L_chr,gregexpr("[[:digit:]]+\\.*[[:digit:]]*",text_1L_chr)))
+  return(digits_chr)
+}
 get_dv_fls_urls <- function(file_nms_chr,
                             dv_ds_nm_1L_chr,
                             dv_url_pfx_1L_chr = character(0),
@@ -358,4 +363,27 @@ get_source_code_urls <- function(pkg_nm_1L_chr = "ready4",
                                  "https://doi.org/10.5281/zenodo.")))
   urls_chr <- urls_chr[idxs_int]
   return(urls_chr)
+}
+get_table_from_loc_file <- function(path_1L_chr,
+                                    force_numeric_1L_lgl = F,
+                                    force_tb_1L_lgl = F,
+                                    heading_rows_1L_int = 1L){
+  file_type_1L_chr <- path_1L_chr %>% tools::file_ext()
+  fn <- switch(file_type_1L_chr,
+               csv = readr::read_csv, # read.csv,
+               xls = readxl::read_excel,
+               xlsx = readxl::read_xlsx, #readxl::read_excel,
+               RDS = readRDS())
+  table_xx <- rlang::exec(fn,path_1L_chr)
+  if(force_tb_1L_lgl)
+    table_xx <- tibble::as_tibble(table_xx)
+  if(heading_rows_1L_int>1L)
+    table_xx <- table_xx %>%
+    dplyr::slice(heading_rows_1L_int:dplyr::n())
+  if(force_numeric_1L_lgl){
+    table_xx <- table_xx %>%
+      dplyr::mutate(dplyr::across(where(is.character),
+                                  ~transform_chr_to_num(.x))) #_if(is.character, transform_chr_to_num) %>%
+  }
+  return(table_xx)
 }

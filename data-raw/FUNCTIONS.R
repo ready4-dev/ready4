@@ -406,9 +406,9 @@ write_self_srvc_pkg <- function(x){
     ready4fun::authorReport.ready4fun_manifest(pkg_setup_ls,
                                                key_1L_chr = Sys.getenv("DATAVERSE_KEY"))
   }
-  write_to_delete_dirs("safety")
+  fns_env_ls$fns_env$write_to_delete_dirs("safety")
   write_prototypes()
-  write_citation_cff(packageDescription("ready4"),
+  fns_env_ls$fns_env$write_citation_cff(packageDescription("ready4"),
                      citation_chr = readLines("inst/CITATION"))
   return(x)
 }

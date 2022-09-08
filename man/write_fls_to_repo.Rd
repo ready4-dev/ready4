@@ -7,6 +7,7 @@
 write_fls_to_repo(
   paths_chr,
   descriptions_chr,
+  consent_1L_chr = "",
   ds_url_1L_chr = character(0),
   ds_ls = NULL,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
@@ -21,6 +22,8 @@ write_fls_to_repo(
 \item{paths_chr}{Paths (a character vector)}
 
 \item{descriptions_chr}{Descriptions (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{ds_url_1L_chr}{Dataset url (a character vector of length one), Default: character(0)}
 

@@ -1,3 +1,38 @@
+library(ready4)
+library(ready4use)
+library(ready4fun)
+X <- ready4use::Ready4useRepos(gh_repo_1L_chr = "ready4-dev/ready4",
+                               gh_tag_1L_chr = "Documentation_0.0")
+Y <- ingest(X)
+abbreviations_lup <- procure(procureSlot(Y,
+                                         "b_Ready4useIngest"),
+                             "abbreviations_lup")
+get_abbrs("numeric",abbreviations_lup) # from ready4fun
+get_abbrs("num",abbreviations_lup,F) # from ready4fun
+abbreviations_lup <- ready4fun::renew.ready4fun_abbreviations(abbreviations_lup,
+                                                              short_name_chr = "num",
+                                                              long_name_chr = "numeric",
+                                                              plural_lgl = F)
+# abbreviations_lup <-  abbreviations_lup %>%
+#   dplyr::mutate(short_name_chr = dplyr::case_when(short_name_chr == "RI" ~ "ri",
+#                                                   short_name_chr == "RIs" ~ "ris",
+#                                                   T ~ short_name_chr)) %>%
+#   dplyr::mutate(long_name_chr = dplyr::case_when(long_name_chr == "Rand Indexs" ~ "Rand Indices",
+#                                                  T ~ long_name_chr))
+Y <- renewSlot(Y,
+               new_val_xx = Ready4useIngest(objects_ls = list(abbreviations_lup = abbreviations_lup)),
+               slot_nm_1L_chr = "b_Ready4useIngest")
+Y <- share(Y,
+           type_1L_chr = "prefer_gh")
+
+
+# x <- ready4::renew(x_xx$x_ready4fun_manifest,
+#                                            are_words_chr = c("backend", "betareg",
+#                                                              "boruta", "covariates",
+#                                                              "deterministic", "multi",
+#                                                              "shareable", "timepoint",
+#                                                              "ungroup","yhat"),
+#                                            type_1L_chr = "words")
 # write_words("datasets")
 fn_types_lup <- ready4fun::get_rds_from_pkg_dmt(fl_nm_1L_chr = "fn_types_lup",
                                                 piggyback_to_1L_chr = "ready4-dev/ready4")

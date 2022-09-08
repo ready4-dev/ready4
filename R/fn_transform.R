@@ -1,3 +1,22 @@
+#' Transform character vector to numeric
+#' @description transform_chr_to_num() is a Transform function that edits an object in such a way that core object attributes - e.g. shape, dimensions, elements, type - are altered. Specifically, this function implements an algorithm to transform character vector to numeric. Function argument digits_chr specifies the object to be updated. The function returns Digits (an output object of multiple potential types).
+#' @param digits_chr Digits (a character vector)
+#' @return Digits (an output object of multiple potential types)
+#' @rdname transform_chr_to_num
+#' @export 
+#' @keywords internal
+transform_chr_to_num <- function (digits_chr) 
+{
+    fn_attribution_1L_chr <- "This function is based on: https://stackoverflow.com/questions/24129124/how-to-determine-if-a-character-vector-is-a-valid-numeric-or-integer-vector"
+    tfd_digits_chr <- suppressWarnings(as.character(digits_chr[!is.na(digits_chr)]))
+    if (!identical(tfd_digits_chr, character(0)) & suppressWarnings(all(!is.na(as.numeric(tfd_digits_chr))))) {
+        digits_xx <- as.numeric(as.character(digits_chr))
+    }
+    else {
+        digits_xx <- digits_chr
+    }
+    return(digits_xx)
+}
 #' Transform class type list
 #' @description transform_cls_type_ls() is a Transform function that edits an object in such a way that core object attributes - e.g. shape, dimensions, elements, type - are altered. Specifically, this function implements an algorithm to transform class type list. Function argument cls_type_ls specifies the object to be updated. The function returns Tfmd class type (a list).
 #' @param cls_type_ls Class type (a list)

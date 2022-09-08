@@ -46,7 +46,28 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Source Compu
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
- # ADD DOI OVERRIDE FOR RELEASES
+#
+#library(ready4)
+share.ready4fun_manifest <- function(x, # Move to ready4fun
+                                     gh_prerelease_1L_lgl = T,
+                                     gh_repo_desc_1L_chr = "Supplementary Files",
+                                     gh_tag_1L_chr = "Documentation_0.0"){
+  fns_dmt_tb <- x$subsequent_ls$fns_dmt_tb
+  gh_repo_1L_chr <- x$subsequent_ls$piggyback_to_1L_chr
+
+  fns_dmt_tb <- fns_dmt_tb %>% dplyr::mutate(file_nm_chr = basename(file_nm_chr))
+  ready4::write_env_objs_to_dv(env_objects_ls = list(fns_dmt_tb = fns_dmt_tb),
+                               descriptions_chr = NULL,
+                               ds_url_1L_chr = character(0),
+                               piggyback_desc_1L_chr = gh_repo_desc_1L_chr,
+                               piggyback_tag_1L_chr = gh_tag_1L_chr,
+                               piggyback_to_1L_chr = gh_repo_1L_chr,
+                               prerelease_1L_lgl = gh_prerelease_1L_lgl)
+}
+share.ready4fun_manifest(x)
+
+
+# ADD DOI OVERRIDE FOR RELEASES
 #
 # write_extensions() # Required only if extensions have changed since last build
 # write_badges() # Only run if the ready4fun badges table has been updated.

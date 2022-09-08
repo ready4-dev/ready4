@@ -94,6 +94,20 @@ get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr
         endsWith("datasets_tb.RDS")]))
     return(datasets_tb)
 }
+#' Get digits from text
+#' @description get_digits_from_text() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get digits from text. Function argument text_1L_chr specifies the where to look for the required object. The function returns Digits (a character vector).
+#' @param text_1L_chr Text (a character vector of length one)
+#' @return Digits (a character vector)
+#' @rdname get_digits_from_text
+#' @export 
+#' @keywords internal
+get_digits_from_text <- function (text_1L_chr) 
+{
+    fn_attribution_1L_chr <- "This function is based on: http://stla.github.io/stlapblog/posts/Numextract.html"
+    digits_chr <- unlist(regmatches(text_1L_chr, gregexpr("[[:digit:]]+\\.*[[:digit:]]*", 
+        text_1L_chr)))
+    return(digits_chr)
+}
 #' Get dataverse files urls
 #' @description get_dv_fls_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get dataverse files urls. Function argument file_nms_chr specifies the where to look for the required object. The function returns Urls (a character vector).
 #' @param file_nms_chr File names (a character vector)
@@ -496,4 +510,37 @@ get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "ht
         "Browse source code"), which(startsWith(urls_chr, "https://doi.org/10.5281/zenodo.")))
     urls_chr <- urls_chr[idxs_int]
     return(urls_chr)
+}
+#' Get table from local file
+#' @description get_table_from_loc_file() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get table from local file. Function argument path_1L_chr specifies the where to look for the required object. The function returns Table (an output object of multiple potential types).
+#' @param path_1L_chr Path (a character vector of length one)
+#' @param force_numeric_1L_lgl Force numeric (a logical vector of length one), Default: F
+#' @param force_tb_1L_lgl Force tibble (a logical vector of length one), Default: F
+#' @param heading_rows_1L_int Heading rows (an integer vector of length one), Default: 1
+#' @return Table (an output object of multiple potential types)
+#' @rdname get_table_from_loc_file
+#' @export 
+#' @importFrom tools file_ext
+#' @importFrom readr read_csv
+#' @importFrom readxl read_excel read_xlsx
+#' @importFrom rlang exec
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr slice n mutate across
+#' @keywords internal
+get_table_from_loc_file <- function (path_1L_chr, force_numeric_1L_lgl = F, force_tb_1L_lgl = F, 
+    heading_rows_1L_int = 1L) 
+{
+    file_type_1L_chr <- path_1L_chr %>% tools::file_ext()
+    fn <- switch(file_type_1L_chr, csv = readr::read_csv, xls = readxl::read_excel, 
+        xlsx = readxl::read_xlsx, RDS = readRDS())
+    table_xx <- rlang::exec(fn, path_1L_chr)
+    if (force_tb_1L_lgl) 
+        table_xx <- tibble::as_tibble(table_xx)
+    if (heading_rows_1L_int > 1L) 
+        table_xx <- table_xx %>% dplyr::slice(heading_rows_1L_int:dplyr::n())
+    if (force_numeric_1L_lgl) {
+        table_xx <- table_xx %>% dplyr::mutate(dplyr::across(where(is.character), 
+            ~transform_chr_to_num(.x)))
+    }
+    return(table_xx)
 }

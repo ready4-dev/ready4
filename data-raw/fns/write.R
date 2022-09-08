@@ -239,6 +239,7 @@ write_fls_to_dv <- function(file_paths_chr,
 }
 write_fls_to_repo <- function(paths_chr,
                               descriptions_chr,
+                              consent_1L_chr = "",
                               ds_url_1L_chr = character(0),
                               ds_ls = NULL,
                               key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
@@ -248,23 +249,36 @@ write_fls_to_repo <- function(paths_chr,
                               piggyback_to_1L_chr = character(0),
                               prerelease_1L_lgl = T){
   if(!identical(piggyback_to_1L_chr,character(0))){
-    releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
-    if(!piggyback_tag_1L_chr %in% releases_df$tag)
-      piggyback::pb_new_release(piggyback_to_1L_chr,
-                                tag = piggyback_tag_1L_chr,
-                                body = piggyback_desc_1L_chr,
-                                prerelease = prerelease_1L_lgl)
-    purrr::walk(paths_chr,
-                ~ {
-                  if(file.exists(.x)){
-                  piggyback::pb_upload(.x,
-                                       repo = piggyback_to_1L_chr,
-                                       #overwrite = T,
-                                       tag = piggyback_tag_1L_chr)
+    if(!consent_1L_chr %in% c("Y", "N")){
+      consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
+                                                         ifelse(length(paths_chr)>1,"s "," "),
+                                                         basename(paths_chr),
+                                                         " to release ",
+                                                         piggyback_tag_1L_chr,
+                                                         " in ",
+                                                         piggyback_to_1L_chr),
+                                    options_chr = c("Y", "N"),
+                                    force_from_opts_1L_chr = T)
+    }
+    if(consent_1L_chr %in% c("Y")){
+      releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
+      if(!piggyback_tag_1L_chr %in% releases_df$tag)
+        piggyback::pb_new_release(piggyback_to_1L_chr,
+                                  tag = piggyback_tag_1L_chr,
+                                  body = piggyback_desc_1L_chr,
+                                  prerelease = prerelease_1L_lgl)
+      purrr::walk(paths_chr,
+                  ~ {
+                    if(file.exists(.x)){
+                      piggyback::pb_upload(.x,
+                                           repo = piggyback_to_1L_chr,
+                                           #overwrite = T,
+                                           tag = piggyback_tag_1L_chr)
+                    }
                   }
-                  }
-                )
-    ids_int <- NULL
+      )
+      ids_int <- NULL
+    }
   }else{
     if(!identical(character(0),ds_url_1L_chr))
       ids_int <- write_fls_to_dv(paths_chr,
@@ -409,6 +423,44 @@ write_new_files <- function(paths_chr,
       message("Write request cancelled - no new directories created")
     }
   }
+}
+write_obj_with_prompt <- function(object_xx,
+                                  obj_nm_1L_chr,
+                                  outp_dir_1L_chr,
+                                  consent_1L_chr =""){
+  path_1L_chr <- paste0(outp_dir_1L_chr, "/", obj_nm_1L_chr, ".RDS")
+  custom_write_ls = list(fn=saveRDS,
+                         args_ls = list(object = object_xx,
+                                        file = path_1L_chr))
+  if(!consent_1L_chr %in% c("Y", "N")){
+    write_new_files(path_1L_chr,
+                            custom_write_ls = custom_write_ls)
+  }else{
+    if(consent_1L_chr == "Y")
+      rlang::exec(custom_write_ls$fn, !!!custom_write_ls$args_ls)
+  }
+}
+write_prj_outp_dirs <- function(prj_dirs_chr,
+                                output_data_dir_1L_chr,
+                                consent_1L_chr = "",
+                                paths_ls = NULL){
+  paths_chr <-  paste0(paste0(output_data_dir_1L_chr,"/"),
+                       prj_dirs_chr)
+  if(!consent_1L_chr %in% c("Y", "N")){
+    write_new_dirs(paths_chr)
+  }else{
+    if(consent_1L_chr %in% c("Y")){
+      new_paths_ls <- paths_chr %>% purrr::walk(~{
+        dir.create(.x)
+      })
+    }else{
+      message("Write request cancelled - no new directories created")
+    }
+  }
+  new_paths_ls <- as.list(paths_chr) %>% stats::setNames(prj_dirs_chr) %>% purrr::keep(dir.exists)
+  if(!is.null(paths_ls))
+    new_paths_ls <- append(new_paths_ls, paths_ls)
+  return(new_paths_ls)
 }
 write_tb_to_csv <- function(tbs_r4,
                             slot_nm_1L_chr,

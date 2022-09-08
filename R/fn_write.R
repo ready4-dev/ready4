@@ -263,6 +263,7 @@ write_fls_to_dv <- function (file_paths_chr, descriptions_chr = NULL, ds_url_1L_
 #' @description write_fls_to_repo() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files to repository. The function returns Identities (an integer vector).
 #' @param paths_chr Paths (a character vector)
 #' @param descriptions_chr Descriptions (a character vector)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param ds_url_1L_chr Dataset url (a character vector of length one), Default: character(0)
 #' @param ds_ls Dataset (a list), Default: NULL
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
@@ -277,23 +278,32 @@ write_fls_to_dv <- function (file_paths_chr, descriptions_chr = NULL, ds_url_1L_
 #' @importFrom piggyback pb_list pb_new_release pb_upload
 #' @importFrom purrr walk
 #' @keywords internal
-write_fls_to_repo <- function (paths_chr, descriptions_chr, ds_url_1L_chr = character(0), 
+write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "", ds_url_1L_chr = character(0), 
     ds_ls = NULL, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), 
     piggyback_desc_1L_chr = "Documentation", piggyback_tag_1L_chr = "Documentation_0.0", 
     piggyback_to_1L_chr = character(0), prerelease_1L_lgl = T) 
 {
     if (!identical(piggyback_to_1L_chr, character(0))) {
-        releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
-        if (!piggyback_tag_1L_chr %in% releases_df$tag) 
-            piggyback::pb_new_release(piggyback_to_1L_chr, tag = piggyback_tag_1L_chr, 
-                body = piggyback_desc_1L_chr, prerelease = prerelease_1L_lgl)
-        purrr::walk(paths_chr, ~{
-            if (file.exists(.x)) {
-                piggyback::pb_upload(.x, repo = piggyback_to_1L_chr, 
-                  tag = piggyback_tag_1L_chr)
-            }
-        })
-        ids_int <- NULL
+        if (!consent_1L_chr %in% c("Y", "N")) {
+            consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
+                ifelse(length(paths_chr) > 1, "s", ""), " to release ", 
+                piggyback_tag_1L_chr, " in ", piggyback_to_1L_chr), 
+                options_chr = c("Y", "N"), force_from_opts_1L_chr = T)
+        }
+        if (consent_1L_chr %in% c("Y")) {
+            releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
+            if (!piggyback_tag_1L_chr %in% releases_df$tag) 
+                piggyback::pb_new_release(piggyback_to_1L_chr, 
+                  tag = piggyback_tag_1L_chr, body = piggyback_desc_1L_chr, 
+                  prerelease = prerelease_1L_lgl)
+            purrr::walk(paths_chr, ~{
+                if (file.exists(.x)) {
+                  piggyback::pb_upload(.x, repo = piggyback_to_1L_chr, 
+                    tag = piggyback_tag_1L_chr)
+                }
+            })
+            ids_int <- NULL
+        }
     }
     else {
         if (!identical(character(0), ds_url_1L_chr)) 
@@ -448,6 +458,67 @@ write_new_files <- function (paths_chr, custom_write_ls = NULL, fl_nm_1L_chr = N
             message("Write request cancelled - no new directories created")
         }
     }
+}
+#' Write object with prompt
+#' @description write_obj_with_prompt() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write object with prompt. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param object_xx Object (an output object of multiple potential types)
+#' @param obj_nm_1L_chr Object name (a character vector of length one)
+#' @param outp_dir_1L_chr Output directory (a character vector of length one)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @return NULL
+#' @rdname write_obj_with_prompt
+#' @export 
+#' @importFrom rlang exec
+#' @keywords internal
+write_obj_with_prompt <- function (object_xx, obj_nm_1L_chr, outp_dir_1L_chr, consent_1L_chr = "") 
+{
+    path_1L_chr <- paste0(outp_dir_1L_chr, "/", obj_nm_1L_chr, 
+        ".RDS")
+    custom_write_ls = list(fn = saveRDS, args_ls = list(object = object_xx, 
+        file = path_1L_chr))
+    if (!consent_1L_chr %in% c("Y", "N")) {
+        write_new_files(path_1L_chr, custom_write_ls = custom_write_ls)
+    }
+    else {
+        if (consent_1L_chr == "Y") 
+            rlang::exec(custom_write_ls$fn, !!!custom_write_ls$args_ls)
+    }
+}
+#' Write project output directories
+#' @description write_prj_outp_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write project output directories. The function returns New paths (a list).
+#' @param prj_dirs_chr Project directories (a character vector)
+#' @param output_data_dir_1L_chr Output data directory (a character vector of length one)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param paths_ls Paths (a list), Default: NULL
+#' @return New paths (a list)
+#' @rdname write_prj_outp_dirs
+#' @export 
+#' @importFrom purrr walk keep
+#' @importFrom stats setNames
+#' @keywords internal
+write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1L_chr = "", 
+    paths_ls = NULL) 
+{
+    paths_chr <- paste0(paste0(output_data_dir_1L_chr, "/"), 
+        prj_dirs_chr)
+    if (!consent_1L_chr %in% c("Y", "N")) {
+        write_new_dirs(paths_chr)
+    }
+    else {
+        if (consent_1L_chr %in% c("Y")) {
+            new_paths_ls <- paths_chr %>% purrr::walk(~{
+                dir.create(.x)
+            })
+        }
+        else {
+            message("Write request cancelled - no new directories created")
+        }
+    }
+    new_paths_ls <- as.list(paths_chr) %>% stats::setNames(prj_dirs_chr) %>% 
+        purrr::keep(dir.exists)
+    if (!is.null(paths_ls)) 
+        new_paths_ls <- append(new_paths_ls, paths_ls)
+    return(new_paths_ls)
 }
 #' Write tibble to comma separated variables file
 #' @description write_tb_to_csv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write tibble to comma separated variables file. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
