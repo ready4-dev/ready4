@@ -17,6 +17,37 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
             r4_name_1L_chr = r4_name_1L_chr, lup_dir_1L_chr = lup_dir_1L_chr, 
             pfx_1L_chr = pfx_1L_chr))
 }
+#' Write blog entries
+#' @description write_blog_entries() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write blog entries. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param dir_path_1L_chr Directory path (a character vector of length one)
+#' @param fl_nm_1L_chr File name (a character vector of length one)
+#' @return NULL
+#' @rdname write_blog_entries
+#' @export 
+#' @importFrom rmarkdown render
+#' @keywords internal
+write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr) 
+{
+    rmarkdown::render(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
+        "/index_Body.Rmd"), output_dir = paste0(dir_path_1L_chr, 
+        "/", fl_nm_1L_chr))
+    write_to_trim_html(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
+        "/index_Body.html"))
+    rmarkdown::render(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
+        "/index.Rmd"), output_dir = paste0(dir_path_1L_chr, "/", 
+        fl_nm_1L_chr))
+    unlink(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, "/index_Body.html"))
+    if (file.exists(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
+        "/index.html"))) 
+        unlink(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, "/index.html"))
+    file_chr <- readLines(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
+        "/index.md"))
+    file_chr <- file_chr[file_chr != "<div class='highlight'>"]
+    file_chr <- file_chr[c(1:(max(which(file_chr == "</div>")) - 
+        1), (max(which(file_chr == "</div>")) + 1):length(file_chr))]
+    writeLines(file_chr, paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
+        "/index.md"))
+}
 #' Write citation cff
 #' @description write_citation_cff() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write citation cff. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param pkg_desc_ls Package description (a list)
@@ -347,6 +378,21 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, edit_fn_ls = list(NUL
     write_to_delete_fls(intersect(tmp_paths_chr, dest_paths_chr))
     write_new_files(dest_paths_chr, text_ls = text_ls)
 }
+#' Write new credentials
+#' @description write_new_credentials() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new credentials. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param path_to_file_1L_chr Path to file (a character vector of length one)
+#' @param new_credentials_1L_chr New credentials (a character vector of length one)
+#' @param old_credentials_1L_chr Old credentials (a character vector of length one)
+#' @return NULL
+#' @rdname write_new_credentials
+#' @export 
+#' @importFrom stringr str_replace
+#' @keywords internal
+write_new_credentials <- function (path_to_file_1L_chr, new_credentials_1L_chr, old_credentials_1L_chr) 
+{
+    readLines(path_to_file_1L_chr) %>% stringr::str_replace(pattern = old_credentials_1L_chr, 
+        replace = new_credentials_1L_chr) %>% writeLines(con = path_to_file_1L_chr)
+}
 #' Write new directories
 #' @description write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param new_dirs_chr New directories (a character vector)
@@ -554,6 +600,26 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
             row.names = F)
     }
 }
+#' Write to copy Markdowns
+#' @description write_to_copy_rmds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to copy markdowns. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param dir_path_1L_chr Directory path (a character vector of length one)
+#' @param fl_nm_1L_chr File name (a character vector of length one)
+#' @param rmds_dir_1L_chr R Markdowns directory (a character vector of length one), Default: 'R/RMD Templates'
+#' @return NULL
+#' @rdname write_to_copy_rmds
+#' @export 
+#' @importFrom purrr walk
+#' @keywords internal
+write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, rmds_dir_1L_chr = "R/RMD Templates") 
+{
+    file_nms_chr <- list.files(rmds_dir_1L_chr)
+    destination_1L_chr <- paste0(dir_path_1L_chr, "/", fl_nm_1L_chr)
+    if (!dir.exists(destination_1L_chr)) 
+        dir.create(destination_1L_chr)
+    purrr::walk(file_nms_chr, ~write_new_files(destination_1L_chr, 
+        source_paths_ls = list(paste0(rmds_dir_1L_chr, "/", .x)), 
+        fl_nm_1L_chr = .x))
+}
 #' Write to delete directories
 #' @description write_to_delete_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param dir_paths_chr Directory paths (a character vector)
@@ -735,6 +801,29 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, wait_tim
     }
     return(ds_ls)
 }
+#' Write to force links in
+#' @description write_to_force_links_in() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to force links in. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param path_to_mkdn_1L_chr Path to markdown (a character vector of length one)
+#' @param shorten_doi_1L_lgl Shorten digital object identifier (a logical vector of length one), Default: T
+#' @return NULL
+#' @rdname write_to_force_links_in
+#' @export 
+#' @importFrom purrr map_chr
+#' @importFrom stringr str_match str_remove str_replace
+#' @keywords internal
+write_to_force_links_in <- function (path_to_mkdn_1L_chr, shorten_doi_1L_lgl = T) 
+{
+    file_chr <- readLines(path_to_mkdn_1L_chr)
+    file_chr <- file_chr %>% purrr::map_chr(~{
+        url_1L_chr <- paste0("https://", stringr::str_match(.x, 
+            "<https://\\s*(.*?)\\s*>")[2])
+        link_1L_chr <- paste0("<a href=\"", url_1L_chr, "\">", 
+            ifelse(shorten_doi_1L_lgl, stringr::str_remove(url_1L_chr, 
+                "https://doi.org/"), url_1L_chr), "</a>")
+        stringr::str_replace(.x, "<https://\\s*(.*?)\\s*>", link_1L_chr)
+    })
+    writeLines(file_chr, path_to_mkdn_1L_chr)
+}
 #' Write to publish dataverse dataset
 #' @description write_to_publish_dv_ds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to publish dataverse dataset. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param dv_ds_1L_chr Dataverse dataset (a character vector of length one)
@@ -750,6 +839,48 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr)
     if (consent_1L_chr == "Y") {
         dataverse::publish_dataset(dv_ds_1L_chr, minor = F)
     }
+}
+#' Write to render post
+#' @description write_to_render_post() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to render post. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param included_dirs_chr Included directories (a character vector)
+#' @param path_to_main_dir_1L_chr Path to main directory (a character vector of length one)
+#' @param is_rmd_1L_lgl Is Markdown (a logical vector of length one), Default: T
+#' @return NULL
+#' @rdname write_to_render_post
+#' @export 
+#' @importFrom purrr walk
+#' @importFrom rmarkdown render
+#' @keywords internal
+write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, is_rmd_1L_lgl = T) 
+{
+    included_dirs_chr %>% purrr::walk(~{
+        if (is_rmd_1L_lgl) {
+            write_blog_entries(dir_path_1L_chr = path_to_main_dir_1L_chr, 
+                fl_nm_1L_chr = .x)
+        }
+        else {
+            rmarkdown::render(paste0(path_to_main_dir_1L_chr, 
+                "/", .x, "/index.en.Rmarkdown"))
+        }
+    })
+}
+#' Write to trim html
+#' @description write_to_trim_html() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to trim html. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param path_to_html_1L_chr Path to html (a character vector of length one)
+#' @return NULL
+#' @rdname write_to_trim_html
+#' @export 
+#' @keywords internal
+write_to_trim_html <- function (path_to_html_1L_chr) 
+{
+    file_chr <- readLines(path_to_html_1L_chr)
+    file_chr <- file_chr[file_chr != "<!DOCTYPE html>"]
+    file_chr <- file_chr[c(1:(which(file_chr == "<head>") - 1), 
+        (which(file_chr == "</head>") + 1):length(file_chr))]
+    file_chr <- file_chr[file_chr != "<div class=\"container-fluid main-container\">"]
+    file_chr <- file_chr[c(1:(max(which(file_chr == "</div>")) - 
+        1), (max(which(file_chr == "</div>")) + 1):length(file_chr))]
+    writeLines(file_chr, path_to_html_1L_chr)
 }
 #' Write words
 #' @description write_words() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write words. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

@@ -12,7 +12,7 @@ print_dss(dvs_tb, what_1L_chr = "all")
 \item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 }
 \value{
-dss_kbl (An object)
+Datasets (a kable)
 }
 \description{
 print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.

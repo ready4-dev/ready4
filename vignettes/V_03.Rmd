@@ -19,11 +19,11 @@ library(ready4)
 ```
 
 ## Motivation
-The practical utility and ease of use of computational models of mental health systems are in part shaped by the choice of programming paradigm used to develop them. [The framework being used to develop the readyforwhatsnext model](https://www.ready4-dev.com/framework/) adopts an object oriented programming (OOP) paradigm which in practice means that the framework principally consists of classes (representations of data structures useful for modelling mental health systems) and methods (algorithms that can be applied to these data-structures to generate insight useful for policy-making). Adopting an OOP approach is particular useful for making the [readyforwhatsnext model](https://www.ready4-dev.com) both modular and transparent.  
+The practical utility and ease of use of computational models of mental health systems are in part shaped by the choice of programming paradigm used to develop them. ready4 adopts an object oriented programming (OOP) paradigm which in practice means that the framework principally consists of classes (representations of data structures useful for modelling mental health systems) and methods (algorithms that can be applied to these data-structures to generate insight useful for policy-making). Adopting an OOP approach is particular useful for making the [ready4 model](https://www.ready4-dev.com) both modular and transparent.  
 
 ## Implementation
 ### Modular Computational Models
-Two commonly noted features of OOP - encapsulation and inheritance are particularly useful when developing [modular computational models](V_01.html).
+Two commonly noted features of OOP - encapsulation and inheritance are particularly useful when developing [modular computational models](https://ready4-dev.github.io/ready4/articles/V_01.html).
 
 #### Encapsulation
 Encapsulation allows us to define the data structures (“classes”) used in computational modelling projects in a manner that allows them to be safely combined.  For example, assume there are two computational models, one (**A**) focused on predicting the types and intensity of services used by individuals that present to mental health services and the other (**B**) that [predicts outcomes for recipients of these services](https://ready4-dev.github.io/youthu/articles/Prediction_With_Mdls.html). It may be desirable to develop a new model (**C**) that combines **A** and **B** to model both service use and outcomes. Using encapsulated code allows all of the features and functionality of **A** can be made available to **B** in a manner that protects the integrity of **A**. Specifically, **B** can only interact with **A** using the algorithms (“methods”) that have been already defined for **A**. 
@@ -36,7 +36,7 @@ The examples highlighted in the previous section have some potential limitations
 Similarly, inheritance would allow re-use of much of the code from a model of the Australian mental health system when exploring similar topics within the UK context, while making it straightforward to develop additional code that addresses relevant divergence in features between the two jurisdictions. In practical terms, this would mean developing two child classes of **X** - class **Y** for use with Australian data and class **Z** for use in the UK system. All methods that are not specific to a particular jurisdiction are defined for **X** and inherited by **Y** and **Z**. Methods that are only appropriate for use in the Australian context are defined for **Y**, while UK specific methods are defined for **Z**.
 
 ### Transparent Computational Models
-To make analyses implemented using the readyforwhatsnext model more readily understood, the `ready4` package provides the model's [simple and consistent syntax](V_02.html). Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.
+To make analyses implemented using the ready4 model more readily understood, the `ready4` package provides the model's [simple and consistent syntax](https://ready4-dev.github.io/ready4/articles/V_02.html). Such simplified approaches are facilitated by two other commonly noted features of OOP - polymorphism and abstraction.
 
 #### Polymorphism
 Polymorphism allows for similar concepts to be represented using consistent syntax. The same top level code can therefore be generalised to multiple model implementations, making algorithms  simpler to understand and easier to re-use.

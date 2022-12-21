@@ -18,7 +18,7 @@ print_dvs(
 \item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 }
 \value{
-dvs_kbl (An object)
+Dataverses (a kable)
 }
 \description{
 print_dvs() is a Print function that prints output to console Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.

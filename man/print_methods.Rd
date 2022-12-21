@@ -24,7 +24,7 @@ print_methods(
 \item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
 }
 \value{
-methods_kbl (An object)
+Methods (a kable)
 }
 \description{
 print_methods() is a Print function that prints output to console Specifically, this function implements an algorithm to print methods. The function is called for its side effects and does not return a value.

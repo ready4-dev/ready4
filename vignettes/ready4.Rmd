@@ -36,4 +36,4 @@ The `ready4` package introduces some simple classes (data-structures) and method
 ### Applying and extending the `ready4` framework
 The bare-bones framework outlined in the `ready4` package is extended through code-libraries of additional classes and methods, repositories of data that can be fed to framework classes and methods and literate programs that transparently link algorithms to data. An overview of each of these framework extensions is described in the following article:
 
-- [Apply And Extend The Readyforwhatsnext Model With Modules, Datasets and Analyses](V_04.html)
+- [Apply And Extend The ready4 Model With Modules, Datasets and Analyses](V_04.html)

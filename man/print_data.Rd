@@ -21,7 +21,7 @@ print_data(
 \item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 }
 \value{
-datasets_kbl (An object)
+Datasets (a kable)
 }
 \description{
 print_data() is a Print function that prints output to console Specifically, this function implements an algorithm to print data. The function is called for its side effects and does not return a value.

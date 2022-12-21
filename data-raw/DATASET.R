@@ -3,8 +3,8 @@ library(lifecycle)
 library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 ready4fun::write_fn_type_dirs()
-x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Source Computational Models of Youth Mental Health Systems" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for developing, extending and applying readyforwhatsnext - a modular, open source health economic model of young people's mental health.
+x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement A Modular, Open Source Computational Model of Youth Mental Health Systems" %>% tools::toTitleCase(),
+                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for developing, extending and applying a modular, open source health economic model of young people's mental health.
   This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
@@ -46,10 +46,15 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Open Source Compu
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 x <- write_self_srvc_pkg(x)
+readLines(".github/workflows/R-CMD-check.yaml") %>%
+  stringr::str_replace_all("r-lib/actions/setup-r@master","r-lib/actions/setup-r@v2") %>%
+  stringr::str_replace_all("r-lib/actions/setup-pandoc@master","r-lib/actions/setup-pandoc@v2") %>%
+  writeLines(con = ".github/workflows/R-CMD-check.yaml")
 #
 # ADD DOI OVERRIDE FOR RELEASES
 #
 # write_extensions() # Required only if extensions have changed since last build
 # write_badges() # Only run if the ready4fun badges table has been updated.
 # Very occasional calls to write_housestyle_fls (four a year tops)
+
 devtools::build_vignettes()

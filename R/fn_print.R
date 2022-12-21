@@ -4,7 +4,7 @@
 #' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: F
 #' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
-#' @return datasets_kbl (An object)
+#' @return Datasets (a kable)
 #' @rdname print_data
 #' @export 
 #' @keywords internal
@@ -24,7 +24,7 @@ print_data <- function (datasets_tb, by_dv_1L_lgl = F, root_1L_chr = "https://da
 #' @description print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
-#' @return dss_kbl (An object)
+#' @return Datasets (a kable)
 #' @rdname print_dss
 #' @export 
 #' @importFrom dplyr filter select mutate
@@ -57,7 +57,7 @@ print_dss <- function (dvs_tb, what_1L_chr = "all")
 #' @param dvs_tb Dataverses (a tibble)
 #' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
-#' @return dvs_kbl (An object)
+#' @return Dataverses (a kable)
 #' @rdname print_dvs
 #' @export 
 #' @importFrom dplyr select mutate filter
@@ -92,7 +92,7 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @param methods_chr Methods (a character vector), Default: NULL
 #' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @param return_1L_chr Return (a character vector of length one), Default: 'all'
-#' @return methods_kbl (An object)
+#' @return Methods (a kable)
 #' @rdname print_methods
 #' @export 
 #' @importFrom dplyr filter
@@ -119,7 +119,7 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
 #' @description print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
 #' @param modules_tb Modules (a tibble)
 #' @param what_1L_chr What (a character vector of length one), Default: 'All'
-#' @return modules_kbl (An object)
+#' @return Modules (a kable)
 #' @rdname print_modules
 #' @export 
 #' @importFrom dplyr filter select
@@ -142,7 +142,7 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
 #' @description print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
-#' @return pkg_extensions_kbl (An object)
+#' @return Package extensions (a kable)
 #' @rdname print_packages
 #' @export 
 #' @importFrom dplyr mutate rename select
@@ -212,7 +212,7 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
 #' @description print_vignettes() is a Print function that prints output to console Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
-#' @return vignettes_kbl (An object)
+#' @return Vignettes (a kable)
 #' @rdname print_vignettes
 #' @export 
 #' @importFrom purrr flatten_chr map_chr map2

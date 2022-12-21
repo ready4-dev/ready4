@@ -9,6 +9,23 @@ write_all_tbs_in_tbs_r4_to_csvs <- function(tbs_r4,
                                 lup_dir_1L_chr = lup_dir_1L_chr,
                                 pfx_1L_chr = pfx_1L_chr))
 }
+write_blog_entries <- function(dir_path_1L_chr,
+                               fl_nm_1L_chr){
+  rmarkdown::render(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.Rmd"),
+                    output_dir = paste0(dir_path_1L_chr,"/",fl_nm_1L_chr))
+  write_to_trim_html(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.html"))
+  rmarkdown::render(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.Rmd"),
+                    output_dir = paste0(dir_path_1L_chr,"/",fl_nm_1L_chr))
+  unlink(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.html"))
+  if(file.exists(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.html")))
+    unlink(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.html"))
+  file_chr <- readLines(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.md"))
+  file_chr <- file_chr[file_chr != "<div class='highlight'>"]
+  file_chr <- file_chr[c(1:(max(which(file_chr=="</div>"))-1),
+                         (max(which(file_chr=="</div>"))+1):length(file_chr))]
+  writeLines(file_chr,
+             paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.md"))
+}
 write_citation_cff <- function(pkg_desc_ls,
                                citation_chr,
                                publisher_1L_chr = "Zenodo"){
@@ -312,6 +329,15 @@ write_from_tmp <- function(tmp_paths_chr,
   write_new_files(dest_paths_chr,
                   text_ls = text_ls)
 }
+write_new_credentials <- function(path_to_file_1L_chr,
+                                  new_credentials_1L_chr,
+                                  old_credentials_1L_chr){
+  readLines(path_to_file_1L_chr) %>%
+    stringr::str_replace(
+      pattern = old_credentials_1L_chr,
+      replace = new_credentials_1L_chr) %>%
+    writeLines(con = path_to_file_1L_chr)
+}
 write_new_dirs <- function(new_dirs_chr){
   new_dirs_chr <- new_dirs_chr[new_dirs_chr %>% purrr::map_lgl(~!dir.exists(.x))]
   if(!identical(new_dirs_chr, character(0))){
@@ -483,6 +509,18 @@ write_tb_to_csv <- function(tbs_r4,
                        row.names = F)
   }
 }
+write_to_copy_rmds <- function(dir_path_1L_chr,
+                               fl_nm_1L_chr,
+                               rmds_dir_1L_chr = "R/RMD Templates"){
+  file_nms_chr <- list.files(rmds_dir_1L_chr)
+  destination_1L_chr <- paste0(dir_path_1L_chr,"/",fl_nm_1L_chr)
+  if(!dir.exists(destination_1L_chr))
+    dir.create(destination_1L_chr)
+  purrr::walk(file_nms_chr,
+              ~   write_new_files(destination_1L_chr,
+                                  source_paths_ls = list(paste0(rmds_dir_1L_chr,"/",.x)),
+                                  fl_nm_1L_chr = .x))
+}
 write_to_delete_dirs <- function(dir_paths_chr){
   dir_paths_chr <- dir_paths_chr[dir_paths_chr %>% purrr::map_lgl(~dir.exists(.x))]
   if(!identical(dir_paths_chr, character(0))){
@@ -653,6 +691,29 @@ write_to_dv_with_wait <- function(dss_tb, # RENAME & Convert to two steps: Make 
   }
   return(ds_ls)
 }
+write_to_force_links_in <- function(path_to_mkdn_1L_chr,
+                                    shorten_doi_1L_lgl = T){
+  file_chr <- readLines(path_to_mkdn_1L_chr)
+  file_chr <- file_chr %>%
+    purrr::map_chr(~{
+      url_1L_chr <- paste0("https://",
+                           stringr::str_match(.x,
+                                              "<https://\\s*(.*?)\\s*>")[2])
+
+      link_1L_chr <- paste0('<a href="',
+                            url_1L_chr,
+                            '">',
+                            ifelse(shorten_doi_1L_lgl,
+                                   stringr::str_remove(url_1L_chr,"https://doi.org/"),
+                                   url_1L_chr),
+                            '</a>')
+      stringr::str_replace(.x,
+                           "<https://\\s*(.*?)\\s*>",
+                           link_1L_chr)
+    })
+  writeLines(file_chr,
+             path_to_mkdn_1L_chr)
+}
 write_to_publish_dv_ds <- function(dv_ds_1L_chr){
   consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you wish to publish the current draft of dataverse ",
                                                      dv_ds_1L_chr,
@@ -663,6 +724,34 @@ write_to_publish_dv_ds <- function(dv_ds_1L_chr){
     dataverse::publish_dataset(dv_ds_1L_chr,
                                minor = F)
   }
+}
+write_to_render_post <- function(included_dirs_chr,
+                                 path_to_main_dir_1L_chr,
+
+                                 is_rmd_1L_lgl = T){
+  included_dirs_chr %>%
+    purrr::walk(~{
+      if(is_rmd_1L_lgl){
+        write_blog_entries(dir_path_1L_chr = path_to_main_dir_1L_chr,
+                           fl_nm_1L_chr = .x)
+      }else{
+        rmarkdown::render(paste0(path_to_main_dir_1L_chr,
+                                 "/",
+                                 .x,
+                                 "/index.en.Rmarkdown"))
+      }})
+}
+write_to_trim_html <- function(path_to_html_1L_chr){
+  file_chr <- readLines(path_to_html_1L_chr)
+  file_chr <- file_chr[file_chr != "<!DOCTYPE html>"]
+  file_chr <- file_chr[c(1:(which(file_chr=="<head>")-1),
+                         (which(file_chr=="</head>")+1):length(file_chr))]
+  file_chr <- file_chr[file_chr != '<div class="container-fluid main-container">']
+  file_chr <- file_chr[c(1:(max(which(file_chr=="</div>"))-1),
+                         (max(which(file_chr=="</div>"))+1):length(file_chr))]
+  writeLines(file_chr,
+             path_to_html_1L_chr)
+
 }
 write_words <- function(new_words_chr,
                         gh_repo_1L_chr = "ready4-dev/ready4",

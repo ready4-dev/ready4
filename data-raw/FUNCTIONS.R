@@ -472,7 +472,7 @@ write_housestyle_fls <- function(){ # Use sparingly [Max 4 times a year]
                                  dv_server_1L_chr = "dataverse.harvard.edu",
                                  gh_repo_1L_chr = "ready4-dev/ready4",
                                  gh_tag_1L_chr = "Documentation_0.0")
-  X <- ready4::ingest(X)
+  X <- ingest(X)
   X <- ready4::share(X@a_Ready4usePointer@b_Ready4useRepos,
                      obj_to_share_xx = X@b_Ready4useIngest@objects_ls,
                      fl_nm_1L_chr = "framework_metadata_ls",

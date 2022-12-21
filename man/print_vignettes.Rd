@@ -12,7 +12,7 @@ print_vignettes(pkg_extensions_tb = NULL, include_1L_chr = "modules")
 \item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
 }
 \value{
-vignettes_kbl (An object)
+Vignettes (a kable)
 }
 \description{
 print_vignettes() is a Print function that prints output to console Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.

@@ -12,7 +12,7 @@ print_modules(modules_tb, what_1L_chr = "All")
 \item{what_1L_chr}{What (a character vector of length one), Default: 'All'}
 }
 \value{
-modules_kbl (An object)
+Modules (a kable)
 }
 \description{
 print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
