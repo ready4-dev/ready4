@@ -181,13 +181,22 @@
     <loc>https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_code_releases_tbl.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_datasets_tb.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_ds_releases_tbl.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_files_tb.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_fn_defaults_ls.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_framework_pkgs_chr.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_libraries_tb.html</loc>
@@ -202,10 +211,19 @@
     <loc>https://ready4-dev.github.io/ready4/reference/make_methods_tb.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_modules_pkgs_chr.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_modules_tb.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_programs_tbl.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_prompt.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_subroutine_repos.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/manufacture-methods.html</loc>
@@ -307,6 +325,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/write_all_tbs_in_tbs_r4_to_csvs.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_blog_entries.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_citation_cff.html</loc>
   </url>
   <url>
@@ -328,6 +349,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/write_from_tmp.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_new_credentials.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_new_dirs.html</loc>
   </url>
   <url>
@@ -343,6 +367,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/write_tb_to_csv.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_copy_rmds.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_to_delete_dirs.html</loc>
   </url>
   <url>
@@ -355,7 +382,16 @@
     <loc>https://ready4-dev.github.io/ready4/reference/write_to_dv_with_wait.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_force_links_in.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_to_publish_dv_ds.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_render_post.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_to_trim_html.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_words.html</loc>
