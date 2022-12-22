@@ -9,7 +9,10 @@ print_methods(
   exclude_mthds_for_chr = NA_character_,
   methods_chr = NULL,
   path_1L_chr = character(0),
-  return_1L_chr = "all"
+  return_1L_chr = "all",
+  scroll_height_1L_chr = character(0),
+  scroll_width_1L_chr = character(0),
+  ...
 )
 }
 \arguments{
@@ -22,6 +25,12 @@ print_methods(
 \item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
 
 \item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
+
+\item{scroll_height_1L_chr}{Scroll height (a character vector of length one), Default: character(0)}
+
+\item{scroll_width_1L_chr}{Scroll width (a character vector of length one), Default: character(0)}
+
+\item{...}{Additional arguments}
 }
 \value{
 Methods (a kable)

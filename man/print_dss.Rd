@@ -4,12 +4,24 @@
 \alias{print_dss}
 \title{Print datasets}
 \usage{
-print_dss(dvs_tb, what_1L_chr = "all")
+print_dss(
+  dvs_tb,
+  scroll_height_1L_chr = character(0),
+  scroll_width_1L_chr = character(0),
+  what_1L_chr = "all",
+  ...
+)
 }
 \arguments{
 \item{dvs_tb}{Dataverses (a tibble)}
 
+\item{scroll_height_1L_chr}{Scroll height (a character vector of length one), Default: character(0)}
+
+\item{scroll_width_1L_chr}{Scroll width (a character vector of length one), Default: character(0)}
+
 \item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
+
+\item{...}{Additional arguments}
 }
 \value{
 Datasets (a kable)

@@ -36,8 +36,8 @@ x <- get_methods_tb()
 
 ```{r}
 print_methods(x,
-              return_1L_chr = "core") %>%
-  kableExtra::scroll_box(width = "100%")
+              return_1L_chr = "core",
+              scroll_width_1L_chr = "100%") 
 ```
 
 #### Slot generics and methods
@@ -51,7 +51,8 @@ A HTML table of the slot generics bundled with `ready4` can be displayed using t
 
 ```{r}
 print_methods(x,
-              return_1L_chr = "slot")
+              return_1L_chr = "slot",
+              scroll_width_1L_chr = "100%")
 ```
 
 #### Extended `author` generics
@@ -60,6 +61,7 @@ Finally, there are a small number of other generics that are more general extens
 ```{r}
 print_methods(x,
               exclude_mthds_for_chr = "Ready4Module",
-              return_1L_chr = "extended")
+              return_1L_chr = "extended",
+              scroll_width_1L_chr = "100%")
 ```
 

@@ -1,19 +1,31 @@
 print_data <- function(datasets_tb,
                        by_dv_1L_lgl = F,
                        root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
-                       what_1L_chr = "all"){
+                       scroll_height_1L_chr = character(0),
+                       scroll_width_1L_chr = character(0),
+                       what_1L_chr = "all",
+                       ...){
   if(by_dv_1L_lgl){
     datasets_kbl <- print_dvs(datasets_tb,
               root_1L_chr = root_1L_chr,
-              what_1L_chr = what_1L_chr)
+              scroll_height_1L_chr = scroll_height_1L_chr,
+              scroll_width_1L_chr = scroll_width_1L_chr,
+              what_1L_chr = what_1L_chr,
+              ...)
   }else{
     datasets_kbl <- print_dss(datasets_tb,
-                              what_1L_chr = what_1L_chr)
+                              scroll_height_1L_chr = scroll_height_1L_chr,
+                              scroll_width_1L_chr = scroll_width_1L_chr,
+                              what_1L_chr = what_1L_chr,
+                              ...)
   }
   return(datasets_kbl)
 }
 print_dss <- function(dvs_tb,
-                      what_1L_chr = "all"){
+                      scroll_height_1L_chr = character(0),
+                      scroll_width_1L_chr = character(0),
+                      what_1L_chr = "all",
+                      ...){
 dss_tb <- dvs_tb %>%
     dplyr::filter(!is.na(Contents)) %>%
   dplyr::select(Contents,
@@ -37,12 +49,18 @@ if(what_1L_chr == "fakes")
     dplyr::filter(Dataverse == "fakes")
 dss_kbl <- dss_tb %>%
   kableExtra::kable("html", escape = FALSE) %>%
-  kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+  kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
+  add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
+                 scroll_width_1L_chr = scroll_width_1L_chr,
+                 ...)
 return(dss_kbl)
 }
 print_dvs <- function(dvs_tb,
                       root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
-                      what_1L_chr = "all"){
+                      scroll_height_1L_chr = character(0),
+                      scroll_width_1L_chr = character(0),
+                      what_1L_chr = "all",
+                      ...){
   dvs_tb <- add_references(dvs_tb,
                             data_var_nm_1L_chr = "Contents",
                             data_url_var_nm_1L_chr = "Datasets") %>%
@@ -63,14 +81,20 @@ print_dvs <- function(dvs_tb,
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
     kableExtra::column_spec(which(names(dvs_tb)=="Dataverse"),
                             link = paste0(root_1L_chr,
-                                          dvs_tb$Dataverse))
+                                          dvs_tb$Dataverse)) %>%
+    add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
+                   scroll_width_1L_chr = scroll_width_1L_chr,
+                   ...)
   return(dvs_kbl)
 }
 print_methods <- function(methods_tb = NULL,
                           exclude_mthds_for_chr = NA_character_,
                           methods_chr = NULL,
                           path_1L_chr = character(0),
-                          return_1L_chr = "all"){
+                          return_1L_chr = "all",
+                          scroll_height_1L_chr = character(0),
+                          scroll_width_1L_chr = character(0),
+                          ...){
   if(is.null(methods_tb))
     methods_tb <- make_methods_tb(path_1L_chr = path_1L_chr)
   if(is.null(methods_chr))
@@ -86,11 +110,18 @@ print_methods <- function(methods_tb = NULL,
     kableExtra::kable("html", escape = FALSE) %>%
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
     kableExtra::column_spec(which(names(methods_tb)=="Method"),
-                            link = links_chr)
+                            link = links_chr) %>%
+    add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
+                   scroll_width_1L_chr = scroll_width_1L_chr,
+                   ...)
   return(methods_kbl)
 }
 print_modules <- function(modules_tb,
-                          what_1L_chr = "All"){
+                          scroll_height_1L_chr = character(0),
+                          scroll_width_1L_chr = character(0),
+                          what_1L_chr = "All",
+                          ...
+                          ){
   if(what_1L_chr == "S4"){
     modules_tb <- modules_tb %>%
       dplyr::filter(!old_class_lgl)
@@ -103,11 +134,17 @@ print_modules <- function(modules_tb,
     dplyr::select(-old_class_lgl,
                   -Library)  %>%
     kableExtra::kable("html", escape = FALSE) %>%
-    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
+    add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
+                   scroll_width_1L_chr = scroll_width_1L_chr,
+                   ...)
   return(modules_kbl)
 }
 print_packages <- function(pkg_extensions_tb = NULL,
-                           include_1L_chr = "modules"){
+                           include_1L_chr = "modules",
+                           scroll_height_1L_chr = character(0),
+                           scroll_width_1L_chr = character(0),
+                           ...){
   if(is.null(pkg_extensions_tb))
     pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
   pkg_extensions_tb <- pkg_extensions_tb %>%
@@ -202,11 +239,17 @@ print_packages <- function(pkg_extensions_tb = NULL,
                                                            height = 160,
                                                            width = 160)) %>%
     kableExtra::column_spec(which(names(pkg_extensions_tb)=="Website"),
-                            link = homepages_chr)
+                            link = homepages_chr) %>%
+    add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
+                   scroll_width_1L_chr = scroll_width_1L_chr,
+                   ...)
   return(pkg_extensions_kbl)
 }
 print_vignettes <- function(pkg_extensions_tb = NULL,
-                            include_1L_chr = "modules"){
+                            include_1L_chr = "modules",
+                            scroll_height_1L_chr = character(0),
+                            scroll_width_1L_chr = character(0),
+                            ...){
   if(is.null(pkg_extensions_tb))
     pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
   vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
@@ -233,7 +276,11 @@ print_vignettes <- function(pkg_extensions_tb = NULL,
   vignettes_kbl <- vignettes_tb %>%
     dplyr::select(Title, Program) %>%
     kableExtra::kable("html", escape = FALSE) %>%
-    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed"))
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
+    add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
+                   scroll_width_1L_chr = scroll_width_1L_chr,
+                   ...)
+
   return(vignettes_kbl)
 }
 

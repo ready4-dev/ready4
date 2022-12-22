@@ -115,6 +115,40 @@ add_rows_from_fn_args <- function (tbl_r3, fn, fn_env_ls)
     }
     return(tbl_r3)
 }
+#' Add scroll box
+#' @description add_scroll_box() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add scroll box. Function argument table_kbl specifies the object to be updated. The function is called for its side effects and does not return a value.
+#' @param table_kbl PARAM_DESCRIPTION
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param ... Additional arguments
+#' @return Table (a kable)
+#' @rdname add_scroll_box
+#' @export 
+#' @importFrom kableExtra scroll_box
+#' @keywords internal
+add_scroll_box <- function (table_kbl, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    ...) 
+{
+    if (!identical(c(scroll_height_1L_chr, scroll_width_1L_chr), 
+        character(0))) {
+        table_kbl <- table_kbl %>% kableExtra::scroll_box(height = {
+            if (identical(scroll_height_1L_chr, character(0))) {
+                NULL
+            }
+            else {
+                scroll_height_1L_chr
+            }
+        }, width = {
+            if (identical(scroll_width_1L_chr, character(0))) {
+                NULL
+            }
+            else {
+                scroll_width_1L_chr
+            }
+        })
+    }
+    return(table_kbl)
+}
 #' Add vignette links
 #' @description add_vignette_links() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add vignette links. Function argument pkg_extensions_tb specifies the object to be updated. The function returns Package extensions (a tibble).
 #' @param pkg_extensions_tb Package extensions (a tibble)

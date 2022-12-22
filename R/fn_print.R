@@ -3,27 +3,37 @@
 #' @param datasets_tb Datasets (a tibble)
 #' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: F
 #' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
+#' @param ... Additional arguments
 #' @return Datasets (a kable)
 #' @rdname print_data
 #' @export 
 #' @keywords internal
 print_data <- function (datasets_tb, by_dv_1L_lgl = F, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
-    what_1L_chr = "all") 
+    scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    what_1L_chr = "all", ...) 
 {
     if (by_dv_1L_lgl) {
         datasets_kbl <- print_dvs(datasets_tb, root_1L_chr = root_1L_chr, 
-            what_1L_chr = what_1L_chr)
+            scroll_height_1L_chr = scroll_height_1L_chr, scroll_width_1L_chr = scroll_width_1L_chr, 
+            what_1L_chr = what_1L_chr, ...)
     }
     else {
-        datasets_kbl <- print_dss(datasets_tb, what_1L_chr = what_1L_chr)
+        datasets_kbl <- print_dss(datasets_tb, scroll_height_1L_chr = scroll_height_1L_chr, 
+            scroll_width_1L_chr = scroll_width_1L_chr, what_1L_chr = what_1L_chr, 
+            ...)
     }
     return(datasets_kbl)
 }
 #' Print datasets
 #' @description print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
+#' @param ... Additional arguments
 #' @return Datasets (a kable)
 #' @rdname print_dss
 #' @export 
@@ -31,7 +41,8 @@ print_data <- function (datasets_tb, by_dv_1L_lgl = F, root_1L_chr = "https://da
 #' @importFrom purrr pmap_dfr map_dfr
 #' @importFrom tibble tibble
 #' @importFrom kableExtra kable kable_styling
-print_dss <- function (dvs_tb, what_1L_chr = "all") 
+print_dss <- function (dvs_tb, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    what_1L_chr = "all", ...) 
 {
     dss_tb <- dvs_tb %>% dplyr::filter(!is.na(Contents)) %>% 
         dplyr::select(Contents, Datasets_Meta, Dataverse) %>% 
@@ -49,14 +60,18 @@ print_dss <- function (dvs_tb, what_1L_chr = "all")
         dss_tb <- dss_tb %>% dplyr::filter(Dataverse == "fakes")
     dss_kbl <- dss_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
-            "condensed"))
+            "condensed")) %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
+        scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(dss_kbl)
 }
 #' Print dataverses
 #' @description print_dvs() is a Print function that prints output to console Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)
 #' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
+#' @param ... Additional arguments
 #' @return Dataverses (a kable)
 #' @rdname print_dvs
 #' @export 
@@ -64,7 +79,8 @@ print_dss <- function (dvs_tb, what_1L_chr = "all")
 #' @importFrom purrr map
 #' @importFrom kableExtra kable kable_styling column_spec
 print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
-    what_1L_chr = "all") 
+    scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    what_1L_chr = "all", ...) 
 {
     dvs_tb <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", 
         data_url_var_nm_1L_chr = "Datasets") %>% dplyr::select(Dataverse, 
@@ -82,7 +98,9 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
     dvs_kbl <- dvs_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
             "condensed")) %>% kableExtra::column_spec(which(names(dvs_tb) == 
-        "Dataverse"), link = paste0(root_1L_chr, dvs_tb$Dataverse))
+        "Dataverse"), link = paste0(root_1L_chr, dvs_tb$Dataverse)) %>% 
+        add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
+            scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(dvs_kbl)
 }
 #' Print methods
@@ -92,6 +110,9 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @param methods_chr Methods (a character vector), Default: NULL
 #' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @param return_1L_chr Return (a character vector of length one), Default: 'all'
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param ... Additional arguments
 #' @return Methods (a kable)
 #' @rdname print_methods
 #' @export 
@@ -99,7 +120,9 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @importFrom purrr map_chr
 #' @importFrom kableExtra kable kable_styling column_spec
 print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
-    methods_chr = NULL, path_1L_chr = character(0), return_1L_chr = "all") 
+    methods_chr = NULL, path_1L_chr = character(0), return_1L_chr = "all", 
+    scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    ...) 
 {
     if (is.null(methods_tb)) 
         methods_tb <- make_methods_tb(path_1L_chr = path_1L_chr)
@@ -112,19 +135,24 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
     methods_kbl <- methods_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
             "condensed")) %>% kableExtra::column_spec(which(names(methods_tb) == 
-        "Method"), link = links_chr)
+        "Method"), link = links_chr) %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
+        scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(methods_kbl)
 }
 #' Print modules
 #' @description print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
 #' @param modules_tb Modules (a tibble)
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
 #' @param what_1L_chr What (a character vector of length one), Default: 'All'
+#' @param ... Additional arguments
 #' @return Modules (a kable)
 #' @rdname print_modules
 #' @export 
 #' @importFrom dplyr filter select
 #' @importFrom kableExtra kable kable_styling
-print_modules <- function (modules_tb, what_1L_chr = "All") 
+print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    what_1L_chr = "All", ...) 
 {
     if (what_1L_chr == "S4") {
         modules_tb <- modules_tb %>% dplyr::filter(!old_class_lgl)
@@ -135,13 +163,17 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
     modules_kbl <- modules_tb %>% dplyr::select(-old_class_lgl, 
         -Library) %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
-            "condensed"))
+            "condensed")) %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
+        scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(modules_kbl)
 }
 #' Print packages
 #' @description print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param ... Additional arguments
 #' @return Package extensions (a kable)
 #' @rdname print_packages
 #' @export 
@@ -149,7 +181,9 @@ print_modules <- function (modules_tb, what_1L_chr = "All")
 #' @importFrom purrr map map_chr map2_chr pmap
 #' @importFrom stringr str_remove
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
-print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules") 
+print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules", 
+    scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    ...) 
 {
     if (is.null(pkg_extensions_tb)) 
         pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
@@ -205,13 +239,17 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
         "DOI"), image = zenodo_badges_chr) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
         "Package"), image = kableExtra::spec_image(logos_chr, 
         height = 160, width = 160)) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
-        "Website"), link = homepages_chr)
+        "Website"), link = homepages_chr) %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
+        scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(pkg_extensions_kbl)
 }
 #' Print vignettes
 #' @description print_vignettes() is a Print function that prints output to console Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
+#' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param ... Additional arguments
 #' @return Vignettes (a kable)
 #' @rdname print_vignettes
 #' @export 
@@ -221,7 +259,9 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
 #' @importFrom rvest read_html html_elements html_text2 html_attr
 #' @importFrom kableExtra cell_spec kable kable_styling
 #' @keywords internal
-print_vignettes <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules") 
+print_vignettes <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules", 
+    scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+    ...) 
 {
     if (is.null(pkg_extensions_tb)) 
         pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
@@ -237,6 +277,7 @@ print_vignettes <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules
             link = c(.x, .y))))
     vignettes_kbl <- vignettes_tb %>% dplyr::select(Title, Program) %>% 
         kableExtra::kable("html", escape = FALSE) %>% kableExtra::kable_styling(bootstrap_options = c("hover", 
-        "condensed"))
+        "condensed")) %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
+        scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(vignettes_kbl)
 }

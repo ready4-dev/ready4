@@ -8,7 +8,10 @@ print_data(
   datasets_tb,
   by_dv_1L_lgl = F,
   root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
-  what_1L_chr = "all"
+  scroll_height_1L_chr = character(0),
+  scroll_width_1L_chr = character(0),
+  what_1L_chr = "all",
+  ...
 )
 }
 \arguments{
@@ -18,7 +21,13 @@ print_data(
 
 \item{root_1L_chr}{Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'}
 
+\item{scroll_height_1L_chr}{Scroll height (a character vector of length one), Default: character(0)}
+
+\item{scroll_width_1L_chr}{Scroll width (a character vector of length one), Default: character(0)}
+
 \item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
+
+\item{...}{Additional arguments}
 }
 \value{
 Datasets (a kable)
