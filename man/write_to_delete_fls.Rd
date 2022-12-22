@@ -4,10 +4,12 @@
 \alias{write_to_delete_fls}
 \title{Write to delete files}
 \usage{
-write_to_delete_fls(file_paths_chr)
+write_to_delete_fls(file_paths_chr, consent_1L_chr = "")
 }
 \arguments{
 \item{file_paths_chr}{File paths (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 }
 \description{
 write_to_delete_fls() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

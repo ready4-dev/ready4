@@ -7,7 +7,8 @@
 write_new_credentials(
   path_to_file_1L_chr,
   new_credentials_1L_chr,
-  old_credentials_1L_chr
+  old_credentials_1L_chr,
+  consent_1L_chr = ""
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ write_new_credentials(
 \item{new_credentials_1L_chr}{New credentials (a character vector of length one)}
 
 \item{old_credentials_1L_chr}{Old credentials (a character vector of length one)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 }
 \description{
 write_new_credentials() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new credentials. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

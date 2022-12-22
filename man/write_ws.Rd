@@ -4,10 +4,12 @@
 \alias{write_ws}
 \title{Write workspace}
 \usage{
-write_ws(path_1L_chr)
+write_ws(path_1L_chr, consent_1L_chr = "")
 }
 \arguments{
 \item{path_1L_chr}{Path (a character vector of length one)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 }
 \description{
 write_ws() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write workspace. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

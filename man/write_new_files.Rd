@@ -6,6 +6,7 @@
 \usage{
 write_new_files(
   paths_chr,
+  consent_1L_chr = "",
   custom_write_ls = NULL,
   fl_nm_1L_chr = NULL,
   source_paths_ls = NULL,
@@ -14,6 +15,8 @@ write_new_files(
 }
 \arguments{
 \item{paths_chr}{Paths (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{custom_write_ls}{Custom write (a list), Default: NULL}
 

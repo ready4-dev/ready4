@@ -4,12 +4,18 @@
 \alias{write_to_force_links_in}
 \title{Write to force links in}
 \usage{
-write_to_force_links_in(path_to_mkdn_1L_chr, shorten_doi_1L_lgl = T)
+write_to_force_links_in(
+  path_to_mkdn_1L_chr,
+  shorten_doi_1L_lgl = T,
+  consent_1L_chr = ""
+)
 }
 \arguments{
 \item{path_to_mkdn_1L_chr}{Path to markdown (a character vector of length one)}
 
 \item{shorten_doi_1L_lgl}{Shorten digital object identifier (a logical vector of length one), Default: T}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 }
 \description{
 write_to_force_links_in() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to force links in. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

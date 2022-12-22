@@ -4,10 +4,12 @@
 \alias{write_new_dirs}
 \title{Write new directories}
 \usage{
-write_new_dirs(new_dirs_chr)
+write_new_dirs(new_dirs_chr, consent_1L_chr = "")
 }
 \arguments{
 \item{new_dirs_chr}{New directories (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 }
 \description{
 write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

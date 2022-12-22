@@ -7,6 +7,7 @@
 write_to_render_post(
   included_dirs_chr,
   path_to_main_dir_1L_chr,
+  consent_1L_chr = "",
   is_rmd_1L_lgl = T
 )
 }
@@ -14,6 +15,8 @@ write_to_render_post(
 \item{included_dirs_chr}{Included directories (a character vector)}
 
 \item{path_to_main_dir_1L_chr}{Path to main directory (a character vector of length one)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{is_rmd_1L_lgl}{Is Markdown (a logical vector of length one), Default: T}
 }

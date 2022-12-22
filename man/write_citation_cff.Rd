@@ -4,12 +4,19 @@
 \alias{write_citation_cff}
 \title{Write citation cff}
 \usage{
-write_citation_cff(pkg_desc_ls, citation_chr, publisher_1L_chr = "Zenodo")
+write_citation_cff(
+  pkg_desc_ls,
+  citation_chr,
+  consent_1L_chr = "",
+  publisher_1L_chr = "Zenodo"
+)
 }
 \arguments{
 \item{pkg_desc_ls}{Package description (a list)}
 
 \item{citation_chr}{Citation (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{publisher_1L_chr}{Publisher (a character vector of length one), Default: 'Zenodo'}
 }

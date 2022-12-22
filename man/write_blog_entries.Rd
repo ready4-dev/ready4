@@ -4,12 +4,14 @@
 \alias{write_blog_entries}
 \title{Write blog entries}
 \usage{
-write_blog_entries(dir_path_1L_chr, fl_nm_1L_chr)
+write_blog_entries(dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "")
 }
 \arguments{
 \item{dir_path_1L_chr}{Directory path (a character vector of length one)}
 
 \item{fl_nm_1L_chr}{File name (a character vector of length one)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 }
 \description{
 write_blog_entries() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write blog entries. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

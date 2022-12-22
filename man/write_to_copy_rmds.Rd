@@ -7,6 +7,7 @@
 write_to_copy_rmds(
   dir_path_1L_chr,
   fl_nm_1L_chr,
+  consent_1L_chr = "",
   rmds_dir_1L_chr = "R/RMD Templates"
 )
 }
@@ -14,6 +15,8 @@ write_to_copy_rmds(
 \item{dir_path_1L_chr}{Directory path (a character vector of length one)}
 
 \item{fl_nm_1L_chr}{File name (a character vector of length one)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{rmds_dir_1L_chr}{R Markdowns directory (a character vector of length one), Default: 'R/RMD Templates'}
 }

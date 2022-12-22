@@ -4,10 +4,12 @@
 \alias{write_to_trim_html}
 \title{Write to trim html}
 \usage{
-write_to_trim_html(path_to_html_1L_chr)
+write_to_trim_html(path_to_html_1L_chr, consent_1L_chr = "")
 }
 \arguments{
 \item{path_to_html_1L_chr}{Path to html (a character vector of length one)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 }
 \description{
 write_to_trim_html() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to trim html. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

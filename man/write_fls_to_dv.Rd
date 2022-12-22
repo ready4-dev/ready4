@@ -6,6 +6,7 @@
 \usage{
 write_fls_to_dv(
   file_paths_chr,
+  consent_1L_chr = "",
   descriptions_chr = NULL,
   ds_url_1L_chr,
   ds_ls = NULL,
@@ -15,6 +16,8 @@ write_fls_to_dv(
 }
 \arguments{
 \item{file_paths_chr}{File paths (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{descriptions_chr}{Descriptions (a character vector), Default: NULL}
 

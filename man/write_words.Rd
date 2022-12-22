@@ -6,12 +6,15 @@
 \usage{
 write_words(
   new_words_chr,
+  consent_1L_chr = "",
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0"
 )
 }
 \arguments{
 \item{new_words_chr}{New words (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 

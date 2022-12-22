@@ -8,6 +8,7 @@ write_env_objs_to_dv(
   env_objects_ls,
   descriptions_chr,
   ds_url_1L_chr,
+  consent_1L_chr = "",
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
   publish_dv_1L_lgl = F,
   piggyback_desc_1L_chr = "Documentation",
@@ -23,6 +24,8 @@ write_env_objs_to_dv(
 \item{descriptions_chr}{Descriptions (a character vector)}
 
 \item{ds_url_1L_chr}{Dataset url (a character vector of length one)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{key_1L_chr}{Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")}
 

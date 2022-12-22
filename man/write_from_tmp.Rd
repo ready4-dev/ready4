@@ -7,6 +7,7 @@
 write_from_tmp(
   tmp_paths_chr,
   dest_paths_chr,
+  consent_1L_chr = "",
   edit_fn_ls = list(NULL),
   args_ls_ls = list(NULL)
 )
@@ -15,6 +16,8 @@ write_from_tmp(
 \item{tmp_paths_chr}{Temporary paths (a character vector)}
 
 \item{dest_paths_chr}{Destination paths (a character vector)}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{edit_fn_ls}{Edit (a list of functions), Default: list(NULL)}
 
