@@ -148,7 +148,9 @@ methods that implement each generic can be displayed using the
 <code>return_1L_chr = "core"</code> argument.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,</span>
-<span>              return_1L_chr <span class="op">=</span> <span class="st">"core"</span><span class="op">)</span></span></code></pre></div>
+<span>              return_1L_chr <span class="op">=</span> <span class="st">"core"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span>width <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
@@ -370,6 +372,7 @@ Share data via an online repository
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div class="section level4">
 <h4 id="slot-generics-and-methods">Slot generics and methods<a class="anchor" aria-label="anchor" href="#slot-generics-and-methods"></a>
