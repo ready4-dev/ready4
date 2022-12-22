@@ -36,7 +36,8 @@ x <- get_methods_tb()
 
 ```{r}
 print_methods(x,
-              return_1L_chr = "core")
+              return_1L_chr = "core") %>%
+  kableExtra::scroll_box(width = "100%")
 ```
 
 #### Slot generics and methods
