@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9103</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9104</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,8 +148,8 @@ methods that implement each generic can be displayed using the
 <code>return_1L_chr = "core"</code> argument.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,</span>
-<span>              return_1L_chr <span class="op">=</span> <span class="st">"core"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span>width <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span></span></code></pre></div>
+<span>              return_1L_chr <span class="op">=</span> <span class="st">"core"</span>,</span>
+<span>              scroll_width_1L_chr <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span> </span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -399,7 +399,9 @@ can be displayed using the <code>print_methods</code> function, using
 the <code>return_1L_chr = "slot"</code> argument.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,</span>
-<span>              return_1L_chr <span class="op">=</span> <span class="st">"slot"</span><span class="op">)</span></span></code></pre></div>
+<span>              return_1L_chr <span class="op">=</span> <span class="st">"slot"</span>,</span>
+<span>              scroll_width_1L_chr <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
@@ -602,6 +604,7 @@ Apply the share method to a model module slot
 </tbody>
 </table>
 </div>
+</div>
 <div class="section level4">
 <h4 id="extended-author-generics">Extended <code>author</code> generics<a class="anchor" aria-label="anchor" href="#extended-author-generics"></a>
 </h4>
@@ -617,7 +620,9 @@ extended generics. A HTML table of the extended generics bundled with
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_methods.html">print_methods</a></span><span class="op">(</span><span class="va">x</span>,</span>
 <span>              exclude_mthds_for_chr <span class="op">=</span> <span class="st">"Ready4Module"</span>,</span>
-<span>              return_1L_chr <span class="op">=</span> <span class="st">"extended"</span><span class="op">)</span></span></code></pre></div>
+<span>              return_1L_chr <span class="op">=</span> <span class="st">"extended"</span>,</span>
+<span>              scroll_width_1L_chr <span class="op">=</span> <span class="st">"100%"</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
@@ -680,6 +685,7 @@ Author and save a report
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
