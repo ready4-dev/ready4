@@ -32,17 +32,17 @@ update_pt_fn_args_ls <- function (args_ls)
 #' @param filter_cdn_1L_chr Filter condition (a character vector of length one), Default: 'NA'
 #' @param fn Function (a function), Default: NULL
 #' @param fn_env_ls Function (a list of environments), Default: NULL
-#' @param slice_idxs_int Slice indices (an integer vector), Default: NA
+#' @param slice_indcs_int Slice indices (an integer vector), Default: NA
 #' @return Tibble ready4 S3 (a ready4 S3 extension of tibble)
 #' @rdname update_tb_r3
 #' @export 
 #' @importFrom dplyr slice filter
 #' @keywords internal
 update_tb_r3 <- function (tb_r3, filter_cdn_1L_chr = NA_character_, fn = NULL, 
-    fn_env_ls = NULL, slice_idxs_int = NA_integer_) 
+    fn_env_ls = NULL, slice_indcs_int = NA_integer_) 
 {
-    if (!is.na(slice_idxs_int[1])) 
-        tb_r3 <- tb_r3 %>% dplyr::slice(slice_idxs_int)
+    if (!is.na(slice_indcs_int[1])) 
+        tb_r3 <- tb_r3 %>% dplyr::slice(slice_indcs_int)
     if (!is.na(filter_cdn_1L_chr[1])) 
         tb_r3 <- tb_r3 %>% dplyr::filter(eval(parse(text = filter_cdn_1L_chr)))
     if (!is.null(fn_env_ls) & !is.null(fn)) 

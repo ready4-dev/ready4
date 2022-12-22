@@ -349,10 +349,10 @@ get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https:/
 {
     urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
         rvest::html_attr("href")
-    idxs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr, 
+    indcs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr, 
         "_User.pdf")) | endsWith(.x, paste0(pkg_nm_1L_chr, "_Developer.pdf"))) %>% 
         which()
-    urls_chr <- sort(urls_chr[idxs_int], decreasing = T)
+    urls_chr <- sort(urls_chr[indcs_int], decreasing = T)
     return(urls_chr)
 }
 #' Get methods
@@ -505,10 +505,10 @@ get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "ht
 {
     urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
         rvest::html_attr("href")
-    idxs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>% 
+    indcs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>% 
         rvest::html_elements(".external-link") %>% rvest::html_text()) == 
         "Browse source code"), which(startsWith(urls_chr, "https://doi.org/10.5281/zenodo.")))
-    urls_chr <- urls_chr[idxs_int]
+    urls_chr <- urls_chr[indcs_int]
     return(urls_chr)
 }
 #' Get table from local file

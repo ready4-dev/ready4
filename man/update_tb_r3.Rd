@@ -9,7 +9,7 @@ update_tb_r3(
   filter_cdn_1L_chr = NA_character_,
   fn = NULL,
   fn_env_ls = NULL,
-  slice_idxs_int = NA_integer_
+  slice_indcs_int = NA_integer_
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ update_tb_r3(
 
 \item{fn_env_ls}{Function (a list of environments), Default: NULL}
 
-\item{slice_idxs_int}{Slice indices (an integer vector), Default: NA}
+\item{slice_indcs_int}{Slice indices (an integer vector), Default: NA}
 }
 \value{
 Tibble ready4 S3 (a ready4 S3 extension of tibble)

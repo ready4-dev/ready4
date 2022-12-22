@@ -163,13 +163,13 @@ write_fn_fl <- function(fns_env_ls,
 }
 write_new_generic_descs <- function(x){
   generics_txt_chr <- readLines("R/grp_generics.R")
-  title_idxs_int <- (generics_txt_chr %>% startsWith("#' @rdname") %>% which())-1
-  titles_chr <- generics_txt_chr[title_idxs_int]
-  descriptions_idxs_int <- generics_txt_chr %>% startsWith("#' @description") %>% which()
-  descriptions_chr <- generics_txt_chr[descriptions_idxs_int]
-  end_idxs_int <- (descriptions_chr %>% stringi::stri_locate_first_fixed("()") %>% `[`(,1)) - 1
+  title_indcs_int <- (generics_txt_chr %>% startsWith("#' @rdname") %>% which())-1
+  titles_chr <- generics_txt_chr[title_indcs_int]
+  descriptions_indcs_int <- generics_txt_chr %>% startsWith("#' @description") %>% which()
+  descriptions_chr <- generics_txt_chr[descriptions_indcs_int]
+  end_indcs_int <- (descriptions_chr %>% stringi::stri_locate_first_fixed("()") %>% `[`(,1)) - 1
   replacements_chr <- purrr::map2_chr(descriptions_chr,
-                                      end_idxs_int,
+                                      end_indcs_int,
                                       ~ {
                                         original_1L_chr <- generic_1L_chr <- stringr::str_sub(.x, start = 17, end = .y)
                                         #substr(generic_1L_chr, 1, 1) <- toupper(substr(generic_1L_chr, 1, 1))
@@ -206,13 +206,13 @@ write_new_generic_descs <- function(x){
   generics_txt_chr <- purrr::reduce(1:length(new_titles_chr),
                                     .init = generics_txt_chr,
                                     ~ {
-                                      .x[title_idxs_int[.y]] <- new_titles_chr[.y]
+                                      .x[title_indcs_int[.y]] <- new_titles_chr[.y]
                                       .x
                                     })
   generics_txt_chr <- purrr::reduce(1:length(replacements_chr),
                                     .init = generics_txt_chr,
                                     ~ {
-                                      .x[descriptions_idxs_int[.y]] <- replacements_chr[.y]
+                                      .x[descriptions_indcs_int[.y]] <- replacements_chr[.y]
                                       .x
                                     })
   generics_txt_chr %>%
