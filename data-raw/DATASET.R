@@ -52,20 +52,14 @@ readLines(".github/workflows/R-CMD-check.yaml") %>%
   stringr::str_replace_all("r-lib/actions/setup-r@master","r-lib/actions/setup-r@v2") %>%
   stringr::str_replace_all("r-lib/actions/setup-pandoc@master","r-lib/actions/setup-pandoc@v2") %>%
   writeLines(con = ".github/workflows/R-CMD-check.yaml")
+write_extra_pkgs_to_actions()
+devtools::build_vignettes()
 #
 # ADD DOI OVERRIDE FOR RELEASES
 #
 # write_extensions() # Required only if extensions have changed since last build
 # write_badges() # Only run if the ready4fun badges table has been updated.
 # Very occasional calls to write_housestyle_fls (four a year tops)
-devtools::build_vignettes()
-write_extra_pkgs_to_actions <- function(path_to_dir_1L_chr = ".github/workflows"){
-  list.files(path_to_dir_1L_chr, full.names = T) %>%
-    purrr::walk(~{
-      readLines(.x) %>%
-        stringr::str_replace_all("extra-packages: ","extra-packages: any::XML, ") %>%
-        stringr::str_replace_all("any::XML, any::XML, ","any::XML, ") %>%
-        writeLines(con = .x)
-    })
-}
-write_extra_pkgs_to_actions()
+
+
+

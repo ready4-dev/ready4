@@ -203,6 +203,23 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
     }
     return(file_ids_int)
 }
+#' Write extra packages to actions
+#' @description write_extra_pkgs_to_actions() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write extra packages to actions. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param path_to_dir_1L_chr Path to directory (a character vector of length one), Default: '.github/workflows'
+#' @return NULL
+#' @rdname write_extra_pkgs_to_actions
+#' @export 
+#' @importFrom purrr walk
+#' @importFrom stringr str_replace_all
+#' @keywords internal
+write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr = ".github/workflows") 
+{
+    list.files(path_to_dir_1L_chr, full.names = T) %>% purrr::walk(~{
+        readLines(.x) %>% stringr::str_replace_all("extra-packages: ", 
+            "extra-packages: any::XML, ") %>% stringr::str_replace_all("any::XML, any::XML, ", 
+            "any::XML, ") %>% writeLines(con = .x)
+    })
+}
 #' Write files from dataverse
 #' @description write_fls_from_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files from dataverse. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param files_tb Files (a tibble)

@@ -180,6 +180,15 @@ write_env_objs_to_dv <- function(env_objects_ls,
   }
   return(file_ids_int)
 }
+write_extra_pkgs_to_actions <- function(path_to_dir_1L_chr = ".github/workflows"){
+  list.files(path_to_dir_1L_chr, full.names = T) %>%
+    purrr::walk(~{
+      readLines(.x) %>%
+        stringr::str_replace_all("extra-packages: ","extra-packages: any::XML, ") %>%
+        stringr::str_replace_all("any::XML, any::XML, ","any::XML, ") %>%
+        writeLines(con = .x)
+    })
+}
 write_fls_from_dv <- function(files_tb,
                               fl_ids_int,
                               ds_url_1L_chr,
