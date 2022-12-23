@@ -464,8 +464,6 @@ write_extensions <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                        piggyback_to_1L_chr = gh_repo_1L_chr,
                        prerelease_1L_lgl = T)
 }
-
-
 write_housestyle_fls <- function(){ # Use sparingly [Max 4 times a year]
   X <- ready4use::Ready4useRepos(dv_nm_1L_chr = "ready4fw",
                                  dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK",

@@ -530,6 +530,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @export 
 #' @importFrom dplyr group_by filter row_number arrange ungroup mutate select
 #' @importFrom rlang sym
+#' @importFrom zen4R ZenodoManager
 #' @importFrom purrr map_chr map_int map2_chr pmap
 #' @importFrom rvest html_text read_html
 #' @importFrom stringr str_remove_all str_replace_all str_remove
@@ -544,7 +545,8 @@ make_programs_tbl <- function (what_1L_chr = "Program", as_kbl_1L_lgl = F, exclu
         dplyr::group_by(!!rlang::sym(what_1L_chr)) %>% dplyr::filter(dplyr::row_number() == 
         1) %>% dplyr::arrange(!!rlang::sym(what_1L_chr)) %>% 
         dplyr::ungroup()
-    zenodo_records_ls <- zenodo$getRecords(q = paste0("communities:(", 
+    zenodo_records_ls <- zen4R::ZenodoManager$new()
+    zenodo_records_ls <- zenodo_records_ls$getRecords(q = paste0("communities:(", 
         zenodo_1L_chr, ")"))
     descriptions_chr <- zenodo_records_ls %>% purrr::map_chr(~rvest::html_text(rvest::read_html(.x$metadata$description %>% 
         stringr::str_remove_all("&nbsp;"))) %>% stringr::str_replace_all("[\r\n]", 

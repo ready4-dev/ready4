@@ -454,7 +454,7 @@ make_programs_tbl <- function(what_1L_chr = "Program",
                               tidy_desc_1L_lgl = T,
                               zenodo_1L_chr = "ready4",
                               ...){
-  programs_xx <- make_code_releases_tbl(what_1L_chr,
+    programs_xx <- make_code_releases_tbl(what_1L_chr,
                                         as_kbl_1L_lgl = F,
                                         exclude_chr = exclude_chr,
                                         tidy_desc_1L_lgl = F) %>%
@@ -462,7 +462,8 @@ make_programs_tbl <- function(what_1L_chr = "Program",
     dplyr::filter(dplyr::row_number()==1) %>%
     dplyr::arrange(!!rlang::sym(what_1L_chr)) %>%
     dplyr::ungroup()
-  zenodo_records_ls <- zenodo$getRecords(q = paste0("communities:(",zenodo_1L_chr,")"))
+  zenodo_records_ls <- zen4R::ZenodoManager$new()
+  zenodo_records_ls <- zenodo_records_ls$getRecords(q = paste0("communities:(",zenodo_1L_chr,")"))
   descriptions_chr <- zenodo_records_ls %>%
     purrr::map_chr(~rvest::html_text(rvest::read_html(.x$metadata$description %>%
                                                         stringr::str_remove_all("&nbsp;"))) %>%

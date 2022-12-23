@@ -22,10 +22,10 @@ library(ready4)
 The social, economic and service systems that shape population mental health are complex and thus can be challenging to model. Some mental health systems modelling projects may therefore be more tractable if broken into smaller tasks and advanced by multiple teams. Such phased and collaborative approaches can be facilitated by use of common frameworks for the development of computational models that are both open and modular.
 
 ## Implementation
-The `ready4` package provides a bare bones initial outline of a framework for open science computational models of mental health systems. This initial framework is extended by multiple other R packages. 
+The `ready4` package provides bare bones foundational elements for the ready4 open science computational model of youth mental health systems. This initial framework is extended by multiple other R packages - see the [primary model documentation website](https://www.ready4-dev.com/) for details. 
 
 ### A toolkit for open and modular computational models of mental health systems
-The `ready4` package introduces some simple classes (data-structures) and methods (algorithms) that can be useful for modelling mental health systems. These concepts are discussed in the following articles:
+The `ready4` package introduces some simple data-structures (S4 classes) and model algorithm syntax (generics and S4 methods) that can be useful for modelling mental health systems. These concepts are discussed in the following articles:
 
 - [Implement A Modular Computational Model Of Youth Mental Health Systems](V_01.html)
 
@@ -33,7 +33,3 @@ The `ready4` package introduces some simple classes (data-structures) and method
 
 - [Apply An Object-Oriented Paradigm To Computational Models Of Youth Mental Health Systems](V_03.html)
 
-### Applying and extending the `ready4` framework
-The bare-bones framework outlined in the `ready4` package is extended through code-libraries of additional classes and methods, repositories of data that can be fed to framework classes and methods and literate programs that transparently link algorithms to data. An overview of each of these framework extensions is described in the following article:
-
-- [Apply And Extend The ready4 Model With Modules, Datasets and Analyses](V_04.html)

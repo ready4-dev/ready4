@@ -78,7 +78,7 @@ In ready4, S3 classes are principally used to help define the structural propert
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
 ::: {.card-header}
-**`ready4 Concept**
+**ready4 Concept**
 :::
 
 ::: {.card-body}

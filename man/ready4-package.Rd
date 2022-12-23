@@ -8,11 +8,11 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for developing, extending and applying a modular, open source health economic model of young people's mental health. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a modular, open source model of the systems shaping young people's mental health. The base elements in this package are extended by other R packages - see https://www.ready4-dev.com/ for details. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton@orygen.org.au).
 
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a framework for developing, extending and applying a modular, open source health economic model of young people's mental health. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the authors (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a modular, open source model of the systems shaping young people's mental health. The base elements in this package are extended by other R packages - see https://www.ready4-dev.com/ for details. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton@orygen.org.au).
 }
 \seealso{
 Useful links:
