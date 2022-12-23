@@ -59,3 +59,13 @@ readLines(".github/workflows/R-CMD-check.yaml") %>%
 # write_badges() # Only run if the ready4fun badges table has been updated.
 # Very occasional calls to write_housestyle_fls (four a year tops)
 devtools::build_vignettes()
+write_extra_pkgs_to_actions <- function(path_to_dir_1L_chr = ".github/workflows"){
+  list.files(path_to_dir_1L_chr, full.names = T) %>%
+    purrr::walk(~{
+      readLines(.x) %>%
+        stringr::str_replace_all("extra-packages: ","extra-packages: any::XML, ") %>%
+        stringr::str_replace_all("any::XML, any::XML, ","any::XML, ") %>%
+        writeLines(con = .x)
+    })
+}
+write_extra_pkgs_to_actions()
