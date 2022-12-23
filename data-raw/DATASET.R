@@ -2,7 +2,7 @@ library(magrittr)
 library(lifecycle)
 library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
-ready4fun::write_fn_type_dirs()
+#ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement A Modular, Open Source Computational Model of Youth Mental Health Systems" %>% tools::toTitleCase(),
                                                     pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a modular, open source model of the systems shaping young people's mental health.
   The base elements in this package are extended by other R packages - see https://www.ready4-dev.com/ for details. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton@orygen.org.au).",
@@ -13,6 +13,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement A Modular, Open S
                                                       comment = c(ORCID = "0000-0001-7407-9194")
                                                     ),
                                                     utils::person("Orygen", role = c("cph", "fnd")),
+                                                    utils::person("Australian Government Research Training Program", role =c("fnd")),
                                                     utils::person("VicHealth",role = c("fnd")),
                                                     utils::person("Victoria University", role =c("fnd"))
                                                     ),
@@ -41,10 +42,11 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement A Modular, Open S
                            ready4_type_1L_chr = "foundation",
                            zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)")
 ##
-## Reminder
+## WARNING WARNING WARNING
 ## Unlike other workflows in the ready4 suite, in this instance it is necessary to answer "N", the FIRST time the following prompt appears:
 ## Do you confirm ('Y') that you want to delete these files: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
+## If you make a mistake and write "Y" you will most likely have to delete your local copy of this repo and clone the repo again from its origin (https://github.com/ready4-dev/ready4).
 x <- write_self_srvc_pkg(x)
 readLines(".github/workflows/R-CMD-check.yaml") %>%
   stringr::str_replace_all("r-lib/actions/setup-r@master","r-lib/actions/setup-r@v2") %>%

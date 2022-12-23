@@ -84,7 +84,7 @@ make_code_releases_tbl <- function (repo_type_1L_chr = "Framework", as_kbl_1L_lg
         "Documentation_0.0")
     if (tidy_desc_1L_lgl) {
         releases_xx <- releases_xx %>% dplyr::mutate(Description = Description %>% 
-            purrr::map2_chr(Program, ~stringr::str_remove(.x, 
+            purrr::map2_chr(!!rlang::sym(repo_type_1L_chr), ~stringr::str_remove(.x, 
                 paste0(.y, ": "))))
     }
     if (as_kbl_1L_lgl) {
