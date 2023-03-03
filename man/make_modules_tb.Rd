@@ -9,7 +9,8 @@ make_modules_tb(
   cls_extensions_tb = NULL,
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
-  include_1L_chr = "modules"
+  include_1L_chr = "modules",
+  what_chr = "all"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ make_modules_tb(
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 
 \item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
+
+\item{what_chr}{What (a character vector), Default: 'all'}
 }
 \value{
 Modules (a tibble)

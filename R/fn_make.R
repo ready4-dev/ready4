@@ -304,6 +304,7 @@ make_framework_pkgs_chr <- function ()
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
 #' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
+#' @param what_chr What (a character vector), Default: 'all'
 #' @return Package extensions (a tibble)
 #' @rdname make_libraries_tb
 #' @export 
@@ -315,9 +316,10 @@ make_framework_pkgs_chr <- function ()
 #' @importFrom bib2df bib2df
 make_libraries_tb <- function (include_1L_chr = "modules", ns_var_nm_1L_chr = "pt_ns_chr", 
     reference_var_nm_1L_chr = "Reference", url_stub_1L_chr = "https://ready4-dev.github.io/", 
-    vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
+    vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs", 
+    what_chr = "all") 
 {
-    modules_chr <- make_modules_pkgs_chr()
+    modules_chr <- make_modules_pkgs_chr(what_chr)
     fw_chr <- make_framework_pkgs_chr()
     if (include_1L_chr == "modules") {
         libraries_chr <- modules_chr
@@ -342,15 +344,21 @@ make_libraries_tb <- function (include_1L_chr = "modules", ns_var_nm_1L_chr = "p
             pt_ns_chr == "heterodox" ~ "Modelling (heterogeneity)", 
             pt_ns_chr == "mychoice" ~ "Modelling (choice)", pt_ns_chr == 
                 "TTU" ~ "Modelling (health utility)", pt_ns_chr == 
-                "youthu" ~ "Prediction (health utility)", T ~ 
-                ""))
+                "youthu" ~ "Prediction (health utility)", pt_ns_chr == 
+                "vicinity" ~ "Modelling (spatial)", pt_ns_chr == 
+                "aus" ~ "Modelling (Australian spatial)", T ~ 
+                "")) %>% dplyr::mutate(Section = dplyr::case_when(pt_ns_chr %in% 
+        make_modules_pkgs_chr("people") ~ "People", pt_ns_chr %in% 
+        make_modules_pkgs_chr("places") ~ "Places", pt_ns_chr %in% 
+        make_modules_pkgs_chr("platforms") ~ "Platforms", pt_ns_chr %in% 
+        make_modules_pkgs_chr("programs") ~ "Programs", T ~ "Framework"))
     if (include_1L_chr == "framework") {
         pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::arrange(dplyr::desc(Type), 
             pt_ns_chr)
     }
     else {
-        pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::arrange(Type, 
-            pt_ns_chr)
+        pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::arrange(Section, 
+            Type, pt_ns_chr)
     }
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Link = purrr::map_chr(pt_ns_chr, 
         ~paste0(url_stub_1L_chr, .x, "/index", ".html"))) %>% 
@@ -464,11 +472,11 @@ make_modules_pkgs_chr <- function (what_chr = "all")
         modules_pkgs_chr <- c(modules_pkgs_chr, c("youthvars", 
             "scorz", "specific", "TTU", "youthu", "mychoice", 
             "heterodox"))
-    if ("places" %in% what_chr) 
+    if ("places" %in% what_chr | "all" %in% what_chr) 
+        modules_pkgs_chr <- c(modules_pkgs_chr, "vicinity", "aus")
+    if ("platforms" %in% what_chr | "all" %in% what_chr) 
         modules_pkgs_chr <- c(modules_pkgs_chr, character(0))
-    if ("platforms" %in% what_chr) 
-        modules_pkgs_chr <- c(modules_pkgs_chr, ccharacter(0))
-    if ("programs" %in% what_chr) 
+    if ("programs" %in% what_chr | "all" %in% what_chr) 
         modules_pkgs_chr <- c(modules_pkgs_chr, c("bimp"))
     return(modules_pkgs_chr)
 }
@@ -479,6 +487,7 @@ make_modules_pkgs_chr <- function (what_chr = "all")
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param what_chr What (a character vector), Default: 'all'
 #' @return Modules (a tibble)
 #' @rdname make_modules_tb
 #' @export 
@@ -490,10 +499,11 @@ make_modules_pkgs_chr <- function (what_chr = "all")
 #' @importFrom stringi stri_replace_last_regex
 make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    include_1L_chr = "modules") 
+    include_1L_chr = "modules", what_chr = "all") 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
+        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr, 
+            what_chr = what_chr)
     if (is.null(cls_extensions_tb)) 
         cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb, 
             gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr, 

@@ -258,9 +258,10 @@ make_libraries_tb <- function (include_1L_chr = "modules",
                                reference_var_nm_1L_chr = "Reference",
                                url_stub_1L_chr = "https://ready4-dev.github.io/",
                                vignette_var_nm_1L_chr = "Vignettes",
-                               vignette_url_var_nm_1L_chr = "Vignettes_URLs")
+                               vignette_url_var_nm_1L_chr = "Vignettes_URLs",
+                               what_chr = "all")
 {
-  modules_chr <- make_modules_pkgs_chr()#c("scorz", "specific", "TTU", "youthu", "youthvars")
+  modules_chr <- make_modules_pkgs_chr(what_chr)#c("scorz", "specific", "TTU", "youthu", "youthvars")
   fw_chr <- make_framework_pkgs_chr()
   # c("ready4show", "ready4use", "ready4fun", "ready4class",
   #             "ready4pack")
@@ -288,14 +289,22 @@ make_libraries_tb <- function (include_1L_chr = "modules",
                                           pt_ns_chr == "mychoice" ~ "Modelling (choice)",
                                           pt_ns_chr == "TTU" ~ "Modelling (health utility)",
                                           pt_ns_chr == "youthu" ~ "Prediction (health utility)",
-                                          T ~ ""))
+                                          pt_ns_chr == "vicinity" ~ "Modelling (spatial)",
+                                          pt_ns_chr == "aus" ~ "Modelling (Australian spatial)",
+                                          T ~ "")) %>%
+    dplyr::mutate(Section = dplyr::case_when(pt_ns_chr %in% make_modules_pkgs_chr("people") ~ "People",
+                                             pt_ns_chr %in% make_modules_pkgs_chr("places") ~ "Places",
+                                             pt_ns_chr %in% make_modules_pkgs_chr("platforms") ~ "Platforms",
+                                             pt_ns_chr %in% make_modules_pkgs_chr("programs") ~ "Programs",
+                                             T ~ "Framework"))
   if(include_1L_chr == "framework"){
     pkg_extensions_tb <- pkg_extensions_tb %>%
       dplyr::arrange(dplyr::desc(Type),
                      pt_ns_chr)
   }else{
     pkg_extensions_tb <- pkg_extensions_tb %>%
-      dplyr::arrange(Type,
+      dplyr::arrange(Section,
+                     Type,
                      pt_ns_chr)
   }
   pkg_extensions_tb <- pkg_extensions_tb %>%
@@ -382,13 +391,13 @@ make_modules_pkgs_chr <- function(what_chr = "all"){
   if("people" %in% what_chr | "all" %in% what_chr)
     modules_pkgs_chr <- c(modules_pkgs_chr,
                          c("youthvars","scorz","specific","TTU","youthu","mychoice","heterodox"))
-  if("places" %in% what_chr)
+  if("places" %in% what_chr | "all" %in% what_chr)
+    modules_pkgs_chr <- c(modules_pkgs_chr,
+                         "vicinity","aus")
+  if("platforms" %in% what_chr | "all" %in% what_chr)
     modules_pkgs_chr <- c(modules_pkgs_chr,
                          character(0))
-  if("platforms" %in% what_chr)
-    modules_pkgs_chr <- c(modules_pkgs_chr,
-                         ccharacter(0))
-  if("programs" %in% what_chr)
+  if("programs" %in% what_chr | "all" %in% what_chr)
     modules_pkgs_chr <- c(modules_pkgs_chr,
                          c("bimp"))
   return(modules_pkgs_chr)
@@ -397,9 +406,11 @@ make_modules_tb <- function(pkg_extensions_tb = NULL,
                             cls_extensions_tb = NULL,
                             gh_repo_1L_chr = "ready4-dev/ready4",
                             gh_tag_1L_chr = "Documentation_0.0",
-                            include_1L_chr = "modules"){
+                            include_1L_chr = "modules",
+                            what_chr = "all"){
   if(is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
+    pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr,
+                                           what_chr = what_chr)
   if(is.null(cls_extensions_tb))
     cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb,
                                             gh_repo_1L_chr = gh_repo_1L_chr,

@@ -10,7 +10,8 @@ make_libraries_tb(
   reference_var_nm_1L_chr = "Reference",
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   vignette_var_nm_1L_chr = "Vignettes",
-  vignette_url_var_nm_1L_chr = "Vignettes_URLs"
+  vignette_url_var_nm_1L_chr = "Vignettes_URLs",
+  what_chr = "all"
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ make_libraries_tb(
 \item{vignette_var_nm_1L_chr}{Vignette variable name (a character vector of length one), Default: 'Vignettes'}
 
 \item{vignette_url_var_nm_1L_chr}{Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'}
+
+\item{what_chr}{What (a character vector), Default: 'all'}
 }
 \value{
 Package extensions (a tibble)

@@ -216,9 +216,9 @@ write_fls_from_dv <- function(files_tb,
                                        key_1L_chr = key_1L_chr,
                                        server_1L_chr = server_1L_chr,
                                        save_type_1L_chr = "original",
-                                       dest_path_1L_chr = make_local_path_to_dv_data(save_dir_path_chr = local_dv_dir_1L_chr,
-                                                                                     filename_chr = files_tb$file_chr[.x],
-                                                                                     save_format_chr = files_tb$file_type_chr[.x]),
+                                       dest_path_1L_chr = make_local_path_to_dv_data(save_dir_path_1L_chr = local_dv_dir_1L_chr,
+                                                                                     fl_nm_1L_chr = files_tb$file_chr[.x],
+                                                                                     save_fmt_1L_chr = files_tb$file_type_chr[.x]),
                                        consent_1L_chr = consent_1L_chr)
                   }
                 })
