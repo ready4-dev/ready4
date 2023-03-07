@@ -187,6 +187,13 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
 {
     if (is.null(pkg_extensions_tb)) 
         pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
+    if (nrow(pkg_extensions_tb) == 1) {
+        pkg_extensions_tb <- rbind(pkg_extensions_tb, pkg_extensions_tb)
+        is_single_1L_lgl <- T
+    }
+    else {
+        is_single_1L_lgl <- F
+    }
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Badges = purrr::map(pt_ns_chr, 
         ~get_badge_urls(.x))) %>% dplyr::mutate(Type = "") %>% 
         dplyr::mutate(DOI = "") %>% dplyr::mutate(Logo = "")
@@ -239,7 +246,13 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
         "DOI"), image = zenodo_badges_chr) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
         "Package"), image = kableExtra::spec_image(logos_chr, 
         height = 160, width = 160)) %>% kableExtra::column_spec(which(names(pkg_extensions_tb) == 
-        "Website"), link = homepages_chr) %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
+        "Website"), link = homepages_chr)
+    if (is_single_1L_lgl) {
+        code_ls <- pkg_extensions_kbl[1] %>% strsplit(split = "<tr>")
+        code_ls <- code_ls[[1]][-3]
+        pkg_extensions_kbl[1] <- code_ls %>% paste0(collapse = "")
+    }
+    pkg_extensions_kbl <- pkg_extensions_kbl %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
         scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(pkg_extensions_kbl)
 }

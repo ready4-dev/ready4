@@ -140,109 +140,93 @@ print_modules <- function(modules_tb,
                    ...)
   return(modules_kbl)
 }
-print_packages <- function(pkg_extensions_tb = NULL,
-                           include_1L_chr = "modules",
-                           scroll_height_1L_chr = character(0),
-                           scroll_width_1L_chr = character(0),
-                           ...){
-  if(is.null(pkg_extensions_tb))
+print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules",
+                            scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0),
+                            ...)
+{
+  if (is.null(pkg_extensions_tb))
     pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
+  if(nrow(pkg_extensions_tb) == 1){
+    pkg_extensions_tb <- rbind(pkg_extensions_tb,pkg_extensions_tb)
+    is_single_1L_lgl <- T
+  }else{
+    is_single_1L_lgl <- F
+  }
   pkg_extensions_tb <- pkg_extensions_tb %>%
     dplyr::mutate(Badges = purrr::map(pt_ns_chr,
-                                      ~ get_badge_urls(.x))) %>%
-    dplyr::mutate(Type = "") %>%
-    dplyr::mutate(DOI = "") %>%
-    dplyr::mutate(Logo = "")
+                                      ~get_badge_urls(.x))) %>% dplyr::mutate(Type = "") %>%
+    dplyr::mutate(DOI = "") %>% dplyr::mutate(Logo = "")
   ready4_badges_chr <- purrr::map_chr(pkg_extensions_tb$Badges,
-                                      ~ .x$ready4_1L_chr)
+                                      ~.x$ready4_1L_chr)
   zenodo_badges_chr <- purrr::map_chr(pkg_extensions_tb$Badges,
-                                      ~ {
-                                        badge_1L_chr <-.x$zenodo_1L_chr
+                                      ~{
+                                        badge_1L_chr <- .x$zenodo_1L_chr
                                         ifelse(identical(badge_1L_chr, character(0)),
                                                "https://zenodo.org/badge/DOI/10.5281/zenodo.5646668.svg",
-                                               badge_1L_chr)}
-  )
+                                               badge_1L_chr)
+                                      })
   logos_chr <- purrr::map_chr(pkg_extensions_tb$pt_ns_chr,
-                              ~paste0("https://ready4-dev.github.io/",.x,"/logo.png"))
+                              ~paste0("https://ready4-dev.github.io/", .x, "/logo.png"))
   homepages_chr <- pkg_extensions_tb$Link
-  pkg_extensions_tb <- pkg_extensions_tb %>%
-    dplyr::mutate(Purpose = Title %>%
-                    purrr::map2_chr(pt_ns_chr,
-                                    ~ stringr::str_remove(.x,paste0(.y,": ")))) %>%
+  pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Purpose = Title %>%
+                                                             purrr::map2_chr(pt_ns_chr,
+                                                                             ~stringr::str_remove(.x, paste0(.y,
+                                                                                                             ": ")))) %>%
     dplyr::rename(Package = Logo,
                   Website = Link,
                   Examples = Vignettes_URLs)
   pkg_extensions_tb <- pkg_extensions_tb %>%
     dplyr::mutate(Examples = purrr::map(Examples,
-                                        ~ if(is.na(.x[1])){
-                                            ""
-                                          }else{
+                                        ~if (is.na(.x[1])) {
+                                          ""
+                                          } else {
                                             .x
-                                          }
-                                        )) %>%
+                                            })) %>%
     dplyr::mutate(Documentation = purrr::pmap(list(manual_urls_ls,
-                                              Citation, Website),
-                                             ~ {
-                                               if(identical(..1,
-                                                            character(0)) | is.na(..1[1]) | length(..1) != 2){
-                                                 manual_txt_chr <- character(0)
-                                               }else{
-                                                 manual_txt_chr <- c("Manual - Short (PDF)",
-                                                                     "Manual - Full (PDF)")
-
-                                               }
-                                               kableExtra::cell_spec(c("Citation",
-                                                                       "Website",
-                                                                       manual_txt_chr),
-                                                                     "html",
-                                                                     link = c(..2,..3,..1))
-
-                                             })) %>%
-    # dplyr::mutate(Manuals = purrr::map(manual_urls_ls,
-    #                                     ~ {
-    #                                          if(identical(.x,
-    #                                                       character(0)) | is.na(.x[1]) | length(.x) != 2){
-    #                                            ""
-    #                                            }else{
-    #                                              kableExtra::cell_spec(c("Modeller (PDF)",
-    #                                                                      "Developer (PDF)"),
-    #                                                                    "html",
-    #                                                                    link = .x)
-    #                                                                         }
-    #
-    #                                                                       })) %>%
+                                                   Citation, Website),
+                                              ~{
+                                                if (identical(..1, character(0)) | is.na(..1[1]) | length(..1) != 2) {
+                                                  manual_txt_chr <- character(0)
+                                                  } else {
+                                                    manual_txt_chr <- c("Manual - Short (PDF)", "Manual - Full (PDF)")
+                                                    }
+                                                kableExtra::cell_spec(c("Citation", "Website", manual_txt_chr),
+                                                                      "html", link = c(..2, ..3, ..1))
+                                                })) %>%
     dplyr::mutate(Code = purrr::map(code_urls_ls,
-                                           ~ {
-                                             if(is.na(.x[1])){
-                                               ""
-                                             }else{
-                                               kableExtra::cell_spec(c("Dev", "Archive"),
-                                                                     "html",
-                                                                     link = .x)
-                                             }
-
-                                           })) %>%
+                                    ~{
+                                      if (is.na(.x[1])) {
+                                        ""
+                                        } else {
+                                          kableExtra::cell_spec(c("Dev", "Archive"), "html",
+                                                                link = .x)
+                                          }
+                                      })) %>%
     dplyr::select(Type, Package, Purpose, Documentation,
-                  #Authors, DOI, Website, Manuals,
                   Code, Examples)
   pkg_extensions_kbl <- pkg_extensions_tb %>%
-    # kableExtra::kbl(booktabs = T) %>%
-    # kableExtra::kable_paper(full_width = F) %>%
-    kableExtra::kable("html", escape = FALSE) %>%
-    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
-    kableExtra::column_spec(which(names(pkg_extensions_tb)=="Type"),
+    kableExtra::kable("html",
+                      escape = FALSE) %>%
+    kableExtra::kable_styling(bootstrap_options = c("hover",
+                                                    "condensed")) %>%
+    kableExtra::column_spec(which(names(pkg_extensions_tb) == "Type"),
                             image = ready4_badges_chr) %>%
-    kableExtra::column_spec(which(names(pkg_extensions_tb)=="DOI"),
+    kableExtra::column_spec(which(names(pkg_extensions_tb) == "DOI"),
                             image = zenodo_badges_chr) %>%
-    kableExtra::column_spec(which(names(pkg_extensions_tb)=="Package"),
+    kableExtra::column_spec(which(names(pkg_extensions_tb) == "Package"),
                             image = kableExtra::spec_image(logos_chr,
-                                                           height = 160,
-                                                           width = 160)) %>%
-    kableExtra::column_spec(which(names(pkg_extensions_tb)=="Website"),
-                            link = homepages_chr) %>%
+                                                           height = 160, width = 160)) %>%
+    kableExtra::column_spec(which(names(pkg_extensions_tb) == "Website"),
+                            link = homepages_chr)
+  if(is_single_1L_lgl){
+    code_ls <- pkg_extensions_kbl[1] %>% strsplit(split = "<tr>")
+    code_ls <- code_ls[[1]][-3]
+    pkg_extensions_kbl[1] <- code_ls %>% paste0(collapse = "")
+  }
+
+  pkg_extensions_kbl <- pkg_extensions_kbl %>%
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
-                   scroll_width_1L_chr = scroll_width_1L_chr,
-                   ...)
+                   scroll_width_1L_chr = scroll_width_1L_chr, ...)
   return(pkg_extensions_kbl)
 }
 print_vignettes <- function(pkg_extensions_tb = NULL,
