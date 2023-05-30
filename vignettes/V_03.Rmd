@@ -11,8 +11,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
-```{r echo = F}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 ```
 ```{r results='hide', message=FALSE, warning=F}
 library(ready4)

@@ -8,10 +8,10 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 ```
 ```{r results='hide', message=FALSE, warning=F}
-library("ready4") 
+library(ready4) 
 ```
 
 ## Motivation
