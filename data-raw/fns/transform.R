@@ -1,5 +1,5 @@
 transform_chr_to_num <- function(digits_chr) {
-  fn_attribution_1L_chr <- "This function is based on: https://stackoverflow.com/questions/24129124/how-to-determine-if-a-character-vector-is-a-valid-numeric-or-integer-vector"
+  acknowledgement_1L_chr <- "This function is based on: https://stackoverflow.com/questions/24129124/how-to-determine-if-a-character-vector-is-a-valid-numeric-or-integer-vector"
   tfd_digits_chr <- suppressWarnings(as.character(digits_chr[!is.na(digits_chr)]))
   if(!identical(tfd_digits_chr, character(0)) & suppressWarnings(all(!is.na(as.numeric(tfd_digits_chr))))) {
     digits_xx <- as.numeric(as.character(digits_chr))

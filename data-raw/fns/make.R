@@ -184,7 +184,6 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
     dplyr::arrange(Dataverse)
   return(dvs_tb)
 }
-
 make_ds_releases_tbl <- function (ds_dois_chr,
                                   format_1L_chr = "%d-%b-%Y",
                                   server_1L_chr = "dataverse.harvard.edu",
