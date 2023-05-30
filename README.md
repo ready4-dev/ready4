@@ -1,6 +1,6 @@
 # ready4
 
-## Implement a Modular, Open Source Computational Model of Youth Mental Health Systems
+## Implement Transparent, Reusable and Updatable Computational Economic Models
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -12,13 +12,15 @@
 <!-- badges: end -->
 
 ready4 provides bare bones foundational elements (classes,
-generics, methods, functions) of a modular, open source model of the
-systems shaping young people's mental health.  The base elements in
-this package are extended by other R packages - see
-https://www.ready4-dev.com/ for details. This development version of
-the ready4 package has been made available as part of the process of
-testing and documenting the package. If you have any questions, please
-contact the author (matthew.hamilton@orygen.org.au).
+generics, methods, functions) of a software framework for modular,
+open source computational models. The current version is optimised to
+support the development of an economic model of the systems shaping
+young people's mental health.  The base elements in this package are
+extended by other R packages - see https://www.ready4-dev.com/ for
+details. This development version of the ready4 package has been made
+available as part of the process of testing and documenting the
+package. If you have any questions, please contact the author
+(matthew.hamilton@orygen.org.au).
 
 To install a development version of this software, run the following commands in your R console:
 
