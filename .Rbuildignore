@@ -56,3 +56,4 @@
 ^data-raw/FUNCTIONS\.R$
 ^data-raw/WIP\.R$
 ^data-raw/fns/bind\.R$
+^data-raw/ToGeneralise\.R$

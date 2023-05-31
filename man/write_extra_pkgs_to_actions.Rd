@@ -4,10 +4,21 @@
 \alias{write_extra_pkgs_to_actions}
 \title{Write extra packages to actions}
 \usage{
-write_extra_pkgs_to_actions(path_to_dir_1L_chr = ".github/workflows")
+write_extra_pkgs_to_actions(
+  path_to_dir_1L_chr = ".github/workflows",
+  consent_1L_chr = "",
+  consent_indcs_int = 1L,
+  options_chr = c("Y", "N")
+)
 }
 \arguments{
 \item{path_to_dir_1L_chr}{Path to directory (a character vector of length one), Default: '.github/workflows'}
+
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
+
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
 write_extra_pkgs_to_actions() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write extra packages to actions. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

@@ -5,6 +5,8 @@
 #' @param lup_dir_1L_chr Lookup table directory (a character vector of length one)
 #' @param pfx_1L_chr Prefix (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @return NULL
 #' @rdname write_all_tbs_in_tbs_r4_to_csvs
 #' @export 
@@ -12,24 +14,29 @@
 #' @importFrom methods getSlots
 #' @keywords internal
 write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_chr, pfx_1L_chr, 
-    consent_1L_chr = "") 
+    consent_1L_chr = "", consent_indcs_int = 1L, options_chr = c("Y", 
+        "N")) 
 {
     purrr::walk(methods::getSlots(r4_name_1L_chr) %>% names(), 
         ~write_tb_to_csv(tbs_r4 = tbs_r4, slot_nm_1L_chr = .x, 
             r4_name_1L_chr = r4_name_1L_chr, lup_dir_1L_chr = lup_dir_1L_chr, 
-            pfx_1L_chr = pfx_1L_chr, consent_1L_chr = consent_1L_chr))
+            pfx_1L_chr = pfx_1L_chr, consent_1L_chr = consent_1L_chr, 
+            consent_indcs_int = consent_indcs_int, options_chr = options_chr))
 }
 #' Write blog entries
 #' @description write_blog_entries() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write blog entries. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param dir_path_1L_chr Directory path (a character vector of length one)
 #' @param fl_nm_1L_chr File name (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @return NULL
 #' @rdname write_blog_entries
 #' @export 
 #' @importFrom rmarkdown render
 #' @keywords internal
-write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "") 
+write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
+    consent_indcs_int = 1L, options_chr = c("Y", "N")) 
 {
     rmarkdown::render(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
         "/index_Body.Rmd"), output_dir = paste0(dir_path_1L_chr, 
@@ -48,24 +55,20 @@ write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
     file_chr <- file_chr[file_chr != "<div class='highlight'>"]
     file_chr <- file_chr[c(1:(max(which(file_chr == "</div>")) - 
         1), (max(which(file_chr == "</div>")) + 1):length(file_chr))]
-    if (!consent_1L_chr %in% c("Y", "N")) {
-        consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
-            paste0(fl_nm_1L_chr, "/index.md"), " to ", dir_path_1L_chr), 
-            options_chr = c("Y", "N"), force_from_opts_1L_chr = T)
-    }
-    if (consent_1L_chr %in% c("Y")) {
-        writeLines(file_chr, paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
-            "/index.md"))
-    }
-    else {
-        warning("Write request cancelled - no new files have been written.")
-    }
+    write_with_consent(consented_fn = writeLines, prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
+        paste0(fl_nm_1L_chr, "/index.md"), " to ", dir_path_1L_chr, 
+        "?"), consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+        consented_args_ls = list(text = file_chr, con = paste0(dir_path_1L_chr, 
+            "/", fl_nm_1L_chr, "/index.md")), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+        options_chr = options_chr)
 }
 #' Write citation cff
 #' @description write_citation_cff() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write citation cff. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param pkg_desc_ls Package description (a list)
 #' @param citation_chr Citation (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param publisher_1L_chr Publisher (a character vector of length one), Default: 'Zenodo'
 #' @return NULL
 #' @rdname write_citation_cff
@@ -73,7 +76,8 @@ write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
 #' @importFrom stringr str_sub str_replace_all str_remove str_replace
 #' @importFrom purrr map_chr
 #' @keywords internal
-write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", publisher_1L_chr = "Zenodo") 
+write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
+    options_chr = c("Y", "N"), publisher_1L_chr = "Zenodo") 
 {
     meta <- pkg_desc_ls
     authors_ls <- parse(text = paste0("list(", citation_chr[startsWith(citation_chr, 
@@ -94,57 +98,59 @@ write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", 
         paste0("url: \"", citation_chr[startsWith(citation_chr, 
             "  url      = ")] %>% stringr::str_sub(start = 15, 
             end = -3), "\""))
-    if (!consent_1L_chr %in% c("Y", "N")) {
-        consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
-            "CITATION.cff", " to ", getwd()), options_chr = c("Y", 
-            "N"), force_from_opts_1L_chr = T)
-    }
-    write_new_files("CITATION.cff", fl_nm_1L_chr = "CITATION", 
-        consent_1L_chr = consent_1L_chr, text_ls = list(citation_cff_chr))
+    write_with_consent(consented_fn = write_new_files, prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
+        "CITATION.cff", " to ", getwd(), "?"), consent_1L_chr = consent_1L_chr, 
+        consent_indcs_int = consent_indcs_int, consented_args_ls = list(paths_chr = "CITATION.cff", 
+            fl_nm_1L_chr = "CITATION", consent_1L_chr = consent_1L_chr, 
+            text_ls = list(citation_cff_chr), consent_indcs_int = consent_indcs_int, 
+            options_chr = options_chr, return_1L_lgl = F), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+        options_chr = options_chr)
 }
 #' Write dataverse file to local
 #' @description write_dv_fl_to_loc() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write dataverse file to local. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param ds_ui_1L_chr Dataset user interface (a character vector of length one)
+#' @param dest_path_1L_chr Destination path (a character vector of length one)
+#' @param repo_fl_fmt_1L_chr Repository file format (a character vector of length one)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param fl_nm_1L_chr File name (a character vector of length one), Default: 'NA'
 #' @param fl_id_1L_int File identity (an integer vector of length one), Default: NA
-#' @param repo_fl_fmt_1L_chr Repository file format (a character vector of length one)
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
-#' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param save_type_1L_chr Save type (a character vector of length one), Default: 'original'
-#' @param dest_path_1L_chr Destination path (a character vector of length one)
-#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @return NULL
 #' @rdname write_dv_fl_to_loc
 #' @export 
-#' @importFrom dataverse get_dataset get_file
+#' @importFrom dataverse get_dataset
 #' @keywords internal
-write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_id_1L_int = NA_integer_, 
-    repo_fl_fmt_1L_chr, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
-    server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), save_type_1L_chr = "original", 
-    dest_path_1L_chr, consent_1L_chr = "") 
+write_dv_fl_to_loc <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L_chr, 
+    consent_1L_chr = "", consent_indcs_int = 1L, fl_nm_1L_chr = NA_character_, 
+    fl_id_1L_int = NA_integer_, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
+    options_chr = c("Y", "N"), save_type_1L_chr = "original", 
+    server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
     ds_ls <- dataverse::get_dataset(ds_ui_1L_chr)
     if (ds_ls$versionState != "DRAFT") {
         if (!is.na(fl_id_1L_int)) {
             ds_ui_1L_chr <- NULL
         }
-        if (!consent_1L_chr %in% c("Y", "N")) {
-            consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
+        write_with_consent(consented_fn = write_ingested_dv_fl, 
+            prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
                 paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), " to ", 
-                dest_path_1L_chr), options_chr = c("Y", "N"), 
-                force_from_opts_1L_chr = T)
-        }
-        if (consent_1L_chr %in% c("Y")) {
-            writeBin(dataverse::get_file(ifelse(is.na(fl_id_1L_int), 
-                paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), fl_id_1L_int), 
-                dataset = ds_ui_1L_chr, format = save_type_1L_chr, 
-                key = key_1L_chr, server = server_1L_chr), dest_path_1L_chr)
-            message(paste0("New file created in ", dest_path_1L_chr, 
-                " :\n", paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr)))
-        }
+                dest_path_1L_chr, " ?"), consent_1L_chr = consent_1L_chr, 
+            consent_indcs_int = consent_indcs_int, consented_args_ls = list(ds_ui_1L_chr = ds_ui_1L_chr, 
+                fl_nm_1L_chr = fl_nm_1L_chr, fl_id_1L_int = fl_id_1L_int, 
+                repo_fl_fmt_1L_chr = repo_fl_fmt_1L_chr, key_1L_chr = key_1L_chr, 
+                server_1L_chr = server_1L_chr, save_type_1L_chr = save_type_1L_chr, 
+                dest_path_1L_chr = dest_path_1L_chr, consent_1L_chr = options_chr[consent_indcs_int[1]]), 
+            consented_msg_1L_chr = paste0("New file created in ", 
+                dest_path_1L_chr, " :\n", paste0(fl_nm_1L_chr, 
+                  repo_fl_fmt_1L_chr)), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+            options_chr = options_chr)
     }
     else {
-        warning("Cannot write local copy of files from private Dataverse repo")
+        warning("Cannot write local copy of files from private Dataverse repo.")
     }
 }
 #' Write environment objects to dataverse
@@ -153,7 +159,9 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_i
 #' @param descriptions_chr Descriptions (a character vector)
 #' @param ds_url_1L_chr Dataset url (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param publish_dv_1L_lgl Publish dataverse (a logical vector of length one), Default: F
 #' @param piggyback_desc_1L_chr Piggyback description (a character vector of length one), Default: 'Documentation'
 #' @param piggyback_tag_1L_chr Piggyback tag (a character vector of length one), Default: 'Documentation_0.0'
@@ -167,10 +175,10 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, fl_nm_1L_chr = NA_character_, fl_i
 #' @importFrom dataverse get_dataset
 #' @keywords internal
 write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_chr, consent_1L_chr = "", 
-    key_1L_chr = Sys.getenv("DATAVERSE_KEY"), publish_dv_1L_lgl = F, 
-    piggyback_desc_1L_chr = "Documentation", piggyback_tag_1L_chr = "Documentation_0.0", 
-    piggyback_to_1L_chr = character(0), prerelease_1L_lgl = T, 
-    server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
+    consent_indcs_int = 1L, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
+    options_chr = c("Y", "N"), publish_dv_1L_lgl = F, piggyback_desc_1L_chr = "Documentation", 
+    piggyback_tag_1L_chr = "Documentation_0.0", piggyback_to_1L_chr = character(0), 
+    prerelease_1L_lgl = T, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
     tmp_dir <- tempdir()
     paths_chr <- env_objects_ls %>% purrr::map2_chr(names(env_objects_ls), 
@@ -191,8 +199,9 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
         ds_ls <- NULL
     }
     file_ids_int <- write_fls_to_repo(paths_chr, consent_1L_chr = consent_1L_chr, 
-        descriptions_chr = descriptions_chr, ds_url_1L_chr = ds_url_1L_chr, 
-        ds_ls = ds_ls, key_1L_chr = key_1L_chr, piggyback_desc_1L_chr = piggyback_desc_1L_chr, 
+        consent_indcs_int = consent_indcs_int, descriptions_chr = descriptions_chr, 
+        ds_url_1L_chr = ds_url_1L_chr, ds_ls = ds_ls, key_1L_chr = key_1L_chr, 
+        options_chr = options_chr, piggyback_desc_1L_chr = piggyback_desc_1L_chr, 
         piggyback_tag_1L_chr = piggyback_tag_1L_chr, piggyback_to_1L_chr = piggyback_to_1L_chr, 
         prerelease_1L_lgl = prerelease_1L_lgl, server_1L_chr = server_1L_chr)
     do.call(file.remove, list(paths_chr))
@@ -206,19 +215,31 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
 #' Write extra packages to actions
 #' @description write_extra_pkgs_to_actions() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write extra packages to actions. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param path_to_dir_1L_chr Path to directory (a character vector of length one), Default: '.github/workflows'
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @return NULL
 #' @rdname write_extra_pkgs_to_actions
 #' @export 
 #' @importFrom purrr walk
 #' @importFrom stringr str_replace_all
 #' @keywords internal
-write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr = ".github/workflows") 
+write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr = ".github/workflows", consent_1L_chr = "", 
+    consent_indcs_int = 1L, options_chr = c("Y", "N")) 
 {
-    list.files(path_to_dir_1L_chr, full.names = T) %>% purrr::walk(~{
-        readLines(.x) %>% stringr::str_replace_all("extra-packages: ", 
-            "extra-packages: any::XML, ") %>% stringr::str_replace_all("any::XML, any::XML, ", 
-            "any::XML, ") %>% writeLines(con = .x)
-    })
+    consented_fn <- function(path_to_dir_1L_chr) {
+        list.files(path_to_dir_1L_chr, full.names = T) %>% purrr::walk(~{
+            readLines(.x) %>% stringr::str_replace_all("extra-packages: ", 
+                "extra-packages: any::XML, ") %>% stringr::str_replace_all("any::XML, any::XML, ", 
+                "any::XML, ") %>% writeLines(con = .x)
+        })
+    }
+    write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you want to modify all references to extra packages and XML in all files in  ", 
+        path_to_dir_1L_chr, " ?"), consent_1L_chr = consent_1L_chr, 
+        consent_indcs_int = consent_indcs_int, consented_args_ls = list(path_to_dir_1L_chr = path_to_dir_1L_chr), 
+        consented_msg_1L_chr = paste0("File(s) edited in ", path_to_dir_1L_chr), 
+        declined_msg_1L_chr = "Write request cancelled - no files have been edited.", 
+        options_chr = options_chr)
 }
 #' Write files from dataverse
 #' @description write_fls_from_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files from dataverse. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
@@ -226,28 +247,24 @@ write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr = ".github/workflows
 #' @param fl_ids_int File identities (an integer vector)
 #' @param ds_url_1L_chr Dataset url (a character vector of length one)
 #' @param local_dv_dir_1L_chr Local dataverse directory (a character vector of length one)
-#' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
-#' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @return NULL
 #' @rdname write_fls_from_dv
 #' @export 
 #' @importFrom purrr walk
 #' @keywords internal
 write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir_1L_chr, 
-    key_1L_chr = Sys.getenv("DATAVERSE_KEY"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), 
-    consent_1L_chr = "") 
+    consent_1L_chr = "", consent_indcs_int = 1L, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
+    options_chr = c("Y", "N"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
-    if (!consent_1L_chr %in% c("Y", "N")) {
-        consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
-            ifelse(length(file_paths_chr) > 1, "s", ""), make_list_phrase(files_tb$file_chr[fl_ids_int]), 
-            " to ", local_dv_dir_1L_chr), options_chr = c("Y", 
-            "N"), force_from_opts_1L_chr = T)
-    }
-    if (consent_1L_chr %in% c("Y")) {
+    consented_fn <- function(files_tb, fl_ids_int, ds_url_1L_chr, 
+        local_dv_dir_1L_chr, key_1L_chr, server_1L_chr, consent_1L_chr) {
         purrr::walk(1:length(fl_ids_int), ~{
-            if (!(ds_ls$versionState == "DRAFT" | files_tb$file_type_chr[.x] == 
-                ".zip")) {
+            if (!(files_tb$file_type_chr[.x] == ".zip")) {
                 write_dv_fl_to_loc(ds_ui_1L_chr = ds_url_1L_chr, 
                   fl_nm_1L_chr = files_tb$file_chr[.x], fl_id_1L_int = fl_ids_int[.x], 
                   repo_fl_fmt_1L_chr = files_tb$ds_file_ext_chr[.x], 
@@ -258,40 +275,42 @@ write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir
             }
         })
     }
+    write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
+        ifelse(length(file_paths_chr) > 1, "s", ""), make_list_phrase(files_tb$file_chr[fl_ids_int]), 
+        " to ", local_dv_dir_1L_chr, "?"), consent_1L_chr = consent_1L_chr, 
+        consent_indcs_int = consent_indcs_int, consented_args_ls = list(files_tb = files_tb, 
+            fl_ids_int = fl_ids_int, ds_url_1L_chr = ds_url_1L_chr, 
+            local_dv_dir_1L_chr = local_dv_dir_1L_chr, key_1L_chr = key_1L_chr, 
+            server_1L_chr = server_1L_chr, consent_1L_chr = options_chr[consent_indcs_int[1]]), 
+        declined_msg_1L_chr = "Write request cancelled - no files have been written.", 
+        options_chr = options_chr)
 }
 #' Write files to dataverse
 #' @description write_fls_to_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files to dataverse. The function returns Identities (an integer vector).
 #' @param file_paths_chr File paths (a character vector)
-#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
-#' @param descriptions_chr Descriptions (a character vector), Default: NULL
 #' @param ds_url_1L_chr Dataset url (a character vector of length one)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param descriptions_chr Descriptions (a character vector), Default: NULL
 #' @param ds_ls Dataset (a list), Default: NULL
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @return Identities (an integer vector)
 #' @rdname write_fls_to_dv
 #' @export 
-#' @importFrom purrr map_chr map map2_int
-#' @importFrom fs path_file
 #' @importFrom dataverse get_dataset delete_file add_dataset_file update_dataset_file
+#' @importFrom purrr map map2_int map_chr
+#' @importFrom fs path_file
 #' @keywords internal
-write_fls_to_dv <- function (file_paths_chr, consent_1L_chr = "", descriptions_chr = NULL, 
-    ds_url_1L_chr, ds_ls = NULL, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
-    server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
+write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "", 
+    consent_indcs_int = 1L, descriptions_chr = NULL, ds_ls = NULL, 
+    key_1L_chr = Sys.getenv("DATAVERSE_KEY"), options_chr = c("Y", 
+        "N"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
     if (!identical(file_paths_chr, character(0))) {
-        if (!consent_1L_chr %in% c("Y", "N")) {
-            message(paste0("Are you sure that you want to upload the following file", 
-                ifelse(length(file_paths_chr) > 1, "s", ""), 
-                " to dataverse ", ds_url_1L_chr, ": \n", file_paths_chr %>% 
-                  purrr::map_chr(~fs::path_file(.x)) %>% paste0(collapse = "\n"), 
-                "?"))
-            consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Type 'Y' to confirm that you want to upload ", 
-                ifelse(length(file_paths_chr) > 1, "these files:", 
-                  "this file:")), options_chr = c("Y", "N"), 
-                force_from_opts_1L_chr = T)
-        }
-        if (consent_1L_chr == "Y") {
+        consented_fn <- function(file_paths_chr, ds_url_1L_chr, 
+            descriptions_chr, ds_ls, key_1L_chr, server_1L_chr) {
             if (is.null(ds_ls)) 
                 ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
             is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
@@ -325,10 +344,19 @@ write_fls_to_dv <- function (file_paths_chr, consent_1L_chr = "", descriptions_c
                   }
                   id_1L_int
                 })
+            return(ids_int)
         }
-        else {
-            ids_int <- NULL
-        }
+        ids_int <- write_with_consent(consented_fn = consented_fn, 
+            prompt_1L_chr = paste0("Are you sure that you want to upload the following file", 
+                ifelse(length(file_paths_chr) > 1, "s", ""), 
+                " to dataverse ", ds_url_1L_chr, ": \n", file_paths_chr %>% 
+                  purrr::map_chr(~fs::path_file(.x)) %>% paste0(collapse = "\n"), 
+                "?"), consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+            consented_args_ls = list(file_paths_chr = file_paths_chr, 
+                ds_url_1L_chr = ds_url_1L_chr, descriptions_chr = descriptions_chr, 
+                ds_ls = ds_ls, key_1L_chr = key_1L_chr, server_1L_chr = server_1L_chr), 
+            declined_msg_1L_chr = "Write request cancelled - no files have been written.", 
+            options_chr = options_chr, return_1L_lgl = T)
     }
     else {
         ids_int <- NULL
@@ -340,34 +368,32 @@ write_fls_to_dv <- function (file_paths_chr, consent_1L_chr = "", descriptions_c
 #' @param paths_chr Paths (a character vector)
 #' @param descriptions_chr Descriptions (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param ds_url_1L_chr Dataset url (a character vector of length one), Default: character(0)
 #' @param ds_ls Dataset (a list), Default: NULL
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
-#' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param piggyback_desc_1L_chr Piggyback description (a character vector of length one), Default: 'Documentation'
 #' @param piggyback_tag_1L_chr Piggyback tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param piggyback_to_1L_chr Piggyback to (a character vector of length one), Default: character(0)
 #' @param prerelease_1L_lgl Prerelease (a logical vector of length one), Default: T
+#' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @return Identities (an integer vector)
 #' @rdname write_fls_to_repo
 #' @export 
 #' @importFrom piggyback pb_list pb_new_release pb_upload
 #' @importFrom purrr walk
 #' @keywords internal
-write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "", ds_url_1L_chr = character(0), 
-    ds_ls = NULL, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), 
-    piggyback_desc_1L_chr = "Documentation", piggyback_tag_1L_chr = "Documentation_0.0", 
-    piggyback_to_1L_chr = character(0), prerelease_1L_lgl = T) 
+write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
+    ds_url_1L_chr = character(0), ds_ls = NULL, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
+    options_chr = c("Y", "N"), piggyback_desc_1L_chr = "Documentation", 
+    piggyback_tag_1L_chr = "Documentation_0.0", piggyback_to_1L_chr = character(0), 
+    prerelease_1L_lgl = T, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
+    ids_int <- NULL
     if (!identical(piggyback_to_1L_chr, character(0))) {
-        if (!consent_1L_chr %in% c("Y", "N")) {
-            consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
-                ifelse(length(paths_chr) > 1, "s ", " "), make_list_phrase(basename(paths_chr)), 
-                " to release ", piggyback_tag_1L_chr, " in ", 
-                piggyback_to_1L_chr), options_chr = c("Y", "N"), 
-                force_from_opts_1L_chr = T)
-        }
-        if (consent_1L_chr %in% c("Y")) {
+        consented_fn <- function(paths_chr, piggyback_desc_1L_chr, 
+            piggyback_to_1L_chr, piggyback_tag_1L_chr, prerelease_1L_lgl) {
             releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
             if (!piggyback_tag_1L_chr %in% releases_df$tag) 
                 piggyback::pb_new_release(piggyback_to_1L_chr, 
@@ -380,13 +406,26 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
                 }
             })
             ids_int <- NULL
+            return(ids_int)
         }
+        ids_int <- write_with_consent(consented_fn = consented_fn, 
+            prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ", 
+                ifelse(length(paths_chr) > 1, "s ", " "), make_list_phrase(basename(paths_chr)), 
+                " to release ", piggyback_tag_1L_chr, " in ", 
+                piggyback_to_1L_chr), consent_1L_chr = consent_1L_chr, 
+            consent_indcs_int = consent_indcs_int, consented_args_ls = list(paths_chr = paths_chr, 
+                piggyback_desc_1L_chr = piggyback_desc_1L_chr, 
+                piggyback_to_1L_chr = piggyback_to_1L_chr, piggyback_tag_1L_chr = piggyback_tag_1L_chr, 
+                prerelease_1L_lgl = prerelease_1L_lgl), declined_msg_1L_chr = "Write request cancelled - no files have been written.", 
+            options_chr = options_chr, return_1L_lgl = T)
     }
     else {
         if (!identical(character(0), ds_url_1L_chr)) 
             ids_int <- write_fls_to_dv(paths_chr, consent_1L_chr = consent_1L_chr, 
-                descriptions_chr = descriptions_chr, ds_url_1L_chr = ds_url_1L_chr, 
-                ds_ls = ds_ls, key_1L_chr = key_1L_chr, server_1L_chr = server_1L_chr)
+                consent_indcs_int = consent_indcs_int, descriptions_chr = descriptions_chr, 
+                ds_url_1L_chr = ds_url_1L_chr, ds_ls = ds_ls, 
+                key_1L_chr = key_1L_chr, options_chr = options_chr, 
+                server_1L_chr = server_1L_chr)
     }
     return(ids_int)
 }
@@ -394,17 +433,20 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
 #' @description write_from_tmp() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write from temporary. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param tmp_paths_chr Temporary paths (a character vector)
 #' @param dest_paths_chr Destination paths (a character vector)
-#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
-#' @param edit_fn_ls Edit (a list of functions), Default: list(NULL)
 #' @param args_ls_ls Arguments (a list of lists), Default: list(NULL)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param edit_fn_ls Edit (a list of functions), Default: list(NULL)
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @return NULL
 #' @rdname write_from_tmp
 #' @export 
 #' @importFrom purrr pmap
 #' @importFrom rlang exec
 #' @keywords internal
-write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, consent_1L_chr = "", 
-    edit_fn_ls = list(NULL), args_ls_ls = list(NULL)) 
+write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, args_ls_ls = list(NULL), 
+    consent_1L_chr = "", consent_indcs_int = 1L, edit_fn_ls = list(NULL), 
+    options_chr = c("Y", "N")) 
 {
     text_ls <- purrr::pmap(list(tmp_paths_chr, edit_fn_ls, args_ls_ls), 
         ~{
@@ -422,8 +464,53 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, consent_1L_chr = "",
             rlang::exec(edit_fn, txt_chr, !!!..3)
         })
     write_to_delete_fls(intersect(tmp_paths_chr, dest_paths_chr), 
-        consent_1L_chr = consent_1L_chr)
-    write_new_files(dest_paths_chr, text_ls = text_ls, consent_1L_chr = consent_1L_chr)
+        consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+        options_chr = options_chr, return_1L_lgl = F)
+    write_new_files(dest_paths_chr, text_ls = text_ls, consent_1L_chr = consent_1L_chr, 
+        consent_indcs_int = consent_indcs_int, options_chr = options_chr, 
+        return_1L_lgl = F)
+}
+#' Write ingested dataverse file
+#' @description write_ingested_dv_fl() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write ingested dataverse file. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param ds_ui_1L_chr Dataset user interface (a character vector of length one)
+#' @param dest_path_1L_chr Destination path (a character vector of length one)
+#' @param repo_fl_fmt_1L_chr Repository file format (a character vector of length one)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param fl_nm_1L_chr File name (a character vector of length one), Default: 'NA'
+#' @param fl_id_1L_int File identity (an integer vector of length one), Default: NA
+#' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @param save_type_1L_chr Save type (a character vector of length one), Default: 'original'
+#' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
+#' @return NULL
+#' @rdname write_ingested_dv_fl
+#' @export 
+#' @importFrom dataverse get_file
+#' @keywords internal
+write_ingested_dv_fl <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L_chr, 
+    consent_1L_chr = "", consent_indcs_int = 1L, fl_nm_1L_chr = NA_character_, 
+    fl_id_1L_int = NA_integer_, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
+    options_chr = c("Y", "N"), save_type_1L_chr = "original", 
+    server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
+{
+    prompt_1L_chr <- paste0("Do you confirm that you want to write the file ", 
+        paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), " to ", dest_path_1L_chr, 
+        "?")
+    if (!consent_1L_chr %in% c("Y", "N")) {
+        consent_1L_chr <- make_prompt(prompt_1L_chr = prompt_1L_chr, 
+            options_chr = c("Y", "N"), force_from_opts_1L_chr = T)
+    }
+    write_with_consent(consented_fn = writeBin, prompt_1L_chr = prompt_1L_chr, 
+        consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+        consented_args_ls = list(object = dataverse::get_file(ifelse(is.na(fl_id_1L_int), 
+            paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), fl_id_1L_int), 
+            dataset = ds_ui_1L_chr, format = save_type_1L_chr, 
+            key = key_1L_chr, server = server_1L_chr), con = dest_path_1L_chr), 
+        consented_msg_1L_chr = paste0("New file created in ", 
+            dest_path_1L_chr, " :\n", paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr)), 
+        declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+        options_chr = options_chr)
 }
 #' Write new credentials
 #' @description write_new_credentials() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new credentials. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
@@ -484,22 +571,26 @@ write_new_dirs <- function (new_dirs_chr, consent_1L_chr = "")
     }
 }
 #' Write new files
-#' @description write_new_files() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_new_files() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new files. The function returns Object (an output object of multiple potential types).
 #' @param paths_chr Paths (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param custom_write_ls Custom write (a list), Default: NULL
 #' @param fl_nm_1L_chr File name (a character vector of length one), Default: NULL
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param source_paths_ls Source paths (a list), Default: NULL
 #' @param text_ls Text (a list), Default: NULL
-#' @return NULL
+#' @param return_1L_lgl Return (a logical vector of length one), Default: F
+#' @return Object (an output object of multiple potential types)
 #' @rdname write_new_files
 #' @export 
 #' @importFrom purrr map flatten_chr map_chr map_lgl walk2 walk
 #' @importFrom fs path_file
 #' @importFrom rlang exec
 #' @keywords internal
-write_new_files <- function (paths_chr, consent_1L_chr = "", custom_write_ls = NULL, 
-    fl_nm_1L_chr = NULL, source_paths_ls = NULL, text_ls = NULL) 
+write_new_files <- function (paths_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
+    custom_write_ls = NULL, fl_nm_1L_chr = NULL, options_chr = c("Y", 
+        "N"), source_paths_ls = NULL, text_ls = NULL, return_1L_lgl = F) 
 {
     if (!is.null(source_paths_ls)) {
         dest_dir_1L_chr <- paths_chr
@@ -517,23 +608,10 @@ write_new_files <- function (paths_chr, consent_1L_chr = "", custom_write_ls = N
     }
     new_files_chr <- paths_chr[paths_chr %>% purrr::map_lgl(~!file.exists(.x))]
     overwritten_files_chr <- setdiff(paths_chr, new_files_chr)
+    object_xx <- NULL
     if (!identical(paths_chr, character(0))) {
-        if (!consent_1L_chr %in% c("Y", "N")) {
-            message(paste0("Are you sure that you want to write / overwrite the following file", 
-                ifelse(length(paths_chr) > 1, "s", ""), " to your machine: \n", 
-                ifelse(identical(new_files_chr, character(0)), 
-                  "", paste0("Files that will be created: \n", 
-                    new_files_chr %>% paste0(collapse = "\n"))), 
-                ifelse(identical(overwritten_files_chr, character(0)), 
-                  "", paste0("Files that will be overwritten: \n", 
-                    overwritten_files_chr %>% paste0(collapse = "\n"))), 
-                "?"))
-            consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write ", 
-                ifelse((length(new_files_chr) + length(overwritten_files_chr)) > 
-                  1, "these files:", "this file:")), options_chr = c("Y", 
-                "N"), force_from_opts_1L_chr = T)
-        }
-        if (consent_1L_chr %in% c("Y")) {
+        consented_fn <- function(paths_chr, consent_1L_chr, custom_write_ls, 
+            fl_nm_1L_chr, source_paths_ls, text_ls) {
             if (!is.null(text_ls)) {
                 purrr::walk2(paths_chr, text_ls, ~{
                   file_conn <- file(.x)
@@ -564,10 +642,24 @@ write_new_files <- function (paths_chr, consent_1L_chr = "", custom_write_ls = N
                 }
             }
         }
-        else {
-            message("Write request cancelled - no new files created.")
-        }
+        object_xx <- write_with_consent(consented_fn = consented_fn, 
+            prompt_1L_chr = paste0("Are you sure that you want to write / overwrite the following file", 
+                ifelse(length(paths_chr) > 1, "s", ""), " to your machine: \n", 
+                ifelse(identical(new_files_chr, character(0)), 
+                  "", paste0("Files that will be created: \n", 
+                    new_files_chr %>% paste0(collapse = "\n"))), 
+                ifelse(identical(overwritten_files_chr, character(0)), 
+                  "", paste0("Files that will be overwritten: \n", 
+                    overwritten_files_chr %>% paste0(collapse = "\n"))), 
+                "?"), consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+            consented_args_ls = list(paths_chr = paths_chr, consent_1L_chr = options_chr[consent_indcs_int[1]], 
+                custom_write_ls = custom_write_ls, fl_nm_1L_chr = fl_nm_1L_chr, 
+                source_paths_ls = source_paths_ls, text_ls = text_ls), 
+            declined_msg_1L_chr = "Write request cancelled - no files have been written.", 
+            options_chr = options_chr, return_1L_lgl = T)
     }
+    if (return_1L_lgl) 
+        return(object_xx)
 }
 #' Write object with prompt
 #' @description write_obj_with_prompt() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write object with prompt. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
@@ -575,12 +667,16 @@ write_new_files <- function (paths_chr, consent_1L_chr = "", custom_write_ls = N
 #' @param obj_nm_1L_chr Object name (a character vector of length one)
 #' @param outp_dir_1L_chr Output directory (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @param return_1L_lgl Return (a logical vector of length one), Default: F
 #' @return NULL
 #' @rdname write_obj_with_prompt
 #' @export 
 #' @importFrom rlang exec
 #' @keywords internal
-write_obj_with_prompt <- function (object_xx, obj_nm_1L_chr, outp_dir_1L_chr, consent_1L_chr = "") 
+write_obj_with_prompt <- function (object_xx, obj_nm_1L_chr, outp_dir_1L_chr, consent_1L_chr = "", 
+    consent_indcs_int = 1L, options_chr = c("Y", "N"), return_1L_lgl = F) 
 {
     path_1L_chr <- paste0(outp_dir_1L_chr, "/", obj_nm_1L_chr, 
         ".RDS")
@@ -588,7 +684,8 @@ write_obj_with_prompt <- function (object_xx, obj_nm_1L_chr, outp_dir_1L_chr, co
         file = path_1L_chr))
     if (!consent_1L_chr %in% c("Y", "N")) {
         write_new_files(path_1L_chr, custom_write_ls = custom_write_ls, 
-            consent_1L_chr = consent_1L_chr)
+            consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+            options_chr = options_chr, return_1L_lgl = return_1L_lgl)
     }
     else {
         if (consent_1L_chr == "Y") 
@@ -639,6 +736,8 @@ write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1
 #' @param lup_dir_1L_chr Lookup table directory (a character vector of length one)
 #' @param pfx_1L_chr Prefix (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @return NULL
 #' @rdname write_tb_to_csv
 #' @export 
@@ -648,7 +747,8 @@ write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1
 #' @importFrom utils write.csv
 #' @keywords internal
 write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_chr, 
-    pfx_1L_chr, consent_1L_chr = "") 
+    pfx_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
+    options_chr = c("Y", "N")) 
 {
     file_path_1L_chr <- paste0(lup_dir_1L_chr, "/", pfx_1L_chr, 
         "_", slot_nm_1L_chr, ".csv")
@@ -673,13 +773,17 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
 #' @param fl_nm_1L_chr File name (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param rmds_dir_1L_chr R Markdowns directory (a character vector of length one), Default: 'R/RMD Templates'
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @param return_1L_lgl Return (a logical vector of length one), Default: F
 #' @return NULL
 #' @rdname write_to_copy_rmds
 #' @export 
 #' @importFrom purrr walk
 #' @keywords internal
 write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
-    rmds_dir_1L_chr = "R/RMD Templates") 
+    rmds_dir_1L_chr = "R/RMD Templates", consent_indcs_int = 1L, 
+    options_chr = c("Y", "N"), return_1L_lgl = F) 
 {
     file_nms_chr <- list.files(rmds_dir_1L_chr)
     destination_1L_chr <- paste0(dir_path_1L_chr, "/", fl_nm_1L_chr)
@@ -687,7 +791,8 @@ write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
         dir.create(destination_1L_chr)
     purrr::walk(file_nms_chr, ~write_new_files(destination_1L_chr, 
         source_paths_ls = list(paste0(rmds_dir_1L_chr, "/", .x)), 
-        consent_1L_chr = consent_1L_chr, fl_nm_1L_chr = .x))
+        consent_1L_chr = consent_1L_chr, fl_nm_1L_chr = .x, consent_indcs_int = consent_indcs_int, 
+        options_chr = options_chr, return_1L_lgl = return_1L_lgl))
 }
 #' Write to delete directories
 #' @description write_to_delete_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
@@ -729,35 +834,35 @@ write_to_delete_dirs <- function (dir_paths_chr, consent_1L_chr = "")
     }
 }
 #' Write to delete files
-#' @description write_to_delete_fls() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_delete_fls() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete files. The function returns Object (an output object of multiple potential types).
 #' @param file_paths_chr File paths (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
-#' @return NULL
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @param return_1L_lgl Return (a logical vector of length one), Default: F
+#' @return Object (an output object of multiple potential types)
 #' @rdname write_to_delete_fls
 #' @export 
 #' @importFrom purrr map_lgl
 #' @keywords internal
-write_to_delete_fls <- function (file_paths_chr, consent_1L_chr = "") 
+write_to_delete_fls <- function (file_paths_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
+    options_chr = c("Y", "N"), return_1L_lgl = F) 
 {
     file_paths_chr <- file_paths_chr[file_paths_chr %>% purrr::map_lgl(~file.exists(.x))]
+    object_xx <- NULL
     if (!identical(file_paths_chr, character(0))) {
-        if (!consent_1L_chr %in% c("Y", "N")) {
-            message(paste0("Are you sure that you want to delete the following file", 
+        object_xx <- write_with_consent(consented_fn = do.call, 
+            prompt_1L_chr = paste0("Are you sure that you want to delete the following file", 
                 ifelse(length(file_paths_chr) > 1, "s", ""), 
                 " from your machine: \n", file_paths_chr %>% 
-                  paste0(collapse = "\n"), "?"))
-            consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Do you confirm ('Y') that you want to delete ", 
-                ifelse(length(file_paths_chr) > 1, "these files:", 
-                  "this file:")), options_chr = c("Y", "N"), 
-                force_from_opts_1L_chr = T)
-        }
-        if (consent_1L_chr %in% c("Y")) {
-            paths_ls <- do.call(file.remove, list(file_paths_chr))
-        }
-        else {
-            message("Delete files request cancelled - no files deleted")
-        }
+                  paste0(collapse = "\n"), "?"), consent_1L_chr = consent_1L_chr, 
+            consent_indcs_int = consent_indcs_int, consented_args_ls = list(what = file.remove, 
+                args = list(file_paths_chr)), consented_msg_1L_chr = "File deletion request has been executed.", 
+            declined_msg_1L_chr = "File deletion request cancelled - no files have been deleted.", 
+            options_chr = options_chr, return_1L_lgl = T)
     }
+    if (return_1L_lgl) 
+        return(object_xx)
 }
 #' Write to dataverse from table
 #' @description write_to_dv_from_tbl() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to dataverse from table. The function returns File identities (an integer vector).
@@ -992,6 +1097,51 @@ write_to_trim_html <- function (path_to_html_1L_chr, consent_1L_chr = "")
     else {
         message("Write request cancelled - no changes were made to the file.")
     }
+}
+#' Write with consent
+#' @description write_with_consent() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write with consent. The function returns Object (an output object of multiple potential types).
+#' @param consented_fn Consented (a function)
+#' @param prompt_1L_chr Prompt (a character vector of length one)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consented_args_ls Consented arguments (a list), Default: NULL
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param consented_msg_1L_chr Consented message (a character vector of length one), Default: character(0)
+#' @param declined_args_ls Declined arguments (a list), Default: NULL
+#' @param declined_fn Declined (a function), Default: NULL
+#' @param declined_msg_1L_chr Declined message (a character vector of length one), Default: 'No files have been written.'
+#' @param force_from_opts_1L_chr Force from opts (a character vector of length one), Default: T
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @param return_1L_lgl Return (a logical vector of length one), Default: F
+#' @return Object (an output object of multiple potential types)
+#' @rdname write_with_consent
+#' @export 
+#' @importFrom rlang exec
+#' @keywords internal
+write_with_consent <- function (consented_fn, prompt_1L_chr, consent_1L_chr = "", consented_args_ls = NULL, 
+    consent_indcs_int = 1L, consented_msg_1L_chr = character(0), 
+    declined_args_ls = NULL, declined_fn = NULL, declined_msg_1L_chr = "No files have been written.", 
+    force_from_opts_1L_chr = T, options_chr = c("Y", "N"), return_1L_lgl = F) 
+{
+    if (!consent_1L_chr %in% options_chr && !identical(prompt_1L_chr, 
+        character(0))) {
+        consent_1L_chr <- make_prompt(prompt_1L_chr = prompt_1L_chr, 
+            options_chr = options_chr, force_from_opts_1L_chr = force_from_opts_1L_chr)
+    }
+    object_xx <- NULL
+    if (consent_1L_chr %in% options_chr[consent_indcs_int]) {
+        object_xx <- rlang::exec(consented_fn, !!!consented_args_ls)
+        if (!identical(consented_msg_1L_chr, character(0))) 
+            message(consented_msg_1L_chr)
+    }
+    else {
+        if (!is.null(declined_fn)) {
+            object_xx <- rlang::exec(declined_fn, !!!declined_args_ls)
+        }
+        if (!identical(declined_msg_1L_chr, character(0))) 
+            message(declined_msg_1L_chr)
+    }
+    if (return_1L_lgl) 
+        return(object_xx)
 }
 #' Write words
 #' @description write_words() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write words. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

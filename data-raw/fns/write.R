@@ -2,18 +2,24 @@ write_all_tbs_in_tbs_r4_to_csvs <- function(tbs_r4,
                                             r4_name_1L_chr,
                                             lup_dir_1L_chr,
                                             pfx_1L_chr,
-                                            consent_1L_chr = ""){
+                                            consent_1L_chr = "",
+                                            consent_indcs_int = 1L,
+                                            options_chr = c("Y", "N")){
   purrr::walk(methods::getSlots(r4_name_1L_chr) %>% names(),
               ~ write_tb_to_csv(tbs_r4 = tbs_r4,
                                 slot_nm_1L_chr = .x,
                                 r4_name_1L_chr = r4_name_1L_chr,
                                 lup_dir_1L_chr = lup_dir_1L_chr,
                                 pfx_1L_chr = pfx_1L_chr,
-                                consent_1L_chr = consent_1L_chr))
+                                consent_1L_chr = consent_1L_chr,
+                                consent_indcs_int = consent_indcs_int,
+                                options_chr = options_chr))
 }
 write_blog_entries <- function(dir_path_1L_chr,
                                fl_nm_1L_chr,
-                               consent_1L_chr = ""){
+                               consent_1L_chr = "",
+                               consent_indcs_int = 1L,
+                               options_chr = c("Y", "N")){
   rmarkdown::render(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.Rmd"),
                     output_dir = paste0(dir_path_1L_chr,"/",fl_nm_1L_chr))
   write_to_trim_html(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.html"))
@@ -26,24 +32,24 @@ write_blog_entries <- function(dir_path_1L_chr,
   file_chr <- file_chr[file_chr != "<div class='highlight'>"]
   file_chr <- file_chr[c(1:(max(which(file_chr=="</div>"))-1),
                          (max(which(file_chr=="</div>"))+1):length(file_chr))]
-  if(!consent_1L_chr %in% c("Y", "N")){
-    consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
-                                                       paste0(fl_nm_1L_chr,"/index.md"),
-                                                       " to ",
-                                                       dir_path_1L_chr),
-                                  options_chr = c("Y", "N"),
-                                  force_from_opts_1L_chr = T)
-  }
-  if(consent_1L_chr %in% c("Y")){
-  writeLines(file_chr,
-             paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.md"))
-  }else{
-    warning("Write request cancelled - no new files have been written.")
-  }
+  write_with_consent(consented_fn = writeLines,
+                     prompt_1L_chr = paste0("Do you confirm that you want to write the file ",
+                                            paste0(fl_nm_1L_chr,"/index.md"),
+                                            " to ",
+                                            dir_path_1L_chr,
+                                            "?"),
+                     consent_1L_chr = consent_1L_chr,
+                     consent_indcs_int = consent_indcs_int,
+                     consented_args_ls = list(text = file_chr, con = paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.md")),
+                     declined_msg_1L_chr = "Write request cancelled - no new files have been written.",
+                     options_chr = options_chr
+                     )
 }
 write_citation_cff <- function(pkg_desc_ls,
                                citation_chr,
                                consent_1L_chr = "",
+                               consent_indcs_int = 1L,
+                               options_chr = c("Y", "N"),
                                publisher_1L_chr = "Zenodo"){
   meta <- pkg_desc_ls
   authors_ls <- parse(text=paste0("list(",
@@ -73,68 +79,114 @@ write_citation_cff <- function(pkg_desc_ls,
                         paste0("doi: ",citation_chr[startsWith(citation_chr,"  doi      = ")] %>% stringr::str_sub(start=15,end=-3)),
                         paste0("date-released: ",Sys.Date()),
                         paste0("url: \"",citation_chr[startsWith(citation_chr,"  url      = ")] %>% stringr::str_sub(start=15,end=-3),"\""))
+  write_with_consent(consented_fn = write_new_files,
+                     prompt_1L_chr = paste0("Do you confirm that you want to write the file ",
+                                            "CITATION.cff",
+                                            " to ",
+                                            getwd(),
+                                            "?"),
+                     consent_1L_chr = consent_1L_chr,
+                     consent_indcs_int = consent_indcs_int,
+                     consented_args_ls = list(paths_chr = "CITATION.cff",
+                                              fl_nm_1L_chr = "CITATION",
+                                              consent_1L_chr = consent_1L_chr,
+                                              text_ls = list(citation_cff_chr),
+                                              consent_indcs_int = consent_indcs_int,
+                                              options_chr = options_chr,
+                                              return_1L_lgl = F),
+                     declined_msg_1L_chr = "Write request cancelled - no new files have been written.",
+                     options_chr = options_chr)
+}
+write_ingested_dv_fl <- function(ds_ui_1L_chr,
+                                 dest_path_1L_chr,
+                                 repo_fl_fmt_1L_chr,
+                                 consent_1L_chr = "",
+                                 consent_indcs_int = 1L,
+                                 fl_nm_1L_chr = NA_character_,
+                                 fl_id_1L_int = NA_integer_,
+                                 key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                                 options_chr = c("Y", "N"),
+                                 save_type_1L_chr = "original",
+                                 server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
+  prompt_1L_chr <- paste0("Do you confirm that you want to write the file ",
+                         paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr),
+                         " to ",
+                         dest_path_1L_chr,
+                         "?")
   if(!consent_1L_chr %in% c("Y", "N")){
-    consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
-                                                       "CITATION.cff",
-                                                       " to ",
-                                                       getwd()),
+    consent_1L_chr <- make_prompt(prompt_1L_chr = prompt_1L_chr,
                                   options_chr = c("Y", "N"),
                                   force_from_opts_1L_chr = T)
   }
-  #if(consent_1L_chr %in% c("Y")){
-    write_new_files("CITATION.cff",
-                    fl_nm_1L_chr = "CITATION",
-                    consent_1L_chr = consent_1L_chr,
-                    text_ls = list(citation_cff_chr))
-  # }else{
-  #   warning("Write request cancelled - no new files have been written.")
-  # }
+  write_with_consent(consented_fn = writeBin,
+                     prompt_1L_chr = prompt_1L_chr,
+                     consent_1L_chr = consent_1L_chr,
+                     consent_indcs_int = consent_indcs_int,
+                     consented_args_ls = list(object = dataverse::get_file(ifelse(is.na(fl_id_1L_int),
+                                                                                  paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
+                                                                                  fl_id_1L_int),
+                                                                           dataset = ds_ui_1L_chr,
+                                                                           format = save_type_1L_chr,
+                                                                           key = key_1L_chr,
+                                                                           server = server_1L_chr),
+                                              con = dest_path_1L_chr),
+                     consented_msg_1L_chr = paste0("New file created in ",
+                                                   dest_path_1L_chr,
+                                                   " :\n",
+                                                   paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr)),
+                     declined_msg_1L_chr = "Write request cancelled - no new files have been written.",
+                     options_chr = options_chr)
 }
 write_dv_fl_to_loc <- function(ds_ui_1L_chr,
+                               dest_path_1L_chr,
+                               repo_fl_fmt_1L_chr,
+                               consent_1L_chr = "",
+                               consent_indcs_int = 1L,
                                fl_nm_1L_chr = NA_character_,
                                fl_id_1L_int = NA_integer_,
-                               repo_fl_fmt_1L_chr,
                                key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
-                               server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                               options_chr = c("Y", "N"),
                                save_type_1L_chr = "original",
-                               dest_path_1L_chr,
-                               consent_1L_chr = ""){
+                               server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
   ds_ls <- dataverse::get_dataset(ds_ui_1L_chr)
   if(ds_ls$versionState != "DRAFT"){
     if(!is.na(fl_id_1L_int)){
       ds_ui_1L_chr <- NULL
     }
-    if(!consent_1L_chr %in% c("Y", "N")){
-      consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
-                                                         paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
-                                                         " to ",
-                                                         dest_path_1L_chr),
-                                    options_chr = c("Y", "N"),
-                                    force_from_opts_1L_chr = T)
-    }
-    if(consent_1L_chr %in% c("Y")){
-      writeBin(dataverse::get_file(ifelse(is.na(fl_id_1L_int),
-                                          paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
-                                          fl_id_1L_int),
-                                   dataset = ds_ui_1L_chr,
-                                   format = save_type_1L_chr,
-                                   key = key_1L_chr,
-                                   server = server_1L_chr),
-               dest_path_1L_chr)
-      message(paste0("New file created in ",
-                     dest_path_1L_chr,
-                     " :\n",
-                     paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr)))
-    }
+    write_with_consent(consented_fn = write_ingested_dv_fl,
+                       prompt_1L_chr = paste0("Do you confirm that you want to write the file ",
+                                              paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
+                                              " to ",
+                                              dest_path_1L_chr,
+                                              " ?"),
+                       consent_1L_chr = consent_1L_chr,
+                       consent_indcs_int = consent_indcs_int,
+                       consented_args_ls = list(ds_ui_1L_chr = ds_ui_1L_chr,
+                                                fl_nm_1L_chr = fl_nm_1L_chr,
+                                                fl_id_1L_int = fl_id_1L_int,
+                                                repo_fl_fmt_1L_chr = repo_fl_fmt_1L_chr,
+                                                key_1L_chr = key_1L_chr,
+                                                server_1L_chr = server_1L_chr,
+                                                save_type_1L_chr = save_type_1L_chr,
+                                                dest_path_1L_chr = dest_path_1L_chr,
+                                                consent_1L_chr = options_chr[consent_indcs_int[1]]),
+                       consented_msg_1L_chr = paste0("New file created in ",
+                                                     dest_path_1L_chr,
+                                                     " :\n",
+                                                     paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr)),
+                       declined_msg_1L_chr = "Write request cancelled - no new files have been written.",
+                       options_chr = options_chr)
   }else{
-    warning("Cannot write local copy of files from private Dataverse repo")
+    warning("Cannot write local copy of files from private Dataverse repo.")
   }
 }
 write_env_objs_to_dv <- function(env_objects_ls,
                                  descriptions_chr,
                                  ds_url_1L_chr,
                                  consent_1L_chr = "",
+                                 consent_indcs_int = 1L,
                                  key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                                 options_chr = c("Y", "N"),
                                  publish_dv_1L_lgl = F,
                                  piggyback_desc_1L_chr = "Documentation",
                                  piggyback_tag_1L_chr = "Documentation_0.0",
@@ -163,10 +215,12 @@ write_env_objs_to_dv <- function(env_objects_ls,
   }
   file_ids_int <- write_fls_to_repo(paths_chr,
                                     consent_1L_chr = consent_1L_chr,
+                                    consent_indcs_int = consent_indcs_int,
                                     descriptions_chr = descriptions_chr,
                                     ds_url_1L_chr = ds_url_1L_chr,
                                     ds_ls = ds_ls,
                                     key_1L_chr = key_1L_chr,
+                                    options_chr = options_chr,
                                     piggyback_desc_1L_chr = piggyback_desc_1L_chr,
                                     piggyback_tag_1L_chr = piggyback_tag_1L_chr,
                                     piggyback_to_1L_chr = piggyback_to_1L_chr,
@@ -180,35 +234,49 @@ write_env_objs_to_dv <- function(env_objects_ls,
   }
   return(file_ids_int)
 }
-write_extra_pkgs_to_actions <- function(path_to_dir_1L_chr = ".github/workflows"){
-  list.files(path_to_dir_1L_chr, full.names = T) %>%
-    purrr::walk(~{
-      readLines(.x) %>%
-        stringr::str_replace_all("extra-packages: ","extra-packages: any::XML, ") %>%
-        stringr::str_replace_all("any::XML, any::XML, ","any::XML, ") %>%
-        writeLines(con = .x)
-    })
+write_extra_pkgs_to_actions <- function(path_to_dir_1L_chr = ".github/workflows",
+                                        consent_1L_chr = "",
+                                        consent_indcs_int = 1L,
+                                        options_chr = c("Y", "N")){
+  consented_fn <- function(path_to_dir_1L_chr){
+    list.files(path_to_dir_1L_chr, full.names = T) %>%
+      purrr::walk(~{
+        readLines(.x) %>%
+          stringr::str_replace_all("extra-packages: ","extra-packages: any::XML, ") %>%
+          stringr::str_replace_all("any::XML, any::XML, ","any::XML, ") %>%
+          writeLines(con = .x)
+      })
+    }
+  write_with_consent(consented_fn = consented_fn,
+                     prompt_1L_chr = paste0("Do you confirm that you want to modify all references to extra packages and XML in all files in  ",
+                                            path_to_dir_1L_chr,
+                                            " ?"),
+                     consent_1L_chr = consent_1L_chr,
+                     consent_indcs_int = consent_indcs_int,
+                     consented_args_ls = list(path_to_dir_1L_chr = path_to_dir_1L_chr),
+                     consented_msg_1L_chr = paste0("File(s) edited in ", path_to_dir_1L_chr),
+                     declined_msg_1L_chr = "Write request cancelled - no files have been edited.",
+                     options_chr = options_chr)
 }
 write_fls_from_dv <- function(files_tb,
                               fl_ids_int,
                               ds_url_1L_chr,
                               local_dv_dir_1L_chr,
+                              consent_1L_chr = "",
+                              consent_indcs_int = 1L,
                               key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
-                              server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
-                              consent_1L_chr = ""){
-  if(!consent_1L_chr %in% c("Y", "N")){
-    consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
-                                                       ifelse(length(file_paths_chr)>1,"s",""),
-                                                       make_list_phrase(files_tb$file_chr[fl_ids_int]),
-                                                       " to ",
-                                                       local_dv_dir_1L_chr),
-                                  options_chr = c("Y", "N"),
-                                  force_from_opts_1L_chr = T)
-  }
-  if(consent_1L_chr %in% c("Y")){
+                              options_chr = c("Y", "N"),
+                              server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
+  consented_fn <- function(files_tb,
+                           fl_ids_int,
+                           ds_url_1L_chr,
+                           local_dv_dir_1L_chr,
+                           key_1L_chr,
+                           server_1L_chr,
+                           consent_1L_chr){
     purrr::walk(1:length(fl_ids_int),
                 ~{
-                  if(!(ds_ls$versionState=="DRAFT" | files_tb$file_type_chr[.x]==".zip")){
+                  if(!(files_tb$file_type_chr[.x]==".zip")){
                     write_dv_fl_to_loc(ds_ui_1L_chr = ds_url_1L_chr,
                                        fl_nm_1L_chr = files_tb$file_chr[.x],
                                        fl_id_1L_int = fl_ids_int[.x],
@@ -222,34 +290,44 @@ write_fls_from_dv <- function(files_tb,
                                        consent_1L_chr = consent_1L_chr)
                   }
                 })
+
   }
+  write_with_consent(consented_fn = consented_fn,
+                     prompt_1L_chr = paste0("Do you confirm that you want to write the file ",
+                                            ifelse(length(file_paths_chr)>1,"s",""),
+                                            make_list_phrase(files_tb$file_chr[fl_ids_int]),
+                                            " to ",
+                                            local_dv_dir_1L_chr,
+                                            "?"),
+                     consent_1L_chr = consent_1L_chr,
+                     consent_indcs_int = consent_indcs_int,
+                     consented_args_ls = list(files_tb = files_tb,
+                                              fl_ids_int = fl_ids_int,
+                                              ds_url_1L_chr = ds_url_1L_chr,
+                                              local_dv_dir_1L_chr = local_dv_dir_1L_chr,
+                                              key_1L_chr = key_1L_chr,
+                                              server_1L_chr = server_1L_chr,
+                                              consent_1L_chr = options_chr[consent_indcs_int[1]]),
+                     declined_msg_1L_chr = "Write request cancelled - no files have been written.",
+                     options_chr = options_chr)
 }
 write_fls_to_dv <- function(file_paths_chr,
-                            consent_1L_chr = "",
-                            descriptions_chr = NULL,
                             ds_url_1L_chr,
+                            consent_1L_chr = "",
+                            consent_indcs_int = 1L,
+                            descriptions_chr = NULL,
                             ds_ls = NULL,
                             key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                            options_chr = c("Y", "N"),
                             server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
+
   if(!identical(file_paths_chr, character(0))){
-    if(!consent_1L_chr %in% c("Y", "N")){
-    message(paste0("Are you sure that you want to upload the following file",
-                   ifelse(length(file_paths_chr)>1,"s",""),
-                   " to dataverse ",
-                   ds_url_1L_chr,
-                   ": \n",
-                   file_paths_chr %>%
-                     purrr::map_chr(~fs::path_file(.x)) %>%
-                     paste0(collapse = "\n"),
-                   "?"))
-    consent_1L_chr <- make_prompt(prompt_1L_chr = paste0("Type 'Y' to confirm that you want to upload ",
-                                                         ifelse(length(file_paths_chr)>1,
-                                                                "these files:",
-                                                                "this file:")),
-                                  options_chr = c("Y", "N"),
-                                  force_from_opts_1L_chr = T)
-    }
-    if(consent_1L_chr == "Y"){
+    consented_fn <- function(file_paths_chr,
+                             ds_url_1L_chr,
+                             descriptions_chr,
+                             ds_ls,
+                             key_1L_chr,
+                             server_1L_chr){
       if(is.null(ds_ls))
         ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
       is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
@@ -290,9 +368,29 @@ write_fls_to_dv <- function(file_paths_chr,
                           }
                           id_1L_int
                         })
-    }else{
-      ids_int <- NULL
+      return(ids_int)
     }
+    ids_int <-  write_with_consent(consented_fn = consented_fn,
+                                   prompt_1L_chr = paste0("Are you sure that you want to upload the following file",
+                                                          ifelse(length(file_paths_chr)>1,"s",""),
+                                                          " to dataverse ",
+                                                          ds_url_1L_chr,
+                                                          ": \n",
+                                                          file_paths_chr %>%
+                                                            purrr::map_chr(~fs::path_file(.x)) %>%
+                                                            paste0(collapse = "\n"),
+                                                          "?"),
+                                   consent_1L_chr = consent_1L_chr,
+                                   consent_indcs_int = consent_indcs_int,
+                                   consented_args_ls = list(file_paths_chr = file_paths_chr,
+                                                            ds_url_1L_chr = ds_url_1L_chr,
+                                                            descriptions_chr = descriptions_chr,
+                                                            ds_ls = ds_ls,
+                                                            key_1L_chr = key_1L_chr,
+                                                            server_1L_chr = server_1L_chr),
+                                   declined_msg_1L_chr = "Write request cancelled - no files have been written.",
+                                   options_chr = options_chr,
+                                   return_1L_lgl = T)
   }else{
     ids_int <- NULL
   }
@@ -301,27 +399,23 @@ write_fls_to_dv <- function(file_paths_chr,
 write_fls_to_repo <- function(paths_chr,
                               descriptions_chr,
                               consent_1L_chr = "",
+                              consent_indcs_int = 1L,
                               ds_url_1L_chr = character(0),
                               ds_ls = NULL,
                               key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
-                              server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                              options_chr = c("Y", "N"),
                               piggyback_desc_1L_chr = "Documentation",
                               piggyback_tag_1L_chr = "Documentation_0.0",
                               piggyback_to_1L_chr = character(0),
-                              prerelease_1L_lgl = T){
+                              prerelease_1L_lgl = T,
+                              server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
+  ids_int <- NULL
   if(!identical(piggyback_to_1L_chr,character(0))){
-    if(!consent_1L_chr %in% c("Y", "N")){
-      consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
-                                                         ifelse(length(paths_chr)>1,"s "," "),
-                                                         make_list_phrase(basename(paths_chr)),
-                                                         " to release ",
-                                                         piggyback_tag_1L_chr,
-                                                         " in ",
-                                                         piggyback_to_1L_chr),
-                                    options_chr = c("Y", "N"),
-                                    force_from_opts_1L_chr = T)
-    }
-    if(consent_1L_chr %in% c("Y")){
+    consented_fn <- function(paths_chr,
+                             piggyback_desc_1L_chr,
+                             piggyback_to_1L_chr,
+                             piggyback_tag_1L_chr,
+                             prerelease_1L_lgl){
       releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
       if(!piggyback_tag_1L_chr %in% releases_df$tag)
         piggyback::pb_new_release(piggyback_to_1L_chr,
@@ -333,30 +427,52 @@ write_fls_to_repo <- function(paths_chr,
                     if(file.exists(.x)){
                       piggyback::pb_upload(.x,
                                            repo = piggyback_to_1L_chr,
-                                           #overwrite = T,
                                            tag = piggyback_tag_1L_chr)
                     }
                   }
       )
       ids_int <- NULL
+      return(ids_int)
     }
+    ids_int <- write_with_consent(consented_fn = consented_fn,
+                                  prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file ",
+                                                         ifelse(length(paths_chr)>1,"s "," "),
+                                                         make_list_phrase(basename(paths_chr)),
+                                                         " to release ",
+                                                         piggyback_tag_1L_chr,
+                                                         " in ",
+                                                         piggyback_to_1L_chr),
+                                  consent_1L_chr = consent_1L_chr,
+                                  consent_indcs_int = consent_indcs_int,
+                                  consented_args_ls = list(paths_chr = paths_chr,
+                                                           piggyback_desc_1L_chr = piggyback_desc_1L_chr,
+                                                           piggyback_to_1L_chr = piggyback_to_1L_chr,
+                                                           piggyback_tag_1L_chr = piggyback_tag_1L_chr,
+                                                           prerelease_1L_lgl = prerelease_1L_lgl),
+                                  declined_msg_1L_chr = "Write request cancelled - no files have been written.",
+                                  options_chr = options_chr,
+                                  return_1L_lgl = T)
   }else{
     if(!identical(character(0),ds_url_1L_chr))
       ids_int <- write_fls_to_dv(paths_chr,
                                  consent_1L_chr = consent_1L_chr,
+                                 consent_indcs_int = consent_indcs_int,
                                  descriptions_chr = descriptions_chr,
                                  ds_url_1L_chr = ds_url_1L_chr,
                                  ds_ls = ds_ls,
                                  key_1L_chr = key_1L_chr,
+                                 options_chr = options_chr,
                                  server_1L_chr = server_1L_chr)
   }
   return(ids_int)
 }
 write_from_tmp <- function(tmp_paths_chr,
                            dest_paths_chr,
+                           args_ls_ls = list(NULL),
                            consent_1L_chr = "",
+                           consent_indcs_int = 1L,
                            edit_fn_ls = list(NULL),
-                           args_ls_ls = list(NULL)){
+                           options_chr = c("Y", "N")){
   text_ls <- purrr::pmap(list(tmp_paths_chr,
                               edit_fn_ls,
                               args_ls_ls),
@@ -372,10 +488,16 @@ write_from_tmp <- function(tmp_paths_chr,
                            rlang::exec(edit_fn, txt_chr, !!!..3)
                          })
   write_to_delete_fls(intersect(tmp_paths_chr,dest_paths_chr),
-                      consent_1L_chr = consent_1L_chr)
+                      consent_1L_chr = consent_1L_chr,
+                      consent_indcs_int = consent_indcs_int,
+                      options_chr = options_chr,
+                      return_1L_lgl = F)
   write_new_files(dest_paths_chr,
                   text_ls = text_ls,
-                  consent_1L_chr = consent_1L_chr)
+                  consent_1L_chr = consent_1L_chr,
+                  consent_indcs_int = consent_indcs_int,
+                  options_chr = options_chr,
+                  return_1L_lgl = F)
 }
 write_new_credentials <- function(path_to_file_1L_chr,
                                   new_credentials_1L_chr,
@@ -423,10 +545,13 @@ write_new_dirs <- function(new_dirs_chr,
 }
 write_new_files <- function(paths_chr,
                             consent_1L_chr = "",
+                            consent_indcs_int = 1L,
                             custom_write_ls = NULL,
                             fl_nm_1L_chr = NULL,
+                            options_chr = c("Y", "N"),
                             source_paths_ls = NULL,
-                            text_ls = NULL){
+                            text_ls = NULL,
+                            return_1L_lgl = F){
   if(!is.null(source_paths_ls)){
     dest_dir_1L_chr <- paths_chr
     paths_chr <- purrr::map(source_paths_ls,
@@ -451,28 +576,14 @@ write_new_files <- function(paths_chr,
   }
   new_files_chr <- paths_chr[paths_chr %>% purrr::map_lgl(~!file.exists(.x))]
   overwritten_files_chr <- setdiff(paths_chr, new_files_chr)
+  object_xx <- NULL
   if(!identical(paths_chr, character(0))){
-    if(!consent_1L_chr %in% c("Y", "N")){
-      message(paste0("Are you sure that you want to write / overwrite the following file",
-                     ifelse(length(paths_chr)>1,"s",""),
-                     " to your machine: \n",
-                     ifelse(identical(new_files_chr, character(0)),
-                            "",
-                            paste0("Files that will be created: \n",
-                                   new_files_chr %>% paste0(collapse = "\n"))),
-                     ifelse(identical(overwritten_files_chr, character(0)),
-                            "",
-                            paste0("Files that will be overwritten: \n",
-                                   overwritten_files_chr %>% paste0(collapse = "\n"))),
-                     "?"))
-      consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write ",
-                                                         ifelse((length(new_files_chr) + length(overwritten_files_chr))>1,
-                                                                "these files:",
-                                                                "this file:")),
-                                    options_chr = c("Y", "N"),
-                                    force_from_opts_1L_chr = T)
-    }
-    if(consent_1L_chr %in% c("Y")){
+    consented_fn <- function(paths_chr,
+                             consent_1L_chr,
+                             custom_write_ls,
+                             fl_nm_1L_chr,
+                             source_paths_ls,
+                             text_ls){
       if(!is.null(text_ls)){
         purrr::walk2(paths_chr,
                      text_ls,
@@ -508,15 +619,42 @@ write_new_files <- function(paths_chr,
                       !!!custom_write_ls$args_ls)
         }
       }
-    }else{
-      message("Write request cancelled - no new files created.")
     }
+   object_xx <- write_with_consent(consented_fn = consented_fn,
+                                   prompt_1L_chr = paste0("Are you sure that you want to write / overwrite the following file",
+                                                          ifelse(length(paths_chr)>1,"s",""),
+                                                          " to your machine: \n",
+                                                          ifelse(identical(new_files_chr, character(0)),
+                                                                 "",
+                                                                 paste0("Files that will be created: \n",
+                                                                        new_files_chr %>% paste0(collapse = "\n"))),
+                                                          ifelse(identical(overwritten_files_chr, character(0)),
+                                                                 "",
+                                                                 paste0("Files that will be overwritten: \n",
+                                                                        overwritten_files_chr %>% paste0(collapse = "\n"))),
+                                                          "?"),
+                                   consent_1L_chr = consent_1L_chr,
+                                   consent_indcs_int = consent_indcs_int,
+                                   consented_args_ls = list(paths_chr = paths_chr,
+                                                            consent_1L_chr = options_chr[consent_indcs_int[1]],
+                                                            custom_write_ls = custom_write_ls,
+                                                            fl_nm_1L_chr = fl_nm_1L_chr,
+                                                            source_paths_ls = source_paths_ls,
+                                                            text_ls = text_ls),
+                                   declined_msg_1L_chr = "Write request cancelled - no files have been written.",
+                                   options_chr = options_chr,
+                                   return_1L_lgl = T)
   }
+  if(return_1L_lgl)
+    return(object_xx)
 }
 write_obj_with_prompt <- function(object_xx,
                                   obj_nm_1L_chr,
                                   outp_dir_1L_chr,
-                                  consent_1L_chr =""){
+                                  consent_1L_chr ="",
+                                  consent_indcs_int = 1L,
+                                  options_chr = c("Y", "N"),
+                                  return_1L_lgl = F){
   path_1L_chr <- paste0(outp_dir_1L_chr, "/", obj_nm_1L_chr, ".RDS")
   custom_write_ls = list(fn=saveRDS,
                          args_ls = list(object = object_xx,
@@ -524,7 +662,10 @@ write_obj_with_prompt <- function(object_xx,
   if(!consent_1L_chr %in% c("Y", "N")){
     write_new_files(path_1L_chr,
                     custom_write_ls = custom_write_ls,
-                    consent_1L_chr = consent_1L_chr)
+                    consent_1L_chr = consent_1L_chr,
+                    consent_indcs_int = consent_indcs_int,
+                    options_chr = options_chr,
+                    return_1L_lgl = return_1L_lgl)
   }else{
     if(consent_1L_chr == "Y")
       rlang::exec(custom_write_ls$fn, !!!custom_write_ls$args_ls)
@@ -558,7 +699,9 @@ write_tb_to_csv <- function(tbs_r4,
                             r4_name_1L_chr,
                             lup_dir_1L_chr,
                             pfx_1L_chr,
-                            consent_1L_chr = ""){
+                            consent_1L_chr = "",
+                            consent_indcs_int = 1L,
+                            options_chr = c("Y", "N")){
   file_path_1L_chr <- paste0(lup_dir_1L_chr,"/",pfx_1L_chr,"_",slot_nm_1L_chr,".csv")
   if(!consent_1L_chr %in% c("Y", "N")){
     consent_1L_chr <- make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to write the file ",
@@ -579,7 +722,10 @@ write_tb_to_csv <- function(tbs_r4,
 write_to_copy_rmds <- function(dir_path_1L_chr,
                                fl_nm_1L_chr,
                                consent_1L_chr = "",
-                               rmds_dir_1L_chr = "R/RMD Templates"){
+                               rmds_dir_1L_chr = "R/RMD Templates",
+                               consent_indcs_int = 1L,
+                               options_chr = c("Y", "N"),
+                               return_1L_lgl = F){
   file_nms_chr <- list.files(rmds_dir_1L_chr)
   destination_1L_chr <- paste0(dir_path_1L_chr,"/",fl_nm_1L_chr)
   if(!dir.exists(destination_1L_chr))
@@ -588,7 +734,10 @@ write_to_copy_rmds <- function(dir_path_1L_chr,
               ~   write_new_files(destination_1L_chr,
                                   source_paths_ls = list(paste0(rmds_dir_1L_chr,"/",.x)),
                                   consent_1L_chr = consent_1L_chr,
-                                  fl_nm_1L_chr = .x))
+                                  fl_nm_1L_chr = .x,
+                                  consent_indcs_int = consent_indcs_int,
+                                  options_chr = options_chr,
+                                  return_1L_lgl = return_1L_lgl))
 }
 write_to_delete_dirs <- function(dir_paths_chr,
                                  consent_1L_chr = ""){
@@ -633,26 +782,30 @@ write_to_delete_dirs <- function(dir_paths_chr,
   }
 }
 write_to_delete_fls <- function(file_paths_chr,
-                                consent_1L_chr = ""){
+                                consent_1L_chr = "",
+                                consent_indcs_int = 1L,
+                                options_chr = c("Y", "N"),
+                                return_1L_lgl = F){
   file_paths_chr <- file_paths_chr[file_paths_chr %>% purrr::map_lgl(~file.exists(.x))]
+  object_xx <- NULL
   if(!identical(file_paths_chr, character(0))){
-    if(!consent_1L_chr %in% c("Y", "N")){
-      message(paste0("Are you sure that you want to delete the following file",
-                     ifelse(length(file_paths_chr)>1,"s",""),
-                     " from your machine: \n",
-                     file_paths_chr %>% paste0(collapse = "\n"),
-                     "?"))
-      consent_1L_chr <-  make_prompt(prompt_1L_chr=paste0("Do you confirm ('Y') that you want to delete ",
-                                                          ifelse(length(file_paths_chr)>1,"these files:","this file:")),
-                                     options_chr = c("Y", "N"),
-                                     force_from_opts_1L_chr = T)
-    }
-    if(consent_1L_chr %in% c("Y")){
-      paths_ls <- do.call(file.remove, list(file_paths_chr))
-    }else{
-      message("Delete files request cancelled - no files deleted")
-    }
+    object_xx <- write_with_consent(consented_fn = do.call,
+                                  prompt_1L_chr = paste0("Are you sure that you want to delete the following file",
+                                                         ifelse(length(file_paths_chr)>1,"s",""),
+                                                         " from your machine: \n",
+                                                         file_paths_chr %>% paste0(collapse = "\n"),
+                                                         "?"),
+                                  consent_1L_chr = consent_1L_chr,
+                                  consent_indcs_int = consent_indcs_int,
+                                  consented_args_ls = list(what = file.remove,
+                                                           args = list(file_paths_chr)),
+                                  consented_msg_1L_chr = "File deletion request has been executed.",
+                                  declined_msg_1L_chr = "File deletion request cancelled - no files have been deleted.",
+                                  options_chr = options_chr,
+                                  return_1L_lgl = T)
   }
+  if(return_1L_lgl)
+    return(object_xx)
 }
 write_to_dv_from_tbl <- function (files_tb,
                                   data_dir_rt_1L_chr = ".",
@@ -862,6 +1015,38 @@ write_to_trim_html <- function(path_to_html_1L_chr,
   }else{
     message("Write request cancelled - no changes were made to the file.")
   }
+}
+write_with_consent <- function(consented_fn,
+                               prompt_1L_chr,
+                               consent_1L_chr = "",
+                               consented_args_ls = NULL,
+                               consent_indcs_int = 1L,
+                               consented_msg_1L_chr = character(0),
+                               declined_args_ls = NULL,
+                               declined_fn = NULL,
+                               declined_msg_1L_chr = "No files have been written.",
+                               force_from_opts_1L_chr = T,
+                               options_chr = c("Y", "N"),
+                               return_1L_lgl = F){
+  if(!consent_1L_chr %in% options_chr && !identical(prompt_1L_chr, character(0))){
+    consent_1L_chr <- make_prompt(prompt_1L_chr=prompt_1L_chr,
+                                  options_chr = options_chr,
+                                  force_from_opts_1L_chr = force_from_opts_1L_chr)
+  }
+  object_xx <- NULL
+  if(consent_1L_chr %in% options_chr[consent_indcs_int]){
+    object_xx <- rlang::exec(consented_fn, !!!consented_args_ls)
+    if(!identical(consented_msg_1L_chr, character(0)))
+      message(consented_msg_1L_chr)
+  }else{
+    if(!is.null(declined_fn)){
+      object_xx <- rlang::exec(declined_fn, !!!declined_args_ls)
+    }
+    if(!identical(declined_msg_1L_chr, character(0)))
+      message(declined_msg_1L_chr)
+  }
+  if(return_1L_lgl)
+    return(object_xx)
 }
 write_words <- function(new_words_chr,
                         consent_1L_chr = "",

@@ -8,7 +8,10 @@ write_to_copy_rmds(
   dir_path_1L_chr,
   fl_nm_1L_chr,
   consent_1L_chr = "",
-  rmds_dir_1L_chr = "R/RMD Templates"
+  rmds_dir_1L_chr = "R/RMD Templates",
+  consent_indcs_int = 1L,
+  options_chr = c("Y", "N"),
+  return_1L_lgl = F
 )
 }
 \arguments{
@@ -19,6 +22,12 @@ write_to_copy_rmds(
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{rmds_dir_1L_chr}{R Markdowns directory (a character vector of length one), Default: 'R/RMD Templates'}
+
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
+
+\item{return_1L_lgl}{Return (a logical vector of length one), Default: F}
 }
 \description{
 write_to_copy_rmds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to copy markdowns. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

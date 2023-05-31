@@ -8,14 +8,16 @@ write_fls_to_repo(
   paths_chr,
   descriptions_chr,
   consent_1L_chr = "",
+  consent_indcs_int = 1L,
   ds_url_1L_chr = character(0),
   ds_ls = NULL,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
-  server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+  options_chr = c("Y", "N"),
   piggyback_desc_1L_chr = "Documentation",
   piggyback_tag_1L_chr = "Documentation_0.0",
   piggyback_to_1L_chr = character(0),
-  prerelease_1L_lgl = T
+  prerelease_1L_lgl = T,
+  server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
 )
 }
 \arguments{
@@ -25,13 +27,15 @@ write_fls_to_repo(
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
 \item{ds_url_1L_chr}{Dataset url (a character vector of length one), Default: character(0)}
 
 \item{ds_ls}{Dataset (a list), Default: NULL}
 
 \item{key_1L_chr}{Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")}
 
-\item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
 \item{piggyback_desc_1L_chr}{Piggyback description (a character vector of length one), Default: 'Documentation'}
 
@@ -40,6 +44,8 @@ write_fls_to_repo(
 \item{piggyback_to_1L_chr}{Piggyback to (a character vector of length one), Default: character(0)}
 
 \item{prerelease_1L_lgl}{Prerelease (a logical vector of length one), Default: T}
+
+\item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }
 \value{
 Identities (an integer vector)

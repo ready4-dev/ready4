@@ -7,10 +7,13 @@
 write_new_files(
   paths_chr,
   consent_1L_chr = "",
+  consent_indcs_int = 1L,
   custom_write_ls = NULL,
   fl_nm_1L_chr = NULL,
+  options_chr = c("Y", "N"),
   source_paths_ls = NULL,
-  text_ls = NULL
+  text_ls = NULL,
+  return_1L_lgl = F
 )
 }
 \arguments{
@@ -18,15 +21,24 @@ write_new_files(
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
 \item{custom_write_ls}{Custom write (a list), Default: NULL}
 
 \item{fl_nm_1L_chr}{File name (a character vector of length one), Default: NULL}
 
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
+
 \item{source_paths_ls}{Source paths (a list), Default: NULL}
 
 \item{text_ls}{Text (a list), Default: NULL}
+
+\item{return_1L_lgl}{Return (a logical vector of length one), Default: F}
+}
+\value{
+Object (an output object of multiple potential types)
 }
 \description{
-write_new_files() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+write_new_files() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new files. The function returns Object (an output object of multiple potential types).
 }
 \keyword{internal}

@@ -7,9 +7,11 @@
 write_from_tmp(
   tmp_paths_chr,
   dest_paths_chr,
+  args_ls_ls = list(NULL),
   consent_1L_chr = "",
+  consent_indcs_int = 1L,
   edit_fn_ls = list(NULL),
-  args_ls_ls = list(NULL)
+  options_chr = c("Y", "N")
 )
 }
 \arguments{
@@ -17,11 +19,15 @@ write_from_tmp(
 
 \item{dest_paths_chr}{Destination paths (a character vector)}
 
+\item{args_ls_ls}{Arguments (a list of lists), Default: list(NULL)}
+
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
+
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
 \item{edit_fn_ls}{Edit (a list of functions), Default: list(NULL)}
 
-\item{args_ls_ls}{Arguments (a list of lists), Default: list(NULL)}
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
 write_from_tmp() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write from temporary. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

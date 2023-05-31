@@ -9,7 +9,9 @@ write_env_objs_to_dv(
   descriptions_chr,
   ds_url_1L_chr,
   consent_1L_chr = "",
+  consent_indcs_int = 1L,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+  options_chr = c("Y", "N"),
   publish_dv_1L_lgl = F,
   piggyback_desc_1L_chr = "Documentation",
   piggyback_tag_1L_chr = "Documentation_0.0",
@@ -27,7 +29,11 @@ write_env_objs_to_dv(
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
 \item{key_1L_chr}{Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
 \item{publish_dv_1L_lgl}{Publish dataverse (a logical vector of length one), Default: F}
 

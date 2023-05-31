@@ -9,9 +9,11 @@ write_fls_from_dv(
   fl_ids_int,
   ds_url_1L_chr,
   local_dv_dir_1L_chr,
+  consent_1L_chr = "",
+  consent_indcs_int = 1L,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
-  server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
-  consent_1L_chr = ""
+  options_chr = c("Y", "N"),
+  server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
 )
 }
 \arguments{
@@ -23,11 +25,15 @@ write_fls_from_dv(
 
 \item{local_dv_dir_1L_chr}{Local dataverse directory (a character vector of length one)}
 
+\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
+
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
 \item{key_1L_chr}{Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")}
 
-\item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
-\item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
+\item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }
 \description{
 write_fls_from_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files from dataverse. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

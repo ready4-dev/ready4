@@ -8,6 +8,8 @@ write_citation_cff(
   pkg_desc_ls,
   citation_chr,
   consent_1L_chr = "",
+  consent_indcs_int = 1L,
+  options_chr = c("Y", "N"),
   publisher_1L_chr = "Zenodo"
 )
 }
@@ -17,6 +19,10 @@ write_citation_cff(
 \item{citation_chr}{Citation (a character vector)}
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
+
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
 \item{publisher_1L_chr}{Publisher (a character vector of length one), Default: 'Zenodo'}
 }

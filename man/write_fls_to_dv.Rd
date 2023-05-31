@@ -6,26 +6,32 @@
 \usage{
 write_fls_to_dv(
   file_paths_chr,
-  consent_1L_chr = "",
-  descriptions_chr = NULL,
   ds_url_1L_chr,
+  consent_1L_chr = "",
+  consent_indcs_int = 1L,
+  descriptions_chr = NULL,
   ds_ls = NULL,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+  options_chr = c("Y", "N"),
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
 )
 }
 \arguments{
 \item{file_paths_chr}{File paths (a character vector)}
 
+\item{ds_url_1L_chr}{Dataset url (a character vector of length one)}
+
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
-\item{descriptions_chr}{Descriptions (a character vector), Default: NULL}
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
-\item{ds_url_1L_chr}{Dataset url (a character vector of length one)}
+\item{descriptions_chr}{Descriptions (a character vector), Default: NULL}
 
 \item{ds_ls}{Dataset (a list), Default: NULL}
 
 \item{key_1L_chr}{Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }
