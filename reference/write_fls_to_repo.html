@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9113</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9115</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,14 +64,16 @@
 <span>  <span class="va">paths_chr</span>,</span>
 <span>  <span class="va">descriptions_chr</span>,</span>
 <span>  consent_1L_chr <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  consent_indcs_int <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  ds_url_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
 <span>  ds_ls <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  key_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
-<span>  server_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
+<span>  options_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="st">"N"</span><span class="op">)</span>,</span>
 <span>  piggyback_desc_1L_chr <span class="op">=</span> <span class="st">"Documentation"</span>,</span>
 <span>  piggyback_tag_1L_chr <span class="op">=</span> <span class="st">"Documentation_0.0"</span>,</span>
 <span>  piggyback_to_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
-<span>  prerelease_1L_lgl <span class="op">=</span> <span class="cn">T</span></span>
+<span>  prerelease_1L_lgl <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  server_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -89,6 +91,10 @@
 <dd><p>Consent (a character vector of length one), Default: ''</p></dd>
 
 
+<dt>consent_indcs_int</dt>
+<dd><p>Consent indices (an integer vector), Default: 1</p></dd>
+
+
 <dt>ds_url_1L_chr</dt>
 <dd><p>Dataset url (a character vector of length one), Default: character(0)</p></dd>
 
@@ -101,8 +107,8 @@
 <dd><p>Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")</p></dd>
 
 
-<dt>server_1L_chr</dt>
-<dd><p>Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")</p></dd>
+<dt>options_chr</dt>
+<dd><p>Options (a character vector), Default: c("Y", "N")</p></dd>
 
 
 <dt>piggyback_desc_1L_chr</dt>
@@ -119,6 +125,10 @@
 
 <dt>prerelease_1L_lgl</dt>
 <dd><p>Prerelease (a logical vector of length one), Default: T</p></dd>
+
+
+<dt>server_1L_chr</dt>
+<dd><p>Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")</p></dd>
 
 </dl></div>
     <div class="section level2">

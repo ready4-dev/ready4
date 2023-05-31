@@ -358,6 +358,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/write_from_tmp.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_ingested_dv_fl.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_new_credentials.html</loc>
   </url>
   <url>
@@ -401,6 +404,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_to_trim_html.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_with_consent.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_words.html</loc>
