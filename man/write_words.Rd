@@ -7,8 +7,10 @@
 write_words(
   new_words_chr,
   consent_1L_chr = "",
+  consent_indcs_int = 1L,
   gh_repo_1L_chr = "ready4-dev/ready4",
-  gh_tag_1L_chr = "Documentation_0.0"
+  gh_tag_1L_chr = "Documentation_0.0",
+  options_chr = c("Y", "N")
 )
 }
 \arguments{
@@ -16,9 +18,13 @@ write_words(
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
 write_words() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write words. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

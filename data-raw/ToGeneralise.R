@@ -9,3 +9,5 @@
 # make_modules_tb
 # make_subroutine_repos
 # print_packages
+# Also, to implement improved consented writing:
+# write_new_credentials write_new_dirs write_prj_outp_dirs write_tb_to_csv write_to_delete_dirs write_to_dv_from_tbl write_to_dv_with_wait write_to_force_links_in write_to_publish_dv_ds write_to_trim_html

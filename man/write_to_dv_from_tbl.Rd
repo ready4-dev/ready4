@@ -6,9 +6,11 @@
 \usage{
 write_to_dv_from_tbl(
   files_tb,
+  consent_indcs_int = 1L,
   data_dir_rt_1L_chr = ".",
   ds_url_1L_chr,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+  options_chr = c("Y", "N"),
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
   consent_1L_chr = ""
 )
@@ -16,11 +18,15 @@ write_to_dv_from_tbl(
 \arguments{
 \item{files_tb}{Files (a tibble)}
 
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
 \item{data_dir_rt_1L_chr}{Data directory root (a character vector of length one), Default: '.'}
 
 \item{ds_url_1L_chr}{Dataset url (a character vector of length one)}
 
 \item{key_1L_chr}{Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 

@@ -8,7 +8,9 @@ write_to_render_post(
   included_dirs_chr,
   path_to_main_dir_1L_chr,
   consent_1L_chr = "",
-  is_rmd_1L_lgl = T
+  consent_indcs_int = 1L,
+  is_rmd_1L_lgl = T,
+  options_chr = c("Y", "N")
 )
 }
 \arguments{
@@ -18,7 +20,11 @@ write_to_render_post(
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
+\item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
+
 \item{is_rmd_1L_lgl}{Is Markdown (a logical vector of length one), Default: T}
+
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
 write_to_render_post() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to render post. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour

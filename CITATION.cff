@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "Matthew P Hamilton  (2021). ready4: Implement Transparent, Reusable and Updatable Computational
-Economic Models. Version 0.0.0.9115. Zenodo. https://doi.org/10.5281/zenodo.5606250"
+Economic Models. Version 0.0.0.9117. Zenodo. https://doi.org/10.5281/zenodo.5606250"
 authors:
   - family-names: "Hamilton"
     given-names: "Matthew P"
 title: "ready4: Implement Transparent, Reusable and Updatable Computational
 Economic Models"
-version: 0.0.0.9115
+version: 0.0.0.9117
 doi: 10.5281/zenodo.5606250
-date-released: 2023-05-31
+date-released: 2023-06-01
 url: "https://ready4-dev.github.io/ready4/"
