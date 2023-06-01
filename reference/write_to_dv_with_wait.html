@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9115</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9117</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,9 @@
 <span>  <span class="va">dss_tb</span>,</span>
 <span>  <span class="va">dv_nm_1L_chr</span>,</span>
 <span>  <span class="va">ds_url_1L_chr</span>,</span>
-<span>  wait_time_in_secs_int <span class="op">=</span> <span class="fl">5L</span>,</span>
+<span>  consent_1L_chr <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  consent_indcs_int <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  options_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="st">"N"</span><span class="op">)</span>,</span>
 <span>  make_local_copy_1L_lgl <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>  <span class="va">parent_dv_dir_1L_chr</span>,</span>
 <span>  <span class="va">paths_to_dirs_chr</span>,</span>
@@ -72,7 +74,7 @@
 <span>  inc_fl_types_chr <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
 <span>  key_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
 <span>  server_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
-<span>  consent_1L_chr <span class="op">=</span> <span class="st">""</span></span>
+<span>  wait_time_in_secs_int <span class="op">=</span> <span class="fl">5L</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -90,8 +92,16 @@
 <dd><p>Dataset url (a character vector of length one)</p></dd>
 
 
-<dt>wait_time_in_secs_int</dt>
-<dd><p>Wait time in secs (an integer vector), Default: 5</p></dd>
+<dt>consent_1L_chr</dt>
+<dd><p>Consent (a character vector of length one), Default: ''</p></dd>
+
+
+<dt>consent_indcs_int</dt>
+<dd><p>Consent indices (an integer vector), Default: 1</p></dd>
+
+
+<dt>options_chr</dt>
+<dd><p>Options (a character vector), Default: c("Y", "N")</p></dd>
 
 
 <dt>make_local_copy_1L_lgl</dt>
@@ -122,8 +132,8 @@
 <dd><p>Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")</p></dd>
 
 
-<dt>consent_1L_chr</dt>
-<dd><p>Consent (a character vector of length one), Default: ''</p></dd>
+<dt>wait_time_in_secs_int</dt>
+<dd><p>Wait time in secs (an integer vector), Default: 5</p></dd>
 
 </dl></div>
     <div class="section level2">
