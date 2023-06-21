@@ -880,102 +880,79 @@ write_to_delete_fls <- function(file_paths_chr,
     return(object_xx)
 }
 write_to_dv_from_tbl <- function (files_tb,
+                                  ds_url_1L_chr,
+                                  consent_1L_chr = "",
                                   consent_indcs_int = 1L,
                                   data_dir_rt_1L_chr = ".",
-                                  ds_url_1L_chr,
                                   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
                                   options_chr = c("Y", "N"),
-                                  server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
-                                  consent_1L_chr = ""){
+                                  server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
   fl_ids_int <- NULL
-  consented_fn <- function(files_tb,
-                           consent_indcs_int,
-                           data_dir_rt_1L_chr,
-                           ds_url_1L_chr,
-                           key_1L_chr,
-                           options_chr,
-                           server_1L_chr){
+  consented_fn <- function(files_tb, consent_indcs_int, data_dir_rt_1L_chr,
+                           ds_url_1L_chr, key_1L_chr, options_chr, server_1L_chr) {
     ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
     is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
     nms_chr <- ds_ls$files$filename
     fl_ids_int <- purrr::pmap_int(files_tb, ~{
-      path_1L_chr <- paste0(ifelse(identical(character(0),data_dir_rt_1L_chr),
-                                   "",
-                                   paste0(data_dir_rt_1L_chr, "/")),
-                            ..1, "/", ..2, ..3)
+      path_1L_chr <- paste0(ifelse(identical(character(0),
+                                             data_dir_rt_1L_chr), "", paste0(data_dir_rt_1L_chr,
+                                                                             "/")), ..1, "/", ..2, ..3)
       fl_nm_1L_chr <- paste0(..2, ..3)
-      write_fls_to_dv(path_1L_chr,
-                      consent_1L_chr = consent_1L_chr,
-                      consent_indcs_int = consent_indcs_int,
-                      descriptions_chr = ..4,
-                      ds_url_1L_chr = ds_url_1L_chr,
-                      ds_ls = ds_ls,
-                      key_1L_chr = key_1L_chr,
-                      options_chr = options_chr,
-                      server_1L_chr = server_1L_chr)
-      return(fl_ids_int)
+      id_1L_int <- write_fls_to_dv(path_1L_chr, consent_1L_chr = consent_1L_chr,
+                                   consent_indcs_int = consent_indcs_int, descriptions_chr = ..4,
+                                   ds_url_1L_chr = ds_url_1L_chr, ds_ls = ds_ls,
+                                   key_1L_chr = key_1L_chr, options_chr = options_chr,
+                                   server_1L_chr = server_1L_chr)
+      if(id_1L_int){
+        id_1L_int <- NA_integer_
+      }
+      id_1L_int
     })
+    return(fl_ids_int)
   }
-  paths_chr <- paste0(ifelse(identical(character(0),data_dir_rt_1L_chr),
-                             "",
-                             paste0(data_dir_rt_1L_chr, "/")),
-                      files_tb[,1], "/", files_tb[,2], files_tb[,3])
+  paths_chr <- paste0(ifelse(identical(character(0), data_dir_rt_1L_chr),
+                             "", paste0(data_dir_rt_1L_chr, "/")), files_tb[, 1],
+                      "/", files_tb[, 2], files_tb[, 3])
   fl_ids_int <- write_with_consent(consented_fn = consented_fn,
                                    prompt_1L_chr = paste0("Do you confirm that you want to upload the file",
-                                                          ifelse(length(paths_chr)>1,"s "," "),
-                                                          make_list_phrase(paths_chr),
-                                                          " to dataverse ",
-                                                          ds_url_1L_chr,
-                                                          " ? "),
-                                  consent_1L_chr = consent_1L_chr,
-                                  consent_indcs_int = consent_indcs_int,
-                                  consented_args_ls = list(files_tb = files_tb,
-                                                           consent_indcs_int = consent_indcs_int,
-                                                           data_dir_rt_1L_chr = data_dir_rt_1L_chr,
-                                                           ds_url_1L_chr = ds_url_1L_chr,
-                                                           key_1L_chr = key_1L_chr,
-                                                           options_chr = options_chr,
-                                                           server_1L_chr = server_1L_chr),
-                                  consented_msg_1L_chr = character(0),
-                                  declined_msg_1L_chr = "Write request cancelled - no files uploaded.",
-                                  options_chr = options_chr,
-                                  return_1L_lgl = T)
-
+                                                          ifelse(length(paths_chr) > 1, "s ", " "), make_list_phrase(paths_chr),
+                                                          " to dataverse ", ds_url_1L_chr, " ? "), consent_1L_chr = consent_1L_chr,
+                                   consent_indcs_int = consent_indcs_int, consented_args_ls = list(files_tb = files_tb,
+                                                                                                   consent_indcs_int = consent_indcs_int, data_dir_rt_1L_chr = data_dir_rt_1L_chr,
+                                                                                                   ds_url_1L_chr = ds_url_1L_chr, key_1L_chr = key_1L_chr,
+                                                                                                   options_chr = options_chr, server_1L_chr = server_1L_chr),
+                                   consented_msg_1L_chr = character(0), declined_msg_1L_chr = "Write request cancelled - no files uploaded.",
+                                   options_chr = options_chr, return_1L_lgl = T)
   return(fl_ids_int)
 }
-write_to_dv_with_wait <- function(dss_tb, # RENAME & Convert to two steps: Make class, apply method.
-                                  dv_nm_1L_chr,
-                                  ds_url_1L_chr,
-                                  consent_1L_chr = "",
-                                  consent_indcs_int = 1L,
-                                  options_chr = c("Y", "N"),
-                                  make_local_copy_1L_lgl = F,
-                                  parent_dv_dir_1L_chr,
-                                  paths_to_dirs_chr,
-                                  paths_are_rltv_1L_lgl = T,
-                                  inc_fl_types_chr = NA_character_,
-                                  key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
-                                  server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
-                                  wait_time_in_secs_int = 5L
-                                  ){
+write_to_dv_with_wait <- function (dss_tb,
+                                   dv_nm_1L_chr,
+                                   ds_url_1L_chr,
+                                   parent_dv_dir_1L_chr,
+                                   paths_to_dirs_chr,
+                                   consent_1L_chr = "",
+                                   consent_indcs_int = 1L,
+                                   make_local_copy_1L_lgl = F,
+                                   options_chr = c("Y", "N"),
+                                   paths_are_rltv_1L_lgl = T,
+                                   inc_fl_types_chr = NA_character_,
+                                   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
+                                   server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                                   wait_time_in_secs_int = 5L){
   ds_ls <- NULL
   ds_chr <- dss_tb$ds_obj_nm_chr
   files_tb <- make_files_tb(paths_to_dirs_chr = paths_to_dirs_chr,
                             recode_ls = dss_tb$title_chr %>% as.list() %>% stats::setNames(ds_chr),
                             inc_fl_types_chr = inc_fl_types_chr)
-  if(paths_are_rltv_1L_lgl){
+  if (paths_are_rltv_1L_lgl) {
     data_dir_rt_1L_chr <- "."
-  }else{
+  } else {
     data_dir_rt_1L_chr <- character(0)
   }
-  paths_chr <- paste0(ifelse(identical(character(0),data_dir_rt_1L_chr),
+  paths_chr <- paste0(ifelse(identical(character(0), data_dir_rt_1L_chr),
                              "",
                              paste0(data_dir_rt_1L_chr, "/")),
-                      files_tb %>%
-                        purrr::pmap(~paste0(paste0(..1,
-                                                   "/",
-                                                   ..2,
-                                                   ..3))))
+                      files_tb %>% purrr::pmap(~paste0(paste0(..1, "/", ..2, ..3))))
   consented_fn <- function(consent_1L_chr,
                            consent_indcs_int,
                            dv_nm_1L_chr,
@@ -986,70 +963,53 @@ write_to_dv_with_wait <- function(dss_tb, # RENAME & Convert to two steps: Make 
                            options_chr,
                            parent_dv_dir_1L_chr,
                            server_1L_chr,
-                           wait_time_in_secs_int){
-    fl_ids_int <- 1:nrow(files_tb) %>%
-      purrr::map_int(~{
-        Sys.sleep(wait_time_in_secs_int)
-        write_to_dv_from_tbl(files_tb[.x,],
-                             consent_1L_chr = consent_1L_chr,
-                             consent_indcs_int = consent_indcs_int,
-                             data_dir_rt_1L_chr = data_dir_rt_1L_chr,
-                             ds_url_1L_chr = ds_url_1L_chr,
-                             key_1L_chr = key_1L_chr,
-                             options_chr = options_chr,
-                             server_1L_chr = server_1L_chr)})
+                           wait_time_in_secs_int) {
+    fl_ids_int <- 1:nrow(files_tb) %>% purrr::map_int(~{
+      Sys.sleep(wait_time_in_secs_int)
+      write_to_dv_from_tbl(files_tb[.x, ],
+                           consent_1L_chr = consent_1L_chr,
+                           consent_indcs_int = consent_indcs_int,
+                           data_dir_rt_1L_chr = data_dir_rt_1L_chr,
+                           ds_url_1L_chr = ds_url_1L_chr,
+                           key_1L_chr = key_1L_chr,
+                           options_chr = options_chr,
+                           server_1L_chr = server_1L_chr)
+    })
     ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
-    if(make_local_copy_1L_lgl | ds_ls$versionState != "DRAFT"){
+    if (make_local_copy_1L_lgl | ds_ls$versionState != "DRAFT") {
       ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
-      dv_dir_1L_chr <- paste0(parent_dv_dir_1L_chr,"/",dv_nm_1L_chr)
-      if(!dir.exists(dv_dir_1L_chr)){
-        write_new_dirs(dv_dir_1L_chr,
-                       consent_1L_chr = consent_1L_chr,
-                       consent_indcs_int = consent_indcs_int,
-                       options_chr = options_chr)
+      dv_dir_1L_chr <- paste0(parent_dv_dir_1L_chr, "/",
+                              dv_nm_1L_chr)
+      if (!dir.exists(dv_dir_1L_chr)) {
+        write_new_dirs(dv_dir_1L_chr, consent_1L_chr = consent_1L_chr,
+                       consent_indcs_int = consent_indcs_int, options_chr = options_chr)
       }
-      local_dv_dir_1L_chr <- paste0(dv_dir_1L_chr,"/",
+      local_dv_dir_1L_chr <- paste0(dv_dir_1L_chr, "/",
                                     ds_ls$metadataBlocks$citation$fields$value[[3]])
-      if(!dir.exists(local_dv_dir_1L_chr)){
-        write_new_dirs(local_dv_dir_1L_chr,
-                       consent_1L_chr = consent_1L_chr,
-                       consent_indcs_int = consent_indcs_int,
-                       options_chr = options_chr)
+      if (!dir.exists(local_dv_dir_1L_chr)) {
+        write_new_dirs(local_dv_dir_1L_chr, consent_1L_chr = consent_1L_chr,
+                       consent_indcs_int = consent_indcs_int, options_chr = options_chr)
       }
       write_fls_from_dv(consent_1L_chr = consent_1L_chr,
-                        consent_indcs_int = consent_indcs_int,
-                        ds_url_1L_chr = ds_url_1L_chr,
-                        files_tb = files_tb,
-                        fl_ids_int = fl_ids_int,
-                        local_dv_dir_1L_chr = local_dv_dir_1L_chr,
-                        options_chr = options_chr)
+                        consent_indcs_int = consent_indcs_int, ds_url_1L_chr = ds_url_1L_chr,
+                        files_tb = files_tb, fl_ids_int = fl_ids_int,
+                        local_dv_dir_1L_chr = local_dv_dir_1L_chr, options_chr = options_chr)
     }
     return(ds_ls)
   }
   ds_ls <- write_with_consent(consented_fn = consented_fn,
                               prompt_1L_chr = paste0("Do you confirm ('Y') that you want to write the file",
-                                                     ifelse(length(paths_chr)>1,"s "," "),
-                                                     make_list_phrase(paths_chr),
-                                                     " to dataverse ",
-                                                     ds_url_1L_chr,
-                                                     " ? "),
-                              consent_1L_chr = consent_1L_chr,
+                                                     ifelse(length(paths_chr) > 1, "s ", " "), make_list_phrase(paths_chr),
+                                                     " to dataverse ", ds_url_1L_chr, " ? "), consent_1L_chr = consent_1L_chr,
                               consent_indcs_int = consent_indcs_int,
                               consented_args_ls = list(consent_1L_chr = consent_1L_chr,
-                                                       consent_indcs_int = consent_indcs_int,
-                                                       dv_nm_1L_chr = dv_nm_1L_chr,
-                                                       ds_url_1L_chr = ds_url_1L_chr,
-                                                       files_tb = files_tb,
-                                                       key_1L_chr = key_1L_chr,
-                                                       make_local_copy_1L_lgl = make_local_copy_1L_lgl,
-                                                       options_chr = options_chr,
-                                                       parent_dv_dir_1L_chr = parent_dv_dir_1L_chr,
-                                                       server_1L_chr = server_1L_chr,
-                                                       wait_time_in_secs_int = wait_time_in_secs_int),
-                              consented_msg_1L_chr = character(0),
-                              declined_msg_1L_chr = "Write request cancelled - no files uploaded.",
-                              options_chr = options_chr,
-                              return_1L_lgl = T)
+                                                       consent_indcs_int = consent_indcs_int, dv_nm_1L_chr = dv_nm_1L_chr,
+                                                       ds_url_1L_chr = ds_url_1L_chr, files_tb = files_tb,
+                                                       key_1L_chr = key_1L_chr, make_local_copy_1L_lgl = make_local_copy_1L_lgl,
+                                                       options_chr = options_chr, parent_dv_dir_1L_chr = parent_dv_dir_1L_chr,
+                                                       server_1L_chr = server_1L_chr, wait_time_in_secs_int = wait_time_in_secs_int),
+                              consented_msg_1L_chr = character(0), declined_msg_1L_chr = "Write request cancelled - no files uploaded.",
+                              options_chr = options_chr, return_1L_lgl = T)
   return(ds_ls)
 }
 write_to_force_links_in <- function(path_to_mkdn_1L_chr,

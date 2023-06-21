@@ -8,12 +8,12 @@ write_to_dv_with_wait(
   dss_tb,
   dv_nm_1L_chr,
   ds_url_1L_chr,
-  consent_1L_chr = "",
-  consent_indcs_int = 1L,
-  options_chr = c("Y", "N"),
-  make_local_copy_1L_lgl = F,
   parent_dv_dir_1L_chr,
   paths_to_dirs_chr,
+  consent_1L_chr = "",
+  consent_indcs_int = 1L,
+  make_local_copy_1L_lgl = F,
+  options_chr = c("Y", "N"),
   paths_are_rltv_1L_lgl = T,
   inc_fl_types_chr = NA_character_,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
@@ -28,17 +28,17 @@ write_to_dv_with_wait(
 
 \item{ds_url_1L_chr}{Dataset url (a character vector of length one)}
 
+\item{parent_dv_dir_1L_chr}{Parent dataverse directory (a character vector of length one)}
+
+\item{paths_to_dirs_chr}{Paths to directories (a character vector)}
+
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 
 \item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
-\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
-
 \item{make_local_copy_1L_lgl}{Make local copy (a logical vector of length one), Default: F}
 
-\item{parent_dv_dir_1L_chr}{Parent dataverse directory (a character vector of length one)}
-
-\item{paths_to_dirs_chr}{Paths to directories (a character vector)}
+\item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
 \item{paths_are_rltv_1L_lgl}{Paths are relative (a logical vector of length one), Default: T}
 

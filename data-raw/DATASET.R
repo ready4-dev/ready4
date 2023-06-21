@@ -44,7 +44,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reus
 ##
 ## WARNING WARNING WARNING
 ## Unlike other workflows in the ready4 suite, in this instance it is necessary to answer "N", the FIRST time the following prompt appears:
-## Do you confirm ('Y') that you want to delete these files: [Y|N]
+## Are you sure that you want to delete the following files from your machine: [Y|N]
 ## After doing so, all other such prompts should be answered in the affirmative.
 ## If you make a mistake and write "Y" you will most likely have to delete your local copy of this repo and clone the repo again from its origin (https://github.com/ready4-dev/ready4).
 x <- write_self_srvc_pkg(x)
