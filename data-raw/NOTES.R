@@ -113,3 +113,19 @@ ready4::write_env_objs_to_dv(list(fn_types_lup = fn_types_lup),
                              publish_dv_1L_lgl = F)
 # x <- ready4fun::write_new_fn_types(x,
 #                                    fn_type_desc_chr = "Updates a specified slot of a class instance with new values.")
+classes_lup <- procure(procureSlot(Y, "b_Ready4useIngest"), "classes_lup")
+prototype_lup <- classes_lup
+prototype_lup <- prototype_lup %>%
+  dplyr::filter(! pt_ns_chr %in% c("TTU", "aus", "ready4", "ready4class", "ready4fun", "ready4pack", "ready4show", "ready4use", "scorz", "specific", "vicinity", "youthvars"))
+prototype_lup <- prototype_lup %>%
+  dplyr::arrange(pt_ns_chr)
+Y <- renewSlot(Y,
+               new_val_xx = Ready4useIngest(objects_ls = list(prototype_lup = prototype_lup)),
+               slot_nm_1L_chr = "b_Ready4useIngest")
+Y <- share(Y,
+           type_1L_chr = "prefer_gh")
+
+write_env_objs_to_dv(list(prototype_lup = prototype_lup),
+                     descriptions_chr = "Class prototype lookup table",
+                     ds_url_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9",
+                     publish_dv_1L_lgl = T)
