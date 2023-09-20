@@ -1,7 +1,7 @@
 Package: ready4
-Title: Implement Transparent, Reusable and Updatable Computational
+Title: Implement Transparent, Reusable and Updatable Computational Health
     Economic Models
-Version: 0.0.0.9119
+Version: 0.0.0.9120
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton@orygen.org.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -11,15 +11,15 @@ Authors@R: c(
     person("Victoria University", role = "fnd")
   )
 Description: ready4 provides bare bones foundational elements (classes,
-    generics, methods, functions) of a software framework for modular,
-    open source computational models. The current version is optimised to
-    support the development of an economic model of the systems shaping
-    young people's mental health.  The base elements in this package are
-    extended by other R packages - see https://www.ready4-dev.com/ for
-    details. This development version of the ready4 package has been made
-    available as part of the process of testing and documenting the
-    package. If you have any questions, please contact the author
-    (matthew.hamilton@orygen.org.au).
+    generics, methods, functions) of a software framework for developing
+    modular, open source computational models in R. The current version is
+    optimised to support the development of an economic model of the
+    systems shaping young people's mental health.  The base elements in
+    this package are extended by other R packages - see
+    https://www.ready4-dev.com/ for details. This development version of
+    the ready4 package has been made available as part of the process of
+    testing and documenting the package. If you have any questions, please
+    contact the author (matthew.hamilton@orygen.org.au).
 License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4, https://www.ready4-dev.com/
@@ -30,6 +30,8 @@ Collate:
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
+    'bind.R'
     'fn_add.R'
     'fn_bind.R'
     'fn_get.R'
@@ -40,9 +42,11 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'mthd_authorSlot.R'
     'mthd_characterizeSlot.R'
     'mthd_depictSlot.R'
@@ -59,7 +63,13 @@ Collate:
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'
     'pkg_ready4.R'
+    'print.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Imports: 
     assertthat,
     bib2df,
