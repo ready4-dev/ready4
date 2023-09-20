@@ -25,7 +25,9 @@ jobs:
 
       - name: Install libcurl on Linux
         if: runner.os == 'Linux'
-        run: sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
+        run: |
+          sudo add-apt-repository ppa:cran/libgit2
+          sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
