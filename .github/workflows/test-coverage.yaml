@@ -25,8 +25,10 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y libcurl4-openssl-dev
-          sudo add-apt-repository ppa:cran/libraptor2
+          sudo apt-get install -y libraptor2-dev
+
+#libcurl4-openssl-dev
+
 # Need to fix: libraptor2-dev : Depends: libcurl4-gnutls-dev but it is not installable
           # sudo add-apt-repository ppa:cran/libraptor2
           # sudo apt-get install r-cran-gert
