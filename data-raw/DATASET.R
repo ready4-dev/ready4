@@ -54,7 +54,7 @@ readLines(".github/workflows/R-CMD-check.yaml") %>%
   stringr::str_replace_all("r-lib/actions/setup-pandoc@master", "r-lib/actions/setup-pandoc@v2") %>%
   stringr::str_replace_all("- \\{os: windows-latest, r: '3.6'\\}", "#- \\{os: windows-latest, r: '3.6'\\}") %>%
   stringr::str_replace_all("- \\{os: ubuntu-20.04,   r: 'oldrel', ", "#- \\{os: ubuntu-20.04,   r: 'oldrel', ") %>%
-  purrr::discard_at(2:4)
+  purrr::discard_at(2:4) %>%
   writeLines(con = ".github/workflows/R-CMD-check.yaml")
 # Need to check that test-coverage includes fix: "Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev"
 # Below can be turned into a function for use [conidtionally] on both pkgdown and test-coverage
