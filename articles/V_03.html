@@ -101,10 +101,9 @@ economic models are in part shaped by the choice of programming paradigm
 used to develop them. ready4 adopts an object oriented programming (OOP)
 paradigm which in practice means that the framework principally consists
 of classes (representations of data structures useful for modelling
-mental health systems) and methods (algorithms that can be applied to
-these data-structures to generate insight useful for policy-making).
-Adopting an OOP approach is particular useful for helping to make models
-<a href="https://www.ready4-dev.com/docs/getting-started/motivation/" class="external-link">transparent,
+health systems) and methods (algorithms that can be applied to these
+data-structures to generate insight useful for policy-making). Adopting
+an OOP approach is particular useful for helping to make models <a href="https://www.ready4-dev.com/docs/getting-started/motivation/" class="external-link">transparent,
 reusable and updatable</a>.</p>
 </div>
 <div class="section level2">
@@ -124,7 +123,7 @@ used in computational modelling projects in a manner that allows them to
 be safely combined. For example, assume there are two computational
 health economic models, one (<strong>A</strong>) focused on predicting
 the types and intensity of services used by individuals that present to
-mental health services and the other (<strong>B</strong>) that <a href="https://ready4-dev.github.io/youthu/articles/Prediction_With_Mdls.html" class="external-link">predicts
+health services and the other (<strong>B</strong>) that <a href="https://ready4-dev.github.io/youthu/articles/Prediction_With_Mdls.html" class="external-link">predicts
 outcomes for recipients of these services</a>. It may be desirable to
 develop a new model (<strong>C</strong>) that combines
 <strong>A</strong> and <strong>B</strong> to model both service use and
@@ -138,11 +137,11 @@ already defined for <strong>A</strong>.</p>
 class will work with any combination of input values that can be
 encapsulated by that class - making computational models more <a href="https://www.ready4-dev.com/docs/getting-started/concepts/transferable/" class="external-link">transferable</a>.
 For example, imagine a class (<strong>X</strong>) that is used to
-structure summary data relevant to mental health systems. Methods
-associated with <strong>X</strong> (e.g. a method to derive an unmet
-need statistic) can then applied to two instances of <strong>X</strong>
-- one containing data relevant to the Australian context and one with
-data from the UK context.</p>
+structure summary data relevant to health systems. Methods associated
+with <strong>X</strong> (e.g. a method to derive an unmet need
+statistic) can then applied to two instances of <strong>X</strong> - one
+containing data relevant to the Australian context and one with data
+from the UK context.</p>
 </div>
 <div class="section level4">
 <h4 id="inheritence">Inheritence<a class="anchor" aria-label="anchor" href="#inheritence"></a>
@@ -173,8 +172,8 @@ ensures that the respective contributions of the (potentially different)
 authorship teams behind <strong>A</strong>, <strong>B</strong> and
 <strong>C</strong> is clearer.</p>
 <p>Similarly, inheritance would allow re-use of much of the code from a
-model of the Australian mental health system when exploring similar
-topics within the UK context, while making it straightforward to develop
+model of the Australian health system when exploring similar topics
+within the UK context, while making it straightforward to develop
 additional code that addresses relevant divergence in features between
 the two jurisdictions. In practical terms, this would mean developing
 two child classes of <strong>X</strong> - class <strong>Y</strong> for
