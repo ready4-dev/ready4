@@ -21,11 +21,11 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install libcurl on Linux
+      - name: Install libraptor on Linux
         if: runner.os == 'Linux'
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y libraptor2-dev
+          sudo add-apt-repository ppa:cran/librdf
+          sudo apt update
 
 #libcurl4-openssl-dev
 
