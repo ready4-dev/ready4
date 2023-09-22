@@ -1,8 +1,8 @@
 ---
-title: "Apply And Extend The ready4 Model With Modules, Datasets and Analyses"
+title: "Apply ready4 To Author Modules, Datasets and Analyses"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Apply And Extend The ready4 Model With Modules, Datasets and Analyses}
+  %\VignetteIndexEntry{Apply ready4 To Author Modules, Datasets and Analyses}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,5 +14,5 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 library(ready4) 
 ```
 
-This vignette is now defunct - expanded and improved versions of the content previously detailed on this page is available on the www.ready4-dev.com website.
+This vignette is now defunct - expanded and improved versions of the content previously detailed on this page is available on the https://www.ready4-dev.com/ website.
 
