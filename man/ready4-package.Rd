@@ -8,11 +8,11 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the development of an economic model of the systems shaping young people's mental health. The base elements in this package are extended by other R packages - see https://www.ready4-dev.com/ for details. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the collaborative development of economic models of the systems shaping young people's mental health. The foundation provided by this package is extended by other R packages. For detailed documentation about the extended framework and models being developed with it see https://www.ready4-dev.com/. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton1@monash.edu).
 
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the development of an economic model of the systems shaping young people's mental health. The base elements in this package are extended by other R packages - see https://www.ready4-dev.com/ for details. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton@orygen.org.au).
+ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the collaborative development of economic models of the systems shaping young people's mental health. The foundation provided by this package is extended by other R packages. For detailed documentation about the extended framework and models being developed with it see https://www.ready4-dev.com/. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton1@monash.edu).
 }
 \seealso{
 Useful links:
@@ -32,7 +32,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Matthew Hamilton \email{matthew.hamilton@orygen.org.au} (\href{https://orcid.org/0000-0001-7407-9194}{ORCID})
+\strong{Maintainer}: Matthew Hamilton \email{matthew.hamilton1@monash.edu} (\href{https://orcid.org/0000-0001-7407-9194}{ORCID})
 
 Other contributors:
 \itemize{

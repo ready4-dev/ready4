@@ -19,17 +19,17 @@ library(ready4)
 ```
 
 ## Motivation
-The social, economic and service systems that shape population mental health are complex and thus can be challenging to model. Some mental health systems modelling projects may therefore be more tractable if broken into smaller tasks and advanced by multiple teams. Such phased and collaborative approaches can be facilitated by use of common frameworks for the development of computational models that are both open and modular.
+The social, economic and service systems that shape population health are complex and thus can be challenging to model. Some health economic modelling projects may therefore be more tractable if broken into smaller tasks and advanced by multiple teams. Such phased and collaborative approaches can be facilitated by use of common frameworks for the development of computational models that are both open and modular.
 
 ## Implementation
-The `ready4` package provides bare bones foundational elements for the ready4 open science computational model of youth mental health systems. This initial framework is extended by multiple other R packages - see the [primary model documentation website](https://www.ready4-dev.com/) for details. 
+The `ready4` package provides bare bones foundational elements of a software framework to implement transparent, reusable and updatable computational health economic models in R. The framework is extended by multiple other R packages - see the [project documentation website](https://www.ready4-dev.com/) for details. 
 
-### A toolkit for open and modular computational models of mental health systems
-The `ready4` package introduces some simple data-structures (S4 classes) and model algorithm syntax (generics and S4 methods) that can be useful for modelling mental health systems. These concepts are discussed in the following articles:
+### Articles
+The `ready4` package includes model module templates, a simple programming syntax and helper functions that can be useful for health economic modelling. These concepts are discussed in the following articles:
 
-- [Implement A Modular Computational Model Of Youth Mental Health Systems](V_01.html)
+- [Implement Modular Computational Health Economic Models](V_01.html)
 
-- [Use A Simple And Consistent Syntax To Model Youth Mental Health Systems](V_02.html)
+- [Use A Simple And Consistent Syntax In Computational Health Economic Models](V_02.html)
 
-- [Apply An Object-Oriented Paradigm To Computational Models Of Youth Mental Health Systems](V_03.html)
+- [Apply An Object-Oriented Paradigm To Computational Health Economic Models](V_03.html)
 

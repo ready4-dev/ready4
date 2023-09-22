@@ -57,3 +57,6 @@
 ^data-raw/WIP\.R$
 ^data-raw/fns/bind\.R$
 ^data-raw/ToGeneralise\.R$
+^data-raw/temporary\.github/pkgdown\.yaml$
+^data-raw/temporary\.github/R-CMD-check\.yaml$
+^data-raw/temporary\.github/test-coverage\.yaml$
