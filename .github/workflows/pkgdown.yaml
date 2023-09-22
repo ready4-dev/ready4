@@ -32,8 +32,8 @@ jobs:
         with:
           use-public-rspm: true
 
-# Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev
-# Below fix is a customisation of approach outlined in https://github.com/r-hub/sysreqsdb/issues/77#issuecomment-620025428
+    # Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev
+    # Below fix is a customisation of approach outlined in https://github.com/r-hub/sysreqsdb/issues/77#issuecomment-620025428
       - name: Install libraptor on Linux
         if: runner.os == 'Linux'
         run: |

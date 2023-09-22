@@ -21,18 +21,13 @@ jobs:
         with:
           use-public-rspm: true
 
+    # Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev
+    # Below fix is a customisation of approach outlined in https://github.com/r-hub/sysreqsdb/issues/77#issuecomment-620025428
       - name: Install libraptor on Linux
         if: runner.os == 'Linux'
         run: |
           sudo add-apt-repository ppa:cran/librdf
           sudo apt update
-
-#libcurl4-openssl-dev
-
-# Need to fix: libraptor2-dev : Depends: libcurl4-gnutls-dev but it is not installable
-          # sudo add-apt-repository ppa:cran/libraptor2
-          # sudo apt-get install r-cran-gert
-          # See https://github.com/r-hub/sysreqsdb/issues/77#issuecomment-620025428
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

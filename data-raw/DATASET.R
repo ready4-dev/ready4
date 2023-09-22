@@ -4,11 +4,11 @@ library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reusable And Updatable Computational Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the development of an economic model of the systems shaping young people's mental health.
-  The base elements in this package are extended by other R packages - see https://www.ready4-dev.com/ for details. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton@orygen.org.au).",
+                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the collaborative development of economic models of the systems shaping young people's mental health.
+  The foundation provided by this package is extended by other R packages. For detailed documentation about the extended framework and models being developed with it see https://www.ready4-dev.com/. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton1@monash.edu).",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
-                                                        "matthew.hamilton@orygen.org.au",role = c("aut",
+                                                        "matthew.hamilton1@monash.edu",role = c("aut",
                                                                                                   "cre"),
                                                       comment = c(ORCID = "0000-0001-7407-9194")
                                                     ),
