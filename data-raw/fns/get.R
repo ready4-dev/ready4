@@ -1,23 +1,27 @@
-get_badges_lup <- function(gh_repo_1L_chr = "ready4-dev/ready4",
+get_badge_urls <- function(pkg_nm_1L_chr,
+                           project_badges_url_1L_chr = "https://img.shields.io/badge/ready4",
+                           url_stub_1L_chr = "https://ready4-dev.github.io/"){
+  images_chr <- rvest::read_html(paste0(url_stub_1L_chr, pkg_nm_1L_chr, "/index.html")) %>%
+    rvest::html_elements("img")  %>%
+    rvest::html_attr("src")
+  badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% startsWith(project_badges_url_1L_chr)],
+                        zenodo_1L_chr = images_chr[images_chr %>% startsWith("https://zenodo.org/badge/DOI/")])
+  return(badge_urls_ls)
+}
+get_badges_lup <- function(ends_with_1L_chr = "ready4_badges_lup.RDS",
+                           gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
   ready4_badges_lup <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
-                                                  endsWith("ready4_badges_lup.RDS")]))
+                                                  endsWith(ends_with_1L_chr)]))
   return(ready4_badges_lup)
-}
-get_badge_urls <- function(pkg_nm_1L_chr){
-  images_chr <- rvest::read_html(paste0("https://ready4-dev.github.io/",pkg_nm_1L_chr,"/index.html")) %>%
-    rvest::html_elements("img")  %>%
-    rvest::html_attr("src")
-  badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% startsWith("https://img.shields.io/badge/ready4")],
-                        zenodo_1L_chr = images_chr[images_chr %>% startsWith("https://zenodo.org/badge/DOI/")])
-  return(badge_urls_ls)
 }
 get_cls_extensions <- function(pkg_extensions_tb,
                                gh_repo_1L_chr = "ready4-dev/ready4",
                                gh_tag_1L_chr = "Documentation_0.0",
+                               url_stub_1L_chr = "https://ready4-dev.github.io/",
                                validate_1L_lgl = F){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
@@ -29,12 +33,10 @@ get_cls_extensions <- function(pkg_extensions_tb,
     dplyr::filter(pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
     dplyr::arrange(pt_ns_chr) %>%
     dplyr::select(type_chr, pt_ns_chr, old_class_lgl)
-  # %>%
-  #   dplyr::filter(type_chr != "TTU_predictors_lup")
   if(validate_1L_lgl){
     cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>% unique() %>%
       purrr::map_dfr(~{
-        url_1L_chr <- paste0("https://ready4-dev.github.io/",
+        url_1L_chr <- paste0(url_stub_1L_chr,
                              .x,
                              "/reference/index",
                              ".html")
@@ -291,7 +293,7 @@ get_modules_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
   modules_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")]))
   return(modules_tb)
 }
-get_mthd_titles <- function(mthd_nms_chr, #NEED TO DEPRECATE IN READY4FUN
+get_mthd_titles <- function(mthd_nms_chr,
                             pkg_nm_1L_chr = "ready4",
                             path_1L_chr = character(0)){
   mthd_titles_chr <-  mthd_nms_chr %>%

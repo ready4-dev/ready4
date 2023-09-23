@@ -57,22 +57,7 @@ readLines(".github/workflows/R-CMD-check.yaml") %>%
   purrr::discard_at(2:4) %>%
   writeLines(con = ".github/workflows/R-CMD-check.yaml")
 # Need to check that test-coverage includes fix: "Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev"
-# Below can be turned into a function for use [conidtionally] on both pkgdown and test-coverage
-workflow_chr <- readLines(".github/workflows/pkgdown.yaml")
-index_1L_int <- which(workflow_chr== "      - uses: r-lib/actions/setup-pandoc@v2")
-workflow_chr <- c(workflow_chr[1:index_1L_int-1],c("      - uses: r-lib/actions/setup-tinytex@v2",""),workflow_chr[index_1L_int:length(workflow_chr)])
-index_1L_int <- which(workflow_chr== "      - uses: r-lib/actions/setup-r-dependencies@v2")
-workflow_chr <- c(workflow_chr[1:index_1L_int-1],
-                  c("    # Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev",
-                    "    # Below fix is a customisation of approach outlined in https://github.com/r-hub/sysreqsdb/issues/77#issuecomment-620025428",
-                    "      - name: Install libraptor on Linux",
-                    "        if: runner.os == 'Linux'",
-                    "        run: |",
-                    "          sudo add-apt-repository ppa:cran/librdf",
-                    "          sudo apt update",
-                    ""),
-                  workflow_chr[index_1L_int:length(workflow_chr)])
-writeLines(workflow_chr, con = ".github/workflows/pkgdown.yaml")
+write_to_edit_workflow("pkgdown.yaml") # In other packages, run for "test-coverage.yaml" as well.
 write_extra_pkgs_to_actions()
 devtools::build_vignettes()
 #
