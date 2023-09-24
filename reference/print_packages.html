@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9122</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9123</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,8 +63,11 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">print_packages</span><span class="op">(</span></span>
 <span>  pkg_extensions_tb <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  include_1L_chr <span class="op">=</span> <span class="st">"modules"</span>,</span>
+<span>  module_pkgs_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>  project_badges_url_1L_chr <span class="op">=</span> <span class="st">"https://img.shields.io/badge/ready4"</span>,</span>
 <span>  scroll_height_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
 <span>  scroll_width_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>  url_stub_1L_chr <span class="op">=</span> <span class="st">"https://ready4-dev.github.io/"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -79,12 +82,24 @@
 <dd><p>Include (a character vector of length one), Default: 'modules'</p></dd>
 
 
+<dt>module_pkgs_chr</dt>
+<dd><p>Module packages (a character vector), Default: character(0)</p></dd>
+
+
+<dt>project_badges_url_1L_chr</dt>
+<dd><p>Project badges url (a character vector of length one), Default: 'https://img.shields.io/badge/ready4'</p></dd>
+
+
 <dt>scroll_height_1L_chr</dt>
 <dd><p>Scroll height (a character vector of length one), Default: character(0)</p></dd>
 
 
 <dt>scroll_width_1L_chr</dt>
 <dd><p>Scroll width (a character vector of length one), Default: character(0)</p></dd>
+
+
+<dt>url_stub_1L_chr</dt>
+<dd><p>Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'</p></dd>
 
 
 <dt>...</dt>
