@@ -7,8 +7,11 @@
 print_packages(
   pkg_extensions_tb = NULL,
   include_1L_chr = "modules",
+  module_pkgs_chr = character(0),
+  project_badges_url_1L_chr = "https://img.shields.io/badge/ready4",
   scroll_height_1L_chr = character(0),
   scroll_width_1L_chr = character(0),
+  url_stub_1L_chr = "https://ready4-dev.github.io/",
   ...
 )
 }
@@ -17,9 +20,15 @@ print_packages(
 
 \item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
 
+\item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
+
+\item{project_badges_url_1L_chr}{Project badges url (a character vector of length one), Default: 'https://img.shields.io/badge/ready4'}
+
 \item{scroll_height_1L_chr}{Scroll height (a character vector of length one), Default: character(0)}
 
 \item{scroll_width_1L_chr}{Scroll width (a character vector of length one), Default: character(0)}
+
+\item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
 \item{...}{Additional arguments}
 }

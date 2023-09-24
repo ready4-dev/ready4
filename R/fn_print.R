@@ -108,6 +108,8 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @param methods_tb Methods (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param methods_chr Methods (a character vector), Default: NULL
+#' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
+#' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
 #' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @param return_1L_chr Return (a character vector of length one), Default: 'all'
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
@@ -120,12 +122,13 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @importFrom purrr map_chr
 #' @importFrom kableExtra kable kable_styling column_spec
 print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
-    methods_chr = NULL, path_1L_chr = character(0), return_1L_chr = "all", 
-    scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
-    ...) 
+    methods_chr = NULL, module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
+    path_1L_chr = character(0), return_1L_chr = "all", scroll_height_1L_chr = character(0), 
+    scroll_width_1L_chr = character(0), ...) 
 {
     if (is.null(methods_tb)) 
-        methods_tb <- make_methods_tb(path_1L_chr = path_1L_chr)
+        methods_tb <- make_methods_tb(module_pkgs_chr = module_pkgs_chr, 
+            path_1L_chr = path_1L_chr)
     if (is.null(methods_chr)) 
         methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
             return_1L_chr = return_1L_chr)
@@ -171,8 +174,11 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
 #' @description print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
+#' @param project_badges_url_1L_chr Project badges url (a character vector of length one), Default: 'https://img.shields.io/badge/ready4'
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param ... Additional arguments
 #' @return Package extensions (a kable)
 #' @rdname print_packages
@@ -182,11 +188,13 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
 #' @importFrom stringr str_remove
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
 print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules", 
+    module_pkgs_chr = character(0), project_badges_url_1L_chr = "https://img.shields.io/badge/ready4", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
-    ...) 
+    url_stub_1L_chr = "https://ready4-dev.github.io/", ...) 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
+        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr, 
+            module_pkgs_chr = module_pkgs_chr)
     if (nrow(pkg_extensions_tb) == 1) {
         pkg_extensions_tb <- rbind(pkg_extensions_tb, pkg_extensions_tb)
         is_single_1L_lgl <- T
@@ -195,7 +203,8 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
         is_single_1L_lgl <- F
     }
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Badges = purrr::map(pt_ns_chr, 
-        ~get_badge_urls(.x))) %>% dplyr::mutate(Type = "") %>% 
+        ~get_badge_urls(.x, project_badges_url_1L_chr = project_badges_url_1L_chr, 
+            url_stub_1L_chr = url_stub_1L_chr))) %>% dplyr::mutate(Type = "") %>% 
         dplyr::mutate(DOI = "") %>% dplyr::mutate(Logo = "")
     ready4_badges_chr <- purrr::map_chr(pkg_extensions_tb$Badges, 
         ~.x$ready4_1L_chr)
@@ -260,6 +269,7 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
 #' @description print_vignettes() is a Print function that prints output to console Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
 #' @param ... Additional arguments
@@ -273,11 +283,12 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
 #' @importFrom kableExtra cell_spec kable kable_styling
 #' @keywords internal
 print_vignettes <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules", 
-    scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
-    ...) 
+    module_pkgs_chr = character(0), scroll_height_1L_chr = character(0), 
+    scroll_width_1L_chr = character(0), ...) 
 {
     if (is.null(pkg_extensions_tb)) 
-        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr)
+        pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr, 
+            module_pkgs_chr = module_pkgs_chr)
     vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
     keep_lgl <- !is.na(vignettes_chr)
     vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]) %>% 

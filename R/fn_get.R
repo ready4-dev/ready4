@@ -1,23 +1,26 @@
 #' Get badge urls
 #' @description get_badge_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get badge urls. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Badge urls (a list).
 #' @param pkg_nm_1L_chr Package name (a character vector of length one)
+#' @param project_badges_url_1L_chr Project badges url (a character vector of length one), Default: 'https://img.shields.io/badge/ready4'
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @return Badge urls (a list)
 #' @rdname get_badge_urls
 #' @export 
 #' @importFrom rvest read_html html_elements html_attr
 #' @keywords internal
-get_badge_urls <- function (pkg_nm_1L_chr) 
+get_badge_urls <- function (pkg_nm_1L_chr, project_badges_url_1L_chr = "https://img.shields.io/badge/ready4", 
+    url_stub_1L_chr = "https://ready4-dev.github.io/") 
 {
-    images_chr <- rvest::read_html(paste0("https://ready4-dev.github.io/", 
-        pkg_nm_1L_chr, "/index.html")) %>% rvest::html_elements("img") %>% 
-        rvest::html_attr("src")
+    images_chr <- rvest::read_html(paste0(url_stub_1L_chr, pkg_nm_1L_chr, 
+        "/index.html")) %>% rvest::html_elements("img") %>% rvest::html_attr("src")
     badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% 
-        startsWith("https://img.shields.io/badge/ready4")], zenodo_1L_chr = images_chr[images_chr %>% 
+        startsWith(project_badges_url_1L_chr)], zenodo_1L_chr = images_chr[images_chr %>% 
         startsWith("https://zenodo.org/badge/DOI/")])
     return(badge_urls_ls)
 }
 #' Get badges lookup table
-#' @description get_badges_lup() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get badges lookup table. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Ready4 badges (a lookup table).
+#' @description get_badges_lup() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get badges lookup table. Function argument ends_with_1L_chr specifies the where to look for the required object. The function returns Ready4 badges (a lookup table).
+#' @param ends_with_1L_chr Ends with (a character vector of length one), Default: 'ready4_badges_lup.RDS'
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Ready4 badges (a lookup table)
@@ -25,12 +28,13 @@ get_badge_urls <- function (pkg_nm_1L_chr)
 #' @export 
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_badges_lup <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_1L_chr = "ready4-dev/ready4", 
+    gh_tag_1L_chr = "Documentation_0.0") 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
         tag = gh_tag_1L_chr, .token = "")
     ready4_badges_lup <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
-        endsWith("ready4_badges_lup.RDS")]))
+        endsWith(ends_with_1L_chr)]))
     return(ready4_badges_lup)
 }
 #' Get class extensions
@@ -38,6 +42,7 @@ get_badges_lup <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @param pkg_extensions_tb Package extensions (a tibble)
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param validate_1L_lgl Validate (a logical vector of length one), Default: F
 #' @return Class extensions (a tibble)
 #' @rdname get_cls_extensions
@@ -50,7 +55,8 @@ get_badges_lup <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @importFrom stringi stri_replace_last_fixed
 #' @keywords internal
 get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/ready4", 
-    gh_tag_1L_chr = "Documentation_0.0", validate_1L_lgl = F) 
+    gh_tag_1L_chr = "Documentation_0.0", url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    validate_1L_lgl = F) 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
         tag = gh_tag_1L_chr, .token = "")
@@ -62,8 +68,8 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
     if (validate_1L_lgl) {
         cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>% 
             unique() %>% purrr::map_dfr(~{
-            url_1L_chr <- paste0("https://ready4-dev.github.io/", 
-                .x, "/reference/index", ".html")
+            url_1L_chr <- paste0(url_stub_1L_chr, .x, "/reference/index", 
+                ".html")
             allowable_chr <- rvest::read_html((url_1L_chr)) %>% 
                 rvest::html_elements("a") %>% rvest::html_text2()
             allowable_chr <- allowable_chr[(allowable_chr %>% 

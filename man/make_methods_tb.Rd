@@ -8,6 +8,7 @@ make_methods_tb(
   packages_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
   include_1L_chr = "modules",
+  module_pkgs_chr = character(0),
   ns_var_nm_1L_chr = "pt_ns_chr",
   path_1L_chr = character(0),
   reference_var_nm_1L_chr = "Reference",
@@ -23,6 +24,8 @@ make_methods_tb(
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
 
 \item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
+
+\item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
 
 \item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 

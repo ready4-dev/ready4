@@ -10,6 +10,7 @@ make_programs_tbl(
   exclude_chr = "dce_sa_cards",
   format_1L_chr = "\%d-\%b-\%Y",
   tidy_desc_1L_lgl = T,
+  url_stub_1L_chr = "https://ready4-dev.github.io/",
   zenodo_1L_chr = "ready4",
   ...
 )
@@ -24,6 +25,8 @@ make_programs_tbl(
 \item{format_1L_chr}{Format (a character vector of length one), Default: '\%d-\%b-\%Y'}
 
 \item{tidy_desc_1L_lgl}{Tidy description (a logical vector of length one), Default: T}
+
+\item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
 \item{zenodo_1L_chr}{Zenodo (a character vector of length one), Default: 'ready4'}
 

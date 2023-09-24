@@ -9,7 +9,10 @@ make_modules_tb(
   cls_extensions_tb = NULL,
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
+  module_pkgs_chr = character(0),
   include_1L_chr = "modules",
+  ns_var_nm_1L_chr = "pt_ns_chr",
+  url_stub_1L_chr = "https://ready4-dev.github.io/",
   what_chr = "all"
 )
 }
@@ -22,7 +25,13 @@ make_modules_tb(
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 
+\item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
+
 \item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
+
+\item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
+
+\item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
 \item{what_chr}{What (a character vector), Default: 'all'}
 }

@@ -4,10 +4,18 @@
 \alias{get_badge_urls}
 \title{Get badge urls}
 \usage{
-get_badge_urls(pkg_nm_1L_chr)
+get_badge_urls(
+  pkg_nm_1L_chr,
+  project_badges_url_1L_chr = "https://img.shields.io/badge/ready4",
+  url_stub_1L_chr = "https://ready4-dev.github.io/"
+)
 }
 \arguments{
 \item{pkg_nm_1L_chr}{Package name (a character vector of length one)}
+
+\item{project_badges_url_1L_chr}{Project badges url (a character vector of length one), Default: 'https://img.shields.io/badge/ready4'}
+
+\item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 }
 \value{
 Badge urls (a list)

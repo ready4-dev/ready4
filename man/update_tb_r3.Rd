@@ -6,14 +6,27 @@
 \usage{
 update_tb_r3(
   tb_r3,
+  case_when_false_1L_chr = NA_character_,
+  case_when_true_1L_chr = NA_character_,
+  case_when_true_ls = NULL,
+  case_when_var_1L_chr = NA_character_,
   filter_cdn_1L_chr = NA_character_,
   fn = NULL,
   fn_env_ls = NULL,
-  slice_indcs_int = NA_integer_
+  slice_indcs_int = NA_integer_,
+  tf_false_val_1L_lgl = F
 )
 }
 \arguments{
 \item{tb_r3}{Tibble ready4 S3 (a ready4 S3 extension of tibble)}
+
+\item{case_when_false_1L_chr}{Case when false (a character vector of length one), Default: 'NA'}
+
+\item{case_when_true_1L_chr}{Case when true (a character vector of length one), Default: 'NA'}
+
+\item{case_when_true_ls}{Case when true (a list), Default: NULL}
+
+\item{case_when_var_1L_chr}{Case when variable (a character vector of length one), Default: 'NA'}
 
 \item{filter_cdn_1L_chr}{Filter condition (a character vector of length one), Default: 'NA'}
 
@@ -22,11 +35,13 @@ update_tb_r3(
 \item{fn_env_ls}{Function (a list of environments), Default: NULL}
 
 \item{slice_indcs_int}{Slice indices (an integer vector), Default: NA}
+
+\item{tf_false_val_1L_lgl}{Transform false value (a logical vector of length one), Default: F}
 }
 \value{
 Tibble ready4 S3 (a ready4 S3 extension of tibble)
 }
 \description{
-update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 s3. Function argument tb_r3 specifies the object to be updated. Argument filter_cdn_1L_chr provides the object to be updated. The function returns Tibble ready4 S3 (a ready4 S3 extension of tibble).
+update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 s3. Function argument tb_r3 specifies the object to be updated. Argument case_when_false_1L_chr provides the object to be updated. The function returns Tibble ready4 S3 (a ready4 S3 extension of tibble).
 }
 \keyword{internal}

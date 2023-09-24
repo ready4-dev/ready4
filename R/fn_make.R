@@ -12,6 +12,7 @@
 #' @param repos_chr Repositories (a character vector), Default: character(0)
 #' @param subroutine_repos_chr Subroutine repositories (a character vector), Default: character(0)
 #' @param tidy_desc_1L_lgl Tidy description (a logical vector of length one), Default: T
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param ... Additional arguments
 #' @return Releases (an output object of multiple potential types)
 #' @rdname make_code_releases_tbl
@@ -29,7 +30,8 @@ make_code_releases_tbl <- function (repo_type_1L_chr = "Framework", as_kbl_1L_lg
     format_1L_chr = "%d-%b-%Y", framework_repos_chr = character(0), 
     model_repos_chr = character(0), program_repos_chr = character(0), 
     org_1L_chr = "ready4-dev", repos_chr = character(0), subroutine_repos_chr = character(0), 
-    tidy_desc_1L_lgl = T, ...) 
+    tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    ...) 
 {
     if (identical(brochure_repos_chr, character(0))) {
         brochure_repos_chr <- "ready4web"
@@ -96,8 +98,7 @@ make_code_releases_tbl <- function (repo_type_1L_chr = "Framework", as_kbl_1L_lg
                 Release, Description)
         if (repo_type_1L_chr %in% c("Package", "Module", "Framework")) {
             logos_chr <- purrr::map_chr(releases_xx %>% dplyr::pull(repo_type_1L_chr), 
-                ~paste0("https://ready4-dev.github.io/", .x, 
-                  "/logo.png"))
+                ~paste0(url_stub_1L_chr, .x, "/logo.png"))
             releases_xx <- releases_xx %>% dplyr::mutate(`:=`(!!rlang::sym(repo_type_1L_chr), 
                 ""))
             indx_1L_int <- which(names(releases_xx) %in% c("Package", 
@@ -237,16 +238,22 @@ make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", serve
 #' Make datasets tibble
 #' @description make_dss_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make datasets tibble. The function returns Datasets (a tibble).
 #' @param dvs_tb Dataverses (a tibble)
+#' @param filter_cdns_ls Filter conditions (a list), Default: list()
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
 #' @return Datasets (a tibble)
 #' @rdname make_dss_tb
 #' @export 
 #' @importFrom dplyr filter select mutate
-#' @importFrom purrr pmap_dfr map_dfr
+#' @importFrom purrr pmap_dfr map_dfr reduce pluck
 #' @importFrom tibble tibble
 #' @keywords internal
-make_dss_tb <- function (dvs_tb, what_1L_chr = "all") 
+make_dss_tb <- function (dvs_tb, filter_cdns_ls = list(), what_1L_chr = "all") 
 {
+    if (identical(filter_cdns_ls, list())) {
+        filter_cdns_ls <- list(real = "Dataverse != \"fakes\"", 
+            fakes = "Dataverse == \"fakes\"", people = "Dataverse %in% c(\"TTU\", \"springtolife\")", 
+            places = "Dataverse %in% c(\"springtides\") | DOI == \"https://doi.org/10.7910/DVN/JHSCDJ\"")
+    }
     dss_tb <- dvs_tb %>% dplyr::filter(!is.na(Contents)) %>% 
         dplyr::select(Contents, Datasets_Meta, Dataverse) %>% 
         purrr::pmap_dfr(~{
@@ -257,16 +264,16 @@ make_dss_tb <- function (dvs_tb, what_1L_chr = "all")
                   "dsDescription")][[1]][[1]][[4]])
             }) %>% dplyr::mutate(Dataverse = ..3, DOI = ..1)
         })
-    if (what_1L_chr == "real") 
-        dss_tb <- dss_tb %>% dplyr::filter(Dataverse != "fakes")
-    if (what_1L_chr == "fakes") 
-        dss_tb <- dss_tb %>% dplyr::filter(Dataverse == "fakes")
-    if (what_1L_chr == "people") 
-        dss_tb <- dss_tb %>% dplyr::filter(Dataverse %in% c("TTU", 
-            "springtolife"))
-    if (what_1L_chr == "places") 
-        dss_tb <- dss_tb %>% dplyr::filter(Dataverse %in% c("springtides") | 
-            DOI == "https://doi.org/10.7910/DVN/JHSCDJ")
+    dss_tb <- purrr::reduce(1:length(filter_cdns_ls), .init = dss_tb, 
+        ~{
+            condition_1L_chr = filter_cdns_ls %>% purrr::pluck(.y)
+            if (names(filter_cdns_ls)[.y] == what_1L_chr) {
+                .x %>% update_tb_r3(filter_cdn_1L_chr = condition_1L_chr)
+            }
+            else {
+                .x
+            }
+        })
     return(dss_tb)
 }
 #' Make files tibble
@@ -347,8 +354,11 @@ make_framework_pkgs_chr <- function ()
 #' Make libraries tibble
 #' @description make_libraries_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make libraries tibble. The function returns Package extensions (a tibble).
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
 #' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
 #' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
+#' @param section_case_whens_chr Section case whens (a character vector), Default: character(0)
+#' @param type_case_whens_chr Type case whens (a character vector), Default: character(0)
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
 #' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
@@ -357,70 +367,87 @@ make_framework_pkgs_chr <- function ()
 #' @rdname make_libraries_tb
 #' @export 
 #' @importFrom tibble tibble
-#' @importFrom dplyr mutate case_when arrange desc select rename left_join
-#' @importFrom purrr map_chr map2 map_dfr
+#' @importFrom rlang sym
+#' @importFrom purrr reduce pluck map_chr map2 map_dfr
+#' @importFrom stats setNames
+#' @importFrom dplyr arrange desc mutate select pull rename left_join
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom bib2df bib2df
-make_libraries_tb <- function (include_1L_chr = "modules", ns_var_nm_1L_chr = "pt_ns_chr", 
-    reference_var_nm_1L_chr = "Reference", url_stub_1L_chr = "https://ready4-dev.github.io/", 
-    vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs", 
-    what_chr = "all") 
+make_libraries_tb <- function (include_1L_chr = "modules", module_pkgs_chr = character(0), 
+    ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_1L_chr = "Reference", 
+    section_case_whens_chr = character(0), type_case_whens_chr = character(0), 
+    url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
+    vignette_url_var_nm_1L_chr = "Vignettes_URLs", what_chr = "all") 
 {
-    modules_chr <- make_modules_pkgs_chr(what_chr)
+    if (identical(section_case_whens_chr, character(0))) {
+        section_case_whens_chr <- paste0(ns_var_nm_1L_chr, c(" %in% make_modules_pkgs_chr(\"people\") ~ \"People\"", 
+            " %in% make_modules_pkgs_chr(\"places\") ~ \"Places\"", 
+            " %in% make_modules_pkgs_chr(\"platforms\") ~ \"Platforms\"", 
+            " %in% make_modules_pkgs_chr(\"programs\") ~ \"Programs\""))
+    }
+    if (identical(type_case_whens_chr, character(0))) {
+        type_case_whens_chr <- paste0(ns_var_nm_1L_chr, c(" == \"ready4\" ~ \"Foundation\"", 
+            " == \"ready4class\" ~ \"Authoring (code - classes)\"", 
+            " == \"ready4fun\" ~ \"Authoring (code - functions)\"", 
+            " == \"ready4pack\" ~ \"Authoring (code - libraries)\"", 
+            " == \"ready4show\" ~ \"Authoring (code - programs)\"", 
+            " == \"ready4use\" ~ \"Authoring (datasets)\"", " == \"youthvars\" ~ \"Description (datasets)\"", 
+            " == \"scorz\" ~ \"Description (variable scoring)\"", 
+            " == \"specific\" ~ \"Modelling (inverse problems)\"", 
+            " == \"heterodox\" ~ \"Modelling (heterogeneity)\"", 
+            " == \"mychoice\" ~ \"Modelling (choice)\"", " == \"TTU\" ~ \"Modelling (health utility)\"", 
+            " == \"youthu\" ~ \"Prediction (health utility)\"", 
+            " == \"vicinity\" ~ \"Modelling (spatial)\"", " == \"aus\" ~ \"Modelling (Australian spatial)\""))
+    }
+    if (identical(module_pkgs_chr, character(0))) 
+        module_pkgs_chr <- make_modules_pkgs_chr(what_chr)
     fw_chr <- make_framework_pkgs_chr()
     if (include_1L_chr == "modules") {
-        libraries_chr <- modules_chr
+        libraries_chr <- module_pkgs_chr
     }
     else {
         if (include_1L_chr == "framework") {
             libraries_chr <- fw_chr
         }
         if (include_1L_chr == "all") 
-            libraries_chr <- c(fw_chr, modules_chr)
+            libraries_chr <- c(fw_chr, module_pkgs_chr)
     }
-    pkg_extensions_tb <- tibble::tibble(pt_ns_chr = libraries_chr) %>% 
-        dplyr::mutate(Type = dplyr::case_when(pt_ns_chr == "ready4" ~ 
-            "Foundation", pt_ns_chr == "ready4class" ~ "Authoring (code - classes)", 
-            pt_ns_chr == "ready4fun" ~ "Authoring (code - functions)", 
-            pt_ns_chr == "ready4pack" ~ "Authoring (code - libraries)", 
-            pt_ns_chr == "ready4show" ~ "Authoring (code - programs)", 
-            pt_ns_chr == "ready4use" ~ "Authoring (datasets)", 
-            pt_ns_chr == "youthvars" ~ "Description (datasets)", 
-            pt_ns_chr == "scorz" ~ "Description (variable scoring)", 
-            pt_ns_chr == "specific" ~ "Modelling (inverse problems)", 
-            pt_ns_chr == "heterodox" ~ "Modelling (heterogeneity)", 
-            pt_ns_chr == "mychoice" ~ "Modelling (choice)", pt_ns_chr == 
-                "TTU" ~ "Modelling (health utility)", pt_ns_chr == 
-                "youthu" ~ "Prediction (health utility)", pt_ns_chr == 
-                "vicinity" ~ "Modelling (spatial)", pt_ns_chr == 
-                "aus" ~ "Modelling (Australian spatial)", T ~ 
-                "")) %>% dplyr::mutate(Section = dplyr::case_when(pt_ns_chr %in% 
-        make_modules_pkgs_chr("people") ~ "People", pt_ns_chr %in% 
-        make_modules_pkgs_chr("places") ~ "Places", pt_ns_chr %in% 
-        make_modules_pkgs_chr("platforms") ~ "Platforms", pt_ns_chr %in% 
-        make_modules_pkgs_chr("programs") ~ "Programs", T ~ "Framework"))
+    pkg_extensions_tb <- tibble::tibble(`:=`(!!rlang::sym(ns_var_nm_1L_chr), 
+        libraries_chr), Type = "", Section = "")
+    pkg_extensions_tb <- purrr::reduce(1:2, .init = pkg_extensions_tb, 
+        ~{
+            case_whens_ls <- list(type_case_whens_chr, section_case_whens_chr)
+            vars_chr <- c("Type", "Section")
+            false_chr <- c("", "Framework")
+            .x %>% update_tb_r3(case_when_false_1L_chr = false_chr[.y], 
+                case_when_true_ls = as.list(case_whens_ls %>% 
+                  purrr::pluck(.y)) %>% stats::setNames(rep(vars_chr[.y], 
+                  length(case_whens_ls %>% purrr::pluck(.y)))), 
+                case_when_var_1L_chr = vars_chr[.y])
+        })
     if (include_1L_chr == "framework") {
         pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::arrange(dplyr::desc(Type), 
-            pt_ns_chr)
+            !!rlang::sym(ns_var_nm_1L_chr))
     }
     else {
         pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::arrange(Section, 
-            Type, pt_ns_chr)
+            Type, !!rlang::sym(ns_var_nm_1L_chr))
     }
-    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Link = purrr::map_chr(pt_ns_chr, 
+    pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Link = purrr::map_chr(!!rlang::sym(ns_var_nm_1L_chr), 
         ~paste0(url_stub_1L_chr, .x, "/index", ".html"))) %>% 
-        dplyr::mutate(Library = kableExtra::cell_spec(pt_ns_chr, 
+        dplyr::mutate(Library = kableExtra::cell_spec(!!rlang::sym(ns_var_nm_1L_chr), 
             "html", link = Link))
     pkg_extensions_tb <- add_vignette_links(pkg_extensions_tb, 
         ns_var_nm_1L_chr = ns_var_nm_1L_chr, reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
         url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
         vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Citation = paste0(url_stub_1L_chr, 
-        pt_ns_chr, "/authors.html")) %>% dplyr::mutate(manual_urls_ls = purrr::map2(pt_ns_chr, 
-        Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>% 
-        dplyr::mutate(code_urls_ls = purrr::map2(pt_ns_chr, Link, 
-            ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
+        !!rlang::sym(ns_var_nm_1L_chr), "/authors.html")) %>% 
+        dplyr::mutate(manual_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr), 
+            Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>% 
+        dplyr::mutate(code_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr), 
+            Link, ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
     y_tb <- purrr::map_dfr(pkg_extensions_tb$Citation, ~{
         if (T) {
             f <- tempfile(fileext = ".bib")
@@ -433,10 +460,11 @@ make_libraries_tb <- function (include_1L_chr = "modules", ns_var_nm_1L_chr = "p
         }
         else {
         }
-    }) %>% dplyr::mutate(pt_ns_chr = pkg_extensions_tb$pt_ns_chr) %>% 
+    }) %>% dplyr::mutate(`:=`(!!rlang::sym(ns_var_nm_1L_chr), 
+        pkg_extensions_tb %>% dplyr::pull(!!rlang::sym(ns_var_nm_1L_chr)))) %>% 
         dplyr::rename(DOI_chr = DOI, Title = TITLE, Authors = AUTHOR)
     pkg_extensions_tb <- dplyr::left_join(pkg_extensions_tb, 
-        y_tb, by = "pt_ns_chr")
+        y_tb, by = ns_var_nm_1L_chr)
     return(pkg_extensions_tb)
 }
 #' Make list phrase
@@ -475,6 +503,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @param packages_tb Packages (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
 #' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
 #' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
@@ -488,14 +517,16 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @importFrom tibble tibble
 #' @importFrom purrr map flatten_chr discard
 make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_character_, 
-    include_1L_chr = "modules", ns_var_nm_1L_chr = "pt_ns_chr", 
-    path_1L_chr = character(0), reference_var_nm_1L_chr = "Reference", 
-    return_1L_chr = "all", url_stub_1L_chr = "https://ready4-dev.github.io/", 
-    vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
+    include_1L_chr = "modules", module_pkgs_chr = character(0), 
+    ns_var_nm_1L_chr = "pt_ns_chr", path_1L_chr = character(0), 
+    reference_var_nm_1L_chr = "Reference", return_1L_chr = "all", 
+    url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
+    vignette_url_var_nm_1L_chr = "Vignettes_URLs") 
 {
     if (is.null(packages_tb)) {
         packages_tb <- make_libraries_tb(include_1L_chr = include_1L_chr, 
-            ns_var_nm_1L_chr = ns_var_nm_1L_chr, reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
+            module_pkgs_chr = module_pkgs_chr, ns_var_nm_1L_chr = ns_var_nm_1L_chr, 
+            reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
             url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
             vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr)
     }
@@ -534,7 +565,10 @@ make_modules_pkgs_chr <- function (what_chr = "all")
 #' @param cls_extensions_tb Class extensions (a tibble), Default: NULL
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
 #' @param include_1L_chr Include (a character vector of length one), Default: 'modules'
+#' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param what_chr What (a character vector), Default: 'all'
 #' @return Modules (a tibble)
 #' @rdname make_modules_tb
@@ -542,22 +576,25 @@ make_modules_pkgs_chr <- function (what_chr = "all")
 #' @importFrom dplyr inner_join arrange mutate case_when select
 #' @importFrom purrr flatten_int discard map map_int pluck map2_chr pmap map2
 #' @importFrom stringr str_sub str_remove_all str_locate str_match
+#' @importFrom rlang sym
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringi stri_replace_last_regex
 make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    include_1L_chr = "modules", what_chr = "all") 
+    module_pkgs_chr = character(0), include_1L_chr = "modules", 
+    ns_var_nm_1L_chr = "pt_ns_chr", url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    what_chr = "all") 
 {
     if (is.null(pkg_extensions_tb)) 
         pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr, 
-            what_chr = what_chr)
+            module_pkgs_chr = module_pkgs_chr, what_chr = what_chr)
     if (is.null(cls_extensions_tb)) 
         cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb, 
             gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr, 
-            validate_1L_lgl = T)
+            url_stub_1L_chr = url_stub_1L_chr, validate_1L_lgl = T)
     modules_tb <- dplyr::inner_join(cls_extensions_tb, pkg_extensions_tb, 
-        by = "pt_ns_chr") %>% dplyr::arrange(type_chr, old_class_lgl)
+        by = ns_var_nm_1L_chr) %>% dplyr::arrange(type_chr, old_class_lgl)
     order_int <- modules_tb$Reference %>% purrr::flatten_int() %>% 
         unique() %>% purrr::discard(is.na)
     modules_tb <- modules_tb %>% dplyr::mutate(Reference = dplyr::case_when(!is.na(Reference) ~ 
@@ -598,9 +635,9 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
             }
             new_chr
         }), T ~ Vignettes_URLs))
-    modules_tb <- modules_tb %>% dplyr::mutate(Class = purrr::pmap(list(pt_ns_chr, 
+    modules_tb <- modules_tb %>% dplyr::mutate(Class = purrr::pmap(list(!!rlang::sym(ns_var_nm_1L_chr), 
         type_chr, old_class_lgl), ~{
-        kableExtra::cell_spec(..2, "html", link = paste0("https://ready4-dev.github.io/", 
+        kableExtra::cell_spec(..2, "html", link = paste0(url_stub_1L_chr, 
             ..1, "/reference/", ifelse(..3, ..2, paste0(..2, 
                 "-class")), ".html"))
     })) %>% dplyr::mutate(Examples = purrr::map2(Vignettes_URLs, 
@@ -622,6 +659,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @param exclude_chr Exclude (a character vector), Default: 'dce_sa_cards'
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
 #' @param tidy_desc_1L_lgl Tidy description (a logical vector of length one), Default: T
+#' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param zenodo_1L_chr Zenodo (a character vector of length one), Default: 'ready4'
 #' @param ... Additional arguments
 #' @return Programs (an output object of multiple potential types)
@@ -636,11 +674,11 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @importFrom kableExtra cell_spec kable kable_styling
 #' @keywords internal
 make_programs_tbl <- function (what_1L_chr = "Program", as_kbl_1L_lgl = F, exclude_chr = "dce_sa_cards", 
-    format_1L_chr = "%d-%b-%Y", tidy_desc_1L_lgl = T, zenodo_1L_chr = "ready4", 
-    ...) 
+    format_1L_chr = "%d-%b-%Y", tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    zenodo_1L_chr = "ready4", ...) 
 {
     programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, 
-        exclude_chr = exclude_chr, tidy_desc_1L_lgl = F) %>% 
+        exclude_chr = exclude_chr, tidy_desc_1L_lgl = F, url_stub_1L_chr = url_stub_1L_chr) %>% 
         dplyr::group_by(!!rlang::sym(what_1L_chr)) %>% dplyr::filter(dplyr::row_number() == 
         1) %>% dplyr::arrange(!!rlang::sym(what_1L_chr)) %>% 
         dplyr::ungroup()

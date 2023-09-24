@@ -5,11 +5,14 @@
 \title{Get badges lookup table}
 \usage{
 get_badges_lup(
+  ends_with_1L_chr = "ready4_badges_lup.RDS",
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0"
 )
 }
 \arguments{
+\item{ends_with_1L_chr}{Ends with (a character vector of length one), Default: 'ready4_badges_lup.RDS'}
+
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
@@ -18,6 +21,6 @@ get_badges_lup(
 Ready4 badges (a lookup table)
 }
 \description{
-get_badges_lup() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get badges lookup table. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Ready4 badges (a lookup table).
+get_badges_lup() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get badges lookup table. Function argument ends_with_1L_chr specifies the where to look for the required object. The function returns Ready4 badges (a lookup table).
 }
 \keyword{internal}

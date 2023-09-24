@@ -17,6 +17,7 @@ make_code_releases_tbl(
   repos_chr = character(0),
   subroutine_repos_chr = character(0),
   tidy_desc_1L_lgl = T,
+  url_stub_1L_chr = "https://ready4-dev.github.io/",
   ...
 )
 }
@@ -44,6 +45,8 @@ make_code_releases_tbl(
 \item{subroutine_repos_chr}{Subroutine repositories (a character vector), Default: character(0)}
 
 \item{tidy_desc_1L_lgl}{Tidy description (a logical vector of length one), Default: T}
+
+\item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
 \item{...}{Additional arguments}
 }

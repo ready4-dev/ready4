@@ -6,8 +6,11 @@
 \usage{
 make_libraries_tb(
   include_1L_chr = "modules",
+  module_pkgs_chr = character(0),
   ns_var_nm_1L_chr = "pt_ns_chr",
   reference_var_nm_1L_chr = "Reference",
+  section_case_whens_chr = character(0),
+  type_case_whens_chr = character(0),
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   vignette_var_nm_1L_chr = "Vignettes",
   vignette_url_var_nm_1L_chr = "Vignettes_URLs",
@@ -17,9 +20,15 @@ make_libraries_tb(
 \arguments{
 \item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
 
+\item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
+
 \item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 
 \item{reference_var_nm_1L_chr}{Reference variable name (a character vector of length one), Default: 'Reference'}
+
+\item{section_case_whens_chr}{Section case whens (a character vector), Default: character(0)}
+
+\item{type_case_whens_chr}{Type case whens (a character vector), Default: character(0)}
 
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 

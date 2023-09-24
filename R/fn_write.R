@@ -1041,6 +1041,40 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, parent_d
         options_chr = options_chr, return_1L_lgl = T)
     return(ds_ls)
 }
+#' Write to edit workflow
+#' @description write_to_edit_workflow() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to edit workflow. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param fl_nm_1L_chr File name (a character vector of length one)
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param dir_path_1L_chr Directory path (a character vector of length one), Default: '.github/workflows'
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @return NULL
+#' @rdname write_to_edit_workflow
+#' @export 
+#' @keywords internal
+write_to_edit_workflow <- function (fl_nm_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
+    dir_path_1L_chr = ".github/workflows", options_chr = c("Y", 
+        "N")) 
+{
+    path_1L_chr <- paste0(dir_path_1L_chr, "/", fl_nm_1L_chr)
+    workflow_chr <- readLines(path_1L_chr)
+    index_1L_int <- which(workflow_chr == "      - uses: r-lib/actions/setup-pandoc@v2")
+    workflow_chr <- c(workflow_chr[1:index_1L_int - 1], c("      - uses: r-lib/actions/setup-tinytex@v2", 
+        ""), workflow_chr[index_1L_int:length(workflow_chr)])
+    index_1L_int <- which(workflow_chr == "      - uses: r-lib/actions/setup-r-dependencies@v2")
+    workflow_chr <- c(workflow_chr[1:index_1L_int - 1], c("    # Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev", 
+        "    # Below fix is a customisation of approach outlined in https://github.com/r-hub/sysreqsdb/issues/77#issuecomment-620025428", 
+        "      - name: Install libraptor on Linux", "        if: runner.os == 'Linux'", 
+        "        run: |", "          sudo add-apt-repository ppa:cran/librdf", 
+        "          sudo apt update", ""), workflow_chr[index_1L_int:length(workflow_chr)])
+    write_with_consent(consented_fn = writeLines, prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
+        fl_nm_1L_chr, " to ", dir_path_1L_chr, "?"), consent_1L_chr = consent_1L_chr, 
+        consent_indcs_int = consent_indcs_int, consented_args_ls = list(text = workflow_chr, 
+            con = path_1L_chr), consented_msg_1L_chr = paste0("File ", 
+            fl_nm_1L_chr, " has been written to ", dir_path_1L_chr, 
+            "."), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+        options_chr = options_chr)
+}
 #' Write to force links in
 #' @description write_to_force_links_in() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to force links in. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param path_to_mkdn_1L_chr Path to markdown (a character vector of length one)

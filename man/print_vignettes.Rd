@@ -7,6 +7,7 @@
 print_vignettes(
   pkg_extensions_tb = NULL,
   include_1L_chr = "modules",
+  module_pkgs_chr = character(0),
   scroll_height_1L_chr = character(0),
   scroll_width_1L_chr = character(0),
   ...
@@ -16,6 +17,8 @@ print_vignettes(
 \item{pkg_extensions_tb}{Package extensions (a tibble), Default: NULL}
 
 \item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
+
+\item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
 
 \item{scroll_height_1L_chr}{Scroll height (a character vector of length one), Default: character(0)}
 

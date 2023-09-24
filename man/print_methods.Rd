@@ -8,6 +8,8 @@ print_methods(
   methods_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
   methods_chr = NULL,
+  module_pkgs_chr = character(0),
+  ns_var_nm_1L_chr = "pt_ns_chr",
   path_1L_chr = character(0),
   return_1L_chr = "all",
   scroll_height_1L_chr = character(0),
@@ -21,6 +23,10 @@ print_methods(
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
 
 \item{methods_chr}{Methods (a character vector), Default: NULL}
+
+\item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
+
+\item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 
 \item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
 
