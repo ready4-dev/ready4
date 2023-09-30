@@ -247,12 +247,30 @@ get_generics <- function(pkg_nm_1L_chr = "ready4",
   }
   return(generics_chr)
 }
+get_libraries_ls <- function(gh_repo_1L_chr = "ready4-dev/ready4",
+                             gh_tag_1L_chr = "Documentation_0.0"){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
+                                             tag = gh_tag_1L_chr,
+                                             .token = "")
+  if(any(dmt_urls_chr %>% endsWith("libraries_ls.RDS"))){
+    libraries_ls <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_ls.RDS")]))
+  }else{
+    libraries_ls <- NULL
+  }
+  return(libraries_ls)
+}
 get_libraries_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
-  libraries_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")]))
+  #if(is.null(libraries_tb)){
+    if(any(dmt_urls_chr %>% endsWith("libraries_tb.RDS"))){
+      libraries_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")]))
+    }else{
+      libraries_tb <- NULL
+    }
+  #}
   return(libraries_tb)
 }
 get_manual_urls <- function(pkg_nm_1L_chr = "ready4",

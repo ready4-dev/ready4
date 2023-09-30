@@ -1,3 +1,59 @@
+update_libraries_ls <- function(libraries_ls = NULL, additions_tb = make_additions_tb()){
+  if(!identical(additions_tb, make_additions_tb())){
+    append_ls <- additions_tb$category_chr %>% unique() %>%
+      purrr::map(~get_from_lup_obj(additions_tb, match_value_xx = .x, match_var_nm_1L_chr = "category_chr", target_var_nm_1L_chr = "library_chr")) %>%
+      stats::setNames(additions_tb$category_chr %>% unique())
+    append_ls <- names(append_ls) %>% purrr::map2(append_ls,
+                                                  ~ c(libraries_ls %>% purrr::pluck(.x), .y) %>% unique() %>% sort()) %>% stats::setNames(names(append_ls))
+    libraries_ls[which(names(libraries_ls) %in% names(append_ls))] <- NULL
+    libraries_ls <- append(libraries_ls, append_ls)
+    libraries_ls <- libraries_ls[order(names(libraries_ls))]
+  }
+  return(libraries_ls)
+}
+update_libraries_tb <- function(libraries_tb = make_libraries_tb(),
+                                additions_tb = make_additions_tb(),
+                                module_pkgs_chr = character(0),
+                                include_1L_chr = "modules",
+                                ns_var_nm_1L_chr = "pt_ns_chr",
+                                reference_var_nm_1L_chr = "Reference",
+                                url_stub_1L_chr = "https://ready4-dev.github.io/",
+                                vignette_var_nm_1L_chr = "Vignettes",
+                                vignette_url_var_nm_1L_chr = "Vignettes_URLs",
+                                what_chr = "all"){
+  if(!identical(additions_tb, make_additions_tb())){
+    new_cases_tb <- make_libraries_tb(additions_tb,
+                                      include_1L_chr = include_1L_chr, module_pkgs_chr = module_pkgs_chr, ns_var_nm_1L_chr = ns_var_nm_1L_chr,
+                                      reference_var_nm_1L_chr = reference_var_nm_1L_chr,
+                                      url_stub_1L_chr = url_stub_1L_chr,
+                                      vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
+                                      vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr,
+                                      what_chr = what_chr)
+    libraries_tb <- dplyr::bind_rows(dplyr::filter(libraries_tb, !(!!rlang::sym(ns_var_nm_1L_chr) %in% dplyr::pull(new_cases_tb,!!rlang::sym(ns_var_nm_1L_chr)))),
+                                     new_cases_tb) %>%
+      dplyr::arrange(Section)
+  }
+
+  if(include_1L_chr %in% c("framework","Framework")){
+    libraries_tb <- dplyr::filter(libraries_tb, Section == "Framework")
+  }
+  if(include_1L_chr %in% c("modules","Modules")){
+    libraries_tb <- dplyr::filter(libraries_tb, Section != "Framework")
+  }
+  if(!identical(module_pkgs_chr, character(0))){
+    libraries_tb <- dplyr::filter(libraries_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% module_pkgs_chr)
+  }
+  if(!what_chr %in% c("all","All")){
+    libraries_ls <- make_libraries_ls(libraries_tb = libraries_tb)
+    include_int <- what_chr %>% purrr::map(~stringr::str_which(names(libraries_ls),stringr::regex(.x, ignore_case = TRUE))) %>% purrr::flatten_int()
+    if(identical(include_int, integer(0))){
+      libraries_tb <- dplyr::filter(libraries_tb, F)
+    }else{
+      libraries_tb <- dplyr::filter(libraries_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% purrr::flatten_chr(libraries_ls[include_int]))
+    }
+  }
+  return(libraries_tb)
+}
 update_pt_fn_args_ls <- function(args_ls){
   arg_lgths_dbl <- args_ls %>% purrr::map_dbl(~length(.x))
   arg_max_lgth_1L_dbl <- max(arg_lgths_dbl)
@@ -65,7 +121,6 @@ update_tb_r3 <- function(tb_r3,
                                                                            T ~ !!rlang::sym(case_when_false_1L_chr)))
 
   }
-
   if(!is.null(fn_env_ls) & !is.null(fn))
     tb_r3 <- add_rows_from_fn_args(tb_r3,
                                    fn = fn,

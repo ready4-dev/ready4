@@ -4,12 +4,36 @@ library(ready4fun)
 X <- Ready4useRepos(gh_repo_1L_chr = "ready4-dev/ready4",
                     gh_tag_1L_chr = "Documentation_0.0")
 Y <- ingest(X)
+#libraries_tb <- Y@b_Ready4useIngest@objects_ls$libraries_tb
+additions_tb <- make_additions_tb("Framework",
+                                  make_framework_pkgs_chr(),
+                                  c("Foundation","Authoring (module functions)","Authoring (module classes)","Authoring (module libraries)","Authoring (model datasets)","Authoring (analysis programs)"))
+module_libraries_ls <- list(People = list(names_chr = c("youthvars", "scorz", "specific","TTU", "youthu", "mychoice","heterodox"),
+                                          descriptions_chr = c("Description (datasets)", "Description (variable scoring)", "Modelling (inverse problems)", "Modelling (health utility)", "Prediction (health utility)", "Modelling (choice)", "Modelling (heterogeneity)")),
+                            Places = list(names_chr = c("aus", "vicinity"),
+                                          descriptions_chr = c("Modelling (Australian spatial)", "Modelling (spatial)")),
+                            #Platforms = ,
+                            Programs = list(names_chr = c("bimp", "costly"),
+                                            descriptions_chr = c("Modelling (budget impact)", "Modelling (costs)")))
+extras_tb <- module_libraries_ls  %>% # c("people", "places","platforms","programs")
+  purrr::map2_dfr(names(module_libraries_ls),
+                  ~make_additions_tb(library_chr = .x$names_chr,#make_modules_pkgs_chr(.x),
+                                     category_chr = .y,#Hmisc::capitalize(.x),
+                                     type_chr = .x$descriptions_chr
+                                     # make_modules_pkgs_chr(.x) %>% purrr::map_chr(~get_from_lup_obj(libraries_tb,
+                                     #                                                                         match_var_nm_1L_chr = "pt_ns_chr",
+                                     #                                                                         match_value_xx = .x, target_var_nm_1L_chr = "Type"))
+                                     ))
+additions_tb <- dplyr::bind_rows(additions_tb, extras_tb)
+libraries_tb <- make_libraries_tb(additions_tb, include_1L_chr = "all")
+Y@b_Ready4useIngest@objects_ls$libraries_tb <- libraries_tb
+#libraries_ls <- update_libraries_ls(NULL, additions_tb)
+
 # abbreviations_lup <- procure(procureSlot(Y,
 #                                          "b_Ready4useIngest"),
 #                              "abbreviations_lup")
-Y@b_Ready4useIngest@objects_ls$treat_as_words_chr <- c(Y@b_Ready4useIngest@objects_ls$treat_as_words_chr,
-                                                       "workflow") %>% sort()
-
+# Y@b_Ready4useIngest@objects_ls$treat_as_words_chr <- c(Y@b_Ready4useIngest@objects_ls$treat_as_words_chr,
+#                                                        "workflow") %>% sort()
 # get_abbrs("interval",abbreviations_lup) # from ready4fun
 # get_abbrs("rmd",abbreviations_lup,F) # from ready4fun
 # abbreviations_lup <- ready4fun::renew.ready4fun_abbreviations(abbreviations_lup,
@@ -26,7 +50,10 @@ Y@b_Ready4useIngest@objects_ls$treat_as_words_chr <- c(Y@b_Ready4useIngest@objec
 #                                                  T ~ long_name_chr))
 Y <- renewSlot(Y,
                new_val_xx = Ready4useIngest(objects_ls = list(#abbreviations_lup = abbreviations_lup,
-                                                              treat_as_words_chr = Y@b_Ready4useIngest@objects_ls$treat_as_words_chr)),
+                    #libraries_tb = libraries_tb
+                 libraries_ls = libraries_ls
+                 #treat_as_words_chr = Y@b_Ready4useIngest@objects_ls$treat_as_words_chr
+                 )),
                slot_nm_1L_chr = "b_Ready4useIngest")
 Y <- share(Y,
            type_1L_chr = "prefer_gh")

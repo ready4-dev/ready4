@@ -142,16 +142,27 @@ print_modules <- function(modules_tb,
                    ...)
   return(modules_kbl)
 }
-print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules",
+print_packages <- function (pkg_extensions_tb = NULL,
+                            gh_repo_1L_chr = "ready4-dev/ready4",
+                            gh_tag_1L_chr = "Documentation_0.0",
+                            include_1L_chr = "modules",
                             module_pkgs_chr = character(0), ##
+                            ns_var_nm_1L_chr = "pt_ns_chr", #
                             project_badges_url_1L_chr = "https://img.shields.io/badge/ready4", ##
                             scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0),
                             url_stub_1L_chr = "https://ready4-dev.github.io/", ##
+                            what_chr = "all", #
                             ...)
 {
   if (is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr,
-                                           module_pkgs_chr = module_pkgs_chr)
+    pkg_extensions_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr,
+                                          gh_tag_1L_chr = gh_tag_1L_chr) %>%
+      update_libraries_tb(include_1L_chr = include_1L_chr,
+                          module_pkgs_chr = module_pkgs_chr,
+                          ns_var_nm_1L_chr = ns_var_nm_1L_chr,
+                          what_chr = what_chr)
+      # make_libraries_tb(include_1L_chr = include_1L_chr, # get_libraries_tb
+      #                                      module_pkgs_chr = module_pkgs_chr)
   if(nrow(pkg_extensions_tb) == 1){
     pkg_extensions_tb <- rbind(pkg_extensions_tb,pkg_extensions_tb)
     is_single_1L_lgl <- T
@@ -238,14 +249,24 @@ print_packages <- function (pkg_extensions_tb = NULL, include_1L_chr = "modules"
   return(pkg_extensions_kbl)
 }
 print_vignettes <- function(pkg_extensions_tb = NULL,
+                            gh_repo_1L_chr = "ready4-dev/ready4",
+                            gh_tag_1L_chr = "Documentation_0.0",
                             include_1L_chr = "modules",
                             module_pkgs_chr = character(0), ##
+                            ns_var_nm_1L_chr = "pt_ns_chr", #
                             scroll_height_1L_chr = character(0),
                             scroll_width_1L_chr = character(0),
+                            what_chr = "all",
                             ...){
   if(is.null(pkg_extensions_tb))
-    pkg_extensions_tb <- make_libraries_tb(include_1L_chr = include_1L_chr,
-                                           module_pkgs_chr = module_pkgs_chr)
+    pkg_extensions_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr,
+                                          gh_tag_1L_chr = gh_tag_1L_chr) %>%
+      update_libraries_tb(include_1L_chr = include_1L_chr,
+                          module_pkgs_chr = module_pkgs_chr,
+                          ns_var_nm_1L_chr = ns_var_nm_1L_chr,
+                          what_chr = what_chr)
+      # make_libraries_tb(include_1L_chr = include_1L_chr, # get_libraries_tb
+      #                                      module_pkgs_chr = module_pkgs_chr)
   vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
   keep_lgl <- !is.na(vignettes_chr)
   vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]#,

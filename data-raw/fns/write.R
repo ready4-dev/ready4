@@ -447,6 +447,49 @@ write_fls_to_repo <- function(paths_chr,
   }
   return(ids_int)
 }
+
+write_library_metadata <- function(additions_tb = make_additions_tb(),
+                                   libraries_ls = NULL,
+                                   libraries_tb = NULL,
+                                   consent_1L_chr = "",
+                                   consent_indcs_int = 1L,
+                                   include_framework_1L_lgl = F,
+                                   gh_repo_1L_chr = "ready4-dev/ready4",
+                                   gh_tag_1L_chr = "Documentation_0.0",
+                                   options_chr = c("Y", "N")){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
+                                             tag = gh_tag_1L_chr,
+                                             .token = "")
+  table_url_1L_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")]))
+  libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
+  # if(any(dmt_urls_chr %>% endsWith("libraries_ls.RDS"))){
+  #   libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
+  # }else{
+  #   libraries_ls <- NULL
+  # }
+  libraries_ls <- update_libraries_ls(additions_tb = additions_tb, libraries_ls = libraries_ls)
+
+  if(is.null(libraries_tb)){
+    libraries_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
+    # if(any(dmt_urls_chr %>% endsWith("libraries_tb.RDS"))){
+    #   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
+    # }
+  }
+  # Filter for Framework
+
+  # b <- c(b,new_words_chr) %>% sort()
+  write_env_objs_to_dv(#env_objects_ls = list(treat_as_words_chr = b),
+                       consent_1L_chr = consent_1L_chr,
+                       consent_indcs_int = consent_indcs_int,
+                       descriptions_chr = NULL,
+                       ds_url_1L_chr = character(0),
+                       options_chr = options_chr,
+                       piggyback_desc_1L_chr = "Supplementary Files",
+                       piggyback_tag_1L_chr =  gh_tag_1L_chr,
+                       piggyback_to_1L_chr = gh_repo_1L_chr,
+                       prerelease_1L_lgl = T)
+}
+
 write_from_tmp <- function(tmp_paths_chr,
                            dest_paths_chr,
                            args_ls_ls = list(NULL),
