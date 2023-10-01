@@ -127,6 +127,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/get_examples.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_excluded_repos.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_fl_id_from_dv_ls.html</loc>
   </url>
   <url>
@@ -137,6 +140,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_generics.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_libraries_ls.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_libraries_tb.html</loc>
@@ -166,6 +172,9 @@
     <loc>https://ready4-dev.github.io/ready4/reference/get_source_code_urls.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/get_subroutine_repos.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/get_table_from_loc_file.html</loc>
   </url>
   <url>
@@ -182,6 +191,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_additions_tb.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_code_releases_tbl.html</loc>
@@ -203,6 +215,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_framework_pkgs_chr.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/make_libraries_ls.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_libraries_tb.html</loc>
@@ -227,9 +242,6 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/make_prompt.html</loc>
-  </url>
-  <url>
-    <loc>https://ready4-dev.github.io/ready4/reference/make_subroutine_repos.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/manufacture-methods.html</loc>
@@ -322,6 +334,12 @@
     <loc>https://ready4-dev.github.io/ready4/reference/transform_cls_type_ls.html</loc>
   </url>
   <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/update_libraries_ls.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/update_libraries_tb.html</loc>
+  </url>
+  <url>
     <loc>https://ready4-dev.github.io/ready4/reference/update_pt_fn_args_ls.html</loc>
   </url>
   <url>
@@ -359,6 +377,9 @@
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_ingested_dv_fl.html</loc>
+  </url>
+  <url>
+    <loc>https://ready4-dev.github.io/ready4/reference/write_library_metadata.html</loc>
   </url>
   <url>
     <loc>https://ready4-dev.github.io/ready4/reference/write_new_credentials.html</loc>
