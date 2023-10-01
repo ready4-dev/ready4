@@ -526,13 +526,16 @@ write_ingested_dv_fl <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L
 #' @param libraries_tb Libraries (a tibble), Default: NULL
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param include_1L_chr Include (a character vector of length one), Default: 'all'
 #' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param ns_var_nm_1L_chr Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'
+#' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
+#' @param return_1L_chr Return (a character vector of length one), Default: 'all'
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
 #' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
@@ -543,9 +546,11 @@ write_ingested_dv_fl <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L
 #' @keywords internal
 write_library_metadata <- function (additions_tb = make_additions_tb(), libraries_ls = NULL, 
     libraries_tb = NULL, consent_1L_chr = "", consent_indcs_int = 1L, 
-    gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    include_1L_chr = "all", module_pkgs_chr = character(0), options_chr = c("Y", 
-        "N"), ns_var_nm_1L_chr = "pt_ns_chr", reference_var_nm_1L_chr = "Reference", 
+    exclude_mthds_for_chr = NA_character_, gh_repo_1L_chr = "ready4-dev/ready4", 
+    gh_tag_1L_chr = "Documentation_0.0", include_1L_chr = "all", 
+    module_pkgs_chr = character(0), options_chr = c("Y", "N"), 
+    ns_var_nm_1L_chr = "pt_ns_chr", path_1L_chr = character(0), 
+    reference_var_nm_1L_chr = "Reference", return_1L_chr = "all", 
     url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
     vignette_url_var_nm_1L_chr = "Vignettes_URLs", what_chr = "all") 
 {
@@ -579,6 +584,13 @@ write_library_metadata <- function (additions_tb = make_additions_tb(), librarie
     }
     if (update_table_1L_lgl) {
         env_objects_ls$libraries_tb <- libraries_tb
+    }
+    if (update_list_1L_lgl | update_table_1L_lgl) {
+        env_objects_ls$methods_tb <- make_methods_tb(packages_tb = libraries_tb, 
+            exclude_mthds_for_chr = exclude_mthds_for_chr, gh_repo_1L_chr = gh_repo_1L_chr, 
+            gh_tag_1L_chr = gh_tag_1L_chr, module_pkgs_chr = module_pkgs_chr, 
+            ns_var_nm_1L_chr = ns_var_nm_1L_chr, path_1L_chr = path_1L_chr, 
+            return_1L_chr = return_1L_chr)
     }
     if (!identical(env_objects_ls, list())) {
         write_env_objs_to_dv(env_objects_ls = env_objects_ls, 

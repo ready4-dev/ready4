@@ -10,13 +10,16 @@ write_library_metadata(
   libraries_tb = NULL,
   consent_1L_chr = "",
   consent_indcs_int = 1L,
+  exclude_mthds_for_chr = NA_character_,
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
   include_1L_chr = "all",
   module_pkgs_chr = character(0),
   options_chr = c("Y", "N"),
   ns_var_nm_1L_chr = "pt_ns_chr",
+  path_1L_chr = character(0),
   reference_var_nm_1L_chr = "Reference",
+  return_1L_chr = "all",
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   vignette_var_nm_1L_chr = "Vignettes",
   vignette_url_var_nm_1L_chr = "Vignettes_URLs",
@@ -34,6 +37,8 @@ write_library_metadata(
 
 \item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
+\item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
+
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
@@ -46,7 +51,11 @@ write_library_metadata(
 
 \item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 
+\item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
+
 \item{reference_var_nm_1L_chr}{Reference variable name (a character vector of length one), Default: 'Reference'}
+
+\item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
 
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
