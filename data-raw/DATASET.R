@@ -59,6 +59,9 @@ readLines(".github/workflows/R-CMD-check.yaml") %>%
 # Need to check that test-coverage includes fix: "Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev"
 write_to_edit_workflow("pkgdown.yaml") # In other packages, run for "test-coverage.yaml" as well.
 write_extra_pkgs_to_actions()
+readLines("_pkgdown.yml") %>%
+  stringr::str_replace_all("  - text: Model", "  - text: Framework & Model") %>%
+  writeLines(con = "_pkgdown.yml")
 devtools::build_vignettes()
 #
 # ADD DOI OVERRIDE FOR RELEASES

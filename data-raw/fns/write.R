@@ -447,49 +447,82 @@ write_fls_to_repo <- function(paths_chr,
   }
   return(ids_int)
 }
-
 write_library_metadata <- function(additions_tb = make_additions_tb(),
                                    libraries_ls = NULL,
                                    libraries_tb = NULL,
                                    consent_1L_chr = "",
                                    consent_indcs_int = 1L,
-                                   include_framework_1L_lgl = F,
+                                   exclude_mthds_for_chr = NA_character_,
                                    gh_repo_1L_chr = "ready4-dev/ready4",
                                    gh_tag_1L_chr = "Documentation_0.0",
-                                   options_chr = c("Y", "N")){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
-  table_url_1L_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")]))
-  libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
-  # if(any(dmt_urls_chr %>% endsWith("libraries_ls.RDS"))){
-  #   libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
-  # }else{
-  #   libraries_ls <- NULL
-  # }
-  libraries_ls <- update_libraries_ls(additions_tb = additions_tb, libraries_ls = libraries_ls)
+                                   include_1L_chr = "all",
+                                   module_pkgs_chr = character(0),
+                                   options_chr = c("Y", "N"),
+                                   ns_var_nm_1L_chr = "pt_ns_chr",
+                                   path_1L_chr = character(0),
+                                   reference_var_nm_1L_chr = "Reference",
+                                   return_1L_chr = "all",
+                                   url_stub_1L_chr = "https://ready4-dev.github.io/",
+                                   vignette_var_nm_1L_chr = "Vignettes",
+                                   vignette_url_var_nm_1L_chr = "Vignettes_URLs",
+                                   what_chr = "all"
+                                   ){
 
-  if(is.null(libraries_tb)){
-    libraries_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
-    # if(any(dmt_urls_chr %>% endsWith("libraries_tb.RDS"))){
-    #   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
-    # }
+  update_list_1L_lgl <- update_table_1L_lgl <- T
+    if(is.null(libraries_tb)){
+      libraries_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
+      update_table_1L_lgl <- F
+      }
+  if(!identical(additions_tb, make_additions_tb())){
+    update_list_1L_lgl <- update_table_1L_lgl <- T
+    libraries_tb <- libraries_tb %>%
+      update_libraries_tb(include_1L_chr = include_1L_chr,
+                          module_pkgs_chr = module_pkgs_chr,
+                          ns_var_nm_1L_chr = ns_var_nm_1L_chr,
+                          reference_var_nm_1L_chr = reference_var_nm_1L_chr,
+                          url_stub_1L_chr = url_stub_1L_chr,
+                          vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
+                          vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr,
+                          what_chr = what_chr)
+    libraries_ls <- make_libraries_ls(libraries_tb = libraries_tb,
+                                      ns_var_nm_1L_chr = ns_var_nm_1L_chr)
+  }else{
+    if(is.null(libraries_ls)){
+      libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr)
+      update_list_1L_lgl <- F
+    }
   }
-  # Filter for Framework
-
-  # b <- c(b,new_words_chr) %>% sort()
-  write_env_objs_to_dv(#env_objects_ls = list(treat_as_words_chr = b),
-                       consent_1L_chr = consent_1L_chr,
-                       consent_indcs_int = consent_indcs_int,
-                       descriptions_chr = NULL,
-                       ds_url_1L_chr = character(0),
-                       options_chr = options_chr,
-                       piggyback_desc_1L_chr = "Supplementary Files",
-                       piggyback_tag_1L_chr =  gh_tag_1L_chr,
-                       piggyback_to_1L_chr = gh_repo_1L_chr,
-                       prerelease_1L_lgl = T)
+  env_objects_ls <- list()
+  if(update_list_1L_lgl){
+    env_objects_ls$libraries_ls <- libraries_ls
+  }
+  if(update_table_1L_lgl){
+    env_objects_ls$libraries_tb <- libraries_tb
+  }
+  if(update_list_1L_lgl | update_table_1L_lgl){
+    env_objects_ls$methods_tb <- make_methods_tb(packages_tb = libraries_tb,
+                                                 exclude_mthds_for_chr = exclude_mthds_for_chr,
+                                                 gh_repo_1L_chr = gh_repo_1L_chr,
+                                                 gh_tag_1L_chr = gh_tag_1L_chr,
+                                                 module_pkgs_chr = module_pkgs_chr, ##
+                                                 ns_var_nm_1L_chr = ns_var_nm_1L_chr, ##
+                                                 path_1L_chr = path_1L_chr,
+                                                 return_1L_chr = return_1L_chr)
+    #env_objects_ls$modules_tb <- make_modules_tb()
+  }
+  if(!identical(env_objects_ls, list())){
+    write_env_objs_to_dv(env_objects_ls = env_objects_ls,
+                         consent_1L_chr = consent_1L_chr,
+                         consent_indcs_int = consent_indcs_int,
+                         descriptions_chr = NULL,
+                         ds_url_1L_chr = character(0),
+                         options_chr = options_chr,
+                         piggyback_desc_1L_chr = "Library metadata",
+                         piggyback_tag_1L_chr =  gh_tag_1L_chr,
+                         piggyback_to_1L_chr = gh_repo_1L_chr,
+                         prerelease_1L_lgl = T)
+  }
 }
-
 write_from_tmp <- function(tmp_paths_chr,
                            dest_paths_chr,
                            args_ls_ls = list(NULL),

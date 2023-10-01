@@ -11,6 +11,8 @@ make_code_releases_tbl(
   exclude_chr = character(0),
   format_1L_chr = "\%d-\%b-\%Y",
   framework_repos_chr = character(0),
+  gh_repo_1L_chr = "ready4-dev/ready4",
+  gh_tag_1L_chr = "Documentation_0.0",
   model_repos_chr = character(0),
   program_repos_chr = character(0),
   org_1L_chr = "ready4-dev",
@@ -33,6 +35,10 @@ make_code_releases_tbl(
 \item{format_1L_chr}{Format (a character vector of length one), Default: '\%d-\%b-\%Y'}
 
 \item{framework_repos_chr}{Framework repositories (a character vector), Default: character(0)}
+
+\item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
+
+\item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 
 \item{model_repos_chr}{Model repositories (a character vector), Default: character(0)}
 

@@ -4,7 +4,15 @@
 \alias{make_framework_pkgs_chr}
 \title{Make framework packages character vector}
 \usage{
-make_framework_pkgs_chr()
+make_framework_pkgs_chr(
+  gh_repo_1L_chr = "ready4-dev/ready4",
+  gh_tag_1L_chr = "Documentation_0.0"
+)
+}
+\arguments{
+\item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
+
+\item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 }
 \value{
 Framework packages (a character vector)

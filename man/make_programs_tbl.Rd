@@ -9,6 +9,8 @@ make_programs_tbl(
   as_kbl_1L_lgl = F,
   exclude_chr = "dce_sa_cards",
   format_1L_chr = "\%d-\%b-\%Y",
+  gh_repo_1L_chr = "ready4-dev/ready4",
+  gh_tag_1L_chr = "Documentation_0.0",
   tidy_desc_1L_lgl = T,
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   zenodo_1L_chr = "ready4",
@@ -23,6 +25,10 @@ make_programs_tbl(
 \item{exclude_chr}{Exclude (a character vector), Default: 'dce_sa_cards'}
 
 \item{format_1L_chr}{Format (a character vector of length one), Default: '\%d-\%b-\%Y'}
+
+\item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
+
+\item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 
 \item{tidy_desc_1L_lgl}{Tidy description (a logical vector of length one), Default: T}
 

@@ -7,15 +7,12 @@
 make_methods_tb(
   packages_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
-  include_1L_chr = "modules",
+  gh_repo_1L_chr = "ready4-dev/ready4",
+  gh_tag_1L_chr = "Documentation_0.0",
   module_pkgs_chr = character(0),
   ns_var_nm_1L_chr = "pt_ns_chr",
   path_1L_chr = character(0),
-  reference_var_nm_1L_chr = "Reference",
-  return_1L_chr = "all",
-  url_stub_1L_chr = "https://ready4-dev.github.io/",
-  vignette_var_nm_1L_chr = "Vignettes",
-  vignette_url_var_nm_1L_chr = "Vignettes_URLs"
+  return_1L_chr = "all"
 )
 }
 \arguments{
@@ -23,7 +20,9 @@ make_methods_tb(
 
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
 
-\item{include_1L_chr}{Include (a character vector of length one), Default: 'modules'}
+\item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
+
+\item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 
 \item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
 
@@ -31,15 +30,7 @@ make_methods_tb(
 
 \item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
 
-\item{reference_var_nm_1L_chr}{Reference variable name (a character vector of length one), Default: 'Reference'}
-
 \item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
-
-\item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
-
-\item{vignette_var_nm_1L_chr}{Vignette variable name (a character vector of length one), Default: 'Vignettes'}
-
-\item{vignette_url_var_nm_1L_chr}{Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'}
 }
 \value{
 Methods (a tibble)

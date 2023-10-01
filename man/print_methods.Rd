@@ -7,10 +7,13 @@
 print_methods(
   methods_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
+  gh_repo_1L_chr = "ready4-dev/ready4",
+  gh_tag_1L_chr = "Documentation_0.0",
   methods_chr = NULL,
   module_pkgs_chr = character(0),
   ns_var_nm_1L_chr = "pt_ns_chr",
   path_1L_chr = character(0),
+  packages_tb = NULL,
   return_1L_chr = "all",
   scroll_height_1L_chr = character(0),
   scroll_width_1L_chr = character(0),
@@ -22,6 +25,10 @@ print_methods(
 
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
 
+\item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
+
+\item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
+
 \item{methods_chr}{Methods (a character vector), Default: NULL}
 
 \item{module_pkgs_chr}{Module packages (a character vector), Default: character(0)}
@@ -29,6 +36,8 @@ print_methods(
 \item{ns_var_nm_1L_chr}{Namespace variable name (a character vector of length one), Default: 'pt_ns_chr'}
 
 \item{path_1L_chr}{Path (a character vector of length one), Default: character(0)}
+
+\item{packages_tb}{Packages (a tibble), Default: NULL}
 
 \item{return_1L_chr}{Return (a character vector of length one), Default: 'all'}
 
