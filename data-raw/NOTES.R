@@ -4,8 +4,12 @@ library(ready4fun)
 X <- Ready4useRepos(gh_repo_1L_chr = "ready4-dev/ready4",
                     gh_tag_1L_chr = "Documentation_0.0")
 Y <- ingest(X)
-subroutine_repos_chr <- c("mychoice_results" ,"ttu_mdl_ctlg","ms_tmpl","ttu_lng_ss")
-exclude_chr <- "rebuild"
+Z <- Ready4useRepos(dv_nm_1L_chr = "ready4fw",
+                    dv_server_1L_chr = "dataverse.harvard.edu",
+                    dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK") %>%
+  ingest()
+#subroutine_repos_chr <- c("mychoice_results" ,"ttu_mdl_ctlg","ms_tmpl","ttu_lng_ss")
+#exclude_chr <- "rebuild"
 #libraries_tb <- Y@b_Ready4useIngest@objects_ls$libraries_tb
 additions_tb <- make_additions_tb("Framework",
                                   make_framework_pkgs_chr(),
@@ -52,9 +56,11 @@ Y@b_Ready4useIngest@objects_ls$libraries_tb <- libraries_tb
 #                                                  T ~ long_name_chr))
 Y <- renewSlot(Y,
                new_val_xx = Ready4useIngest(objects_ls = list(
+                 classes_bup_lup =  Y@b_Ready4useIngest@objects_ls$bup_classes_lup
+                 #classes_lup = Z@b_Ready4useIngest@objects_ls$framework_metadata_ls$classes_lup
                  #abbreviations_lup = abbreviations_lup,
                  #libraries_tb = libraries_tb
-                 exclude_chr = exclude_chr
+                 #exclude_chr = exclude_chr
                  #libraries_ls = libraries_ls
                  #treat_as_words_chr = Y@b_Ready4useIngest@objects_ls$treat_as_words_chr
                  )),
