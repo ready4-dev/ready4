@@ -21,3 +21,25 @@ NULL
 #' @export
 #' @keywords internal
 NULL
+
+#' NSE equals function
+#'
+#' Import of non standard evaluation equals function for use in dplyr calls.
+#'
+#' @importFrom rlang :=
+#' @name :=
+#' @rdname nseequals
+#' @export
+#' @keywords internal
+NULL
+
+#' Dot Data function
+#'
+#' Import of .data function for use in dataset manipulation within functions.
+#'
+#' @importFrom rlang .data
+#' @name .data
+#' @rdname dotdata
+#' @export
+#' @keywords internal
+NULL

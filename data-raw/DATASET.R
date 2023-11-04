@@ -4,8 +4,8 @@ library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reusable And Updatable Computational Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the collaborative development of economic models of the systems shaping young people's mental health.
-  The foundation provided by this package is extended by other R packages. For detailed documentation about the extended framework and models being developed with it see https://www.ready4-dev.com/. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton1@monash.edu).",
+                                                    pkg_desc_1L_chr = "Foundational elements (classes, generics, methods, functions) of a prototype software framework for developing modular, open source computational health economic models. The foundation provided by 'ready4' is extended by other R packages.
+                                 For detailed documentation visit <https://www.ready4-dev.com/>. For a scientific summary read <arxiv:2310.14138>.",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
                                                         "matthew.hamilton1@monash.edu",role = c("aut",
@@ -62,6 +62,8 @@ write_extra_pkgs_to_actions()
 readLines("_pkgdown.yml") %>%
   stringr::str_replace_all("  - text: Model", "  - text: Framework & Model") %>%
   writeLines(con = "_pkgdown.yml")
+usethis::use_package("knitr",type = "Suggests") # instead of imports
+usethis::use_package("testthat",type = "Suggests")
 devtools::build_vignettes()
 #
 # ADD DOI OVERRIDE FOR RELEASES

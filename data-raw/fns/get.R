@@ -300,7 +300,7 @@ get_manual_urls <- function(pkg_nm_1L_chr = "ready4",
 }
 get_methods <- function(pkg_nm_1L_chr = "ready4",
                         cls_nm_1L_chr =  "Ready4Module"){
-  methods_chr <- showMethods(class="Ready4Module", printTo =FALSE )
+  methods_chr <- showMethods(classes = "Ready4Module", printTo =FALSE )
   methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(cls_nm_1L_chr))-1]
   methods_chr <- methods_chr[which(methods_chr%>% stringr::str_detect(paste0("package ",pkg_nm_1L_chr)))] %>%
     stringr::str_remove_all("Function: ") %>%

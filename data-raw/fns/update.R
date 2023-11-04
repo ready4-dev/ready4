@@ -116,7 +116,6 @@ update_tb_r3 <- function(tb_r3,
     if(!tf_false_val_1L_lgl){
       case_when_default_1L_chr <- case_when_false_1L_chr
       case_when_false_1L_chr <- "case_when_default_1L_chr"
-
     }
     tb_r3 <- tb_r3 %>%
       dplyr::mutate(!!rlang::sym(case_when_var_1L_chr) := dplyr::case_when(eval(parse(text = case_when_true_1L_chr)),

@@ -8,11 +8,11 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the collaborative development of economic models of the systems shaping young people's mental health. The foundation provided by this package is extended by other R packages. For detailed documentation about the extended framework and models being developed with it see https://www.ready4-dev.com/. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton1@monash.edu).
+Foundational elements (classes, generics, methods, functions) of a prototype software framework for developing modular, open source computational health economic models. The foundation provided by 'ready4' is extended by other R packages. For detailed documentation visit \url{https://www.ready4-dev.com/}. For a scientific summary read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-ready4 provides bare bones foundational elements (classes, generics, methods, functions) of a software framework for developing modular, open source computational models in R. The current version is optimised to support the collaborative development of economic models of the systems shaping young people's mental health. The foundation provided by this package is extended by other R packages. For detailed documentation about the extended framework and models being developed with it see https://www.ready4-dev.com/. This development version of the ready4 package has been made available as part of the process of testing and documenting the package. If you have any questions, please contact the author (matthew.hamilton1@monash.edu).
+Foundational elements (classes, generics, methods, functions) of a prototype software framework for developing modular, open source computational health economic models. The foundation provided by 'ready4' is extended by other R packages. For detailed documentation visit \url{https://www.ready4-dev.com/}. For a scientific summary read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 }
 \seealso{
 Useful links:

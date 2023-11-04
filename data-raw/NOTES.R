@@ -32,7 +32,7 @@ extras_tb <- module_libraries_ls  %>% # c("people", "places","platforms","progra
                                      ))
 additions_tb <- dplyr::bind_rows(additions_tb, extras_tb)
 libraries_tb <- make_libraries_tb(additions_tb, include_1L_chr = "all")
-Y@b_Ready4useIngest@objects_ls$libraries_tb <- libraries_tb
+# Y@b_Ready4useIngest@objects_ls$libraries_tb <- libraries_tb
 #libraries_ls <- update_libraries_ls(NULL, additions_tb)
 
 # abbreviations_lup <- procure(procureSlot(Y,
@@ -56,10 +56,10 @@ Y@b_Ready4useIngest@objects_ls$libraries_tb <- libraries_tb
 #                                                  T ~ long_name_chr))
 Y <- renewSlot(Y,
                new_val_xx = Ready4useIngest(objects_ls = list(
-                 classes_bup_lup =  Y@b_Ready4useIngest@objects_ls$bup_classes_lup
+                 #classes_bup_lup =  Y@b_Ready4useIngest@objects_ls$bup_classes_lup
                  #classes_lup = Z@b_Ready4useIngest@objects_ls$framework_metadata_ls$classes_lup
                  #abbreviations_lup = abbreviations_lup,
-                 #libraries_tb = libraries_tb
+                 libraries_tb = libraries_tb
                  #exclude_chr = exclude_chr
                  #libraries_ls = libraries_ls
                  #treat_as_words_chr = Y@b_Ready4useIngest@objects_ls$treat_as_words_chr

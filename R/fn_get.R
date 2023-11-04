@@ -5,16 +5,16 @@
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @return Badge urls (a list)
 #' @rdname get_badge_urls
-#' @export 
+#' @export
 #' @importFrom rvest read_html html_elements html_attr
 #' @keywords internal
-get_badge_urls <- function (pkg_nm_1L_chr, project_badges_url_1L_chr = "https://img.shields.io/badge/ready4", 
-    url_stub_1L_chr = "https://ready4-dev.github.io/") 
+get_badge_urls <- function (pkg_nm_1L_chr, project_badges_url_1L_chr = "https://img.shields.io/badge/ready4",
+    url_stub_1L_chr = "https://ready4-dev.github.io/")
 {
-    images_chr <- rvest::read_html(paste0(url_stub_1L_chr, pkg_nm_1L_chr, 
+    images_chr <- rvest::read_html(paste0(url_stub_1L_chr, pkg_nm_1L_chr,
         "/index.html")) %>% rvest::html_elements("img") %>% rvest::html_attr("src")
-    badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% 
-        startsWith(project_badges_url_1L_chr)], zenodo_1L_chr = images_chr[images_chr %>% 
+    badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>%
+        startsWith(project_badges_url_1L_chr)], zenodo_1L_chr = images_chr[images_chr %>%
         startsWith("https://zenodo.org/badge/DOI/")])
     return(badge_urls_ls)
 }
@@ -25,15 +25,15 @@ get_badge_urls <- function (pkg_nm_1L_chr, project_badges_url_1L_chr = "https://
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Ready4 badges (a lookup table)
 #' @rdname get_badges_lup
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_1L_chr = "ready4-dev/ready4", 
-    gh_tag_1L_chr = "Documentation_0.0") 
+get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_1L_chr = "ready4-dev/ready4",
+    gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
-    ready4_badges_lup <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+    ready4_badges_lup <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
         endsWith(ends_with_1L_chr)]))
     return(ready4_badges_lup)
 }
@@ -46,7 +46,7 @@ get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_
 #' @param validate_1L_lgl Validate (a logical vector of length one), Default: F
 #' @return Class extensions (a tibble)
 #' @rdname get_cls_extensions
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr arrange filter select
@@ -54,30 +54,30 @@ get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringi stri_replace_last_fixed
 #' @keywords internal
-get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/ready4", 
-    gh_tag_1L_chr = "Documentation_0.0", url_stub_1L_chr = "https://ready4-dev.github.io/", 
-    validate_1L_lgl = F) 
+get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/ready4",
+    gh_tag_1L_chr = "Documentation_0.0", url_stub_1L_chr = "https://ready4-dev.github.io/",
+    validate_1L_lgl = F)
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
-    cls_extensions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
-        endsWith("classes_lup.RDS")])) %>% tibble::as_tibble() %>% 
-        dplyr::arrange(pt_ns_chr) %>% dplyr::filter(pt_ns_chr %in% 
-        pkg_extensions_tb$pt_ns_chr) %>% dplyr::arrange(pt_ns_chr) %>% 
-        dplyr::select(type_chr, pt_ns_chr, old_class_lgl)
+    cls_extensions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
+        endsWith("classes_lup.RDS")])) %>% tibble::as_tibble() %>%
+        dplyr::arrange(.data$pt_ns_chr) %>% dplyr::filter(.data$pt_ns_chr %in%
+        pkg_extensions_tb$pt_ns_chr) %>% dplyr::arrange(.data$pt_ns_chr) %>%
+        dplyr::select(.data$type_chr, .data$pt_ns_chr, .data$old_class_lgl)
     if (validate_1L_lgl) {
-        cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>% 
+        cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>%
             unique() %>% purrr::map_dfr(~{
-            url_1L_chr <- paste0(url_stub_1L_chr, .x, "/reference/index", 
+            url_1L_chr <- paste0(url_stub_1L_chr, .x, "/reference/index",
                 ".html")
-            allowable_chr <- rvest::read_html((url_1L_chr)) %>% 
+            allowable_chr <- rvest::read_html((url_1L_chr)) %>%
                 rvest::html_elements("a") %>% rvest::html_text2()
-            allowable_chr <- allowable_chr[(allowable_chr %>% 
-                endsWith("-class") | allowable_chr %>% startsWith(.x)) & 
-                allowable_chr != .x] %>% stringi::stri_replace_last_fixed("-class", 
-                "") %>% stringi::stri_replace_last_fixed("()", 
+            allowable_chr <- allowable_chr[(allowable_chr %>%
+                endsWith("-class") | allowable_chr %>% startsWith(.x)) &
+                allowable_chr != .x] %>% stringi::stri_replace_last_fixed("-class",
+                "") %>% stringi::stri_replace_last_fixed("()",
                 "")
-            cls_extensions_tb %>% dplyr::filter(pt_ns_chr == 
+            cls_extensions_tb %>% dplyr::filter(pt_ns_chr ==
                 .x) %>% dplyr::filter(type_chr %in% allowable_chr)
         })
     }
@@ -89,14 +89,14 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Datasets (a tibble)
 #' @rdname get_datasets_tb
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
-    datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+    datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
         endsWith("datasets_tb.RDS")]))
     return(datasets_tb)
 }
@@ -105,12 +105,12 @@ get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr
 #' @param text_1L_chr Text (a character vector of length one)
 #' @return Digits (a character vector)
 #' @rdname get_digits_from_text
-#' @export 
+#' @export
 #' @keywords internal
-get_digits_from_text <- function (text_1L_chr) 
+get_digits_from_text <- function (text_1L_chr)
 {
     fn_attribution_1L_chr <- "This function is based on: http://stla.github.io/stlapblog/posts/Numextract.html"
-    digits_chr <- unlist(regmatches(text_1L_chr, gregexpr("[[:digit:]]+\\.*[[:digit:]]*", 
+    digits_chr <- unlist(regmatches(text_1L_chr, gregexpr("[[:digit:]]+\\.*[[:digit:]]*",
         text_1L_chr)))
     return(digits_chr)
 }
@@ -123,17 +123,17 @@ get_digits_from_text <- function (text_1L_chr)
 #' @param key_1L_chr Key (a character vector of length one), Default: NULL
 #' @return Urls (a character vector)
 #' @rdname get_dv_fls_urls
-#' @export 
+#' @export
 #' @importFrom dataverse dataset_files
 #' @importFrom purrr map_chr
 #' @keywords internal
-get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = character(0), 
-    server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), key_1L_chr = NULL) 
+get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = character(0),
+    server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), key_1L_chr = NULL)
 {
-    if (identical(dv_url_pfx_1L_chr, character(0))) 
-        dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr, 
+    if (identical(dv_url_pfx_1L_chr, character(0)))
+        dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr,
             "/api/access/datafile/")
-    ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr, server = server_1L_chr, 
+    ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr, server = server_1L_chr,
         key = key_1L_chr)
     all_items_chr <- purrr::map_chr(ds_ls, ~.x$label)
     urls_chr <- file_nms_chr %>% purrr::map_chr(~{
@@ -153,24 +153,24 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
 #' @param term_1L_chr Term (a character vector of length one)
 #' @return Examples (a character vector)
 #' @rdname get_examples
-#' @export 
+#' @export
 #' @importFrom purrr map_chr discard
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringr str_match str_detect
 #' @keywords internal
-get_examples <- function (vignettes_chr, term_1L_chr) 
+get_examples <- function (vignettes_chr, term_1L_chr)
 {
     if (is.na(vignettes_chr[1])) {
         examples_chr <- ""
     }
     else {
         examples_chr <- vignettes_chr %>% purrr::map_chr(~{
-            code_chr <- rvest::read_html((.x %>% stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[, 
+            code_chr <- rvest::read_html((.x %>% stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[,
                 2]) %>% rvest::html_elements(".r") %>% rvest::html_text2()
-            ifelse(stringr::str_detect(paste0(code_chr, collapse = "/n"), 
+            ifelse(stringr::str_detect(paste0(code_chr, collapse = "/n"),
                 paste0(term_1L_chr, "\\(")), .x, NA_character_)
         }) %>% purrr::discard(is.na)
-        if (identical(character(0), examples_chr)) 
+        if (identical(character(0), examples_chr))
             examples_chr <- ""
     }
     return(examples_chr)
@@ -181,15 +181,15 @@ get_examples <- function (vignettes_chr, term_1L_chr)
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Exclude (a character vector)
 #' @rdname get_excluded_repos
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
     if (any(dmt_urls_chr %>% endsWith("exclude_chr.RDS"))) {
-        exclude_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+        exclude_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
             endsWith("exclude_chr.RDS")]))
     }
     else {
@@ -204,20 +204,20 @@ get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_
 #' @param nms_chr Names (a character vector), Default: 'NA'
 #' @return Identity (a character vector of length one)
 #' @rdname get_fl_id_from_dv_ls
-#' @export 
+#' @export
 #' @importFrom purrr map_chr
 #' @importFrom tibble as_tibble
 #' @keywords internal
-get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_) 
+get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 {
     if (is.na(nms_chr[1])) {
-        nms_chr <- purrr::map_chr(ds_ls$files$filename, ~ifelse(is.na(.x), 
+        nms_chr <- purrr::map_chr(ds_ls$files$filename, ~ifelse(is.na(.x),
             .y, .x))
     }
     if (fl_nm_1L_chr %in% nms_chr) {
-        id_1L_chr <- get_from_lup_obj(ds_ls$files[, names(ds_ls$files) %>% 
-            unique()] %>% tibble::as_tibble(), match_var_nm_1L_chr = "filename", 
-            match_value_xx = fl_nm_1L_chr, target_var_nm_1L_chr = "id", 
+        id_1L_chr <- get_from_lup_obj(ds_ls$files[, names(ds_ls$files) %>%
+            unique()] %>% tibble::as_tibble(), match_var_nm_1L_chr = "filename",
+            match_value_xx = fl_nm_1L_chr, target_var_nm_1L_chr = "id",
             evaluate_1L_lgl = F)
     }
     else {
@@ -234,35 +234,35 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 #' @param evaluate_1L_lgl Evaluate (a logical vector of length one), Default: FALSE
 #' @return Return object (an output object of multiple potential types)
 #' @rdname get_from_lup_obj
-#' @export 
+#' @export
 #' @importFrom dplyr filter select pull
 #' @importFrom rlang sym
 #' @importFrom stringr str_detect str_locate str_sub
-get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_chr, 
-    target_var_nm_1L_chr, evaluate_1L_lgl = FALSE) 
+get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_chr,
+    target_var_nm_1L_chr, evaluate_1L_lgl = FALSE)
 {
-    return_object_ref <- data_lookup_tb %>% dplyr::filter(!!rlang::sym(match_var_nm_1L_chr) == 
-        match_value_xx) %>% dplyr::select(!!target_var_nm_1L_chr) %>% 
+    return_object_ref <- data_lookup_tb %>% dplyr::filter(!!rlang::sym(match_var_nm_1L_chr) ==
+        match_value_xx) %>% dplyr::select(!!target_var_nm_1L_chr) %>%
         dplyr::pull()
     if (evaluate_1L_lgl) {
         if (stringr::str_detect(return_object_ref, "::")) {
-            colon_positions <- stringr::str_locate(return_object_ref, 
+            colon_positions <- stringr::str_locate(return_object_ref,
                 "::")
-            namespace_ref <- stringr::str_sub(return_object_ref, 
-                start = 1, end = colon_positions[1, "start"] - 
+            namespace_ref <- stringr::str_sub(return_object_ref,
+                start = 1, end = colon_positions[1, "start"] -
                   1)
-            object_ref <- stringr::str_sub(return_object_ref, 
+            object_ref <- stringr::str_sub(return_object_ref,
                 start = colon_positions[1, "end"] + 1)
-            if (sum(stringr::str_detect(search(), paste0("package:", 
+            if (sum(stringr::str_detect(search(), paste0("package:",
                 namespace_ref))) == 0) {
                 namespace_ref_sym <- rlang::sym(namespace_ref)
                 attachNamespace(namespace_ref)
-                return_object_xx <- get(x = object_ref, envir = as.environment(paste0("package:", 
+                return_object_xx <- get(x = object_ref, envir = as.environment(paste0("package:",
                   namespace_ref)))
                 detach(paste0("package:", namespace_ref), character.only = TRUE)
             }
             else {
-                return_object_xx <- get(x = object_ref, envir = as.environment(paste0("package:", 
+                return_object_xx <- get(x = object_ref, envir = as.environment(paste0("package:",
                   namespace_ref)))
             }
         }
@@ -282,16 +282,16 @@ get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_ch
 #' @param return_1L_chr Return (a character vector of length one), Default: 'all'
 #' @return Functions (a tibble)
 #' @rdname get_functions_tb
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @importFrom dplyr filter select
 #' @keywords internal
-get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    return_1L_chr = "all") 
+get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0",
+    return_1L_chr = "all")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
-    functions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+    functions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
         endsWith("fn_types_lup.RDS")]))
     if (return_1L_chr == "methods") {
         functions_tb <- functions_tb %>% dplyr::filter(is_method_lgl)
@@ -299,7 +299,7 @@ get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
     if (return_1L_chr == "types") {
         functions_tb <- functions_tb %>% dplyr::filter(!is_method_lgl)
     }
-    functions_tb <- functions_tb %>% dplyr::select(fn_type_nm_chr, 
+    functions_tb <- functions_tb %>% dplyr::select(fn_type_nm_chr,
         fn_type_desc_chr)
     return(functions_tb)
 }
@@ -311,35 +311,35 @@ get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: T
 #' @return Generics (a character vector)
 #' @rdname get_generics
-#' @export 
+#' @export
 #' @importFrom methods getGenerics
 #' @importFrom purrr map_lgl map flatten_chr
 #' @keywords internal
-get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclude_mthds_for_chr = NA_character_, 
-    framework_only_1L_lgl = T) 
+get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclude_mthds_for_chr = NA_character_,
+    framework_only_1L_lgl = T)
 {
     generics_chr <- methods::getGenerics(paste0("package:", pkg_nm_1L_chr))@.Data
     generics_chr <- generics_chr[generics_chr %>% purrr::map_lgl(~{
         generic_1L_chr <- .x
-        any(letters %>% purrr::map_lgl(~startsWith(generic_1L_chr, 
+        any(letters %>% purrr::map_lgl(~startsWith(generic_1L_chr,
             .x)))
     })]
     if (!is.na(exclude_mthds_for_chr[1])) {
-        generics_chr <- setdiff(generics_chr, purrr::map(exclude_mthds_for_chr, 
-            ~get_methods(pkg_nm_1L_chr = pkg_nm_1L_chr, cls_nm_1L_chr = .x)) %>% 
+        generics_chr <- setdiff(generics_chr, purrr::map(exclude_mthds_for_chr,
+            ~get_methods(pkg_nm_1L_chr = pkg_nm_1L_chr, cls_nm_1L_chr = .x)) %>%
             purrr::flatten_chr() %>% unique())
     }
     if (framework_only_1L_lgl) {
-        generics_chr <- setdiff(generics_chr, c("addNextMethod", 
-            "body<-", "cbind2", "coerce", "coerce<-", "kronecker", 
+        generics_chr <- setdiff(generics_chr, c("addNextMethod",
+            "body<-", "cbind2", "coerce", "coerce<-", "kronecker",
             "loadMethod", "rbind2", "show", "slotsFromS3"))
     }
     if (return_1L_chr == "core") {
-        generics_chr <- generics_chr[tolower(generics_chr) == 
+        generics_chr <- generics_chr[tolower(generics_chr) ==
             generics_chr]
     }
-    if (return_1L_chr == "extended") 
-        generics_chr <- generics_chr[tolower(generics_chr) != 
+    if (return_1L_chr == "extended")
+        generics_chr <- generics_chr[tolower(generics_chr) !=
             generics_chr]
     if (return_1L_chr == "slot") {
         generics_chr <- generics_chr[endsWith(generics_chr, "Slot")]
@@ -352,15 +352,15 @@ get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclu
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Libraries (a list)
 #' @rdname get_libraries_ls
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
     if (any(dmt_urls_chr %>% endsWith("libraries_ls.RDS"))) {
-        libraries_ls <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+        libraries_ls <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
             endsWith("libraries_ls.RDS")]))
     }
     else {
@@ -374,15 +374,15 @@ get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Libraries (a tibble)
 #' @rdname get_libraries_tb
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
     if (any(dmt_urls_chr %>% endsWith("libraries_tb.RDS"))) {
-        libraries_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+        libraries_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
             endsWith("libraries_tb.RDS")]))
     }
     else {
@@ -396,16 +396,16 @@ get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @param pkg_url_1L_chr Package url (a character vector of length one), Default: 'https://ready4-dev.github.io/ready4/index.html'
 #' @return Urls (a character vector)
 #' @rdname get_manual_urls
-#' @export 
+#' @export
 #' @importFrom rvest read_html html_elements html_attr
 #' @importFrom purrr map_lgl
 #' @keywords internal
-get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html") 
+get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html")
 {
-    urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
+    urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>%
         rvest::html_attr("href")
-    indcs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr, 
-        "_User.pdf")) | endsWith(.x, paste0(pkg_nm_1L_chr, "_Developer.pdf"))) %>% 
+    indcs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr,
+        "_User.pdf")) | endsWith(.x, paste0(pkg_nm_1L_chr, "_Developer.pdf"))) %>%
         which()
     urls_chr <- sort(urls_chr[indcs_int], decreasing = T)
     return(urls_chr)
@@ -416,16 +416,16 @@ get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https:/
 #' @param cls_nm_1L_chr Class name (a character vector of length one), Default: 'Ready4Module'
 #' @return Methods (a character vector)
 #' @rdname get_methods
-#' @export 
+#' @export
 #' @importFrom stringr str_detect str_remove_all
-get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module") 
+get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module")
 {
-    methods_chr <- showMethods(class = "Ready4Module", printTo = FALSE)
-    methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(cls_nm_1L_chr)) - 
+    methods_chr <- showMethods(classes = "Ready4Module", printTo = FALSE)
+    methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(cls_nm_1L_chr)) -
         1]
-    methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(paste0("package ", 
-        pkg_nm_1L_chr)))] %>% stringr::str_remove_all("Function: ") %>% 
-        stringr::str_remove_all(paste0(" \\(package ", pkg_nm_1L_chr, 
+    methods_chr <- methods_chr[which(methods_chr %>% stringr::str_detect(paste0("package ",
+        pkg_nm_1L_chr)))] %>% stringr::str_remove_all("Function: ") %>%
+        stringr::str_remove_all(paste0(" \\(package ", pkg_nm_1L_chr,
             "\\)"))
     return(methods_chr)
 }
@@ -435,12 +435,12 @@ get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Methods (a tibble)
 #' @rdname get_methods_tb
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
     methods_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("methods_tb.RDS")]))
     return(methods_tb)
@@ -451,12 +451,12 @@ get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Modules (a tibble)
 #' @rdname get_modules_tb
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
     modules_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")]))
     return(modules_tb)
@@ -468,18 +468,18 @@ get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @param path_1L_chr Path (a character vector of length one), Default: character(0)
 #' @return Method titles (a character vector)
 #' @rdname get_mthd_titles
-#' @export 
+#' @export
 #' @importFrom purrr map_chr pluck
 #' @importFrom stringr str_locate str_sub
 #' @importFrom tools Rd_db
 #' @keywords internal
-get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr = character(0)) 
+get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr = character(0))
 {
     mthd_titles_chr <- mthd_nms_chr %>% purrr::map_chr(~{
         mthd_nm_1L_chr <- .x
         df <- mthd_nm_1L_chr %>% stringr::str_locate("\\.")
         if (!is.na(df[[1, 1]])) {
-            mthd_nm_1L_chr <- stringr::str_sub(mthd_nm_1L_chr, 
+            mthd_nm_1L_chr <- stringr::str_sub(mthd_nm_1L_chr,
                 end = (df[[1, 1]] - 1))
         }
         if (!identical(path_1L_chr, character(0))) {
@@ -488,9 +488,9 @@ get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr
         else {
             dmtn_tb <- tools::Rd_db(pkg_nm_1L_chr)
         }
-        gnrc_dmt_ls <- dmtn_tb %>% purrr::pluck(paste0(mthd_nm_1L_chr, 
+        gnrc_dmt_ls <- dmtn_tb %>% purrr::pluck(paste0(mthd_nm_1L_chr,
             "-methods.Rd"))
-        ifelse(!is.null(gnrc_dmt_ls), gnrc_dmt_ls %>% purrr::pluck(1) %>% 
+        ifelse(!is.null(gnrc_dmt_ls), gnrc_dmt_ls %>% purrr::pluck(1) %>%
             purrr::pluck(1) %>% as.vector(), mthd_nm_1L_chr)
     })
     return(mthd_titles_chr)
@@ -501,13 +501,13 @@ get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr
 #' @param package_1L_chr Package (a character vector of length one), Default: ''
 #' @return Slots (a character vector)
 #' @rdname get_r4_obj_slots
-#' @export 
+#' @export
 #' @importFrom methods className getSlots
 #' @importFrom purrr map_chr
 #' @keywords internal
-get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "") 
+get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "")
 {
-    slots_ls <- methods::className(fn_name_1L_chr, ifelse(package_1L_chr == 
+    slots_ls <- methods::className(fn_name_1L_chr, ifelse(package_1L_chr ==
         "", ".GlobalEnv", package_1L_chr)) %>% methods::getSlots()
     slots_chr <- purrr::map_chr(slots_ls, ~.x)
     return(slots_chr)
@@ -521,28 +521,28 @@ get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "")
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
 #' @return R object (an output object of multiple potential types)
 #' @rdname get_rds_from_dv
-#' @export 
+#' @export
 #' @importFrom dataverse dataset_files
 #' @importFrom purrr map_chr
 #' @importFrom stringi stri_replace_last_regex
 #' @keywords internal
-get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9", 
-    dv_url_pfx_1L_chr = character(0), key_1L_chr = NULL, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
+get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9",
+    dv_url_pfx_1L_chr = character(0), key_1L_chr = NULL, server_1L_chr = Sys.getenv("DATAVERSE_SERVER"))
 {
-    if (identical(dv_url_pfx_1L_chr, character(0))) 
-        dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr, 
+    if (identical(dv_url_pfx_1L_chr, character(0)))
+        dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr,
             "/api/access/datafile/")
-    ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr, server = server_1L_chr, 
+    ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr, server = server_1L_chr,
         key = key_1L_chr)
-    all_items_chr <- purrr::map_chr(ds_ls, ~.x$label) %>% stringi::stri_replace_last_regex("\\.RDS", 
-        "") %>% stringi::stri_replace_last_regex("\\.Rds", "") %>% 
+    all_items_chr <- purrr::map_chr(ds_ls, ~.x$label) %>% stringi::stri_replace_last_regex("\\.RDS",
+        "") %>% stringi::stri_replace_last_regex("\\.Rds", "") %>%
         stringi::stri_replace_last_regex("\\.rds", "")
     idx_1L_int <- which(all_items_chr == file_nm_1L_chr)
     if (identical(idx_1L_int, integer(0))) {
         r_object_xx <- NULL
     }
     else {
-        r_object_xx <- readRDS(url(paste0(dv_url_pfx_1L_chr, 
+        r_object_xx <- readRDS(url(paste0(dv_url_pfx_1L_chr,
             ds_ls[[idx_1L_int]]$dataFile$id)))
     }
     return(r_object_xx)
@@ -553,15 +553,15 @@ get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/
 #' @param pkg_url_1L_chr Package url (a character vector of length one), Default: 'https://ready4-dev.github.io/ready4/index.html'
 #' @return Urls (a character vector)
 #' @rdname get_source_code_urls
-#' @export 
+#' @export
 #' @importFrom rvest read_html html_elements html_attr html_text
 #' @keywords internal
-get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html") 
+get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html")
 {
-    urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>% 
+    urls_chr <- rvest::read_html(pkg_url_1L_chr) %>% rvest::html_elements(".external-link") %>%
         rvest::html_attr("href")
-    indcs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>% 
-        rvest::html_elements(".external-link") %>% rvest::html_text()) == 
+    indcs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>%
+        rvest::html_elements(".external-link") %>% rvest::html_text()) ==
         "Browse source code"), which(startsWith(urls_chr, "https://doi.org/10.5281/zenodo.")))
     urls_chr <- urls_chr[indcs_int]
     return(urls_chr)
@@ -572,15 +572,15 @@ get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "ht
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @return Subroutine repositories (a character vector)
 #' @rdname get_subroutine_repos
-#' @export 
+#' @export
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
-get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0")
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
+    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
         tag = gh_tag_1L_chr, .token = "")
     if (any(dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS"))) {
-        subroutine_repos_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
+        subroutine_repos_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
             endsWith("subroutine_repos_chr.RDS")]))
     }
     else {
@@ -596,7 +596,7 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 #' @param heading_rows_1L_int Heading rows (an integer vector of length one), Default: 1
 #' @return Table (an output object of multiple potential types)
 #' @rdname get_table_from_loc_file
-#' @export 
+#' @export
 #' @importFrom tools file_ext
 #' @importFrom readr read_csv
 #' @importFrom readxl read_excel read_xlsx
@@ -604,19 +604,19 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr slice n mutate across
 #' @keywords internal
-get_table_from_loc_file <- function (path_1L_chr, force_numeric_1L_lgl = F, force_tb_1L_lgl = F, 
-    heading_rows_1L_int = 1L) 
+get_table_from_loc_file <- function (path_1L_chr, force_numeric_1L_lgl = F, force_tb_1L_lgl = F,
+    heading_rows_1L_int = 1L)
 {
     file_type_1L_chr <- path_1L_chr %>% tools::file_ext()
-    fn <- switch(file_type_1L_chr, csv = readr::read_csv, xls = readxl::read_excel, 
+    fn <- switch(file_type_1L_chr, csv = readr::read_csv, xls = readxl::read_excel,
         xlsx = readxl::read_xlsx, RDS = readRDS())
     table_xx <- rlang::exec(fn, path_1L_chr)
-    if (force_tb_1L_lgl) 
+    if (force_tb_1L_lgl)
         table_xx <- tibble::as_tibble(table_xx)
-    if (heading_rows_1L_int > 1L) 
+    if (heading_rows_1L_int > 1L)
         table_xx <- table_xx %>% dplyr::slice(heading_rows_1L_int:dplyr::n())
     if (force_numeric_1L_lgl) {
-        table_xx <- table_xx %>% dplyr::mutate(dplyr::across(where(is.character), 
+        table_xx <- table_xx %>% dplyr::mutate(dplyr::across(where(is.character),
             ~transform_chr_to_num(.x)))
     }
     return(table_xx)

@@ -10,17 +10,12 @@ Authors@R: c(
     person("VicHealth", role = "fnd"),
     person("Victoria University", role = "fnd")
   )
-Description: ready4 provides bare bones foundational elements (classes,
-    generics, methods, functions) of a software framework for developing
-    modular, open source computational models in R. The current version is
-    optimised to support the collaborative development of economic models
-    of the systems shaping young people's mental health.  The foundation
-    provided by this package is extended by other R packages. For detailed
-    documentation about the extended framework and models being developed
-    with it see https://www.ready4-dev.com/. This development version of
-    the ready4 package has been made available as part of the process of
-    testing and documenting the package. If you have any questions, please
-    contact the author (matthew.hamilton1@monash.edu).
+Description: Foundational elements (classes, generics, methods, functions) 
+    of a prototype software framework for developing modular, open source 
+    computational health economic models. The foundation provided by 
+    'ready4' is extended by other R packages. For detailed documentation 
+    visit <https://www.ready4-dev.com/>. For a scientific summary read 
+    <arxiv:2310.14138>.
 License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4, https://www.ready4-dev.com/
@@ -69,7 +64,6 @@ Imports:
     fs,
     Hmisc,
     kableExtra,
-    knitr,
     lifecycle,
     magrittr,
     methods,
@@ -85,10 +79,12 @@ Imports:
     stringi,
     stringr,
     testit,
-    testthat,
     tibble,
     tidyRSS,
     tools,
     utils,
     zen4R
 VignetteBuilder: knitr
+Suggests: 
+    knitr,
+    testthat
