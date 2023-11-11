@@ -5,41 +5,7 @@
 # install.packages('attachment', repos = 'https://thinkr-open.r-universe.dev')
 # attachment::att_amend_desc()
 #unlink("dev",T)
-citation_chr <- readLines("inst/CITATION")
-citation_chr[3] <- stringr::str_replace(citation_chr[3], "citEntry", "bibentry")
-citation_chr[4] <- stringr::str_replace(citation_chr[4], "entry", "bibtype")
-citation_chr[8] <- stringr::str_replace(citation_chr[8], "2021", "2023")
-citation_chr[12] <- stringr::str_replace(citation_chr[12], "2021", "2023")
-citation_chr  %>%
-  writeLines(con = "inst/CITATION")
-readLines("README.md") %>%
-  stringr::str_replace_all("svg\\)]\\(https://codecov.io","svg\\)]\\(https://app.codecov.io") %>%
-  writeLines(con = "README.md")
-c(readLines("R/imp_fns.R"),
-  " ",
-  "#' NSE equals function",
-  "#'",
-  "#' Import of non standard evaluation equals function for use in dplyr calls.",
-  "#'",
-  "#' @importFrom rlang :=",
-  "#' @name :=",
-  "#' @rdname nseequals",
-  "#' @export",
-  "#' @keywords internal",
-  "NULL",
-  " ",
-  "#' Dot Data function",
-  "#'",
-  "#' Import of .data function for use in dataset manipulation within functions.",
-  "#'",
-  "#' @importFrom rlang .data",
-  "#' @name .data",
-  "#' @rdname dotdata",
-  "#' @export",
-  "#' @keywords internal",
-  "NULL"
-) %>%
-  writeLines("R/imp_fns.R")
+
 # Run tests and examples
 devtools::test()
 devtools::run_examples()

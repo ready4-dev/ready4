@@ -8,11 +8,11 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Foundational elements (classes, generics, methods, functions) of a prototype software framework for developing modular, open source computational health economic models. The foundation provided by 'ready4' is extended by other R packages. For detailed documentation visit \url{https://www.ready4-dev.com/}. For a scientific summary read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
+A prototype software framework to support ethical implementation of health economic models. To help health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules. These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit \url{https://www.ready4-dev.com/}. For a scientific summary of the rationale for transparent, reusable And updatable computational health economic models read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Foundational elements (classes, generics, methods, functions) of a prototype software framework for developing modular, open source computational health economic models. The foundation provided by 'ready4' is extended by other R packages. For detailed documentation visit \url{https://www.ready4-dev.com/}. For a scientific summary read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
+A prototype software framework to support ethical implementation of health economic models. To help health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules. These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit \url{https://www.ready4-dev.com/}. For a scientific summary of the rationale for transparent, reusable And updatable computational health economic models read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 }
 \seealso{
 Useful links:

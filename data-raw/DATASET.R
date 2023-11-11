@@ -6,7 +6,7 @@ source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reusable And Updatable Computational Health Economic Models" %>% tools::toTitleCase(),
                                                     pkg_desc_1L_chr = "A prototype software framework to support ethical implementation of health economic models. To help health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules.
                                                     These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit <https://www.ready4-dev.com/>.
-                                                    For a scientific summary of the rationale for transparent, reusable And updatable computational health economic models read <arxiv:2310.14138>.",
+                                                    For a scientific summary of the rationale for transparent, reusable And updatable computational health economic models read <arXiv:2310.14138>.",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
                                                         "matthew.hamilton1@monash.edu",role = c("aut",
@@ -68,6 +68,42 @@ readLines("DESCRIPTION")[-which(readLines("DESCRIPTION") %in% c("    knitr,", " 
 devtools::document()
 usethis::use_package("knitr", type = "Suggests") # instead of imports
 usethis::use_package("testthat", type = "Suggests")
+citation_chr <- readLines("inst/CITATION")
+citation_chr[3] <- stringr::str_replace(citation_chr[3], "citEntry", "bibentry")
+citation_chr[4] <- stringr::str_replace(citation_chr[4], "entry", "bibtype")
+citation_chr[8] <- stringr::str_replace(citation_chr[8], "2021", "2023")
+citation_chr[12] <- stringr::str_replace(citation_chr[12], "2021", "2023")
+citation_chr  %>%
+  writeLines(con = "inst/CITATION")
+readLines("README.md") %>%
+  stringr::str_replace_all("svg\\)]\\(https://codecov.io","svg\\)]\\(https://app.codecov.io") %>%
+  writeLines(con = "README.md")
+c(readLines("R/imp_fns.R"),
+  " ",
+  "#' NSE equals function",
+  "#'",
+  "#' Import of non standard evaluation equals function for use in dplyr calls.",
+  "#'",
+  "#' @importFrom rlang :=",
+  "#' @name :=",
+  "#' @rdname nseequals",
+  "#' @export",
+  "#' @keywords internal",
+  "NULL",
+  " ",
+  "#' Dot Data function",
+  "#'",
+  "#' Import of .data function for use in dataset manipulation within functions.",
+  "#'",
+  "#' @importFrom rlang .data",
+  "#' @name .data",
+  "#' @rdname dotdata",
+  "#' @export",
+  "#' @keywords internal",
+  "NULL"
+) %>%
+  writeLines("R/imp_fns.R")
+devtools::document()
 devtools::build_vignettes()
 #
 # ADD DOI OVERRIDE FOR RELEASES
