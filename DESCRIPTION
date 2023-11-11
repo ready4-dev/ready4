@@ -1,7 +1,7 @@
 Package: ready4
 Title: Implement Transparent, Reusable and Updatable Computational Health
     Economic Models
-Version: 0.0.0.9125
+Version: 0.0.0.9126
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton1@monash.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -10,11 +10,11 @@ Authors@R: c(
     person("VicHealth", role = "fnd"),
     person("Victoria University", role = "fnd")
   )
-Description: Foundational elements (classes, generics, methods, functions) 
-    of a prototype software framework for developing modular, open source 
-    computational health economic models. The foundation provided by 
-    'ready4' is extended by other R packages. For detailed documentation 
-    visit <https://www.ready4-dev.com/>. For a scientific summary read 
+Description: Foundational elements (classes, generics, methods, functions)
+    of a prototype software framework for developing modular, open source
+    computational health economic models. The foundation provided by
+    'ready4' is extended by other R packages.  For detailed documentation
+    visit <https://www.ready4-dev.com/>. For a scientific summary read
     <arxiv:2310.14138>.
 License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
@@ -26,6 +26,8 @@ Collate:
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
+    'bind.R'
     'fn_add.R'
     'fn_bind.R'
     'fn_get.R'
@@ -36,9 +38,11 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'mthd_authorSlot.R'
     'mthd_characterizeSlot.R'
     'mthd_depictSlot.R'
@@ -55,7 +59,13 @@ Collate:
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'
     'pkg_ready4.R'
+    'print.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Imports: 
     assertthat,
     bib2df,
@@ -64,6 +74,7 @@ Imports:
     fs,
     Hmisc,
     kableExtra,
+    knitr,
     lifecycle,
     magrittr,
     methods,
@@ -79,12 +90,11 @@ Imports:
     stringi,
     stringr,
     testit,
+    testthat,
     tibble,
     tidyRSS,
+    tidyselect,
     tools,
     utils,
     zen4R
 VignetteBuilder: knitr
-Suggests: 
-    knitr,
-    testthat
