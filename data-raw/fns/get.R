@@ -29,10 +29,10 @@ get_cls_extensions <- function(pkg_extensions_tb,
   cls_extensions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
                                                   endsWith("classes_lup.RDS")])) %>%
     tibble::as_tibble() %>%
-    dplyr::arrange(pt_ns_chr) %>%
-    dplyr::filter(pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
-    dplyr::arrange(pt_ns_chr) %>%
-    dplyr::select(type_chr, pt_ns_chr, old_class_lgl)
+    dplyr::arrange(.data$pt_ns_chr) %>%
+    dplyr::filter(.data$pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
+    dplyr::arrange(.data$pt_ns_chr) %>%
+    dplyr::select("type_chr", "pt_ns_chr", "old_class_lgl")
   if(validate_1L_lgl){
     cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>% unique() %>%
       purrr::map_dfr(~{
@@ -47,8 +47,8 @@ get_cls_extensions <- function(pkg_extensions_tb,
           stringi::stri_replace_last_fixed("-class","") %>%
           stringi::stri_replace_last_fixed("()","")
         cls_extensions_tb %>%
-          dplyr::filter(pt_ns_chr == .x) %>%
-          dplyr::filter(type_chr %in% allowable_chr)
+          dplyr::filter(.data$pt_ns_chr == .x) %>%
+          dplyr::filter(.data$type_chr %in% allowable_chr)
       })
   }
   return(cls_extensions_tb)
@@ -215,14 +215,14 @@ get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                                              endsWith("fn_types_lup.RDS")]))
   if(return_1L_chr == "methods"){
     functions_tb <- functions_tb %>%
-      dplyr::filter(is_method_lgl)
+      dplyr::filter(.data$is_method_lgl)
   }
   if(return_1L_chr == "types"){
     functions_tb <- functions_tb %>%
-      dplyr::filter(!is_method_lgl)
+      dplyr::filter(!.data$is_method_lgl)
   }
   functions_tb <- functions_tb %>%
-    dplyr::select(fn_type_nm_chr,fn_type_desc_chr)
+    dplyr::select("fn_type_nm_chr", "fn_type_desc_chr")
   return(functions_tb)
 }
 get_generics <- function(pkg_nm_1L_chr = "ready4",
@@ -426,7 +426,7 @@ get_table_from_loc_file <- function(path_1L_chr,
     dplyr::slice(heading_rows_1L_int:dplyr::n())
   if(force_numeric_1L_lgl){
     table_xx <- table_xx %>%
-      dplyr::mutate(dplyr::across(where(is.character),
+      dplyr::mutate(dplyr::across(tidyselect::where(is.character), ## added ns
                                   ~transform_chr_to_num(.x))) #_if(is.character, transform_chr_to_num) %>%
   }
   return(table_xx)

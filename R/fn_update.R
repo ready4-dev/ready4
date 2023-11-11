@@ -67,14 +67,14 @@ update_libraries_tb <- function (libraries_tb = make_libraries_tb(), additions_t
         libraries_tb <- dplyr::bind_rows(dplyr::filter(libraries_tb, 
             !(!!rlang::sym(ns_var_nm_1L_chr) %in% dplyr::pull(new_cases_tb, 
                 !!rlang::sym(ns_var_nm_1L_chr)))), new_cases_tb) %>% 
-            dplyr::arrange(Section)
+            dplyr::arrange(.data$Section)
     }
     if (include_1L_chr %in% c("framework", "Framework")) {
-        libraries_tb <- dplyr::filter(libraries_tb, Section == 
+        libraries_tb <- dplyr::filter(libraries_tb, .data$Section == 
             "Framework")
     }
     if (include_1L_chr %in% c("modules", "Modules")) {
-        libraries_tb <- dplyr::filter(libraries_tb, Section != 
+        libraries_tb <- dplyr::filter(libraries_tb, .data$Section != 
             "Framework")
     }
     if (!identical(module_pkgs_chr, character(0))) {

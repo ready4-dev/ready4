@@ -4,8 +4,9 @@ library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reusable And Updatable Computational Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "Foundational elements (classes, generics, methods, functions) of a prototype software framework for developing modular, open source computational health economic models. The foundation provided by 'ready4' is extended by other R packages.
-                                 For detailed documentation visit <https://www.ready4-dev.com/>. For a scientific summary read <arxiv:2310.14138>.",
+                                                    pkg_desc_1L_chr = "A prototype software framework to support ethical implementation of health economic models. To help health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules.
+                                                    These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit <https://www.ready4-dev.com/>.
+                                                    For a scientific summary of the rationale for transparent, reusable And updatable computational health economic models read <arxiv:2310.14138>.",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
                                                         "matthew.hamilton1@monash.edu",role = c("aut",
@@ -30,9 +31,9 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reus
                                #"get_dv_fls_urls",
                                "get_from_lup_obj",#"get_rds_from_dv",
                                "get_methods",
-                               "make_dvs_tb","make_libraries_tb", "make_methods_tb", "make_modules_tb",
-                               "print_dss", "print_dvs", "print_methods", "print_modules", "print_packages"
-                               #"write_ws"
+                               "make_dvs_tb","make_ds_releases_tbl", "make_libraries_tb", "make_methods_tb", "make_modules_tb",  "make_programs_tbl",
+                               "print_dss", "print_dvs", "print_methods", "print_modules", "print_packages",
+                               "write_to_render_post"
                                )),
                            copyright_holders_chr = "Orygen",
                            import_from_chr = NA_character_,
@@ -57,13 +58,16 @@ readLines(".github/workflows/R-CMD-check.yaml") %>%
   purrr::discard_at(2:4) %>%
   writeLines(con = ".github/workflows/R-CMD-check.yaml")
 # Need to check that test-coverage includes fix: "Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev"
-write_to_edit_workflow("pkgdown.yaml") # In other packages, run for "test-coverage.yaml" as well.
-write_extra_pkgs_to_actions()
+write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
+write_extra_pkgs_to_actions(consent_1L_chr = "Y")
 readLines("_pkgdown.yml") %>%
   stringr::str_replace_all("  - text: Model", "  - text: Framework & Model") %>%
   writeLines(con = "_pkgdown.yml")
-usethis::use_package("knitr",type = "Suggests") # instead of imports
-usethis::use_package("testthat",type = "Suggests")
+readLines("DESCRIPTION")[-which(readLines("DESCRIPTION") %in% c("    knitr,", "    testthat,"))] %>%
+  writeLines("DESCRIPTION")
+devtools::document()
+usethis::use_package("knitr", type = "Suggests") # instead of imports
+usethis::use_package("testthat", type = "Suggests")
 devtools::build_vignettes()
 #
 # ADD DOI OVERRIDE FOR RELEASES

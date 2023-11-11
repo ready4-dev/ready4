@@ -21,7 +21,7 @@ NULL
 #' @export
 #' @keywords internal
 NULL
-
+ 
 #' NSE equals function
 #'
 #' Import of non standard evaluation equals function for use in dplyr calls.
@@ -32,7 +32,7 @@ NULL
 #' @export
 #' @keywords internal
 NULL
-
+ 
 #' Dot Data function
 #'
 #' Import of .data function for use in dataset manipulation within functions.

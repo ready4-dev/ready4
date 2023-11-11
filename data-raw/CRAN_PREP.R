@@ -4,7 +4,7 @@
 # Update dependencies in DESCRIPTION
 # install.packages('attachment', repos = 'https://thinkr-open.r-universe.dev')
 # attachment::att_amend_desc()
-unlink("dev",T)
+#unlink("dev",T)
 citation_chr <- readLines("inst/CITATION")
 citation_chr[3] <- stringr::str_replace(citation_chr[3], "citEntry", "bibentry")
 citation_chr[4] <- stringr::str_replace(citation_chr[4], "entry", "bibtype")

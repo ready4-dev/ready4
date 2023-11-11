@@ -281,13 +281,14 @@ write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir
         })
     }
     write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you want to write the file", 
-        ifelse(length(file_paths_chr) > 1, "s", ""), make_list_phrase(files_tb$file_chr[fl_ids_int]), 
+        ifelse(length(files_tb$file_chr[fl_ids_int]) > 1, "s", 
+            ""), make_list_phrase(files_tb$file_chr[fl_ids_int]), 
         " to ", local_dv_dir_1L_chr, "?"), consent_1L_chr = consent_1L_chr, 
         consent_indcs_int = consent_indcs_int, consented_args_ls = list(files_tb = files_tb, 
             fl_ids_int = fl_ids_int, ds_url_1L_chr = ds_url_1L_chr, 
             local_dv_dir_1L_chr = local_dv_dir_1L_chr, key_1L_chr = key_1L_chr, 
             server_1L_chr = server_1L_chr, consent_1L_chr = options_chr[consent_indcs_int[1]]), 
-        consented_msg_1L_chr = paste0("File", ifelse(length(file_paths_chr) > 
+        consented_msg_1L_chr = paste0("File", ifelse(length(files_tb$file_chr[fl_ids_int]) > 
             1, "s", ""), make_list_phrase(files_tb$file_chr[fl_ids_int]), 
             " written to ", local_dv_dir_1L_chr, "."), declined_msg_1L_chr = "Write request cancelled - no files have been written.", 
         options_chr = options_chr, return_1L_lgl = F)
@@ -824,11 +825,11 @@ write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1
         write_with_consent(consented_fn = consented_fn, prompt_1L_chr = "", 
             consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
             consented_args_ls = list(paths_chr = paths_chr), 
-            consented_msg_1L_chr = paste0("The following file", 
+            consented_msg_1L_chr = paste0("The following folder", 
                 ifelse(length(paths_chr) > 1, "s have been", 
                   " has been"), " written to your machine: \n", 
-                ifelse(identical(new_files_chr, character(0)), 
-                  "", paste0(" \n", new_files_chr %>% paste0(collapse = "\n"))), 
+                ifelse(identical(paths_chr, character(0)), "", 
+                  paste0(" \n", paths_chr %>% paste0(collapse = "\n"))), 
                 "."), declined_msg_1L_chr = "Write request cancelled - no files have been written.", 
             options_chr = options_chr, return_1L_lgl = F)
     }
@@ -852,7 +853,8 @@ write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1
 #' @rdname write_tb_to_csv
 #' @export 
 #' @importFrom methods slot
-#' @importFrom dplyr mutate_if funs
+#' @importFrom dplyr mutate across
+#' @importFrom tidyselect where
 #' @importFrom stringr str_c
 #' @importFrom utils write.csv
 #' @keywords internal
@@ -863,9 +865,9 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
     file_path_1L_chr <- paste0(lup_dir_1L_chr, "/", pfx_1L_chr, 
         "_", slot_nm_1L_chr, ".csv")
     consented_fn <- function(file_path_1L_chr, tbs_r4, slot_nm_1L_chr) {
-        methods::slot(tbs_r4, slot_nm_1L_chr) %>% dplyr::mutate_if(is.list, 
-            .funs = dplyr::funs(ifelse(stringr::str_c(.) == "NULL", 
-                NA_character_, stringr::str_c(.)))) %>% utils::write.csv(file = file_path_1L_chr, 
+        methods::slot(tbs_r4, slot_nm_1L_chr) %>% dplyr::mutate(dplyr::across(tidyselect::where(is.list), 
+            ~suppressWarnings(ifelse(stringr::str_c(.x) == "NULL", 
+                NA_character_, stringr::str_c(.x))))) %>% utils::write.csv(file = file_path_1L_chr, 
             row.names = F)
     }
     write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
@@ -1226,7 +1228,6 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
 #' @export 
 #' @importFrom purrr walk
 #' @importFrom rmarkdown render
-#' @keywords internal
 write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, is_rmd_1L_lgl = T, options_chr = c("Y", 
         "N")) 

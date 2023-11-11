@@ -69,30 +69,29 @@ make_code_releases_tbl <- function(repo_type_1L_chr = "Framework",
   }
   releases_xx <- repos_chr %>%
     purrr::map_dfr(~tidyRSS::tidyfeed(paste0("https://github.com/",org_1L_chr,"/",.x,"/releases.atom"))) %>%
-    dplyr::arrange(dplyr::desc(entry_last_updated)) %>%
-    dplyr::select(feed_title, entry_title, entry_last_updated, entry_content, entry_link) %>%
-    dplyr::mutate(feed_title = feed_title %>% stringr::str_remove_all("Release notes from ")) %>%
-    dplyr::rename(!!rlang::sym(repo_type_1L_chr) := feed_title,
-                  Release = entry_title,
-                  Date = entry_last_updated,
-                  Description = entry_content,
-                  URL = entry_link
+    dplyr::arrange(dplyr::desc(.data$entry_last_updated)) %>%
+    dplyr::select("feed_title", "entry_title", "entry_last_updated", "entry_content", "entry_link") %>%
+    dplyr::mutate(feed_title = .data$feed_title %>% stringr::str_remove_all("Release notes from ")) %>%
+    dplyr::rename(!!rlang::sym(repo_type_1L_chr) := .data$feed_title,
+                  Release = .data$entry_title,
+                  Date = .data$entry_last_updated,
+                  Description = .data$entry_content,
+                  URL = .data$entry_link
     ) %>%
-    dplyr::filter(Release != "Documentation_0.0")
+    dplyr::filter(.data$Release != "Documentation_0.0")
   if(tidy_desc_1L_lgl){
     releases_xx <- releases_xx %>%
-      dplyr::mutate(Description = Description %>% purrr::map2_chr(!!rlang::sym(repo_type_1L_chr),
+      dplyr::mutate(Description = .data$Description %>% purrr::map2_chr(!!rlang::sym(repo_type_1L_chr),
                                                                   ~ stringr::str_remove(.x,paste0(.y,": "))))
   }
   if(as_kbl_1L_lgl){
     releases_xx <- releases_xx  %>%
-      dplyr::mutate(Release = Release %>% stringr::str_remove_all("Release ") %>%
+      dplyr::mutate(Release = .data$Release %>% stringr::str_remove_all("Release ") %>%
                       stringr::str_remove_all("v") %>%
-                      kableExtra::cell_spec(format = "html", link = URL),
-                    Date = Date %>% format.Date(format_1L_chr) %>% as.character()) %>%
+                      kableExtra::cell_spec(format = "html", link = .data$URL),
+                    Date = .data$Date %>% format.Date(format_1L_chr) %>% as.character()) %>%
       # dplyr::mutate(Release = cell_spec(row.names(.), "html", link = dt_url)) %>%
-      dplyr::select(Date, !!rlang::sym(repo_type_1L_chr), Release, Description#dplyr::everything()
-      )
+      dplyr::select("Date", !!rlang::sym(repo_type_1L_chr), "Release", "Description")
     if(repo_type_1L_chr %in% c("Package","Module","Framework")){
       logos_chr <- purrr::map_chr(releases_xx %>% dplyr::pull(repo_type_1L_chr),
                                   ~paste0(url_stub_1L_chr, .x, "/logo.png"))
@@ -138,7 +137,7 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
                            Description = dv_ls$description,
                            Creator = dv_ls$affiliation)
       tb %>%
-        dplyr::mutate(Contents =  purrr::map(Dataverse,
+        dplyr::mutate(Contents =  purrr::map(.data$Dataverse,
                                              ~{
                                                dv_all_ls <- dataverse::dataverse_contents(.x,
                                                                                           key = key_1L_chr,
@@ -153,14 +152,14 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
                                              }))
     })
   dvs_tb <- dvs_tb %>%
-    dplyr::mutate(Datasets_Meta = Contents %>%
+    dplyr::mutate(Datasets_Meta = .data$Contents %>%
                     purrr::map(~.x %>%
                                  purrr::map(~ .x %>%
                                               dataverse::dataset_metadata(key = key_1L_chr,
                                                                           server = server_1L_chr) %>%
                                               tryCatch(error = function(e) "ERROR")))) %>%
-    dplyr::mutate(Contents = Contents %>%
-                    purrr::map2(Datasets_Meta,
+    dplyr::mutate(Contents = .data$Contents %>%
+                    purrr::map2(.data$Datasets_Meta,
                                 ~ {
                                   entry_ls <- .x %>%
                                     purrr::map2(.y,
@@ -180,7 +179,7 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
                                 }
                     ))
   dvs_tb <- dvs_tb %>%
-    dplyr::mutate(Datasets_Meta = Datasets_Meta %>%
+    dplyr::mutate(Datasets_Meta = .data$Datasets_Meta %>%
                     purrr::map(~ {
                       entry_ls <- .x %>%
                         purrr::map(~ if(identical(.x, "ERROR")){
@@ -197,17 +196,18 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
                       }
                     }
                     )) %>%
-    dplyr::arrange(Dataverse)
+    dplyr::arrange(.data$Dataverse)
   return(dvs_tb)
 }
 make_ds_releases_tbl <- function (ds_dois_chr,
                                   format_1L_chr = "%d-%b-%Y",
+                                  key_1L_chr = NULL,
                                   server_1L_chr = "dataverse.harvard.edu",
                                   as_kbl_1L_lgl = T,
                                   ...)
 {
   ds_releases_xx <- ds_dois_chr %>% purrr::map_dfr(~{
-    meta_ls <- dataverse::dataset_versions(.x, server = server_1L_chr)
+    meta_ls <- dataverse::dataset_versions(.x, server = server_1L_chr, key = key_1L_chr)
     doi_1L_chr <- .x
     1:length(meta_ls) %>%
       purrr::map_dfr(~tibble::tibble(Date = meta_ls[[.x]]$releaseTime,
@@ -218,16 +218,16 @@ make_ds_releases_tbl <- function (ds_dois_chr,
                                                       meta_ls[[.x]]$versionMinorNumber),
                                      `Number of files` = length(meta_ls[[1]]$files)))
   }) %>%
-    dplyr::arrange(dplyr::desc(Date)) %>%
-    dplyr::mutate(Date = Date %>%
+    dplyr::arrange(dplyr::desc(.data$Date)) %>%
+    dplyr::mutate(Date = .data$Date %>%
                     format.Date(format_1L_chr) %>%
                     as.character()) %>%
-    dplyr::filter(!is.na(Date))
+    dplyr::filter(!is.na(.data$Date))
   if (as_kbl_1L_lgl) {
-    ds_releases_xx <- ds_releases_xx %>% dplyr::mutate(Dataset = Dataset %>%
-                                                         kableExtra::cell_spec(format = "html", link = DOI)) %>%
-      dplyr::select(Date, Dataset,
-                    Version, `Number of files`)
+    ds_releases_xx <- ds_releases_xx %>% dplyr::mutate(Dataset = .data$Dataset %>%
+                                                         kableExtra::cell_spec(format = "html", link = .data$DOI)) %>%
+      dplyr::select("Date", "Dataset",
+                    "Version", "Number of files")
     ds_releases_xx <- ds_releases_xx %>%
       kableExtra::kable("html", escape = FALSE) %>%
       kableExtra::kable_styling(...)
@@ -235,23 +235,7 @@ make_ds_releases_tbl <- function (ds_dois_chr,
   }
   return(ds_releases_xx)
 }
-# make_ds_releases_tbl <- function(ds_dois_chr, # OLD - - DELETE ONCE CONFIRMED
-#                                  format_1L_chr = "%d-%b-%Y",
-#                                  server_1L_chr = "dataverse.harvard.edu"){
-#   ds_dois_chr %>%
-#     purrr::map_dfr(~{
-#       meta_ls <- dataverse::dataset_versions(.x, server = server_1L_chr)
-#       doi_1L_chr <- .x
-#       1:length(meta_ls) %>%
-#         purrr::map_dfr(~tibble::tibble(Date = meta_ls[[.x]]$releaseTime,
-#                                        DOI = paste0("https://doi.org/",doi_1L_chr),
-#                                        Version = paste0(meta_ls[[.x]]$versionNumber,".",meta_ls[[.x]]$versionMinorNumber),
-#                                        `Number of files` = length(meta_ls[[1]]$files)))
-#
-#     }) %>%
-#     dplyr::arrange(dplyr::desc(Date)) %>%
-#     dplyr::mutate(Date = Date %>% format.Date(format_1L_chr) %>% as.character())
-# }
+
 make_dss_tb <- function(dvs_tb,
                         filter_cdns_ls = list(),
                         what_1L_chr = "all"){
@@ -261,8 +245,8 @@ make_dss_tb <- function(dvs_tb,
                            people = 'Dataverse %in% c("TTU", "springtolife")',
                            places = 'Dataverse %in% c("springtides") | DOI == "https://doi.org/10.7910/DVN/JHSCDJ"')
   }
-  dss_tb <- dvs_tb %>% dplyr::filter(!is.na(Contents)) %>%
-    dplyr::select(Contents, Datasets_Meta, Dataverse) %>%
+  dss_tb <- dvs_tb %>% dplyr::filter(!is.na(.data$Contents)) %>%
+    dplyr::select("Contents", "Datasets_Meta", "Dataverse") %>%
     purrr::pmap_dfr(~{
       ..2 %>% purrr::map_dfr(~{
         fields_ls <- .x$fields
@@ -302,9 +286,9 @@ make_files_tb <- function(paths_to_dirs_chr, # Make output into a class? Make fn
                              })
   if(!is.na(inc_fl_types_chr))
     files_tb <- files_tb %>%
-      dplyr::filter(file_type_chr %in% inc_fl_types_chr)
+      dplyr::filter(.data$file_type_chr %in% inc_fl_types_chr)
   files_tb <- files_tb %>%
-    dplyr::filter(file_chr %in% names(recode_ls))
+    dplyr::filter(.data$file_chr %in% names(recode_ls))
   description_chr <- purrr::map_chr(files_tb$file_chr,
                                     ~ {
                                       arg_ls <- append(list(EXPR=.x),recode_ls)
@@ -312,7 +296,7 @@ make_files_tb <- function(paths_to_dirs_chr, # Make output into a class? Make fn
                                     })
   files_tb <- files_tb %>%
     dplyr::mutate(description_chr = description_chr,
-                  ds_file_ext_chr = purrr::map_chr(file_type_chr,
+                  ds_file_ext_chr = purrr::map_chr(.data$file_type_chr,
                                                    ~ ifelse(.x %in% c(".csv", ".xls",".xlsx"),
                                                             ".tab",
                                                             ".zip")))
@@ -397,19 +381,19 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
                   )
   if(include_1L_chr %in% c("framework","Framework")){
     libraries_tb <- libraries_tb %>%
-      dplyr::arrange(dplyr::desc(Type),
+      dplyr::arrange(dplyr::desc(.data$Type),
                      !!rlang::sym(ns_var_nm_1L_chr))
   }else{
     libraries_tb <- libraries_tb %>%
-      dplyr::arrange(Section,
-                     Type,
+      dplyr::arrange(.data$Section,
+                     .data$Type,
                      !!rlang::sym(ns_var_nm_1L_chr))
   }
   libraries_tb <- libraries_tb %>%
     dplyr::mutate(Link = purrr::map_chr(!!rlang::sym(ns_var_nm_1L_chr), ~paste0(url_stub_1L_chr,
                                                            .x, "/index", ".html"))) %>%
     dplyr::mutate(Library = kableExtra::cell_spec(!!rlang::sym(ns_var_nm_1L_chr),
-                                                  "html", link = Link))
+                                                  "html", link = .data$Link))
   libraries_tb <- add_vignette_links(libraries_tb,
                                           ns_var_nm_1L_chr = ns_var_nm_1L_chr,
                                           reference_var_nm_1L_chr = reference_var_nm_1L_chr,
@@ -419,8 +403,8 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
   libraries_tb <- libraries_tb %>% dplyr::mutate(Citation = paste0(url_stub_1L_chr,
                                                                              !!rlang::sym(ns_var_nm_1L_chr), "/authors.html")) %>%
     dplyr::mutate(manual_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr),
-                                               Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>%
-    dplyr::mutate(code_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr), Link,
+                                               .data$Link, ~get_manual_urls(.x, pkg_url_1L_chr = .y))) %>%
+    dplyr::mutate(code_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr), .data$Link,
                                              ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
   y_tb <- purrr::map_dfr(libraries_tb$Citation, ~{
     if (T) {
@@ -429,16 +413,13 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
       writeLines(rvest::read_html(.x) %>% rvest::html_elements("pre") %>%
                    rvest::html_text2())
       sink(NULL)
-      suppressWarnings(bib2df::bib2df(f)) %>% dplyr::select(AUTHOR,
-                                                            TITLE, DOI)
+      suppressWarnings(bib2df::bib2df(f)) %>% dplyr::select("AUTHOR", "TITLE", "DOI")
     }
     else {
     }
   }) %>% dplyr::mutate(!!rlang::sym(ns_var_nm_1L_chr) := libraries_tb %>% dplyr::pull(!!rlang::sym(ns_var_nm_1L_chr))) %>%
-    dplyr::rename(DOI_chr = DOI, Title = TITLE, Authors = AUTHOR)
-  libraries_tb <- dplyr::left_join(libraries_tb,
-                                        y_tb,
-                                        by = ns_var_nm_1L_chr)
+    dplyr::rename(DOI_chr = .data$DOI, Title = .data$TITLE, Authors = .data$AUTHOR)
+  libraries_tb <- dplyr::left_join(libraries_tb, y_tb, by = ns_var_nm_1L_chr)
   if(empty_1L_lgl){
     libraries_tb <- libraries_tb %>% dplyr::filter(F)
   }
@@ -472,15 +453,13 @@ make_methods_tb <- function(packages_tb = NULL,
   }
   if(!identical(module_pkgs_chr, character(0))){
     packages_tb <- dplyr::filter(packages_tb,
-                                 !!rlang::sym(ns_var_nm_1L_chr) %in% module_pkgs_chr | Section == "Framework")
+                                 !!rlang::sym(ns_var_nm_1L_chr) %in% module_pkgs_chr | .data$Section == "Framework")
   }
   methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
                                                      return_1L_chr = return_1L_chr),
-                               Purpose = get_mthd_titles(Method,
-                                                         path_1L_chr = path_1L_chr),
-                               Examples =  purrr::map(Method,
-                                                      ~ get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>% unique() %>% purrr::discard(is.na),
-                                                                     term_1L_chr = .x)))
+                               Purpose = get_mthd_titles(.data$Method, path_1L_chr = path_1L_chr),
+                               Examples =  purrr::map(.data$Method, ~ get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>%
+                                                                                     unique() %>% purrr::discard(is.na), term_1L_chr = .x)))
   return(methods_tb)
 }
 make_modules_pkgs_chr <- function(gh_repo_1L_chr = "ready4-dev/ready4",
@@ -511,11 +490,11 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
   }
   if(include_1L_chr %in% c("framework","Framework")){
     pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb,
-                                       Section == "Framework")
+                                       .data$Section == "Framework")
   }
   if(include_1L_chr %in% c("modules","Modules")){
     pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb,
-                                       Section != "Framework")
+                                       .data$Section != "Framework")
   }
   if(!identical(module_pkgs_chr, character(0))){
     pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% module_pkgs_chr)
@@ -533,7 +512,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb, gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr,
                                             url_stub_1L_chr = url_stub_1L_chr, validate_1L_lgl = T)
   modules_tb <- dplyr::inner_join(cls_extensions_tb, pkg_extensions_tb, by = ns_var_nm_1L_chr) %>%
-    dplyr::arrange(type_chr, old_class_lgl)
+    dplyr::arrange(.data$type_chr, .data$old_class_lgl)
   order_int <- modules_tb$Reference %>% purrr::flatten_int() %>% unique() %>% purrr::discard(is.na)
   modules_tb <- modules_tb %>%
     dplyr::mutate(Reference = dplyr::case_when(!is.na(Reference) ~ purrr::map(Reference,
@@ -558,7 +537,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     }) %>% purrr::flatten_int()  %>%
     purrr::discard(is.na) %>% unique()
   modules_tb <- modules_tb %>%
-    dplyr::mutate(Vignettes_URLs = dplyr::case_when(!is.na(Reference) ~ purrr::map(Vignettes_URLs,
+    dplyr::mutate(Vignettes_URLs = dplyr::case_when(!is.na(Reference) ~ purrr::map(.data$Vignettes_URLs,
                                                                                    ~ {
                                                                                      if(is.na(.x[1])){
                                                                                        new_chr <-  NA_character_
@@ -584,25 +563,24 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
                                                                                      #   new_int <-  rep(new_int,2)
                                                                                      new_chr
                                                                                    }),
-                                                    T ~ Vignettes_URLs)
+                                                    T ~ .data$Vignettes_URLs)
     )
   modules_tb <- modules_tb %>%
     dplyr::mutate(Class = purrr::pmap(list(!!rlang::sym(ns_var_nm_1L_chr),
-                                           type_chr, old_class_lgl), ~{
+                                           .data$type_chr, .data$old_class_lgl), ~{
                                              kableExtra::cell_spec(..2, "html", link = paste0(url_stub_1L_chr,
                                                                                               ..1, "/reference/", ifelse(..3, ..2, paste0(..2,
                                                                                                                                           "-class")), ".html"))
-                                           })) %>% dplyr::mutate(Examples = purrr::map2(Vignettes_URLs,
-                                                                                        type_chr, ~get_examples(.x, term_1L_chr = .y)))
+                                           })) %>% dplyr::mutate(Examples = purrr::map2(.data$Vignettes_URLs,
+                                                                                        .data$type_chr, ~get_examples(.x, term_1L_chr = .y)))
 
-  modules_tb <- modules_tb %>% dplyr::mutate(Description = purrr::map2_chr(Class,
-                                                                           old_class_lgl, ~{
+  modules_tb <- modules_tb %>% dplyr::mutate(Description = purrr::map2_chr(.data$Class,
+                                                                           .data$old_class_lgl, ~{
                                                                              rvest::read_html((.x %>% stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[,
                                                                                                                                                           2]) %>% rvest::html_elements(ifelse(.y, "h1",
                                                                                                                                                                                               "p")) %>% rvest::html_text2() %>% purrr::pluck(1)
                                                                            }) %>% stringi::stri_replace_last_regex("\\.", "")) %>%
-    dplyr::select(Class, Description, Library, Examples,
-                  old_class_lgl)
+    dplyr::select("Class", "Description", "Library", "Examples",  "old_class_lgl")
   return(modules_tb)
 }
 make_programs_tbl <- function(what_1L_chr = "Program",
@@ -615,42 +593,57 @@ make_programs_tbl <- function(what_1L_chr = "Program",
                               url_stub_1L_chr = "https://ready4-dev.github.io/",
                               zenodo_1L_chr = "ready4",
                               ...){
-    programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, exclude_chr = exclude_chr,
-                                          gh_repo_1L_chr = gh_repo_1L_chr,
-                                          gh_tag_1L_chr = gh_tag_1L_chr,
-                                          tidy_desc_1L_lgl = F, url_stub_1L_chr = url_stub_1L_chr) %>%
+  programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, exclude_chr = exclude_chr,
+                                        gh_repo_1L_chr = gh_repo_1L_chr,
+                                        gh_tag_1L_chr = gh_tag_1L_chr,
+                                        tidy_desc_1L_lgl = F, url_stub_1L_chr = url_stub_1L_chr) %>%
     dplyr::group_by(!!rlang::sym(what_1L_chr)) %>%
     dplyr::filter(dplyr::row_number()==1) %>%
     dplyr::arrange(!!rlang::sym(what_1L_chr)) %>%
     dplyr::ungroup()
-  zenodo_records_ls <- zen4R::ZenodoManager$new()
-  zenodo_records_ls <- zenodo_records_ls$getRecords(q = paste0("communities:(",zenodo_1L_chr,")"))
-  descriptions_chr <- zenodo_records_ls %>%
-    purrr::map_chr(~rvest::html_text(rvest::read_html(.x$metadata$description %>%
-                                                        stringr::str_remove_all("&nbsp;"))) %>%
-                     stringr::str_replace_all("[\r\n]" , ""))
-  indices_int <- programs_xx$Description %>% purrr::map_int(~which(.x == descriptions_chr))
+  zenodo_xx <- zen4R::ZenodoManager$new()
+  community_ls <- zenodo_xx$getCommunityById(zenodo_1L_chr)
+  records_chr <- readLines(url(community_ls$links$records))
+  records_chr <- records_chr %>% strsplit("\\{\"created\": ") %>% purrr::pluck(1)
+  records_chr <- records_chr[2:length(records_chr)]
+  records_ls <- records_chr %>% purrr::map(~{
+    individual_chr <- .x %>% strsplit(",") %>% purrr::pluck(1)
+    individual_chr[individual_chr %>% purrr::map_lgl(~startsWith(.x," \"doi_url\"") | startsWith(.x," \"metadata\"") | startsWith(.x," \"description\""))]
+  })
+  indices_int <- programs_xx$Description %>% purrr::map2_int(programs_xx %>% dplyr::pull(1),~ {
+    description_1L_chr <- .x
+    title_1L_chr <- .y
+    index_1L_int <- which(records_ls %>%
+                            purrr::map_lgl(~{any(.x %>% purrr::map_lgl(~{
+                              modified_1L_chr <- gsub("<.*?>", "", .x) %>% stringr::str_remove_all("\\\\n") %>% stringr::str_remove(" \"description\": \"") %>% stringr::str_remove("\"")
+                              stringr::str_equal(modified_1L_chr,description_1L_chr) | stringr::str_detect(modified_1L_chr,description_1L_chr)
+                            }
+                            )) | .x[2] %>% stringr::str_remove(" \"metadata\": \\{\"title\": \"") %>% startsWith(paste0(title_1L_chr,":"))
+                            }))
+    ifelse(identical(index_1L_int,integer(0)),
+           NA_integer_,
+           index_1L_int)})
   programs_xx$DOI <- indices_int %>%
-    purrr::map_chr(~zenodo_records_ls[[.x]]$links$conceptdoi)
+    purrr::map_chr(~ records_ls[[.x]][1] %>% strsplit("\"") %>% purrr::pluck(1) %>% purrr::pluck(4))
   programs_xx$GitHub <- gsub("/releases/.*","",programs_xx$URL)
   if(tidy_desc_1L_lgl)
     programs_xx <- programs_xx %>%
-    dplyr::mutate(Description = Description %>%
+    dplyr::mutate(Description = .data$Description %>%
                     purrr::map2_chr(!!rlang::sym(what_1L_chr),
                                     ~ stringr::str_remove(.x,paste0(.y,": "))))
   if(as_kbl_1L_lgl){
     programs_xx <- programs_xx  %>%
-      dplyr::mutate(Release = Release %>% stringr::str_remove_all("Release ") %>%
+      dplyr::mutate(Release = .data$Release %>% stringr::str_remove_all("Release ") %>%
                       stringr::str_remove_all("v"),
-                    Date = Date %>% format.Date(format_1L_chr) %>% as.character()) %>%
-      dplyr::mutate(Source = purrr::pmap(list(GitHub, DOI),
+                    Date = .data$Date %>% format.Date(format_1L_chr) %>% as.character()) %>%
+      dplyr::mutate(Source = purrr::pmap(list(.data$GitHub, .data$DOI),
                                          ~{
                                            kableExtra::cell_spec(c("Dev", "Archive"),
                                                                  format = "html",
                                                                  link = c(..1, ..2))
                                          }
       )) %>%
-      dplyr::select(!!rlang::sym(what_1L_chr), Release, Date, Description, Source)
+      dplyr::select(!!rlang::sym(what_1L_chr), "Release", "Date", "Description", "Source")
     programs_xx <- programs_xx %>%
       kableExtra::kable("html", escape = FALSE) %>%
       kableExtra::kable_styling(...)

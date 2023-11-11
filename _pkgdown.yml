@@ -24,14 +24,17 @@ reference:
 - contents:
   - get_from_lup_obj
   - get_methods
+  - make_ds_releases_tbl
   - make_libraries_tb
   - make_methods_tb
   - make_modules_tb
+  - make_programs_tbl
   - print_dss
   - print_dvs
   - print_methods
   - print_modules
   - print_packages
+  - write_to_render_post
 - title: "Generics"
 - contents:
   - author

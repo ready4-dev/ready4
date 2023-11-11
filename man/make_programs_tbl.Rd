@@ -44,4 +44,3 @@ Programs (an output object of multiple potential types)
 \description{
 make_programs_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make programs table. The function returns Programs (an output object of multiple potential types).
 }
-\keyword{internal}

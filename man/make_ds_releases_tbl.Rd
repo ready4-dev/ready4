@@ -7,6 +7,7 @@
 make_ds_releases_tbl(
   ds_dois_chr,
   format_1L_chr = "\%d-\%b-\%Y",
+  key_1L_chr = NULL,
   server_1L_chr = "dataverse.harvard.edu",
   as_kbl_1L_lgl = T,
   ...
@@ -16,6 +17,8 @@ make_ds_releases_tbl(
 \item{ds_dois_chr}{Dataset digital object identifiers (a character vector)}
 
 \item{format_1L_chr}{Format (a character vector of length one), Default: '\%d-\%b-\%Y'}
+
+\item{key_1L_chr}{Key (a character vector of length one), Default: NULL}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: 'dataverse.harvard.edu'}
 
@@ -29,4 +32,3 @@ Dataset releases (an output object of multiple potential types)
 \description{
 make_ds_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make dataset releases table. The function returns Dataset releases (an output object of multiple potential types).
 }
-\keyword{internal}

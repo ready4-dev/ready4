@@ -20,10 +20,8 @@ print_dss <- function(dvs_tb,
                       what_1L_chr = "all",
                       ...){
 dss_tb <- dvs_tb %>%
-    dplyr::filter(!is.na(Contents)) %>%
-  dplyr::select(Contents,
-                Datasets_Meta,
-                Dataverse) %>%
+    dplyr::filter(!is.na(.data$Contents)) %>%
+  dplyr::select("Contents", "Datasets_Meta", "Dataverse") %>%
   purrr::pmap_dfr(~ {
     ..2 %>%
                     purrr::map_dfr(~{
@@ -36,10 +34,10 @@ dss_tb <- dvs_tb %>%
     })
 if(what_1L_chr == "real")
   dss_tb <- dss_tb %>%
-    dplyr::filter(Dataverse != "fakes")
+    dplyr::filter(.data$Dataverse != "fakes")
 if(what_1L_chr == "fakes")
   dss_tb <- dss_tb %>%
-    dplyr::filter(Dataverse == "fakes")
+    dplyr::filter(.data$Dataverse == "fakes")
 dss_kbl <- dss_tb %>%
   kableExtra::kable("html", escape = FALSE) %>%
   kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
@@ -57,18 +55,18 @@ print_dvs <- function(dvs_tb,
   dvs_tb <- add_references(dvs_tb,
                             data_var_nm_1L_chr = "Contents",
                             data_url_var_nm_1L_chr = "Datasets") %>%
-    dplyr::select(Dataverse, Name, Description, Creator, Datasets) %>%
-    dplyr::mutate(Datasets = Datasets %>% purrr::map(~
+    dplyr::select("Dataverse", "Name", "Description", "Creator", "Datasets") %>%
+    dplyr::mutate(Datasets = .data$Datasets %>% purrr::map(~
                                                        if(identical(.x,NA_character_)){
                                                          ""}else{
                                                            .x
                                                          }))
   if(what_1L_chr == "real")
     dvs_tb <- dvs_tb %>%
-      dplyr::filter(Dataverse != "fakes")
+      dplyr::filter(.data$Dataverse != "fakes")
   if(what_1L_chr == "fakes")
     dvs_tb <- dvs_tb %>%
-      dplyr::filter(Dataverse == "fakes")
+      dplyr::filter(.data$Dataverse == "fakes")
   dvs_kbl <- dvs_tb %>%
     kableExtra::kable("html", escape = FALSE) %>%
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
@@ -106,7 +104,7 @@ print_methods <- function(methods_tb = NULL,
     methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
                                 return_1L_chr = return_1L_chr)
   methods_tb <- methods_tb %>%
-    dplyr::filter(Method %in% methods_chr)
+    dplyr::filter(.data$Method %in% methods_chr)
   links_chr <- methods_tb$Method %>%
     purrr::map_chr(~paste0("https://ready4-dev.github.io/ready4/reference/",.x,"-methods.html"))
   methods_kbl <- methods_tb %>%
@@ -129,15 +127,15 @@ print_modules <- function(modules_tb,
                           ){
   if(what_1L_chr == "S4"){
     modules_tb <- modules_tb %>%
-      dplyr::filter(!old_class_lgl)
+      dplyr::filter(!.data$old_class_lgl)
   }
   if(what_1L_chr == "S3"){
     modules_tb <- modules_tb %>%
-      dplyr::filter(old_class_lgl)
+      dplyr::filter(.data$old_class_lgl)
   }
   modules_kbl <- modules_tb %>%
-    dplyr::select(-old_class_lgl,
-                  -Library)  %>%
+    dplyr::select(-"old_class_lgl",
+                  -"Library")  %>%
     kableExtra::kable("html", escape = FALSE) %>%
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
@@ -178,7 +176,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
     is_single_1L_lgl <- F
   }
   pkg_extensions_tb <- pkg_extensions_tb %>%
-    dplyr::mutate(Badges = purrr::map(pt_ns_chr,
+    dplyr::mutate(Badges = purrr::map(.data$pt_ns_chr,
                                       ~get_badge_urls(.x,
                                                       project_badges_url_1L_chr = project_badges_url_1L_chr,
                                                       url_stub_1L_chr = url_stub_1L_chr))) %>% dplyr::mutate(Type = "") %>%
@@ -195,22 +193,22 @@ print_packages <- function (pkg_extensions_tb = NULL,
   logos_chr <- purrr::map_chr(pkg_extensions_tb$pt_ns_chr,
                               ~paste0("https://ready4-dev.github.io/", .x, "/logo.png"))
   homepages_chr <- pkg_extensions_tb$Link
-  pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Purpose = Title %>%
-                                                             purrr::map2_chr(pt_ns_chr,
+  pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Purpose = .data$Title %>%
+                                                             purrr::map2_chr(.data$pt_ns_chr,
                                                                              ~stringr::str_remove(.x, paste0(.y,
                                                                                                              ": ")))) %>%
-    dplyr::rename(Package = Logo,
-                  Website = Link,
-                  Examples = Vignettes_URLs)
+    dplyr::rename(Package = .data$Logo,
+                  Website = .data$Link,
+                  Examples = .data$Vignettes_URLs)
   pkg_extensions_tb <- pkg_extensions_tb %>%
-    dplyr::mutate(Examples = purrr::map(Examples,
+    dplyr::mutate(Examples = purrr::map(.data$Examples,
                                         ~if (is.na(.x[1])) {
                                           ""
                                           } else {
                                             .x
                                             })) %>%
-    dplyr::mutate(Documentation = purrr::pmap(list(manual_urls_ls,
-                                                   Citation, Website),
+    dplyr::mutate(Documentation = purrr::pmap(list(.data$manual_urls_ls,
+                                                   .data$Citation, .data$Website),
                                               ~{
                                                 if (identical(..1, character(0)) | is.na(..1[1]) | length(..1) != 2) {
                                                   manual_txt_chr <- character(0)
@@ -220,7 +218,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
                                                 kableExtra::cell_spec(c("Citation", "Website", manual_txt_chr),
                                                                       "html", link = c(..2, ..3, ..1))
                                                 })) %>%
-    dplyr::mutate(Code = purrr::map(code_urls_ls,
+    dplyr::mutate(Code = purrr::map(.data$code_urls_ls,
                                     ~{
                                       if (is.na(.x[1])) {
                                         ""
@@ -229,8 +227,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
                                                                 link = .x)
                                           }
                                       })) %>%
-    dplyr::select(Type, Package, Purpose, Documentation,
-                  Code, Examples)
+    dplyr::select("Type", "Package", "Purpose", "Documentation", "Code", "Examples")
   pkg_extensions_kbl <- pkg_extensions_tb %>%
     kableExtra::kable("html",
                       escape = FALSE) %>%
@@ -288,22 +285,22 @@ print_vignettes <- function(pkg_extensions_tb = NULL,
                                  #   purrr::flatten_chr() %>%
                                  #   purrr::keep(keep_lgl)
                                  ) %>%
-    dplyr::mutate(Title = purrr::map_chr(HTML,
+    dplyr::mutate(Title = purrr::map_chr(.data$HTML,
                                          ~ rvest::read_html(.x) %>%
                     rvest::html_elements("h1")  %>%
                     rvest::html_text2()),
-                  RMD = purrr::map_chr(HTML,
+                  RMD = purrr::map_chr(.data$HTML,
                                        ~ rvest::read_html(.x) %>%
                     rvest::html_elements(".dont-index")  %>%
                       rvest::html_elements("a") %>%
                       rvest::html_attr("href"))) %>%
-    dplyr::mutate(Program = purrr::map2(HTML, RMD,
+    dplyr::mutate(Program = purrr::map2(.data$HTML, .data$RMD,
                                         ~kableExtra::cell_spec(c("HTML",
                                                                  "RMD"),
                                                                "html",
                                                                link = c(.x,.y))))
   vignettes_kbl <- vignettes_tb %>%
-    dplyr::select(Title, Program) %>%
+    dplyr::select(.data$Title, .data$Program) %>%
     kableExtra::kable("html", escape = FALSE) %>%
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
