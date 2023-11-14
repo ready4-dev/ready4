@@ -1,7 +1,7 @@
 Package: ready4
 Title: Implement Transparent, Reusable and Updatable Computational Health
     Economic Models
-Version: 0.0.0.9128
+Version: 0.0.0.9129
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton1@monash.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -18,8 +18,8 @@ Description: A prototype software framework to support ethical
     foundational elements of the 'ready4' software framework are extended
     by other R packages. For detailed documentation about how to use
     'ready4' and its extensions visit <https://www.ready4-dev.com/>.  For
-    a scientific summary of the rationale for transparent, reusable And
-    updatable computational health economic models read
+    a background to and rationale for transparent, reusable and updatable
+    computational health economic models read the manuscript
     <arXiv:2310.14138>.
 License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
@@ -31,6 +31,8 @@ Collate:
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
+    'bind.R'
     'fn_add.R'
     'fn_bind.R'
     'fn_get.R'
@@ -41,9 +43,11 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'mthd_authorSlot.R'
     'mthd_characterizeSlot.R'
     'mthd_depictSlot.R'
@@ -60,7 +64,13 @@ Collate:
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'
     'pkg_ready4.R'
+    'print.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Imports: 
     assertthat,
     bib2df,
@@ -69,6 +79,7 @@ Imports:
     fs,
     Hmisc,
     kableExtra,
+    knitr,
     lifecycle,
     magrittr,
     methods,
@@ -84,6 +95,7 @@ Imports:
     stringi,
     stringr,
     testit,
+    testthat,
     tibble,
     tidyRSS,
     tidyselect,
@@ -91,6 +103,3 @@ Imports:
     utils,
     zen4R
 VignetteBuilder: knitr
-Suggests: 
-    knitr,
-    testthat

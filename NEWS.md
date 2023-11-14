@@ -1,3 +1,3 @@
 # ready4 (development version)
 
-* Initial CRAN submission.
+* In preparation for CRAN submission.
