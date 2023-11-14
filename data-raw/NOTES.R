@@ -159,7 +159,6 @@ Y <- renewSlot(Y,
                slot_nm_1L_chr = "b_Ready4useIngest")
 Y <- share(Y,
            type_1L_chr = "prefer_gh")
-
 write_env_objs_to_dv(list(prototype_lup = prototype_lup),
                      descriptions_chr = "Class prototype lookup table",
                      ds_url_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9",

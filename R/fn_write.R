@@ -42,7 +42,7 @@ write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
         "/index_Body.Rmd"), output_dir = paste0(dir_path_1L_chr, 
         "/", fl_nm_1L_chr))
     write_to_trim_html(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
-        "/index_Body.html"))
+        "/index_Body.html"), consent_1L_chr = consent_1L_chr)
     rmarkdown::render(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
         "/index.Rmd"), output_dir = paste0(dir_path_1L_chr, "/", 
         fl_nm_1L_chr))

@@ -1,0 +1,18 @@
+---
+output: html_document
+---
+
+This text will be rendered as HTML and incorporated in a parent Markdown file. The remainder of this document will also be rendered as HTML and is generated from the execution of the following R code chunks.
+
+```{r include=T}
+library(ready4)
+```
+
+```{r include=T}
+libraries_tb <- get_libraries_tb() %>% update_libraries_tb(include_1L_chr = "modules")
+```
+
+```{r echo=T}
+print_packages(libraries_tb)
+```
+

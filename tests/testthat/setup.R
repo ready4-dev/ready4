@@ -1,0 +1,5 @@
+# context("Set up")
+# file_fl <- file()
+# write(paste(c("Y"), collapse = "\n"), file_fl)
+# withr::local_options(list(prompt_opts.con = file_fl,.local_envir = teardown_env()))
+# withr::defer(close(file_fl), teardown_env())

@@ -19,8 +19,8 @@ and tools for finding and documenting model modules.  These
 foundational elements of the 'ready4' software framework are extended
 by other R packages. For detailed documentation about how to use
 'ready4' and its extensions visit <https://www.ready4-dev.com/>.  For
-a scientific summary of the rationale for transparent, reusable And
-updatable computational health economic models read
+a background to and rationale for transparent, reusable and updatable
+computational health economic models read the manuscript
 <arXiv:2310.14138>.
 
 To install a development version of this software, run the following commands in your R console:

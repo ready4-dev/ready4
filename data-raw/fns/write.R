@@ -22,7 +22,8 @@ write_blog_entries <- function(dir_path_1L_chr,
                                options_chr = c("Y", "N")){
   rmarkdown::render(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.Rmd"),
                     output_dir = paste0(dir_path_1L_chr,"/",fl_nm_1L_chr))
-  write_to_trim_html(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.html"))
+  write_to_trim_html(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.html"),
+                     consent_1L_chr = consent_1L_chr)
   rmarkdown::render(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index.Rmd"),
                     output_dir = paste0(dir_path_1L_chr,"/",fl_nm_1L_chr))
   unlink(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.html"))
@@ -108,7 +109,6 @@ write_citation_cff <- function(pkg_desc_ls,
                      options_chr = options_chr,
                      return_1L_lgl = F)
 }
-
 write_dv_fl_to_loc <- function(ds_ui_1L_chr,
                                dest_path_1L_chr,
                                repo_fl_fmt_1L_chr,

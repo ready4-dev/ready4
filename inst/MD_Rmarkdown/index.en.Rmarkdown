@@ -1,0 +1,28 @@
+---
+title: "Example two of a documentation article"
+linkTitle: "Example two"
+date: "`r Sys.Date()`"
+description: "This example can be used as a customisable template for rendering Markdown articles from a combination of an Rmarkdown file and a web based child RMD file."
+weight: 110
+categories: 
+- Category one
+- Category two
+- And so on
+tags: 
+- Tag one
+- Tag two
+- Tag three
+- And so on
+output: hugodown::md_document
+---
+
+This is the introductory text that will be rendered from RMarkdown. Everything after this sentence will be generated from rendering a web-based child RMD.
+
+```{r echo=FALSE, results='hide'}
+x <- tempfile(fileext = "Rmd")
+on.exit(unlink(x))
+download.file("https://raw.githubusercontent.com/ready4-dev/ready4/master/vignettes/V_01.Rmd", x)
+```
+
+```{r test-main, child=x}
+```

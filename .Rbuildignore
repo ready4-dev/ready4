@@ -62,3 +62,5 @@
 ^data-raw/temporary\.github/test-coverage\.yaml$
 ^data-raw/CRAN_PREP\.R$
 ^data-raw/global_notes\.txt$
+^revdep$
+^cran-comments\.md$

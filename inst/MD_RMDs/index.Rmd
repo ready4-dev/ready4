@@ -1,0 +1,27 @@
+---
+title: "Example one of a documentation article"
+linkTitle: "Example one"
+date: "`r Sys.Date()`"
+description: "This example can be used as a customisable template for rendering Markdown articles that incorporate HTML output from pairs of RMD files."
+weight: 100
+categories: 
+- Category one
+- Category two
+- And so on
+tags: 
+- Tag one
+- Tag two
+- Tag three
+- And so on
+output: hugodown::md_document
+---
+
+This is the introductory text that will be rendered as Markdown, that sits above the HTML content.
+
+````{=html}
+```{r, echo=FALSE, message=F,results='asis'}
+xfun::file_string('index_Body.html')
+```
+````
+
+
