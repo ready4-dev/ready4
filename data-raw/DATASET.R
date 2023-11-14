@@ -3,8 +3,9 @@ library(lifecycle)
 library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
+#dir.create("data-raw/examples")
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reusable And Updatable Computational Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "A prototype software framework to support ethical implementation of health economic models. To help health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules.
+                                                    pkg_desc_1L_chr = "A prototype software framework to support ethical implementation of health economic models. To enable health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules.
                                                     These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit <https://www.ready4-dev.com/>.
                                                     For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript <arXiv:2310.14138>.",
                                                     authors_prsn = c(utils::person(
@@ -104,7 +105,9 @@ c(readLines("R/imp_fns.R"),
   "NULL"
 ) %>%
   writeLines("R/imp_fns.R")
-devtools::document()
+
+write_examples()
+usethis::use_cran_badge() # Export to ready4fun
 devtools::build_vignettes()
 #
 # ADD DOI OVERRIDE FOR RELEASES

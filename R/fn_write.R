@@ -216,6 +216,77 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
     }
     return(file_ids_int)
 }
+#' Write examples
+#' @description write_examples() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write examples. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @param path_1L_chr Path (a character vector of length one), Default: getwd()
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @param type_1L_chr Type (a character vector of length one), Default: 'fn'
+#' @return NULL
+#' @rdname write_examples
+#' @export 
+#' @importFrom purrr map_chr walk2 map_lgl
+#' @importFrom stringr str_sub str_locate str_replace
+#' @importFrom devtools document
+#' @keywords internal
+write_examples <- function (path_1L_chr = getwd(), consent_1L_chr = "", consent_indcs_int = 1L, 
+    options_chr = c("Y", "N"), type_1L_chr = "fn") 
+{
+    if (dir.exists(paste0(path_1L_chr, "/data-raw/examples"))) {
+        prefix_1L_chr <- ifelse(type_1L_chr == "fn", "fn", "mthd")
+        examples_chr <- list.files(paste0(path_1L_chr, "/data-raw/examples"))
+        if (length(examples_chr) > 0) {
+            file.copy(paste0(path_1L_chr, "/data-raw/examples"), 
+                "man", recursive = TRUE)
+            fn_nms_chr <- examples_chr %>% purrr::map_chr(~stringr::str_sub(.x, 
+                end = -3))
+            fn_fls_chr <- fn_nms_chr %>% purrr::map_chr(~paste0(path_1L_chr, 
+                "/R/", prefix_1L_chr, "_", stringr::str_sub(.x, 
+                  end = stringr::str_locate(.x, "_")[1] - 1), 
+                ".R"))
+            consented_fn <- function(fn_fls_chr, fn_nms_chr, 
+                text_chr) {
+                purrr::walk2(fn_nms_chr, fn_fls_chr, ~{
+                  fn_fl_1L_chr <- .y
+                  if (type_1L_chr == "fn") 
+                    starts_with_1L_chr <- paste0(.x, " <- function")
+                  if (type_1L_chr == "r3") 
+                    starts_with_1L_chr <- paste0(stringr::str_replace(.x, 
+                      "_", "."), " <- function")
+                  if (type_1L_chr == "r4") {
+                    divider_1L_int <- stringr::str_locate(.x, 
+                      "_")[1]
+                    starts_with_1L_chr <- paste0("methods::setMethod(\"", 
+                      stringr::str_sub(.x, end = divider_1L_int - 
+                        1), "\", \"", stringr::str_sub(.x, start = divider_1L_int + 
+                        1), "\", function")
+                  }
+                  text_chr <- readLines(fn_fl_1L_chr)
+                  addition_1L_chr <- paste0("#' @example man/examples/", 
+                    .x, ".R")
+                  if (identical(which(text_chr %>% purrr::map_lgl(~startsWith(.x, 
+                    addition_1L_chr))), integer(0))) {
+                    index_1L_int <- which(text_chr %>% purrr::map_lgl(~startsWith(.x, 
+                      starts_with_1L_chr)))
+                    c(text_chr[1:(index_1L_int - 1)], addition_1L_chr, 
+                      text_chr[index_1L_int:length(text_chr)]) %>% 
+                      writeLines(fn_fl_1L_chr)
+                  }
+                })
+            }
+            write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you wish to write examples to ", 
+                make_list_phrase(unique(fn_fls_chr)), "?"), consent_1L_chr = consent_1L_chr, 
+                consent_indcs_int = consent_indcs_int, consented_args_ls = list(fn_fls_chr = fn_fls_chr, 
+                  fn_nms_chr = fn_nms_chr, text_chr = text_chr), 
+                consented_msg_1L_chr = paste0("Examples have been written in ", 
+                  make_list_phrase(unique(fn_fls_chr)), "."), 
+                declined_msg_1L_chr = "Write request cancelled - no examples have been written.", 
+                options_chr = options_chr, return_1L_lgl = F)
+        }
+    }
+    devtools::document()
+}
 #' Write extra packages to actions
 #' @description write_extra_pkgs_to_actions() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write extra packages to actions. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param path_to_dir_1L_chr Path to directory (a character vector of length one), Default: '.github/workflows'
@@ -1251,7 +1322,8 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
         consent_indcs_int = consent_indcs_int, consented_args_ls = list(consent_1L_chr = consent_1L_chr, 
             consent_indcs_int = consent_indcs_int, included_dirs_chr = included_dirs_chr, 
             is_rmd_1L_lgl = is_rmd_1L_lgl, options_chr = options_chr, 
-            path_to_main_dir_1L_chr), consented_msg_1L_chr = paste0("Posts have been rendered in ", 
+            path_to_main_dir_1L_chr = path_to_main_dir_1L_chr), 
+        consented_msg_1L_chr = paste0("Posts have been rendered in ", 
             make_list_phrase(included_dirs_chr), "."), declined_msg_1L_chr = "Render request cancelled - no posts have been rendered.", 
         options_chr = options_chr, return_1L_lgl = F)
 }
@@ -1367,6 +1439,7 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
 #' @export 
 #' @importFrom purrr map_chr
 #' @keywords internal
+#' @example man/examples/write_ws.R
 write_ws <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N")) 
 {

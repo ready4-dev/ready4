@@ -9,10 +9,11 @@
 [![test-coverage](https://github.com/ready4-dev/ready4/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ready4-dev/ready4/actions/workflows/test-coverage.yaml)
 [![codecov](https://codecov.io/gh/ready4-dev/ready4/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ready4-dev/ready4)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)
+[![CRAN status](https://www.r-pkg.org/badges/version/ready4)](https://CRAN.R-project.org/package=ready4)
 <!-- badges: end -->
 
 A prototype software framework to support ethical
-implementation of health economic models. To help health economists
+implementation of health economic models. To enable health economists
 adopt a modular and collaborative approach to model development
 'ready4' provides a template model module, a simple programming syntax
 and tools for finding and documenting model modules.  These
