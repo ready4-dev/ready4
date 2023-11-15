@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9130</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9131</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,6 +111,176 @@
 <p>Datasets (a kable)</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">datasets_tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_datasets_tb.html">get_datasets_tb</a></span><span class="op">(</span><span class="st">"ready4-dev/ready4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">print_data</span><span class="op">(</span><span class="va">datasets_tb</span>, by_dv_1L_lgl <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Dataverse &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Name &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Creator &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Datasets &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://dataverse.harvard.edu/dataverse/fakes"&gt; fakes &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Fake Data For Instruction And Illustration &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Fake data used to illustrate toolkits developed with the ready4 open science framework. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Orygen &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://doi.org/10.7910/DVN/D74QMP" style="     "&gt;1&lt;/a&gt;, &lt;a href="https://doi.org/10.7910/DVN/612HDC" style="     "&gt;2&lt;/a&gt;, &lt;a href="https://doi.org/10.7910/DVN/HJXYKQ" style="     "&gt;3&lt;/a&gt;, &lt;a href="https://doi.org/10.7910/DVN/W95KED" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://doi.org/10.7910/DVN/GW7ZKC" style="     "&gt;5&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://dataverse.harvard.edu/dataverse/firstbounce"&gt; firstbounce &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; First Bounce &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; A ready4 framework model of platforms. Aims to identify opportunities to improve the efficiency and equity of mental health services. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Orygen &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://dataverse.harvard.edu/dataverse/ready4fw"&gt; ready4fw &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; ready4 Framework &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; A collection of datasets that support implementation of the ready4 framework for open science computational models of mental health systems. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Orygen &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://doi.org/10.7910/DVN/RIQTKK" style="     "&gt;6&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://dataverse.harvard.edu/dataverse/readyforwhatsnext"&gt; readyforwhatsnext &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; readyforwhatsnext &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Data collections for the readyforwhatsnext mental health systems model. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Orygen &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://doi.org/10.7910/DVN/QBZFQV" style="     "&gt;7&lt;/a&gt;, &lt;a href="https://doi.org/10.7910/DVN/JHSCDJ" style="     "&gt;8&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://dataverse.harvard.edu/dataverse/springtides"&gt; springtides &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Springtides &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; A ready4 framework model of places. Synthesises geometry (boundary, coordinate) and spatial attribute (e.g. population counts, environmental characteristics, service identifier and model coefficients associated with areas) data. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Orygen &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://doi.org/10.7910/DVN/V3OKZV" style="     "&gt;9&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://dataverse.harvard.edu/dataverse/springtolife"&gt; springtolife &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Spring To Life &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; A ready4 framework model of people. Models the characteristics, behaviours, relationships and outcomes of groups of individuals relevant to policymakers and service planners aiming to improve population mental health. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Orygen &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://doi.org/10.7910/DVN/VGPIPS" style="     "&gt;10&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://dataverse.harvard.edu/dataverse/TTU"&gt; TTU &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Transfer to Utility &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; A collection of transfer to utility datasets developed with the ready4 open science framework. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Orygen &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://doi.org/10.7910/DVN/DKDIB0" style="     "&gt;11&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-in"><span><span class="fu">print_data</span><span class="op">(</span><span class="va">datasets_tb</span>, what_1L_chr <span class="op">=</span> <span class="st">"real"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Title &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Dataverse &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; DOI &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; ready4 Framework Abbreviations and Definitions &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; This dataset contains resources that help ready4 Framework Developers adopt common standards and workflows. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; ready4fw &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/RIQTKK &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; readyforwhatsnext posters &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; A collection of poster summaries about the readyforwhatsnext project and its outputs. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; readyforwhatsnext &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/QBZFQV &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Australian demographic input parameters for Springtides model &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Geometry, spatial attribute and metadata inputs for the demographic module of the readyforwhatsnext model. The demographic module is a systems dynamics spatial simulation of area demographic characteristics. The current version of the model is quite rudimentary and is designed to be extended by other models developped with the ready4 open science mental health modelling tools. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; readyforwhatsnext &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/JHSCDJ &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Springtides reports for Local Government Areas in the North West of Melbourne &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; This dataset is a collection of reports generated by a development version of the Springtides Model Of Places. Each report summarises prevalence projections for a specified mental disorder / mental health condition for a Local Government Area that is wholly or partially within the catchment area of the Orygen youth mental health service in North West Melbourne. As these reports were generated by a development version of the Springtides Model, these projections should be regarded as exploratory. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; springtides &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/V3OKZV &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Modelling the online helpseeking choice of socially anxious young people &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Models to predict the online helpseeking choices of socially anxious young people in Australia and replication code and documentation to implement the discrete choice experiment that generated the models.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> All study outputs were created with the aid of the mychoice R package (https://ready4-dev.github.io/mychoice). &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; springtolife &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/VGPIPS &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Transfer to AQoL-6D Utility Mapping Algorithms &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Catalogues of models (and the programs that produced them) that can be used in conjunction with the youthu R package to predict AQoL-6D health utility (and thus, derive QALYs) from measures collected in youth mental health services. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; TTU &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/DKDIB0 &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-in"><span><span class="fu">print_data</span><span class="op">(</span><span class="va">datasets_tb</span>, what_1L_chr <span class="op">=</span> <span class="st">"fakes"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Title &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Description &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Dataverse &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; DOI &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; TTU (Transfer to Utility) R package - AQoL-6D vignette output &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; This dataset has been generated from fake data as an instructional aid. It is not to be used to inform decision making. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; fakes &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/D74QMP &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; TTU (Transfer to Utility) R package - EQ-5D vignette output &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; This dataset is provided as a teaching aid. It is the output of tools from the TTU R package, applied to a synthetic dataset  (Fake Data) of psychological distress and psychological wellbeing. It is not to be used to support decision-making. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; fakes &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/612HDC &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Synthetic (fake) youth mental health datasets and data dictionaries &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; The datasets in this collection are entirely fake. They were developed principally to demonstrate the workings of a number of utility scoring and mapping algorithms. However, they may be of more general use to others. In some limited cases, some of the included files could be used in exploratory simulation based analyses. However, you should read the metadata descriptors for each file to inform yourself of the validity and limitations of each fake dataset. To open the RDS format files included in this dataset, the R package ready4use needs to be installed (see https://ready4-dev.github.io/ready4use/ ). It is also recommended that you install the youthvars package ( https://ready4-dev.github.io/youthvars/) as this provides useful tools for inspecting and validating each dataset. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; fakes &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/HJXYKQ &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; ready4use R package vignette output &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; This dataset is provided so that others can compare the output they generate when implementing vignette code with that generated by the authors. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; fakes &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/W95KED &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Specific R Package - AQoL-6D Vignette Output &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; This dataset is provided so that others can apply the algorithms we have developed, consistent with the principles of the ready4 open science framework for data synthesis and simulation in mental health. &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; fakes &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; https://doi.org/10.7910/DVN/GW7ZKC &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
