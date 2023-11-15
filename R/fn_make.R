@@ -21,7 +21,8 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 }
 #' Make code releases table
 #' @description make_code_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make code releases table. The function returns Releases (an output object of multiple potential types).
-#' @param repo_type_1L_chr Repository type (a character vector of length one), Default: 'Framework'
+#' @param repo_type_1L_chr Repository type (a character vector of length one), Default: c("Framework", "Module", "Package", "Program", "Subroutine", 
+#'    "Program_and_Subroutine")
 #' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: T
 #' @param brochure_repos_chr Brochure repositories (a character vector), Default: character(0)
 #' @param exclude_chr Exclude (a character vector), Default: character(0)
@@ -47,8 +48,14 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #' @importFrom stringr str_remove_all str_remove
 #' @importFrom rlang sym
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
-#' @keywords internal
-make_code_releases_tbl <- function (repo_type_1L_chr = "Framework", as_kbl_1L_lgl = T, 
+#' @examplesIf interactive()
+#'   # Likely to take more than one minute to execute.
+#'   make_code_releases_tbl("Framework", gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_code_releases_tbl("Module", gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_code_releases_tbl("Program", gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_code_releases_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4")
+make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", "Package", 
+    "Program", "Subroutine", "Program_and_Subroutine"), as_kbl_1L_lgl = T, 
     brochure_repos_chr = character(0), exclude_chr = character(0), 
     format_1L_chr = "%d-%b-%Y", framework_repos_chr = character(0), 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
@@ -57,6 +64,7 @@ make_code_releases_tbl <- function (repo_type_1L_chr = "Framework", as_kbl_1L_lg
     tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
     ...) 
 {
+    repo_type_1L_chr <- match.arg(repo_type_1L_chr)
     if (identical(brochure_repos_chr, character(0))) {
         brochure_repos_chr <- "ready4web"
     }
@@ -154,6 +162,9 @@ make_code_releases_tbl <- function (repo_type_1L_chr = "Framework", as_kbl_1L_lg
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate arrange
 #' @keywords internal
+#' @examplesIf interactive()
+#'   # Likely to take more than one minute to execute.
+#'   make_datasets_tb("ready4")
 make_datasets_tb <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu") 
 {
     contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr, 
@@ -242,6 +253,7 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server
 #' @importFrom tibble tibble
 #' @importFrom dplyr arrange desc mutate filter select
 #' @importFrom kableExtra cell_spec kable kable_styling
+#' @example man/examples/make_ds_releases_tbl.R
 make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", key_1L_chr = NULL, 
     server_1L_chr = "dataverse.harvard.edu", as_kbl_1L_lgl = T, 
     ...) 
@@ -433,6 +445,7 @@ make_libraries_ls <- function (additions_tb = make_additions_tb(), libraries_tb 
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom bib2df bib2df
+#' @keywords internal
 make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_chr = "modules", 
     module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
     reference_var_nm_1L_chr = "Reference", url_stub_1L_chr = "https://ready4-dev.github.io/", 
@@ -558,6 +571,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @description make_methods_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make methods tibble. The function returns Methods (a tibble).
 #' @param packages_tb Packages (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
+#' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: T
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
@@ -567,14 +581,18 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @return Methods (a tibble)
 #' @rdname make_methods_tb
 #' @export 
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter mutate
 #' @importFrom rlang sym
 #' @importFrom tibble tibble
 #' @importFrom purrr map flatten_chr discard
+#' @examplesIf interactive()
+#'   # Likely to take more than one minute to execute.
+#'   make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_character_, 
-    gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
-    path_1L_chr = character(0), return_1L_chr = "all") 
+    framework_only_1L_lgl = T, gh_repo_1L_chr = "ready4-dev/ready4", 
+    gh_tag_1L_chr = "Documentation_0.0", module_pkgs_chr = character(0), 
+    ns_var_nm_1L_chr = "pt_ns_chr", path_1L_chr = character(0), 
+    return_1L_chr = "all") 
 {
     if (is.null(packages_tb)) {
         packages_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr, 
@@ -585,10 +603,11 @@ make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_char
             module_pkgs_chr | .data$Section == "Framework")
     }
     methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr, 
-        return_1L_chr = return_1L_chr), Purpose = get_mthd_titles(.data$Method, 
-        path_1L_chr = path_1L_chr), Examples = purrr::map(.data$Method, 
-        ~get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>% 
-            unique() %>% purrr::discard(is.na), term_1L_chr = .x)))
+        framework_only_1L_lgl = framework_only_1L_lgl, return_1L_chr = return_1L_chr)) %>% 
+        dplyr::mutate(Purpose = .data$Method %>% get_mthd_titles(path_1L_chr = path_1L_chr), 
+            Examples = .data$Method %>% purrr::map(~get_examples(packages_tb$Vignettes_URLs %>% 
+                purrr::flatten_chr() %>% unique() %>% purrr::discard(is.na), 
+                term_1L_chr = .x)))
     return(methods_tb)
 }
 #' Make modules packages character vector
@@ -635,6 +654,9 @@ make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringi stri_replace_last_regex
+#' @examplesIf interactive()
+#'   # Likely to take more than one minute to execute.
+#'   make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     module_pkgs_chr = character(0), include_1L_chr = "modules", 
@@ -737,9 +759,9 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 }
 #' Make programs table
 #' @description make_programs_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make programs table. The function returns Programs (an output object of multiple potential types).
-#' @param what_1L_chr What (a character vector of length one), Default: 'Program'
+#' @param what_1L_chr What (a character vector of length one), Default: c("Program", "Subroutine", "Program_and_Subroutine")
 #' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: F
-#' @param exclude_chr Exclude (a character vector), Default: 'dce_sa_cards'
+#' @param exclude_chr Exclude (a character vector), Default: character(0)
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
@@ -756,12 +778,17 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @importFrom purrr pluck map map_lgl map2_int map_chr map2_chr pmap
 #' @importFrom stringr str_remove_all str_remove str_equal str_detect
 #' @importFrom kableExtra cell_spec kable kable_styling
-make_programs_tbl <- function (what_1L_chr = "Program", as_kbl_1L_lgl = F, exclude_chr = "dce_sa_cards", 
-    format_1L_chr = "%d-%b-%Y", gh_repo_1L_chr = "ready4-dev/ready4", 
-    gh_tag_1L_chr = "Documentation_0.0", tidy_desc_1L_lgl = T, 
-    url_stub_1L_chr = "https://ready4-dev.github.io/", zenodo_1L_chr = "ready4", 
-    ...) 
+#' @examplesIf interactive()
+#'   # Likely to take more than one minute to execute.
+#'   make_programs_tbl("Program", gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_programs_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4")
+make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"), 
+    as_kbl_1L_lgl = F, exclude_chr = character(0), format_1L_chr = "%d-%b-%Y", 
+    gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
+    tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    zenodo_1L_chr = "ready4", ...) 
 {
+    what_1L_chr <- match.arg(what_1L_chr)
     programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, 
         exclude_chr = exclude_chr, gh_repo_1L_chr = gh_repo_1L_chr, 
         gh_tag_1L_chr = gh_tag_1L_chr, tidy_desc_1L_lgl = F, 

@@ -41,3 +41,9 @@ Modules (a tibble)
 \description{
 make_modules_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make modules tibble. The function returns Modules (a tibble).
 }
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  # Likely to take more than one minute to execute.
+  make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
+\dontshow{\}) # examplesIf}
+}

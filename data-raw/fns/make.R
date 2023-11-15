@@ -6,7 +6,7 @@ make_additions_tb <- function(category_chr = character(0),
     dplyr::mutate(Link = paste0(url_stub_1L_chr,library_chr,"/index.html"))
   return(additions_tb)
 }
-make_code_releases_tbl <- function(repo_type_1L_chr = "Framework",
+make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Package","Program","Subroutine","Program_and_Subroutine"),
                                    as_kbl_1L_lgl = T,
                                    brochure_repos_chr = character(0),
                                    exclude_chr = character(0),
@@ -22,6 +22,7 @@ make_code_releases_tbl <- function(repo_type_1L_chr = "Framework",
                                    tidy_desc_1L_lgl = T,
                                    url_stub_1L_chr = "https://ready4-dev.github.io/",
                                    ...){
+  repo_type_1L_chr <- match.arg(repo_type_1L_chr)
   if(identical(brochure_repos_chr,character(0))){
     brochure_repos_chr <- "ready4web"
   }
@@ -235,7 +236,6 @@ make_ds_releases_tbl <- function (ds_dois_chr,
   }
   return(ds_releases_xx)
 }
-
 make_dss_tb <- function(dvs_tb,
                         filter_cdns_ls = list(),
                         what_1L_chr = "all"){
@@ -441,6 +441,7 @@ make_local_path_to_dv_data <- function(save_dir_path_1L_chr,
 }
 make_methods_tb <- function(packages_tb = NULL,
                             exclude_mthds_for_chr = NA_character_,
+                            framework_only_1L_lgl = T,
                             gh_repo_1L_chr = "ready4-dev/ready4",
                             gh_tag_1L_chr = "Documentation_0.0",
                             module_pkgs_chr = character(0), ##
@@ -456,10 +457,11 @@ make_methods_tb <- function(packages_tb = NULL,
                                  !!rlang::sym(ns_var_nm_1L_chr) %in% module_pkgs_chr | .data$Section == "Framework")
   }
   methods_tb <- tibble::tibble(Method = get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
-                                                     return_1L_chr = return_1L_chr),
-                               Purpose = get_mthd_titles(.data$Method, path_1L_chr = path_1L_chr),
-                               Examples =  purrr::map(.data$Method, ~ get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>%
-                                                                                     unique() %>% purrr::discard(is.na), term_1L_chr = .x)))
+                                                     framework_only_1L_lgl = framework_only_1L_lgl,
+                                                     return_1L_chr = return_1L_chr)) %>%
+    dplyr::mutate(Purpose = .data$Method %>% get_mthd_titles(path_1L_chr = path_1L_chr),
+                  Examples = .data$Method %>% purrr::map(~ get_examples(packages_tb$Vignettes_URLs %>% purrr::flatten_chr() %>%
+                                                                          unique() %>% purrr::discard(is.na), term_1L_chr = .x)))
   return(methods_tb)
 }
 make_modules_pkgs_chr <- function(gh_repo_1L_chr = "ready4-dev/ready4",
@@ -583,9 +585,9 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     dplyr::select("Class", "Description", "Library", "Examples",  "old_class_lgl")
   return(modules_tb)
 }
-make_programs_tbl <- function(what_1L_chr = "Program",
+make_programs_tbl <- function(what_1L_chr = c("Program","Subroutine","Program_and_Subroutine"),
                               as_kbl_1L_lgl = F,
-                              exclude_chr = "dce_sa_cards",
+                              exclude_chr = character(0),
                               format_1L_chr = "%d-%b-%Y",
                               gh_repo_1L_chr = "ready4-dev/ready4",
                               gh_tag_1L_chr = "Documentation_0.0",
@@ -593,6 +595,7 @@ make_programs_tbl <- function(what_1L_chr = "Program",
                               url_stub_1L_chr = "https://ready4-dev.github.io/",
                               zenodo_1L_chr = "ready4",
                               ...){
+  what_1L_chr <- match.arg(what_1L_chr)
   programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, exclude_chr = exclude_chr,
                                         gh_repo_1L_chr = gh_repo_1L_chr,
                                         gh_tag_1L_chr = gh_tag_1L_chr,

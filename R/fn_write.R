@@ -226,7 +226,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
 #' @return NULL
 #' @rdname write_examples
 #' @export 
-#' @importFrom purrr map_chr walk2 map_lgl
+#' @importFrom purrr map_chr pwalk map_lgl
 #' @importFrom stringr str_sub str_locate str_replace
 #' @importFrom devtools document
 #' @keywords internal
@@ -245,41 +245,51 @@ write_examples <- function (path_1L_chr = getwd(), consent_1L_chr = "", consent_
                 "/R/", prefix_1L_chr, "_", stringr::str_sub(.x, 
                   end = stringr::str_locate(.x, "_")[1] - 1), 
                 ".R"))
-            consented_fn <- function(fn_fls_chr, fn_nms_chr, 
-                text_chr) {
-                purrr::walk2(fn_nms_chr, fn_fls_chr, ~{
-                  fn_fl_1L_chr <- .y
-                  if (type_1L_chr == "fn") 
-                    starts_with_1L_chr <- paste0(.x, " <- function")
-                  if (type_1L_chr == "r3") 
-                    starts_with_1L_chr <- paste0(stringr::str_replace(.x, 
-                      "_", "."), " <- function")
-                  if (type_1L_chr == "r4") {
-                    divider_1L_int <- stringr::str_locate(.x, 
-                      "_")[1]
-                    starts_with_1L_chr <- paste0("methods::setMethod(\"", 
-                      stringr::str_sub(.x, end = divider_1L_int - 
-                        1), "\", \"", stringr::str_sub(.x, start = divider_1L_int + 
-                        1), "\", function")
-                  }
-                  text_chr <- readLines(fn_fl_1L_chr)
-                  addition_1L_chr <- paste0("#' @example man/examples/", 
-                    .x, ".R")
-                  if (identical(which(text_chr %>% purrr::map_lgl(~startsWith(.x, 
-                    addition_1L_chr))), integer(0))) {
+            consented_fn <- function(examples_chr, fn_fls_chr, 
+                fn_nms_chr) {
+                purrr::pwalk(list(examples_chr, fn_nms_chr, fn_fls_chr), 
+                  ~{
+                    fn_fl_1L_chr <- ..3
+                    if (type_1L_chr == "fn") 
+                      starts_with_1L_chr <- paste0(..2, " <- function")
+                    if (type_1L_chr == "r3") 
+                      starts_with_1L_chr <- paste0(stringr::str_replace(..2, 
+                        "_", "."), " <- function")
+                    if (type_1L_chr == "r4") {
+                      divider_1L_int <- stringr::str_locate(..2, 
+                        "_")[1]
+                      starts_with_1L_chr <- paste0("methods::setMethod(\"", 
+                        stringr::str_sub(..2, end = divider_1L_int - 
+                          1), "\", \"", stringr::str_sub(..2, 
+                          start = divider_1L_int + 1), "\", function")
+                    }
+                    text_chr <- readLines(fn_fl_1L_chr)
+                    addition_chr <- readLines(..1)
+                    if (startsWith(addition_chr[1], "if (interactive())")) {
+                      addition_chr <- c("#' @examplesIf interactive()", 
+                        paste0("#' ", addition_chr[2:(length(addition_chr) - 
+                          1)]))
+                      if (startsWith(addition_chr[1], "  ")) {
+                        addition_chr <- purrr::map_chr(addition_chr, 
+                          ~stringr::str_replace(.x, "  ", ""))
+                      }
+                    }
+                    else {
+                      addition_chr <- paste0("#' @example man/examples/", 
+                        ..2, ".R")
+                    }
                     index_1L_int <- which(text_chr %>% purrr::map_lgl(~startsWith(.x, 
                       starts_with_1L_chr)))
-                    c(text_chr[1:(index_1L_int - 1)], addition_1L_chr, 
+                    c(text_chr[1:(index_1L_int - 1)], addition_chr, 
                       text_chr[index_1L_int:length(text_chr)]) %>% 
                       writeLines(fn_fl_1L_chr)
-                  }
-                })
+                  })
             }
             write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you wish to write examples to ", 
                 make_list_phrase(unique(fn_fls_chr)), "?"), consent_1L_chr = consent_1L_chr, 
-                consent_indcs_int = consent_indcs_int, consented_args_ls = list(fn_fls_chr = fn_fls_chr, 
-                  fn_nms_chr = fn_nms_chr, text_chr = text_chr), 
-                consented_msg_1L_chr = paste0("Examples have been written in ", 
+                consent_indcs_int = consent_indcs_int, consented_args_ls = list(examples_chr = paste0(path_1L_chr, 
+                  "/data-raw/examples/", examples_chr), fn_fls_chr = fn_fls_chr, 
+                  fn_nms_chr = fn_nms_chr), consented_msg_1L_chr = paste0("Examples have been written in ", 
                   make_list_phrase(unique(fn_fls_chr)), "."), 
                 declined_msg_1L_chr = "Write request cancelled - no examples have been written.", 
                 options_chr = options_chr, return_1L_lgl = F)
@@ -1299,33 +1309,59 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
 #' @export 
 #' @importFrom purrr walk
 #' @importFrom rmarkdown render
+#' @examplesIf interactive()
+#'   #
+#'   # Example 1 - RMD files
+#'   #
+#'   # Copy template RMD files
+#'   write_to_copy_rmds(dir_path_1L_chr = tempdir(),
+#'                      fl_nm_1L_chr = "RMDs",
+#'                      rmds_dir_1L_chr = system.file("MD_RMDs", package = "ready4"))
+#'   # Typically you would now edit these templates before proceeding.
+#'   # Render post from RMD files.
+#'   write_to_render_post("RMDs", path_to_main_dir_1L_chr = tempdir())
+#'   #
+#'   # Example 2 - Rmarkdown file
+#'   #
+#'   # Copy template Rmarkdown file
+#'   write_to_copy_rmds(dir_path_1L_chr = tempdir(),
+#'                      fl_nm_1L_chr = "Rmarkdown",
+#'                      rmds_dir_1L_chr = system.file("MD_Rmarkdown", package = "ready4"))
+#'   # Typically you would now edit these templates before proceeding.
+#'   # Render post from RMD files.
+#'   write_to_render_post("Rmarkdown", path_to_main_dir_1L_chr = tempdir(), is_rmd_1L_lgl = F)
 write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, is_rmd_1L_lgl = T, options_chr = c("Y", 
         "N")) 
 {
-    consented_fn <- function(consent_1L_chr, consent_indcs_int, 
-        included_dirs_chr, is_rmd_1L_lgl, options_chr, path_to_main_dir_1L_chr) {
-        included_dirs_chr %>% purrr::walk(~{
-            if (is_rmd_1L_lgl) {
-                write_blog_entries(dir_path_1L_chr = path_to_main_dir_1L_chr, 
-                  consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
-                  fl_nm_1L_chr = .x, options_chr = options_chr)
-            }
-            else {
-                rmarkdown::render(paste0(path_to_main_dir_1L_chr, 
-                  "/", .x, "/index.en.Rmarkdown"))
-            }
-        })
+    if (requireNamespace("hugodown", quietly = TRUE)) {
+        consented_fn <- function(consent_1L_chr, consent_indcs_int, 
+            included_dirs_chr, is_rmd_1L_lgl, options_chr, path_to_main_dir_1L_chr) {
+            included_dirs_chr %>% purrr::walk(~{
+                if (is_rmd_1L_lgl) {
+                  write_blog_entries(dir_path_1L_chr = path_to_main_dir_1L_chr, 
+                    consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+                    fl_nm_1L_chr = .x, options_chr = options_chr)
+                }
+                else {
+                  rmarkdown::render(paste0(path_to_main_dir_1L_chr, 
+                    "/", .x, "/index.en.Rmarkdown"))
+                }
+            })
+        }
+        write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you wish to render posts in ", 
+            make_list_phrase(included_dirs_chr), "?"), consent_1L_chr = consent_1L_chr, 
+            consent_indcs_int = consent_indcs_int, consented_args_ls = list(consent_1L_chr = consent_1L_chr, 
+                consent_indcs_int = consent_indcs_int, included_dirs_chr = included_dirs_chr, 
+                is_rmd_1L_lgl = is_rmd_1L_lgl, options_chr = options_chr, 
+                path_to_main_dir_1L_chr = path_to_main_dir_1L_chr), 
+            consented_msg_1L_chr = paste0("Posts have been rendered in ", 
+                make_list_phrase(included_dirs_chr), "."), declined_msg_1L_chr = "Render request cancelled - no posts have been rendered.", 
+            options_chr = options_chr, return_1L_lgl = F)
     }
-    write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you wish to render posts in ", 
-        make_list_phrase(included_dirs_chr), "?"), consent_1L_chr = consent_1L_chr, 
-        consent_indcs_int = consent_indcs_int, consented_args_ls = list(consent_1L_chr = consent_1L_chr, 
-            consent_indcs_int = consent_indcs_int, included_dirs_chr = included_dirs_chr, 
-            is_rmd_1L_lgl = is_rmd_1L_lgl, options_chr = options_chr, 
-            path_to_main_dir_1L_chr = path_to_main_dir_1L_chr), 
-        consented_msg_1L_chr = paste0("Posts have been rendered in ", 
-            make_list_phrase(included_dirs_chr), "."), declined_msg_1L_chr = "Render request cancelled - no posts have been rendered.", 
-        options_chr = options_chr, return_1L_lgl = F)
+    else {
+        warning("The R package 'hugodown' is not installed - no files have been written. Try installing hugodown and then rerun 'write_to_render_post'.")
+    }
 }
 #' Write to trim html
 #' @description write_to_trim_html() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to trim html. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
@@ -1438,8 +1474,8 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
 #' @rdname write_ws
 #' @export 
 #' @importFrom purrr map_chr
-#' @keywords internal
-#' @example man/examples/write_ws.R
+#' @examplesIf interactive()
+#'   write_ws(tempdir())
 write_ws <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N")) 
 {

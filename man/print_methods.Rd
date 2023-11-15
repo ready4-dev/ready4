@@ -53,3 +53,10 @@ Methods (a kable)
 \description{
 print_methods() is a Print function that prints output to console Specifically, this function implements an algorithm to print methods. The function is called for its side effects and does not return a value.
 }
+\examples{
+methods_tb <- get_methods_tb("ready4-dev/ready4")
+print_methods(methods_tb)
+print_methods(methods_tb, return_1L_chr = "core")
+print_methods(methods_tb, return_1L_chr = "slot")
+print_methods(methods_tb, return_1L_chr = "extended")
+}

@@ -35,4 +35,10 @@ Datasets (a kable)
 \description{
 print_data() is a Print function that prints output to console Specifically, this function implements an algorithm to print data. The function is called for its side effects and does not return a value.
 }
-\keyword{internal}
+\examples{
+datasets_tb <- get_datasets_tb("ready4-dev/ready4")
+print_data(datasets_tb, by_dv_1L_lgl = T)
+print_data(datasets_tb, what_1L_chr = "real")
+print_data(datasets_tb, what_1L_chr = "fakes")
+
+}

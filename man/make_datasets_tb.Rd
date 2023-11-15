@@ -23,4 +23,10 @@ Dataverses (a tibble)
 \description{
 make_datasets_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make datasets tibble. The function returns Dataverses (a tibble).
 }
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  # Likely to take more than one minute to execute.
+  make_datasets_tb("ready4")
+\dontshow{\}) # examplesIf}
+}
 \keyword{internal}

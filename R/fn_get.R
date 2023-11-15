@@ -92,6 +92,7 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
 #' @export 
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
+#' @example man/examples/get_datasets_tb.R
 get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
@@ -226,18 +227,19 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
     return(id_1L_chr)
 }
 #' Get from lookup table object
-#' @description get_from_lup_obj() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get from lookup table object. Function argument data_lookup_tb specifies the where to look for the required object. The function returns Return object (an output object of multiple potential types).
+#' @description get_from_lup_obj() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get from lookup table object. Function argument data_lookup_tb specifies the where to look for the required object. The function returns Cell value (an output object of multiple potential types).
 #' @param data_lookup_tb Data lookup (a tibble)
 #' @param match_value_xx Match value (an output object of multiple potential types)
 #' @param match_var_nm_1L_chr Match variable name (a character vector of length one)
 #' @param target_var_nm_1L_chr Target variable name (a character vector of length one)
 #' @param evaluate_1L_lgl Evaluate (a logical vector of length one), Default: FALSE
-#' @return Return object (an output object of multiple potential types)
+#' @return Cell value (an output object of multiple potential types)
 #' @rdname get_from_lup_obj
 #' @export 
 #' @importFrom dplyr filter select pull
 #' @importFrom rlang sym
 #' @importFrom stringr str_detect str_locate str_sub
+#' @example man/examples/get_from_lup_obj.R
 get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_chr, 
     target_var_nm_1L_chr, evaluate_1L_lgl = FALSE) 
 {
@@ -257,23 +259,23 @@ get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_ch
                 namespace_ref))) == 0) {
                 namespace_ref_sym <- rlang::sym(namespace_ref)
                 attachNamespace(namespace_ref)
-                return_object_xx <- get(x = object_ref, envir = as.environment(paste0("package:", 
+                cell_value_xx <- get(x = object_ref, envir = as.environment(paste0("package:", 
                   namespace_ref)))
                 detach(paste0("package:", namespace_ref), character.only = TRUE)
             }
             else {
-                return_object_xx <- get(x = object_ref, envir = as.environment(paste0("package:", 
+                cell_value_xx <- get(x = object_ref, envir = as.environment(paste0("package:", 
                   namespace_ref)))
             }
         }
         else {
-            return_object_xx <- get(x = return_object_ref)
+            cell_value_xx <- get(x = return_object_ref)
         }
     }
     else {
-        return_object_xx <- return_object_ref
+        cell_value_xx <- return_object_ref
     }
-    return(return_object_xx)
+    return(cell_value_xx)
 }
 #' Get functions tibble
 #' @description get_functions_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get functions tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Functions (a tibble).
@@ -331,8 +333,8 @@ get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclu
     }
     if (framework_only_1L_lgl) {
         generics_chr <- setdiff(generics_chr, c("addNextMethod", 
-            "body<-", "cbind2", "coerce", "coerce<-", "kronecker", 
-            "loadMethod", "rbind2", "show", "slotsFromS3"))
+            "body<-", "cbind2", "coerce", "coerce<-", "initialize", 
+            "kronecker", "loadMethod", "rbind2", "show", "slotsFromS3"))
     }
     if (return_1L_chr == "core") {
         generics_chr <- generics_chr[tolower(generics_chr) == 
@@ -376,7 +378,7 @@ get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @rdname get_libraries_tb
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
+#' @example man/examples/get_libraries_tb.R
 get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
@@ -418,6 +420,7 @@ get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https:/
 #' @rdname get_methods
 #' @export 
 #' @importFrom stringr str_detect str_remove_all
+#' @example man/examples/get_methods.R
 get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module") 
 {
     methods_chr <- showMethods(classes = "Ready4Module", printTo = FALSE)
@@ -437,7 +440,7 @@ get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module
 #' @rdname get_methods_tb
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
+#' @example man/examples/get_methods_tb.R
 get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
@@ -453,7 +456,7 @@ get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @rdname get_modules_tb
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
+#' @example man/examples/get_modules_tb.R
 get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 

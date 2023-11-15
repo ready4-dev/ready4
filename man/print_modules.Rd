@@ -29,3 +29,10 @@ Modules (a kable)
 \description{
 print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
 }
+\examples{
+modules_tb <- get_modules_tb("ready4-dev/ready4")
+# Print sub-modules
+print_modules(modules_tb, what_1L_chr = "S3")
+# Print full-modules
+print_modules(modules_tb, what_1L_chr = "S4")
+}

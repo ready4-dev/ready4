@@ -10,7 +10,7 @@
 #' @return Datasets (a kable)
 #' @rdname print_data
 #' @export 
-#' @keywords internal
+#' @example man/examples/print_data.R
 print_data <- function (datasets_tb, by_dv_1L_lgl = F, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     what_1L_chr = "all", ...) 
@@ -41,6 +41,7 @@ print_data <- function (datasets_tb, by_dv_1L_lgl = F, root_1L_chr = "https://da
 #' @importFrom purrr pmap_dfr map_dfr
 #' @importFrom tibble tibble
 #' @importFrom kableExtra kable kable_styling
+#' @keywords internal
 print_dss <- function (dvs_tb, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     what_1L_chr = "all", ...) 
 {
@@ -80,6 +81,7 @@ print_dss <- function (dvs_tb, scroll_height_1L_chr = character(0), scroll_width
 #' @importFrom dplyr select mutate filter
 #' @importFrom purrr map
 #' @importFrom kableExtra kable kable_styling column_spec
+#' @keywords internal
 print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     what_1L_chr = "all", ...) 
@@ -128,6 +130,7 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
 #' @importFrom dplyr filter
 #' @importFrom purrr map_chr
 #' @importFrom kableExtra kable kable_styling column_spec
+#' @example man/examples/print_methods.R
 print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     methods_chr = NULL, module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
@@ -167,6 +170,7 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
 #' @export 
 #' @importFrom dplyr filter select
 #' @importFrom kableExtra kable kable_styling
+#' @example man/examples/print_modules.R
 print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     what_1L_chr = "All", ...) 
 {
@@ -207,6 +211,7 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
 #' @importFrom purrr map map_chr map2_chr pmap
 #' @importFrom stringr str_remove
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
+#' @example man/examples/print_packages.R
 print_packages <- function (pkg_extensions_tb = NULL, gh_repo_1L_chr = "ready4-dev/ready4", 
     gh_tag_1L_chr = "Documentation_0.0", include_1L_chr = "modules", 
     module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 

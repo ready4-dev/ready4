@@ -41,3 +41,4 @@ Libraries (a tibble)
 \description{
 make_libraries_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make libraries tibble. The function returns Libraries (a tibble).
 }
+\keyword{internal}

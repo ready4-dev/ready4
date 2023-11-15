@@ -1,0 +1,5 @@
+methods_tb <- get_methods_tb("ready4-dev/ready4")
+print_methods(methods_tb)
+print_methods(methods_tb, return_1L_chr = "core")
+print_methods(methods_tb, return_1L_chr = "slot")
+print_methods(methods_tb, return_1L_chr = "extended")

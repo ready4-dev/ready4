@@ -29,12 +29,14 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reus
                            cls_fn_ls = list(),
                            custom_dmt_ls = ready4fun::make_custom_dmt_ls(
                              user_manual_fns_chr = c(
-                               #"get_dv_fls_urls",
-                               "get_from_lup_obj",#"get_rds_from_dv",
-                               "get_methods",
-                               "make_dvs_tb","make_ds_releases_tbl", "make_libraries_tb", "make_methods_tb", "make_modules_tb",  "make_programs_tbl",
-                               "print_dss", "print_dvs", "print_methods", "print_modules", "print_packages",
-                               "write_to_render_post"
+                               "get_datasts_tb",
+                               "get_from_lup_obj",
+                               "get_libraries_tb",
+                               "get_methods", "get_methods_tb", "get_modules_tb",
+                               "make_code_releases_tbl", "make_datasts_tb", "make_ds_releases_tbl",
+                               "make_methods_tb", "make_modules_tb",  "make_programs_tbl",
+                               "print_data", "print_methods", "print_modules", "print_packages",
+                               "write_to_render_post", "write_ws"
                                )),
                            copyright_holders_chr = "Orygen",
                            import_from_chr = NA_character_,
@@ -61,26 +63,26 @@ readLines(".github/workflows/R-CMD-check.yaml") %>%
 # Need to check that test-coverage includes fix: "Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev"
 write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
 write_extra_pkgs_to_actions(consent_1L_chr = "Y")
-readLines("_pkgdown.yml") %>%
+readLines("_pkgdown.yml") %>% # update in ready4fun
   stringr::str_replace_all("  - text: Model", "  - text: Framework & Model") %>%
   writeLines(con = "_pkgdown.yml")
 readLines("DESCRIPTION")[-which(readLines("DESCRIPTION") %in% c("    knitr,", "    testthat,"))] %>%
-  writeLines("DESCRIPTION")
+  writeLines("DESCRIPTION") # update in ready4fun
 devtools::document()
-usethis::use_package("knitr", type = "Suggests") # instead of imports
-usethis::use_package("pkgload", type = "Suggests")
-usethis::use_package("testthat", type = "Suggests")
-citation_chr <- readLines("inst/CITATION")
+usethis::use_package("knitr", type = "Suggests") # update in ready4fun
+usethis::use_package("pkgload", type = "Suggests") # ??
+usethis::use_package("testthat", type = "Suggests") # update in ready4fun
+citation_chr <- readLines("inst/CITATION") # update in ready4fun
 citation_chr[3] <- stringr::str_replace(citation_chr[3], "citEntry", "bibentry")
 citation_chr[4] <- stringr::str_replace(citation_chr[4], "entry", "bibtype")
 citation_chr[8] <- stringr::str_replace(citation_chr[8], "2021", "2023")
 citation_chr[12] <- stringr::str_replace(citation_chr[12], "2021", "2023")
 citation_chr  %>%
   writeLines(con = "inst/CITATION")
-readLines("README.md") %>%
+readLines("README.md") %>% # update in ready4fun
   stringr::str_replace_all("svg\\)]\\(https://codecov.io","svg\\)]\\(https://app.codecov.io") %>%
   writeLines(con = "README.md")
-c(readLines("R/imp_fns.R"),
+c(readLines("R/imp_fns.R"), # update in ready4fun
   " ",
   "#' NSE equals function",
   "#'",
@@ -105,7 +107,6 @@ c(readLines("R/imp_fns.R"),
   "NULL"
 ) %>%
   writeLines("R/imp_fns.R")
-
 write_examples()
 usethis::use_cran_badge() # Export to ready4fun
 devtools::build_vignettes()

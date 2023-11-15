@@ -5,9 +5,9 @@
 \title{Make programs table}
 \usage{
 make_programs_tbl(
-  what_1L_chr = "Program",
+  what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"),
   as_kbl_1L_lgl = F,
-  exclude_chr = "dce_sa_cards",
+  exclude_chr = character(0),
   format_1L_chr = "\%d-\%b-\%Y",
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
@@ -18,11 +18,11 @@ make_programs_tbl(
 )
 }
 \arguments{
-\item{what_1L_chr}{What (a character vector of length one), Default: 'Program'}
+\item{what_1L_chr}{What (a character vector of length one), Default: c("Program", "Subroutine", "Program_and_Subroutine")}
 
 \item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: F}
 
-\item{exclude_chr}{Exclude (a character vector), Default: 'dce_sa_cards'}
+\item{exclude_chr}{Exclude (a character vector), Default: character(0)}
 
 \item{format_1L_chr}{Format (a character vector of length one), Default: '\%d-\%b-\%Y'}
 
@@ -43,4 +43,11 @@ Programs (an output object of multiple potential types)
 }
 \description{
 make_programs_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make programs table. The function returns Programs (an output object of multiple potential types).
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  # Likely to take more than one minute to execute.
+  make_programs_tbl("Program", gh_repo_1L_chr = "ready4-dev/ready4")
+  make_programs_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4")
+\dontshow{\}) # examplesIf}
 }

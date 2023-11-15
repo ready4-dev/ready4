@@ -24,8 +24,7 @@ write_ws(
 write_ws() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write workspace. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   write_ws(tempdir())
-  }
+\dontshow{\}) # examplesIf}
 }
-\keyword{internal}

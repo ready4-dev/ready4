@@ -186,24 +186,24 @@ get_from_lup_obj <- function(data_lookup_tb,
                                                  namespace_ref))) == 0){
         namespace_ref_sym <- rlang::sym(namespace_ref)
         attachNamespace(namespace_ref)
-        return_object_xx <- get(x = object_ref,
+        cell_value_xx <- get(x = object_ref,
                                 envir = as.environment(paste0("package:",
                                                               namespace_ref)))
         detach(paste0("package:",
                       namespace_ref),
                character.only = TRUE)
       }else{
-        return_object_xx <- get(x = object_ref,
+        cell_value_xx <- get(x = object_ref,
                                 envir = as.environment(paste0("package:",
                                                               namespace_ref)))
       }
     }else{
-      return_object_xx <- get(x = return_object_ref)
+      cell_value_xx <- get(x = return_object_ref)
     }
   }else{
-    return_object_xx <- return_object_ref
+    cell_value_xx <- return_object_ref
   }
-  return(return_object_xx)
+  return(cell_value_xx)
 }
 get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0",
@@ -245,7 +245,7 @@ get_generics <- function(pkg_nm_1L_chr = "ready4",
   }
   if(framework_only_1L_lgl){
     generics_chr <- setdiff(generics_chr,
-                            c("addNextMethod", "body<-", "cbind2", "coerce", "coerce<-",
+                            c("addNextMethod", "body<-", "cbind2", "coerce", "coerce<-", "initialize",
                               "kronecker", "loadMethod", "rbind2", "show", "slotsFromS3" ))
 
   }

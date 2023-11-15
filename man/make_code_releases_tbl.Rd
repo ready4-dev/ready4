@@ -5,7 +5,8 @@
 \title{Make code releases table}
 \usage{
 make_code_releases_tbl(
-  repo_type_1L_chr = "Framework",
+  repo_type_1L_chr = c("Framework", "Module", "Package", "Program", "Subroutine",
+    "Program_and_Subroutine"),
   as_kbl_1L_lgl = T,
   brochure_repos_chr = character(0),
   exclude_chr = character(0),
@@ -24,7 +25,8 @@ make_code_releases_tbl(
 )
 }
 \arguments{
-\item{repo_type_1L_chr}{Repository type (a character vector of length one), Default: 'Framework'}
+\item{repo_type_1L_chr}{Repository type (a character vector of length one), Default: c("Framework", "Module", "Package", "Program", "Subroutine",
+"Program_and_Subroutine")}
 
 \item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: T}
 
@@ -62,4 +64,12 @@ Releases (an output object of multiple potential types)
 \description{
 make_code_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make code releases table. The function returns Releases (an output object of multiple potential types).
 }
-\keyword{internal}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  # Likely to take more than one minute to execute.
+  make_code_releases_tbl("Framework", gh_repo_1L_chr = "ready4-dev/ready4")
+  make_code_releases_tbl("Module", gh_repo_1L_chr = "ready4-dev/ready4")
+  make_code_releases_tbl("Program", gh_repo_1L_chr = "ready4-dev/ready4")
+  make_code_releases_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4")
+\dontshow{\}) # examplesIf}
+}

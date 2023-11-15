@@ -7,6 +7,7 @@
 make_methods_tb(
   packages_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
+  framework_only_1L_lgl = T,
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
   module_pkgs_chr = character(0),
@@ -19,6 +20,8 @@ make_methods_tb(
 \item{packages_tb}{Packages (a tibble), Default: NULL}
 
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
+
+\item{framework_only_1L_lgl}{Framework only (a logical vector of length one), Default: T}
 
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 
@@ -37,4 +40,10 @@ Methods (a tibble)
 }
 \description{
 make_methods_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make methods tibble. The function returns Methods (a tibble).
+}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  # Likely to take more than one minute to execute.
+  make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
+\dontshow{\}) # examplesIf}
 }

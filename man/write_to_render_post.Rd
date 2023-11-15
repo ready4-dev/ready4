@@ -29,3 +29,27 @@ write_to_render_post(
 \description{
 write_to_render_post() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to render post. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 }
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  #
+  # Example 1 - RMD files
+  #
+  # Copy template RMD files
+  write_to_copy_rmds(dir_path_1L_chr = tempdir(),
+                     fl_nm_1L_chr = "RMDs",
+                     rmds_dir_1L_chr = system.file("MD_RMDs", package = "ready4"))
+  # Typically you would now edit these templates before proceeding.
+  # Render post from RMD files.
+  write_to_render_post("RMDs", path_to_main_dir_1L_chr = tempdir())
+  #
+  # Example 2 - Rmarkdown file
+  #
+  # Copy template Rmarkdown file
+  write_to_copy_rmds(dir_path_1L_chr = tempdir(),
+                     fl_nm_1L_chr = "Rmarkdown",
+                     rmds_dir_1L_chr = system.file("MD_Rmarkdown", package = "ready4"))
+  # Typically you would now edit these templates before proceeding.
+  # Render post from RMD files.
+  write_to_render_post("Rmarkdown", path_to_main_dir_1L_chr = tempdir(), is_rmd_1L_lgl = F)
+\dontshow{\}) # examplesIf}
+}
