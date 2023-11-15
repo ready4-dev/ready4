@@ -60,6 +60,8 @@ Package extensions (a kable)
 print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
 }
 \examples{
-print_packages(gh_repo_1L_chr = "ready4-dev/ready4", include_1L_chr = "framework")
-print_packages(gh_repo_1L_chr = "ready4-dev/ready4", include_1L_chr = "modules")
+print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
+               include_1L_chr = "framework")
+print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
+               include_1L_chr = "modules")
 }

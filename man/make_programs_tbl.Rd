@@ -47,7 +47,9 @@ make_programs_tbl() is a Make function that creates a new R object. Specifically
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   # Likely to take more than one minute to execute.
-  make_programs_tbl("Program", gh_repo_1L_chr = "ready4-dev/ready4")
-  make_programs_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4")
+  make_programs_tbl("Program",
+                    gh_repo_1L_chr = "ready4-dev/ready4")
+  make_programs_tbl("Subroutine",
+                    gh_repo_1L_chr = "ready4-dev/ready4")
 \dontshow{\}) # examplesIf}
 }

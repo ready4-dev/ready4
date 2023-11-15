@@ -50,10 +50,14 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
-#'   make_code_releases_tbl("Framework", gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_code_releases_tbl("Module", gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_code_releases_tbl("Program", gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_code_releases_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_code_releases_tbl("Framework",
+#'                          gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_code_releases_tbl("Module",
+#'                          gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_code_releases_tbl("Program",
+#'                          gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_code_releases_tbl("Subroutine",
+#'                          gh_repo_1L_chr = "ready4-dev/ready4")
 make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", "Package", 
     "Program", "Subroutine", "Program_and_Subroutine"), as_kbl_1L_lgl = T, 
     brochure_repos_chr = character(0), exclude_chr = character(0), 
@@ -780,8 +784,10 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @importFrom kableExtra cell_spec kable kable_styling
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
-#'   make_programs_tbl("Program", gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_programs_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_programs_tbl("Program",
+#'                     gh_repo_1L_chr = "ready4-dev/ready4")
+#'   make_programs_tbl("Subroutine",
+#'                     gh_repo_1L_chr = "ready4-dev/ready4")
 make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"), 
     as_kbl_1L_lgl = F, exclude_chr = character(0), format_1L_chr = "%d-%b-%Y", 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 

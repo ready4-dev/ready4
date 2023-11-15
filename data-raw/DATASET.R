@@ -107,7 +107,7 @@ c(readLines("R/imp_fns.R"), # update in ready4fun
   "NULL"
 ) %>%
   writeLines("R/imp_fns.R")
-write_examples()
+write_examples(consent_1L_chr = "Y")
 usethis::use_cran_badge() # Export to ready4fun
 devtools::build_vignettes()
 #

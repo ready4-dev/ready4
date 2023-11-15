@@ -30,8 +30,11 @@ Cell value (an output object of multiple potential types)
 get_from_lup_obj() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get from lookup table object. Function argument data_lookup_tb specifies the where to look for the required object. The function returns Cell value (an output object of multiple potential types).
 }
 \examples{
-lookup_tb <- tibble::tibble(Name = c("Sajid","Siobhan"), Treat = c("Cake", "Chocolate"))
-get_from_lup_obj(lookup_tb, match_value_xx = "Siobhan", match_var_nm_1L_chr = "Name", target_var_nm_1L_chr = "Treat")
-get_from_lup_obj(lookup_tb, match_value_xx = "Cake", match_var_nm_1L_chr = "Treat", target_var_nm_1L_chr = "Name")
+lookup_tb <- tibble::tibble(Name = c("Sajid","Siobhan"),
+                            Treat = c("Cake", "Chocolate"))
+get_from_lup_obj(lookup_tb, match_value_xx = "Siobhan",
+                 match_var_nm_1L_chr = "Name", target_var_nm_1L_chr = "Treat")
+get_from_lup_obj(lookup_tb, match_value_xx = "Cake",
+                 match_var_nm_1L_chr = "Treat", target_var_nm_1L_chr = "Name")
 
 }
