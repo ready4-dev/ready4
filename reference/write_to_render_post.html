@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9131</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9132</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,8 @@
 <span class="r-in"><span>  <span class="co"># Copy template RMD files</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="write_to_copy_rmds.html">write_to_copy_rmds</a></span><span class="op">(</span>dir_path_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                     fl_nm_1L_chr <span class="op">=</span> <span class="st">"RMDs"</span>,</span></span>
-<span class="r-in"><span>                     rmds_dir_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"MD_RMDs"</span>, package <span class="op">=</span> <span class="st">"ready4"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                     rmds_dir_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"MD_RMDs"</span>,</span></span>
+<span class="r-in"><span>                                                   package <span class="op">=</span> <span class="st">"ready4"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="co"># Typically you would now edit these templates before proceeding.</span></span></span>
 <span class="r-in"><span>  <span class="co"># Render post from RMD files.</span></span></span>
 <span class="r-in"><span>  <span class="fu">write_to_render_post</span><span class="op">(</span><span class="st">"RMDs"</span>, path_to_main_dir_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -119,10 +120,13 @@
 <span class="r-in"><span>  <span class="co"># Copy template Rmarkdown file</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="write_to_copy_rmds.html">write_to_copy_rmds</a></span><span class="op">(</span>dir_path_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                     fl_nm_1L_chr <span class="op">=</span> <span class="st">"Rmarkdown"</span>,</span></span>
-<span class="r-in"><span>                     rmds_dir_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"MD_Rmarkdown"</span>, package <span class="op">=</span> <span class="st">"ready4"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                     rmds_dir_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"MD_Rmarkdown"</span>,</span></span>
+<span class="r-in"><span>                                                   package <span class="op">=</span> <span class="st">"ready4"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="co"># Typically you would now edit these templates before proceeding.</span></span></span>
 <span class="r-in"><span>  <span class="co"># Render post from RMD files.</span></span></span>
-<span class="r-in"><span>  <span class="fu">write_to_render_post</span><span class="op">(</span><span class="st">"Rmarkdown"</span>, path_to_main_dir_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, is_rmd_1L_lgl <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">write_to_render_post</span><span class="op">(</span><span class="st">"Rmarkdown"</span>,</span></span>
+<span class="r-in"><span>                       path_to_main_dir_1L_chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                       is_rmd_1L_lgl <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
