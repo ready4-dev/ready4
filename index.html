@@ -5,19 +5,18 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="A prototype software framework to support ethical
-    implementation of health economic models. To enable health economists
-    adopt a modular and collaborative approach to model development
-    ready4 provides a template model module, a simple programming syntax
-    and tools for finding and documenting model modules.  These
+<meta name="description" content="A prototype software framework to support collaborative and
+    modular implementation of health economic models. To help make health
+    economic models more Transparent, Reusable And Updatable (TRU),
+    ready4 provides a simple programming syntax, a template model
+    module, and tools for documenting model implementations.  These
     foundational elements of the ready4 software framework are extended
     by other R packages. For detailed documentation about how to use
     ready4 and its extensions visit &lt;https://www.ready4-dev.com/&gt;.  For
     a background to and rationale for transparent, reusable and updatable
     computational health economic models read the manuscript
     &lt;arXiv:2310.14138&gt;.">
-<title>Implement Transparent, Reusable and Updatable Computational Health
-    Economic Models • ready4</title>
+<title>Implement Modular Health Economic Models • ready4</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -29,13 +28,12 @@
 <script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="Implement Transparent, Reusable and Updatable Computational Health
-    Economic Models">
-<meta property="og:description" content="A prototype software framework to support ethical
-    implementation of health economic models. To enable health economists
-    adopt a modular and collaborative approach to model development
-    ready4 provides a template model module, a simple programming syntax
-    and tools for finding and documenting model modules.  These
+<meta property="og:title" content="Implement Modular Health Economic Models">
+<meta property="og:description" content="A prototype software framework to support collaborative and
+    modular implementation of health economic models. To help make health
+    economic models more Transparent, Reusable And Updatable (TRU),
+    ready4 provides a simple programming syntax, a template model
+    module, and tools for documenting model implementations.  These
     foundational elements of the ready4 software framework are extended
     by other R packages. For detailed documentation about how to use
     ready4 and its extensions visit &lt;https://www.ready4-dev.com/&gt;.  For
@@ -56,7 +54,7 @@
     
     <a class="navbar-brand me-2" href="index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9132</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9133</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,11 +106,11 @@
 </h1>
 </div>
 <div class="section level2">
-<h2 id="implement-transparent-reusable-and-updatable-computational-health-economic-models">Implement Transparent, Reusable and Updatable Computational Health Economic Models<a class="anchor" aria-label="anchor" href="#implement-transparent-reusable-and-updatable-computational-health-economic-models"></a>
+<h2 id="implement-modular-health-economic-models">Implement Modular Health Economic Models<a class="anchor" aria-label="anchor" href="#implement-modular-health-economic-models"></a>
 </h2>
 <!-- badges: start -->
 
-<p>A prototype software framework to support ethical implementation of health economic models. To enable health economists adopt a modular and collaborative approach to model development ‘ready4’ provides a template model module, a simple programming syntax and tools for finding and documenting model modules. These foundational elements of the ‘ready4’ software framework are extended by other R packages. For detailed documentation about how to use ‘ready4’ and its extensions visit <a href="https://www.ready4-dev.com/" class="external-link uri">https://www.ready4-dev.com/</a>. For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript &lt;arXiv:2310.14138&gt;.</p>
+<p>A prototype software framework to support collaborative and modular implementation of health economic models. To help make health economic models more Transparent, Reusable And Updatable (TRU), ‘ready4’ provides a simple programming syntax, a template model module, and tools for documenting model implementations. These foundational elements of the ‘ready4’ software framework are extended by other R packages. For detailed documentation about how to use ‘ready4’ and its extensions visit <a href="https://www.ready4-dev.com/" class="external-link uri">https://www.ready4-dev.com/</a>. For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript <a href="https://arxiv.org/abs/2310.14138" class="external-link uri">https://arxiv.org/abs/2310.14138</a>.</p>
 <p>To install a development version of this software, run the following commands in your R console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
@@ -134,7 +132,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
 
@@ -161,7 +159,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://www.ready4-dev.com/docs/software/libraries/types/framework/" class="external-link"><img src="https://img.shields.io/badge/ready4-foundation-coral?style=flat&amp;labelColor=black&amp;logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAIXRFWHRDcmVhdGlvbiBUaW1lADIwMjI6MDM6MDcgMTY6MTM6NTPZeG5UAAABa0lEQVQ4T4WT607CQBCFpyUi3qIR0eAfNfCi/vENfEgENIAIlcJ6vr1oLaZOerJzdst0zpklc49nznqHZs6ZfWwDem1xM1sqXwtXkb8rL4SuOLEoLXPPXWfD01Dg9dPsrTQbngQ+EZ+LDyIfiy/FHyIfFZbbTslWKOOqxx/uWBPSfp07FahGlqlNfWGqL9HNfBO+CAfwdO55WS8g4MFML834sfJVA9e7vwsg50aGohncdmRojV9XeL+jArRNmZxVSJ4Acj3NHqARdyeFJqC2KJiCfKE9zsfxnNYTl5TcCtmNMcwY/ZXf+3wdzzVza2vj4iCaq3d1R/bvwVSH6IPjNIUHx0FSNZA7WquDqOVb35+eiO8h7Oe+vRfp0a3yGtFMDuiAIg2R20YaVwJ3Hj+4kehO/J/I7VJ/jHtpvBP6mrHnR4EzdyQ0xI8HhM8jUiChxVpDK3iVuadzx43yRdI4E2d0gNtX74TCs419AR8YEST/cHPBAAAAAElFTkSuQmCC" alt="ready4"></a></li>
+<li><a href="https://www.ready4-dev.com/docs/software/libraries/types/framework/" class="external-link"><img src="https://img.shields.io/badge/ready4-foundation-coral?style=flat&amp;amp;labelColor=black&amp;amp;logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAIXRFWHRDcmVhdGlvbiBUaW1lADIwMjI6MDM6MDcgMTY6MTM6NTPZeG5UAAABa0lEQVQ4T4WT607CQBCFpyUi3qIR0eAfNfCi/vENfEgENIAIlcJ6vr1oLaZOerJzdst0zpklc49nznqHZs6ZfWwDem1xM1sqXwtXkb8rL4SuOLEoLXPPXWfD01Dg9dPsrTQbngQ+EZ+LDyIfiy/FHyIfFZbbTslWKOOqxx/uWBPSfp07FahGlqlNfWGqL9HNfBO+CAfwdO55WS8g4MFML834sfJVA9e7vwsg50aGohncdmRojV9XeL+jArRNmZxVSJ4Acj3NHqARdyeFJqC2KJiCfKE9zsfxnNYTl5TcCtmNMcwY/ZXf+3wdzzVza2vj4iCaq3d1R/bvwVSH6IPjNIUHx0FSNZA7WquDqOVb35+eiO8h7Oe+vRfp0a3yGtFMDuiAIg2R20YaVwJ3Hj+4kehO/J/I7VJ/jHtpvBP6mrHnR4EzdyQ0xI8HhM8jUiChxVpDK3iVuadzx43yRdI4E2d0gNtX74TCs419AR8YEST/cHPBAAAAAElFTkSuQmCC" alt="ready4"></a></li>
 <li><a href="https://github.com/ready4-dev/ready4/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/ready4-dev/ready4/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://github.com/ready4-dev/ready4/actions/workflows/test-coverage.yaml" class="external-link"><img src="https://github.com/ready4-dev/ready4/actions/workflows/test-coverage.yaml/badge.svg" alt="test-coverage"></a></li>
 <li><a href="https://app.codecov.io/gh/ready4-dev/ready4" class="external-link"><img src="https://codecov.io/gh/ready4-dev/ready4/branch/main/graph/badge.svg" alt="codecov"></a></li>
