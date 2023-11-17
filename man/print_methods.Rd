@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_print.R
 \name{print_methods}
 \alias{print_methods}
-\title{Print methods}
+\title{Print a table of methods associated with ready4 model modules}
 \usage{
 print_methods(
   methods_tb = NULL,

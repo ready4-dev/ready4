@@ -54,11 +54,12 @@ get_cls_extensions <- function(pkg_extensions_tb,
   return(cls_extensions_tb)
 }
 get_datasets_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
-                            gh_tag_1L_chr = "Documentation_0.0"){
+                            gh_tag_1L_chr = "Documentation_0.0",
+                            rds_fl_name_1L_chr = "datasets_tb"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
-  datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("datasets_tb.RDS")]))
+  datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith(paste0(rds_fl_name_1L_chr, ".RDS"))]))
   return(datasets_tb)
 }
 get_digits_from_text <- function(text_1L_chr){

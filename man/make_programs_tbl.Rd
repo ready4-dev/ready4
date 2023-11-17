@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_programs_tbl}
 \alias{make_programs_tbl}
-\title{Make programs table}
+\title{Make a tabular summary of programs using ready4 model modules}
 \usage{
 make_programs_tbl(
   what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"),

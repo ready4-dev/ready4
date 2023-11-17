@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_print.R
 \name{print_data}
 \alias{print_data}
-\title{Print data}
+\title{Print a table of ready4 model data collections}
 \usage{
 print_data(
   datasets_tb,

@@ -241,7 +241,7 @@ write_examples <- function(path_1L_chr = getwd(),
                        }
                        text_chr <- readLines(fn_fl_1L_chr)
                        addition_chr <- readLines(..1)
-                       if(startsWith(addition_chr[1], "if (interactive())")){
+                       if(startsWith(addition_chr[1], "if (interactive())") | startsWith(addition_chr[1], "if(interactive())")){
                          addition_chr <- c("#' @examplesIf interactive()",paste0("#' ",addition_chr[2:(length(addition_chr)-1)]))
                          if(startsWith(addition_chr[1], "  ")){
                            addition_chr <- purrr::map_chr(addition_chr,~stringr::str_replace(.x,"  ",""))

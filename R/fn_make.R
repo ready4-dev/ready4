@@ -19,7 +19,7 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
             "/index.html"))
     return(additions_tb)
 }
-#' Make code releases table
+#' Make a tabular summary of release history of ready4 code libraries and executables
 #' @description make_code_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make code releases table. The function returns Releases (an output object of multiple potential types).
 #' @param repo_type_1L_chr Repository type (a character vector of length one), Default: c("Framework", "Module", "Package", "Program", "Subroutine", 
 #'    "Program_and_Subroutine")
@@ -241,7 +241,7 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server
         })) %>% dplyr::arrange(.data$Dataverse)
     return(dvs_tb)
 }
-#' Make dataset releases table
+#' Make a tabular summary of release history of ready4 model data collections
 #' @description make_ds_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make dataset releases table. The function returns Dataset releases (an output object of multiple potential types).
 #' @param ds_dois_chr Dataset digital object identifiers (a character vector)
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
@@ -571,7 +571,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
         "/"), ""), fl_nm_1L_chr, save_fmt_1L_chr)
     return(path_chr)
 }
-#' Make methods tibble
+#' Make a tabular summary of methods associated with ready model modules
 #' @description make_methods_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make methods tibble. The function returns Methods (a tibble).
 #' @param packages_tb Packages (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
@@ -637,7 +637,7 @@ make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_
     }
     return(modules_pkgs_chr)
 }
-#' Make modules tibble
+#' Make a tabular summary of ready4 model modules and sub-modules
 #' @description make_modules_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make modules tibble. The function returns Modules (a tibble).
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param cls_extensions_tb Class extensions (a tibble), Default: NULL
@@ -761,7 +761,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
             "old_class_lgl")
     return(modules_tb)
 }
-#' Make programs table
+#' Make a tabular summary of programs using ready4 model modules
 #' @description make_programs_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make programs table. The function returns Programs (an output object of multiple potential types).
 #' @param what_1L_chr What (a character vector of length one), Default: c("Program", "Subroutine", "Program_and_Subroutine")
 #' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: F

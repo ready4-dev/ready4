@@ -265,7 +265,8 @@ write_examples <- function (path_1L_chr = getwd(), consent_1L_chr = "", consent_
                     }
                     text_chr <- readLines(fn_fl_1L_chr)
                     addition_chr <- readLines(..1)
-                    if (startsWith(addition_chr[1], "if (interactive())")) {
+                    if (startsWith(addition_chr[1], "if (interactive())") | 
+                      startsWith(addition_chr[1], "if(interactive())")) {
                       addition_chr <- c("#' @examplesIf interactive()", 
                         paste0("#' ", addition_chr[2:(length(addition_chr) - 
                           1)]))
@@ -959,7 +960,7 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
             file_path_1L_chr), declined_msg_1L_chr = "Write request cancelled - no new files have been created.", 
         options_chr = options_chr, return_1L_lgl = F)
 }
-#' Write to copy Markdowns
+#' Write a local copy of RMD or Rmarkdown files
 #' @description write_to_copy_rmds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to copy markdowns. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param dir_path_1L_chr Directory path (a character vector of length one)
 #' @param fl_nm_1L_chr File name (a character vector of length one)
@@ -972,7 +973,11 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
 #' @rdname write_to_copy_rmds
 #' @export 
 #' @importFrom purrr walk
-#' @keywords internal
+#' @examplesIf interactive()
+#'   write_to_copy_rmds(dir_path_1L_chr = tempdir(),
+#'                      fl_nm_1L_chr = "RMDs",
+#'                      rmds_dir_1L_chr = system.file("MD_RMDs",
+#'                                                    package = "ready4"))
 write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
     rmds_dir_1L_chr = "R/RMD Templates", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), return_1L_lgl = F) 
@@ -1296,7 +1301,7 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
         declined_msg_1L_chr = "Publish request cancelled - no changes has been made to dataverse dataset visibility.", 
         options_chr = options_chr, return_1L_lgl = F)
 }
-#' Write to render post
+#' Write ready4 model documentation website page from an RMD or Rmarkdown file
 #' @description write_to_render_post() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to render post. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param included_dirs_chr Included directories (a character vector)
 #' @param path_to_main_dir_1L_chr Path to main directory (a character vector of length one)
@@ -1468,7 +1473,7 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
         piggyback_tag_1L_chr = gh_tag_1L_chr, piggyback_to_1L_chr = gh_repo_1L_chr, 
         prerelease_1L_lgl = T)
 }
-#' Write workspace
+#' Write ready4 software develoment local directories
 #' @description write_ws() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write workspace. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 #' @param path_1L_chr Path (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''

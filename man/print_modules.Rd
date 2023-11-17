@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_print.R
 \name{print_modules}
 \alias{print_modules}
-\title{Print modules}
+\title{Print a table of ready4 model modules}
 \usage{
 print_modules(
   modules_tb,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_modules_tb}
 \alias{make_modules_tb}
-\title{Make modules tibble}
+\title{Make a tabular summary of ready4 model modules and sub-modules}
 \usage{
 make_modules_tb(
   pkg_extensions_tb = NULL,

@@ -413,7 +413,7 @@ write_self_srvc_pkg <- function(x){
   ready4fun::write_fns_dmt_tb(x)
   return(x)
 }
-write_prototypes <- function(gh_repo_1L_chr = "ready4-dev/ready4",
+write_prototypes <- function(gh_repo_1L_chr = "ready4-dev/ready4", # Export to ready4fun ?
                              gh_tag_1L_chr = "Documentation_0.0"){
   a <- ready4use::Ready4useRepos(gh_repo_1L_chr = gh_repo_1L_chr,
                                  gh_tag_1L_chr = gh_tag_1L_chr)
@@ -464,7 +464,7 @@ write_extensions <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                        piggyback_to_1L_chr = gh_repo_1L_chr,
                        prerelease_1L_lgl = T)
 }
-write_housestyle_fls <- function(){ # Use sparingly [Max 4 times a year]
+write_housestyle_fls <- function(){ # Use sparingly [Max 4 times a year] # Export to ready4fun ?
   X <- ready4use::Ready4useRepos(dv_nm_1L_chr = "ready4fw",
                                  dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK",
                                  dv_server_1L_chr = "dataverse.harvard.edu",

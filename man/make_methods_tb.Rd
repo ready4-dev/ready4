@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_methods_tb}
 \alias{make_methods_tb}
-\title{Make methods tibble}
+\title{Make a tabular summary of methods associated with ready model modules}
 \usage{
 make_methods_tb(
   packages_tb = NULL,

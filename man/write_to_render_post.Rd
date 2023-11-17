@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_to_render_post}
 \alias{write_to_render_post}
-\title{Write to render post}
+\title{Write ready4 model documentation website page from an RMD or Rmarkdown file}
 \usage{
 write_to_render_post(
   included_dirs_chr,

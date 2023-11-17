@@ -4,15 +4,15 @@
 \name{ready4-package}
 \alias{ready4}
 \alias{ready4-package}
-\title{ready4: Implement Transparent, Reusable and Updatable Computational Health Economic Models}
+\title{ready4: Implement Modular Health Economic Models}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A prototype software framework to support ethical implementation of health economic models. To enable health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules. These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit \url{https://www.ready4-dev.com/}. For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
+A prototype software framework to support collaborative and modular implementation of health economic models. To help make health economic models more Transparent, Reusable And Updatable (TRU), 'ready4' provides a simple programming syntax, a template model module, and tools for documenting model implementations. These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit \url{https://www.ready4-dev.com/}. For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A prototype software framework to support ethical implementation of health economic models. To enable health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules. These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit \url{https://www.ready4-dev.com/}. For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
+A prototype software framework to support collaborative and modular implementation of health economic models. To help make health economic models more Transparent, Reusable And Updatable (TRU), 'ready4' provides a simple programming syntax, a template model module, and tools for documenting model implementations. These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit \url{https://www.ready4-dev.com/}. For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 }
 \seealso{
 Useful links:

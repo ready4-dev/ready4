@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_methods_tb}
 \alias{get_methods_tb}
-\title{Get methods tibble}
+\title{Get a table of methods associated with ready4 model modules}
 \usage{
 get_methods_tb(
   gh_repo_1L_chr = "ready4-dev/ready4",

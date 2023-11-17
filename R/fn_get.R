@@ -87,18 +87,20 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
 #' @description get_datasets_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get datasets tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Datasets (a tibble).
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param rds_fl_name_1L_chr Rds file name (a character vector of length one), Default: 'datasets_tb'
 #' @return Datasets (a tibble)
 #' @rdname get_datasets_tb
 #' @export 
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
 #' @example man/examples/get_datasets_tb.R
-get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
+get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
+    rds_fl_name_1L_chr = "datasets_tb") 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
         tag = gh_tag_1L_chr, .token = "")
     datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% 
-        endsWith("datasets_tb.RDS")]))
+        endsWith(paste0(rds_fl_name_1L_chr, ".RDS"))]))
     return(datasets_tb)
 }
 #' Get digits from text
@@ -226,7 +228,7 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
     }
     return(id_1L_chr)
 }
-#' Get from lookup table object
+#' Get a value from a lookup table
 #' @description get_from_lup_obj() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get from lookup table object. Function argument data_lookup_tb specifies the where to look for the required object. The function returns Cell value (an output object of multiple potential types).
 #' @param data_lookup_tb Data lookup (a tibble)
 #' @param match_value_xx Match value (an output object of multiple potential types)
@@ -370,7 +372,7 @@ get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
     }
     return(libraries_ls)
 }
-#' Get libraries tibble
+#' Get a table of ready4 libraries
 #' @description get_libraries_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get libraries tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Libraries (a tibble).
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
@@ -412,7 +414,7 @@ get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https:/
     urls_chr <- sort(urls_chr[indcs_int], decreasing = T)
     return(urls_chr)
 }
-#' Get methods
+#' Get the methods associated with a ready4 model module
 #' @description get_methods() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get methods. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Methods (a character vector).
 #' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
 #' @param cls_nm_1L_chr Class name (a character vector of length one), Default: 'Ready4Module'
@@ -432,7 +434,7 @@ get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module
             "\\)"))
     return(methods_chr)
 }
-#' Get methods tibble
+#' Get a table of methods associated with ready4 model modules
 #' @description get_methods_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get methods tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Methods (a tibble).
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
@@ -448,7 +450,7 @@ get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
     methods_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("methods_tb.RDS")]))
     return(methods_tb)
 }
-#' Get modules tibble
+#' Get a table of ready4 model modules
 #' @description get_modules_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get modules tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Modules (a tibble).
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_ws}
 \alias{write_ws}
-\title{Write workspace}
+\title{Write ready4 software develoment local directories}
 \usage{
 write_ws(
   path_1L_chr,

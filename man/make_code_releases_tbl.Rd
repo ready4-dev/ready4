@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_code_releases_tbl}
 \alias{make_code_releases_tbl}
-\title{Make code releases table}
+\title{Make a tabular summary of release history of ready4 code libraries and executables}
 \usage{
 make_code_releases_tbl(
   repo_type_1L_chr = c("Framework", "Module", "Package", "Program", "Subroutine",

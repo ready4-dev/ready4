@@ -4,8 +4,8 @@ library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 #dir.create("data-raw/examples")
-x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reusable And Updatable Computational Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "A prototype software framework to support ethical implementation of health economic models. To enable health economists adopt a modular and collaborative approach to model development 'ready4' provides a template model module, a simple programming syntax and tools for finding and documenting model modules.
+x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Modular Health Economic Models" %>% tools::toTitleCase(),
+                                                    pkg_desc_1L_chr = "A prototype software framework to support collaborative and modular implementation of health economic models. To help make health economic models more Transparent, Reusable And Updatable (TRU), 'ready4' provides a simple programming syntax, a template model module, and tools for documenting model implementations.
                                                     These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit <https://www.ready4-dev.com/>.
                                                     For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript <arXiv:2310.14138>.",
                                                     authors_prsn = c(utils::person(
@@ -21,23 +21,66 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Transparent, Reus
                                                     ),
                                                     urls_chr = c("https://ready4-dev.github.io/ready4/",
                                                                  "https://github.com/ready4-dev/ready4",
-                                                                 "https://www.ready4-dev.com/")) %>%
+                                                                 "https://www.ready4-dev.com/"))
+user_manual_fns_chr <-  c(
+  "get_datasts_tb","get_from_lup_obj","get_libraries_tb",
+  "get_methods", "get_methods_tb", "get_modules_tb",
+  "make_code_releases_tbl", "make_datasts_tb", "make_ds_releases_tbl",
+  "make_methods_tb", "make_modules_tb",  "make_programs_tbl",
+  "print_data", "print_methods", "print_modules", "print_packages",
+  "write_to_copy_rmds",#"write_to_force_links_in",
+  "write_to_render_post", "write_ws"
+)
+x <- x %>%
   ready4fun::make_manifest(addl_pkgs_ls = ready4fun::make_addl_pkgs_ls(#depends_chr = "generics",
                                                                        suggests_chr = "rmarkdown"),
                            build_ignore_ls = ready4fun::make_build_ignore_ls(file_nms_chr = c("initial_setup.R")),
                            check_type_1L_chr = "ready4",
                            cls_fn_ls = list(),
                            custom_dmt_ls = ready4fun::make_custom_dmt_ls(
-                             user_manual_fns_chr = c(
-                               "get_datasts_tb",
-                               "get_from_lup_obj",
-                               "get_libraries_tb",
-                               "get_methods", "get_methods_tb", "get_modules_tb",
-                               "make_code_releases_tbl", "make_datasts_tb", "make_ds_releases_tbl",
-                               "make_methods_tb", "make_modules_tb",  "make_programs_tbl",
-                               "print_data", "print_methods", "print_modules", "print_packages",
-                               "write_to_render_post", "write_ws"
-                               )),
+                             desc_ls = list("The `get_datasts_tb()` function retrieves an RDS file (for example, a tabular summary of data collections that can be used with ready4 model modules) from a specified GitHub repository release.", #Get a table of ready4 model data collections
+                                            "From a `data.frame`, retrieve the values in a target column when the values in a second column match a specified value.",
+                                            "The `get_libraries_tb()` function retrieves a tabular summary of ready4 libraries that have been developed within a specified GitHub organisation.",
+                                            "The `get_methods()` function retrieves the ready4 methods that are available for a specified ready4 model module.",
+                                            "The `get_methods_tb()` function ingests `methods_tb.RDS` (a table of methods associated with ready4 model modules) from a specified GitHub repository release.",
+                                            "The `get_modules_tb()` function ingests `modules_tb.RDS` (a table of ready4 model modules) from a specified GitHub repository release.",
+                                            "The `make_code_releases_tbl()` function scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the `exclude_chr` argument.",
+                                            "Make a tabular summary of ready4 model data collections",
+                                            "Make a tabular summary of release history of ready4 model data collections",
+                                            "Make a tabular summary of methods associated with ready model modules",
+                                            "Make a tabular summary of ready4 model modules and sub-modules",
+                                            "Make a tabular summary of programs using ready4 model modules",
+                                            "Print a table of ready4 model data collections",
+                                            "Print a table of methods associated with ready4 model modules",
+                                            "Print a table of ready4 model modules",
+                                            "Print a table of ready4 libraries",
+                                            "Write a local copy of RMD or Rmarkdown files",
+                                            #
+                                            "Write ready4 model documentation website page from an RMD or Rmarkdown file",
+                                            "Write ready4 software develoment local directories"
+                             ) %>% stats::setNames(user_manual_fns_chr),#[1:7]
+                             title_ls = list("Get data from the release assets of a GitHub repository",
+                                             "Get a value from a lookup table",
+                                             "Get a table of ready4 libraries",
+                                             "Get the methods associated with a ready4 model module",
+                                             "Get a table of methods associated with ready4 model modules",
+                                             "Get a table of ready4 model modules",
+                                             "Make a tabular summary of release history of ready4 code libraries and executables",
+                                             "Make a tabular summary of ready4 model data collections",
+                                             "Make a tabular summary of release history of ready4 model data collections",
+                                             "Make a tabular summary of methods associated with ready model modules",
+                                             "Make a tabular summary of ready4 model modules and sub-modules",
+                                             "Make a tabular summary of programs using ready4 model modules",
+                                             "Print a table of ready4 model data collections",
+                                             "Print a table of methods associated with ready4 model modules",
+                                             "Print a table of ready4 model modules",
+                                             "Print a table of ready4 libraries",
+                                             "Write a local copy of RMD or Rmarkdown files",
+                                             #
+                                             "Write ready4 model documentation website page from an RMD or Rmarkdown file",
+                                             "Write ready4 software develoment local directories"
+                                             ) %>% stats::setNames(user_manual_fns_chr),
+                             user_manual_fns_chr = user_manual_fns_chr),
                            copyright_holders_chr = "Orygen",
                            import_from_chr = NA_character_,
                            lifecycle_stage_1L_chr = "experimental",
@@ -81,6 +124,7 @@ citation_chr  %>%
   writeLines(con = "inst/CITATION")
 readLines("README.md") %>% # update in ready4fun
   stringr::str_replace_all("svg\\)]\\(https://codecov.io","svg\\)]\\(https://app.codecov.io") %>%
+  gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   writeLines(con = "README.md")
 c(readLines("R/imp_fns.R"), # update in ready4fun
   " ",
@@ -110,6 +154,8 @@ c(readLines("R/imp_fns.R"), # update in ready4fun
 write_examples(consent_1L_chr = "Y")
 usethis::use_cran_badge() # Export to ready4fun
 devtools::build_vignettes()
+#
+# Note currently first function title is appended to all function titles when using custom titles.
 #
 # ADD DOI OVERRIDE FOR RELEASES
 #

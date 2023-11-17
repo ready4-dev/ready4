@@ -36,6 +36,7 @@ reference:
   - print_methods
   - print_modules
   - print_packages
+  - write_to_copy_rmds
   - write_to_render_post
   - write_ws
 - title: "Generics"

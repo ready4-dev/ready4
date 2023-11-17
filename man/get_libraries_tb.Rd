@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_libraries_tb}
 \alias{get_libraries_tb}
-\title{Get libraries tibble}
+\title{Get a table of ready4 libraries}
 \usage{
 get_libraries_tb(
   gh_repo_1L_chr = "ready4-dev/ready4",

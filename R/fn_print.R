@@ -1,4 +1,4 @@
-#' Print data
+#' Print a table of ready4 model data collections
 #' @description print_data() is a Print function that prints output to console Specifically, this function implements an algorithm to print data. The function is called for its side effects and does not return a value.
 #' @param datasets_tb Datasets (a tibble)
 #' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: F
@@ -109,7 +109,7 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
             scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(dvs_kbl)
 }
-#' Print methods
+#' Print a table of methods associated with ready4 model modules
 #' @description print_methods() is a Print function that prints output to console Specifically, this function implements an algorithm to print methods. The function is called for its side effects and does not return a value.
 #' @param methods_tb Methods (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
@@ -158,7 +158,7 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
         scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(methods_kbl)
 }
-#' Print modules
+#' Print a table of ready4 model modules
 #' @description print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
 #' @param modules_tb Modules (a tibble)
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
@@ -187,7 +187,7 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
         scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(modules_kbl)
 }
-#' Print packages
+#' Print a table of ready4 libraries
 #' @description print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'

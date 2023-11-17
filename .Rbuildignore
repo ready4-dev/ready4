@@ -82,3 +82,4 @@
 ^data-raw/examples/print_modules\.R$
 ^data-raw/examples/print_packages\.R$
 ^data-raw/examples/write_to_render_post\.R$
+^data-raw/examples/write_to_copy_rmds\.R$

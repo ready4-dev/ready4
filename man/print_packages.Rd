@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_print.R
 \name{print_packages}
 \alias{print_packages}
-\title{Print packages}
+\title{Print a table of ready4 libraries}
 \usage{
 print_packages(
   pkg_extensions_tb = NULL,

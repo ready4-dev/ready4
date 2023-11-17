@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_to_copy_rmds}
 \alias{write_to_copy_rmds}
-\title{Write to copy Markdowns}
+\title{Write a local copy of RMD or Rmarkdown files}
 \usage{
 write_to_copy_rmds(
   dir_path_1L_chr,
@@ -32,4 +32,11 @@ write_to_copy_rmds(
 \description{
 write_to_copy_rmds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to copy markdowns. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
 }
-\keyword{internal}
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  write_to_copy_rmds(dir_path_1L_chr = tempdir(),
+                     fl_nm_1L_chr = "RMDs",
+                     rmds_dir_1L_chr = system.file("MD_RMDs",
+                                                   package = "ready4"))
+\dontshow{\}) # examplesIf}
+}

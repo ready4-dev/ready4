@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_get.R
 \name{get_methods}
 \alias{get_methods}
-\title{Get methods}
+\title{Get the methods associated with a ready4 model module}
 \usage{
 get_methods(pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module")
 }

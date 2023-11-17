@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_make.R
 \name{make_ds_releases_tbl}
 \alias{make_ds_releases_tbl}
-\title{Make dataset releases table}
+\title{Make a tabular summary of release history of ready4 model data collections}
 \usage{
 make_ds_releases_tbl(
   ds_dois_chr,
