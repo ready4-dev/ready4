@@ -5,9 +5,9 @@ source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 #dir.create("data-raw/examples")
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Modular Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "A prototype software framework to support collaborative and modular implementation of health economic models. To help make health economic models more Transparent, Reusable And Updatable (TRU), 'ready4' provides a simple programming syntax, a template model module, and tools for documenting model implementations.
-                                                    These foundational elements of the 'ready4' software framework are extended by other R packages. For detailed documentation about how to use 'ready4' and its extensions visit <https://www.ready4-dev.com/>.
-                                                    For a background to and rationale for transparent, reusable and updatable computational health economic models read the manuscript <arXiv:2310.14138>.",
+                                                    pkg_desc_1L_chr = "Foundation for a prototype software framework to support Transparent, Reusable And Updatable (TRU) health economic models. The foundation of this framework is a programming syntax, a template model module and functions to help author and maintain a modular modelling project's documentation website.
+                                                    These foundational elements focus on supporting modular and collaborative approaches to health economic model development. Extended functionality is provided by other R packages in the framework. For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>.
+                                                    For a background to the methodological issues that the framework is attempting to help solve, read the manuscript <arXiv:2310.14138>.",
                                                     authors_prsn = c(utils::person(
                                                       given = "Matthew",family = "Hamilton", email =
                                                         "matthew.hamilton1@monash.edu",role = c("aut",
@@ -25,7 +25,7 @@ x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Modular Health Ec
 user_manual_fns_chr <-  c(
   "get_datasts_tb","get_from_lup_obj","get_libraries_tb",
   "get_methods", "get_methods_tb", "get_modules_tb",
-  "make_code_releases_tbl", "make_datasts_tb", "make_ds_releases_tbl",
+  "make_code_releases_tbl", "make_datasets_tb", "make_ds_releases_tbl",
   "make_methods_tb", "make_modules_tb",  "make_programs_tbl",
   "print_data", "print_methods", "print_modules", "print_packages",
   "write_to_copy_rmds",#"write_to_force_links_in",
@@ -38,26 +38,26 @@ x <- x %>%
                            check_type_1L_chr = "ready4",
                            cls_fn_ls = list(),
                            custom_dmt_ls = ready4fun::make_custom_dmt_ls(
-                             desc_ls = list("The `get_datasts_tb()` function retrieves an RDS file (for example, a tabular summary of data collections that can be used with ready4 model modules) from a specified GitHub repository release.", #Get a table of ready4 model data collections
-                                            "From a `data.frame`, retrieve the values in a target column when the values in a second column match a specified value.",
-                                            "The `get_libraries_tb()` function retrieves a tabular summary of ready4 libraries that have been developed within a specified GitHub organisation.",
-                                            "The `get_methods()` function retrieves the ready4 methods that are available for a specified ready4 model module.",
-                                            "The `get_methods_tb()` function ingests `methods_tb.RDS` (a table of methods associated with ready4 model modules) from a specified GitHub repository release.",
-                                            "The `get_modules_tb()` function ingests `modules_tb.RDS` (a table of ready4 model modules) from a specified GitHub repository release.",
-                                            "The `make_code_releases_tbl()` function scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the `exclude_chr` argument.",
-                                            "Make a tabular summary of ready4 model data collections",
-                                            "Make a tabular summary of release history of ready4 model data collections",
-                                            "Make a tabular summary of methods associated with ready model modules",
-                                            "Make a tabular summary of ready4 model modules and sub-modules",
-                                            "Make a tabular summary of programs using ready4 model modules",
-                                            "Print a table of ready4 model data collections",
-                                            "Print a table of methods associated with ready4 model modules",
-                                            "Print a table of ready4 model modules",
-                                            "Print a table of ready4 libraries",
-                                            "Write a local copy of RMD or Rmarkdown files",
+                             desc_ls = list("get_datasts_tb() retrieves an RDS file (for example, a tabular summary of data collections that can be used with ready4 model modules) from a specified GitHub repository release.", #Get a table of ready4 model data collections
+                                            "get_from_lup_obj() retrieves from a lookup table (a data.frame) the values in a target column for cases where values in a second column match a specified value.",
+                                            "get_libraries_tb() retrieves a tabular summary of ready4 libraries that have been developed within a specified GitHub organisation.",
+                                            "get_methods() retrieves the ready4 methods that are available for a specified ready4 model module.",
+                                            "get_methods_tb() ingests 'methods_tb.RDS' (a table of methods associated with ready4 model modules) from a specified GitHub repository release.",
+                                            "get_modules_tb() ingests 'modules_tb.RDS' (a table of ready4 model modules) from a specified GitHub repository release.",
+                                            "make_code_releases_tbl() scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the 'exclude_chr' argument.",                                            "make_datasts_tb() function searches the contents of a specified Dataverse collection and returns a summary of the the data collections it contains.",
+                                            "make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.",
+                                            "make_ds_releases_tbl() scrapes metadata from Dataverse datasets for which a valid Digital Object Identifier (DOI) has been supplied to create a table summarising the entire release history of these datasets.",
+                                            "make_methods_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of vignette examples of ready4 module methods.",
+                                            "make_modules_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of the modules included in those libraries and vignette examples of their use.",
+                                            "make_programs_tbl() scrapes the GitHub organisation and Zenodo community associated specified for a ready4 model implementation to create a tabular summary of programs and sub-routines associated with that implementation.",
+                                            "print_data() formats the output of either get_datasts_tb() or make_datasts_tb() as HTML. The type of output can be customised to display Dataverse data collections or Dataverse datasets. Similarly output can be restricted to real or toy datasets.",
+                                            "print_methods() formats the output of either get_methods_tb() or make_methods_tb() as HTML.",
+                                            "print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.",
+                                            "print_packages() formats the output of get_libraries_tb() as HTML.",
+                                            "write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specified sub-directories of a model documentation website. These template copies can then be manually edited before being rendered with write_to_render_post().",
                                             #
-                                            "Write ready4 model documentation website page from an RMD or Rmarkdown file",
-                                            "Write ready4 software develoment local directories"
+                                            "write_to_render_post() is designed for help overcome practical challenges of rendering RMD or Rmarkdown files to Markdown output in a modelling project's Hugo Docsy documentation website. You must have 'hugodown' installed for this function to work.",
+                                            "write_ws() creates a standardised directory structure as a local development environment for modelling projects developed with the ready4 framework."
                              ) %>% stats::setNames(user_manual_fns_chr),#[1:7]
                              title_ls = list("Get data from the release assets of a GitHub repository",
                                              "Get a value from a lookup table",

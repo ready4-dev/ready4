@@ -1,60 +1,46 @@
 print_data <- function(datasets_tb,
                        by_dv_1L_lgl = F,
+                       filter_cdns_ls = NULL,
                        root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
                        scroll_height_1L_chr = character(0),
                        scroll_width_1L_chr = character(0),
+                       toy_data_dv_1L_chr = "fakes",
                        what_1L_chr = "all",
                        ...){
-  if(by_dv_1L_lgl){
+  if(by_dv_1L_lgl & ("Datasets_Meta" %in% names(datasets_tb))){
     datasets_kbl <- print_dvs(datasets_tb, root_1L_chr = root_1L_chr, scroll_height_1L_chr = scroll_height_1L_chr,
-                              scroll_width_1L_chr = scroll_width_1L_chr, what_1L_chr = what_1L_chr, ...)
+                              scroll_width_1L_chr = scroll_width_1L_chr, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, ...)
   }else{
-    datasets_kbl <- print_dss(datasets_tb, scroll_height_1L_chr = scroll_height_1L_chr,
-                              scroll_width_1L_chr = scroll_width_1L_chr, what_1L_chr = what_1L_chr, ...)
+    datasets_kbl <- print_dss(datasets_tb, filter_cdns_ls = filter_cdns_ls, scroll_height_1L_chr = scroll_height_1L_chr,
+                              scroll_width_1L_chr = scroll_width_1L_chr, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, ...)
   }
   return(datasets_kbl)
 }
-print_dss <- function(dvs_tb,
+print_dss <- function(datasets_tb,
+                      filter_cdns_ls = NULL,
                       scroll_height_1L_chr = character(0),
                       scroll_width_1L_chr = character(0),
+                      toy_data_dv_1L_chr = "fakes",
                       what_1L_chr = "all",
                       ...){
-dss_tb <- dvs_tb %>%
-    dplyr::filter(!is.na(.data$Contents)) %>%
-  dplyr::select("Contents", "Datasets_Meta", "Dataverse") %>%
-  purrr::pmap_dfr(~ {
-    ..2 %>%
-                    purrr::map_dfr(~{
-                      fields_ls <- .x$fields
-                      tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == "title")][[1]],
-                             Description = fields_ls$value[which(fields_ls$typeName == "dsDescription")][[1]][[1]][[4]])
-                      }) %>%
-      dplyr::mutate(Dataverse = ..3,
-                    DOI = ..1)
-    })
-if(what_1L_chr == "real")
-  dss_tb <- dss_tb %>%
-    dplyr::filter(.data$Dataverse != "fakes")
-if(what_1L_chr == "fakes")
-  dss_tb <- dss_tb %>%
-    dplyr::filter(.data$Dataverse == "fakes")
-dss_kbl <- dss_tb %>%
-  kableExtra::kable("html", escape = FALSE) %>%
-  kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
-  add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
-                 scroll_width_1L_chr = scroll_width_1L_chr,
-                 ...)
+  datasets_tb <- make_dss_tb(datasets_tb, filter_cdns_ls = filter_cdns_ls, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr)
+  dss_kbl <- datasets_tb %>%
+    kableExtra::kable("html", escape = FALSE) %>%
+    kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
+    add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
+                   scroll_width_1L_chr = scroll_width_1L_chr,
+                   ...)
 return(dss_kbl)
 }
 print_dvs <- function(dvs_tb,
+                      filter_cdns_ls = NULL,
                       root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
                       scroll_height_1L_chr = character(0),
                       scroll_width_1L_chr = character(0),
+                      toy_data_dv_1L_chr = "fakes",
                       what_1L_chr = "all",
                       ...){
-  dvs_tb <- add_references(dvs_tb,
-                            data_var_nm_1L_chr = "Contents",
-                            data_url_var_nm_1L_chr = "Datasets") %>%
+  dvs_tb <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", data_url_var_nm_1L_chr = "Datasets") %>%
     dplyr::select("Dataverse", "Name", "Description", "Creator", "Datasets") %>%
     dplyr::mutate(Datasets = .data$Datasets %>% purrr::map(~
                                                        if(identical(.x,NA_character_)){
@@ -63,10 +49,10 @@ print_dvs <- function(dvs_tb,
                                                          }))
   if(what_1L_chr == "real")
     dvs_tb <- dvs_tb %>%
-      dplyr::filter(.data$Dataverse != "fakes")
+      dplyr::filter(.data$Dataverse != toy_data_dv_1L_chr)
   if(what_1L_chr == "fakes")
     dvs_tb <- dvs_tb %>%
-      dplyr::filter(.data$Dataverse == "fakes")
+      dplyr::filter(.data$Dataverse == toy_data_dv_1L_chr)
   dvs_kbl <- dvs_tb %>%
     kableExtra::kable("html", escape = FALSE) %>%
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
@@ -247,7 +233,6 @@ print_packages <- function (pkg_extensions_tb = NULL,
     code_ls <- code_ls[[1]][-3]
     pkg_extensions_kbl[1] <- code_ls %>% paste0(collapse = "")
   }
-
   pkg_extensions_kbl <- pkg_extensions_kbl %>%
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
                    scroll_width_1L_chr = scroll_width_1L_chr, ...)
