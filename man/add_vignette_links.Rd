@@ -30,6 +30,6 @@ add_vignette_links(
 Package extensions (a tibble)
 }
 \description{
-add_vignette_links() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add vignette links. Function argument pkg_extensions_tb specifies the object to be updated. The function returns Package extensions (a tibble).
+add_vignette_links() is an Add function that updates an object by adding new values to new or empty fields. Specifically, this function implements an algorithm to add vignette links. The function returns Package extensions (a tibble).
 }
 \keyword{internal}

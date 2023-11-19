@@ -18,6 +18,6 @@ get_libraries_ls(
 Libraries (a list)
 }
 \description{
-get_libraries_ls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get libraries list. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Libraries (a list).
+get_libraries_ls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get libraries list. The function returns Libraries (a list).
 }
 \keyword{internal}

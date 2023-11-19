@@ -27,7 +27,7 @@ write_to_render_post(
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
-write_to_render_post() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to render post. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specified sub-directories of a model documentation website. These template copies can then be manually edited before being rendered with write_to_render_post().
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

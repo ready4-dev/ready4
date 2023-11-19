@@ -42,6 +42,6 @@ update_libraries_tb(
 Libraries (a tibble)
 }
 \description{
-update_libraries_tb() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries tibble. Function argument libraries_tb specifies the object to be updated. Argument additions_tb provides the object to be updated. The function returns Libraries (a tibble).
+update_libraries_tb() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries tibble. The function returns Libraries (a tibble).
 }
 \keyword{internal}

@@ -27,7 +27,7 @@ print_modules(
 Modules (a kable)
 }
 \description{
-print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
+print_methods() formats the output of either get_methods_tb() or make_methods_tb() as HTML.
 }
 \examples{
 modules_tb <- get_modules_tb("ready4-dev/ready4")

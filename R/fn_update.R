@@ -1,5 +1,5 @@
 #' Update libraries list
-#' @description update_libraries_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries list. Function argument libraries_ls specifies the object to be updated. Argument additions_tb provides the object to be updated. The function returns Libraries (a list).
+#' @description update_libraries_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries list. The function returns Libraries (a list).
 #' @param libraries_ls Libraries (a list), Default: NULL
 #' @param additions_tb Additions (a tibble), Default: make_additions_tb()
 #' @param keep_chr Keep (a character vector), Default: 'all'
@@ -33,7 +33,7 @@ update_libraries_ls <- function (libraries_ls = NULL, additions_tb = make_additi
     return(libraries_ls)
 }
 #' Update libraries tibble
-#' @description update_libraries_tb() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries tibble. Function argument libraries_tb specifies the object to be updated. Argument additions_tb provides the object to be updated. The function returns Libraries (a tibble).
+#' @description update_libraries_tb() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries tibble. The function returns Libraries (a tibble).
 #' @param libraries_tb Libraries (a tibble), Default: make_libraries_tb()
 #' @param additions_tb Additions (a tibble), Default: make_additions_tb()
 #' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
@@ -95,7 +95,7 @@ update_libraries_tb <- function (libraries_tb = make_libraries_tb(), additions_t
     return(libraries_tb)
 }
 #' Update prototype function arguments list
-#' @description update_pt_fn_args_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update prototype function arguments list. Function argument args_ls specifies the object to be updated. The function returns Updated arguments (a list).
+#' @description update_pt_fn_args_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update prototype function arguments list. The function returns Updated arguments (a list).
 #' @param args_ls Arguments (a list)
 #' @return Updated arguments (a list)
 #' @rdname update_pt_fn_args_ls
@@ -122,9 +122,9 @@ update_pt_fn_args_ls <- function (args_ls)
     }) %>% stats::setNames(names(args_ls))
     return(updated_args_ls)
 }
-#' Update tibble ready4 S3
-#' @description update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 s3. Function argument tb_r3 specifies the object to be updated. Argument case_when_false_1L_chr provides the object to be updated. The function returns Tibble ready4 S3 (a ready4 S3 extension of tibble).
-#' @param tb_r3 Tibble ready4 S3 (a ready4 S3 extension of tibble)
+#' Update tibble ready4 submodule
+#' @description update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 submodule. The function returns Tibble ready4 submodule (a ready4 submodule extension of tibble).
+#' @param tb_r3 Tibble ready4 submodule (a ready4 submodule extension of tibble)
 #' @param case_when_false_1L_chr Case when false (a character vector of length one), Default: 'NA'
 #' @param case_when_true_1L_chr Case when true (a character vector of length one), Default: 'NA'
 #' @param case_when_true_ls Case when true (a list), Default: NULL
@@ -134,7 +134,7 @@ update_pt_fn_args_ls <- function (args_ls)
 #' @param fn_env_ls Function (a list of environments), Default: NULL
 #' @param slice_indcs_int Slice indices (an integer vector), Default: NA
 #' @param tf_false_val_1L_lgl Transform false value (a logical vector of length one), Default: F
-#' @return Tibble ready4 S3 (a ready4 S3 extension of tibble)
+#' @return Tibble ready4 submodule (a ready4 submodule extension of tibble)
 #' @rdname update_tb_r3
 #' @export 
 #' @importFrom dplyr slice filter mutate case_when

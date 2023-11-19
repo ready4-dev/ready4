@@ -51,7 +51,7 @@ print_methods(
 Methods (a kable)
 }
 \description{
-print_methods() is a Print function that prints output to console Specifically, this function implements an algorithm to print methods. The function is called for its side effects and does not return a value.
+print_data() formats the output of either get_datasts_tb() or make_datasts_tb() as HTML. The type of output can be customised to display Dataverse data collections or Dataverse datasets. Similarly output can be restricted to real or toy datasets.
 }
 \examples{
 methods_tb <- get_methods_tb("ready4-dev/ready4")

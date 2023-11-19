@@ -21,7 +21,7 @@ get_datasets_tb(
 Datasets (a tibble)
 }
 \description{
-get_datasets_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get datasets tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Datasets (a tibble).
+get_datasets_tb() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get datasets tibble. The function returns Datasets (a tibble).
 }
 \examples{
 get_datasets_tb("ready4-dev/ready4")

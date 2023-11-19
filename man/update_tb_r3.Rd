@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_update.R
 \name{update_tb_r3}
 \alias{update_tb_r3}
-\title{Update tibble ready4 S3}
+\title{Update tibble ready4 submodule}
 \usage{
 update_tb_r3(
   tb_r3,
@@ -18,7 +18,7 @@ update_tb_r3(
 )
 }
 \arguments{
-\item{tb_r3}{Tibble ready4 S3 (a ready4 S3 extension of tibble)}
+\item{tb_r3}{Tibble ready4 submodule (a ready4 submodule extension of tibble)}
 
 \item{case_when_false_1L_chr}{Case when false (a character vector of length one), Default: 'NA'}
 
@@ -39,9 +39,9 @@ update_tb_r3(
 \item{tf_false_val_1L_lgl}{Transform false value (a logical vector of length one), Default: F}
 }
 \value{
-Tibble ready4 S3 (a ready4 S3 extension of tibble)
+Tibble ready4 submodule (a ready4 submodule extension of tibble)
 }
 \description{
-update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 s3. Function argument tb_r3 specifies the object to be updated. Argument case_when_false_1L_chr provides the object to be updated. The function returns Tibble ready4 S3 (a ready4 S3 extension of tibble).
+update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 submodule. The function returns Tibble ready4 submodule (a ready4 submodule extension of tibble).
 }
 \keyword{internal}

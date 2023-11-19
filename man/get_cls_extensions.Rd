@@ -27,6 +27,6 @@ get_cls_extensions(
 Class extensions (a tibble)
 }
 \description{
-get_cls_extensions() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get class extensions. Function argument pkg_extensions_tb specifies the where to look for the required object. The function returns Class extensions (a tibble).
+get_cls_extensions() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get class extensions. The function returns Class extensions (a tibble).
 }
 \keyword{internal}

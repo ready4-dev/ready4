@@ -15,7 +15,7 @@ get_methods(pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module")
 Methods (a character vector)
 }
 \description{
-get_methods() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get methods. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Methods (a character vector).
+get_methods() retrieves the ready4 methods that are available for a specified ready4 model module.
 }
 \examples{
 get_methods()

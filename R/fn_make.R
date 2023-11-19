@@ -20,7 +20,7 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
     return(additions_tb)
 }
 #' Make a tabular summary of release history of ready4 code libraries and executables
-#' @description make_code_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make code releases table. The function returns Releases (an output object of multiple potential types).
+#' @description make_code_releases_tbl() scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the 'exclude_chr' argument.
 #' @param repo_type_1L_chr Repository type (a character vector of length one), Default: c("Framework", "Module", "Package", "Program", "Subroutine", 
 #'    "Program_and_Subroutine")
 #' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: T
@@ -153,96 +153,119 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
     }
     return(releases_xx)
 }
-#' Make datasets tibble
-#' @description make_datasets_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make datasets tibble. The function returns Dataverses (a tibble).
+#' Make a tabular summary of ready4 model data collections
+#' @description make_datasts_tb() function searches the contents of a specified Dataverse collection and returns a summary of the the data collections it contains.
 #' @param dv_nm_1L_chr Dataverse name (a character vector of length one), Default: 'ready4'
+#' @param dvs_tb Dataverses (a tibble), Default: NULL
+#' @param filter_cdns_ls Filter conditions (a list), Default: NULL
 #' @param key_1L_chr Key (a character vector of length one), Default: NULL
 #' @param server_1L_chr Server (a character vector of length one), Default: 'dataverse.harvard.edu'
-#' @return Dataverses (a tibble)
+#' @param toy_data_dv_1L_chr Toy data dataverse (a character vector of length one), Default: 'fakes'
+#' @param type_1L_chr Type (a character vector of length one), Default: c("collections", "datasets")
+#' @param what_1L_chr What (a character vector of length one), Default: 'all'
+#' @return Datasets (a tibble)
 #' @rdname make_datasets_tb
 #' @export 
 #' @importFrom dataverse dataverse_contents get_dataverse dataset_metadata
 #' @importFrom purrr map_lgl map_dfr map map_chr map2 discard flatten_chr compact
 #' @importFrom tibble tibble
-#' @importFrom dplyr mutate arrange
-#' @keywords internal
+#' @importFrom dplyr mutate arrange filter
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
 #'   make_datasets_tb("ready4")
-make_datasets_tb <- function (dv_nm_1L_chr = "ready4", key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu") 
+make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdns_ls = NULL, 
+    key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu", 
+    toy_data_dv_1L_chr = "fakes", type_1L_chr = c("collections", 
+        "datasets"), what_1L_chr = "all") 
 {
-    contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr, 
-        key = key_1L_chr, server = server_1L_chr)
-    dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == 
-        "dataverse")]
-    ds_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == 
-        "dataset")]
-    if (identical(ds_ls, list())) {
-        ds_ls <- NULL
-    }
-    else {
-        extra_dv_ls <- dataverse::get_dataverse(dv_nm_1L_chr, 
+    type_1L_chr <- match.arg(type_1L_chr)
+    if (is.null(dvs_tb)) {
+        contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr, 
             key = key_1L_chr, server = server_1L_chr)
-        dv_ls <- append(extra_dv_ls, dv_ls)
-    }
-    dvs_tb <- dv_ls %>% purrr::map_dfr(~{
-        dv_ls <- dataverse::get_dataverse(.x, key = key_1L_chr, 
-            server = server_1L_chr)
-        tb <- tibble::tibble(Dataverse = dv_ls$alias, Name = dv_ls$name, 
-            Description = dv_ls$description, Creator = dv_ls$affiliation)
-        tb %>% dplyr::mutate(Contents = purrr::map(.data$Dataverse, 
-            ~{
-                dv_all_ls <- dataverse::dataverse_contents(.x, 
-                  key = key_1L_chr, server = server_1L_chr)
-                dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == 
-                  "dataset")] %>% purrr::map_chr(~if ("persistentUrl" %in% 
-                  names(.x)) {
-                  .x$persistentUrl
-                }
-                else {
-                  NA_character_
-                })
-            }))
-    })
-    dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Contents %>% 
-        purrr::map(~.x %>% purrr::map(~.x %>% dataverse::dataset_metadata(key = key_1L_chr, 
-            server = server_1L_chr) %>% tryCatch(error = function(e) "ERROR")))) %>% 
-        dplyr::mutate(Contents = .data$Contents %>% purrr::map2(.data$Datasets_Meta, 
-            ~{
-                entry_ls <- .x %>% purrr::map2(.y, ~if (identical(.y, 
+        dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == 
+            "dataverse")]
+        ds_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == 
+            "dataset")]
+        if (identical(ds_ls, list())) {
+            ds_ls <- NULL
+        }
+        else {
+            extra_dv_ls <- dataverse::get_dataverse(dv_nm_1L_chr, 
+                key = key_1L_chr, server = server_1L_chr)
+            dv_ls <- append(extra_dv_ls, dv_ls)
+        }
+        dvs_tb <- dv_ls %>% purrr::map_dfr(~{
+            dv_ls <- dataverse::get_dataverse(.x, key = key_1L_chr, 
+                server = server_1L_chr)
+            tb <- tibble::tibble(Dataverse = dv_ls$alias, Name = dv_ls$name, 
+                Description = dv_ls$description, Creator = dv_ls$affiliation)
+            tb %>% dplyr::mutate(Contents = purrr::map(.data$Dataverse, 
+                ~{
+                  dv_all_ls <- dataverse::dataverse_contents(.x, 
+                    key = key_1L_chr, server = server_1L_chr)
+                  dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == 
+                    "dataset")] %>% purrr::map_chr(~if ("persistentUrl" %in% 
+                    names(.x)) {
+                    .x$persistentUrl
+                  }
+                  else {
+                    NA_character_
+                  })
+                }))
+        })
+        dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Contents %>% 
+            purrr::map(~.x %>% purrr::map(~.x %>% dataverse::dataset_metadata(key = key_1L_chr, 
+                server = server_1L_chr) %>% tryCatch(error = function(e) "ERROR")))) %>% 
+            dplyr::mutate(Contents = .data$Contents %>% purrr::map2(.data$Datasets_Meta, 
+                ~{
+                  entry_ls <- .x %>% purrr::map2(.y, ~if (identical(.y, 
+                    "ERROR")) {
+                    NA_character_
+                  }
+                  else {
+                    .x
+                  }) %>% purrr::discard(is.na)
+                  if (identical(entry_ls, list())) {
+                    NA_character_
+                  }
+                  else {
+                    entry_ls %>% purrr::flatten_chr()
+                  }
+                }))
+        dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Datasets_Meta %>% 
+            purrr::map(~{
+                entry_ls <- .x %>% purrr::map(~if (identical(.x, 
                   "ERROR")) {
-                  NA_character_
+                  NULL
                 }
                 else {
                   .x
-                }) %>% purrr::discard(is.na)
+                }) %>% purrr::compact()
                 if (identical(entry_ls, list())) {
-                  NA_character_
+                  NULL
                 }
                 else {
-                  entry_ls %>% purrr::flatten_chr()
+                  entry_ls
                 }
-            }))
-    dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Datasets_Meta %>% 
-        purrr::map(~{
-            entry_ls <- .x %>% purrr::map(~if (identical(.x, 
-                "ERROR")) {
-                NULL
-            }
-            else {
-                .x
-            }) %>% purrr::compact()
-            if (identical(entry_ls, list())) {
-                NULL
-            }
-            else {
-                entry_ls
-            }
-        })) %>% dplyr::arrange(.data$Dataverse)
-    return(dvs_tb)
+            })) %>% dplyr::arrange(.data$Dataverse)
+    }
+    if (type_1L_chr == "datasets") {
+        datasets_tb <- make_dss_tb(dvs_tb, filter_cdns_ls = filter_cdns_ls, 
+            toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr)
+    }
+    else {
+        if (what_1L_chr == "real") 
+            dvs_tb <- dvs_tb %>% dplyr::filter(.data$Dataverse != 
+                toy_data_dv_1L_chr)
+        if (what_1L_chr == "fakes") 
+            dvs_tb <- dvs_tb %>% dplyr::filter(.data$Dataverse == 
+                toy_data_dv_1L_chr)
+        datasets_tb <- dvs_tb
+    }
+    return(datasets_tb)
 }
 #' Make a tabular summary of release history of ready4 model data collections
-#' @description make_ds_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make dataset releases table. The function returns Dataset releases (an output object of multiple potential types).
+#' @description make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.
 #' @param ds_dois_chr Dataset digital object identifiers (a character vector)
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
 #' @param key_1L_chr Key (a character vector of length one), Default: NULL
@@ -285,6 +308,7 @@ make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", key_1
 #' @description make_dss_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make datasets tibble. The function returns Datasets (a tibble).
 #' @param dvs_tb Dataverses (a tibble)
 #' @param filter_cdns_ls Filter conditions (a list), Default: list()
+#' @param toy_data_dv_1L_chr Toy data dataverse (a character vector of length one), Default: 'fakes'
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
 #' @return Datasets (a tibble)
 #' @rdname make_dss_tb
@@ -293,33 +317,46 @@ make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", key_1
 #' @importFrom purrr pmap_dfr map_dfr reduce pluck
 #' @importFrom tibble tibble
 #' @keywords internal
-make_dss_tb <- function (dvs_tb, filter_cdns_ls = list(), what_1L_chr = "all") 
+make_dss_tb <- function (dvs_tb, filter_cdns_ls = list(), toy_data_dv_1L_chr = "fakes", 
+    what_1L_chr = "all") 
 {
-    if (identical(filter_cdns_ls, list())) {
-        filter_cdns_ls <- list(real = "Dataverse != \"fakes\"", 
-            fakes = "Dataverse == \"fakes\"", people = "Dataverse %in% c(\"TTU\", \"springtolife\")", 
-            places = "Dataverse %in% c(\"springtides\") | DOI == \"https://doi.org/10.7910/DVN/JHSCDJ\"")
+    if ("Datasets_Meta" %in% names(dvs_tb)) {
+        dss_tb <- dvs_tb %>% dplyr::filter(!is.na(.data$Contents)) %>% 
+            dplyr::select("Contents", "Datasets_Meta", "Dataverse") %>% 
+            purrr::pmap_dfr(~{
+                ..2 %>% purrr::map_dfr(~{
+                  fields_ls <- .x$fields
+                  tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == 
+                    "title")][[1]], Description = fields_ls$value[which(fields_ls$typeName == 
+                    "dsDescription")][[1]][[1]][[4]])
+                }) %>% dplyr::mutate(Dataverse = ..3, DOI = ..1)
+            })
     }
-    dss_tb <- dvs_tb %>% dplyr::filter(!is.na(.data$Contents)) %>% 
-        dplyr::select("Contents", "Datasets_Meta", "Dataverse") %>% 
-        purrr::pmap_dfr(~{
-            ..2 %>% purrr::map_dfr(~{
-                fields_ls <- .x$fields
-                tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == 
-                  "title")][[1]], Description = fields_ls$value[which(fields_ls$typeName == 
-                  "dsDescription")][[1]][[1]][[4]])
-            }) %>% dplyr::mutate(Dataverse = ..3, DOI = ..1)
-        })
-    dss_tb <- purrr::reduce(1:length(filter_cdns_ls), .init = dss_tb, 
-        ~{
-            condition_1L_chr = filter_cdns_ls %>% purrr::pluck(.y)
-            if (names(filter_cdns_ls)[.y] == what_1L_chr) {
-                .x %>% update_tb_r3(filter_cdn_1L_chr = condition_1L_chr)
-            }
-            else {
-                .x
-            }
-        })
+    else {
+        dss_tb <- dvs_tb
+    }
+    if (!is.null(filter_cdns_ls)) {
+        if (identical(filter_cdns_ls, list())) {
+            filter_cdns_ls <- list(people = "Dataverse %in% c(\"TTU\", \"springtolife\")", 
+                places = "Dataverse %in% c(\"springtides\") | DOI == \"https://doi.org/10.7910/DVN/JHSCDJ\"")
+        }
+        dss_tb <- purrr::reduce(1:length(filter_cdns_ls), .init = dss_tb, 
+            ~{
+                condition_1L_chr = filter_cdns_ls %>% purrr::pluck(.y)
+                if (names(filter_cdns_ls)[.y] == what_1L_chr) {
+                  .x %>% update_tb_r3(filter_cdn_1L_chr = condition_1L_chr)
+                }
+                else {
+                  .x
+                }
+            })
+    }
+    if (what_1L_chr == "real") 
+        dss_tb <- dss_tb %>% dplyr::filter(.data$Dataverse != 
+            toy_data_dv_1L_chr)
+    if (what_1L_chr == "fakes") 
+        dss_tb <- dss_tb %>% dplyr::filter(.data$Dataverse == 
+            toy_data_dv_1L_chr)
     return(dss_tb)
 }
 #' Make files tibble
@@ -572,7 +609,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
     return(path_chr)
 }
 #' Make a tabular summary of methods associated with ready model modules
-#' @description make_methods_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make methods tibble. The function returns Methods (a tibble).
+#' @description make_ds_releases_tbl() scrapes metadata from Dataverse datasets for which a valid Digital Object Identifier (DOI) has been supplied to create a table summarising the entire release history of these datasets.
 #' @param packages_tb Packages (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: T
@@ -638,7 +675,7 @@ make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_
     return(modules_pkgs_chr)
 }
 #' Make a tabular summary of ready4 model modules and sub-modules
-#' @description make_modules_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make modules tibble. The function returns Modules (a tibble).
+#' @description make_methods_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of vignette examples of ready4 module methods.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param cls_extensions_tb Class extensions (a tibble), Default: NULL
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
@@ -654,7 +691,7 @@ make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_
 #' @importFrom dplyr filter inner_join arrange mutate case_when select
 #' @importFrom rlang sym
 #' @importFrom purrr map flatten_int flatten_chr discard map_int pluck map2_chr pmap map2
-#' @importFrom stringr str_which regex str_sub str_remove_all str_locate str_match
+#' @importFrom stringr str_which regex str_locate str_sub str_remove_all str_match
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringi stri_replace_last_regex
@@ -718,8 +755,8 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
             NA_integer_
         }
         else {
-            .x %>% purrr::map_int(~stringr::str_sub(.x, start = -5) %>% 
-                stringr::str_remove_all("</a>") %>% as.numeric())
+            .x %>% purrr::map_int(~gsub(".*style=\"     \" >(.+)</a>.*", 
+                "\\1", .x) %>% as.numeric())
         }
     }) %>% purrr::flatten_int() %>% purrr::discard(is.na) %>% 
         unique()
@@ -762,7 +799,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     return(modules_tb)
 }
 #' Make a tabular summary of programs using ready4 model modules
-#' @description make_programs_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make programs table. The function returns Programs (an output object of multiple potential types).
+#' @description make_modules_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of the modules included in those libraries and vignette examples of their use.
 #' @param what_1L_chr What (a character vector of length one), Default: c("Program", "Subroutine", "Program_and_Subroutine")
 #' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: F
 #' @param exclude_chr Exclude (a character vector), Default: character(0)

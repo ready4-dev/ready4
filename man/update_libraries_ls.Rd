@@ -21,6 +21,6 @@ update_libraries_ls(
 Libraries (a list)
 }
 \description{
-update_libraries_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries list. Function argument libraries_ls specifies the object to be updated. Argument additions_tb provides the object to be updated. The function returns Libraries (a list).
+update_libraries_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries list. The function returns Libraries (a list).
 }
 \keyword{internal}

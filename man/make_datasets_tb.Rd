@@ -2,26 +2,41 @@
 % Please edit documentation in R/fn_make.R
 \name{make_datasets_tb}
 \alias{make_datasets_tb}
-\title{Make datasets tibble}
+\title{Make a tabular summary of ready4 model data collections}
 \usage{
 make_datasets_tb(
   dv_nm_1L_chr = "ready4",
+  dvs_tb = NULL,
+  filter_cdns_ls = NULL,
   key_1L_chr = NULL,
-  server_1L_chr = "dataverse.harvard.edu"
+  server_1L_chr = "dataverse.harvard.edu",
+  toy_data_dv_1L_chr = "fakes",
+  type_1L_chr = c("collections", "datasets"),
+  what_1L_chr = "all"
 )
 }
 \arguments{
 \item{dv_nm_1L_chr}{Dataverse name (a character vector of length one), Default: 'ready4'}
 
+\item{dvs_tb}{Dataverses (a tibble), Default: NULL}
+
+\item{filter_cdns_ls}{Filter conditions (a list), Default: NULL}
+
 \item{key_1L_chr}{Key (a character vector of length one), Default: NULL}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: 'dataverse.harvard.edu'}
+
+\item{toy_data_dv_1L_chr}{Toy data dataverse (a character vector of length one), Default: 'fakes'}
+
+\item{type_1L_chr}{Type (a character vector of length one), Default: c("collections", "datasets")}
+
+\item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 }
 \value{
-Dataverses (a tibble)
+Datasets (a tibble)
 }
 \description{
-make_datasets_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make datasets tibble. The function returns Dataverses (a tibble).
+make_datasts_tb() function searches the contents of a specified Dataverse collection and returns a summary of the the data collections it contains.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -29,4 +44,3 @@ make_datasets_tb() is a Make function that creates a new R object. Specifically,
   make_datasets_tb("ready4")
 \dontshow{\}) # examplesIf}
 }
-\keyword{internal}

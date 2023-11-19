@@ -30,7 +30,7 @@ make_ds_releases_tbl(
 Dataset releases (an output object of multiple potential types)
 }
 \description{
-make_ds_releases_tbl() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make dataset releases table. The function returns Dataset releases (an output object of multiple potential types).
+make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.
 }
 \examples{
 make_ds_releases_tbl("10.7910/DVN/RIQTKK", as_kbl_1L_lgl = FALSE)

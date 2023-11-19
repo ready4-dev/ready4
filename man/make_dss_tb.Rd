@@ -4,12 +4,19 @@
 \alias{make_dss_tb}
 \title{Make datasets tibble}
 \usage{
-make_dss_tb(dvs_tb, filter_cdns_ls = list(), what_1L_chr = "all")
+make_dss_tb(
+  dvs_tb,
+  filter_cdns_ls = list(),
+  toy_data_dv_1L_chr = "fakes",
+  what_1L_chr = "all"
+)
 }
 \arguments{
 \item{dvs_tb}{Dataverses (a tibble)}
 
 \item{filter_cdns_ls}{Filter conditions (a list), Default: list()}
+
+\item{toy_data_dv_1L_chr}{Toy data dataverse (a character vector of length one), Default: 'fakes'}
 
 \item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 }

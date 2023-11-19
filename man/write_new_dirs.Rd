@@ -21,6 +21,6 @@ write_new_dirs(
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
-write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value.
 }
 \keyword{internal}

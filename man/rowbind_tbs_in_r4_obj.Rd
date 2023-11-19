@@ -2,23 +2,23 @@
 % Please edit documentation in R/fn_rowbind.R
 \name{rowbind_tbs_in_r4_obj}
 \alias{rowbind_tbs_in_r4_obj}
-\title{Rowbind tibbles in ready4 S4 object}
+\title{Rowbind tibbles in ready4 module object}
 \usage{
 rowbind_tbs_in_r4_obj(tbs_r4, slot_nm_1L_chr, second_tbs_r4, r4_name_1L_chr)
 }
 \arguments{
-\item{tbs_r4}{Tibbles (a ready4 S4)}
+\item{tbs_r4}{Tibbles (a ready4 module)}
 
 \item{slot_nm_1L_chr}{Slot name (a character vector of length one)}
 
-\item{second_tbs_r4}{Second tibbles (a ready4 S4)}
+\item{second_tbs_r4}{Second tibbles (a ready4 module)}
 
-\item{r4_name_1L_chr}{Ready4 S4 name (a character vector of length one)}
+\item{r4_name_1L_chr}{Ready4 module name (a character vector of length one)}
 }
 \value{
-Tibbles (a ready4 S4)
+Tibbles (a ready4 module)
 }
 \description{
-rowbind_tbs_in_r4_obj() is a Rowbind function that performs custom rowbind operations on table objects. Specifically, this function implements an algorithm to rowbind tibbles in ready4 s4 object. The function returns Tibbles (a ready4 S4).
+rowbind_tbs_in_r4_obj() is a Rowbind function that performs custom rowbind operations on table objects. Specifically, this function implements an algorithm to rowbind tibbles in ready4 module object. The function returns Tibbles (a ready4 module).
 }
 \keyword{internal}

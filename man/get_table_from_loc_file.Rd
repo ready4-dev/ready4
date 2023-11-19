@@ -24,6 +24,6 @@ get_table_from_loc_file(
 Table (an output object of multiple potential types)
 }
 \description{
-get_table_from_loc_file() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get table from local file. Function argument path_1L_chr specifies the where to look for the required object. The function returns Table (an output object of multiple potential types).
+get_table_from_loc_file() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get table from local file. The function returns Table (an output object of multiple potential types).
 }
 \keyword{internal}

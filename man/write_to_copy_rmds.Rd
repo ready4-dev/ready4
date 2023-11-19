@@ -30,7 +30,7 @@ write_to_copy_rmds(
 \item{return_1L_lgl}{Return (a logical vector of length one), Default: F}
 }
 \description{
-write_to_copy_rmds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to copy markdowns. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+print_packages() formats the output of get_libraries_tb() as HTML.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

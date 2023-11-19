@@ -13,6 +13,6 @@ update_pt_fn_args_ls(args_ls)
 Updated arguments (a list)
 }
 \description{
-update_pt_fn_args_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update prototype function arguments list. Function argument args_ls specifies the object to be updated. The function returns Updated arguments (a list).
+update_pt_fn_args_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update prototype function arguments list. The function returns Updated arguments (a list).
 }
 \keyword{internal}

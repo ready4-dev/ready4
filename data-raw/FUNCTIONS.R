@@ -278,11 +278,8 @@ write_self_srvc_pkg <- function(x){
     fn_fls_chr %>%
       purrr::walk(~file.copy(paste0("data-raw/fns/",.x),
                              "R"))
-    ready4fun::author.ready4fun_metadata_a(x$initial_ls)
-    # important: ANSWER "N" TO DELETE GENERICS AND FN FILES
-    # ready4fun::write_to_delete_fls(c(#"R/imp_fns.R",
-    #                                  "R/imp_mthds.R"))
-    # devtools::document()
+    ready4fun::author.ready4fun_metadata_a(x$initial_ls,  self_serve_1L_lgl = T) # important: ANSWERS "N" TO DELETE GENERICS AND FN FILES
+    # If function fails and you write "Y" you will most likely have to delete your local copy of this repo and clone the repo again from its origin (https://github.com/ready4-dev/ready4).
     x <- ready4fun::authorData.ready4fun_manifest(x)
     x <- write_to_copy_s4_cls_fls(x,
                                   class_pt_lup = ready4fun::get_rds_from_pkg_dmt(x,

@@ -57,7 +57,7 @@ print_packages(
 Package extensions (a kable)
 }
 \description{
-print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
+print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.
 }
 \examples{
 print_packages(gh_repo_1L_chr = "ready4-dev/ready4",

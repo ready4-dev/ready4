@@ -18,6 +18,6 @@ get_excluded_repos(
 Exclude (a character vector)
 }
 \description{
-get_excluded_repos() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get excluded repositories. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Exclude (a character vector).
+get_excluded_repos() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get excluded repositories. The function returns Exclude (a character vector).
 }
 \keyword{internal}

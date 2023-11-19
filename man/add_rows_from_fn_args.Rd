@@ -7,16 +7,16 @@
 add_rows_from_fn_args(tbl_r3, fn, fn_env_ls)
 }
 \arguments{
-\item{tbl_r3}{Table (a ready4 S3)}
+\item{tbl_r3}{Table (a ready4 submodule)}
 
 \item{fn}{Function (a function)}
 
 \item{fn_env_ls}{Function (a list of environments)}
 }
 \value{
-Table (a ready4 S3)
+Table (a ready4 submodule)
 }
 \description{
-add_rows_from_fn_args() is an Add function that updates an object by adding data to that object. Specifically, this function implements an algorithm to add rows from function arguments. Function argument tbl_r3 specifies the object to be updated. The function returns Table (a ready4 S3).
+add_rows_from_fn_args() is an Add function that updates an object by adding new values to new or empty fields. Specifically, this function implements an algorithm to add rows from function arguments. The function returns Table (a ready4 submodule).
 }
 \keyword{internal}

@@ -18,7 +18,7 @@ get_methods_tb(
 Methods (a tibble)
 }
 \description{
-get_methods_tb() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get methods tibble. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Methods (a tibble).
+get_methods_tb() ingests 'methods_tb.RDS' (a table of methods associated with ready4 model modules) from a specified GitHub repository release.
 }
 \examples{
 get_methods_tb("ready4-dev/ready4")

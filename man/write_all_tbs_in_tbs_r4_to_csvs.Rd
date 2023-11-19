@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_write.R
 \name{write_all_tbs_in_tbs_r4_to_csvs}
 \alias{write_all_tbs_in_tbs_r4_to_csvs}
-\title{Write all tibbles in tibbles ready4 S4 to comma separated variables files}
+\title{Write all tibbles in tibbles ready4 module to comma separated variables files}
 \usage{
 write_all_tbs_in_tbs_r4_to_csvs(
   tbs_r4,
@@ -15,9 +15,9 @@ write_all_tbs_in_tbs_r4_to_csvs(
 )
 }
 \arguments{
-\item{tbs_r4}{Tibbles (a ready4 S4)}
+\item{tbs_r4}{Tibbles (a ready4 module)}
 
-\item{r4_name_1L_chr}{Ready4 S4 name (a character vector of length one)}
+\item{r4_name_1L_chr}{Ready4 module name (a character vector of length one)}
 
 \item{lup_dir_1L_chr}{Lookup table directory (a character vector of length one)}
 
@@ -30,6 +30,6 @@ write_all_tbs_in_tbs_r4_to_csvs(
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
-write_all_tbs_in_tbs_r4_to_csvs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write all tibbles in tibbles ready4 s4 to comma separated variables files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+write_all_tbs_in_tbs_r4_to_csvs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write all tibbles in tibbles ready4 module to comma separated variables files. The function is called for its side effects and does not return a value.
 }
 \keyword{internal}

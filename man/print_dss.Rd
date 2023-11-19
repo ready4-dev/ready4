@@ -5,19 +5,25 @@
 \title{Print datasets}
 \usage{
 print_dss(
-  dvs_tb,
+  datasets_tb,
+  filter_cdns_ls = NULL,
   scroll_height_1L_chr = character(0),
   scroll_width_1L_chr = character(0),
+  toy_data_dv_1L_chr = "fakes",
   what_1L_chr = "all",
   ...
 )
 }
 \arguments{
-\item{dvs_tb}{Dataverses (a tibble)}
+\item{datasets_tb}{Datasets (a tibble)}
+
+\item{filter_cdns_ls}{Filter conditions (a list), Default: NULL}
 
 \item{scroll_height_1L_chr}{Scroll height (a character vector of length one), Default: character(0)}
 
 \item{scroll_width_1L_chr}{Scroll width (a character vector of length one), Default: character(0)}
+
+\item{toy_data_dv_1L_chr}{Toy data dataverse (a character vector of length one), Default: 'fakes'}
 
 \item{what_1L_chr}{What (a character vector of length one), Default: 'all'}
 
@@ -27,6 +33,6 @@ print_dss(
 Datasets (a kable)
 }
 \description{
-print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
+print_dss() is a Print function that prints output to console. Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
 }
 \keyword{internal}

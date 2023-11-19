@@ -16,11 +16,11 @@ write_tb_to_csv(
 )
 }
 \arguments{
-\item{tbs_r4}{Tibbles (a ready4 S4)}
+\item{tbs_r4}{Tibbles (a ready4 module)}
 
 \item{slot_nm_1L_chr}{Slot name (a character vector of length one)}
 
-\item{r4_name_1L_chr}{Ready4 S4 name (a character vector of length one)}
+\item{r4_name_1L_chr}{Ready4 module name (a character vector of length one)}
 
 \item{lup_dir_1L_chr}{Lookup table directory (a character vector of length one)}
 
@@ -33,6 +33,6 @@ write_tb_to_csv(
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
 \description{
-write_tb_to_csv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write tibble to comma separated variables file. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+write_tb_to_csv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write tibble to comma separated variables file. The function is called for its side effects and does not return a value.
 }
 \keyword{internal}

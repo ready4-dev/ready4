@@ -1,78 +1,71 @@
 #' Print a table of ready4 model data collections
-#' @description print_data() is a Print function that prints output to console Specifically, this function implements an algorithm to print data. The function is called for its side effects and does not return a value.
+#' @description make_programs_tbl() scrapes the GitHub organisation and Zenodo community associated specified for a ready4 model implementation to create a tabular summary of programs and sub-routines associated with that implementation.
 #' @param datasets_tb Datasets (a tibble)
 #' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: F
+#' @param filter_cdns_ls Filter conditions (a list), Default: NULL
 #' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param toy_data_dv_1L_chr Toy data dataverse (a character vector of length one), Default: 'fakes'
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
 #' @param ... Additional arguments
 #' @return Datasets (a kable)
 #' @rdname print_data
 #' @export 
 #' @example man/examples/print_data.R
-print_data <- function (datasets_tb, by_dv_1L_lgl = F, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
+print_data <- function (datasets_tb, by_dv_1L_lgl = F, filter_cdns_ls = NULL, 
+    root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
-    what_1L_chr = "all", ...) 
+    toy_data_dv_1L_chr = "fakes", what_1L_chr = "all", ...) 
 {
-    if (by_dv_1L_lgl) {
+    if (by_dv_1L_lgl & ("Datasets_Meta" %in% names(datasets_tb))) {
         datasets_kbl <- print_dvs(datasets_tb, root_1L_chr = root_1L_chr, 
             scroll_height_1L_chr = scroll_height_1L_chr, scroll_width_1L_chr = scroll_width_1L_chr, 
-            what_1L_chr = what_1L_chr, ...)
+            toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, 
+            ...)
     }
     else {
-        datasets_kbl <- print_dss(datasets_tb, scroll_height_1L_chr = scroll_height_1L_chr, 
-            scroll_width_1L_chr = scroll_width_1L_chr, what_1L_chr = what_1L_chr, 
+        datasets_kbl <- print_dss(datasets_tb, filter_cdns_ls = filter_cdns_ls, 
+            scroll_height_1L_chr = scroll_height_1L_chr, scroll_width_1L_chr = scroll_width_1L_chr, 
+            toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, 
             ...)
     }
     return(datasets_kbl)
 }
 #' Print datasets
-#' @description print_dss() is a Print function that prints output to console Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
-#' @param dvs_tb Dataverses (a tibble)
+#' @description print_dss() is a Print function that prints output to console. Specifically, this function implements an algorithm to print datasets. The function is called for its side effects and does not return a value.
+#' @param datasets_tb Datasets (a tibble)
+#' @param filter_cdns_ls Filter conditions (a list), Default: NULL
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param toy_data_dv_1L_chr Toy data dataverse (a character vector of length one), Default: 'fakes'
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
 #' @param ... Additional arguments
 #' @return Datasets (a kable)
 #' @rdname print_dss
 #' @export 
-#' @importFrom dplyr filter select mutate
-#' @importFrom purrr pmap_dfr map_dfr
-#' @importFrom tibble tibble
 #' @importFrom kableExtra kable kable_styling
 #' @keywords internal
-print_dss <- function (dvs_tb, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
+print_dss <- function (datasets_tb, filter_cdns_ls = NULL, scroll_height_1L_chr = character(0), 
+    scroll_width_1L_chr = character(0), toy_data_dv_1L_chr = "fakes", 
     what_1L_chr = "all", ...) 
 {
-    dss_tb <- dvs_tb %>% dplyr::filter(!is.na(.data$Contents)) %>% 
-        dplyr::select("Contents", "Datasets_Meta", "Dataverse") %>% 
-        purrr::pmap_dfr(~{
-            ..2 %>% purrr::map_dfr(~{
-                fields_ls <- .x$fields
-                tibble::tibble(Title = fields_ls$value[which(fields_ls$typeName == 
-                  "title")][[1]], Description = fields_ls$value[which(fields_ls$typeName == 
-                  "dsDescription")][[1]][[1]][[4]])
-            }) %>% dplyr::mutate(Dataverse = ..3, DOI = ..1)
-        })
-    if (what_1L_chr == "real") 
-        dss_tb <- dss_tb %>% dplyr::filter(.data$Dataverse != 
-            "fakes")
-    if (what_1L_chr == "fakes") 
-        dss_tb <- dss_tb %>% dplyr::filter(.data$Dataverse == 
-            "fakes")
-    dss_kbl <- dss_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
+    datasets_tb <- make_dss_tb(datasets_tb, filter_cdns_ls = filter_cdns_ls, 
+        toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr)
+    dss_kbl <- datasets_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
             "condensed")) %>% add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr, 
         scroll_width_1L_chr = scroll_width_1L_chr, ...)
     return(dss_kbl)
 }
 #' Print dataverses
-#' @description print_dvs() is a Print function that prints output to console Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.
+#' @description print_dvs() is a Print function that prints output to console. Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.
 #' @param dvs_tb Dataverses (a tibble)
+#' @param filter_cdns_ls Filter conditions (a list), Default: NULL
 #' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param toy_data_dv_1L_chr Toy data dataverse (a character vector of length one), Default: 'fakes'
 #' @param what_1L_chr What (a character vector of length one), Default: 'all'
 #' @param ... Additional arguments
 #' @return Dataverses (a kable)
@@ -82,9 +75,9 @@ print_dss <- function (dvs_tb, scroll_height_1L_chr = character(0), scroll_width
 #' @importFrom purrr map
 #' @importFrom kableExtra kable kable_styling column_spec
 #' @keywords internal
-print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
+print_dvs <- function (dvs_tb, filter_cdns_ls = NULL, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
-    what_1L_chr = "all", ...) 
+    toy_data_dv_1L_chr = "fakes", what_1L_chr = "all", ...) 
 {
     dvs_tb <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", 
         data_url_var_nm_1L_chr = "Datasets") %>% dplyr::select("Dataverse", 
@@ -97,10 +90,10 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
         }))
     if (what_1L_chr == "real") 
         dvs_tb <- dvs_tb %>% dplyr::filter(.data$Dataverse != 
-            "fakes")
+            toy_data_dv_1L_chr)
     if (what_1L_chr == "fakes") 
         dvs_tb <- dvs_tb %>% dplyr::filter(.data$Dataverse == 
-            "fakes")
+            toy_data_dv_1L_chr)
     dvs_kbl <- dvs_tb %>% kableExtra::kable("html", escape = FALSE) %>% 
         kableExtra::kable_styling(bootstrap_options = c("hover", 
             "condensed")) %>% kableExtra::column_spec(which(names(dvs_tb) == 
@@ -110,7 +103,7 @@ print_dvs <- function (dvs_tb, root_1L_chr = "https://dataverse.harvard.edu/data
     return(dvs_kbl)
 }
 #' Print a table of methods associated with ready4 model modules
-#' @description print_methods() is a Print function that prints output to console Specifically, this function implements an algorithm to print methods. The function is called for its side effects and does not return a value.
+#' @description print_data() formats the output of either get_datasts_tb() or make_datasts_tb() as HTML. The type of output can be customised to display Dataverse data collections or Dataverse datasets. Similarly output can be restricted to real or toy datasets.
 #' @param methods_tb Methods (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
@@ -159,7 +152,7 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
     return(methods_kbl)
 }
 #' Print a table of ready4 model modules
-#' @description print_modules() is a Print function that prints output to console Specifically, this function implements an algorithm to print modules. The function is called for its side effects and does not return a value.
+#' @description print_methods() formats the output of either get_methods_tb() or make_methods_tb() as HTML.
 #' @param modules_tb Modules (a tibble)
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
@@ -188,7 +181,7 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
     return(modules_kbl)
 }
 #' Print a table of ready4 libraries
-#' @description print_packages() is a Print function that prints output to console Specifically, this function implements an algorithm to print packages. The function is called for its side effects and does not return a value.
+#' @description print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
@@ -301,7 +294,7 @@ print_packages <- function (pkg_extensions_tb = NULL, gh_repo_1L_chr = "ready4-d
     return(pkg_extensions_kbl)
 }
 #' Print vignettes
-#' @description print_vignettes() is a Print function that prints output to console Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.
+#' @description print_vignettes() is a Print function that prints output to console. Specifically, this function implements an algorithm to print vignettes. The function is called for its side effects and does not return a value.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'

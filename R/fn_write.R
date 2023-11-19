@@ -1,7 +1,7 @@
-#' Write all tibbles in tibbles ready4 S4 to comma separated variables files
-#' @description write_all_tbs_in_tbs_r4_to_csvs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write all tibbles in tibbles ready4 s4 to comma separated variables files. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
-#' @param tbs_r4 Tibbles (a ready4 S4)
-#' @param r4_name_1L_chr Ready4 S4 name (a character vector of length one)
+#' Write all tibbles in tibbles ready4 module to comma separated variables files
+#' @description write_all_tbs_in_tbs_r4_to_csvs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write all tibbles in tibbles ready4 module to comma separated variables files. The function is called for its side effects and does not return a value.
+#' @param tbs_r4 Tibbles (a ready4 module)
+#' @param r4_name_1L_chr Ready4 module name (a character vector of length one)
 #' @param lup_dir_1L_chr Lookup table directory (a character vector of length one)
 #' @param pfx_1L_chr Prefix (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -24,7 +24,7 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
             consent_indcs_int = consent_indcs_int, options_chr = options_chr))
 }
 #' Write blog entries
-#' @description write_blog_entries() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write blog entries. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_blog_entries() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write blog entries. The function is called for its side effects and does not return a value.
 #' @param dir_path_1L_chr Directory path (a character vector of length one)
 #' @param fl_nm_1L_chr File name (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -65,7 +65,7 @@ write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
         options_chr = options_chr)
 }
 #' Write citation cff
-#' @description write_citation_cff() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write citation cff. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_citation_cff() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write citation cff. The function is called for its side effects and does not return a value.
 #' @param pkg_desc_ls Package description (a list)
 #' @param citation_chr Citation (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -111,7 +111,7 @@ write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", 
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write dataverse file to local
-#' @description write_dv_fl_to_loc() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write dataverse file to local. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_dv_fl_to_loc() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write dataverse file to local. The function is called for its side effects and does not return a value.
 #' @param ds_ui_1L_chr Dataset user interface (a character vector of length one)
 #' @param dest_path_1L_chr Destination path (a character vector of length one)
 #' @param repo_fl_fmt_1L_chr Repository file format (a character vector of length one)
@@ -217,7 +217,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
     return(file_ids_int)
 }
 #' Write examples
-#' @description write_examples() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write examples. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_examples() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write examples. The function is called for its side effects and does not return a value.
 #' @param path_1L_chr Path (a character vector of length one), Default: getwd()
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -299,7 +299,7 @@ write_examples <- function (path_1L_chr = getwd(), consent_1L_chr = "", consent_
     devtools::document()
 }
 #' Write extra packages to actions
-#' @description write_extra_pkgs_to_actions() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write extra packages to actions. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_extra_pkgs_to_actions() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write extra packages to actions. The function is called for its side effects and does not return a value.
 #' @param path_to_dir_1L_chr Path to directory (a character vector of length one), Default: '.github/workflows'
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -329,7 +329,7 @@ write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr = ".github/workflows
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write files from dataverse
-#' @description write_fls_from_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files from dataverse. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_fls_from_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files from dataverse. The function is called for its side effects and does not return a value.
 #' @param files_tb Files (a tibble)
 #' @param fl_ids_int File identities (an integer vector)
 #' @param ds_url_1L_chr Dataset url (a character vector of length one)
@@ -520,7 +520,7 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
     return(ids_int)
 }
 #' Write from temporary
-#' @description write_from_tmp() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write from temporary. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_from_tmp() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write from temporary. The function is called for its side effects and does not return a value.
 #' @param tmp_paths_chr Temporary paths (a character vector)
 #' @param dest_paths_chr Destination paths (a character vector)
 #' @param args_ls_ls Arguments (a list of lists), Default: list(NULL)
@@ -561,7 +561,7 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, args_ls_ls = list(NUL
         return_1L_lgl = F)
 }
 #' Write ingested dataverse file
-#' @description write_ingested_dv_fl() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write ingested dataverse file. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_ingested_dv_fl() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write ingested dataverse file. The function is called for its side effects and does not return a value.
 #' @param ds_ui_1L_chr Dataset user interface (a character vector of length one)
 #' @param dest_path_1L_chr Destination path (a character vector of length one)
 #' @param repo_fl_fmt_1L_chr Repository file format (a character vector of length one)
@@ -603,7 +603,7 @@ write_ingested_dv_fl <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write library metadata
-#' @description write_library_metadata() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write library metadata. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_library_metadata() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write library metadata. The function is called for its side effects and does not return a value.
 #' @param additions_tb Additions (a tibble), Default: make_additions_tb()
 #' @param libraries_ls Libraries (a list), Default: NULL
 #' @param libraries_tb Libraries (a tibble), Default: NULL
@@ -685,7 +685,7 @@ write_library_metadata <- function (additions_tb = make_additions_tb(), librarie
     }
 }
 #' Write new credentials
-#' @description write_new_credentials() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new credentials. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_new_credentials() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new credentials. The function is called for its side effects and does not return a value.
 #' @param path_to_file_1L_chr Path to file (a character vector of length one)
 #' @param new_credentials_1L_chr New credentials (a character vector of length one)
 #' @param old_credentials_1L_chr Old credentials (a character vector of length one)
@@ -716,7 +716,7 @@ write_new_credentials <- function (path_to_file_1L_chr, new_credentials_1L_chr, 
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write new directories
-#' @description write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_new_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new directories. The function is called for its side effects and does not return a value.
 #' @param new_dirs_chr New directories (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -845,7 +845,7 @@ write_new_files <- function (paths_chr, consent_1L_chr = "", consent_indcs_int =
         return(object_xx)
 }
 #' Write object with prompt
-#' @description write_obj_with_prompt() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write object with prompt. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_obj_with_prompt() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write object with prompt. The function is called for its side effects and does not return a value.
 #' @param object_xx Object (an output object of multiple potential types)
 #' @param obj_nm_1L_chr Object name (a character vector of length one)
 #' @param outp_dir_1L_chr Output directory (a character vector of length one)
@@ -922,10 +922,10 @@ write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1
     return(new_paths_ls)
 }
 #' Write tibble to comma separated variables file
-#' @description write_tb_to_csv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write tibble to comma separated variables file. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
-#' @param tbs_r4 Tibbles (a ready4 S4)
+#' @description write_tb_to_csv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write tibble to comma separated variables file. The function is called for its side effects and does not return a value.
+#' @param tbs_r4 Tibbles (a ready4 module)
 #' @param slot_nm_1L_chr Slot name (a character vector of length one)
-#' @param r4_name_1L_chr Ready4 S4 name (a character vector of length one)
+#' @param r4_name_1L_chr Ready4 module name (a character vector of length one)
 #' @param lup_dir_1L_chr Lookup table directory (a character vector of length one)
 #' @param pfx_1L_chr Prefix (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -961,7 +961,7 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write a local copy of RMD or Rmarkdown files
-#' @description write_to_copy_rmds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to copy markdowns. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description print_packages() formats the output of get_libraries_tb() as HTML.
 #' @param dir_path_1L_chr Directory path (a character vector of length one)
 #' @param fl_nm_1L_chr File name (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -992,7 +992,7 @@ write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
         options_chr = options_chr, return_1L_lgl = return_1L_lgl))
 }
 #' Write to delete directories
-#' @description write_to_delete_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete directories. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_delete_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete directories. The function is called for its side effects and does not return a value.
 #' @param dir_paths_chr Directory paths (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -1212,7 +1212,7 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, parent_d
     return(ds_ls)
 }
 #' Write to edit workflow
-#' @description write_to_edit_workflow() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to edit workflow. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_edit_workflow() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to edit workflow. The function is called for its side effects and does not return a value.
 #' @param fl_nm_1L_chr File name (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -1246,7 +1246,7 @@ write_to_edit_workflow <- function (fl_nm_1L_chr, consent_1L_chr = "", consent_i
         options_chr = options_chr)
 }
 #' Write to force links in
-#' @description write_to_force_links_in() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to force links in. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_force_links_in() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to force links in. The function is called for its side effects and does not return a value.
 #' @param path_to_mkdn_1L_chr Path to markdown (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -1279,7 +1279,7 @@ write_to_force_links_in <- function (path_to_mkdn_1L_chr, consent_1L_chr = "", c
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write to publish dataverse dataset
-#' @description write_to_publish_dv_ds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to publish dataverse dataset. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_publish_dv_ds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to publish dataverse dataset. The function is called for its side effects and does not return a value.
 #' @param dv_ds_1L_chr Dataverse dataset (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -1302,7 +1302,7 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write ready4 model documentation website page from an RMD or Rmarkdown file
-#' @description write_to_render_post() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to render post. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specified sub-directories of a model documentation website. These template copies can then be manually edited before being rendered with write_to_render_post().
 #' @param included_dirs_chr Included directories (a character vector)
 #' @param path_to_main_dir_1L_chr Path to main directory (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -1373,7 +1373,7 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
     }
 }
 #' Write to trim html
-#' @description write_to_trim_html() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to trim html. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_trim_html() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to trim html. The function is called for its side effects and does not return a value.
 #' @param path_to_html_1L_chr Path to html (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -1446,7 +1446,7 @@ write_with_consent <- function (consented_fn, prompt_1L_chr, consent_1L_chr = ""
         return(object_xx)
 }
 #' Write words
-#' @description write_words() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write words. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_words() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write words. The function is called for its side effects and does not return a value.
 #' @param new_words_chr New words (a character vector)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
@@ -1474,7 +1474,7 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
         prerelease_1L_lgl = T)
 }
 #' Write ready4 software develoment local directories
-#' @description write_ws() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write workspace. The function is called for its side effects and does not return a value. WARNING: This function writes R scripts to your local environment. Make sure to only use if you want this behaviour
+#' @description write_to_render_post() is designed for help overcome practical challenges of rendering RMD or Rmarkdown files to Markdown output in a modelling project's Hugo Docsy documentation website. You must have 'hugodown' installed for this function to work.
 #' @param path_1L_chr Path (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1

@@ -5,7 +5,7 @@ source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 #dir.create("data-raw/examples")
 x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Modular Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "Foundation for a prototype software framework to support Transparent, Reusable And Updatable (TRU) health economic models. The foundation of this framework is a programming syntax, a template model module and functions to help author and maintain a modular modelling project's documentation website.
+                                                    pkg_desc_1L_chr = "Foundation for a prototype software framework to support Transparent, Reusable And Updatable (TRU) health economic models. The framework foundation includes a programming syntax, a template model module and functions to help author and maintain a modular modelling project's documentation website.
                                                     These foundational elements focus on supporting modular and collaborative approaches to health economic model development. Extended functionality is provided by other R packages in the framework. For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>.
                                                     For a background to the methodological issues that the framework is attempting to help solve, read the manuscript <arXiv:2310.14138>.",
                                                     authors_prsn = c(utils::person(
@@ -89,41 +89,13 @@ x <- x %>%
                            ready4_type_1L_chr = "foundation",
                            zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)")
 ##
-## WARNING WARNING WARNING
-## Unlike other workflows in the ready4 suite, in this instance it is necessary to answer "N", the FIRST time the following prompt appears:
-## Are you sure that you want to delete the following files from your machine: [Y|N]
-## After doing so, all other such prompts should be answered in the affirmative.
-## If you make a mistake and write "Y" you will most likely have to delete your local copy of this repo and clone the repo again from its origin (https://github.com/ready4-dev/ready4).
+
 x <- write_self_srvc_pkg(x)
-# Check that the following corresponds with author.ready4fun_manifest
-readLines(".github/workflows/R-CMD-check.yaml") %>%
-  stringr::str_replace_all("r-lib/actions/setup-r@master", "r-lib/actions/setup-r@v2") %>%
-  stringr::str_replace_all("r-lib/actions/setup-pandoc@master", "r-lib/actions/setup-pandoc@v2") %>%
-  stringr::str_replace_all("- \\{os: windows-latest, r: '3.6'\\}", "#- \\{os: windows-latest, r: '3.6'\\}") %>%
-  stringr::str_replace_all("- \\{os: ubuntu-20.04,   r: 'oldrel', ", "#- \\{os: ubuntu-20.04,   r: 'oldrel', ") %>%
-  purrr::discard_at(2:4) %>%
-  writeLines(con = ".github/workflows/R-CMD-check.yaml")
-# Need to check that test-coverage includes fix: "Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev"
-write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
-write_extra_pkgs_to_actions(consent_1L_chr = "Y")
-readLines("_pkgdown.yml") %>% # update in ready4fun
-  stringr::str_replace_all("  - text: Model", "  - text: Framework & Model") %>%
-  writeLines(con = "_pkgdown.yml")
-readLines("DESCRIPTION")[-which(readLines("DESCRIPTION") %in% c("    knitr,", "    testthat,"))] %>%
-  writeLines("DESCRIPTION") # update in ready4fun
-devtools::document()
-usethis::use_package("knitr", type = "Suggests") # update in ready4fun
+# write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
+# write_extra_pkgs_to_actions(consent_1L_chr = "Y")
 usethis::use_package("pkgload", type = "Suggests") # ??
-usethis::use_package("testthat", type = "Suggests") # update in ready4fun
-citation_chr <- readLines("inst/CITATION") # update in ready4fun
-citation_chr[3] <- stringr::str_replace(citation_chr[3], "citEntry", "bibentry")
-citation_chr[4] <- stringr::str_replace(citation_chr[4], "entry", "bibtype")
-citation_chr[8] <- stringr::str_replace(citation_chr[8], "2021", "2023")
-citation_chr[12] <- stringr::str_replace(citation_chr[12], "2021", "2023")
-citation_chr  %>%
-  writeLines(con = "inst/CITATION")
 readLines("README.md") %>% # update in ready4fun
-  stringr::str_replace_all("svg\\)]\\(https://codecov.io","svg\\)]\\(https://app.codecov.io") %>%
+  #stringr::str_replace_all("svg\\)]\\(https://codecov.io","svg\\)]\\(https://app.codecov.io") %>%
   gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   writeLines(con = "README.md")
 c(readLines("R/imp_fns.R"), # update in ready4fun
@@ -152,10 +124,8 @@ c(readLines("R/imp_fns.R"), # update in ready4fun
 ) %>%
   writeLines("R/imp_fns.R")
 write_examples(consent_1L_chr = "Y")
-usethis::use_cran_badge() # Export to ready4fun
 devtools::build_vignettes()
 #
-# Note currently first function title is appended to all function titles when using custom titles.
 #
 # ADD DOI OVERRIDE FOR RELEASES
 #

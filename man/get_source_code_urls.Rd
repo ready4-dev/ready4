@@ -18,6 +18,6 @@ get_source_code_urls(
 Urls (a character vector)
 }
 \description{
-get_source_code_urls() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get source code urls. Function argument pkg_nm_1L_chr specifies the where to look for the required object. The function returns Urls (a character vector).
+get_source_code_urls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get source code urls. The function returns Urls (a character vector).
 }
 \keyword{internal}

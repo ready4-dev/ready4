@@ -15,6 +15,6 @@ get_examples(vignettes_chr, term_1L_chr)
 Examples (a character vector)
 }
 \description{
-get_examples() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get examples. Function argument vignettes_chr specifies the where to look for the required object. The function returns Examples (a character vector).
+get_examples() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get examples. The function returns Examples (a character vector).
 }
 \keyword{internal}

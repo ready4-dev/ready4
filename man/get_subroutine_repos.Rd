@@ -18,6 +18,6 @@ get_subroutine_repos(
 Subroutine repositories (a character vector)
 }
 \description{
-get_subroutine_repos() is a Get function that retrieves a pre-existing data object from memory, local file system or online repository. Specifically, this function implements an algorithm to get subroutine repositories. Function argument gh_repo_1L_chr specifies the where to look for the required object. The function returns Subroutine repositories (a character vector).
+get_subroutine_repos() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get subroutine repositories. The function returns Subroutine repositories (a character vector).
 }
 \keyword{internal}
