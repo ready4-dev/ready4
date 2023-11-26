@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,12 +156,7 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span>  <span class="va">libraries_tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_libraries_tb.html">get_libraries_tb</a></span><span class="op">(</span>gh_repo_1L_chr <span class="op">=</span> <span class="st">"ready4-dev/ready4"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="co"># Print framework libraries (method 1)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="update_libraries_tb.html">update_libraries_tb</a></span><span class="op">(</span><span class="va">libraries_tb</span>,</span></span>
-<span class="r-in"><span>                      url_stub_1L_chr <span class="op">=</span> <span class="st">"https://ready4-dev.github.io/"</span>,</span></span>
-<span class="r-in"><span>                      include_1L_chr <span class="op">=</span> <span class="st">"framework"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">print_packages</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="co"># Print framework libraries (method 2)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Print framework libraries</span></span></span>
 <span class="r-in"><span>  <span class="fu">print_packages</span><span class="op">(</span>gh_repo_1L_chr <span class="op">=</span> <span class="st">"ready4-dev/ready4"</span>,</span></span>
 <span class="r-in"><span>                 include_1L_chr <span class="op">=</span> <span class="st">"framework"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="co"># Print module libraries (method 1)</span></span></span>
