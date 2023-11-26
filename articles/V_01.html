@@ -55,7 +55,7 @@
     <a class="dropdown-item" href="../articles/V_01.html">Implement Modular Computational Health Economic Models</a>
     <a class="dropdown-item" href="../articles/V_02.html">Use A Simple And Consistent Syntax In Computational Health Economic Models</a>
     <a class="dropdown-item" href="../articles/V_03.html">Apply An Object-Oriented Paradigm To Computational Health Economic Models</a>
-    <a class="dropdown-item" href="../articles/V_04.html">Apply ready4 To Author Modules, Datasets and Analyses</a>
+    <a class="dropdown-item" href="../articles/V_05.html">Finding Examples of Individual Ready4 Modules and Sub-modules</a>
   </div>
 </li>
 <li class="nav-item">
@@ -107,9 +107,8 @@ multiple discrete modelling projects (potentially developed by different
 modelling teams) that each independently describe distinct aspects of
 the system being modelled. The <code>ready4</code> package provides
 foundational elements of a software framework to support the development
-of modular and open-source computational health economic models using R.
-We are currently applying this framework <a href="https://www.ready4-dev.com/docs/model/" class="external-link">in youth mental
-health</a>.</p>
+of modular and open-source computational health economic models using
+R.</p>
 </div>
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
@@ -139,9 +138,9 @@ to work out what methods should be applied to the class.</p></li>
 <p>As we use the term, a “model module” is comprised of both a
 data-structure (or “class”) and algorithms (or “methods”) that are
 associated with that data-structure. A model module can be used to model
-a discrete component of a system relevant to young people’s mental
-health. Model modules can be created from a template - the
-<code>ready4</code> package’s <code>Ready4Module</code> class.</p>
+a discrete component of a health economic system. Model modules can be
+created from a template - the <code>ready4</code> package’s
+<code>Ready4Module</code> class.</p>
 <p>We can create an object (<code>X</code>) from the
 <code>Ready4Module</code> template using the following command.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -171,49 +170,6 @@ module templates) are “S4” classes.</p>
 from <code>Ready4Module</code>) and its associated methods.</p>
 </div>
 </div>
-<p><code>ready4</code> includes two module templates that inherit from
-<code>Ready4Module</code>. These are <code>Ready4Public</code> and
-<code>Ready4Private</code> and both are almost as minimally informative
-as their parent (the only difference being that their instances have the
-values “Public” or “Private” assigned to the
-<code>dissemination_1L_chr</code> slot).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Ready4Public-class.html">Ready4Public</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Formal class 'Ready4Public' [package "ready4"] with 1 slot</span></span>
-<span><span class="co">##   ..@ dissemination_1L_chr: chr "Public"</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Ready4Private-class.html">Ready4Private</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Formal class 'Ready4Private' [package "ready4"] with 1 slot</span></span>
-<span><span class="co">##   ..@ dissemination_1L_chr: chr "Private"</span></span></code></pre>
-<p>Like the <code>Ready4Module</code> template they inherit from, the
-purpose of <code>Ready4Public</code> and <code>Ready4Private</code> is
-to be used as parent classes of other templates. Using either of
-<code>Ready4Public</code> and <code>Ready4Private</code> can be a
-potentially efficient way of partially automating access policies for
-model data. If <strong>all</strong> the data contained in a module can
-<strong>always</strong> be shared publicly, it may be convenient to note
-this by using a module that has been created from the
-<code>Ready4Public</code> template. Similarly, if at least some of the
-data contained in a module will always be unsuitable for public
-dissemination, it can be useful to use a module created from
-<code>Ready4Private</code>. When the dissemination policy for data
-contained in a module will vary depending on user or context, it is more
-appropriate to use a module template that inherits from
-<code>Ready4Module</code> but not from either of
-<code>Ready4Public</code> and <code>Ready4Private</code>. In this latest
-case, users may choose to add descriptive information about the data
-access policy themselves using the <code>renewSlot</code> method. The
-dissemination policy can be inspected with the <code>procureSlot</code>
-method.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/renewSlot-methods.html">renewSlot</a></span><span class="op">(</span><span class="va">X</span>,</span>
-<span>               <span class="st">"dissemination_1L_chr"</span>,</span>
-<span>               <span class="st">"Staff and students of research institutes"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/procureSlot-methods.html">procureSlot</a></span><span class="op">(</span><span class="va">X</span>,</span>
-<span>            <span class="st">"dissemination_1L_chr"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "Staff and students of research institutes"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="ready4-model-sub-modules">ready4 Model Sub-modules<a class="anchor" aria-label="anchor" href="#ready4-model-sub-modules"></a>
@@ -247,7 +203,7 @@ template which by default are inherited by all other module templates.
 Currently, the only methods defined for <code>Ready4Module</code> are <a href="https://www.ready4-dev.com/docs/framework/implementation/syntax/#slot-generics-and-methods" class="external-link">slot-methods</a>
 and these can be itemised using the <code>get_methods</code>
 function.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_methods.html">get_methods</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "authorSlot"        "characterizeSlot"  "depictSlot"       </span></span>
 <span><span class="co">##  [4] "enhanceSlot"       "exhibitSlot"       "ingestSlot"       </span></span>
