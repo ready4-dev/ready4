@@ -88,3 +88,4 @@
 ^data-raw/examples/procureSlot_Ready4Module\.R$
 ^data-raw/examples/renewSlot_Ready4Module\.R$
 ^CITATION\.cff$
+^data-raw/CUT\.R$

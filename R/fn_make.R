@@ -121,9 +121,9 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
         dplyr::select("feed_title", "entry_title", "entry_last_updated", 
             "entry_content", "entry_link") %>% dplyr::mutate(feed_title = .data$feed_title %>% 
         stringr::str_remove_all("Release notes from ")) %>% dplyr::rename(`:=`(!!rlang::sym(repo_type_1L_chr), 
-        .data$feed_title), Release = .data$entry_title, Date = .data$entry_last_updated, 
-        Description = .data$entry_content, URL = .data$entry_link) %>% 
-        dplyr::filter(.data$Release != "Documentation_0.0")
+        feed_title), Release = entry_title, Date = entry_last_updated, 
+        Description = entry_content, URL = entry_link) %>% dplyr::filter(.data$Release != 
+        "Documentation_0.0")
     if (tidy_desc_1L_lgl) {
         releases_xx <- releases_xx %>% dplyr::mutate(Description = .data$Description %>% 
             purrr::map2_chr(!!rlang::sym(repo_type_1L_chr), ~stringr::str_remove(.x, 
