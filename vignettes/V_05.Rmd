@@ -1,8 +1,8 @@
 ---
-title: "Finding Examples of Individual Ready4 Modules and Sub-modules"
+title: "Finding Applied Examples of Ready4 Modules and Sub-modules"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Finding Examples of Individual Ready4 Modules and Sub-modules}
+  %\VignetteIndexEntry{Finding Applied Examples of Ready4 Modules and Sub-modules}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

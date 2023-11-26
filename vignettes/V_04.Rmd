@@ -1,0 +1,47 @@
+---
+title: "Finding Libraries Of Ready4 Modules"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Finding Libraries Of Ready4 Modules}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+```{r message=FALSE, warning=F}
+library(ready4) 
+```
+
+## Motivation
+To combine model modules, it is first necessary for model developers and users to be able to find compatible module libraries. Manually keeping track of modules libraries authored by different teams can be an onerous undertaking. The ready4 package therefore includes tools to allow a modelling project’s maintainers to perform automated searches for model libraries and to output tabular summaries of these modules that are suitable for inclusion on documentation website pages.
+
+## Implementation
+A table summarising currently available module libraries authored with the `ready4` framework within a specified GitHub organisation can be retrieved from an online dataset by using the `get_libraries_tb` and `update_libraries_tb` functions.
+
+```{r}
+libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4") %>% update_libraries_tb(include_1L_chr = "modules")
+```
+
+Module libraries can be thematically grouped in model “sections”. In this [youth mental health example](https://www.ready4-dev.com/docs/model/), module libraries have been grouped in to three “sections”.
+
+```{r}
+libraries_tb$Section %>% unique()
+```
+
+We can use the `print_packages` function to display the module libraries currently available for each section.
+
+```{r}
+print_packages(libraries_tb %>% dplyr::filter(Section == "People"))
+```
+
+```{r}
+print_packages(libraries_tb %>% dplyr::filter(Section == "Places"))
+```
+
+```{r}
+print_packages(libraries_tb %>% dplyr::filter(Section == "Programs"))
+```
+
+
