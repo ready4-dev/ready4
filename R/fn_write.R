@@ -1343,7 +1343,10 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
     consent_indcs_int = 1L, is_rmd_1L_lgl = T, options_chr = c("Y", 
         "N")) 
 {
-    if (requireNamespace("hugodown", quietly = TRUE)) {
+    if (!requireNamespace("hugodown", quietly = TRUE)) {
+        stop("The R package 'hugodown' is not installed. Try installing hugodown and then rerun 'write_to_render_post'.")
+    }
+    else {
         consented_fn <- function(consent_1L_chr, consent_indcs_int, 
             included_dirs_chr, is_rmd_1L_lgl, options_chr, path_to_main_dir_1L_chr) {
             included_dirs_chr %>% purrr::walk(~{
@@ -1367,9 +1370,6 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
             consented_msg_1L_chr = paste0("Posts have been rendered in ", 
                 make_list_phrase(included_dirs_chr), "."), declined_msg_1L_chr = "Render request cancelled - no posts have been rendered.", 
             options_chr = options_chr, return_1L_lgl = F)
-    }
-    else {
-        warning("The R package 'hugodown' is not installed - no files have been written. Try installing hugodown and then rerun 'write_to_render_post'.")
     }
 }
 #' Write to trim html

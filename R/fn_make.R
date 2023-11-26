@@ -173,6 +173,13 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
 #'   make_datasets_tb("ready4")
+#'   dvs_tb <- get_datasets_tb("ready4-dev/ready4")
+#'   make_datasets_tb("ready4", dvs_tb = dvs_tb)
+#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, what_1L_chr = "real")
+#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, what_1L_chr = "fakes")
+#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets")
+#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets", what_1L_chr = "real")
+#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets", what_1L_chr = "fakes")
 make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdns_ls = NULL, 
     key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu", 
     toy_data_dv_1L_chr = "fakes", type_1L_chr = c("collections", 

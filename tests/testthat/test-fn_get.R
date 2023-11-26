@@ -1,0 +1,33 @@
+# test_that("Valid tibble of release history of ready4 framework libraries is generated",{
+#   expect_no_error(fw_tb <- make_code_releases_tbl("Framework", gh_repo_1L_chr = "ready4-dev/ready4", as_kbl_1L_lgl = F))
+#   expect_true(tibble::is_tibble(fw_tb))
+#   expect_true(names(fw_tb) == c("Package", "Release", "Date", "Description", "URL"))
+#   expect_true((fw_tb$Package %>% unique() %>% sort()) == c("ready4", "ready4class", "ready4fun", "ready4show", "ready4use")) # update once ready4pack released
+#   expect_true(nrow(fw_tb) > 5)
+# }
+# )
+# test_that("Kable of release history of subroutines in a GitHub repository is generated",{
+#   expect_no_error(subroutines_kbl <- make_code_releases_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4"))
+#   expect_true(class(subroutines_kbl)[1] == "kableExtra")
+# }
+# )
+test_that("Valid tibble of release history of data collection is generated",{
+  expect_no_error(dvs_tb <- get_datasets_tb("ready4-dev/ready4"))
+  expect_true(tibble::is_tibble(dvs_tb))
+  expect_true(names(dataset_tb) == c("Dataverse", "Name", "Description", "Creator", "Contents", "Datasets_Meta"))
+  expect_true("ready4fw" %in% dataset_tb$Dataverse)
+}
+)
+# test_that("Valid tibble of release history of data collection is generated",{
+#   expect_no_error(dataset_tb <- make_ds_releases_tbl("10.7910/DVN/RIQTKK", as_kbl_1L_lgl = FALSE))
+#   expect_true(tibble::is_tibble(dataset_tb))
+#   expect_true(names(dataset_tb) == c("Date", "Dataset", "DOI",  "Version", "Number of files"))
+#   expect_true("ready4 Framework Abbreviations and Definitions" %in% dataset_tb$Dataset)
+# }
+# )
+# test_that("Kable of release history of dataset is generated",{
+#   expect_no_error(dataset_kbl <- make_ds_releases_tbl("10.7910/DVN/RIQTKK"))
+#   expect_true(class(dataset_kbl)[1] == "kableExtra")
+# }
+# )
+

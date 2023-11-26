@@ -4,24 +4,23 @@ library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 #dir.create("data-raw/examples")
-x <- ready4fun::make_pkg_desc_ls(pkg_title_1L_chr = "Implement Modular Health Economic Models" %>% tools::toTitleCase(),
-                                                    pkg_desc_1L_chr = "Foundation for a prototype software framework to support Transparent, Reusable And Updatable (TRU) health economic models. The framework foundation includes a programming syntax, a template model module and functions to help author and maintain a modular modelling project's documentation website.
-                                                    These foundational elements focus on supporting modular and collaborative approaches to health economic model development. Extended functionality is provided by other R packages in the framework. For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>.
-                                                    For a background to the methodological issues that the framework is attempting to help solve, read the manuscript <arXiv:2310.14138>.",
-                                                    authors_prsn = c(utils::person(
-                                                      given = "Matthew",family = "Hamilton", email =
-                                                        "matthew.hamilton1@monash.edu",role = c("aut",
-                                                                                                  "cre"),
-                                                      comment = c(ORCID = "0000-0001-7407-9194")
-                                                    ),
-                                                    utils::person("Orygen", role = c("cph", "fnd")),
-                                                    utils::person("Australian Government Research Training Program", role =c("fnd")),
-                                                    utils::person("VicHealth",role = c("fnd")),
-                                                    utils::person("Victoria University", role =c("fnd"))
-                                                    ),
-                                                    urls_chr = c("https://ready4-dev.github.io/ready4/",
-                                                                 "https://github.com/ready4-dev/ready4",
-                                                                 "https://www.ready4-dev.com/"))
+x <- ready4fun::make_pkg_desc_ls(
+  pkg_title_1L_chr = "Implement Modular Health Economic Models" %>% tools::toTitleCase(),
+  pkg_desc_1L_chr = "A programming syntax, template model module and tools to help author and maintain a health economic modelling project's documentation website.
+  These elements are the foundation for a prototype software framework to support Transparent, Reusable And Updatable (TRU) health economic models. The software framework is extended by other R libraries.
+  For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, read <arXiv:2310.14138>.",
+  authors_prsn = c(utils::person(
+    given = "Matthew",family = "Hamilton", email = "matthew.hamilton1@monash.edu", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0001-7407-9194")
+    ),
+    utils::person("Orygen", role = c("cph", "fnd")),
+    utils::person("Australian Government Research Training Program", role =c("fnd")),
+    utils::person("VicHealth",role = c("fnd")),
+    utils::person("Victoria University", role =c("fnd"))
+    ),
+  urls_chr = c("https://ready4-dev.github.io/ready4/",
+               "https://github.com/ready4-dev/ready4",
+               "https://www.ready4-dev.com/"))
 user_manual_fns_chr <-  c(
   "get_datasts_tb","get_from_lup_obj","get_libraries_tb",
   "get_methods", "get_methods_tb", "get_modules_tb",
@@ -34,7 +33,8 @@ user_manual_fns_chr <-  c(
 x <- x %>%
   ready4fun::make_manifest(addl_pkgs_ls = ready4fun::make_addl_pkgs_ls(#depends_chr = "generics",
                                                                        suggests_chr = "rmarkdown"),
-                           build_ignore_ls = ready4fun::make_build_ignore_ls(file_nms_chr = c("initial_setup.R")),
+                           build_ignore_ls = ready4fun::make_build_ignore_ls(file_nms_chr = c("initial_setup.R",
+                                                                                              "CITATION.cff")), # New
                            check_type_1L_chr = "ready4",
                            cls_fn_ls = list(),
                            custom_dmt_ls = ready4fun::make_custom_dmt_ls(
@@ -89,7 +89,6 @@ x <- x %>%
                            ready4_type_1L_chr = "foundation",
                            zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)")
 ##
-
 x <- write_self_srvc_pkg(x)
 # write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
 # write_extra_pkgs_to_actions(consent_1L_chr = "Y")

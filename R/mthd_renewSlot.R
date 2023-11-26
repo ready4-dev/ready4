@@ -22,7 +22,5 @@ methods::setMethod("renewSlot", "Ready4Module", function(x,
 
   }
   eval(parse(text = paste0("x@",slot_nm_1L_chr," <- new_val_xx")))
-
-
   return(x)
 })
