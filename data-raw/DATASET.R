@@ -5,9 +5,9 @@ source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 #dir.create("data-raw/examples")
 x <- ready4fun::make_pkg_desc_ls(
-  pkg_title_1L_chr = "Implement Modular Health Economic Models" %>% tools::toTitleCase(),
-  pkg_desc_1L_chr = "A programming syntax, template model module and tools to help author and maintain a health economic modelling project's documentation website.
-  These elements are the foundation for a prototype software framework to support transparent, reusable And updatable health economic models. The software framework is extended by other R libraries.
+  pkg_title_1L_chr = "Implement Modular And Open-Source Health Economic Models" %>% tools::toTitleCase(),
+  pkg_desc_1L_chr = "Programming syntax, a template model module and tools to help maintain a health economic modelling project's documentation website.
+  These elements are the foundation for a prototype software framework to support transparent, reusable and updatable health economic models. The software framework is extended by other R libraries.
   For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, read <arXiv:2310.14138>.",
   authors_prsn = c(utils::person(
     given = "Matthew",family = "Hamilton", email = "matthew.hamilton1@monash.edu", role = c("aut", "cre"),
@@ -90,12 +90,15 @@ x <- x %>%
                            zenodo_badge_1L_chr = "[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5606250.svg)](https://doi.org/10.5281/zenodo.5606250)")
 ##
 x <- write_self_srvc_pkg(x)
-# write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
+write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
 # write_extra_pkgs_to_actions(consent_1L_chr = "Y")
 usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
-  #stringr::str_replace_all("svg\\)]\\(https://codecov.io","svg\\)]\\(https://app.codecov.io") %>%
-  gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
+  # stringr::str_replace("\\(https://CRAN.R-project.org/package=ready4\\)","") %>%
+  # stringr::str_replace("https://www.r-pkg.org/badges/version/ready4\\)]","https://www.r-pkg.org/badges/version/ready4\\)") %>%
+  # stringr::str_replace("\\[!\\[CRAN status","\\![CRAN status") %>%
+  stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
+  # gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   writeLines(con = "README.md")
 c(readLines("R/imp_fns.R"), # update in ready4fun
   " ",

@@ -4,15 +4,15 @@
 \name{ready4-package}
 \alias{ready4}
 \alias{ready4-package}
-\title{ready4: Implement Modular Health Economic Models}
+\title{ready4: Implement Modular and Open-Source Health Economic Models}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A programming syntax, template model module and tools to help author and maintain a health economic modelling project's documentation website. These elements are the foundation for a prototype software framework to support transparent, reusable And updatable health economic models. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
+Programming syntax, a template model module and tools to help maintain a health economic modelling project's documentation website. These elements are the foundation for a prototype software framework to support transparent, reusable and updatable health economic models. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A programming syntax, template model module and tools to help author and maintain a health economic modelling project's documentation website. These elements are the foundation for a prototype software framework to support transparent, reusable And updatable health economic models. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
+Programming syntax, a template model module and tools to help maintain a health economic modelling project's documentation website. These elements are the foundation for a prototype software framework to support transparent, reusable and updatable health economic models. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, read \href{https://arxiv.org/abs/2310.14138}{arXiv:2310.14138}.
 }
 \seealso{
 Useful links:
