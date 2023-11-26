@@ -1,6 +1,6 @@
 Package: ready4
-Title: Implement Modular Health Economic Models
-Version: 0.0.0.9138
+Title: Implement Modular and Open-Source Health Economic Models
+Version: 0.0.0.9139
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton1@monash.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -9,15 +9,15 @@ Authors@R: c(
     person("VicHealth", role = "fnd"),
     person("Victoria University", role = "fnd")
   )
-Description: A programming syntax, template model module and tools to help
-    author and maintain a health economic modelling project's
-    documentation website.  These elements are the foundation for a
-    prototype software framework to support transparent, reusable And
-    updatable health economic models. The software framework is extended
-    by other R libraries.  For detailed documentation about the framework
-    and how to use it visit <https://www.ready4-dev.com/>. For a
-    background to the methodological issues that the framework is
-    attempting to help solve, read <arXiv:2310.14138>.
+Description: Programming syntax, a template model module and tools to help
+    maintain a health economic modelling project's documentation website.
+    These elements are the foundation for a prototype software framework
+    to support transparent, reusable and updatable health economic models.
+    The software framework is extended by other R libraries.  For detailed
+    documentation about the framework and how to use it visit
+    <https://www.ready4-dev.com/>. For a background to the methodological
+    issues that the framework is attempting to help solve, read
+    <arXiv:2310.14138>.
 License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4, https://www.ready4-dev.com/
@@ -28,6 +28,8 @@ Collate:
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
+    'bind.R'
     'fn_add.R'
     'fn_bind.R'
     'fn_get.R'
@@ -38,9 +40,11 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'mthd_authorSlot.R'
     'mthd_characterizeSlot.R'
     'mthd_depictSlot.R'
@@ -57,10 +61,15 @@ Collate:
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'
     'pkg_ready4.R'
+    'print.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Suggests: 
     knitr,
-    pkgload,
     testthat
 VignetteBuilder: knitr
 Imports: 
