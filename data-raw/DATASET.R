@@ -123,6 +123,7 @@ c(readLines("R/imp_fns.R"), # update in ready4fun
 ) %>%
   writeLines("R/imp_fns.R")
 write_examples(consent_1L_chr = "Y")
+write_examples(consent_1L_chr = "Y", type_1L_chr = "r4")
 devtools::build_vignettes()
 #
 #

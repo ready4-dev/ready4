@@ -10,6 +10,7 @@
 #' @rdname renewSlot-methods
 #' @aliases renewSlot,Ready4Module-method
 #' @export
+#' @example man/examples/renewSlot_Ready4Module.R
 methods::setMethod("renewSlot", "Ready4Module", function(x,
                                                          slot_nm_1L_chr,
                                                          new_val_xx = "use_renew_mthd",

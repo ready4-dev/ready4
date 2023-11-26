@@ -11,6 +11,7 @@
 #' @aliases procureSlot,Ready4Module-method
 #' @export
 
+#' @example man/examples/procureSlot_Ready4Module.R
 methods::setMethod("procureSlot", "Ready4Module", function(x,
                                                            slot_nm_1L_chr,
                                                            use_procure_mthd_1L_lgl = F,

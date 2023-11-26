@@ -85,3 +85,6 @@
 ^data-raw/examples/write_to_copy_rmds\.R$
 ^data-raw/staged/procureSlot_Ready4Module\.R$
 ^data-raw/staged/renewSlot_Ready4Module\.R$
+^data-raw/examples/procureSlot_Ready4Module\.R$
+^data-raw/examples/renewSlot_Ready4Module\.R$
+^CITATION\.cff$

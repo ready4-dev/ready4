@@ -213,12 +213,14 @@ write_examples <- function(path_1L_chr = getwd(),
                            options_chr = c("Y", "N"),
                            type_1L_chr = "fn"){
   if(dir.exists(paste0(path_1L_chr,"/data-raw/examples"))){
-    prefix_1L_chr <- ifelse(type_1L_chr == "fn", "fn", "mthd")
+    methods_chr <- get_methods_tb()$Method
     examples_chr <- list.files(paste0(path_1L_chr,"/data-raw/examples"))
+    #prefix_1L_chr <- ifelse(type_1L_chr == "fn", "fn", "mthd")
     if(length(examples_chr)>0){
       file.copy(paste0(path_1L_chr,"/data-raw/examples"), 'man', recursive=TRUE)
       fn_nms_chr <- examples_chr %>% purrr::map_chr(~stringr::str_sub(.x,end=-3))
-      fn_fls_chr <- fn_nms_chr %>% purrr::map_chr(~paste0(path_1L_chr,"/R/", prefix_1L_chr, "_",stringr::str_sub(.x, end = stringr::str_locate(.x,"_")[1]-1),".R"))
+      fn_fls_chr <- fn_nms_chr %>% purrr::map_chr(~stringr::str_sub(.x, end = stringr::str_locate(.x,"_")[1]-1)) %>% purrr::map_chr(~paste0(path_1L_chr,"/R/",
+                                                                                                                                            ifelse(.x %in% methods_chr, "mthd","fn"), "_",.x,".R"))
       consented_fn <- function(examples_chr,
                                fn_fls_chr,
                                fn_nms_chr){
@@ -227,36 +229,44 @@ write_examples <- function(path_1L_chr = getwd(),
                           fn_fls_chr),
                      ~{
                        fn_fl_1L_chr <- ..3
-                       if(type_1L_chr == "fn")
-                         starts_with_1L_chr <- paste0(..2," <- function")
-                       if(type_1L_chr == "r3")
-                         starts_with_1L_chr <- paste0(stringr::str_replace(..2,"_",".")," <- function")
-                       if(type_1L_chr == "r4"){
-                         divider_1L_int <- stringr::str_locate(..2,"_")[1]
-                         starts_with_1L_chr <- paste0("methods::setMethod(\"",
-                                                      stringr::str_sub(..2,end=divider_1L_int - 1),
-                                                      "\", \"",
-                                                      stringr::str_sub(..2,start=divider_1L_int + 1),
-                                                      "\", function")
-                       }
-                       text_chr <- readLines(fn_fl_1L_chr)
-                       addition_chr <- readLines(..1)
-                       if(startsWith(addition_chr[1], "if (interactive())") | startsWith(addition_chr[1], "if(interactive())")){
-                         addition_chr <- c("#' @examplesIf interactive()",paste0("#' ",addition_chr[2:(length(addition_chr)-1)]))
-                         if(startsWith(addition_chr[1], "  ")){
-                           addition_chr <- purrr::map_chr(addition_chr,~stringr::str_replace(.x,"  ",""))
-                         }
+                       if(startsWith(stringr::str_remove(fn_fl_1L_chr, paste0(path_1L_chr,"/R/")), "fn_")){
+                         match_chr <- "fn"
                        }else{
-                         addition_chr <- paste0("#' @example man/examples/",..2,".R")
+                         match_chr <- c("r3", "r4")
                        }
-                       #if(identical(which(text_chr %>% purrr::map_lgl(~startsWith(.x,addition_chr[1]))),integer(0))){
+                       if(type_1L_chr %in% match_chr){
+                         if(type_1L_chr == "fn")
+                           starts_with_1L_chr <- paste0(..2," <- function")
+                         if(type_1L_chr == "r3")
+                           starts_with_1L_chr <- paste0(stringr::str_replace(..2,"_",".")," <- function")
+                         if(type_1L_chr == "r4"){
+                           divider_1L_int <- stringr::str_locate(..2,"_")[1]
+                           starts_with_1L_chr <- paste0("methods::setMethod(\"",
+                                                        stringr::str_sub(..2,end=divider_1L_int - 1),
+                                                        "\", \"",
+                                                        stringr::str_sub(..2,start=divider_1L_int + 1),
+                                                        "\", function")
+                         }
+                         text_chr <- readLines(fn_fl_1L_chr)
+                         addition_chr <- readLines(..1)
+                         if(startsWith(addition_chr[1], "if (interactive())") | startsWith(addition_chr[1], "if(interactive())")){
+                           addition_chr <- c("#' @examplesIf interactive()",paste0("#' ",addition_chr[2:(length(addition_chr)-1)]))
+                           if(startsWith(addition_chr[1], "  ")){
+                             addition_chr <- purrr::map_chr(addition_chr,~stringr::str_replace(.x,"  ",""))
+                           }
+                         }else{
+                           addition_chr <- paste0("#' @example man/examples/",..2,".R")
+                         }
+                         #if(identical(which(text_chr %>% purrr::map_lgl(~startsWith(.x,addition_chr[1]))),integer(0))){
                          index_1L_int <- which(text_chr %>% purrr::map_lgl(~startsWith(.x,starts_with_1L_chr)))
                          c(text_chr[1:(index_1L_int-1)],
                            addition_chr,
                            text_chr[index_1L_int:length(text_chr)]) %>%  writeLines(fn_fl_1L_chr)
-                       # }else{
-                       #   warning(paste0("Attempt to overwrite an existing example in file '",..3,"'. No new or updated examples have been written to documentation for functions from this file."))
-                       # }
+                         # }else{
+                         #   warning(paste0("Attempt to overwrite an existing example in file '",..3,"'. No new or updated examples have been written to documentation for functions from this file."))
+                         # }
+                       }
+
                      })
       }
       write_with_consent(consented_fn = consented_fn,

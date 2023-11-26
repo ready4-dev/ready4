@@ -27,3 +27,7 @@ procureSlot() is a "getter" method that, depending on input arguments, retrieves
 
 procureSlot method applied to Ready4Module
 }
+\examples{
+X <- Ready4Module()
+procureSlot(X, "dissemination_1L_chr")
+}
