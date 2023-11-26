@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.1.0
 
 This is the development release that is being prepared for submission to CRAN.
 
