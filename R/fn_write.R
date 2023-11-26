@@ -1352,34 +1352,30 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
     consent_indcs_int = 1L, is_rmd_1L_lgl = T, options_chr = c("Y", 
         "N")) 
 {
-    if (!requireNamespace("hugodown", quietly = TRUE)) {
-        stop("The R package 'hugodown' is not installed. Try installing hugodown and then rerun 'write_to_render_post'.")
+    note_1L_chr <- "To use this function, the non-CRAN R package 'hugodown' must be installed."
+    consented_fn <- function(consent_1L_chr, consent_indcs_int, 
+        included_dirs_chr, is_rmd_1L_lgl, options_chr, path_to_main_dir_1L_chr) {
+        included_dirs_chr %>% purrr::walk(~{
+            if (is_rmd_1L_lgl) {
+                write_blog_entries(dir_path_1L_chr = path_to_main_dir_1L_chr, 
+                  consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+                  fl_nm_1L_chr = .x, options_chr = options_chr)
+            }
+            else {
+                rmarkdown::render(paste0(path_to_main_dir_1L_chr, 
+                  "/", .x, "/index.en.Rmarkdown"))
+            }
+        })
     }
-    else {
-        consented_fn <- function(consent_1L_chr, consent_indcs_int, 
-            included_dirs_chr, is_rmd_1L_lgl, options_chr, path_to_main_dir_1L_chr) {
-            included_dirs_chr %>% purrr::walk(~{
-                if (is_rmd_1L_lgl) {
-                  write_blog_entries(dir_path_1L_chr = path_to_main_dir_1L_chr, 
-                    consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
-                    fl_nm_1L_chr = .x, options_chr = options_chr)
-                }
-                else {
-                  rmarkdown::render(paste0(path_to_main_dir_1L_chr, 
-                    "/", .x, "/index.en.Rmarkdown"))
-                }
-            })
-        }
-        write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you wish to render posts in ", 
-            make_list_phrase(included_dirs_chr), "?"), consent_1L_chr = consent_1L_chr, 
-            consent_indcs_int = consent_indcs_int, consented_args_ls = list(consent_1L_chr = consent_1L_chr, 
-                consent_indcs_int = consent_indcs_int, included_dirs_chr = included_dirs_chr, 
-                is_rmd_1L_lgl = is_rmd_1L_lgl, options_chr = options_chr, 
-                path_to_main_dir_1L_chr = path_to_main_dir_1L_chr), 
-            consented_msg_1L_chr = paste0("Posts have been rendered in ", 
-                make_list_phrase(included_dirs_chr), "."), declined_msg_1L_chr = "Render request cancelled - no posts have been rendered.", 
-            options_chr = options_chr, return_1L_lgl = F)
-    }
+    write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you wish to render posts in ", 
+        make_list_phrase(included_dirs_chr), "?"), consent_1L_chr = consent_1L_chr, 
+        consent_indcs_int = consent_indcs_int, consented_args_ls = list(consent_1L_chr = consent_1L_chr, 
+            consent_indcs_int = consent_indcs_int, included_dirs_chr = included_dirs_chr, 
+            is_rmd_1L_lgl = is_rmd_1L_lgl, options_chr = options_chr, 
+            path_to_main_dir_1L_chr = path_to_main_dir_1L_chr), 
+        consented_msg_1L_chr = paste0("Posts have been rendered in ", 
+            make_list_phrase(included_dirs_chr), "."), declined_msg_1L_chr = "Render request cancelled - no posts have been rendered.", 
+        options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write to trim html
 #' @description write_to_trim_html() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to trim html. The function is called for its side effects and does not return a value.

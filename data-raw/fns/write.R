@@ -1273,9 +1273,9 @@ write_to_render_post <- function(included_dirs_chr,
                                  consent_indcs_int = 1L,
                                  is_rmd_1L_lgl = T,
                                  options_chr = c("Y", "N")){
-  if(!requireNamespace("hugodown", quietly = TRUE)){
-    stop("The R package 'hugodown' is not installed. Try installing hugodown and then rerun 'write_to_render_post'.")
-  }else{
+  #if(!requireNamespace("hugodown", quietly = TRUE)){
+   note_1L_chr <- "To use this function, the non-CRAN R package 'hugodown' must be installed."
+  #}else{
     consented_fn <- function(consent_1L_chr,
                              consent_indcs_int,
                              included_dirs_chr,
@@ -1315,7 +1315,7 @@ write_to_render_post <- function(included_dirs_chr,
                        declined_msg_1L_chr = "Render request cancelled - no posts have been rendered.",
                        options_chr = options_chr,
                        return_1L_lgl = F)
-  }
+  #}
 }
 write_to_trim_html <- function(path_to_html_1L_chr,
                                consent_1L_chr = "",

@@ -15,10 +15,10 @@
 A programming syntax, template model module and tools to help
 author and maintain a health economic modelling project's
 documentation website.  These elements are the foundation for a
-prototype software framework to support Transparent, Reusable And
-Updatable (TRU) health economic models. The software framework is
-extended by other R libraries.  For detailed documentation about the
-framework and how to use it visit <https://www.ready4-dev.com/>. For a
+prototype software framework to support transparent, reusable And
+updatable health economic models. The software framework is extended
+by other R libraries.  For detailed documentation about the framework
+and how to use it visit <https://www.ready4-dev.com/>. For a
 background to the methodological issues that the framework is
 attempting to help solve, read <https://arxiv.org/abs/2310.14138>.
 
