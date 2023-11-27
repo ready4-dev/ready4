@@ -144,6 +144,19 @@ get_fl_id_from_dv_ls <-  function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
   }
   return(id_1L_chr)
 }
+get_fl_nm_from_path <- function (path_1L_chr) {
+  acknowledgement_1L_chr <- "This function is a minor rephrasing of fs:path_file"
+  missing_1L_lgl <- is.na(path_1L_chr)
+  path_1L_chr[!missing_1L_lgl] <- basename(path_1L_chr[!missing_1L_lgl])
+  fl_nm_1L_chr <- as.character(path_1L_chr)
+  return(fl_nm_1L_chr)
+}
+get_fl_extension <- function (path_1L_chr) {
+  acknowledgement_1L_chr <- "This function is a minor rephrasing of tools::file_ext"
+  index_1L_int <- regexpr("\\.([[:alnum:]]+)$", path_1L_chr)
+  extension_1L_chr<- ifelse(index_1L_int > -1L, substring(path_1L_chr, index_1L_int + 1L), "")
+  return(extension_1L_chr)
+}
 # get_fn_descs <- function(fn_nms_chr = NULL,
 #                          functions_tb = NULL,
 #                          gh_repo_1L_chr = "ready4-dev/ready4",
@@ -384,6 +397,12 @@ get_rds_from_dv <- function(file_nm_1L_chr,
   }
   return(r_object_xx)
 }
+get_gh_repositories <- function (org_1L_chr) {
+  acknowledgement_1L_chr <- "This function is a minor rephrasing of natmanager::list_repo"
+  repositories_ls <- gh::gh(paste0("/orgs/", org_1L_chr, "/repos"), type = "public")
+  repositories_chr <- vapply(repositories_ls, "[[", "", "name")
+  return(repositories_chr)
+}
 get_source_code_urls <- function(pkg_nm_1L_chr = "ready4",
                                  pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html"){
   urls_chr <- rvest::read_html(pkg_url_1L_chr) %>%
@@ -413,7 +432,17 @@ get_table_from_loc_file <- function(path_1L_chr,
                                     force_numeric_1L_lgl = F,
                                     force_tb_1L_lgl = F,
                                     heading_rows_1L_int = 1L){
-  file_type_1L_chr <- path_1L_chr %>% tools::file_ext()
+  file_type_1L_chr <-  get_fl_extension(path_1L_chr)
+  pkg_1L_chr <- switch(file_type_1L_chr,
+                       csv = "readr", # read.csv,
+                       xls = "readxl",
+                       xlsx = "readxl", #readxl::read_excel,
+                       RDS = NULL)
+  if(!is.null(pkg_1L_chr)){
+    if(!requireNamespace(pkg_1L_chr, quietly = TRUE)) {
+      stop(paste0(pkg_1L_chr," package is required - please install it and rerun the last command."))
+    }
+  }
   fn <- switch(file_type_1L_chr,
                csv = readr::read_csv, # read.csv,
                xls = readxl::read_excel,

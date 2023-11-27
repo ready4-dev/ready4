@@ -22,6 +22,9 @@ make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Pa
                                    tidy_desc_1L_lgl = T,
                                    url_stub_1L_chr = "https://ready4-dev.github.io/",
                                    ...){
+  if(!requireNamespace("tidyRSS", quietly = TRUE)) {
+    stop("tidyRSS package is required - please install it and rerun the last command.")
+  }
   repo_type_1L_chr <- match.arg(repo_type_1L_chr)
   if(identical(brochure_repos_chr,character(0))){
     brochure_repos_chr <- "ready4web"
@@ -44,7 +47,8 @@ make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Pa
                                                  gh_tag_1L_chr = gh_tag_1L_chr)
   }
   if(identical(program_repos_chr,character(0))){
-    program_repos_chr <- setdiff(natmanager::list_repo(org_1L_chr),
+
+    program_repos_chr <- setdiff(get_gh_repositories(org_1L_chr),
                                  c(brochure_repos_chr, exclude_chr, framework_repos_chr, model_repos_chr, subroutine_repos_chr))
   }
   if(identical(repos_chr,character(0))){
@@ -332,11 +336,9 @@ make_files_tb <- function(paths_to_dirs_chr, # Make output into a class? Make fn
                                                    ~ ifelse(.x %in% c(".csv", ".xls",".xlsx"),
                                                             ".tab",
                                                             ".zip")))
-  assertthat::are_equal(nrow(files_tb),
-                        paste0(files_tb$file_chr,
-                               files_tb$file_type_chr) %>%
-                          unique() %>%
-                          length())
+  if(nrow(files_tb) != (paste0(files_tb$file_chr, files_tb$file_type_chr) %>% unique() %>% length())){
+    stop("The columns file_chr and file_type_chr must be of the same length.")
+  }
   return(files_tb)
 }
 make_fn_defaults_ls <- function(fn){
@@ -439,16 +441,27 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
     dplyr::mutate(code_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr), .data$Link,
                                              ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
   y_tb <- purrr::map_dfr(libraries_tb$Citation, ~{
-    if (T) {
-      f <- tempfile(fileext = ".bib")
-      sink(f)
-      writeLines(rvest::read_html(.x) %>% rvest::html_elements("pre") %>%
-                   rvest::html_text2())
-      sink(NULL)
-      suppressWarnings(bib2df::bib2df(f)) %>% dplyr::select("AUTHOR", "TITLE", "DOI")
-    }
-    else {
-    }
+    scraped_1L_chr <- rvest::read_html(.x) %>% rvest::html_elements("pre") %>% rvest::html_text2()
+    details_chr <- strsplit(scraped_1L_chr, split = "\n") %>% purrr::flatten_chr() %>% purrr::map_chr(~{
+      value_1L_chr <- trimws(.x)
+      ifelse(startsWith(value_1L_chr, "title = ") | startsWith(value_1L_chr, "author = ") | startsWith(value_1L_chr, "doi = "),
+             value_1L_chr,
+             NA_character_)
+    }) %>% purrr::discard(is.na)
+    col_names_chr <- c("AUTHOR", "TITLE", "DOI")
+    col_names_chr %>%
+      purrr::map_dfc(~details_chr[which(startsWith(details_chr, tolower(.x)))] %>% stringr::str_match("\\{(.*?)\\}") %>% purrr::pluck(2)) %>%
+      stats::setNames(col_names_chr)
+    #tibble::tibble(AUTHOR = details_chr[which(startsWith(details_chr, "author "))])
+    # if (T) {
+    #   f <- tempfile(fileext = ".bib")
+    #   sink(f)
+    #   writeLines(scraped_1L_chr)
+    #   sink(NULL)
+    #   suppressWarnings(bib2df::bib2df(f)) %>% dplyr::select("AUTHOR", "TITLE", "DOI")
+    # }
+    # else {
+    # }
   }) %>% dplyr::mutate(!!rlang::sym(ns_var_nm_1L_chr) := libraries_tb %>% dplyr::pull(!!rlang::sym(ns_var_nm_1L_chr))) %>%
     dplyr::rename(DOI_chr = .data$DOI, Title = .data$TITLE, Authors = .data$AUTHOR)
   libraries_tb <- dplyr::left_join(libraries_tb, y_tb, by = ns_var_nm_1L_chr)
@@ -628,6 +641,9 @@ make_programs_tbl <- function(what_1L_chr = c("Program","Subroutine","Program_an
                               url_stub_1L_chr = "https://ready4-dev.github.io/",
                               zenodo_1L_chr = "ready4",
                               ...){
+  if(!requireNamespace("zen4R", quietly = TRUE)) {
+    stop("zen4R package is required - please install it and rerun the last command.")
+  }
   what_1L_chr <- match.arg(what_1L_chr)
   programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, exclude_chr = exclude_chr,
                                         gh_repo_1L_chr = gh_repo_1L_chr,

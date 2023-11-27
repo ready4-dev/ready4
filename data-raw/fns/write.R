@@ -20,6 +20,9 @@ write_blog_entries <- function(dir_path_1L_chr,
                                consent_1L_chr = "",
                                consent_indcs_int = 1L,
                                options_chr = c("Y", "N")){
+  if(!requireNamespace(rmarkdown, quietly = TRUE)) {
+    stop("rmarkdown package is required - please install it and rerun the last command.")
+  }
   rmarkdown::render(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.Rmd"),
                     output_dir = paste0(dir_path_1L_chr,"/",fl_nm_1L_chr))
   write_to_trim_html(paste0(dir_path_1L_chr,"/",fl_nm_1L_chr,"/index_Body.html"),
@@ -286,7 +289,8 @@ write_examples <- function(path_1L_chr = getwd(),
                          return_1L_lgl = F)
     }
   }
-  devtools::document()
+  if(requireNamespace("devtools", quietly = T))
+    devtools::document()
 }
 write_extra_pkgs_to_actions <- function(path_to_dir_1L_chr = ".github/workflows",
                                         consent_1L_chr = "",
@@ -400,7 +404,7 @@ write_fls_to_dv <- function(file_paths_chr,
       ids_int <- file_paths_chr %>%
         purrr::map2_int(descriptions_chr,
                         ~{
-                          fl_nm_1L_chr <- fs::path_file(.x)
+                          fl_nm_1L_chr <- get_fl_nm_from_path(.x)
                           if (fl_nm_1L_chr %in% nms_chr) {
                             id_1L_int <- get_fl_id_from_dv_ls(ds_ls,
                                                               fl_nm_1L_chr = fl_nm_1L_chr,
@@ -439,7 +443,7 @@ write_fls_to_dv <- function(file_paths_chr,
                                                           ds_url_1L_chr,
                                                           ": \n",
                                                           file_paths_chr %>%
-                                                            purrr::map_chr(~fs::path_file(.x)) %>%
+                                                            purrr::map_chr(~get_fl_nm_from_path(.x)) %>%
                                                             paste0(collapse = "\n"),
                                                           "?"),
                                    consent_1L_chr = consent_1L_chr,
@@ -748,7 +752,7 @@ write_new_files <- function(paths_chr,
                                 list.files(.x,
                                            recursive = T)
                               }else{
-                                fs::path_file(.x)
+                                get_fl_nm_from_path(.x)
                               }
                             }) %>%
       purrr::flatten_chr() %>%
@@ -1273,9 +1277,10 @@ write_to_render_post <- function(included_dirs_chr,
                                  consent_indcs_int = 1L,
                                  is_rmd_1L_lgl = T,
                                  options_chr = c("Y", "N")){
-  #if(!requireNamespace("hugodown", quietly = TRUE)){
    note_1L_chr <- "To use this function, the non-CRAN R package 'hugodown' must be installed."
-  #}else{
+   if(!requireNamespace(rmarkdown, quietly = TRUE)) {
+     stop("rmarkdown package is required - please install it and rerun the last command.")
+   }
     consented_fn <- function(consent_1L_chr,
                              consent_indcs_int,
                              included_dirs_chr,

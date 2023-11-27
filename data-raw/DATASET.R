@@ -92,6 +92,7 @@ x <- x %>%
 x <- write_self_srvc_pkg(x)
 write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
 # write_extra_pkgs_to_actions(consent_1L_chr = "Y")
+usethis::use_package("devtools", type = "Suggests")
 usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
   # stringr::str_replace("\\(https://CRAN.R-project.org/package=ready4\\)","") %>%

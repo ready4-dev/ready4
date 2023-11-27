@@ -1,3 +1,33 @@
+# assertthat, # Done
+# bib2df, # Done
+# dataverse,
+# devtools, # Done
+# dplyr,
+# fs, # Done
+# Hmisc, # Done
+# kableExtra,
+# lifecycle,
+# magrittr,
+# methods,
+# natmanager, Done (replaced with gh)
+# piggyback,
+# purrr,
+# readr, # Done
+# readxl, # Done
+# rlang,
+# rmarkdown, # Done
+# rvest,
+# stats,
+# stringi,
+# stringr,
+# testit, # Done
+# tibble,
+# tidyRSS,
+# tidyselect,
+# tools,
+# utils,
+# zen4R # Done
+
 # To Do
 
 # Complete unit tests
