@@ -200,6 +200,21 @@ get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_
     }
     return(exclude_chr)
 }
+#' Get file extension
+#' @description get_fl_extension() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get file extension. The function returns Extension (a character vector of length one).
+#' @param path_1L_chr Path (a character vector of length one)
+#' @return Extension (a character vector of length one)
+#' @rdname get_fl_extension
+#' @export 
+#' @keywords internal
+get_fl_extension <- function (path_1L_chr) 
+{
+    acknowledgement_1L_chr <- "This function is a minor rephrasing of tools::file_ext"
+    index_1L_int <- regexpr("\\.([[:alnum:]]+)$", path_1L_chr)
+    extension_1L_chr <- ifelse(index_1L_int > -1L, substring(path_1L_chr, 
+        index_1L_int + 1L), "")
+    return(extension_1L_chr)
+}
 #' Get file identity from dataverse list
 #' @description get_fl_id_from_dv_ls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get file identity from dataverse list. The function returns Identity (a character vector of length one).
 #' @param ds_ls Dataset (a list)
@@ -227,6 +242,21 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
         id_1L_chr <- NA_character_
     }
     return(id_1L_chr)
+}
+#' Get file name from path
+#' @description get_fl_nm_from_path() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get file name from path. The function returns File name (a character vector of length one).
+#' @param path_1L_chr Path (a character vector of length one)
+#' @return File name (a character vector of length one)
+#' @rdname get_fl_nm_from_path
+#' @export 
+#' @keywords internal
+get_fl_nm_from_path <- function (path_1L_chr) 
+{
+    acknowledgement_1L_chr <- "This function is a minor rephrasing of fs:path_file"
+    missing_1L_lgl <- is.na(path_1L_chr)
+    path_1L_chr[!missing_1L_lgl] <- basename(path_1L_chr[!missing_1L_lgl])
+    fl_nm_1L_chr <- as.character(path_1L_chr)
+    return(fl_nm_1L_chr)
 }
 #' Get a value from a lookup table
 #' @description get_from_lup_obj() retrieves from a lookup table (a data.frame) the values in a target column for cases where values in a second column match a specified value.
@@ -349,6 +379,22 @@ get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclu
         generics_chr <- generics_chr[endsWith(generics_chr, "Slot")]
     }
     return(generics_chr)
+}
+#' Get github repositories
+#' @description get_gh_repos() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get github repositories. The function returns Repositories (a character vector).
+#' @param org_1L_chr Organisation (a character vector of length one)
+#' @return Repositories (a character vector)
+#' @rdname get_gh_repos
+#' @export 
+#' @importFrom gh gh
+#' @keywords internal
+get_gh_repos <- function (org_1L_chr) 
+{
+    acknowledgement_1L_chr <- "This function is a minor rephrasing of natmanager::list_repo"
+    repositories_ls <- gh::gh(paste0("/orgs/", org_1L_chr, "/repos"), 
+        type = "public")
+    repositories_chr <- vapply(repositories_ls, "[[", "", "name")
+    return(repositories_chr)
 }
 #' Get libraries list
 #' @description get_libraries_ls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get libraries list. The function returns Libraries (a list).
@@ -602,9 +648,8 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 #' @return Table (an output object of multiple potential types)
 #' @rdname get_table_from_loc_file
 #' @export 
-#' @importFrom tools file_ext
-#' @importFrom readr read_csv
-#' @importFrom readxl read_excel read_xlsx
+#' @seealso \pkg{\link{readr}}
+#' @seealso \pkg{\link{readxl}}
 #' @importFrom rlang exec
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr slice n mutate across
@@ -613,7 +658,14 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 get_table_from_loc_file <- function (path_1L_chr, force_numeric_1L_lgl = F, force_tb_1L_lgl = F, 
     heading_rows_1L_int = 1L) 
 {
-    file_type_1L_chr <- path_1L_chr %>% tools::file_ext()
+    file_type_1L_chr <- get_fl_extension(path_1L_chr)
+    pkg_1L_chr <- switch(file_type_1L_chr, csv = "readr", xls = "readxl", 
+        xlsx = "readxl", RDS = NULL)
+    if (!is.null(pkg_1L_chr)) {
+        if (!requireNamespace(pkg_1L_chr, quietly = TRUE)) {
+            stop(paste0(pkg_1L_chr, " package is required - please install it and rerun the last command."))
+        }
+    }
     fn <- switch(file_type_1L_chr, csv = readr::read_csv, xls = readxl::read_excel, 
         xlsx = readxl::read_xlsx, RDS = readRDS())
     table_xx <- rlang::exec(fn, path_1L_chr)

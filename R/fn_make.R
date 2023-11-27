@@ -41,7 +41,6 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #' @return Releases (an output object of multiple potential types)
 #' @rdname make_code_releases_tbl
 #' @export 
-#' @importFrom natmanager list_repo
 #' @importFrom purrr map_dfr map2_chr map_chr
 #' @importFrom tidyRSS tidyfeed
 #' @importFrom dplyr arrange desc select mutate rename filter pull
@@ -50,14 +49,16 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
-#'   make_code_releases_tbl("Framework",
-#'                          gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_code_releases_tbl("Module",
-#'                          gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_code_releases_tbl("Program",
-#'                          gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_code_releases_tbl("Subroutine",
-#'                          gh_repo_1L_chr = "ready4-dev/ready4")
+#'     if(requireNamespace("tidyRSS", quietly = TRUE)) {
+#'       make_code_releases_tbl("Framework",
+#'                              gh_repo_1L_chr = "ready4-dev/ready4")
+#'       make_code_releases_tbl("Module",
+#'                              gh_repo_1L_chr = "ready4-dev/ready4")
+#'       make_code_releases_tbl("Program",
+#'                              gh_repo_1L_chr = "ready4-dev/ready4")
+#'       make_code_releases_tbl("Subroutine",
+#'                              gh_repo_1L_chr = "ready4-dev/ready4")
+#'     }
 make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", "Package", 
     "Program", "Subroutine", "Program_and_Subroutine"), as_kbl_1L_lgl = T, 
     brochure_repos_chr = character(0), exclude_chr = character(0), 
@@ -68,6 +69,9 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
     tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
     ...) 
 {
+    if (!requireNamespace("tidyRSS", quietly = TRUE)) {
+        stop("tidyRSS package is required - please install it and rerun the last command.")
+    }
     repo_type_1L_chr <- match.arg(repo_type_1L_chr)
     if (identical(brochure_repos_chr, character(0))) {
         brochure_repos_chr <- "ready4web"
@@ -89,7 +93,7 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
             gh_tag_1L_chr = gh_tag_1L_chr)
     }
     if (identical(program_repos_chr, character(0))) {
-        program_repos_chr <- setdiff(natmanager::list_repo(org_1L_chr), 
+        program_repos_chr <- setdiff(get_gh_repos(org_1L_chr), 
             c(brochure_repos_chr, exclude_chr, framework_repos_chr, 
                 model_repos_chr, subroutine_repos_chr))
     }
@@ -380,7 +384,6 @@ make_dss_tb <- function (dvs_tb, filter_cdns_ls = list(), toy_data_dv_1L_chr = "
 #' @importFrom stringi stri_locate_last_regex
 #' @importFrom dplyr filter mutate
 #' @importFrom rlang exec
-#' @importFrom assertthat are_equal
 #' @keywords internal
 make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_character_) 
 {
@@ -409,8 +412,10 @@ make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_c
         ds_file_ext_chr = purrr::map_chr(.data$file_type_chr, 
             ~ifelse(.x %in% c(".csv", ".xls", ".xlsx"), ".tab", 
                 ".zip")))
-    assertthat::are_equal(nrow(files_tb), paste0(files_tb$file_chr, 
-        files_tb$file_type_chr) %>% unique() %>% length())
+    if (nrow(files_tb) != (paste0(files_tb$file_chr, files_tb$file_type_chr) %>% 
+        unique() %>% length())) {
+        stop("The columns file_chr and file_type_chr must be of the same length.")
+    }
     return(files_tb)
 }
 #' Make function defaults list
@@ -486,13 +491,14 @@ make_libraries_ls <- function (additions_tb = make_additions_tb(), libraries_tb 
 #' @return Libraries (a tibble)
 #' @rdname make_libraries_tb
 #' @export 
-#' @importFrom purrr flatten_chr map_chr map2 map_dfr
+#' @importFrom purrr flatten_chr map_chr map2 map_dfr discard map_dfc pluck
 #' @importFrom tibble tibble
 #' @importFrom rlang sym
-#' @importFrom dplyr mutate arrange desc select pull rename left_join filter
+#' @importFrom dplyr mutate arrange desc pull rename left_join filter
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
-#' @importFrom bib2df bib2df
+#' @importFrom stringr str_match
+#' @importFrom stats setNames
 #' @keywords internal
 make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_chr = "modules", 
     module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
@@ -563,17 +569,19 @@ make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_ch
         dplyr::mutate(code_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr), 
             .data$Link, ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
     y_tb <- purrr::map_dfr(libraries_tb$Citation, ~{
-        if (T) {
-            f <- tempfile(fileext = ".bib")
-            sink(f)
-            writeLines(rvest::read_html(.x) %>% rvest::html_elements("pre") %>% 
-                rvest::html_text2())
-            sink(NULL)
-            suppressWarnings(bib2df::bib2df(f)) %>% dplyr::select("AUTHOR", 
-                "TITLE", "DOI")
-        }
-        else {
-        }
+        scraped_1L_chr <- rvest::read_html(.x) %>% rvest::html_elements("pre") %>% 
+            rvest::html_text2()
+        details_chr <- strsplit(scraped_1L_chr, split = "\n") %>% 
+            purrr::flatten_chr() %>% purrr::map_chr(~{
+            value_1L_chr <- trimws(.x)
+            ifelse(startsWith(value_1L_chr, "title = ") | startsWith(value_1L_chr, 
+                "author = ") | startsWith(value_1L_chr, "doi = "), 
+                value_1L_chr, NA_character_)
+        }) %>% purrr::discard(is.na)
+        col_names_chr <- c("AUTHOR", "TITLE", "DOI")
+        col_names_chr %>% purrr::map_dfc(~details_chr[which(startsWith(details_chr, 
+            tolower(.x)))] %>% stringr::str_match("\\{(.*?)\\}") %>% 
+            purrr::pluck(2)) %>% stats::setNames(col_names_chr)
     }) %>% dplyr::mutate(`:=`(!!rlang::sym(ns_var_nm_1L_chr), 
         libraries_tb %>% dplyr::pull(!!rlang::sym(ns_var_nm_1L_chr)))) %>% 
         dplyr::rename(DOI_chr = .data$DOI, Title = .data$TITLE, 
@@ -822,22 +830,27 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @export 
 #' @importFrom dplyr group_by filter row_number arrange ungroup pull mutate select
 #' @importFrom rlang sym
-#' @importFrom zen4R ZenodoManager
+#' @seealso \pkg{\link{zen4R}}
 #' @importFrom purrr pluck map map_lgl map2_int map_chr map2_chr pmap
 #' @importFrom stringr str_remove_all str_remove str_equal str_detect
 #' @importFrom kableExtra cell_spec kable kable_styling
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
-#'   make_programs_tbl("Program",
-#'                     gh_repo_1L_chr = "ready4-dev/ready4")
-#'   make_programs_tbl("Subroutine",
-#'                     gh_repo_1L_chr = "ready4-dev/ready4")
+#'   if(requireNamespace("zen4R", quietly = TRUE)) {
+#'     make_programs_tbl("Program",
+#'                       gh_repo_1L_chr = "ready4-dev/ready4")
+#'     make_programs_tbl("Subroutine",
+#'                       gh_repo_1L_chr = "ready4-dev/ready4")
+#'   }
 make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"), 
     as_kbl_1L_lgl = F, exclude_chr = character(0), format_1L_chr = "%d-%b-%Y", 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
     zenodo_1L_chr = "ready4", ...) 
 {
+    if (!requireNamespace("zen4R", quietly = TRUE)) {
+        stop("zen4R package is required - please install it and rerun the last command.")
+    }
     what_1L_chr <- match.arg(what_1L_chr)
     programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, 
         exclude_chr = exclude_chr, gh_repo_1L_chr = gh_repo_1L_chr, 

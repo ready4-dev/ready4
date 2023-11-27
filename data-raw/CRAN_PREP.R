@@ -13,7 +13,6 @@ devtools::run_examples()
 
 # Check package as CRAN
 rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"))
-# Add note that top level CITATION is intentional
 # https://www.r-bloggers.com/2019/08/no-visible-binding-for-global-variable/
 # Check content
 # install.packages('checkhelper', repos = 'https://thinkr-open.r-universe.dev')

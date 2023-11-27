@@ -92,8 +92,13 @@ x <- x %>%
 x <- write_self_srvc_pkg(x)
 write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
 # write_extra_pkgs_to_actions(consent_1L_chr = "Y")
-usethis::use_package("devtools", type = "Suggests")
-usethis::use_package("pkgload", type = "Suggests") # ??
+write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"))
+# Second part may be faulty. May need to redo manually.
+devtools::document()
+# c("devtools", "Hmisc", "readr", "readxl", "rmarkdown", "zen4R") %>%
+#   purrr::walk(~usethis::use_package(.x, type = "Suggests"))
+#usethis::use_package("devtools", type = "Suggests")
+#usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
   # stringr::str_replace("\\(https://CRAN.R-project.org/package=ready4\\)","") %>%
   # stringr::str_replace("https://www.r-pkg.org/badges/version/ready4\\)]","https://www.r-pkg.org/badges/version/ready4\\)") %>%

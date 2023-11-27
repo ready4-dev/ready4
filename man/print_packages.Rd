@@ -61,11 +61,11 @@ print_modules() formats the output of either get_modules_tb() or make_modules_tb
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-  libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")
   # Print framework libraries
   print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
                  include_1L_chr = "framework")
   # Print module libraries (method 1)
+  libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")
   update_libraries_tb(libraries_tb,
                       url_stub_1L_chr = "https://ready4-dev.github.io/",
                       include_1L_chr = "modules") \%>\%

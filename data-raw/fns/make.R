@@ -48,7 +48,7 @@ make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Pa
   }
   if(identical(program_repos_chr,character(0))){
 
-    program_repos_chr <- setdiff(get_gh_repositories(org_1L_chr),
+    program_repos_chr <- setdiff(get_gh_repos(org_1L_chr),
                                  c(brochure_repos_chr, exclude_chr, framework_repos_chr, model_repos_chr, subroutine_repos_chr))
   }
   if(identical(repos_chr,character(0))){
@@ -480,8 +480,7 @@ make_local_path_to_dv_data <- function(save_dir_path_1L_chr,
                                        fl_nm_1L_chr,
                                        save_fmt_1L_chr){
   path_chr <- paste0(ifelse(save_dir_path_1L_chr!="",paste0(save_dir_path_1L_chr,"/"),""),
-                     fl_nm_1L_chr,
-                     save_fmt_1L_chr)
+                     fl_nm_1L_chr, save_fmt_1L_chr)
   return(path_chr)
 }
 make_methods_tb <- function(packages_tb = NULL,
@@ -571,15 +570,13 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
                                                                               }),
                                                T ~ Reference)
     )
-  order_int <- modules_tb$Vignettes_URLs %>% # Prefer to keep this if removing potential duplicate order_int
+  order_int <- modules_tb$Vignettes_URLs %>%
     purrr::map(~{
       if(is.na(.x[[1]])){
-        NA_integer_#.x[[1]]
+        NA_integer_
       }else{
         .x %>%
           purrr::map_int(~ gsub(".*style=\"     \" >(.+)</a>.*", "\\1", .x) %>%
-                           # stringr::str_sub(.x,start=-5) %>%
-                           # stringr::str_remove_all("</a>") %>%
                            as.numeric())
       }
     }) %>% purrr::flatten_int()  %>%
@@ -596,7 +593,6 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
                                                                                            stringr::str_sub(.x,start=start_1L_int) %>%
                                                                                              stringr::str_remove_all("</a>") %>%
                                                                                              as.numeric()})
-                                                                                       #new_int <- which(old_int ==order_int)
                                                                                        new_chr <- .x %>%
                                                                                          purrr::map2_chr(old_int,
                                                                                                          ~{
@@ -606,9 +602,6 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
                                                                                                                   "</a>")
                                                                                                          })
                                                                                      }
-
-                                                                                     # if(length(new_int)==1)
-                                                                                     #   new_int <-  rep(new_int,2)
                                                                                      new_chr
                                                                                    }),
                                                     T ~ .data$Vignettes_URLs)

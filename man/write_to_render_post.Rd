@@ -31,7 +31,8 @@ write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specifie
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-  #
+  # Note, In addition to rmarkdown, the non CRAN package "hugodown" is also required.
+  if(requireNamespace("rmarkdown", quietly = TRUE)) {
   # Example 1 - RMD files
   #
   # Copy template RMD files
@@ -55,5 +56,9 @@ write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specifie
   write_to_render_post("Rmarkdown",
                        path_to_main_dir_1L_chr = tempdir(),
                        is_rmd_1L_lgl = F)
+  }
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+\pkg{\link{rmarkdown}}
 }

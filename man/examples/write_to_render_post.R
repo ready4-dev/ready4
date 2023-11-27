@@ -1,5 +1,6 @@
 if (interactive()) {
-  #
+  # Note, In addition to rmarkdown, the non CRAN package "hugodown" is also required.
+  if(requireNamespace("rmarkdown", quietly = TRUE)) {
   # Example 1 - RMD files
   #
   # Copy template RMD files
@@ -23,4 +24,5 @@ if (interactive()) {
   write_to_render_post("Rmarkdown",
                        path_to_main_dir_1L_chr = tempdir(),
                        is_rmd_1L_lgl = F)
+  }
   }

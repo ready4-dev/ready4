@@ -33,11 +33,14 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
 #' @return NULL
 #' @rdname write_blog_entries
 #' @export 
-#' @importFrom rmarkdown render
+#' @seealso \pkg{\link{rmarkdown}}
 #' @keywords internal
 write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N")) 
 {
+    if (!requireNamespace(rmarkdown, quietly = TRUE)) {
+        stop("rmarkdown package is required - please install it and rerun the last command.")
+    }
     rmarkdown::render(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 
         "/index_Body.Rmd"), output_dir = paste0(dir_path_1L_chr, 
         "/", fl_nm_1L_chr))
@@ -108,6 +111,84 @@ write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", 
             options_chr = options_chr, return_1L_lgl = F), consented_msg_1L_chr = paste0("File ", 
             "CITATION.cff", " has been written to ", getwd(), 
             "."), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+        options_chr = options_chr, return_1L_lgl = F)
+}
+#' Write conditional tags
+#' @description write_conditional_tags() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write conditional tags. The function is called for its side effects and does not return a value.
+#' @param pkgs_chr Packages (a character vector)
+#' @param path_to_pkg_root_1L_chr Path to package root (a character vector of length one), Default: getwd()
+#' @param consent_1L_chr Consent (a character vector of length one), Default: ''
+#' @param consent_indcs_int Consent indices (an integer vector), Default: 1
+#' @param options_chr Options (a character vector), Default: c("Y", "N")
+#' @return NULL
+#' @rdname write_conditional_tags
+#' @export 
+#' @importFrom purrr map_lgl walk reduce map_chr discard
+#' @importFrom stringr str_sub
+#' @seealso \pkg{\link{usethis}}
+#' @keywords internal
+write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr = getwd(), consent_1L_chr = "", 
+    consent_indcs_int = 1L, options_chr = c("Y", "N")) 
+{
+    consented_fn <- function(path_to_R_dir_1L_chr, pkgs_chr) {
+        paths_chr <- list.files(path_to_R_dir_1L_chr, full.names = T)
+        paths_chr[paths_chr %>% purrr::map_lgl(~startsWith(.x, 
+            paste0(path_to_R_dir_1L_chr, "/", "fn_")) | startsWith(.x, 
+            paste0(path_to_R_dir_1L_chr, "/", "mthd_")))] %>% 
+            purrr::walk(~{
+                file_chr <- readLines(.x)
+                file_chr <- purrr::reduce(pkgs_chr, .init = file_chr, 
+                  ~{
+                    text_chr <- .x
+                    text_chr[text_chr %>% startsWith(paste0("#' @importFrom ", 
+                      .y))] <- paste0("#' @seealso \\pkg{\\link{", 
+                      .y, "}}")
+                    text_chr
+                  })
+                file_chr %>% writeLines(con = .x)
+            })
+    }
+    path_to_R_dir_1L_chr <- paste0(path_to_pkg_root_1L_chr, "/R")
+    write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you want to overwrite files in directory '", 
+        path_to_R_dir_1L_chr, "' to remove all '@importFrom' tags that reference packages ", 
+        make_list_phrase(pkgs_chr), " and to instead use corresponding `@seealso` tags", 
+        " ?"), consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+        consented_args_ls = list(path_to_R_dir_1L_chr = path_to_R_dir_1L_chr, 
+            pkgs_chr = pkgs_chr), consented_msg_1L_chr = paste0("Any files in ", 
+            path_to_R_dir_1L_chr, " with a matching pattern ", 
+            make_list_phrase(paste0("#' @importFrom ", pkgs_chr)), 
+            " have been edited."), declined_msg_1L_chr = "Write request cancelled - no files have been edited.", 
+        options_chr = options_chr, return_1L_lgl = F)
+    consented_fn <- function(path_to_pkg_root_1L_chr, pkgs_chr) {
+        file_chr <- readLines(paste0(path_to_pkg_root_1L_chr, 
+            "/DESCRIPTION"))
+        file_chr <- purrr::reduce(pkgs_chr, .init = file_chr, 
+            ~{
+                text_chr <- .x
+                text_chr[text_chr %>% purrr::map_chr(~trimws(.x)) %>% 
+                  startsWith(.y)] <- NA_character_
+                text_chr
+            }) %>% purrr::discard(is.na)
+        if (endsWith(file_chr[length(file_chr)], ",")) {
+            file_chr[length(file_chr)] <- stringr::str_sub(file_chr[length(file_chr)], 
+                end = -2)
+        }
+        file_chr %>% writeLines(con = paste0(path_to_pkg_root_1L_chr, 
+            "/DESCRIPTION"))
+        if (requireNamespace("usethis", quietly = T)) {
+            pkgs_chr %>% purrr::walk(~usethis::use_package(.x, 
+                type = "Suggests"))
+        }
+    }
+    write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you want to edit the DESCRIPTION file in '", 
+        path_to_R_dir_1L_chr, "' to remove the packages ", make_list_phrase(pkgs_chr), 
+        " from the 'Imports' list and add them to the 'Suggests' list", 
+        " ?"), consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+        consented_args_ls = list(path_to_R_dir_1L_chr = path_to_R_dir_1L_chr, 
+            pkgs_chr = pkgs_chr), consented_msg_1L_chr = paste0("The DESCRIPTION file in ", 
+            path_to_R_dir_1L_chr, " has been updated to list the ", 
+            make_list_phrase(pkgs_chr), " packages as suggested rather than imported."), 
+        declined_msg_1L_chr = "Write request cancelled - no files have been edited.", 
         options_chr = options_chr, return_1L_lgl = F)
 }
 #' Write dataverse file to local
@@ -228,7 +309,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
 #' @export 
 #' @importFrom purrr map_chr pwalk map_lgl
 #' @importFrom stringr str_sub str_locate str_remove str_replace
-#' @importFrom devtools document
+#' @seealso \pkg{\link{devtools}}
 #' @keywords internal
 write_examples <- function (path_1L_chr = getwd(), consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), type_1L_chr = "fn") 
@@ -305,7 +386,8 @@ write_examples <- function (path_1L_chr = getwd(), consent_1L_chr = "", consent_
                 options_chr = options_chr, return_1L_lgl = F)
         }
     }
-    devtools::document()
+    if (requireNamespace("devtools", quietly = T)) 
+        devtools::document()
 }
 #' Write extra packages to actions
 #' @description write_extra_pkgs_to_actions() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write extra packages to actions. The function is called for its side effects and does not return a value.
@@ -400,7 +482,6 @@ write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir
 #' @export 
 #' @importFrom dataverse get_dataset delete_file add_dataset_file update_dataset_file
 #' @importFrom purrr map map2_int map_chr
-#' @importFrom fs path_file
 #' @keywords internal
 write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, descriptions_chr = NULL, ds_ls = NULL, 
@@ -419,7 +500,7 @@ write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "",
                   ~NULL)
             ids_int <- file_paths_chr %>% purrr::map2_int(descriptions_chr, 
                 ~{
-                  fl_nm_1L_chr <- fs::path_file(.x)
+                  fl_nm_1L_chr <- get_fl_nm_from_path(.x)
                   if (fl_nm_1L_chr %in% nms_chr) {
                     id_1L_int <- get_fl_id_from_dv_ls(ds_ls, 
                       fl_nm_1L_chr = fl_nm_1L_chr, nms_chr = nms_chr)
@@ -449,9 +530,9 @@ write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "",
             prompt_1L_chr = paste0("Are you sure that you want to upload the following file", 
                 ifelse(length(file_paths_chr) > 1, "s", ""), 
                 " to dataverse ", ds_url_1L_chr, ": \n", file_paths_chr %>% 
-                  purrr::map_chr(~fs::path_file(.x)) %>% paste0(collapse = "\n"), 
-                "?"), consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
-            consented_args_ls = list(file_paths_chr = file_paths_chr, 
+                  purrr::map_chr(~get_fl_nm_from_path(.x)) %>% 
+                  paste0(collapse = "\n"), "?"), consent_1L_chr = consent_1L_chr, 
+            consent_indcs_int = consent_indcs_int, consented_args_ls = list(file_paths_chr = file_paths_chr, 
                 ds_url_1L_chr = ds_url_1L_chr, descriptions_chr = descriptions_chr, 
                 ds_ls = ds_ls, key_1L_chr = key_1L_chr, server_1L_chr = server_1L_chr), 
             declined_msg_1L_chr = "Write request cancelled - no files have been written.", 
@@ -771,7 +852,6 @@ write_new_dirs <- function (new_dirs_chr, consent_1L_chr = "", consent_indcs_int
 #' @rdname write_new_files
 #' @export 
 #' @importFrom purrr map flatten_chr map_chr map_lgl walk2 walk
-#' @importFrom fs path_file
 #' @importFrom rlang exec
 #' @keywords internal
 write_new_files <- function (paths_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
@@ -785,7 +865,7 @@ write_new_files <- function (paths_chr, consent_1L_chr = "", consent_indcs_int =
                 list.files(.x, recursive = T)
             }
             else {
-                fs::path_file(.x)
+                get_fl_nm_from_path(.x)
             }
         }) %>% purrr::flatten_chr() %>% purrr::map_chr(~paste0(dest_dir_1L_chr, 
             "/", ifelse(is.null(fl_nm_1L_chr), .x, fl_nm_1L_chr)))
@@ -1322,9 +1402,10 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
 #' @rdname write_to_render_post
 #' @export 
 #' @importFrom purrr walk
-#' @importFrom rmarkdown render
+#' @seealso \pkg{\link{rmarkdown}}
 #' @examplesIf interactive()
-#'   #
+#'   # Note, In addition to rmarkdown, the non CRAN package "hugodown" is also required.
+#'   if(requireNamespace("rmarkdown", quietly = TRUE)) {
 #'   # Example 1 - RMD files
 #'   #
 #'   # Copy template RMD files
@@ -1348,11 +1429,15 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
 #'   write_to_render_post("Rmarkdown",
 #'                        path_to_main_dir_1L_chr = tempdir(),
 #'                        is_rmd_1L_lgl = F)
+#'   }
 write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, is_rmd_1L_lgl = T, options_chr = c("Y", 
         "N")) 
 {
     note_1L_chr <- "To use this function, the non-CRAN R package 'hugodown' must be installed."
+    if (!requireNamespace(rmarkdown, quietly = TRUE)) {
+        stop("rmarkdown package is required - please install it and rerun the last command.")
+    }
     consented_fn <- function(consent_1L_chr, consent_indcs_int, 
         included_dirs_chr, is_rmd_1L_lgl, options_chr, path_to_main_dir_1L_chr) {
         included_dirs_chr %>% purrr::walk(~{

@@ -67,13 +67,15 @@ make_code_releases_tbl() scrapes the details of a specified GitHub repository to
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   # Likely to take more than one minute to execute.
-  make_code_releases_tbl("Framework",
-                         gh_repo_1L_chr = "ready4-dev/ready4")
-  make_code_releases_tbl("Module",
-                         gh_repo_1L_chr = "ready4-dev/ready4")
-  make_code_releases_tbl("Program",
-                         gh_repo_1L_chr = "ready4-dev/ready4")
-  make_code_releases_tbl("Subroutine",
-                         gh_repo_1L_chr = "ready4-dev/ready4")
+    if(requireNamespace("tidyRSS", quietly = TRUE)) {
+      make_code_releases_tbl("Framework",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+      make_code_releases_tbl("Module",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+      make_code_releases_tbl("Program",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+      make_code_releases_tbl("Subroutine",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+    }
 \dontshow{\}) # examplesIf}
 }

@@ -19,4 +19,7 @@ Table (a ready4 submodule)
 \description{
 add_rows_from_fn_args() is an Add function that updates an object by adding new values to new or empty fields. Specifically, this function implements an algorithm to add rows from function arguments. The function returns Table (a ready4 submodule).
 }
+\seealso{
+\pkg{\link{Hmisc}}
+}
 \keyword{internal}

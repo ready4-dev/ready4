@@ -7,15 +7,18 @@
 #' @return Combined (lookup tables)
 #' @rdname add_lups
 #' @export 
-#' @importFrom testit assert
 #' @importFrom dplyr filter pull bind_rows arrange
 #' @importFrom rlang sym
-#' @importFrom Hmisc label
+#' @seealso \pkg{\link{Hmisc}}
 #' @keywords internal
 add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for_dupls_1L_chr = "template") 
 {
-    testit::assert("Look up tables must have same column names", 
-        names(template_lup) == names(new_lup))
+    if (names(template_lup) != names(new_lup)) {
+        stop("Look up tables must have same column names")
+    }
+    if (!requireNamespace("Hmisc", quietly = TRUE)) {
+        stop("Hmisc package is required - please install it and rerun the last command.")
+    }
     if (priority_lup_for_dupls_1L_chr == "template") {
         new_lup <- new_lup %>% dplyr::filter(!(!!rlang::sym(key_var_nm_1L_chr) %in% 
             (template_lup %>% dplyr::pull(!!rlang::sym(key_var_nm_1L_chr)))))
@@ -93,11 +96,14 @@ add_references <- function (ds_tb, data_var_nm_1L_chr = "URL", data_url_var_nm_1
 #' @export 
 #' @importFrom purrr map_lgl
 #' @importFrom tibble as_tibble
-#' @importFrom Hmisc label
+#' @seealso \pkg{\link{Hmisc}}
 #' @importFrom dplyr bind_rows
 #' @keywords internal
 add_rows_from_fn_args <- function (tbl_r3, fn, fn_env_ls) 
 {
+    if (!requireNamespace("Hmisc", quietly = TRUE)) {
+        stop("Hmisc package is required - please install it and rerun the last command.")
+    }
     fn_defaults_ls <- make_fn_defaults_ls(fn)
     tbl_args_ls <- fn_env_ls[names(tbl_r3)]
     bind_1L_lgl <- names(tbl_args_ls) %>% purrr::map_lgl(~{

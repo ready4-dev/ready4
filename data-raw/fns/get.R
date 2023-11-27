@@ -56,9 +56,7 @@ get_cls_extensions <- function(pkg_extensions_tb,
 get_datasets_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                             gh_tag_1L_chr = "Documentation_0.0",
                             rds_fl_name_1L_chr = "datasets_tb"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
   datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith(paste0(rds_fl_name_1L_chr, ".RDS"))]))
   return(datasets_tb)
 }
@@ -287,16 +285,12 @@ get_libraries_ls <- function(gh_repo_1L_chr = "ready4-dev/ready4",
 }
 get_libraries_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
-  #if(is.null(libraries_tb)){
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
     if(any(dmt_urls_chr %>% endsWith("libraries_tb.RDS"))){
       libraries_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")]))
     }else{
       libraries_tb <- NULL
     }
-  #}
   return(libraries_tb)
 }
 get_manual_urls <- function(pkg_nm_1L_chr = "ready4",
@@ -323,17 +317,13 @@ get_methods <- function(pkg_nm_1L_chr = "ready4",
 }
 get_methods_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
   methods_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("methods_tb.RDS")]))
   return(methods_tb)
 }
 get_modules_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
+  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
   modules_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")]))
   return(modules_tb)
 }
@@ -397,7 +387,7 @@ get_rds_from_dv <- function(file_nm_1L_chr,
   }
   return(r_object_xx)
 }
-get_gh_repositories <- function (org_1L_chr) {
+get_gh_repos <- function (org_1L_chr) {
   acknowledgement_1L_chr <- "This function is a minor rephrasing of natmanager::list_repo"
   repositories_ls <- gh::gh(paste0("/orgs/", org_1L_chr, "/repos"), type = "public")
   repositories_chr <- vapply(repositories_ls, "[[", "", "name")
