@@ -93,6 +93,7 @@ x <- write_self_srvc_pkg(x)
 write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
 # write_extra_pkgs_to_actions(consent_1L_chr = "Y")
 write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"))
+write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), where_1L_chr = "DESCRIPTION")
 # Second part may be faulty. May need to redo manually.
 devtools::document()
 # c("devtools", "Hmisc", "readr", "readxl", "rmarkdown", "zen4R") %>%
@@ -104,7 +105,7 @@ readLines("README.md") %>% # update in ready4fun
   # stringr::str_replace("https://www.r-pkg.org/badges/version/ready4\\)]","https://www.r-pkg.org/badges/version/ready4\\)") %>%
   # stringr::str_replace("\\[!\\[CRAN status","\\![CRAN status") %>%
   stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
-  # gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
+  gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   writeLines(con = "README.md")
 c(readLines("R/imp_fns.R"), # update in ready4fun
   " ",
@@ -134,6 +135,9 @@ c(readLines("R/imp_fns.R"), # update in ready4fun
 write_examples(consent_1L_chr = "Y")
 write_examples(consent_1L_chr = "Y", type_1L_chr = "r4")
 devtools::build_vignettes()
+devtools::document()
+ready4fun::authorReport.ready4fun_manifest(x) #
+readLines("_pkgdown.yml")[-c(11:12)] %>% writeLines("_pkgdown.yml")
 #
 #
 # ADD DOI OVERRIDE FOR RELEASES

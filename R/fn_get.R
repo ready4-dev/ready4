@@ -16,6 +16,11 @@ get_badge_urls <- function (pkg_nm_1L_chr, project_badges_url_1L_chr = "https://
     badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% 
         startsWith(project_badges_url_1L_chr)], zenodo_1L_chr = images_chr[images_chr %>% 
         startsWith("https://zenodo.org/badge/DOI/")])
+    if (identical(badge_urls_ls$ready4_1L_chr, character(0))) {
+        badge_urls_ls <- get_badge_urls(paste0(pkg_nm_1L_chr, 
+            "/dev"), project_badges_url_1L_chr = project_badges_url_1L_chr, 
+            url_stub_1L_chr = url_stub_1L_chr)
+    }
     return(badge_urls_ls)
 }
 #' Get badges lookup table

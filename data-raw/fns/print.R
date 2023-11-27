@@ -163,7 +163,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
   }
   pkg_extensions_tb <- pkg_extensions_tb %>%
     dplyr::mutate(Badges = purrr::map(.data$pt_ns_chr,
-                                      ~get_badge_urls(.x,
+                                      ~ get_badge_urls(.x,
                                                       project_badges_url_1L_chr = project_badges_url_1L_chr,
                                                       url_stub_1L_chr = url_stub_1L_chr))) %>% dplyr::mutate(Type = "") %>%
     dplyr::mutate(DOI = "") %>% dplyr::mutate(Logo = "")
@@ -171,13 +171,14 @@ print_packages <- function (pkg_extensions_tb = NULL,
                                       ~{
                                         badge_1L_chr <- .x$ready4_1L_chr
                                         ifelse(identical(badge_1L_chr, character(0)),
-                                               paste0("https://img.shields.io/badge/ready4-authoring-maroon?style=flat&labelColor=black&logo=data:",
-                                               "image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/",
-                                               "GEFAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAIXRFWHRDcmVhdGlvbiBUaW1lADIwMjI6MDM6MDcgMTY6MTM6NTPZeG5UAAABa0lEQVQ4T4WT607CQBCFpyUi3qIR0eAfNfCi/",
-                                               "vENfEgENIAIlcJ6vr1oLaZOerJzdst0zpklc49nznqHZs6ZfWwDem1xM1sqXwtXkb8rL4SuOLEoLXPPXWfD01Dg9dPsrTQbngQ+EZ+LDyIfiy/FHyIfFZbbTslWKOOqxx/",
-                                               "uWBPSfp07FahGlqlNfWGqL9HNfBO+CAfwdO55WS8g4MFML834sfJVA9e7vwsg50aGohncdmRojV9XeL+jArRNmZxVSJ4Acj3NHqARdyeFJqC2KJiCfKE9zsfxnNYTl5TcCtmNMcwY/",
-                                               "ZXf+3wdzzVza2vj4iCaq3d1R/bvwVSH6IPjNIUHx0FSNZA7WquDqOVb35+eiO8h7Oe+vRfp0a3yGtFMDuiAIg2R20YaVwJ3Hj+4kehO/J/I7VJ/",
-                                               "jHtpvBP6mrHnR4EzdyQ0xI8HhM8jUiChxVpDK3iVuadzx43yRdI4E2d0gNtX74TCs419AR8YEST/cHPBAAAAAElFTkSuQmCC"),
+                                               NA_character_,
+                                               # paste0("https://img.shields.io/badge/ready4-authoring-maroon?style=flat&labelColor=black&logo=data:",
+                                               # "image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/",
+                                               # "GEFAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAIXRFWHRDcmVhdGlvbiBUaW1lADIwMjI6MDM6MDcgMTY6MTM6NTPZeG5UAAABa0lEQVQ4T4WT607CQBCFpyUi3qIR0eAfNfCi/",
+                                               # "vENfEgENIAIlcJ6vr1oLaZOerJzdst0zpklc49nznqHZs6ZfWwDem1xM1sqXwtXkb8rL4SuOLEoLXPPXWfD01Dg9dPsrTQbngQ+EZ+LDyIfiy/FHyIfFZbbTslWKOOqxx/",
+                                               # "uWBPSfp07FahGlqlNfWGqL9HNfBO+CAfwdO55WS8g4MFML834sfJVA9e7vwsg50aGohncdmRojV9XeL+jArRNmZxVSJ4Acj3NHqARdyeFJqC2KJiCfKE9zsfxnNYTl5TcCtmNMcwY/",
+                                               # "ZXf+3wdzzVza2vj4iCaq3d1R/bvwVSH6IPjNIUHx0FSNZA7WquDqOVb35+eiO8h7Oe+vRfp0a3yGtFMDuiAIg2R20YaVwJ3Hj+4kehO/J/I7VJ/",
+                                               # "jHtpvBP6mrHnR4EzdyQ0xI8HhM8jUiChxVpDK3iVuadzx43yRdI4E2d0gNtX74TCs419AR8YEST/cHPBAAAAAElFTkSuQmCC"),
                                                badge_1L_chr)
                                         #.x$ready4_1L_chr
                                         })
@@ -185,7 +186,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
                                       ~{
                                         badge_1L_chr <- .x$zenodo_1L_chr
                                         ifelse(identical(badge_1L_chr, character(0)),
-                                               "https://zenodo.org/badge/DOI/10.5281/zenodo.5646668.svg",
+                                               NA_character_,#"https://zenodo.org/badge/DOI/10.5281/zenodo.5646668.svg",
                                                badge_1L_chr)
                                       })
   logos_chr <- purrr::map_chr(pkg_extensions_tb$pt_ns_chr,

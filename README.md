@@ -1,6 +1,6 @@
 # ready4
 
-> Implement Modular and Open-Source Health Economic Models
+## Implement Modular and Open-Source Health Economic Models
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -20,7 +20,7 @@ The software framework is extended by other R libraries.  For detailed
 documentation about the framework and how to use it visit
 <https://www.ready4-dev.com/>. For a background to the methodological
 issues that the framework is attempting to help solve, read
-<arXiv:2310.14138>.
+<https://arxiv.org/abs/2310.14138>.
 
 To install a development version of this software, run the following commands in your R console:
 

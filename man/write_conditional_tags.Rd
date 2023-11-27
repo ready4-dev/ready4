@@ -9,7 +9,8 @@ write_conditional_tags(
   path_to_pkg_root_1L_chr = getwd(),
   consent_1L_chr = "",
   consent_indcs_int = 1L,
-  options_chr = c("Y", "N")
+  options_chr = c("Y", "N"),
+  where_1L_chr = character(0)
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ write_conditional_tags(
 \item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
+
+\item{where_1L_chr}{Where (a character vector of length one), Default: character(0)}
 }
 \description{
 write_conditional_tags() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write conditional tags. The function is called for its side effects and does not return a value.
