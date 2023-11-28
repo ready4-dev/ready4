@@ -94,9 +94,6 @@ write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages
 write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), consent_1L_chr = "Y")
 #usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
-  # stringr::str_replace("\\(https://CRAN.R-project.org/package=ready4\\)","") %>%
-  # stringr::str_replace("https://www.r-pkg.org/badges/version/ready4\\)]","https://www.r-pkg.org/badges/version/ready4\\)") %>%
-  # stringr::str_replace("\\[!\\[CRAN status","\\![CRAN status") %>%
   stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
   gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   writeLines(con = "README.md")

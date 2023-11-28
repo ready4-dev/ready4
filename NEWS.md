@@ -1,5 +1,7 @@
 # ready4 (development version)
 
+Current development version, trialing fix of bug in write_to_render_post function.
+
 # ready4 0.1.2
 
 This is a patch for the release being prepared for submission to CRAN.

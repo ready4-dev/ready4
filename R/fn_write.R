@@ -1456,7 +1456,7 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
         "N")) 
 {
     note_1L_chr <- "To use this function, the non-CRAN R package 'hugodown' must be installed."
-    if (!requireNamespace(rmarkdown, quietly = TRUE)) {
+    if (!requireNamespace("rmarkdown", quietly = TRUE)) {
         stop("rmarkdown package is required - please install it and rerun the last command.")
     }
     consented_fn <- function(consent_1L_chr, consent_indcs_int, 
