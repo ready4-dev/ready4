@@ -38,7 +38,7 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
 write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N")) 
 {
-    if (!requireNamespace(rmarkdown, quietly = TRUE)) {
+    if (!requireNamespace("rmarkdown", quietly = TRUE)) {
         stop("rmarkdown package is required - please install it and rerun the last command.")
     }
     rmarkdown::render(paste0(dir_path_1L_chr, "/", fl_nm_1L_chr, 

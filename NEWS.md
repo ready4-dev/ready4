@@ -1,6 +1,6 @@
 # ready4 0.1.3
 
-Current development version, trialing fix of bug in write_to_render_post function.
+Patch with fixes of bugs in write_blog_entries and write_to_render_post functions.
 
 # ready4 0.1.2
 
