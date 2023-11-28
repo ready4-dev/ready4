@@ -91,14 +91,7 @@ x <- x %>%
 ##
 x <- write_self_srvc_pkg(x)
 write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
-# write_extra_pkgs_to_actions(consent_1L_chr = "Y")
-write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"))
-write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), where_1L_chr = "DESCRIPTION")
-# Second part may be faulty. May need to redo manually.
-devtools::document()
-# c("devtools", "Hmisc", "readr", "readxl", "rmarkdown", "zen4R") %>%
-#   purrr::walk(~usethis::use_package(.x, type = "Suggests"))
-#usethis::use_package("devtools", type = "Suggests")
+write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), consent_1L_chr = "Y")
 #usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
   # stringr::str_replace("\\(https://CRAN.R-project.org/package=ready4\\)","") %>%
@@ -134,10 +127,11 @@ c(readLines("R/imp_fns.R"), # update in ready4fun
   writeLines("R/imp_fns.R")
 write_examples(consent_1L_chr = "Y")
 write_examples(consent_1L_chr = "Y", type_1L_chr = "r4")
-devtools::build_vignettes()
 devtools::document()
-ready4fun::authorReport.ready4fun_manifest(x) #
+devtools::build_vignettes()
+ready4fun::authorReport.ready4fun_manifest(x) # Choose 'N' for pkgdown edit
 readLines("_pkgdown.yml")[-c(11:12)] %>% writeLines("_pkgdown.yml")
+# Edit News
 #
 #
 # ADD DOI OVERRIDE FOR RELEASES

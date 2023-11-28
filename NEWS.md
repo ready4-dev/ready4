@@ -1,6 +1,17 @@
 # ready4 0.1.2
 
+This is a patch for the release being prepared for submission to CRAN.
+
+## New features
+
+This adds the helper function write_conditional_tags for updating documentation once selected package dependencies have been moved from 'Imports' to 'Suggests'.
+
 # ready4 0.1.1
+This is a patch for the release being prepared for submission to CRAN.
+
+## New features
+
+This release addresses a bug with printing the tabular summary of framework libraries.
 
 # ready4 0.1.0
 
