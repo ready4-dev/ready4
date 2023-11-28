@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.1.3
 
 Current development version, trialing fix of bug in write_to_render_post function.
 
