@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.1.4
 Modification of function write_conditional_tags.
 
 # ready4 0.1.3

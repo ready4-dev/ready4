@@ -1,6 +1,6 @@
 Package: ready4
 Title: Implement Modular and Open-Source Health Economic Models
-Version: 0.1.3.9004
+Version: 0.1.4
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton1@monash.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7407-9194")),
