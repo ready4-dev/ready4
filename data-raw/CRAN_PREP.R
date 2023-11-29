@@ -34,7 +34,9 @@ urlchecker::url_update()
 # _rhub
 devtools::check_rhub()
 rhub::check_on_windows(check_args = "--force-multiarch")
-rhub::check_on_solaris()
+rhub::check_on_fedora()
+# rhub::check_on_macos()
+#rhub::check_on_solaris()
 # _win devel
 devtools::check_win_devel()
 
