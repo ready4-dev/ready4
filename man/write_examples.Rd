@@ -27,6 +27,6 @@ write_examples(
 write_examples() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write examples. The function is called for its side effects and does not return a value.
 }
 \seealso{
-\pkg{\link{devtools}}
+\code{\link[devtools:document]{devtools::document()}}
 }
 \keyword{internal}

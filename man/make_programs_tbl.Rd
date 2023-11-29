@@ -56,5 +56,5 @@ make_modules_tb() scrapes the documentation websites of all libraries of ready4 
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\pkg{\link{zen4R}}
+\code{\link[zen4R:ZenodoManager]{zen4R::ZenodoManager()}}
 }

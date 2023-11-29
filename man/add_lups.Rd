@@ -27,6 +27,6 @@ Combined (lookup tables)
 add_lups() is an Add function that updates an object by adding new values to new or empty fields. Specifically, this function implements an algorithm to add lookup tables. The function is called for its side effects and does not return a value.
 }
 \seealso{
-\pkg{\link{Hmisc}}
+\code{\link[Hmisc:label]{Hmisc::label()}}
 }
 \keyword{internal}

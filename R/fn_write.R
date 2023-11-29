@@ -33,7 +33,7 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
 #' @return NULL
 #' @rdname write_blog_entries
 #' @export 
-#' @seealso \pkg{\link{rmarkdown}}
+#' @seealso [rmarkdown::render()]
 #' @keywords internal
 write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N")) 
@@ -125,8 +125,8 @@ write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", 
 #' @rdname write_conditional_tags
 #' @export 
 #' @importFrom purrr walk map_lgl reduce map_chr discard
-#' @importFrom stringr str_sub
-#' @seealso \pkg{\link{usethis}}
+#' @importFrom stringr str_remove_all str_sub
+#' @seealso [usethis::use_package()]
 #' @keywords internal
 write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr = getwd(), consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N"), where_1L_chr = character(0)) 
@@ -138,8 +138,11 @@ write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr = getwd(),
             options_chr = options_chr, where_1L_chr = .x))
     }
     else {
-        if (where_1L_chr == "R") {
-            consented_fn <- function(path_to_R_dir_1L_chr, pkgs_chr) {
+        consented_fn <- function(path_to_pkg_root_1L_chr, pkgs_chr, 
+            where_1L_chr) {
+            if (where_1L_chr == "R") {
+                path_to_R_dir_1L_chr <- paste0(path_to_pkg_root_1L_chr, 
+                  "/R")
                 paths_chr <- list.files(path_to_R_dir_1L_chr, 
                   full.names = T)
                 paths_chr[paths_chr %>% purrr::map_lgl(~startsWith(.x, 
@@ -150,29 +153,22 @@ write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr = getwd(),
                   file_chr <- purrr::reduce(pkgs_chr, .init = file_chr, 
                     ~{
                       text_chr <- .x
-                      text_chr[text_chr %>% startsWith(paste0("#' @importFrom ", 
-                        .y))] <- paste0("#' @seealso \\pkg{\\link{", 
-                        .y, "}}")
+                      old_chr <- text_chr[text_chr %>% startsWith(paste0("#' @importFrom ", 
+                        .y))]
+                      pkg_1L_chr <- .y
+                      new_chr <- old_chr %>% stringr::str_remove_all(paste0("#' @importFrom ", 
+                        .y)) %>% trimws() %>% strsplit(split = " ") %>% 
+                        purrr::map_chr(~paste0("#' @seealso ", 
+                          paste0("[", pkg_1L_chr, "::", .x, "()]") %>% 
+                            make_list_phrase()))
+                      text_chr[text_chr %in% old_chr] <- new_chr[match(text_chr, 
+                        old_chr, nomatch = 0)]
                       text_chr
                     })
                   file_chr %>% writeLines(con = .x)
                 })
             }
-            path_to_R_dir_1L_chr <- paste0(path_to_pkg_root_1L_chr, 
-                "/R")
-            prompt_1L_chr <- paste0("Do you confirm that you want to overwrite files in directory '", 
-                path_to_R_dir_1L_chr, "' to remove all '@importFrom' tags that reference packages ", 
-                make_list_phrase(pkgs_chr), " and to instead use corresponding `@seealso` tags", 
-                " ?")
-            consented_args_ls <- list(path_to_R_dir_1L_chr = path_to_R_dir_1L_chr, 
-                pkgs_chr = pkgs_chr)
-            consented_msg_1L_chr <- paste0("Any files in ", path_to_R_dir_1L_chr, 
-                " with a matching pattern ", make_list_phrase(paste0("#' @importFrom ", 
-                  pkgs_chr)), " have been edited.")
-        }
-        if (where_1L_chr == "DESCRIPTION") {
-            consented_fn <- function(path_to_pkg_root_1L_chr, 
-                pkgs_chr) {
+            else {
                 file_chr <- readLines(paste0(path_to_pkg_root_1L_chr, 
                   "/DESCRIPTION"))
                 file_chr <- purrr::reduce(pkgs_chr, .init = file_chr, 
@@ -193,12 +189,23 @@ write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr = getwd(),
                     type = "Suggests"))
                 }
             }
+        }
+        if (where_1L_chr == "R") {
+            path_to_R_dir_1L_chr <- paste0(path_to_pkg_root_1L_chr, 
+                "/R")
+            prompt_1L_chr <- paste0("Do you confirm that you want to overwrite files in directory '", 
+                path_to_R_dir_1L_chr, "' to remove all '@importFrom' tags that reference packages ", 
+                make_list_phrase(pkgs_chr), " and to instead use corresponding `@seealso` tags", 
+                " ?")
+            consented_msg_1L_chr <- paste0("Any files in ", path_to_R_dir_1L_chr, 
+                " with a matching pattern ", make_list_phrase(paste0("#' @importFrom ", 
+                  pkgs_chr)), " have been edited.")
+        }
+        if (where_1L_chr == "DESCRIPTION") {
             prompt_1L_chr <- paste0("Do you confirm that you want to edit the DESCRIPTION file in '", 
                 path_to_pkg_root_1L_chr, "' to remove the packages ", 
                 make_list_phrase(pkgs_chr), " from the 'Imports' list and add them to the 'Suggests' list", 
                 " ?")
-            consented_args_ls <- list(path_to_pkg_root_1L_chr = path_to_pkg_root_1L_chr, 
-                pkgs_chr = pkgs_chr)
             consented_msg_1L_chr <- paste0("The DESCRIPTION file in ", 
                 path_to_pkg_root_1L_chr, " has been updated to list the ", 
                 make_list_phrase(pkgs_chr), " packages as suggested rather than imported.")
@@ -206,7 +213,9 @@ write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr = getwd(),
         if (where_1L_chr %in% c("R", "DESCRIPTION")) {
             write_with_consent(consented_fn = consented_fn, prompt_1L_chr = prompt_1L_chr, 
                 consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
-                consented_args_ls = consented_args_ls, consented_msg_1L_chr = consented_msg_1L_chr, 
+                consented_args_ls = list(path_to_pkg_root_1L_chr = path_to_pkg_root_1L_chr, 
+                  pkgs_chr = pkgs_chr, where_1L_chr = where_1L_chr), 
+                consented_msg_1L_chr = consented_msg_1L_chr, 
                 declined_msg_1L_chr = "Write request cancelled - no files have been edited.", 
                 options_chr = options_chr, return_1L_lgl = F)
         }
@@ -330,7 +339,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
 #' @export 
 #' @importFrom purrr map_chr pwalk map_lgl
 #' @importFrom stringr str_sub str_locate str_remove str_replace
-#' @seealso \pkg{\link{devtools}}
+#' @seealso [devtools::document()]
 #' @keywords internal
 write_examples <- function (path_1L_chr = getwd(), consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), type_1L_chr = "fn") 
@@ -1423,7 +1432,7 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
 #' @rdname write_to_render_post
 #' @export 
 #' @importFrom purrr walk
-#' @seealso \pkg{\link{rmarkdown}}
+#' @seealso [rmarkdown::render()]
 #' @examplesIf interactive()
 #'   # Note, In addition to rmarkdown, the non CRAN package "hugodown" is also required.
 #'   if(requireNamespace("rmarkdown", quietly = TRUE)) {

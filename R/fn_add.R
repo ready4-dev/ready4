@@ -9,7 +9,7 @@
 #' @export 
 #' @importFrom dplyr filter pull bind_rows arrange
 #' @importFrom rlang sym
-#' @seealso \pkg{\link{Hmisc}}
+#' @seealso [Hmisc::label()]
 #' @keywords internal
 add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for_dupls_1L_chr = "template") 
 {
@@ -96,7 +96,7 @@ add_references <- function (ds_tb, data_var_nm_1L_chr = "URL", data_url_var_nm_1
 #' @export 
 #' @importFrom purrr map_lgl
 #' @importFrom tibble as_tibble
-#' @seealso \pkg{\link{Hmisc}}
+#' @seealso [Hmisc::label()]
 #' @importFrom dplyr bind_rows
 #' @keywords internal
 add_rows_from_fn_args <- function (tbl_r3, fn, fn_env_ls) 

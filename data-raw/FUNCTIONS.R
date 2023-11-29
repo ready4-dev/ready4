@@ -319,8 +319,14 @@ write_self_srvc_pkg <- function(x){
                                     ready4fun::write_ns_imps_to_desc(dev_pkgs_chr = dev_pkgs_chr,
                                                                      incr_ver_1L_lgl = .y)
                                     devtools::load_all()
-                                    if(T)
-                                      devtools::build_manual(path = .x)
+                                    if(!is.null(pkg_setup_ls$subsequent_ls$addl_pkgs_ls)){ # Add edited version of this to ready4fun
+                                      if(!is.null(pkg_setup_ls$subsequent_ls$addl_pkgs_ls$Suggests)){
+                                        fns_env_ls$fns_env$write_conditional_tags(pkg_setup_ls$subsequent_ls$addl_pkgs_ls$Suggests)
+                                        devtools::document()
+                                      }
+                                    }
+                                    # if(T)
+                                    devtools::build_manual(path = .x)
                                     s4_mthds_ls
                                   })
     pkg_setup_ls$subsequent_ls$fns_dmt_tb <- fns_dmt_tb

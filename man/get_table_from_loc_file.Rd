@@ -27,8 +27,8 @@ Table (an output object of multiple potential types)
 get_table_from_loc_file() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get table from local file. The function returns Table (an output object of multiple potential types).
 }
 \seealso{
-\pkg{\link{readr}}
+\code{\link[readr:read_delim]{readr::read_csv()}}
 
-\pkg{\link{readxl}}
+\code{\link[readxl:read_excel]{readxl::read_excel()}} and \code{\link[readxl:read_excel]{readxl::read_xlsx()}}
 }
 \keyword{internal}

@@ -830,7 +830,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @export 
 #' @importFrom dplyr group_by filter row_number arrange ungroup pull mutate select
 #' @importFrom rlang sym
-#' @seealso \pkg{\link{zen4R}}
+#' @seealso [zen4R::ZenodoManager()]
 #' @importFrom purrr pluck map map_lgl map2_int map_chr map2_chr pmap
 #' @importFrom stringr str_remove_all str_remove str_equal str_detect
 #' @importFrom kableExtra cell_spec kable kable_styling

@@ -60,5 +60,5 @@ write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specifie
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\pkg{\link{rmarkdown}}
+\code{\link[rmarkdown:render]{rmarkdown::render()}}
 }

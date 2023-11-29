@@ -653,8 +653,8 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 #' @return Table (an output object of multiple potential types)
 #' @rdname get_table_from_loc_file
 #' @export 
-#' @seealso \pkg{\link{readr}}
-#' @seealso \pkg{\link{readxl}}
+#' @seealso [readr::read_csv()]
+#' @seealso [readxl::read_excel()] and [readxl::read_xlsx()]
 #' @importFrom rlang exec
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr slice n mutate across

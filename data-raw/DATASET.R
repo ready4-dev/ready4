@@ -1,9 +1,11 @@
+#usethis::use_description(fields = list(Language = "en-AU"))
 library(magrittr)
 library(lifecycle)
 library(generics)
 source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #ready4fun::write_fn_type_dirs()
 #dir.create("data-raw/examples")
+
 x <- ready4fun::make_pkg_desc_ls(
   pkg_title_1L_chr = "Implement Modular And Open-Source Health Economic Models" %>% tools::toTitleCase(),
   pkg_desc_1L_chr = "Programming syntax, a template model module and tools to help maintain a health economic modelling project's documentation website.
@@ -31,8 +33,7 @@ user_manual_fns_chr <-  c(
   "write_to_render_post", "write_ws"
 )
 x <- x %>%
-  ready4fun::make_manifest(addl_pkgs_ls = ready4fun::make_addl_pkgs_ls(#depends_chr = "generics",
-                                                                       suggests_chr = "rmarkdown"),
+  ready4fun::make_manifest(addl_pkgs_ls = ready4fun::make_addl_pkgs_ls(suggests_chr = c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R")),
                            build_ignore_ls = ready4fun::make_build_ignore_ls(file_nms_chr = c("initial_setup.R",
                                                                                               "CITATION.cff")), # New
                            check_type_1L_chr = "ready4",
@@ -91,8 +92,8 @@ x <- x %>%
 ##
 x <- write_self_srvc_pkg(x)
 write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
-write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), consent_1L_chr = "Y")
-#usethis::use_package("pkgload", type = "Suggests") # ??
+#write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), consent_1L_chr = "Y")
+usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
   stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
   gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
@@ -124,10 +125,18 @@ c(readLines("R/imp_fns.R"), # update in ready4fun
   writeLines("R/imp_fns.R")
 write_examples(consent_1L_chr = "Y")
 write_examples(consent_1L_chr = "Y", type_1L_chr = "r4")
+# desc_ls <-
+# description_ls$Language = "en-AU"
+# usethis::use_description(fields = description_ls)
+# usethis::use_description(fields = append(utils::packageDescription("ready4"), list(Language = "en-AU")))
 devtools::document()
 devtools::build_vignettes()
-ready4fun::authorReport.ready4fun_manifest(x) # Choose 'N' for pkgdown edit
-readLines("_pkgdown.yml")[-c(11:12)] %>% writeLines("_pkgdown.yml")
+#ready4fun::authorReport.ready4fun_manifest(x) # Choose 'N' for pkgdown edit
+#readLines("_pkgdown.yml")[-c(11:12)] %>% writeLines("_pkgdown.yml")
+
+## SEE: https://stackoverflow.com/questions/25489042/linking-to-other-packages-in-documentation-in-roxygen2-in-r
+## Update language to Australian English
+
 # Edit News
 #
 #

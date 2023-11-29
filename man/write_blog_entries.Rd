@@ -27,6 +27,6 @@ write_blog_entries(
 write_blog_entries() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write blog entries. The function is called for its side effects and does not return a value.
 }
 \seealso{
-\pkg{\link{rmarkdown}}
+\code{\link[rmarkdown:render]{rmarkdown::render()}}
 }
 \keyword{internal}
