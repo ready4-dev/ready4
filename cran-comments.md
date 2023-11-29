@@ -4,6 +4,7 @@
 * Fedora Linux (on R-hub) R-devel [2 NOTEs generated]
 * Windows Server 2022, R-devel, 64 bit (on R-hub) [3 NOTEs generated]
 * Windows Server 2022, R-release, 32/64 bit (on R-hub) [0 NOTEs generated]
+* Windows Server 2022 x64 (build 20348) (on winbuilder) [1 NOTE generated]
 
 ## R CMD check results
 
@@ -12,7 +13,7 @@ There were no ERRORs or WARNINGs.
 There are 4 NOTEs.
 
 
-1. One NOTE related to this being a new submission and having a potentially misspelled word (found in Local Windows, Windows Server development and Fedora Linux):
+1. One NOTE related to this being a new submission and having a potentially misspelled word (found in Local Windows, Windows Server development, Windows Server (on winbuilder) and Fedora Linux):
 
 ```
 checking CRAN incoming feasibility ... [186s] NOTE
