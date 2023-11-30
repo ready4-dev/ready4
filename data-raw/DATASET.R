@@ -12,7 +12,7 @@ x <- ready4fun::make_pkg_desc_ls(
   These elements are the foundation for a prototype software framework to support transparent, reusable and updatable health economic models. The software framework is extended by other R libraries.
   For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, read <arXiv:2310.14138>.",
   authors_prsn = c(utils::person(
-    given = "Matthew",family = "Hamilton", email = "matthew.hamilton1@monash.edu", role = c("aut", "cre"),
+    given = "Matthew",family = "Hamilton", email = "matthew.hamilton1@monash.edu", role = c("aut", "cre","cph"),
     comment = c(ORCID = "0000-0001-7407-9194")
     ),
     utils::person("Orygen", role = c("cph", "fnd")),
@@ -129,6 +129,11 @@ write_examples(consent_1L_chr = "Y", type_1L_chr = "r4")
 # description_ls$Language = "en-AU"
 # usethis::use_description(fields = description_ls)
 # usethis::use_description(fields = append(utils::packageDescription("ready4"), list(Language = "en-AU")))
+unlink("LICENSE")
+readLines("DESCRIPTION") %>%
+  purrr::map_chr(~.x %>% stringr::str_replace("GPL-3 \\+ file LICENSE","GPL-3") %>%
+                   stringr::str_replace("\"aut\", \"cre\"", "\"aut\", \"cre\", \"cph\"")) %>%
+  writeLines("DESCRIPTION")
 devtools::document()
 devtools::build_vignettes()
 #ready4fun::authorReport.ready4fun_manifest(x) # Choose 'N' for pkgdown edit
