@@ -12,7 +12,6 @@ There were no ERRORs or WARNINGs.
 
 There are 4 NOTEs.
 
-
 1. One NOTE related to this being a new submission and having a potentially misspelled word (found in Local Windows, Windows Server development, Windows Server (on winbuilder) and Fedora Linux):
 
 ```
