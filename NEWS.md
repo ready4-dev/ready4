@@ -1,3 +1,6 @@
+# ready4 0.1.5
+This patch removed an extraneous LICENSE file.
+
 # ready4 0.1.4
 This patch made minor modification to function write_conditional_tags.
 
