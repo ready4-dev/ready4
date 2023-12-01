@@ -19,8 +19,8 @@ to support transparent, reusable and updatable health economic models.
 The software framework is extended by other R libraries.  For detailed
 documentation about the framework and how to use it visit
 <https://www.ready4-dev.com/>. For a background to the methodological
-issues that the framework is attempting to help solve, read
-<https://arxiv.org/abs/2310.14138>.
+issues that the framework is attempting to help solve, see Hamilton et
+al. (2023) <https://arxiv.org/abs/2310.14138>.
 
 To install a development version of this software, run the following commands in your R console:
 

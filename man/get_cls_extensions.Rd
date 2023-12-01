@@ -9,7 +9,7 @@ get_cls_extensions(
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
   url_stub_1L_chr = "https://ready4-dev.github.io/",
-  validate_1L_lgl = F
+  validate_1L_lgl = FALSE
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ get_cls_extensions(
 
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
-\item{validate_1L_lgl}{Validate (a logical vector of length one), Default: F}
+\item{validate_1L_lgl}{Validate (a logical vector of length one), Default: FALSE}
 }
 \value{
 Class extensions (a tibble)

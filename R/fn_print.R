@@ -1,7 +1,7 @@
 #' Print a table of ready4 model data collections
 #' @description make_programs_tbl() scrapes the GitHub organisation and Zenodo community associated specified for a ready4 model implementation to create a tabular summary of programs and sub-routines associated with that implementation.
 #' @param datasets_tb Datasets (a tibble)
-#' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: F
+#' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: FALSE
 #' @param filter_cdns_ls Filter conditions (a list), Default: NULL
 #' @param root_1L_chr Root (a character vector of length one), Default: 'https://dataverse.harvard.edu/dataverse/'
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
@@ -13,7 +13,7 @@
 #' @rdname print_data
 #' @export 
 #' @example man/examples/print_data.R
-print_data <- function (datasets_tb, by_dv_1L_lgl = F, filter_cdns_ls = NULL, 
+print_data <- function (datasets_tb, by_dv_1L_lgl = FALSE, filter_cdns_ls = NULL, 
     root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     toy_data_dv_1L_chr = "fakes", what_1L_chr = "all", ...) 
@@ -243,10 +243,10 @@ print_packages <- function (pkg_extensions_tb = NULL, gh_repo_1L_chr = "ready4-d
             what_chr = what_chr)
     if (nrow(pkg_extensions_tb) == 1) {
         pkg_extensions_tb <- rbind(pkg_extensions_tb, pkg_extensions_tb)
-        is_single_1L_lgl <- T
+        is_single_1L_lgl <- TRUE
     }
     else {
-        is_single_1L_lgl <- F
+        is_single_1L_lgl <- FALSE
     }
     pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::mutate(Badges = purrr::map(.data$pt_ns_chr, 
         ~get_badge_urls(.x, project_badges_url_1L_chr = project_badges_url_1L_chr, 

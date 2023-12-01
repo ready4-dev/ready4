@@ -5,7 +5,7 @@
 #' @param x An object of class Ready4Module
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
-#' @return NULL
+#' @return Either a Ready4Module of the same class as that supplied to the method or no value (when called for side effects only).
 #' @rdname characterizeSlot-methods
 #' @aliases characterizeSlot,Ready4Module-method
 #' @export

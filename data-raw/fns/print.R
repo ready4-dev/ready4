@@ -1,5 +1,5 @@
 print_data <- function(datasets_tb,
-                       by_dv_1L_lgl = F,
+                       by_dv_1L_lgl = FALSE,
                        filter_cdns_ls = NULL,
                        root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
                        scroll_height_1L_chr = character(0),
@@ -94,8 +94,6 @@ print_methods <- function(methods_tb = NULL,
   links_chr <- methods_tb$Method %>%
     purrr::map_chr(~paste0("https://ready4-dev.github.io/ready4/reference/",.x,"-methods.html"))
   methods_kbl <- methods_tb %>%
-    # kableExtra::kbl(booktabs = T) %>%
-    # kableExtra::kable_paper(full_width = F) %>%
     kableExtra::kable("html", escape = FALSE) %>%
     kableExtra::kable_styling(bootstrap_options = c("hover", "condensed")) %>%
     kableExtra::column_spec(which(names(methods_tb)=="Method"),
@@ -157,9 +155,9 @@ print_packages <- function (pkg_extensions_tb = NULL,
                           what_chr = what_chr )
   if(nrow(pkg_extensions_tb) == 1){
     pkg_extensions_tb <- rbind(pkg_extensions_tb,pkg_extensions_tb)
-    is_single_1L_lgl <- T
+    is_single_1L_lgl <- TRUE
   }else{
-    is_single_1L_lgl <- F
+    is_single_1L_lgl <- FALSE
   }
   pkg_extensions_tb <- pkg_extensions_tb %>%
     dplyr::mutate(Badges = purrr::map(.data$pt_ns_chr,

@@ -13,7 +13,7 @@ write_new_files(
   options_chr = c("Y", "N"),
   source_paths_ls = NULL,
   text_ls = NULL,
-  return_1L_lgl = F
+  return_1L_lgl = FALSE
 )
 }
 \arguments{
@@ -33,7 +33,7 @@ write_new_files(
 
 \item{text_ls}{Text (a list), Default: NULL}
 
-\item{return_1L_lgl}{Return (a logical vector of length one), Default: F}
+\item{return_1L_lgl}{Return (a logical vector of length one), Default: FALSE}
 }
 \value{
 Object (an output object of multiple potential types)

@@ -17,6 +17,9 @@ metamorphoseSlot(x, slot_nm_1L_chr, ...)
 
 \item{...}{Additional arguments}
 }
+\value{
+A Ready4Module.
+}
 \description{
 metamorphoseSlot() is a convenience method that applies the metamorphose method to a specified slot of a model module.
 

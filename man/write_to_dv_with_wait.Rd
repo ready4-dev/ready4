@@ -12,9 +12,9 @@ write_to_dv_with_wait(
   paths_to_dirs_chr,
   consent_1L_chr = "",
   consent_indcs_int = 1L,
-  make_local_copy_1L_lgl = F,
+  make_local_copy_1L_lgl = FALSE,
   options_chr = c("Y", "N"),
-  paths_are_rltv_1L_lgl = T,
+  paths_are_rltv_1L_lgl = TRUE,
   inc_fl_types_chr = NA_character_,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
@@ -36,11 +36,11 @@ write_to_dv_with_wait(
 
 \item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
-\item{make_local_copy_1L_lgl}{Make local copy (a logical vector of length one), Default: F}
+\item{make_local_copy_1L_lgl}{Make local copy (a logical vector of length one), Default: FALSE}
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
-\item{paths_are_rltv_1L_lgl}{Paths are relative (a logical vector of length one), Default: T}
+\item{paths_are_rltv_1L_lgl}{Paths are relative (a logical vector of length one), Default: TRUE}
 
 \item{inc_fl_types_chr}{Include file types (a character vector), Default: 'NA'}
 

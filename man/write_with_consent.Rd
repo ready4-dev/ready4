@@ -14,9 +14,9 @@ write_with_consent(
   declined_args_ls = NULL,
   declined_fn = NULL,
   declined_msg_1L_chr = "No files have been written.",
-  force_from_opts_1L_chr = T,
+  force_from_opts_1L_chr = TRUE,
   options_chr = c("Y", "N"),
-  return_1L_lgl = F
+  return_1L_lgl = FALSE
 )
 }
 \arguments{
@@ -38,11 +38,11 @@ write_with_consent(
 
 \item{declined_msg_1L_chr}{Declined message (a character vector of length one), Default: 'No files have been written.'}
 
-\item{force_from_opts_1L_chr}{Force from opts (a character vector of length one), Default: T}
+\item{force_from_opts_1L_chr}{Force from opts (a character vector of length one), Default: TRUE}
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
-\item{return_1L_lgl}{Return (a logical vector of length one), Default: F}
+\item{return_1L_lgl}{Return (a logical vector of length one), Default: FALSE}
 }
 \value{
 Object (an output object of multiple potential types)

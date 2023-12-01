@@ -7,7 +7,7 @@ make_additions_tb <- function(category_chr = character(0),
   return(additions_tb)
 }
 make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Package","Program","Subroutine","Program_and_Subroutine"),
-                                   as_kbl_1L_lgl = T,
+                                   as_kbl_1L_lgl = TRUE,
                                    brochure_repos_chr = character(0),
                                    exclude_chr = character(0),
                                    format_1L_chr = "%d-%b-%Y",
@@ -19,7 +19,7 @@ make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Pa
                                    org_1L_chr = "ready4-dev",
                                    repos_chr = character(0),
                                    subroutine_repos_chr = character(0),
-                                   tidy_desc_1L_lgl = T,
+                                   tidy_desc_1L_lgl = TRUE,
                                    url_stub_1L_chr = "https://ready4-dev.github.io/",
                                    ...){
   if(!requireNamespace("tidyRSS", quietly = TRUE)) {
@@ -229,7 +229,7 @@ make_ds_releases_tbl <- function (ds_dois_chr,
                                   format_1L_chr = "%d-%b-%Y",
                                   key_1L_chr = NULL,
                                   server_1L_chr = "dataverse.harvard.edu",
-                                  as_kbl_1L_lgl = T,
+                                  as_kbl_1L_lgl = TRUE,
                                   ...)
 {
   ds_releases_xx <- ds_dois_chr %>% purrr::map_dfr(~{
@@ -382,9 +382,9 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
   if(identical(additions_tb,make_additions_tb())){
     additions_tb <- make_additions_tb("Framework","ready4",c("Foundation"))
     include_1L_chr <- "framework"
-    empty_1L_lgl <- T
+    empty_1L_lgl <- TRUE
   }else{
-    empty_1L_lgl <- F
+    empty_1L_lgl <- FALSE
   }
   if(include_1L_chr %in% c("framework","Framework") && !"Framework" %in% additions_tb$category_chr){
     stop("No framework library included in additions_tb")
@@ -453,7 +453,7 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
       purrr::map_dfc(~details_chr[which(startsWith(details_chr, tolower(.x)))] %>% stringr::str_match("\\{(.*?)\\}") %>% purrr::pluck(2)) %>%
       stats::setNames(col_names_chr)
     #tibble::tibble(AUTHOR = details_chr[which(startsWith(details_chr, "author "))])
-    # if (T) {
+    # if (TRUE) {
     #   f <- tempfile(fileext = ".bib")
     #   sink(f)
     #   writeLines(scraped_1L_chr)
@@ -466,7 +466,7 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
     dplyr::rename(DOI_chr = .data$DOI, Title = .data$TITLE, Authors = .data$AUTHOR)
   libraries_tb <- dplyr::left_join(libraries_tb, y_tb, by = ns_var_nm_1L_chr)
   if(empty_1L_lgl){
-    libraries_tb <- libraries_tb %>% dplyr::filter(F)
+    libraries_tb <- libraries_tb %>% dplyr::filter(FALSE)
   }
   return(libraries_tb)
 }
@@ -485,7 +485,7 @@ make_local_path_to_dv_data <- function(save_dir_path_1L_chr,
 }
 make_methods_tb <- function(packages_tb = NULL,
                             exclude_mthds_for_chr = NA_character_,
-                            framework_only_1L_lgl = T,
+                            framework_only_1L_lgl = TRUE,
                             gh_repo_1L_chr = "ready4-dev/ready4",
                             gh_tag_1L_chr = "Documentation_0.0",
                             module_pkgs_chr = character(0), ##
@@ -510,7 +510,7 @@ make_methods_tb <- function(packages_tb = NULL,
 }
 make_modules_pkgs_chr <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                                   gh_tag_1L_chr = "Documentation_0.0",
-                                  sort_1L_lgl = F,
+                                  sort_1L_lgl = FALSE,
                                   what_chr = "all"){
   libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr,
                                    gh_tag_1L_chr = gh_tag_1L_chr) %>%
@@ -549,14 +549,14 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     libraries_ls <- make_libraries_ls(libraries_tb = pkg_extensions_tb, ns_var_nm_1L_chr = ns_var_nm_1L_chr)
     include_int <- what_chr %>% purrr::map(~stringr::str_which(names(libraries_ls),stringr::regex(.x, ignore_case = TRUE))) %>% purrr::flatten_int()
     if(identical(include_int, integer(0))){
-      pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb, F)
+      pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb, FALSE)
     }else{
       pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% purrr::flatten_chr(libraries_ls[include_int]))
     }
   }
   if (is.null(cls_extensions_tb))
     cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb, gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr,
-                                            url_stub_1L_chr = url_stub_1L_chr, validate_1L_lgl = T)
+                                            url_stub_1L_chr = url_stub_1L_chr, validate_1L_lgl = TRUE)
   modules_tb <- dplyr::inner_join(cls_extensions_tb, pkg_extensions_tb, by = ns_var_nm_1L_chr) %>%
     dplyr::arrange(.data$type_chr, .data$old_class_lgl)
   order_int <- modules_tb$Reference %>% purrr::flatten_int() %>% unique() %>% purrr::discard(is.na)
@@ -568,7 +568,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
                                                                                   new_int <-  rep(new_int,2)
                                                                                 new_int
                                                                               }),
-                                               T ~ Reference)
+                                               TRUE ~ Reference)
     )
   order_int <- modules_tb$Vignettes_URLs %>%
     purrr::map(~{
@@ -604,7 +604,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
                                                                                      }
                                                                                      new_chr
                                                                                    }),
-                                                    T ~ .data$Vignettes_URLs)
+                                                    TRUE ~ .data$Vignettes_URLs)
     )
   modules_tb <- modules_tb %>%
     dplyr::mutate(Class = purrr::pmap(list(!!rlang::sym(ns_var_nm_1L_chr),
@@ -625,12 +625,12 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
   return(modules_tb)
 }
 make_programs_tbl <- function(what_1L_chr = c("Program","Subroutine","Program_and_Subroutine"),
-                              as_kbl_1L_lgl = F,
+                              as_kbl_1L_lgl = FALSE,
                               exclude_chr = character(0),
                               format_1L_chr = "%d-%b-%Y",
                               gh_repo_1L_chr = "ready4-dev/ready4",
                               gh_tag_1L_chr = "Documentation_0.0",
-                              tidy_desc_1L_lgl = T,
+                              tidy_desc_1L_lgl = TRUE,
                               url_stub_1L_chr = "https://ready4-dev.github.io/",
                               zenodo_1L_chr = "ready4",
                               ...){
@@ -638,10 +638,10 @@ make_programs_tbl <- function(what_1L_chr = c("Program","Subroutine","Program_an
     stop("zen4R package is required - please install it and rerun the last command.")
   }
   what_1L_chr <- match.arg(what_1L_chr)
-  programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, exclude_chr = exclude_chr,
+  programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = FALSE, exclude_chr = exclude_chr,
                                         gh_repo_1L_chr = gh_repo_1L_chr,
                                         gh_tag_1L_chr = gh_tag_1L_chr,
-                                        tidy_desc_1L_lgl = F, url_stub_1L_chr = url_stub_1L_chr) %>%
+                                        tidy_desc_1L_lgl = FALSE, url_stub_1L_chr = url_stub_1L_chr) %>%
     dplyr::group_by(!!rlang::sym(what_1L_chr)) %>%
     dplyr::filter(dplyr::row_number()==1) %>%
     dplyr::arrange(!!rlang::sym(what_1L_chr)) %>%
@@ -703,7 +703,7 @@ make_prompt <- function(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_ch
   cat(prompt_with_options_1L_chr)
   response_1L_chr <- readLines(con = con_conn, n = 1)
   if (!is.null(options_chr) & !response_1L_chr %in% options_chr & force_from_opts_1L_chr) {
-    response_1L_chr  <- make_prompt(prompt_1L_chr, options_chr, force_from_opts_1L_chr = T)
+    response_1L_chr  <- make_prompt(prompt_1L_chr, options_chr, force_from_opts_1L_chr = TRUE)
   }
   return(response_1L_chr)
 }

@@ -321,7 +321,8 @@ write_self_srvc_pkg <- function(x){
                                     devtools::load_all()
                                     if(!is.null(pkg_setup_ls$subsequent_ls$addl_pkgs_ls)){ # Add edited version of this to ready4fun
                                       if(!is.null(pkg_setup_ls$subsequent_ls$addl_pkgs_ls$Suggests)){
-                                        fns_env_ls$fns_env$write_conditional_tags(pkg_setup_ls$subsequent_ls$addl_pkgs_ls$Suggests)
+                                        fns_env_ls$fns_env$write_conditional_tags(pkg_setup_ls$subsequent_ls$addl_pkgs_ls$Suggests,
+                                                                                  path_to_pkg_root_1L_chr = pkg_setup_ls$initial_ls$path_to_pkg_rt_1L_chr)
                                         devtools::document()
                                       }
                                     }

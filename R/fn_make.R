@@ -23,7 +23,7 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #' @description make_code_releases_tbl() scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the 'exclude_chr' argument.
 #' @param repo_type_1L_chr Repository type (a character vector of length one), Default: c("Framework", "Module", "Package", "Program", "Subroutine", 
 #'    "Program_and_Subroutine")
-#' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: T
+#' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: TRUE
 #' @param brochure_repos_chr Brochure repositories (a character vector), Default: character(0)
 #' @param exclude_chr Exclude (a character vector), Default: character(0)
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
@@ -35,7 +35,7 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #' @param org_1L_chr Organisation (a character vector of length one), Default: 'ready4-dev'
 #' @param repos_chr Repositories (a character vector), Default: character(0)
 #' @param subroutine_repos_chr Subroutine repositories (a character vector), Default: character(0)
-#' @param tidy_desc_1L_lgl Tidy description (a logical vector of length one), Default: T
+#' @param tidy_desc_1L_lgl Tidy description (a logical vector of length one), Default: TRUE
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param ... Additional arguments
 #' @return Releases (an output object of multiple potential types)
@@ -60,13 +60,13 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #'                              gh_repo_1L_chr = "ready4-dev/ready4")
 #'     }
 make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", "Package", 
-    "Program", "Subroutine", "Program_and_Subroutine"), as_kbl_1L_lgl = T, 
+    "Program", "Subroutine", "Program_and_Subroutine"), as_kbl_1L_lgl = TRUE, 
     brochure_repos_chr = character(0), exclude_chr = character(0), 
     format_1L_chr = "%d-%b-%Y", framework_repos_chr = character(0), 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     model_repos_chr = character(0), program_repos_chr = character(0), 
     org_1L_chr = "ready4-dev", repos_chr = character(0), subroutine_repos_chr = character(0), 
-    tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    tidy_desc_1L_lgl = TRUE, url_stub_1L_chr = "https://ready4-dev.github.io/", 
     ...) 
 {
     if (!requireNamespace("tidyRSS", quietly = TRUE)) {
@@ -281,7 +281,7 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdn
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
 #' @param key_1L_chr Key (a character vector of length one), Default: NULL
 #' @param server_1L_chr Server (a character vector of length one), Default: 'dataverse.harvard.edu'
-#' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: T
+#' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: TRUE
 #' @param ... Additional arguments
 #' @return Dataset releases (an output object of multiple potential types)
 #' @rdname make_ds_releases_tbl
@@ -293,7 +293,7 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdn
 #' @importFrom kableExtra cell_spec kable kable_styling
 #' @example man/examples/make_ds_releases_tbl.R
 make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", key_1L_chr = NULL, 
-    server_1L_chr = "dataverse.harvard.edu", as_kbl_1L_lgl = T, 
+    server_1L_chr = "dataverse.harvard.edu", as_kbl_1L_lgl = TRUE, 
     ...) 
 {
     ds_releases_xx <- ds_dois_chr %>% purrr::map_dfr(~{
@@ -510,10 +510,10 @@ make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_ch
         additions_tb <- make_additions_tb("Framework", "ready4", 
             c("Foundation"))
         include_1L_chr <- "framework"
-        empty_1L_lgl <- T
+        empty_1L_lgl <- TRUE
     }
     else {
-        empty_1L_lgl <- F
+        empty_1L_lgl <- FALSE
     }
     if (include_1L_chr %in% c("framework", "Framework") && !"Framework" %in% 
         additions_tb$category_chr) {
@@ -588,7 +588,7 @@ make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_ch
             Authors = .data$AUTHOR)
     libraries_tb <- dplyr::left_join(libraries_tb, y_tb, by = ns_var_nm_1L_chr)
     if (empty_1L_lgl) {
-        libraries_tb <- libraries_tb %>% dplyr::filter(F)
+        libraries_tb <- libraries_tb %>% dplyr::filter(FALSE)
     }
     return(libraries_tb)
 }
@@ -627,7 +627,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @description make_ds_releases_tbl() scrapes metadata from Dataverse datasets for which a valid Digital Object Identifier (DOI) has been supplied to create a table summarising the entire release history of these datasets.
 #' @param packages_tb Packages (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
-#' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: T
+#' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: TRUE
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param module_pkgs_chr Module packages (a character vector), Default: character(0)
@@ -645,7 +645,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #'   # Likely to take more than one minute to execute.
 #'   make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_character_, 
-    framework_only_1L_lgl = T, gh_repo_1L_chr = "ready4-dev/ready4", 
+    framework_only_1L_lgl = TRUE, gh_repo_1L_chr = "ready4-dev/ready4", 
     gh_tag_1L_chr = "Documentation_0.0", module_pkgs_chr = character(0), 
     ns_var_nm_1L_chr = "pt_ns_chr", path_1L_chr = character(0), 
     return_1L_chr = "all") 
@@ -670,7 +670,7 @@ make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_char
 #' @description make_modules_pkgs_chr() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make modules packages character vector. The function returns Modules packages (a character vector).
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
-#' @param sort_1L_lgl Sort (a logical vector of length one), Default: F
+#' @param sort_1L_lgl Sort (a logical vector of length one), Default: FALSE
 #' @param what_chr What (a character vector), Default: 'all'
 #' @return Modules packages (a character vector)
 #' @rdname make_modules_pkgs_chr
@@ -678,7 +678,7 @@ make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_char
 #' @importFrom purrr flatten_chr
 #' @keywords internal
 make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    sort_1L_lgl = F, what_chr = "all") 
+    sort_1L_lgl = FALSE, what_chr = "all") 
 {
     libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, 
         gh_tag_1L_chr = gh_tag_1L_chr) %>% update_libraries_ls(keep_chr = what_chr)
@@ -742,7 +742,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
             stringr::regex(.x, ignore_case = TRUE))) %>% purrr::flatten_int()
         if (identical(include_int, integer(0))) {
             pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb, 
-                F)
+                FALSE)
         }
         else {
             pkg_extensions_tb <- dplyr::filter(pkg_extensions_tb, 
@@ -752,7 +752,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     if (is.null(cls_extensions_tb)) 
         cls_extensions_tb <- get_cls_extensions(pkg_extensions_tb, 
             gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr, 
-            url_stub_1L_chr = url_stub_1L_chr, validate_1L_lgl = T)
+            url_stub_1L_chr = url_stub_1L_chr, validate_1L_lgl = TRUE)
     modules_tb <- dplyr::inner_join(cls_extensions_tb, pkg_extensions_tb, 
         by = ns_var_nm_1L_chr) %>% dplyr::arrange(.data$type_chr, 
         .data$old_class_lgl)
@@ -764,7 +764,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
             if (length(new_int) == 1) 
                 new_int <- rep(new_int, 2)
             new_int
-        }), T ~ Reference))
+        }), TRUE ~ Reference))
     order_int <- modules_tb$Vignettes_URLs %>% purrr::map(~{
         if (is.na(.x[[1]])) {
             NA_integer_
@@ -795,7 +795,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
                 })
             }
             new_chr
-        }), T ~ .data$Vignettes_URLs))
+        }), TRUE ~ .data$Vignettes_URLs))
     modules_tb <- modules_tb %>% dplyr::mutate(Class = purrr::pmap(list(!!rlang::sym(ns_var_nm_1L_chr), 
         .data$type_chr, .data$old_class_lgl), ~{
         kableExtra::cell_spec(..2, "html", link = paste0(url_stub_1L_chr, 
@@ -816,12 +816,12 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' Make a tabular summary of programs using ready4 model modules
 #' @description make_modules_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of the modules included in those libraries and vignette examples of their use.
 #' @param what_1L_chr What (a character vector of length one), Default: c("Program", "Subroutine", "Program_and_Subroutine")
-#' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: F
+#' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: FALSE
 #' @param exclude_chr Exclude (a character vector), Default: character(0)
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
-#' @param tidy_desc_1L_lgl Tidy description (a logical vector of length one), Default: T
+#' @param tidy_desc_1L_lgl Tidy description (a logical vector of length one), Default: TRUE
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param zenodo_1L_chr Zenodo (a character vector of length one), Default: 'ready4'
 #' @param ... Additional arguments
@@ -843,18 +843,18 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #'                       gh_repo_1L_chr = "ready4-dev/ready4")
 #'   }
 make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"), 
-    as_kbl_1L_lgl = F, exclude_chr = character(0), format_1L_chr = "%d-%b-%Y", 
+    as_kbl_1L_lgl = FALSE, exclude_chr = character(0), format_1L_chr = "%d-%b-%Y", 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    tidy_desc_1L_lgl = T, url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    tidy_desc_1L_lgl = TRUE, url_stub_1L_chr = "https://ready4-dev.github.io/", 
     zenodo_1L_chr = "ready4", ...) 
 {
     if (!requireNamespace("zen4R", quietly = TRUE)) {
         stop("zen4R package is required - please install it and rerun the last command.")
     }
     what_1L_chr <- match.arg(what_1L_chr)
-    programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = F, 
+    programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = FALSE, 
         exclude_chr = exclude_chr, gh_repo_1L_chr = gh_repo_1L_chr, 
-        gh_tag_1L_chr = gh_tag_1L_chr, tidy_desc_1L_lgl = F, 
+        gh_tag_1L_chr = gh_tag_1L_chr, tidy_desc_1L_lgl = FALSE, 
         url_stub_1L_chr = url_stub_1L_chr) %>% dplyr::group_by(!!rlang::sym(what_1L_chr)) %>% 
         dplyr::filter(dplyr::row_number() == 1) %>% dplyr::arrange(!!rlang::sym(what_1L_chr)) %>% 
         dplyr::ungroup()
@@ -930,7 +930,7 @@ make_prompt <- function (prompt_1L_chr, options_chr = NULL, force_from_opts_1L_c
     if (!is.null(options_chr) & !response_1L_chr %in% options_chr & 
         force_from_opts_1L_chr) {
         response_1L_chr <- make_prompt(prompt_1L_chr, options_chr, 
-            force_from_opts_1L_chr = T)
+            force_from_opts_1L_chr = TRUE)
     }
     return(response_1L_chr)
 }

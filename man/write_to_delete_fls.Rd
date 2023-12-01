@@ -9,7 +9,7 @@ write_to_delete_fls(
   consent_1L_chr = "",
   consent_indcs_int = 1L,
   options_chr = c("Y", "N"),
-  return_1L_lgl = F
+  return_1L_lgl = FALSE
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ write_to_delete_fls(
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
-\item{return_1L_lgl}{Return (a logical vector of length one), Default: F}
+\item{return_1L_lgl}{Return (a logical vector of length one), Default: FALSE}
 }
 \value{
 Object (an output object of multiple potential types)

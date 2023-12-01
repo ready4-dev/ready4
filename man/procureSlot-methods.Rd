@@ -20,7 +20,7 @@ procureSlot(x, slot_nm_1L_chr, ...)
 \item{use_procure_mthd_1L_lgl}{Use procure method (a length one logical vector)}
 }
 \value{
-y (an object)
+A Ready4Module of the same class as that supplied to the method or a class contained in that Ready4Module's slots.
 }
 \description{
 procureSlot() is a "getter" method that, depending on input arguments, retrieves either the value of data contained in a specified model module slot (default behaviour) or the value returned by applying the procure method to the slot.

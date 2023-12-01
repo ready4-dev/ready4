@@ -48,7 +48,7 @@ get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
-#' @param validate_1L_lgl Validate (a logical vector of length one), Default: F
+#' @param validate_1L_lgl Validate (a logical vector of length one), Default: FALSE
 #' @return Class extensions (a tibble)
 #' @rdname get_cls_extensions
 #' @export 
@@ -61,7 +61,7 @@ get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_
 #' @keywords internal
 get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/ready4", 
     gh_tag_1L_chr = "Documentation_0.0", url_stub_1L_chr = "https://ready4-dev.github.io/", 
-    validate_1L_lgl = F) 
+    validate_1L_lgl = FALSE) 
 {
     dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
         tag = gh_tag_1L_chr, .token = "")
@@ -241,7 +241,7 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
         id_1L_chr <- get_from_lup_obj(ds_ls$files[, names(ds_ls$files) %>% 
             unique()] %>% tibble::as_tibble(), match_var_nm_1L_chr = "filename", 
             match_value_xx = fl_nm_1L_chr, target_var_nm_1L_chr = "id", 
-            evaluate_1L_lgl = F)
+            evaluate_1L_lgl = FALSE)
     }
     else {
         id_1L_chr <- NA_character_
@@ -347,7 +347,7 @@ get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
 #' @param return_1L_chr Return (a character vector of length one), Default: 'all'
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
-#' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: T
+#' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: TRUE
 #' @return Generics (a character vector)
 #' @rdname get_generics
 #' @export 
@@ -355,7 +355,7 @@ get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @importFrom purrr map_lgl map flatten_chr
 #' @keywords internal
 get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclude_mthds_for_chr = NA_character_, 
-    framework_only_1L_lgl = T) 
+    framework_only_1L_lgl = TRUE) 
 {
     generics_chr <- methods::getGenerics(paste0("package:", pkg_nm_1L_chr))@.Data
     generics_chr <- generics_chr[generics_chr %>% purrr::map_lgl(~{
@@ -462,7 +462,7 @@ get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https:/
     indcs_int <- urls_chr %>% purrr::map_lgl(~endsWith(.x, paste0(pkg_nm_1L_chr, 
         "_User.pdf")) | endsWith(.x, paste0(pkg_nm_1L_chr, "_Developer.pdf"))) %>% 
         which()
-    urls_chr <- sort(urls_chr[indcs_int], decreasing = T)
+    urls_chr <- sort(urls_chr[indcs_int], decreasing = TRUE)
     return(urls_chr)
 }
 #' Get the methods associated with a ready4 model module
@@ -647,8 +647,8 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 #' Get table from local file
 #' @description get_table_from_loc_file() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get table from local file. The function returns Table (an output object of multiple potential types).
 #' @param path_1L_chr Path (a character vector of length one)
-#' @param force_numeric_1L_lgl Force numeric (a logical vector of length one), Default: F
-#' @param force_tb_1L_lgl Force tibble (a logical vector of length one), Default: F
+#' @param force_numeric_1L_lgl Force numeric (a logical vector of length one), Default: FALSE
+#' @param force_tb_1L_lgl Force tibble (a logical vector of length one), Default: FALSE
 #' @param heading_rows_1L_int Heading rows (an integer vector of length one), Default: 1
 #' @return Table (an output object of multiple potential types)
 #' @rdname get_table_from_loc_file
@@ -660,7 +660,7 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 #' @importFrom dplyr slice n mutate across
 #' @importFrom tidyselect where
 #' @keywords internal
-get_table_from_loc_file <- function (path_1L_chr, force_numeric_1L_lgl = F, force_tb_1L_lgl = F, 
+get_table_from_loc_file <- function (path_1L_chr, force_numeric_1L_lgl = FALSE, force_tb_1L_lgl = FALSE, 
     heading_rows_1L_int = 1L) 
 {
     file_type_1L_chr <- get_fl_extension(path_1L_chr)

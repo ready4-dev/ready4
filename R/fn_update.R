@@ -85,7 +85,7 @@ update_libraries_tb <- function (libraries_tb = make_libraries_tb(), additions_t
         libraries_ls <- make_libraries_ls(libraries_tb = libraries_tb, 
             ns_var_nm_1L_chr = ns_var_nm_1L_chr) %>% update_libraries_ls(keep_chr = what_chr)
         if (length(libraries_ls == 0)) {
-            libraries_tb <- dplyr::filter(libraries_tb, F)
+            libraries_tb <- dplyr::filter(libraries_tb, FALSE)
         }
         else {
             libraries_tb <- dplyr::filter(libraries_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% 
@@ -133,7 +133,7 @@ update_pt_fn_args_ls <- function (args_ls)
 #' @param fn Function (a function), Default: NULL
 #' @param fn_env_ls Function (a list of environments), Default: NULL
 #' @param slice_indcs_int Slice indices (an integer vector), Default: NA
-#' @param tf_false_val_1L_lgl Transform false value (a logical vector of length one), Default: F
+#' @param tf_false_val_1L_lgl Transform false value (a logical vector of length one), Default: FALSE
 #' @return Tibble ready4 submodule (a ready4 submodule extension of tibble)
 #' @rdname update_tb_r3
 #' @export 
@@ -145,7 +145,7 @@ update_pt_fn_args_ls <- function (args_ls)
 update_tb_r3 <- function (tb_r3, case_when_false_1L_chr = NA_character_, case_when_true_1L_chr = NA_character_, 
     case_when_true_ls = NULL, case_when_var_1L_chr = NA_character_, 
     filter_cdn_1L_chr = NA_character_, fn = NULL, fn_env_ls = NULL, 
-    slice_indcs_int = NA_integer_, tf_false_val_1L_lgl = F) 
+    slice_indcs_int = NA_integer_, tf_false_val_1L_lgl = FALSE) 
 {
     if (!is.na(slice_indcs_int[1])) 
         tb_r3 <- tb_r3 %>% dplyr::slice(slice_indcs_int)
@@ -158,7 +158,7 @@ update_tb_r3 <- function (tb_r3, case_when_false_1L_chr = NA_character_, case_wh
                 .init = tb_r3, ~.x %>% update_tb_r3(case_when_true_1L_chr = case_when_true_ls %>% 
                   purrr::pluck(.y), case_when_var_1L_chr = names(case_when_true_ls)[.y], 
                   case_when_false_1L_chr = names(case_when_true_ls)[.y], 
-                  tf_false_val_1L_lgl = T))
+                  tf_false_val_1L_lgl = TRUE))
             case_when_true_1L_chr <- paste0(paste0(case_when_true_ls %>% 
                 unname() %>% purrr::map_chr(~stringr::str_sub(.x, 
                 end = stringr::str_locate(.x, "~")[1] - 1) %>% 
@@ -171,7 +171,7 @@ update_tb_r3 <- function (tb_r3, case_when_false_1L_chr = NA_character_, case_wh
         }
         tb_r3 <- tb_r3 %>% dplyr::mutate(`:=`(!!rlang::sym(case_when_var_1L_chr), 
             dplyr::case_when(eval(parse(text = case_when_true_1L_chr)), 
-                T ~ !!rlang::sym(case_when_false_1L_chr))))
+                TRUE ~ !!rlang::sym(case_when_false_1L_chr))))
     }
     if (!is.null(fn_env_ls) & !is.null(fn)) 
         tb_r3 <- add_rows_from_fn_args(tb_r3, fn = fn, fn_env_ls = fn_env_ls)

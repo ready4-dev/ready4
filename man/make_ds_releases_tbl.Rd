@@ -9,7 +9,7 @@ make_ds_releases_tbl(
   format_1L_chr = "\%d-\%b-\%Y",
   key_1L_chr = NULL,
   server_1L_chr = "dataverse.harvard.edu",
-  as_kbl_1L_lgl = T,
+  as_kbl_1L_lgl = TRUE,
   ...
 )
 }
@@ -22,7 +22,7 @@ make_ds_releases_tbl(
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: 'dataverse.harvard.edu'}
 
-\item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: T}
+\item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: TRUE}
 
 \item{...}{Additional arguments}
 }

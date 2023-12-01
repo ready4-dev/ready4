@@ -7,7 +7,7 @@
 make_code_releases_tbl(
   repo_type_1L_chr = c("Framework", "Module", "Package", "Program", "Subroutine",
     "Program_and_Subroutine"),
-  as_kbl_1L_lgl = T,
+  as_kbl_1L_lgl = TRUE,
   brochure_repos_chr = character(0),
   exclude_chr = character(0),
   format_1L_chr = "\%d-\%b-\%Y",
@@ -19,7 +19,7 @@ make_code_releases_tbl(
   org_1L_chr = "ready4-dev",
   repos_chr = character(0),
   subroutine_repos_chr = character(0),
-  tidy_desc_1L_lgl = T,
+  tidy_desc_1L_lgl = TRUE,
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   ...
 )
@@ -28,7 +28,7 @@ make_code_releases_tbl(
 \item{repo_type_1L_chr}{Repository type (a character vector of length one), Default: c("Framework", "Module", "Package", "Program", "Subroutine",
 "Program_and_Subroutine")}
 
-\item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: T}
+\item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: TRUE}
 
 \item{brochure_repos_chr}{Brochure repositories (a character vector), Default: character(0)}
 
@@ -52,7 +52,7 @@ make_code_releases_tbl(
 
 \item{subroutine_repos_chr}{Subroutine repositories (a character vector), Default: character(0)}
 
-\item{tidy_desc_1L_lgl}{Tidy description (a logical vector of length one), Default: T}
+\item{tidy_desc_1L_lgl}{Tidy description (a logical vector of length one), Default: TRUE}
 
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 

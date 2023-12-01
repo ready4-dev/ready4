@@ -9,7 +9,7 @@ write_to_render_post(
   path_to_main_dir_1L_chr,
   consent_1L_chr = "",
   consent_indcs_int = 1L,
-  is_rmd_1L_lgl = T,
+  is_rmd_1L_lgl = TRUE,
   options_chr = c("Y", "N")
 )
 }
@@ -22,7 +22,7 @@ write_to_render_post(
 
 \item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
-\item{is_rmd_1L_lgl}{Is Markdown (a logical vector of length one), Default: T}
+\item{is_rmd_1L_lgl}{Is Markdown (a logical vector of length one), Default: TRUE}
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }

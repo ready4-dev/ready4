@@ -6,7 +6,7 @@
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param use_procure_mthd_1L_lgl Use procure method (a length one logical vector)
 #' @param ... Additional arguments
-#' @return y (an object)
+#' @return A Ready4Module of the same class as that supplied to the method or a class contained in that Ready4Module's slots.
 #' @rdname procureSlot-methods
 #' @aliases procureSlot,Ready4Module-method
 #' @export

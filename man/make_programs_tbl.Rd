@@ -6,12 +6,12 @@
 \usage{
 make_programs_tbl(
   what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"),
-  as_kbl_1L_lgl = F,
+  as_kbl_1L_lgl = FALSE,
   exclude_chr = character(0),
   format_1L_chr = "\%d-\%b-\%Y",
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
-  tidy_desc_1L_lgl = T,
+  tidy_desc_1L_lgl = TRUE,
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   zenodo_1L_chr = "ready4",
   ...
@@ -20,7 +20,7 @@ make_programs_tbl(
 \arguments{
 \item{what_1L_chr}{What (a character vector of length one), Default: c("Program", "Subroutine", "Program_and_Subroutine")}
 
-\item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: F}
+\item{as_kbl_1L_lgl}{As kable (a logical vector of length one), Default: FALSE}
 
 \item{exclude_chr}{Exclude (a character vector), Default: character(0)}
 
@@ -30,7 +30,7 @@ make_programs_tbl(
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 
-\item{tidy_desc_1L_lgl}{Tidy description (a logical vector of length one), Default: T}
+\item{tidy_desc_1L_lgl}{Tidy description (a logical vector of length one), Default: TRUE}
 
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 

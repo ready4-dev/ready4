@@ -17,6 +17,9 @@ reckonSlot(x, slot_nm_1L_chr, ...)
 
 \item{...}{Additional arguments}
 }
+\value{
+A numeric class.
+}
 \description{
 reckonSlot() is a convenience method that applies the reckon method to a specified slot of a model module.
 

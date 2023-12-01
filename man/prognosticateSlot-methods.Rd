@@ -17,6 +17,9 @@ prognosticateSlot(x, slot_nm_1L_chr, ...)
 
 \item{...}{Additional arguments}
 }
+\value{
+A Ready4Module.
+}
 \description{
 prognosticateSlot() is a convenience method that applies the prognosticate method to a specified slot of a model module.
 

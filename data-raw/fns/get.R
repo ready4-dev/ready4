@@ -25,7 +25,7 @@ get_cls_extensions <- function(pkg_extensions_tb,
                                gh_repo_1L_chr = "ready4-dev/ready4",
                                gh_tag_1L_chr = "Documentation_0.0",
                                url_stub_1L_chr = "https://ready4-dev.github.io/",
-                               validate_1L_lgl = F){
+                               validate_1L_lgl = FALSE){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
@@ -138,7 +138,7 @@ get_fl_id_from_dv_ls <-  function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
                                           match_var_nm_1L_chr = "filename",
                                           match_value_xx = fl_nm_1L_chr,
                                           target_var_nm_1L_chr = "id",
-                                          evaluate_1L_lgl = F)
+                                          evaluate_1L_lgl = FALSE)
   }
   else {
     id_1L_chr <- NA_character_
@@ -243,7 +243,7 @@ get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
 get_generics <- function(pkg_nm_1L_chr = "ready4",
                          return_1L_chr = "all",
                          exclude_mthds_for_chr = NA_character_,
-                         framework_only_1L_lgl = T){
+                         framework_only_1L_lgl = TRUE){
   generics_chr <- methods::getGenerics(paste0("package:",pkg_nm_1L_chr))@.Data
   generics_chr <- generics_chr[generics_chr %>%
                                  purrr::map_lgl(~{
@@ -306,7 +306,7 @@ get_manual_urls <- function(pkg_nm_1L_chr = "ready4",
                              paste0(pkg_nm_1L_chr,"_User.pdf"))|endsWith(.x,
                                                                          paste0(pkg_nm_1L_chr,"_Developer.pdf"))) %>%
     which()
-  urls_chr <- sort(urls_chr[indcs_int], decreasing = T)
+  urls_chr <- sort(urls_chr[indcs_int], decreasing = TRUE)
   return(urls_chr)
 }
 get_methods <- function(pkg_nm_1L_chr = "ready4",
@@ -422,8 +422,8 @@ get_subroutine_repos <- function(gh_repo_1L_chr = "ready4-dev/ready4",
   return(subroutine_repos_chr)
 }
 get_table_from_loc_file <- function(path_1L_chr,
-                                    force_numeric_1L_lgl = F,
-                                    force_tb_1L_lgl = F,
+                                    force_numeric_1L_lgl = FALSE,
+                                    force_tb_1L_lgl = FALSE,
                                     heading_rows_1L_int = 1L){
   file_type_1L_chr <-  get_fl_extension(path_1L_chr)
   pkg_1L_chr <- switch(file_type_1L_chr,

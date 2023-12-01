@@ -7,7 +7,7 @@
 make_modules_pkgs_chr(
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
-  sort_1L_lgl = F,
+  sort_1L_lgl = FALSE,
   what_chr = "all"
 )
 }
@@ -16,7 +16,7 @@ make_modules_pkgs_chr(
 
 \item{gh_tag_1L_chr}{Github tag (a character vector of length one), Default: 'Documentation_0.0'}
 
-\item{sort_1L_lgl}{Sort (a logical vector of length one), Default: F}
+\item{sort_1L_lgl}{Sort (a logical vector of length one), Default: FALSE}
 
 \item{what_chr}{What (a character vector), Default: 'all'}
 }

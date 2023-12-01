@@ -5,7 +5,7 @@
 \title{Write examples}
 \usage{
 write_examples(
-  path_1L_chr = getwd(),
+  path_1L_chr,
   consent_1L_chr = "",
   consent_indcs_int = 1L,
   options_chr = c("Y", "N"),
@@ -13,7 +13,7 @@ write_examples(
 )
 }
 \arguments{
-\item{path_1L_chr}{Path (a character vector of length one), Default: getwd()}
+\item{path_1L_chr}{Path (a character vector of length one)}
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 

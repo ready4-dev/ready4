@@ -17,6 +17,9 @@ ratifySlot(x, slot_nm_1L_chr, ...)
 
 \item{...}{Additional arguments}
 }
+\value{
+A Ready4Module of the same class as that supplied to the method.
+}
 \description{
 ratifySlot() is a convenience method that applies the ratify method to a specified slot of a model module.
 

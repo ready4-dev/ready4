@@ -6,7 +6,7 @@
 \usage{
 print_data(
   datasets_tb,
-  by_dv_1L_lgl = F,
+  by_dv_1L_lgl = FALSE,
   filter_cdns_ls = NULL,
   root_1L_chr = "https://dataverse.harvard.edu/dataverse/",
   scroll_height_1L_chr = character(0),
@@ -19,7 +19,7 @@ print_data(
 \arguments{
 \item{datasets_tb}{Datasets (a tibble)}
 
-\item{by_dv_1L_lgl}{By dataverse (a logical vector of length one), Default: F}
+\item{by_dv_1L_lgl}{By dataverse (a logical vector of length one), Default: FALSE}
 
 \item{filter_cdns_ls}{Filter conditions (a list), Default: NULL}
 

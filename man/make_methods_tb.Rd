@@ -7,7 +7,7 @@
 make_methods_tb(
   packages_tb = NULL,
   exclude_mthds_for_chr = NA_character_,
-  framework_only_1L_lgl = T,
+  framework_only_1L_lgl = TRUE,
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
   module_pkgs_chr = character(0),
@@ -21,7 +21,7 @@ make_methods_tb(
 
 \item{exclude_mthds_for_chr}{Exclude methods for (a character vector), Default: 'NA'}
 
-\item{framework_only_1L_lgl}{Framework only (a logical vector of length one), Default: T}
+\item{framework_only_1L_lgl}{Framework only (a logical vector of length one), Default: TRUE}
 
 \item{gh_repo_1L_chr}{Github repository (a character vector of length one), Default: 'ready4-dev/ready4'}
 

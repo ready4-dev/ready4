@@ -14,7 +14,7 @@ update_tb_r3(
   fn = NULL,
   fn_env_ls = NULL,
   slice_indcs_int = NA_integer_,
-  tf_false_val_1L_lgl = F
+  tf_false_val_1L_lgl = FALSE
 )
 }
 \arguments{
@@ -36,7 +36,7 @@ update_tb_r3(
 
 \item{slice_indcs_int}{Slice indices (an integer vector), Default: NA}
 
-\item{tf_false_val_1L_lgl}{Transform false value (a logical vector of length one), Default: F}
+\item{tf_false_val_1L_lgl}{Transform false value (a logical vector of length one), Default: FALSE}
 }
 \value{
 Tibble ready4 submodule (a ready4 submodule extension of tibble)

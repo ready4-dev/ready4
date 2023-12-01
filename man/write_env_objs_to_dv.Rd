@@ -12,11 +12,11 @@ write_env_objs_to_dv(
   consent_indcs_int = 1L,
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
   options_chr = c("Y", "N"),
-  publish_dv_1L_lgl = F,
+  publish_dv_1L_lgl = FALSE,
   piggyback_desc_1L_chr = "Documentation",
   piggyback_tag_1L_chr = "Documentation_0.0",
   piggyback_to_1L_chr = character(0),
-  prerelease_1L_lgl = T,
+  prerelease_1L_lgl = TRUE,
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
 )
 }
@@ -35,7 +35,7 @@ write_env_objs_to_dv(
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
-\item{publish_dv_1L_lgl}{Publish dataverse (a logical vector of length one), Default: F}
+\item{publish_dv_1L_lgl}{Publish dataverse (a logical vector of length one), Default: FALSE}
 
 \item{piggyback_desc_1L_chr}{Piggyback description (a character vector of length one), Default: 'Documentation'}
 
@@ -43,7 +43,7 @@ write_env_objs_to_dv(
 
 \item{piggyback_to_1L_chr}{Piggyback to (a character vector of length one), Default: character(0)}
 
-\item{prerelease_1L_lgl}{Prerelease (a logical vector of length one), Default: T}
+\item{prerelease_1L_lgl}{Prerelease (a logical vector of length one), Default: TRUE}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }

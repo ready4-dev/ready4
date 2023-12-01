@@ -6,17 +6,17 @@
 \usage{
 get_table_from_loc_file(
   path_1L_chr,
-  force_numeric_1L_lgl = F,
-  force_tb_1L_lgl = F,
+  force_numeric_1L_lgl = FALSE,
+  force_tb_1L_lgl = FALSE,
   heading_rows_1L_int = 1L
 )
 }
 \arguments{
 \item{path_1L_chr}{Path (a character vector of length one)}
 
-\item{force_numeric_1L_lgl}{Force numeric (a logical vector of length one), Default: F}
+\item{force_numeric_1L_lgl}{Force numeric (a logical vector of length one), Default: FALSE}
 
-\item{force_tb_1L_lgl}{Force tibble (a logical vector of length one), Default: F}
+\item{force_tb_1L_lgl}{Force tibble (a logical vector of length one), Default: FALSE}
 
 \item{heading_rows_1L_int}{Heading rows (an integer vector of length one), Default: 1}
 }

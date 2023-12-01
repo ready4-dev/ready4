@@ -17,6 +17,9 @@ enhanceSlot(x, slot_nm_1L_chr, ...)
 
 \item{...}{Additional arguments}
 }
+\value{
+A Ready4Module of the same class as that supplied to the method.
+}
 \description{
 enhanceSlot() is a convenience method that applies the enhance method to a specified slot a model module.
 

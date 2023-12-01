@@ -6,7 +6,7 @@
 \usage{
 write_conditional_tags(
   pkgs_chr,
-  path_to_pkg_root_1L_chr = getwd(),
+  path_to_pkg_root_1L_chr,
   consent_1L_chr = "",
   consent_indcs_int = 1L,
   options_chr = c("Y", "N"),
@@ -16,7 +16,7 @@ write_conditional_tags(
 \arguments{
 \item{pkgs_chr}{Packages (a character vector)}
 
-\item{path_to_pkg_root_1L_chr}{Path to package root (a character vector of length one), Default: getwd()}
+\item{path_to_pkg_root_1L_chr}{Path to package root (a character vector of length one)}
 
 \item{consent_1L_chr}{Consent (a character vector of length one), Default: ''}
 

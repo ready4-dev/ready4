@@ -13,7 +13,7 @@
 #' @keywords internal
 add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for_dupls_1L_chr = "template") 
 {
-    if (names(template_lup) != names(new_lup)) {
+    if (any(sort(names(template_lup)) != sort(names(new_lup)))) {
         stop("Look up tables must have same column names")
     }
     if (!requireNamespace("Hmisc", quietly = TRUE)) {

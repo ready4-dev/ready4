@@ -9,7 +9,7 @@ write_to_force_links_in(
   consent_1L_chr = "",
   consent_indcs_int = 1L,
   options_chr = c("Y", "N"),
-  shorten_doi_1L_lgl = T
+  shorten_doi_1L_lgl = TRUE
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ write_to_force_links_in(
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
-\item{shorten_doi_1L_lgl}{Shorten digital object identifier (a logical vector of length one), Default: T}
+\item{shorten_doi_1L_lgl}{Shorten digital object identifier (a logical vector of length one), Default: TRUE}
 }
 \description{
 write_to_force_links_in() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to force links in. The function is called for its side effects and does not return a value.

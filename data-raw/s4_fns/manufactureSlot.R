@@ -5,7 +5,7 @@
 #' @param x An object of class Ready4Module
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
-#' @return NULL
+#' @return An object that is not the the same class as that supplied to the method.
 #' @rdname manufactureSlot-methods
 #' @aliases manufactureSlot,Ready4Module-method
 #' @export

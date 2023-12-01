@@ -8,7 +8,7 @@ write_to_publish_dv_ds(
   dv_ds_1L_chr,
   consent_1L_chr = "",
   consent_indcs_int = 1L,
-  minor_1L_lgl = F,
+  minor_1L_lgl = FALSE,
   options_chr = c("Y", "N")
 )
 }
@@ -19,7 +19,7 @@ write_to_publish_dv_ds(
 
 \item{consent_indcs_int}{Consent indices (an integer vector), Default: 1}
 
-\item{minor_1L_lgl}{Minor (a logical vector of length one), Default: F}
+\item{minor_1L_lgl}{Minor (a logical vector of length one), Default: FALSE}
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }

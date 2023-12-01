@@ -11,7 +11,7 @@ write_to_copy_rmds(
   rmds_dir_1L_chr = "R/RMD Templates",
   consent_indcs_int = 1L,
   options_chr = c("Y", "N"),
-  return_1L_lgl = F
+  return_1L_lgl = FALSE
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ write_to_copy_rmds(
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 
-\item{return_1L_lgl}{Return (a logical vector of length one), Default: F}
+\item{return_1L_lgl}{Return (a logical vector of length one), Default: FALSE}
 }
 \description{
 print_packages() formats the output of get_libraries_tb() as HTML.

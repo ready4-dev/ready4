@@ -3,6 +3,7 @@
 #' @description author() is a method that authors and saves files.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no return value (when called for side-effects only).
 #' @export
 author <- function (x, ...)
 {
@@ -14,6 +15,7 @@ methods::setGeneric("author")
 #' @description authorClasses() is a method that authors and saves code files for creating and documenting classes in an R package directory.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no return value (when called for side-effects only).
 #' @export
 authorClasses <- function (x, ...)
 {
@@ -22,9 +24,10 @@ authorClasses <- function (x, ...)
 methods::setGeneric("authorClasses")
 #' Author and document datasets
 #' @rdname authorData-methods
-#' @description authorData() is a method that authors and saves code files for creating and documenting datasets.
+#' @description authorData() is a method that authors, documents and saves datasets.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no return value (when called for side-effects only).
 #' @export
 authorData <- function (x, ...)
 {
@@ -36,6 +39,7 @@ methods::setGeneric("authorData")
 #' @description authorFunctions() is a method that authors and saves files necessary for creating and documenting functions in an R package directory.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no return value (when called for side-effects only).
 #' @export
 authorFunctions <- function (x, ...)
 {
@@ -47,6 +51,7 @@ methods::setGeneric("authorFunctions")
 #' @description authorReport() is a method that authors and saves a report.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no return value (when called for side-effects only).
 #' @export
 authorReport <- function (x, ...)
 {
@@ -58,6 +63,7 @@ methods::setGeneric("authorReport")
 #' @description characterize() is a method that generates descriptive tabular summaries about a dataset.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A data.frame, tibble or other table based class.
 #' @export
 characterize <- function (x, ...)
 {
@@ -69,6 +75,7 @@ methods::setGeneric("characterize")
 #' @description depict() is a method that plots features of a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A ggplot, gg or other plot type class.
 #' @export
 depict <- function (x, ...)
 {
@@ -80,6 +87,7 @@ methods::setGeneric("depict")
 #' @description enhance() is a method that adds new data fields (columns for tabular data, elements for arrays) and values to extendable objects.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 enhance <- function (x, ...)
 {
@@ -92,6 +100,7 @@ methods::setGeneric("enhance")
 #' @description exhibit() is a method that prints salient features of a dataset to console.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method or no return value (when called for side-effects only).
 #' @export
 exhibit <- function (x, ...)
 {
@@ -103,6 +112,7 @@ methods::setGeneric("exhibit")
 #' @description ingest() is a method that ingests data saved in external files into an object in an active R session.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module.
 #' @export
 ingest <- function (x, ...)
 {
@@ -114,6 +124,7 @@ methods::setGeneric("ingest")
 #' @description investigate() is a method that applies an algorithm to solve an inverse problem (ie, given the data,  identify a statistical model that can generate approximations of that data).
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module.
 #' @export
 investigate <- function (x, ...)
 {
@@ -125,6 +136,7 @@ methods::setGeneric("investigate")
 #' @description manufacture() is a method that creates a new object (other than a model module or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
+#' @return An object other than a Ready4Module class.
 #' @export
 manufacture <- function (x, ...)
 {
@@ -136,6 +148,7 @@ methods::setGeneric("manufacture")
 #' @description metamorphose() is a method that transforms a dataset in a model module (or sub-module) instance into a dataset with different structural properties that is contained in another model module/sub-module instance.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module of a different class to that supplied to the method.
 #' @export
 metamorphose <- function (x, ...)
 {
@@ -148,6 +161,7 @@ methods::setGeneric("metamorphose")
 #' @description procure() is a method that retrieves data contained within a model module or sub-module instance. A "getter" method.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 procure <- function (x, ...)
 {
@@ -158,6 +172,7 @@ procure <- function (x, ...)
 #' @description prognosticate() is a method that uses statistical or simulation models to solve a forward problem (i.e., given a model, calculate what is expected to be observed).
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module.
 #' @export
 prognosticate <- function (x, ...)
 {
@@ -169,6 +184,7 @@ methods::setGeneric("prognosticate")
 #' @description ratify() is a method that validates that a model dataset conforms to specified internal consistency criteria, potentially modifying the dataset so that these criteria are met.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 ratify <- function (x, ...)
 {
@@ -180,6 +196,7 @@ methods::setGeneric("ratify")
 #' @description reckon() is a method that  performs a calculation using data contained in a ready4 framework module (or sub-module).
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A numeric class.
 #' @export
 reckon <- function (x, ...)
 {
@@ -191,6 +208,7 @@ methods::setGeneric("reckon")
 #' @description renew() is a method that updates a dataset contained within a model module or sub-module with new values. A "setter" method.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 renew <- function (x, ...)
 {
@@ -202,6 +220,7 @@ methods::setGeneric("renew")
 #' @description share() is a method that uploads data to an online repository. If requested, the method will also publish the updated repository.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method or no return value (when called for side-effects only).
 #' @export
 share <- function (x, ...)
 {
@@ -214,6 +233,7 @@ methods::setGeneric("share")
 #' @description authorSlot() is a convenience method that applies the author method to a specified slot of a model module.
 #' @param x An object
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no value (when called for side effects only).
 #' @export
 authorSlot <- function (x,
                         slot_nm_1L_chr,
@@ -229,6 +249,7 @@ methods::setGeneric("authorSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or a data.frame, tibble or other table class.
 #' @export
 characterizeSlot <- function (x,
                               slot_nm_1L_chr,
@@ -244,6 +265,7 @@ methods::setGeneric("characterizeSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no value (when called for side effects only).
 #' @export
 depictSlot <- function (x,
                         slot_nm_1L_chr,
@@ -259,6 +281,7 @@ methods::setGeneric("depictSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 enhanceSlot <- function (x,
                          slot_nm_1L_chr,
@@ -275,6 +298,7 @@ methods::setGeneric("enhanceSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no return value (when called purely for side effects).
 #' @export
 exhibitSlot <- function (x,
                          slot_nm_1L_chr,
@@ -290,6 +314,7 @@ methods::setGeneric("exhibitSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 ingestSlot <- function (x,
                         slot_nm_1L_chr,
@@ -305,6 +330,7 @@ methods::setGeneric("ingestSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A Ready4Module.
 #' @export
 investigateSlot <- function (x,
                              slot_nm_1L_chr,
@@ -320,6 +346,7 @@ methods::setGeneric("investigateSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return An object that is not the the same class as that supplied to the method.
 #' @export
 manufactureSlot <- function (x,
                              slot_nm_1L_chr,
@@ -334,6 +361,7 @@ methods::setGeneric("manufactureSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A Ready4Module.
 #' @export
 metamorphoseSlot <- function (x,
                               slot_nm_1L_chr,
@@ -349,6 +377,7 @@ methods::setGeneric("procure")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method or a class contained in that Ready4Module's slots.
 #' @export
 procureSlot <- function (x,
                          slot_nm_1L_chr,
@@ -363,6 +392,7 @@ methods::setGeneric("procureSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A Ready4Module.
 #' @export
 prognosticateSlot <- function (x,
                                slot_nm_1L_chr,
@@ -377,6 +407,7 @@ methods::setGeneric("prognosticateSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 ratifySlot <- function (x,
                         slot_nm_1L_chr,
@@ -391,6 +422,7 @@ methods::setGeneric("ratifySlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return A numeric class.
 #' @export
 reckonSlot <- function (x,
                         slot_nm_1L_chr,
@@ -406,6 +438,7 @@ methods::setGeneric("reckonSlot")
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param new_val_xx New value (slot dependent object type), Default 'use_renew_mthd'
 #' @param ... Additional arguments
+#' @return A Ready4Module of the same class as that supplied to the method.
 #' @export
 renewSlot <- function (x,
                        slot_nm_1L_chr,
@@ -421,6 +454,7 @@ methods::setGeneric("renewSlot")
 #' @param x An object
 #' @param slot_nm_1L_chr Slot name (a length one character vector)
 #' @param ... Additional arguments
+#' @return Either a Ready4Module of the same class as that supplied to the method or no value (when called purely for side effects).
 #' @export
 shareSlot <- function (x,
                        slot_nm_1L_chr,
