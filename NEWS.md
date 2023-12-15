@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.1.6
 
 # ready4 0.1.5
 This patch removed an extraneous LICENSE file.
