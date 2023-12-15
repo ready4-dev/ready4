@@ -7,9 +7,12 @@
 share(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
+}
+\value{
+A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
 }
 \description{
 share() is a method that uploads data to an online repository. If requested, the method will also publish the updated repository.

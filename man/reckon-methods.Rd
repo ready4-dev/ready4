@@ -7,10 +7,13 @@
 reckon(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
+\value{
+A numeric class.
+}
 \description{
-reckon() is a method that  performs a calculation using data contained in a ready4 framework module (or sub-module).
+reckon() is a method that  performs a calculation using data contained in a ready4 model module (or sub-module).
 }

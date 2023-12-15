@@ -20,10 +20,12 @@ renewSlot(x, slot_nm_1L_chr, new_val_xx = "use_renew_mthd", ...)
 \item{...}{Additional arguments}
 }
 \value{
-A Ready4Module of the same class as that supplied to the method.
+A ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+
+A ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
 }
 \description{
-renewSlot() is a "setter" method that renews (sets) the value of a specified model module slot with either a supplied new value or the value returned by applying the renew method to the slot (default behaviour).
+renewSlot() is a "setter" method that renews (sets) the value of a specified model module slot with either the value returned by applying the renew method to that slot (the default behaviour) or a supplied new value.
 
 renewSlot method applied to Ready4Module
 }

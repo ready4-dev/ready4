@@ -2,15 +2,18 @@
 % Please edit documentation in R/grp_generics.R
 \name{renew}
 \alias{renew}
-\title{Renew values in a dataset}
+\title{Renew (update) values}
 \usage{
 renew(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
+\value{
+A ready4 model module (an instance of a class that inherits from Ready4Module)  or submodule (any S3 class instance) of the same class as that supplied to the method.
+}
 \description{
-renew() is a method that updates a dataset contained within a model module or sub-module with new values. A "setter" method.
+renew() is a method that updates a ready4 model module or sub-module with new values. A "setter" method.
 }

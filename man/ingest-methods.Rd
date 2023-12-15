@@ -7,10 +7,13 @@
 ingest(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
+\value{
+A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
+}
 \description{
-ingest() is a method that ingests data saved in external files into an object in an active R session.
+ingest() is a method that ingests data saved in external files into a ready4 model module or submodule.
 }

@@ -19,6 +19,8 @@ manufactureSlot(x, slot_nm_1L_chr, ...)
 }
 \value{
 An object that is not the the same class as that supplied to the method.
+
+An object that is not the the same class as that supplied to the method.
 }
 \description{
 manufactureSlot() is a convenience method that applies the manufacture method to a specified slot of a model module.

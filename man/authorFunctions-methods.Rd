@@ -7,10 +7,13 @@
 authorFunctions(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
+\value{
+Either a ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+}
 \description{
-authorFunctions() is a method that authors and saves files necessary for creating and documenting functions in an R package directory.
+authorFunctions() is a method that authors and saves R package files files necessary for creating and documenting functions that implement ready4 model module algorithms.
 }

@@ -2,14 +2,17 @@
 % Please edit documentation in R/grp_generics.R
 \name{characterize}
 \alias{characterize}
-\title{Characterize data by generating (tabular) descriptive statistics}
+\title{Characterize dataset properties by generating (tabular) descriptive statistics}
 \usage{
 characterize(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
+}
+\value{
+A data.frame, tibble or other table based class.
 }
 \description{
 characterize() is a method that generates descriptive tabular summaries about a dataset.

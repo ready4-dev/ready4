@@ -29,6 +29,9 @@ write_obj_with_prompt(
 
 \item{return_1L_lgl}{Return (a logical vector of length one), Default: FALSE}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 write_obj_with_prompt() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write object with prompt. The function is called for its side effects and does not return a value.
 }

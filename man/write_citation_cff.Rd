@@ -26,6 +26,9 @@ write_citation_cff(
 
 \item{publisher_1L_chr}{Publisher (a character vector of length one), Default: 'Zenodo'}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 write_citation_cff() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write citation cff. The function is called for its side effects and does not return a value.
 }

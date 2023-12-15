@@ -18,7 +18,9 @@ investigateSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \value{
-A Ready4Module.
+A ready4 model module (an instance of a class that inherits from Ready4Module).
+
+A ready4 model module (an instance of a class that inherits from Ready4Module).
 }
 \description{
 investigateSlot() is a convenience method that applies the investigate method to a specified slot of a model module.

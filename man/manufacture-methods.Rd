@@ -7,10 +7,13 @@
 manufacture(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
+\value{
+An object other than a ready4 model module (an instance of a class that inherits from Ready4Module).
+}
 \description{
-manufacture() is a method that creates a new object (other than a model module or sub-module).
+manufacture() is a method that creates a new object (other than a ready4 model module).
 }

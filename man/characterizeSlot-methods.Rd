@@ -18,7 +18,9 @@ characterizeSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \value{
-Either a Ready4Module of the same class as that supplied to the method or no value (when called for side effects only).
+Either a ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or a data.frame, tibble or other table class.
+
+Either a ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or a data.frame, tibble or other table class.
 }
 \description{
 characterizeSlot() is a convenience method that applies the characterize method to a specified slot of a model module.

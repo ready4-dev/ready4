@@ -29,6 +29,9 @@ write_from_tmp(
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 write_from_tmp() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write from temporary. The function is called for its side effects and does not return a value.
 }

@@ -7,9 +7,12 @@
 prognosticate(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
+}
+\value{
+A ready4 model module (an instance of a class that inherits from Ready4Module).
 }
 \description{
 prognosticate() is a method that uses statistical or simulation models to solve a forward problem (i.e., given a model, calculate what is expected to be observed).

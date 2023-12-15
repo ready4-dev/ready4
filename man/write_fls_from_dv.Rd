@@ -35,6 +35,9 @@ write_fls_from_dv(
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 write_fls_from_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write files from dataverse. The function is called for its side effects and does not return a value.
 }

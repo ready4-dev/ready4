@@ -7,9 +7,12 @@
 enhance(x, ...)
 }
 \arguments{
-\item{x}{An object}
+\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
+}
+\value{
+A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method.
 }
 \description{
 enhance() is a method that adds new data fields (columns for tabular data, elements for arrays) and values to extendable objects.

@@ -29,6 +29,9 @@ write_to_copy_rmds(
 
 \item{return_1L_lgl}{Return (a logical vector of length one), Default: FALSE}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 print_packages() formats the output of get_libraries_tb() as HTML.
 }

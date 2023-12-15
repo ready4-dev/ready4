@@ -20,6 +20,9 @@ write_ws(
 
 \item{options_chr}{Options (a character vector), Default: c("Y", "N")}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 write_to_render_post() is designed for help overcome practical challenges of rendering RMD or Rmarkdown files to Markdown output in a modelling project's Hugo Docsy documentation website. You must have 'hugodown' installed for this function to work.
 }

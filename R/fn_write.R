@@ -7,7 +7,7 @@
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_all_tbs_in_tbs_r4_to_csvs
 #' @export 
 #' @importFrom purrr walk
@@ -30,7 +30,7 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_blog_entries
 #' @export 
 #' @seealso [rmarkdown::render()]
@@ -75,7 +75,7 @@ write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param publisher_1L_chr Publisher (a character vector of length one), Default: 'Zenodo'
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_citation_cff
 #' @export 
 #' @importFrom stringr str_sub str_replace_all str_remove str_replace
@@ -121,7 +121,7 @@ write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", 
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param where_1L_chr Where (a character vector of length one), Default: character(0)
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_conditional_tags
 #' @export 
 #' @importFrom purrr walk map_lgl reduce map_chr discard
@@ -234,7 +234,7 @@ write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr, consent_1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param save_type_1L_chr Save type (a character vector of length one), Default: 'original'
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_dv_fl_to_loc
 #' @export 
 #' @importFrom dataverse get_dataset
@@ -334,7 +334,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param type_1L_chr Type (a character vector of length one), Default: 'fn'
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_examples
 #' @export 
 #' @importFrom purrr map_chr pwalk map_lgl
@@ -425,7 +425,7 @@ write_examples <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int 
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_extra_pkgs_to_actions
 #' @export 
 #' @importFrom purrr walk
@@ -461,7 +461,7 @@ write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr, consent_1L_chr = ""
 #' @param key_1L_chr Key (a character vector of length one), Default: Sys.getenv("DATAVERSE_KEY")
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_fls_from_dv
 #' @export 
 #' @importFrom purrr walk
@@ -649,7 +649,7 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param edit_fn_ls Edit (a list of functions), Default: list(NULL)
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_from_tmp
 #' @export 
 #' @importFrom purrr pmap
@@ -694,7 +694,7 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, args_ls_ls = list(NUL
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param save_type_1L_chr Save type (a character vector of length one), Default: 'original'
 #' @param server_1L_chr Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_ingested_dv_fl
 #' @export 
 #' @importFrom dataverse get_file
@@ -744,7 +744,7 @@ write_ingested_dv_fl <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L
 #' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
 #' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
 #' @param what_chr What (a character vector), Default: 'all'
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_library_metadata
 #' @export 
 #' @keywords internal
@@ -813,7 +813,7 @@ write_library_metadata <- function (additions_tb = make_additions_tb(), librarie
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_new_credentials
 #' @export 
 #' @importFrom stringr str_replace
@@ -842,7 +842,7 @@ write_new_credentials <- function (path_to_file_1L_chr, new_credentials_1L_chr, 
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_new_dirs
 #' @export 
 #' @importFrom purrr map_lgl walk
@@ -973,7 +973,7 @@ write_new_files <- function (paths_chr, consent_1L_chr = "", consent_indcs_int =
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param return_1L_lgl Return (a logical vector of length one), Default: FALSE
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_obj_with_prompt
 #' @export 
 #' @importFrom rlang exec
@@ -1051,7 +1051,7 @@ write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_tb_to_csv
 #' @export 
 #' @importFrom methods slot
@@ -1089,7 +1089,7 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param return_1L_lgl Return (a logical vector of length one), Default: FALSE
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_to_copy_rmds
 #' @export 
 #' @importFrom purrr walk
@@ -1117,7 +1117,7 @@ write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_to_delete_dirs
 #' @export 
 #' @importFrom purrr map_lgl map flatten_chr walk
@@ -1339,7 +1339,7 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, parent_d
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param dir_path_1L_chr Directory path (a character vector of length one), Default: '.github/workflows'
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_to_edit_workflow
 #' @export 
 #' @keywords internal
@@ -1373,7 +1373,7 @@ write_to_edit_workflow <- function (fl_nm_1L_chr, consent_1L_chr = "", consent_i
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
 #' @param shorten_doi_1L_lgl Shorten digital object identifier (a logical vector of length one), Default: TRUE
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_to_force_links_in
 #' @export 
 #' @importFrom purrr map_chr
@@ -1406,7 +1406,7 @@ write_to_force_links_in <- function (path_to_mkdn_1L_chr, consent_1L_chr = "", c
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param minor_1L_lgl Minor (a logical vector of length one), Default: FALSE
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_to_publish_dv_ds
 #' @export 
 #' @importFrom dataverse publish_dataset
@@ -1430,7 +1430,7 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param is_rmd_1L_lgl Is Markdown (a logical vector of length one), Default: TRUE
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_to_render_post
 #' @export 
 #' @importFrom purrr walk
@@ -1500,7 +1500,7 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_to_trim_html
 #' @export 
 #' @keywords internal
@@ -1576,7 +1576,7 @@ write_with_consent <- function (consented_fn, prompt_1L_chr, consent_1L_chr = ""
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_words
 #' @export 
 #' @importFrom piggyback pb_download_url
@@ -1602,7 +1602,7 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1
 #' @param options_chr Options (a character vector), Default: c("Y", "N")
-#' @return NULL
+#' @return No return value, called for side effects.
 #' @rdname write_ws
 #' @export 
 #' @importFrom purrr map_chr
