@@ -1,4 +1,5 @@
 # ready4 0.1.6
+This patch modifies code style, documentation and argument defaults to comply with CRAN reviewer recommendations.
 
 # ready4 0.1.5
 This patch removed an extraneous LICENSE file.
