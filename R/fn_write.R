@@ -308,7 +308,19 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
     descriptions_chr <- descriptions_chr[!is.na(paths_chr)]
     paths_chr <- paths_chr[!is.na(paths_chr)]
     if (identical(piggyback_to_1L_chr, character(0))) {
-        ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+        ds_ls <- tryCatch(dataverse::get_dataset(ds_url_1L_chr, 
+            key = key_1L_chr), error = function(cond) {
+            NULL
+        })
+        if (is.null(ds_ls)) {
+            ds_ls <- tryCatch(dataverse::get_dataset(ds_url_1L_chr, 
+                key = NULL), error = function(cond) {
+                NULL
+            })
+            if (is.null(ds_ls)) {
+                ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+            }
+        }
     }
     else {
         ds_ls <- NULL
