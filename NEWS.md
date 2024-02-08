@@ -1,3 +1,5 @@
+# ready4 (development version)
+
 # ready4 0.1.6
 This patch modifies code style, documentation and argument defaults to comply with CRAN reviewer recommendations.
 
