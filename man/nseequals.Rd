@@ -2,8 +2,11 @@
 % Please edit documentation in R/imp_fns.R
 \name{:=}
 \alias{:=}
-\title{NSE equals function}
+\title{Non standard evaluation assignment function}
 \description{
-Import of non standard evaluation equals function for use in dplyr calls.
+Import of := function, implementing \code{\link[rlang:dyn-dots]{rlang::dyn-dots()}}. See rlang package documentation for detailed description.
+}
+\seealso{
+\code{\link[rlang:dyn-dots]{rlang::dyn-dots()}}
 }
 \keyword{internal}

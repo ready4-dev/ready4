@@ -18,7 +18,7 @@ shareSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \value{
-Either a ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no value (when called purely for side effects).
+Either a model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no value (when called purely for side effects).
 
 Either a ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no value (when called purely for side effects).
 }

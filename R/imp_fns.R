@@ -1,19 +1,18 @@
 #' Pipe operator
 #'
-#' Implements: https://github.com/sckott/analogsea/issues/32
-#' and https://github.com/rstudio/ggvis/blob/master/R/pipe.R.
+#' Import of [magrittr::%>%()]. See magrittr package documentation for detailed description.
 #'
 #' @importFrom magrittr %>%
 #' @name %>%
 #' @rdname pipe
 #' @export
-#' @param lhs,rhs An object and a function to apply to it
 #' @keywords internal
+#' @seealso [magrittr::%>%()]
 NULL
 
 #' Deprecated function
 #'
-#' Import of [lifecycle::deprecated()] function as recommended in lifecycle package documentation.
+#' Import of [lifecycle::deprecated()]. See lifecycle package documentation for detailed description.
 #'
 #' @importFrom lifecycle deprecated
 #' @name deprecated
@@ -23,20 +22,21 @@ NULL
 #' @seealso [lifecycle::deprecated()]
 NULL
 
-#' NSE equals function
+#' Non standard evaluation assignment function
 #'
-#' Import of non standard evaluation equals function for use in dplyr calls.
+#' Import of := function, implementing [rlang::dyn-dots()]. See rlang package documentation for detailed description.
 #'
 #' @importFrom rlang :=
 #' @name :=
 #' @rdname nseequals
 #' @export
 #' @keywords internal
+#' @seealso [rlang::dyn-dots()]
 NULL
 
 #' Dot Data function
 #'
-#' Import of [rlang::.data()] function for use in dataset manipulation within functions.
+#' Import of [rlang::.data()]. See rlang package documentation for detailed description.
 #'
 #' @importFrom rlang .data
 #' @name .data

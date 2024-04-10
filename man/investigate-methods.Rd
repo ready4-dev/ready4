@@ -7,13 +7,13 @@
 investigate(x, ...)
 }
 \arguments{
-\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
 \value{
-A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
+A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
 }
 \description{
-investigate() is a method that applies an algorithm to solve an inverse problem (ie, given the data, identify a statistical model that can generate approximations of that data).
+investigate() is a method that applies an algorithm to data contained in a model module in order to solve an inverse problem (ie, identify a statistical model that can generate approximations of that data).
 }

@@ -4,7 +4,7 @@
 \alias{deprecated}
 \title{Deprecated function}
 \description{
-Import of \code{\link[lifecycle:deprecated]{lifecycle::deprecated()}} function as recommended in lifecycle package documentation.
+Import of \code{\link[lifecycle:deprecated]{lifecycle::deprecated()}}. See lifecycle package documentation for detailed description.
 }
 \seealso{
 \code{\link[lifecycle:deprecated]{lifecycle::deprecated()}}

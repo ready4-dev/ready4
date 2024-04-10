@@ -7,7 +7,7 @@
 procure(x, ...)
 }
 \arguments{
-\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
@@ -15,5 +15,5 @@ procure(x, ...)
 An object of the same class as that supplied to the method or of one of the same classes that constitute the input object's slots or elements.
 }
 \description{
-procure() is a method that retrieves data contained within a ready4 model module or sub-module. A "getter" method.
+procure() is a "getter"  method that retrieves data contained within a model module or sub-module.
 }

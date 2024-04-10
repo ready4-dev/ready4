@@ -7,13 +7,13 @@
 authorClasses(x, ...)
 }
 \arguments{
-\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
 \value{
-Either a ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
 }
 \description{
-authorClasses() is a method that authors and saves R package files for creating and documenting classes to describe the data structures of ready4 model modules.
+authorClasses() is a method that authors and saves R package files for creating and documenting classes to describe the data structures of model modules.
 }

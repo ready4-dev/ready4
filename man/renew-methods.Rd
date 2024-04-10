@@ -7,13 +7,13 @@
 renew(x, ...)
 }
 \arguments{
-\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
 \value{
-A ready4 model module (an instance of a class that inherits from Ready4Module)  or submodule (any S3 class instance) of the same class as that supplied to the method.
+A model module (an instance of a class that inherits from Ready4Module)  or submodule (any S3 class instance) of the same class as that supplied to the method.
 }
 \description{
-renew() is a method that updates a ready4 model module or sub-module with new values. A "setter" method.
+renew() is a "setter" method that updates values of selected data contained in a model module or sub-module.
 }

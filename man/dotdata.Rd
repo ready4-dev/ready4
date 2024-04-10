@@ -4,7 +4,7 @@
 \alias{.data}
 \title{Dot Data function}
 \description{
-Import of \code{\link[rlang:dot-data]{rlang::.data()}} function for use in dataset manipulation within functions.
+Import of \code{\link[rlang:dot-data]{rlang::.data()}}. See rlang package documentation for detailed description.
 }
 \seealso{
 \code{\link[rlang:dot-data]{rlang::.data()}}

@@ -7,13 +7,13 @@
 ingest(x, ...)
 }
 \arguments{
-\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
 \value{
-A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
+A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
 }
 \description{
-ingest() is a method that ingests data saved in external files into a ready4 model module or submodule.
+ingest() is a method that ingests data saved in external files into a model module or submodule.
 }

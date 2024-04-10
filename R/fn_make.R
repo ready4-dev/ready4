@@ -913,12 +913,12 @@ make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program
 #' @description make_prompt() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make prompt. The function returns Response (a character vector of length one).
 #' @param prompt_1L_chr Prompt (a character vector of length one)
 #' @param options_chr Options (a character vector), Default: NULL
-#' @param force_from_opts_1L_chr Force from opts (a character vector of length one), Default: F
+#' @param force_from_opts_1L_chr Force from opts (a character vector of length one), Default: FALSE
 #' @return Response (a character vector of length one)
 #' @rdname make_prompt
 #' @export 
 #' @keywords internal
-make_prompt <- function (prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = F) 
+make_prompt <- function (prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = FALSE) 
 {
     acknowledgement_1L_chr <- "This function is based on: https://debruine.github.io/posts/interactive-test/"
     con_conn <- getOption("prompt_opts.con", stdin())

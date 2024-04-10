@@ -7,13 +7,13 @@
 ratify(x, ...)
 }
 \arguments{
-\item{x}{A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
 
 \item{...}{Additional arguments}
 }
 \value{
-A ready4 model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method.
+A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method.
 }
 \description{
-ratify() is a method that validates that a ready4 model module or submodule conforms to specified internal consistency criteria, potentially updating the values in the input object so that these criteria are met.
+ratify() is a method that validates that a model module or submodule conforms to specified internal consistency criteria, potentially updating the invalid values in the model module so that these criteria are met.
 }

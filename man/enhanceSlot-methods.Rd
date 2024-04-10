@@ -18,7 +18,7 @@ enhanceSlot(x, slot_nm_1L_chr, ...)
 \item{...}{Additional arguments}
 }
 \value{
-A ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
 
 A ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
 }

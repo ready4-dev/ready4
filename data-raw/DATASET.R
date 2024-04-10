@@ -98,31 +98,31 @@ readLines("README.md") %>% # update in ready4fun
   stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
   gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   writeLines(con = "README.md")
-c(readLines("R/imp_fns.R"), # update in ready4fun
-  " ",
-  "#' NSE equals function",
-  "#'",
-  "#' Import of non standard evaluation equals function for use in dplyr calls.",
-  "#'",
-  "#' @importFrom rlang :=",
-  "#' @name :=",
-  "#' @rdname nseequals",
-  "#' @export",
-  "#' @keywords internal",
-  "NULL",
-  " ",
-  "#' Dot Data function",
-  "#'",
-  "#' Import of .data function for use in dataset manipulation within functions.",
-  "#'",
-  "#' @importFrom rlang .data",
-  "#' @name .data",
-  "#' @rdname dotdata",
-  "#' @export",
-  "#' @keywords internal",
-  "NULL"
-) %>%
-  writeLines("R/imp_fns.R")
+# c(readLines("R/imp_fns.R"), # update in ready4fun
+#   " ",
+#   "#' NSE equals function",
+#   "#'",
+#   "#' Import of non standard evaluation equals function for use in dplyr calls.",
+#   "#'",
+#   "#' @importFrom rlang :=",
+#   "#' @name :=",
+#   "#' @rdname nseequals",
+#   "#' @export",
+#   "#' @keywords internal",
+#   "NULL",
+#   " ",
+#   "#' Dot Data function",
+#   "#'",
+#   "#' Import of .data function for use in dataset manipulation within functions.",
+#   "#'",
+#   "#' @importFrom rlang .data",
+#   "#' @name .data",
+#   "#' @rdname dotdata",
+#   "#' @export",
+#   "#' @keywords internal",
+#   "NULL"
+# ) %>%
+#   writeLines("R/imp_fns.R")
 write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1L_chr)
 write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1L_chr, type_1L_chr = "r4")
 # desc_ls <-
@@ -132,10 +132,12 @@ write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1
 unlink("LICENSE")
 readLines("DESCRIPTION") %>%
   purrr::map_chr(~.x %>% stringr::str_replace("GPL-3 \\+ file LICENSE","GPL-3") %>%
-                   stringr::str_replace("\"aut\", \"cre\"", "\"aut\", \"cre\", \"cph\"")) %>%
+                   #stringr::str_replace("\"aut\", \"cre\"", "\"aut\", \"cre\", \"cph\"")) %>%
   writeLines("DESCRIPTION")
 devtools::document()
 devtools::build_vignettes()
+readLines("_pkgdown.yml") %>% stringr::str_replace("  - text: Model","  - text: Framework") %>%
+  writeLines("_pkgdown.yml")
 #ready4fun::authorReport.ready4fun_manifest(x) # Choose 'N' for pkgdown edit
 #readLines("_pkgdown.yml")[-c(11:12)] %>% writeLines("_pkgdown.yml")
 

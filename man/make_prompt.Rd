@@ -4,14 +4,14 @@
 \alias{make_prompt}
 \title{Make prompt}
 \usage{
-make_prompt(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = F)
+make_prompt(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = FALSE)
 }
 \arguments{
 \item{prompt_1L_chr}{Prompt (a character vector of length one)}
 
 \item{options_chr}{Options (a character vector), Default: NULL}
 
-\item{force_from_opts_1L_chr}{Force from opts (a character vector of length one), Default: F}
+\item{force_from_opts_1L_chr}{Force from opts (a character vector of length one), Default: FALSE}
 }
 \value{
 Response (a character vector of length one)
