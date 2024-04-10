@@ -13,7 +13,7 @@
 
 methods::setMethod("procureSlot", "Ready4Module", function(x,
                                                            slot_nm_1L_chr,
-                                                           use_procure_mthd_1L_lgl = F,
+                                                           use_procure_mthd_1L_lgl = FALSE,
                                                            ...){
   y_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))
   if(use_procure_mthd_1L_lgl)

@@ -695,7 +695,7 @@ make_programs_tbl <- function(what_1L_chr = c("Program","Subroutine","Program_an
   }
   return(programs_xx)
 }
-make_prompt <- function(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = F) {
+make_prompt <- function(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = FALSE) {
   acknowledgement_1L_chr <- "This function is based on: https://debruine.github.io/posts/interactive-test/"
   con_conn <- getOption("prompt_opts.con", stdin())
   options_1L_chr <- paste(options_chr, collapse = "|")

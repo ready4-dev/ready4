@@ -13,15 +13,16 @@ NULL
 
 #' Deprecated function
 #'
-#' Import of deprecated function as recommended in lifecycle package documentation.
+#' Import of [lifecycle::deprecated()] function as recommended in lifecycle package documentation.
 #'
 #' @importFrom lifecycle deprecated
 #' @name deprecated
 #' @rdname deprecated
 #' @export
 #' @keywords internal
+#' @seealso [lifecycle::deprecated()]
 NULL
- 
+
 #' NSE equals function
 #'
 #' Import of non standard evaluation equals function for use in dplyr calls.
@@ -32,14 +33,15 @@ NULL
 #' @export
 #' @keywords internal
 NULL
- 
+
 #' Dot Data function
 #'
-#' Import of .data function for use in dataset manipulation within functions.
+#' Import of [rlang::.data()] function for use in dataset manipulation within functions.
 #'
 #' @importFrom rlang .data
 #' @name .data
 #' @rdname dotdata
 #' @export
 #' @keywords internal
+#' @seealso [rlang::.data()]
 NULL

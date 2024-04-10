@@ -2,7 +2,6 @@
 % Please edit documentation in R/pkg_ready4.R, R/ready4-package.R
 \docType{package}
 \name{ready4-package}
-\alias{ready4}
 \alias{ready4-package}
 \title{ready4: Implement Modular and Open-Source Health Economic Models}
 \description{

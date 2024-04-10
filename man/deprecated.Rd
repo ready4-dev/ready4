@@ -4,6 +4,9 @@
 \alias{deprecated}
 \title{Deprecated function}
 \description{
-Import of deprecated function as recommended in lifecycle package documentation.
+Import of \code{\link[lifecycle:deprecated]{lifecycle::deprecated()}} function as recommended in lifecycle package documentation.
+}
+\seealso{
+\code{\link[lifecycle:deprecated]{lifecycle::deprecated()}}
 }
 \keyword{internal}
