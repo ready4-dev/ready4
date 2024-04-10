@@ -1,4 +1,4 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -8,7 +8,7 @@ articles:
   V_04: V_04.html
   V_05: V_05.html
   ready4: ready4.html
-last_built: 2024-02-08T04:17Z
+last_built: 2024-04-10T04:36Z
 urls:
   reference: https://ready4-dev.github.io/ready4/reference
   article: https://ready4-dev.github.io/ready4/articles
