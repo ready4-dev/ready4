@@ -82,7 +82,7 @@ x <- x %>%
                                              "Write ready4 software develoment local directories"
                                              ) %>% stats::setNames(user_manual_fns_chr),
                              user_manual_fns_chr = user_manual_fns_chr),
-                           copyright_holders_chr = "Orygen",
+                           copyright_holders_chr = "Orygen and Matthew Hamilton",
                            import_from_chr = NA_character_,
                            lifecycle_stage_1L_chr = "experimental",
                            path_to_pkg_logo_1L_chr = "../../../../../Documentation/Images/ready4-logo/default.png",
@@ -131,8 +131,9 @@ write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1
 # usethis::use_description(fields = append(utils::packageDescription("ready4"), list(Language = "en-AU")))
 unlink("LICENSE")
 readLines("DESCRIPTION") %>%
-  purrr::map_chr(~.x %>% stringr::str_replace("GPL-3 \\+ file LICENSE","GPL-3") %>%
-                   #stringr::str_replace("\"aut\", \"cre\"", "\"aut\", \"cre\", \"cph\"")) %>%
+  purrr::map_chr(~.x %>% stringr::str_replace("GPL-3 \\+ file LICENSE","GPL-3")
+                 # %>%stringr::str_replace("\"aut\", \"cre\"", "\"aut\", \"cre\", \"cph\"")
+                   ) %>%
   writeLines("DESCRIPTION")
 devtools::document()
 devtools::build_vignettes()

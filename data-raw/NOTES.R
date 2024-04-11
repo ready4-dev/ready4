@@ -65,8 +65,8 @@ Y <- renewSlot(Y,
                  #libraries_tb = libraries_tb
                  #exclude_chr = c("aus_09_synth","dce_sa_cards","fakefolk","rebuild")
                  #libraries_ls = libraries_ls
-                 #methods_tb = methods_tb
-                 modules_tb = modules_tb
+                 methods_tb = methods_tb
+                 #modules_tb = modules_tb
                  #treat_as_words_chr = Y@b_Ready4useIngest@objects_ls$treat_as_words_chr
                  )),
                slot_nm_1L_chr = "b_Ready4useIngest")
