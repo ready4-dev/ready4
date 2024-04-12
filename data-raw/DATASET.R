@@ -139,6 +139,9 @@ devtools::document()
 devtools::build_vignettes()
 readLines("_pkgdown.yml") %>% stringr::str_replace("  - text: Model","  - text: Framework") %>%
   writeLines("_pkgdown.yml")
+# Important addition:
+# rhub::rhub_setup()
+#
 #ready4fun::authorReport.ready4fun_manifest(x) # Choose 'N' for pkgdown edit
 #readLines("_pkgdown.yml")[-c(11:12)] %>% writeLines("_pkgdown.yml")
 

@@ -32,9 +32,9 @@ spelling::spell_check_package()
 
 # check on other distributions
 # _rhub
-devtools::check_rhub()
-rhub::check_on_windows(check_args = "--force-multiarch")
-rhub::check_on_fedora()
+# devtools::check_rhub()
+# rhub::check_on_windows(check_args = "--force-multiarch")
+# rhub::check_on_fedora()
 # _win devel
 devtools::check_win_devel()
 
