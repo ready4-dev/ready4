@@ -24,7 +24,7 @@ A table summarising currently available module libraries authored with the `read
 libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4") %>% update_libraries_tb(include_1L_chr = "modules")
 ```
 
-Module libraries can be thematically grouped in model “sections”. In this [youth mental health example](https://www.ready4-dev.com/docs/model/), module libraries have been grouped in to three “sections”.
+Module libraries can be thematically grouped in model “sections”. In this [youth mental health example](https://readyforwhatsnext.org/docs/model/), module libraries have been grouped in to three “sections”.
 
 ```{r}
 libraries_tb$Section %>% unique()

@@ -20,7 +20,7 @@ When considering whether to use model modules, model developers and users will o
 
 ## Implementation
 
-Details of how to search for themed collections of modules is described in [another article](https://www.ready4-dev.com/docs/software/libraries/types/module/). A table itemising individual model modules and sub-modules authored with `ready4` can be generated using `make_modules_tb`. This function scrapes relevant data from the websites of module libraries that have been developed within a specified project's GitHub organisation and may take a couple of minutes to execute. In this example, we are going to examine modules from a [youth mental health model](https://www.ready4-dev.com/docs/model/).
+Details of how to search for themed collections of modules is described in [another article](https://www.ready4-dev.com/docs/software/libraries/types/module/). A table itemising individual model modules and sub-modules authored with `ready4` can be generated using `make_modules_tb`. This function scrapes relevant data from the websites of module libraries that have been developed within a specified project's GitHub organisation and may take a couple of minutes to execute. In this example, we are going to examine modules from a [youth mental health model](https://readyforwhatsnext.org/docs/model/).
 
 
 ```{r}

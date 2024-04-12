@@ -13,6 +13,23 @@ There were no ERRORs or WARNINGs.
 
 There are 4 NOTEs.
 
+1. One NOTE related to this being a new submission and having a potentially invalid URL
+```
+  New submission
+  
+  Found the following (possibly) invalid URLs:
+    URL: https://readyforwhatsnext.org/docs/model/ (moved to https://readyforwhatsnext.org/docs/model/)
+      From: inst/doc/V_02.html
+            inst/doc/V_04.html
+            inst/doc/V_05.html
+      Status: 404
+      Message: Not Found
+    URL: https://www.ready4-dev.com/docs/software/libraries/types/module/ (moved to https://readyforwhatsnext.org/docs/model/modules/finding/libraries/)
+      From: inst/doc/V_02.html
+            inst/doc/V_05.html
+      Status: 404
+      Message: Not Found
+```
 1. One NOTE related to this being a new submission and having a potentially misspelled word (found in Local Windows, Windows Server development, Windows Server (on winbuilder) and Fedora Linux clang):
 
 ```
