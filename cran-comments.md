@@ -1,17 +1,16 @@
 ## Test environments
 
 * Local Windows (mingw32), R 4.3.1 [1 NOTE generated]
-* Fedora Linux (on R-hub) R-devel GCC [0 NOTEs generated]
-* Fedora Linux (on R-hub) R-devel clang gfortran [2 NOTEs generated]
-* Windows Server 2022, R-devel, 64 bit (on R-hub) [3 NOTEs generated]
-* Windows Server 2022, R-release, 32/64 bit (on R-hub) [0 NOTEs generated]
+* Mac OS macos-latest (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/8658118159/job/23741393976)
+* Windows windows-latest (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/8658118159/job/23741394263)
+* Fedora Linux 38 R Under development (unstable) gcc13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/8658118159/job/23741394147) 
 * Windows Server 2022 x64 (build 20348) (on winbuilder) [1 NOTE generated] 
 
 ## R CMD check results
 
 There were no ERRORs or WARNINGs. 
 
-There was 1 NOTE (on Local Windows) relating to this being a new submission.
+There was 1 NOTE (on Local Windows and winbuilder) relating to this being a new submission.
 
 1. One NOTE related to this being a new submission.
 
