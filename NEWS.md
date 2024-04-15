@@ -1,3 +1,5 @@
+# ready4 0.1.8
+
 # ready4 0.1.7
 This patch modifies framework syntax descriptions as well as updating function documentation and function argument defaults to comply with CRAN reviewer recommendations.
 
