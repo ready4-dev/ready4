@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.1.9
 
 # ready4 0.1.8
 This patch addresses CRAN reviewer feedback by ensuring that prompt messages written to console can now be suppressed. This patch also updates the documentation of functions imported from other packages and the way an arXiv pre-print is referenced in the DESCRIPTION file to comply with CRAN reviewer recommendations.
