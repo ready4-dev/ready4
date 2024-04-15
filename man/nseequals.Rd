@@ -3,6 +3,9 @@
 \name{:=}
 \alias{:=}
 \title{Non standard evaluation assignment function}
+\value{
+Does not return a value. Used to implement non standard evaluation within a dynamic dots context.
+}
 \description{
 Import of := function, implementing \code{\link[rlang:dyn-dots]{rlang::dyn-dots()}}. See rlang package documentation for detailed description.
 }

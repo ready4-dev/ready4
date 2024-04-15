@@ -8,9 +8,9 @@ source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 
 x <- ready4fun::make_pkg_desc_ls(
   pkg_title_1L_chr = "Implement Modular And Open-Source Health Economic Models" %>% tools::toTitleCase(),
-  pkg_desc_1L_chr = "Programming syntax, a template model module and tools to help maintain a health economic modelling project's documentation website.
-  These elements are the foundation for a prototype software framework to support transferable health economic models. The software framework is extended by other R libraries.
-  For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2023) <arXiv:2310.14138>.",
+  pkg_desc_1L_chr = "Programming syntax, a template model module and tools to help maintain a modular and open-source health economic model's project documentation website.
+  These elements are the foundation for a prototype software framework to support replicable and transferable health economic models. The software framework is extended by other R libraries.
+  For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) <doi:10.48550/arXiv:2310.14138>.",
   authors_prsn = c(utils::person(
     given = "Matthew",family = "Hamilton", email = "matthew.hamilton1@monash.edu", role = c("aut", "cre","cph"),
     comment = c(ORCID = "0000-0001-7407-9194")
@@ -96,7 +96,7 @@ write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages
 usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
   stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
-  gsub(pattern = "arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
+  gsub(pattern = "doi:10.48550/arXiv:([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   writeLines(con = "README.md")
 # c(readLines("R/imp_fns.R"), # update in ready4fun
 #   " ",

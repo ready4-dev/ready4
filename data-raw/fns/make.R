@@ -700,7 +700,7 @@ make_prompt <- function(prompt_1L_chr, options_chr = NULL, force_from_opts_1L_ch
   con_conn <- getOption("prompt_opts.con", stdin())
   options_1L_chr <- paste(options_chr, collapse = "|")
   prompt_with_options_1L_chr <- paste0(prompt_1L_chr, " [", options_1L_chr, "]\n")
-  cat(prompt_with_options_1L_chr)
+  message(prompt_with_options_1L_chr)
   response_1L_chr <- readLines(con = con_conn, n = 1)
   if (!is.null(options_chr) & !response_1L_chr %in% options_chr & force_from_opts_1L_chr) {
     response_1L_chr  <- make_prompt(prompt_1L_chr, options_chr, force_from_opts_1L_chr = TRUE)

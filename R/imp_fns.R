@@ -7,6 +7,7 @@
 #' @rdname pipe
 #' @export
 #' @keywords internal
+#' @returns The type of return from this function depends on the left hand side and right hand side arguments supplied to it. In principle, any type of returned object is feasible.
 #' @seealso [magrittr::%>%()]
 NULL
 
@@ -19,6 +20,7 @@ NULL
 #' @rdname deprecated
 #' @export
 #' @keywords internal
+#' @returns Does not return a value as the function is used to signal that a function argument has been deprecated.
 #' @seealso [lifecycle::deprecated()]
 NULL
 
@@ -31,6 +33,7 @@ NULL
 #' @rdname nseequals
 #' @export
 #' @keywords internal
+#' @returns Does not return a value. Used to implement non standard evaluation within a dynamic dots context.
 #' @seealso [rlang::dyn-dots()]
 NULL
 
@@ -43,5 +46,6 @@ NULL
 #' @rdname dotdata
 #' @export
 #' @keywords internal
+#' @returns Does not return a value. A pronoun for use in data-masked functions.
 #' @seealso [rlang::.data()]
 NULL

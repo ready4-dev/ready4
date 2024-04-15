@@ -3,6 +3,9 @@
 \name{.data}
 \alias{.data}
 \title{Dot Data function}
+\value{
+Does not return a value. A pronoun for use in data-masked functions.
+}
 \description{
 Import of \code{\link[rlang:dot-data]{rlang::.data()}}. See rlang package documentation for detailed description.
 }

@@ -3,6 +3,9 @@
 \name{\%>\%}
 \alias{\%>\%}
 \title{Pipe operator}
+\value{
+The type of return from this function depends on the left hand side and right hand side arguments supplied to it. In principle, any type of returned object is feasible.
+}
 \description{
 Import of \code{\link[magrittr:pipe]{magrittr::\%>\%()}}. See magrittr package documentation for detailed description.
 }
