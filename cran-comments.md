@@ -15,7 +15,7 @@ There was 1 NOTE (on Local Windows and winbuilder) relating to this being a new 
 1. One NOTE related to this being a new submission.
 
 ```
-  New submission
+    New submission
 
 ```
 
@@ -23,10 +23,11 @@ There was 1 NOTE (on Local Windows and winbuilder) relating to this being a new 
 
 This version addresses the following issues flagged by a previous CRAN reviewer:
 
+- a call to the cat function has been replaced to a call to the message function to enable users to suppress messages to console; 
 
-- two functions have been edited so that "T" has been replaced with "TRUE" and "F" has been replaced with "FALSE"; and
+- the reference to an arXiv pre-print in the DESCRIPTION file has been updated to adopt the format <doi:10.48550/arXiv.YYMM.NNNNN>.; and
 
-- four functions that were imported from other packages and which were inadequately documented (e.g. not /value tag), have now been documented with explicit links to the source package's documentation.
+- four functions that were imported from other packages have value tags added to their .Rd files.
 
 
 

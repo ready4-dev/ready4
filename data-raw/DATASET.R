@@ -10,7 +10,7 @@ x <- ready4fun::make_pkg_desc_ls(
   pkg_title_1L_chr = "Implement Modular And Open-Source Health Economic Models" %>% tools::toTitleCase(),
   pkg_desc_1L_chr = "Programming syntax, a template model module and tools to help maintain a modular and open-source health economic model's project documentation website.
   These elements are the foundation for a prototype software framework to support replicable and transferable health economic models. The software framework is extended by other R libraries.
-  For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) <doi:10.48550/arXiv:2310.14138>.",
+  For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) <doi:10.48550/arXiv.2310.14138>.",
   authors_prsn = c(utils::person(
     given = "Matthew",family = "Hamilton", email = "matthew.hamilton1@monash.edu", role = c("aut", "cre","cph"),
     comment = c(ORCID = "0000-0001-7407-9194")

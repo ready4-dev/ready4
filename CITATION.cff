@@ -1,10 +1,10 @@
 cff-version: 1.2.0
-message: "Matthew P Hamilton  (2023). ready4: Implement Modular and Open-Source Health Economic Models. Version 0.1.8. Zenodo. https://doi.org/10.5281/zenodo.5606250"
+message: "Matthew P Hamilton  (2023). ready4: Implement Modular and Open-Source Health Economic Models. Version 0.1.8.9000. Zenodo. https://doi.org/10.5281/zenodo.5606250"
 authors:
   - family-names: "Hamilton"
     given-names: "Matthew P"
 title: "ready4: Implement Modular and Open-Source Health Economic Models"
-version: 0.1.8
+version: 0.1.8.9000
 doi: 10.5281/zenodo.5606250
 date-released: 2024-04-15
 url: "https://ready4-dev.github.io/ready4/"
