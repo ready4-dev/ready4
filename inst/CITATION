@@ -9,7 +9,7 @@ bibentry(
   note     = sprintf("R package version %s", meta$Version),
   url      = "https://ready4-dev.github.io/ready4/",
   textVersion = paste("Matthew P Hamilton ",
-  "(2023).",
+  "(2024).",
   paste0(meta$Package,": ",meta$Title,
   "."),
   paste0(sprintf("Version %s", meta$Version),"."),
