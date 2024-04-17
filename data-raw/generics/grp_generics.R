@@ -156,7 +156,7 @@ metamorphose <- function (x, ...)
 }
 methods::setGeneric("metamorphose")
 
-#' Procure items from a dataset
+#' Procure data from a model module
 #' @rdname procure-methods
 #' @description procure() is a "getter"  method that retrieves data contained within a model module or sub-module.
 #' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)

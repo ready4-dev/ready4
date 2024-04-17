@@ -2,7 +2,7 @@
 % Please edit documentation in R/grp_generics.R
 \name{procure}
 \alias{procure}
-\title{Procure items from a dataset}
+\title{Procure data from a model module}
 \usage{
 procure(x, ...)
 }
