@@ -22,7 +22,13 @@ use it visit <https://www.ready4-dev.com/>. For a background to the
 methodological issues that the framework is attempting to help solve,
 see Hamilton et al. (2024) <https://arxiv.org/abs/2310.14138>.
 
-To install a development version of this software, run the following commands in your R console:
+To install the latest [CRAN](https://cran.r-project.org/) version of ready4, run the following commands in your R console:
+
+```r
+utils::install.packages("ready4")
+```
+
+To install the latest development version of this software, run the following commands in your R console:
 
 ```r
 utils::install.packages("devtools")
