@@ -7,10 +7,10 @@ source("data-raw/FUNCTIONS.R") # Required to manage conflicts
 #dir.create("data-raw/examples")
 
 x <- ready4fun::make_pkg_desc_ls(
-  pkg_title_1L_chr = "Implement Modular And Open-Source Health Economic Models" %>% tools::toTitleCase(),
-  pkg_desc_1L_chr = "Programming syntax, a template model module and tools to help maintain a modular and open-source health economic model's project documentation website.
-  These elements are the foundation for a prototype software framework to support replicable and transferable health economic models. The software framework is extended by other R libraries.
-  For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) <doi:10.48550/arXiv.2310.14138>.",
+  pkg_title_1L_chr = "Develop And Use Modular Health Economic Models" %>% tools::toTitleCase(),
+  pkg_desc_1L_chr = "A template model module, tools to help find model modules derived from this template and a programming syntax to use these modules in health economic analyses.
+  These elements are the foundation for a prototype software framework for developing living and transferable models and using those models to undertake reproducible health economic analyses. The software framework is extended by other R libraries.
+  For detailed documentation about the framework and how to use it visit <https://www.ready4-dev.com/>. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) <doi:10.1007/s40273-024-01378-8>.",
   authors_prsn = c(utils::person(
     given = "Matthew",family = "Hamilton", email = "matthew.hamilton1@monash.edu", role = c("aut", "cre","cph"),
     comment = c(ORCID = "0000-0001-7407-9194")
@@ -45,7 +45,7 @@ x <- x %>%
                                             "get_methods() retrieves the ready4 methods that are available for a specified ready4 model module.",
                                             "get_methods_tb() ingests 'methods_tb.RDS' (a table of methods associated with ready4 model modules) from a specified GitHub repository release.",
                                             "get_modules_tb() ingests 'modules_tb.RDS' (a table of ready4 model modules) from a specified GitHub repository release.",
-                                            "make_code_releases_tbl() scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the 'exclude_chr' argument.",                                            "make_datasts_tb() function searches the contents of a specified Dataverse collection and returns a summary of the the data collections it contains.",
+                                            "make_code_releases_tbl() scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the 'exclude_chr' argument.",
                                             "make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.",
                                             "make_ds_releases_tbl() scrapes metadata from Dataverse datasets for which a valid Digital Object Identifier (DOI) has been supplied to create a table summarising the entire release history of these datasets.",
                                             "make_methods_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of vignette examples of ready4 module methods.",
@@ -94,10 +94,10 @@ x <- write_self_srvc_pkg(x)
 write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages, run for "test-coverage.yaml" as well.
 #write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), consent_1L_chr = "Y")
 usethis::use_package("pkgload", type = "Suggests") # ??
-readLines("README.md") %>% # update in ready4fun
-  #stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
-  gsub(pattern = "doi:10.48550/arXiv.([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
-  writeLines(con = "README.md")
+# readLines("README.md") %>% # update in ready4fun
+#   #stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
+#   gsub(pattern = "doi:10.48550/arXiv.([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
+#   writeLines(con = "README.md")
 # c(readLines("R/imp_fns.R"), # update in ready4fun
 #   " ",
 #   "#' NSE equals function",

@@ -1,0 +1,42 @@
+---
+title: "Partially Automate Maintenance Of A Modelling Project's Website"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Partially Automate Maintenance Of A Modelling Project's Website}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+```{r message=FALSE, warning=F}
+library(ready4) 
+```
+
+## Motivation
+To combine model modules, it is first necessary for model developers and users to be able to find compatible module libraries. Manually keeping track of modules libraries authored by different teams can be an onerous undertaking. The `ready4` library therefore includes tools to allow a modelling project’s maintainers to perform automated searches for model libraries and to output tabular summaries of these modules that are suitable for inclusion on documentation website pages.
+
+## Implementation
+The `ready4` library includes tools to allow a modelling project's maintainers to partially automate searching for and creating summaries of relevant modelling project assets (e.g. tutorials, releases, etc.) that are suitable for inclusion on documentation website pages.
+
+## Use
+The documentation website maintenance tools in the `ready4` library are designed to be used on a docsy documentation website derived from [this template repository](https://github.com/ready4-dev/ready4web). An example of a website created from this template is the [readyforwhatsnext model project website](https://readyforwhatsnext.org/), for which source code is [available here](https://github.com/ready4-dev/readyforwhatsnext). 
+
+The `write_to_render_post` is the main `ready4` function used specifically for website maintenance tasks. Importantly, the non-CRAN library [hugodown](https://github.com/r-lib/hugodown) needs to be installed to use this function.
+
+`write_to_render_post` is designed for help overcome practical challenges of rendering RMD or Rmarkdown files (pareticularly those sourced from an individual module library's documentation website) to Markdown output in an overall modelling project website. Examples of its use are in [this script](https://github.com/ready4-dev/readyforwhatsnext/blob/main/runme.R) that is run when updating the readyforwhatsnext project website. The RMD / Rmarkdown files rendered by this example script call other useful functions from the ready4 package, such as:
+
+- `get_libraries_tb`,  `update_libraries_tb` and `print_packages` for updating details on module libraries (see [this example](https://readyforwhatsnext.org/docs/tutorials/finding/libraries/))
+
+- `make_modules_tb` and `print_modules` for updating details on individual modules (see [this example](https://readyforwhatsnext.org/docs/tutorials/finding/individual/))
+
+- `make_datasets_tb` and `print_data` for updating details on module datasets (see [this example](https://readyforwhatsnext.org/docs/tutorials/finding/finding-data/))    
+
+- `get_datasets_tb`, `make_dss_tb` and `make_ds_releases_tbl` for updating release statuses of module datasets (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Datasets/Model-Data/People-Datasets/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/01/25/datasets-for-modelling-people-releases/))
+
+- `make_programs_tbl` for updating details on analysis programs or reporting sub-routines that use model modules (see [this RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Analyses/Find/index_Body.Rmd) and [its associated output](https://readyforwhatsnext.org/docs/analyses/find/#current-readyforhwatsnext-programs) as well as this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Reporting/index_Body.Rmd) and [its output](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Reporting/index_Body.Rmd))
+
+- `make_code_releases_tbl` for updating release statuses of module libraries and programs or reporting sub-routines that use model modules (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Executables/Programs/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/01/25/programs-releases/))
+
+

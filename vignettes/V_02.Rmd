@@ -1,8 +1,8 @@
 ---
-title: "Use A Simple And Consistent Syntax In Computational Health Economic Models"
+title: "Apply Model Modules Using A Simple And Consistent Syntax"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Use A Simple And Consistent Syntax In Computational Health Economic Models}
+  %\VignetteIndexEntry{Apply Model Modules Using A Simple And Consistent Syntax}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,24 +15,24 @@ library(ready4)
 ```
 
 ## Motivation
-Transparency is one of the underpinning principles of ethical modelling practice. One way to improve the transparency of computational health economic models (such as those we are developing [in youth mental health](https://readyforwhatsnext.org)) is to ensure that the [programs implementing model analyses](https://readyforwhatsnext.org/docs/model/analyses/) can be meaningfully inspected by readers with different levels of technical expertise. Even non-technical readers should be able to follow the high-level logic implemented by model algorithms. If multiple analysis programs are written using a common simplified syntax then reviewers of those programs need to contend with relatively fewer new concepts. 
+To be used in health economic analyses, model modules need to be called using a programming syntax. Ideally that syntax should be relatively simple, with the name and description of each command reliably communicating the category of operations it performs.
 
 ## Implementation
-`ready4` provides a simple syntax that can be consistently applied to attach algorithms (methods) to [model modules](https://www.ready4-dev.com/docs/framework/implementation/modularity/). It does so by taking advantage of the [abstraction and polymorphism features of Object Oriented Programing](https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/#transparent-computational-models) and R's use of generic functions. Generic functions don't implement algorithms themselves - their most salient features are a name and a high level description of the type of task that any method associated with that generic should perform. Whenever a developer creates a method for [classes that use R's S4 and S3 systems (the types used for model modules and sub-modules)](https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation), they can associate that method with the generic that has a description that is the best match for the algorithm being implemented.
+`ready4` provides a simple syntax that is used to apply all model modules developed with the [`ready4` framework](https://www.ready4-dev.com/).
 
-### Available generics
-A table that summarises the latest `ready4` syntax can be ingested from a periodically updated database using `get_methods_tb`.
+## Use
+A table that summarises the latest `ready4` syntax can be ingested from a periodically updated database using `get_methods_tb`. In the below example we will search for examples of where that syntax has been used to call modules from the [readyforwhatsnext model](https://readyforwhatsnext.org/). The value supplied to the `gh_repo_1L_chr` argument specifies the repository in which a dataset of readyforwhatsnext module libraries is stored.
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # Not run
-# x <- make_methods_tb()
+# x <- make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 ```
 ```{r}
-x <- get_methods_tb()
+x <- get_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 ```
 
-#### Core generics
-`ready4` includes a number of core generic functions which describe the main types of method to be implemented by model modules. Notably, the `ready4` package does not associate methods with any of these core generics. Instead, methods are associated with these generics in [R packages of model modules](https://readyforwhatsnext.org/docs/tutorials/finding/libraries/). A HTML table of `ready4`'s  core generics and examples of methods associated with each generic can be displayed using the `print_methods` function, using the `return_1L_chr = "core"` argument. 
+### Core commands
+A HTML table of `ready4`'s core commands and examples of the use of each command can be displayed using the `print_methods` function, using the `return_1L_chr = "core"` argument. 
 
 ```{r}
 print_methods(x,
@@ -40,14 +40,14 @@ print_methods(x,
               scroll_width_1L_chr = "100%") 
 ```
 
-#### Slot generics and methods
-Each of the "core" generics also has a "slot" version, for use when applying a core method to a specified slot of a class. The `ready4` package associated methods for each of these "slot" generics for [the `Ready4Module` template](https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation). Two of these "slot" methods can also be used for additional purposes:
+### Applying commands to module "slots"
+Each of the "core" commands also has a "slot" version, which applies the command to a specified slot (a named element of a module). Two of these "slot" methods can also be used for additional purposes:
 
  - [procureSlot](https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html) is a "getter" method - its default behaviour is to return the value of a specified slot. If the argument `use_procure_mthd_1L_lgl = T` is included in the method call, `procureSlot` will instead apply the `procure` method to a specified slot.
  
  - [renewSlot](https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html) is a "setter" method - if any value other than "use_renew_mthd" (the default) is passed to the `new_val_xx` argument, that value will be assigned to the specified slot.
  
-A HTML table of the slot generics bundled with `ready4` can be displayed using the `print_methods` function, using the `return_1L_chr = "slot"` argument.
+A HTML table of slot commands and relevant examples can be displayed using the `print_methods` function, using the `return_1L_chr = "slot"` argument.
 
 ```{r}
 print_methods(x,
@@ -55,8 +55,8 @@ print_methods(x,
               scroll_width_1L_chr = "100%")
 ```
 
-#### Extended `author` generics
-Finally, there are a small number of other generics that are more general extensions of the core functions. Currently, these extended generics are all variants on the `author` generics, with each one specifying the type of output to be authored by the method. The `ready4` package does not include methods for any of these extended generics. A HTML table of the extended generics bundled with `ready4` can be displayed using the `print_methods` function, using the `return_1L_chr = "extended"` argument.
+### Extended commands
+Finally, there are a small number of other commands that are more general extensions of the core commands. Currently, these extended commands are all variants on the `author` command, with each extension specifying the type of output to be authored by the method. A HTML table of the extended generics bundled with `ready4` can be displayed using the `print_methods` function, using the `return_1L_chr = "extended"` argument.
 
 ```{r}
 print_methods(x,

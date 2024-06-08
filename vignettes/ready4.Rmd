@@ -19,23 +19,40 @@ library(ready4)
 ```
 
 ## Motivation
-The social, economic and service systems that shape population health are complex and thus can be challenging to model. Some health economic modelling projects may therefore be more tractable if broken into smaller tasks and advanced by multiple teams. Such phased and collaborative approaches can be facilitated by use of common frameworks for the development of computational models that are both open and modular. A broader discussion of the ethical dimensions of these topics is available [here](https://arxiv.org/pdf/2403.17798.pdf).
+Health economic models should ideally be both "living" ( kept up to date) and "transferable" (easy to selectively modify so they can be validly used in a new context). Research studies that use such models should be reproducible. These goals [can be hard to achieve in practice](https://www.ready4-dev.com/docs/getting-started/motivation/).
 
 ## Implementation
-The `ready4` package provides bare bones foundational elements of a software framework to implement replicable and transferable health economic models in R. The framework is extended by multiple other R packages - see the framework's [consolidated documentation website](https://www.ready4-dev.com/) for details. 
+The `ready4` R library provides bare bones foundational elements of a [prototype software framework](https://rdcu.be/dIv8g) to: (i) develop living and transferable health economic models; and (ii) apply those models to implement reproducible health economic analyses. The framework is extended by multiple other R packages - see the framework's [project website](https://www.ready4-dev.com/) for details. 
 
-### Articles
-The `ready4` package includes a simple programming syntax, a template model module  and functions to partially automate the maintenance of a modelling project's website. These tools are described in the following articles:
+## Use
+For most users, the main applications of the ready4 library will be to:
 
-- [Implement Modular Computational Health Economic Models](V_01.html)
+- [find themed collections of health economic model modules that have been developed with the ready4 framework](V_04.html);
 
-- [Use A Simple And Consistent Syntax In Computational Health Economic Models](V_02.html)
+- [itemise available model modules and sub-modules and find examples of how to use them](V_05.html); and
 
-- [Finding Ready4 Module Libraries](V_04.html)
+- [apply these modules to undertake health economic analyses using a simple and consistent syntax](V_02.html).
 
-- [Finding Examples of Individual Ready4 Modules and Sub-modules](V_05.html)
+For the above purposes, the ready4 library will be typically used in conjunction with the [ready4use](https://ready4-dev.github.io/ready4use/) and [ready4show](https://ready4-dev.github.io/ready4show/) libraries.
 
-A discussion of why ready4 has adopted an object-oriented approach to model modularisation is included in the following article:
+For users with software development expertise, the ready4 library also provides:
 
-- [Apply An Object-Oriented Paradigm To Computational Health Economic Models](V_03.html)
+- [a template model module](V_01.html) that facilitates modular implementations of health economic models using an [object-oriented paradigm](V_03.html);
 
+- [a simple programming syntax to make available to end-users](V_07.html); and
+
+- [tools to partially automate the maintenance of an open source modelling project's website](V_06.html).
+
+Developers that wish to author health economic models as R libraries with ready4 may wish to consider using the [ready4pack](https://ready4-dev.github.io/ready4pack/) library. However, that library (along with its two primary dependencies [ready4fun](https://ready4-dev.github.io/ready4fun/) and [ready4class](https://ready4-dev.github.io/ready4class/)) is not yet well documented and the ready4 framework remains a prototype. It is therefore recommended to [first contact the package authors](https://mph-economist.netlify.app/#contact) before undertaking R library development with ready4. 
+
+## Further reading
+
+- A [pre-print manuscript](https://arxiv.org/pdf/2403.17798) discussing the need for health economic models to be transparent, reusable and updatable;
+
+- An 2024 [article in Pharmacoeconomics](https://rdcu.be/dIv8g) describing the ready4 prototype software framework;
+
+- The [ready4 prototype software framework website](https://www.ready4-dev.com/);
+
+- The [project website of the readyforwhatsnext model](https://readyforwhatsnext.org/) that is being developed with the ready4 software framework; and
+
+- A [pre-print manuscript](https://www.medrxiv.org/content/10.1101/2021.07.07.21260129v4) describing a utility mapping study implemented with modules of the readyforwhatsnext model.

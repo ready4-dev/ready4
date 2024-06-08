@@ -16,48 +16,46 @@ library(ready4)
 ```
 
 ## Motivation
-When considering whether to use model modules, model developers and users will often want to see examples of each module's application The `ready4` package includes tools to allow a modelling project's maintainers to perform automated searches for vignette examples of model modules and to output tabular summaries of these modules that are suitable for inclusion on documentation website pages.
+When considering whether to use a model module, it is useful to first see tutorials about appropriate use of that module. 
 
 ## Implementation
+A table itemising individual model modules and sub-modules authored with `ready4` can be generated using `make_modules_tb`. This function scrapes relevant data from the websites of module libraries that have been developed within a specified project's GitHub organisation and may take a couple of minutes to execute.
 
-Details of how to search for themed collections of modules is described in [another article](https://readyforwhatsnext.org/docs/tutorials/finding/libraries/). A table itemising individual model modules and sub-modules authored with `ready4` can be generated using `make_modules_tb`. This function scrapes relevant data from the websites of module libraries that have been developed within a specified project's GitHub organisation and may take a couple of minutes to execute. In this example, we are going to examine modules from a [youth mental health model](https://readyforwhatsnext.org/).
-
+## Use
+In this example, we are going to examine modules from the [readyforwhatsnext model](https://readyforwhatsnext.org/). The value supplied to the `gh_repo_1L_chr` argument specifies the repository in which a dataset of readyforwhatsnext module libraries is stored. 
 
 ```{r}
 modules_tb <-  make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 ```
 
-
 A slightly quicker method to achieve a similar result is to use the `get_modules_tb` function. This function retrieves an archived version (and therefore potentially less up to date) of the modules summary table.
-
 
 ```{r eval=FALSE}
 # Not run
 # modules_tb <- get_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 ```
 
+The `modules_tb` object itemises both model [modules (which always use R's "S4" class type) and sub-modules ("S3" class type)](https://www.ready4-dev.com/docs/getting-started/implementation/modularity/). 
 
-The `modules_tb` object itemises both ready4 modules (which always use R's "S4" class type) and sub-modules ("S3" class type). To display a HTML summary of just ready4 modules, you can use the `print_modules` function. 
-
+To display a HTML summary of just model modules, you can use the `print_modules` function. 
 
 ```{r eval=FALSE}
 print_modules(modules_tb, what_1L_chr = "S4")
 ```
 
-
 ```{r echo=FALSE}
 print_modules(modules_tb, what_1L_chr = "S4")
 ```
 
-You can use the same function to display only ready4 sub-modules.
-
+You can use the same function to display only model sub-modules.
 
 ```{r eval=FALSE}
 print_modules(modules_tb, what_1L_chr = "S3")
 ```
 
-
 ```{r echo=FALSE}
 print_modules(modules_tb, what_1L_chr = "S3")
 ```
 
+## Related content
+Details of how to search for themed collections of modules is described in [another article](https://readyforwhatsnext.org/docs/tutorials/finding/libraries/). 

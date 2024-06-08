@@ -431,7 +431,7 @@ reckonSlot <- function (x,
   UseMethod("reckonSlot", x)
 }
 methods::setGeneric("reckonSlot")
-#' Apply the renew method to a model module slot
+#' Renew (set) the values of data in a module slot
 #' @rdname renewSlot-methods
 #' @description renewSlot() is a "setter" method that renews (sets) the value of a specified model module slot with either the value returned by applying the renew method to that slot (the default behaviour) or a supplied new value.
 #' @param x A model module (an instance of a class that inherits from Ready4Module)

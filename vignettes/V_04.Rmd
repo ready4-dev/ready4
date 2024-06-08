@@ -15,22 +15,24 @@ library(ready4)
 ```
 
 ## Motivation
-To combine model modules, it is first necessary for model developers and users to be able to find compatible module libraries. Manually keeping track of modules libraries authored by different teams can be an onerous undertaking. The ready4 package therefore includes tools to allow a modelling project’s maintainers to perform automated searches for model libraries and to output tabular summaries of these modules that are suitable for inclusion on documentation website pages.
+To use and combine health economic model modules it is first useful to find inter-operable modules developed with a common framework.
 
 ## Implementation
-A table summarising currently available module libraries authored with the `ready4` framework within a specified GitHub organisation can be retrieved from an online dataset by using the `get_libraries_tb` and `update_libraries_tb` functions.
+A table summarising currently available module libraries authored with the `ready4` framework within a specified GitHub organisation can be retrieved from an online dataset by using the `get_libraries_tb` and `update_libraries_tb` functions. 
+
+## Use
+In the below example we will search for modules from the [readyforwhatsnext model](https://readyforwhatsnext.org/). The source code for these modules all reside in the [ready4-dev GitHub repository](https://github.com/ready4-dev). The value supplied to the `gh_repo_1L_chr` argument specifies the repository in which a dataset of readyforwhatsnext module libraries is stored.
 
 ```{r}
-libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4") %>% update_libraries_tb(include_1L_chr = "modules")
+libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4") %>% update_libraries_tb(include_1L_chr = "modules", url_stub_1L_chr = "https://ready4-dev.github.io/")
 ```
 
-Module libraries can be thematically grouped in model “sections”. In this [youth mental health example](https://readyforwhatsnext.org/), module libraries have been grouped in to three “sections”.
+In this example, module libraries have been grouped in to the following thematic model “sections”.
 
 ```{r}
 libraries_tb$Section %>% unique()
 ```
-
-We can use the `print_packages` function to display the module libraries currently available for each section.
+We can use the `print_packages` function to display a HTML summary of the module libraries currently available for each section. The resulting table summarises the types of module library (e.g. those for description, developing models or predicting with models), the name and purpose of those libraries, the locations from which development and archived library code can be downloaded and details of supporting documentation for each library (e.g. website, manuals and examples).
 
 ```{r}
 print_packages(libraries_tb %>% dplyr::filter(Section == "People"))
@@ -44,4 +46,5 @@ print_packages(libraries_tb %>% dplyr::filter(Section == "Places"))
 print_packages(libraries_tb %>% dplyr::filter(Section == "Programs"))
 ```
 
-
+## Related content
+Details of how to search for details on individual modules is described in [another article](https://ready4-dev.github.io/ready4/articles/V_05.html). 
