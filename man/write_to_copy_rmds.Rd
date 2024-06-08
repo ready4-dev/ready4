@@ -33,7 +33,7 @@ write_to_copy_rmds(
 No return value, called for side effects.
 }
 \description{
-print_packages() formats the output of get_libraries_tb() as HTML.
+write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specified sub-directories of a model documentation website. These template copies can then be manually edited before being rendered with write_to_render_post().
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

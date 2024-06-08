@@ -24,7 +24,7 @@ write_ws(
 No return value, called for side effects.
 }
 \description{
-write_to_render_post() is designed for help overcome practical challenges of rendering RMD or Rmarkdown files to Markdown output in a modelling project's Hugo Docsy documentation website. You must have 'hugodown' installed for this function to work.
+write_ws() creates a standardised directory structure as a local development environment for modelling projects developed with the ready4 framework.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

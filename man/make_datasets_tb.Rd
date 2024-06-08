@@ -36,7 +36,7 @@ make_datasets_tb(
 Datasets (a tibble)
 }
 \description{
-make_datasts_tb() function searches the contents of a specified Dataverse collection and returns a summary of the the data collections it contains.
+make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

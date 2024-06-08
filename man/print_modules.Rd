@@ -27,7 +27,7 @@ print_modules(
 Modules (a kable)
 }
 \description{
-print_methods() formats the output of either get_methods_tb() or make_methods_tb() as HTML.
+print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.
 }
 \examples{
 modules_tb <- get_modules_tb("ready4-dev/ready4")

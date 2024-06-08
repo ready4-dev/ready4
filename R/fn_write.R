@@ -1093,7 +1093,7 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
         options_chr = options_chr, return_1L_lgl = FALSE)
 }
 #' Write a local copy of RMD or Rmarkdown files
-#' @description print_packages() formats the output of get_libraries_tb() as HTML.
+#' @description write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specified sub-directories of a model documentation website. These template copies can then be manually edited before being rendered with write_to_render_post().
 #' @param dir_path_1L_chr Directory path (a character vector of length one)
 #' @param fl_nm_1L_chr File name (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -1435,7 +1435,7 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
         options_chr = options_chr, return_1L_lgl = FALSE)
 }
 #' Write ready4 model documentation website page from an RMD or Rmarkdown file
-#' @description write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specified sub-directories of a model documentation website. These template copies can then be manually edited before being rendered with write_to_render_post().
+#' @description write_to_render_post() is designed for help overcome practical challenges of rendering RMD or Rmarkdown files to Markdown output in a modelling project's Hugo Docsy documentation website. You must have 'hugodown' installed for this function to work.
 #' @param included_dirs_chr Included directories (a character vector)
 #' @param path_to_main_dir_1L_chr Path to main directory (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
@@ -1609,7 +1609,7 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
         prerelease_1L_lgl = TRUE)
 }
 #' Write ready4 software develoment local directories
-#' @description write_to_render_post() is designed for help overcome practical challenges of rendering RMD or Rmarkdown files to Markdown output in a modelling project's Hugo Docsy documentation website. You must have 'hugodown' installed for this function to work.
+#' @description write_ws() creates a standardised directory structure as a local development environment for modelling projects developed with the ready4 framework.
 #' @param path_1L_chr Path (a character vector of length one)
 #' @param consent_1L_chr Consent (a character vector of length one), Default: ''
 #' @param consent_indcs_int Consent indices (an integer vector), Default: 1

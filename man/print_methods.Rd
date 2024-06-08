@@ -51,7 +51,7 @@ print_methods(
 Methods (a kable)
 }
 \description{
-print_data() formats the output of either get_datasts_tb() or make_datasts_tb() as HTML. The type of output can be customised to display Dataverse data collections or Dataverse datasets. Similarly output can be restricted to real or toy datasets.
+print_methods() formats the output of either get_methods_tb() or make_methods_tb() as HTML.
 }
 \examples{
 methods_tb <- get_methods_tb("ready4-dev/ready4")

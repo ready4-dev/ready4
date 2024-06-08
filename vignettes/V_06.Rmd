@@ -15,7 +15,7 @@ library(ready4)
 ```
 
 ## Motivation
-To combine model modules, it is first necessary for model developers and users to be able to find compatible module libraries. Manually keeping track of modules libraries authored by different teams can be an onerous undertaking. The `ready4` library therefore includes tools to allow a modelling project’s maintainers to perform automated searches for model libraries and to output tabular summaries of these modules that are suitable for inclusion on documentation website pages.
+Manually keeping track of modules libraries, programs, reporting templates and datasets authored by different teams and stored in different locations can be an onerous undertaking. The `ready4` library therefore includes tools to allow a modelling project’s maintainers to perform automated searches for model artefacts and to output tabular summaries of these assets in formats suitable for inclusion on a project documentation website.
 
 ## Implementation
 The `ready4` library includes tools to allow a modelling project's maintainers to partially automate searching for and creating summaries of relevant modelling project assets (e.g. tutorials, releases, etc.) that are suitable for inclusion on documentation website pages.
@@ -35,7 +35,7 @@ The `write_to_render_post` is the main `ready4` function used specifically for w
 
 - `get_datasets_tb`, `make_dss_tb` and `make_ds_releases_tbl` for updating release statuses of module datasets (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Datasets/Model-Data/People-Datasets/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/01/25/datasets-for-modelling-people-releases/))
 
-- `make_programs_tbl` for updating details on analysis programs or reporting sub-routines that use model modules (see [this RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Analyses/Find/index_Body.Rmd) and [its associated output](https://readyforwhatsnext.org/docs/analyses/find/#current-readyforhwatsnext-programs) as well as this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Reporting/index_Body.Rmd) and [its output](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Reporting/index_Body.Rmd))
+- `make_programs_tbl` for updating details on analysis programs or reporting sub-routines that use model modules (see [this RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Analyses/Find/index_Body.Rmd) and [its associated output](https://readyforwhatsnext.org/docs/analyses/find/#current-readyforhwatsnext-programs) as well as this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Reporting/index_Body.Rmd) and [its output](https://readyforwhatsnext.org/docs/reporting/#current-readyforwhatsnext-subroutines))
 
 - `make_code_releases_tbl` for updating release statuses of module libraries and programs or reporting sub-routines that use model modules (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Executables/Programs/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/01/25/programs-releases/))
 

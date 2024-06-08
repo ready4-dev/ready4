@@ -3,15 +3,15 @@
 \docType{package}
 \name{ready4-package}
 \alias{ready4-package}
-\title{ready4: Implement Modular and Open-Source Health Economic Models}
+\title{ready4: Develop and Use Modular Health Economic Models}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Programming syntax, a template model module and tools to help maintain a modular and open-source health economic model's project documentation website. These elements are the foundation for a prototype software framework to support replicable and transferable health economic models. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) \doi{10.48550/arXiv.2310.14138}.
+A template model module, tools to help find model modules derived from this template and a programming syntax to use these modules in health economic analyses. These elements are the foundation for a prototype software framework for developing living and transferable models and using those models in reproducible health economic analyses. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) \doi{10.1007/s40273-024-01378-8}.
 
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Programming syntax, a template model module and tools to help maintain a modular and open-source health economic model's project documentation website. These elements are the foundation for a prototype software framework to support replicable and transferable health economic models. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) \doi{10.48550/arXiv.2310.14138}.
+A template model module, tools to help find model modules derived from this template and a programming syntax to use these modules in health economic analyses. These elements are the foundation for a prototype software framework for developing living and transferable models and using those models in reproducible health economic analyses. The software framework is extended by other R libraries. For detailed documentation about the framework and how to use it visit \url{https://www.ready4-dev.com/}. For a background to the methodological issues that the framework is attempting to help solve, see Hamilton et al. (2024) \doi{10.1007/s40273-024-01378-8}.
 }
 \seealso{
 Useful links:

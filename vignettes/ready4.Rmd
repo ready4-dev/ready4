@@ -19,7 +19,7 @@ library(ready4)
 ```
 
 ## Motivation
-Health economic models should ideally be both "living" ( kept up to date) and "transferable" (easy to selectively modify so they can be validly used in a new context). Research studies that use such models should be reproducible. These goals [can be hard to achieve in practice](https://www.ready4-dev.com/docs/getting-started/motivation/).
+Health economic models should ideally be both "living" (kept up to date) and "transferable" (easy to selectively modify so they can be validly used in a new context) and applied in research that is reproducible. These goals [can be hard to achieve in practice](https://www.ready4-dev.com/docs/getting-started/motivation/).
 
 ## Implementation
 The `ready4` R library provides bare bones foundational elements of a [prototype software framework](https://rdcu.be/dIv8g) to: (i) develop living and transferable health economic models; and (ii) apply those models to implement reproducible health economic analyses. The framework is extended by multiple other R packages - see the framework's [project website](https://www.ready4-dev.com/) for details. 

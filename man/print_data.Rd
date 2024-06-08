@@ -39,7 +39,7 @@ print_data(
 Datasets (a kable)
 }
 \description{
-make_programs_tbl() scrapes the GitHub organisation and Zenodo community associated specified for a ready4 model implementation to create a tabular summary of programs and sub-routines associated with that implementation.
+print_data() formats the output of either get_datasts_tb() or make_datasts_tb() as HTML. The type of output can be customised to display Dataverse data collections or Dataverse datasets. Similarly output can be restricted to real or toy datasets.
 }
 \examples{
 datasets_tb <- get_datasets_tb("ready4-dev/ready4")

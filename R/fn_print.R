@@ -1,5 +1,5 @@
 #' Print a table of ready4 model data collections
-#' @description make_programs_tbl() scrapes the GitHub organisation and Zenodo community associated specified for a ready4 model implementation to create a tabular summary of programs and sub-routines associated with that implementation.
+#' @description print_data() formats the output of either get_datasts_tb() or make_datasts_tb() as HTML. The type of output can be customised to display Dataverse data collections or Dataverse datasets. Similarly output can be restricted to real or toy datasets.
 #' @param datasets_tb Datasets (a tibble)
 #' @param by_dv_1L_lgl By dataverse (a logical vector of length one), Default: FALSE
 #' @param filter_cdns_ls Filter conditions (a list), Default: NULL
@@ -103,7 +103,7 @@ print_dvs <- function (dvs_tb, filter_cdns_ls = NULL, root_1L_chr = "https://dat
     return(dvs_kbl)
 }
 #' Print a table of methods associated with ready4 model modules
-#' @description print_data() formats the output of either get_datasts_tb() or make_datasts_tb() as HTML. The type of output can be customised to display Dataverse data collections or Dataverse datasets. Similarly output can be restricted to real or toy datasets.
+#' @description print_methods() formats the output of either get_methods_tb() or make_methods_tb() as HTML.
 #' @param methods_tb Methods (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
@@ -152,7 +152,7 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
     return(methods_kbl)
 }
 #' Print a table of ready4 model modules
-#' @description print_methods() formats the output of either get_methods_tb() or make_methods_tb() as HTML.
+#' @description print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.
 #' @param modules_tb Modules (a tibble)
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
@@ -181,7 +181,7 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
     return(modules_kbl)
 }
 #' Print a table of ready4 libraries
-#' @description print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.
+#' @description print_packages() formats the output of get_libraries_tb() as HTML.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'

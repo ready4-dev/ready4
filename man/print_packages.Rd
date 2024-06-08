@@ -57,7 +57,7 @@ print_packages(
 Package extensions (a kable)
 }
 \description{
-print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.
+print_packages() formats the output of get_libraries_tb() as HTML.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

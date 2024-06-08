@@ -158,7 +158,7 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
     return(releases_xx)
 }
 #' Make a tabular summary of ready4 model data collections
-#' @description make_datasts_tb() function searches the contents of a specified Dataverse collection and returns a summary of the the data collections it contains.
+#' @description make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.
 #' @param dv_nm_1L_chr Dataverse name (a character vector of length one), Default: 'ready4'
 #' @param dvs_tb Dataverses (a tibble), Default: NULL
 #' @param filter_cdns_ls Filter conditions (a list), Default: NULL
@@ -276,7 +276,7 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdn
     return(datasets_tb)
 }
 #' Make a tabular summary of release history of ready4 model data collections
-#' @description make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.
+#' @description make_ds_releases_tbl() scrapes metadata from Dataverse datasets for which a valid Digital Object Identifier (DOI) has been supplied to create a table summarising the entire release history of these datasets.
 #' @param ds_dois_chr Dataset digital object identifiers (a character vector)
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
 #' @param key_1L_chr Key (a character vector of length one), Default: NULL
@@ -624,7 +624,7 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
     return(path_chr)
 }
 #' Make a tabular summary of methods associated with ready model modules
-#' @description make_ds_releases_tbl() scrapes metadata from Dataverse datasets for which a valid Digital Object Identifier (DOI) has been supplied to create a table summarising the entire release history of these datasets.
+#' @description make_methods_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of vignette examples of ready4 module methods.
 #' @param packages_tb Packages (a tibble), Default: NULL
 #' @param exclude_mthds_for_chr Exclude methods for (a character vector), Default: 'NA'
 #' @param framework_only_1L_lgl Framework only (a logical vector of length one), Default: TRUE
@@ -690,7 +690,7 @@ make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_
     return(modules_pkgs_chr)
 }
 #' Make a tabular summary of ready4 model modules and sub-modules
-#' @description make_methods_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of vignette examples of ready4 module methods.
+#' @description make_modules_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of the modules included in those libraries and vignette examples of their use.
 #' @param pkg_extensions_tb Package extensions (a tibble), Default: NULL
 #' @param cls_extensions_tb Class extensions (a tibble), Default: NULL
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
@@ -814,7 +814,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
     return(modules_tb)
 }
 #' Make a tabular summary of programs using ready4 model modules
-#' @description make_modules_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of the modules included in those libraries and vignette examples of their use.
+#' @description make_programs_tbl() scrapes the GitHub organisation and Zenodo community associated specified for a ready4 model implementation to create a tabular summary of programs and sub-routines associated with that implementation.
 #' @param what_1L_chr What (a character vector of length one), Default: c("Program", "Subroutine", "Program_and_Subroutine")
 #' @param as_kbl_1L_lgl As kable (a logical vector of length one), Default: FALSE
 #' @param exclude_chr Exclude (a character vector), Default: character(0)
