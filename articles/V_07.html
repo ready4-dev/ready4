@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="ready4">
-<title>Implement Modular Computational Health Economic Models • ready4</title>
+<title>Provide End Users With A Simple And Consistent Syntax • ready4</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Implement Modular Computational Health Economic Models">
+<meta property="og:title" content="Provide End Users With A Simple And Consistent Syntax">
 <meta property="og:description" content="ready4">
 <meta property="og:image" content="https://ready4-dev.github.io/ready4/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -88,11 +88,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Implement Modular Computational Health Economic Models</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Provide End Users With A Simple And Consistent Syntax</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ready4-dev/ready4/blob/HEAD/vignettes/V_01.Rmd" class="external-link"><code>vignettes/V_01.Rmd</code></a></small>
-      <div class="d-none name"><code>V_01.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/ready4-dev/ready4/blob/HEAD/vignettes/V_07.Rmd" class="external-link"><code>vignettes/V_07.Rmd</code></a></small>
+      <div class="d-none name"><code>V_07.Rmd</code></div>
     </div>
 
     
@@ -102,101 +102,58 @@
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<p>A potentially attractive approach to modelling complex health systems
-is to begin with a relatively simple computational model and to
-progressively extend its scope and sophistication. Such an approach
-could be described as “modular” if it is possible to readily combine
-multiple discrete modelling projects (potentially developed by different
-modelling teams) that each independently describe distinct aspects of
-the system being modelled.</p>
+<p>Transparency is one of the underpinning principles of ethical
+modelling practice. One way to improve the transparency of computational
+health economic models is to ensure that the programs implementing model
+analyses can be meaningfully inspected by readers with different levels
+of technical expertise. Even non-technical readers should be able to
+follow the high-level logic implemented by model algorithms. If multiple
+analysis programs are written using a common simplified syntax then
+reviewers of those programs need to contend with relatively fewer new
+concepts.</p>
 </div>
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
 </h2>
-<p>The <code>ready4</code> package provides foundational elements of a
-software framework to support the development of modular and open-source
-computational health economic models using R. Modular model development
-is enabled by the <a href="https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/" class="external-link">encapsulation
-and inheritance features of Object Oriented Programming (OOP)</a>.
-Specifically, <code>ready4</code> uses two of R’s systems for
-implementing OOP - S3 and S4. An in-depth explanation of R’s different
-class system is beyond the scope of this article, but is explored in <a href="https://adv-r.hadley.nz/oo.html" class="external-link">Hadley Wickham’s Advanced R
-handbook</a>. However, it is useful to know some very high level
-information about S3 and S4 classes:</p>
-<ul>
-<li><p>S4 classes are frequently said to be “formal”, “strict” or
-“rigorous”. The elements of an S4 class are called slots and the type of
-data that each slot is allowed to contain is specified in the class
-definition. An S4 class can be comprised of slots that contain different
-types of data (e.g. a slot that contains a character vector and another
-slot that contains tabular data).</p></li>
-<li><p>S3 classes are often described as “simple”, “informal” and
-“flexible”. S3 objects attach an attribute label to base type objects
-(e.g. a character vector, a data.frame, a list), which in turn is used
-to work out what methods should be applied to the class.</p></li>
-</ul>
+<p><code>ready4</code> provides a simple syntax that can be consistently
+applied to attach algorithms (methods) to <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/" class="external-link">model
+modules</a>. It does so by taking advantage of the <a href="https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/#transparent-computational-models" class="external-link">abstraction
+and polymorphism features of Object Oriented Programing</a> and R’s use
+of generic functions. Generic functions don’t implement algorithms
+themselves - their most salient features are a name and a high level
+description of the type of task that any method associated with that
+generic should perform. Whenever a developer creates a method for
+classes that use R’s S4 and S3 systems <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation" class="external-link">(the
+types used for model modules and sub-modules)</a>, they can associate
+that method with a generic that has a description that is a good match
+for the algorithm being implemented.</p>
 </div>
 <div class="section level2">
 <h2 id="use">Use<a class="anchor" aria-label="anchor" href="#use"></a>
 </h2>
-<div class="section level3">
-<h3 id="ready4-model-modules">ready4 Model Modules<a class="anchor" aria-label="anchor" href="#ready4-model-modules"></a>
-</h3>
-<p>As we use the term, a “model module” is comprised of both a
-data-structure (an S4 class) and the algorithms (or “methods”) that are
-associated with that data-structure. Model modules can be created from a
-template - the <code>ready4</code> package’s <code>Ready4Module</code>
-class.</p>
-<p>We can create an object (<code>X</code>) from the
-<code>Ready4Module</code> template using the following command.</p>
+<p><code>ready4</code> includes a number of core generic functions which
+describe the main types of method to be implemented by model modules.
+These generics correspond exactly to the “core”, “slot” and “extended”
+commands described in <a href="https://ready4-dev.github.io/ready4/articles/V_02.html">another
+article</a>.</p>
+<p>Notably, the <code>ready4</code> package does not associate any core
+or extended methods with the <code>Ready4Module</code> <a href="https://www.ready4-dev.com/docs/getting-started/implementation/modularity/" class="external-link">template
+module</a>. Instead, model developers need to decide which core and
+extended generics they associate with the modules they derive from the
+<code>Ready4Module</code> template. This decision is typically made when
+authoring the methods associated with model modules.</p>
+<p>Currently, the only methods defined for <code>Ready4Module</code> are
+<a href="https://www.ready4-dev.com/docs/framework/implementation/syntax/#slot-generics-and-methods" class="external-link">slot-methods</a>.
+By default, these slot methods are inherited by all modules derived from
+the <code>Ready4Module</code> template. These methods can be itemised
+using the <code>get_methods</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Ready4Module-class.html">Ready4Module</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>However, if we inspect <code>X</code> we can see it is of limited use
-as it contains no data other than an empty element called
-<code>dissemination_1L_chr</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Formal class 'Ready4Module' [package "ready4"] with 1 slot</span></span>
-<span><span class="co">##   ..@ dissemination_1L_chr: chr NA</span></span></code></pre>
-<p>The <code>Ready4Module</code> class is therefore not intended to be
-called directly. Instead, the purpose of <code>Ready4Module</code> is to
-be the parent class of other model modules. Prototype tools for
-authoring modules from this template are described <a href="https://www.ready4-dev.com/docs/tutorials/authoring-modules/" class="external-link">here</a>.</p>
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-<div class="card-header">
-<p><strong>ready4 Concept</strong></p>
-</div>
-<div class="card-body">
-<div class="section level4 card-title">
-<h4 id="module">Module<a class="anchor" aria-label="anchor" href="#module"></a>
-</h4>
-</div>
-<p>An instance of <code>Ready4Module</code> (or classes that inherit
-from <code>Ready4Module</code>) and its associated methods.</p>
-</div>
-</div>
-</div>
-<div class="section level3">
-<h3 id="ready4-model-sub-modules">ready4 Model Sub-modules<a class="anchor" aria-label="anchor" href="#ready4-model-sub-modules"></a>
-</h3>
-<p>In ready4, S3 classes are principally used to help define the
-structural properties of slots (elements) of model modules and the
-methods that can be applied to these slots. S3 classes created for these
-purposes are called <strong>sub-modules</strong>.</p>
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-<div class="card-header">
-<p><strong>ready4 Concept</strong></p>
-</div>
-<div class="card-body">
-<div class="section level4 card-title">
-<h4 id="sub-module">Sub-Module<a class="anchor" aria-label="anchor" href="#sub-module"></a>
-</h4>
-</div>
-<p>An instance of an informal (S3) class and its associated methods that
-describes, validates and applies algorithms to a slot of a Module.</p>
-</div>
-</div>
-</div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_methods.html">get_methods</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "authorSlot"        "characterizeSlot"  "depictSlot"       </span></span>
+<span><span class="co">##  [4] "enhanceSlot"       "exhibitSlot"       "ingestSlot"       </span></span>
+<span><span class="co">##  [7] "investigateSlot"   "manufactureSlot"   "metamorphoseSlot" </span></span>
+<span><span class="co">## [10] "procureSlot"       "prognosticateSlot" "ratifySlot"       </span></span>
+<span><span class="co">## [13] "reckonSlot"        "renewSlot"         "shareSlot"</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
