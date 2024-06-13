@@ -1,4 +1,5 @@
 # ready4 0.1.10
+This patch fixes a documentation error under which the description of many functions referred to the wrong function.
 
 # ready4 0.1.9
 This patch fixes a typo in a reference to an arXiv preprint contained in the DESCRIPTION file.
