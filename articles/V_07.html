@@ -134,16 +134,16 @@ for the algorithm being implemented.</p>
 <p><code>ready4</code> includes a number of core generic functions which
 describe the main types of method to be implemented by model modules.
 These generics correspond exactly to the “core”, “slot” and “extended”
-commands described in <a href="https://ready4-dev.github.io/ready4/articles/V_02.html">another
+commands described in <a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/" class="external-link">another
 article</a>.</p>
 <p>Notably, the <code>ready4</code> package does not associate any core
-or extended methods with the <code>Ready4Module</code> <a href="https://www.ready4-dev.com/docs/getting-started/implementation/modularity/" class="external-link">template
+or extended methods with the <code>Ready4Module</code> <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/" class="external-link">template
 module</a>. Instead, model developers need to decide which core and
 extended generics they associate with the modules they derive from the
 <code>Ready4Module</code> template. This decision is typically made when
 authoring the methods associated with model modules.</p>
 <p>Currently, the only methods defined for <code>Ready4Module</code> are
-<a href="https://www.ready4-dev.com/docs/framework/implementation/syntax/#slot-generics-and-methods" class="external-link">slot-methods</a>.
+<a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/" class="external-link">slot-methods</a>.
 By default, these slot methods are inherited by all modules derived from
 the <code>Ready4Module</code> template. These methods can be itemised
 using the <code>get_methods</code> function.</p>
