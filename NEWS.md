@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.1.10
 
 # ready4 0.1.9
 This patch fixes a typo in a reference to an arXiv preprint contained in the DESCRIPTION file.
