@@ -44,7 +44,7 @@ However, if we inspect `X` we can see it is of limited use as it contains no dat
 str(X)
 ```
 
-The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent class of other model modules. Prototype tools for authoring modules from this template are described [here](https://www.ready4-dev.com/docs/tutorials/authoring-modules/).
+The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent class of other model modules. Prototype tools for authoring modules from this template are described [here](https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/).
 
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 

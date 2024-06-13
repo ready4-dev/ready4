@@ -47,4 +47,4 @@ print_packages(libraries_tb %>% dplyr::filter(Section == "Programs"))
 ```
 
 ## Related content
-Details of how to search for details on individual modules is described in [another article](https://ready4-dev.github.io/ready4/articles/V_05.html). 
+Details of how to search for details on individual modules is described in [another article](https://www.ready4-dev.com/docs/tutorials/use-models/finding-modules/modules/). 

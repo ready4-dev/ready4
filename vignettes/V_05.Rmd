@@ -58,4 +58,4 @@ print_modules(modules_tb, what_1L_chr = "S3")
 ```
 
 ## Related content
-Details of how to search for themed collections of modules is described in [another article](https://readyforwhatsnext.org/docs/tutorials/finding/libraries/). 
+Details of how to search for themed collections of modules is described in [another article](https://www.ready4-dev.com/docs/tutorials/use-models/finding-modules/collections/). 

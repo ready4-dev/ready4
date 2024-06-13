@@ -33,10 +33,10 @@ The `write_to_render_post` is the main `ready4` function used specifically for w
 
 - `make_datasets_tb` and `print_data` for updating details on module datasets (see [this example](https://readyforwhatsnext.org/docs/tutorials/finding/finding-data/))    
 
-- `get_datasets_tb`, `make_dss_tb` and `make_ds_releases_tbl` for updating release statuses of module datasets (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Datasets/Model-Data/People-Datasets/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/01/25/datasets-for-modelling-people-releases/))
+- `get_datasets_tb`, `make_dss_tb` and `make_ds_releases_tbl` for updating release statuses of module datasets (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Datasets/Model-Data/People-Datasets/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/06/08/datasets-for-modelling-people-releases/))
 
 - `make_programs_tbl` for updating details on analysis programs or reporting sub-routines that use model modules (see [this RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Analyses/Find/index_Body.Rmd) and [its associated output](https://readyforwhatsnext.org/docs/analyses/find/#current-readyforhwatsnext-programs) as well as this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/docs/Reporting/index_Body.Rmd) and [its output](https://readyforwhatsnext.org/docs/reporting/#current-readyforwhatsnext-subroutines))
 
-- `make_code_releases_tbl` for updating release statuses of module libraries and programs or reporting sub-routines that use model modules (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Executables/Programs/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/01/25/programs-releases/))
+- `make_code_releases_tbl` for updating release statuses of module libraries and programs or reporting sub-routines that use model modules (see this [RMD file](https://github.com/ready4-dev/readyforwhatsnext/blob/main/content/en/blog/releases/Executables/Programs/index_Body.Rmd) and its [output](https://readyforwhatsnext.org/blog/2024/06/08/programs-releases/))
 
 
