@@ -1,14 +1,22 @@
 test_that("Valid tibble of release history of ready4 framework libraries is generated",{
   expect_no_error(fw_tb <- make_code_releases_tbl("Framework", gh_repo_1L_chr = "ready4-dev/ready4", as_kbl_1L_lgl = F))
-  expect_true(tibble::is_tibble(fw_tb))
-  expect_true(all(names(fw_tb) == c("Package", "Release", "Date", "Description", "URL")))
-  expect_true(identical(fw_tb$Package %>% unique() %>% sort(), c("ready4", "ready4class", "ready4fun", "ready4show", "ready4use"))) # update once ready4pack released
-  expect_true(nrow(fw_tb) > 5)
+  skip_on_cran()
+  expect_true(!is.null(fw_tb))
+  if(!is.null(fw_tb)){
+    expect_true(tibble::is_tibble(fw_tb))
+    expect_true(all(names(fw_tb) == c("Package", "Release", "Date", "Description", "URL")))
+    expect_true(identical(fw_tb$Package %>% unique() %>% sort(), c("ready4", "ready4class", "ready4fun", "ready4show", "ready4use"))) # update once ready4pack released
+    expect_true(nrow(fw_tb) > 5)
+  }
 }
 )
 test_that("Kable of release history of subroutines in a GitHub repository is generated",{
   expect_no_error(subroutines_kbl <- make_code_releases_tbl("Subroutine", gh_repo_1L_chr = "ready4-dev/ready4"))
+  skip_on_cran()
+  expect_true(!is.null(subroutines_kbl))
+  if(!is.null(subroutines_kbl)){
   expect_true(class(subroutines_kbl)[1] == "kableExtra")
+  }
 }
 )
 test_that("Valid tibble of release history of data collection is generated",{

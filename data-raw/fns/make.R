@@ -73,44 +73,47 @@ make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Pa
     }
   }
   releases_xx <- repos_chr %>%
-    purrr::map_dfr(~tidyRSS::tidyfeed(paste0("https://github.com/",org_1L_chr,"/",.x,"/releases.atom"))) %>%
-    dplyr::arrange(dplyr::desc(.data$entry_last_updated)) %>%
-    dplyr::select("feed_title", "entry_title", "entry_last_updated", "entry_content", "entry_link") %>%
-    dplyr::mutate(feed_title = .data$feed_title %>% stringr::str_remove_all("Release notes from ")) %>%
-    dplyr::rename(!!rlang::sym(repo_type_1L_chr) := "feed_title",
-                  Release = "entry_title",
-                  Date = "entry_last_updated",
-                  Description = "entry_content",
-                  URL = "entry_link") %>%
-    dplyr::filter(.data$Release != "Documentation_0.0")
-  if(tidy_desc_1L_lgl){
-    releases_xx <- releases_xx %>%
-      dplyr::mutate(Description = .data$Description %>% purrr::map2_chr(!!rlang::sym(repo_type_1L_chr),
-                                                                  ~ stringr::str_remove(.x,paste0(.y,": "))))
-  }
-  if(as_kbl_1L_lgl){
+    purrr::map_dfr(~get_gracefully(paste0("https://github.com/",org_1L_chr,"/",.x,"/releases.atom"), fn = tidyRSS::tidyfeed))
+  if(!is.null(releases_xx)){
     releases_xx <- releases_xx  %>%
-      dplyr::mutate(Release = .data$Release %>% stringr::str_remove_all("Release ") %>%
-                      stringr::str_remove_all("v") %>%
-                      kableExtra::cell_spec(format = "html", link = .data$URL),
-                    Date = .data$Date %>% format.Date(format_1L_chr) %>% as.character()) %>%
-      # dplyr::mutate(Release = cell_spec(row.names(.), "html", link = dt_url)) %>%
-      dplyr::select("Date", !!rlang::sym(repo_type_1L_chr), "Release", "Description")
-    if(repo_type_1L_chr %in% c("Package","Module","Framework")){
-      logos_chr <- purrr::map_chr(releases_xx %>% dplyr::pull(repo_type_1L_chr),
-                                  ~paste0(url_stub_1L_chr, .x, "/logo.png"))
+      dplyr::arrange(dplyr::desc(.data$entry_last_updated)) %>%
+      dplyr::select("feed_title", "entry_title", "entry_last_updated", "entry_content", "entry_link") %>%
+      dplyr::mutate(feed_title = .data$feed_title %>% stringr::str_remove_all("Release notes from ")) %>%
+      dplyr::rename(!!rlang::sym(repo_type_1L_chr) := "feed_title",
+                    Release = "entry_title",
+                    Date = "entry_last_updated",
+                    Description = "entry_content",
+                    URL = "entry_link") %>%
+      dplyr::filter(.data$Release != "Documentation_0.0")
+    if(tidy_desc_1L_lgl){
       releases_xx <- releases_xx %>%
-        dplyr::mutate(!!rlang::sym(repo_type_1L_chr) := "")
-      indx_1L_int <-which(names(releases_xx) %in% c("Package","Module","Framework"))
+        dplyr::mutate(Description = .data$Description %>% purrr::map2_chr(!!rlang::sym(repo_type_1L_chr),
+                                                                          ~ stringr::str_remove(.x,paste0(.y,": "))))
     }
-    releases_xx <- releases_xx %>%
-      kableExtra::kable("html", escape = FALSE) %>% # kableExtra::kbl() %>%
-      kableExtra::kable_styling(...)   # kableExtra::kable_styling(...) %>%
-    if(repo_type_1L_chr %in% c("Package","Module","Framework"))
+    if(as_kbl_1L_lgl){
+      releases_xx <- releases_xx  %>%
+        dplyr::mutate(Release = .data$Release %>% stringr::str_remove_all("Release ") %>%
+                        stringr::str_remove_all("v") %>%
+                        kableExtra::cell_spec(format = "html", link = .data$URL),
+                      Date = .data$Date %>% format.Date(format_1L_chr) %>% as.character()) %>%
+        # dplyr::mutate(Release = cell_spec(row.names(.), "html", link = dt_url)) %>%
+        dplyr::select("Date", !!rlang::sym(repo_type_1L_chr), "Release", "Description")
+      if(repo_type_1L_chr %in% c("Package","Module","Framework")){
+        logos_chr <- purrr::map_chr(releases_xx %>% dplyr::pull(repo_type_1L_chr),
+                                    ~paste0(url_stub_1L_chr, .x, "/logo.png"))
+        releases_xx <- releases_xx %>%
+          dplyr::mutate(!!rlang::sym(repo_type_1L_chr) := "")
+        indx_1L_int <-which(names(releases_xx) %in% c("Package","Module","Framework"))
+      }
       releases_xx <- releases_xx %>%
-      kableExtra::column_spec(indx_1L_int,
-                              image = kableExtra::spec_image(logos_chr,
-                                                             height = 160, width = 160))
+        kableExtra::kable("html", escape = FALSE) %>% # kableExtra::kbl() %>%
+        kableExtra::kable_styling(...)   # kableExtra::kable_styling(...) %>%
+      if(repo_type_1L_chr %in% c("Package","Module","Framework"))
+        releases_xx <- releases_xx %>%
+        kableExtra::column_spec(indx_1L_int,
+                                image = kableExtra::spec_image(logos_chr,
+                                                               height = 160, width = 160))
+    }
   }
   return(releases_xx)
 }
@@ -124,25 +127,22 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
                              what_1L_chr = "all"){
   type_1L_chr <- match.arg(type_1L_chr)
   if(is.null(dvs_tb)){
-    contents_ls <- dataverse::dataverse_contents(dv_nm_1L_chr,
-                                                 key = key_1L_chr,
-                                                 server = server_1L_chr)
+    contents_ls <- get_gracefully(.x, fn = dataverse::dataverse_contents,
+                                  args_ls = list(key = key_1L_chr, server = server_1L_chr))
     dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == "dataverse")]
     ds_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == "dataset")]
     if(identical(ds_ls,list())){
       ds_ls <- NULL
     }else{
-      extra_dv_ls <- dataverse::get_dataverse(dv_nm_1L_chr,
-                                              key = key_1L_chr,
-                                              server = server_1L_chr)
+      extra_dv_ls <- get_gracefully(dv_nm_1L_chr, fn = dataverse::get_dataverse,
+                                    args_ls = list(key = key_1L_chr, server = server_1L_chr))
       dv_ls <- append(extra_dv_ls,
                       dv_ls)
     }
     dvs_tb <- dv_ls %>%
       purrr::map_dfr(~{
-        dv_ls <- dataverse::get_dataverse(.x,
-                                          key = key_1L_chr,
-                                          server = server_1L_chr)
+        dv_ls <- get_gracefully(.x, fn = dataverse::get_dataverse,
+                       args_ls = list(key = key_1L_chr, server = server_1L_chr))
         tb <- tibble::tibble(Dataverse = dv_ls$alias,
                              Name = dv_ls$name,
                              Description = dv_ls$description,
@@ -150,9 +150,8 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
         tb %>%
           dplyr::mutate(Contents =  purrr::map(.data$Dataverse,
                                                ~{
-                                                 dv_all_ls <- dataverse::dataverse_contents(.x,
-                                                                                            key = key_1L_chr,
-                                                                                            server = server_1L_chr)
+                                                 dv_all_ls <- get_gracefully(.x, fn = dataverse::dataverse_contents,
+                                                                             args_ls = list(key = key_1L_chr, server = server_1L_chr))
                                                  #dv_ls <- dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == "dataverse")]
                                                  dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == "dataset")] %>%
                                                    purrr::map_chr(~if("persistentUrl" %in% names(.x)){
@@ -233,7 +232,8 @@ make_ds_releases_tbl <- function (ds_dois_chr,
                                   ...)
 {
   ds_releases_xx <- ds_dois_chr %>% purrr::map_dfr(~{
-    meta_ls <- dataverse::dataset_versions(.x, server = server_1L_chr, key = key_1L_chr)
+    meta_ls <- get_gracefully(.x, fn = dataverse::dataset_versions,
+                   args_ls = list(key = key_1L_chr, server = server_1L_chr))
     doi_1L_chr <- .x
     1:length(meta_ls) %>%
       purrr::map_dfr(~tibble::tibble(Date = meta_ls[[.x]]$releaseTime,

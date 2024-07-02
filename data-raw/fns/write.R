@@ -211,7 +211,7 @@ write_dv_fl_to_loc <- function(ds_ui_1L_chr,
                                options_chr = c("Y", "N"),
                                save_type_1L_chr = "original",
                                server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
-  ds_ls <- dataverse::get_dataset(ds_ui_1L_chr)
+  ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
   if(ds_ls$versionState != "DRAFT"){
     if(!is.na(fl_id_1L_int)){
       ds_ui_1L_chr <- NULL
@@ -280,7 +280,7 @@ write_env_objs_to_dv <- function(env_objects_ls,
     if(is.null(ds_ls)){
       ds_ls <- tryCatch(dataverse::get_dataset(ds_url_1L_chr, key = NULL), error = function(cond){NULL})
       if(is.null(ds_ls)){
-        ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+        ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
       }
     }
   } else{
@@ -492,7 +492,7 @@ write_fls_to_dv <- function(file_paths_chr,
                              key_1L_chr,
                              server_1L_chr){
       if(is.null(ds_ls))
-        ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+        ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
       is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
       nms_chr <- ds_ls$files$filename
       if(is.null(descriptions_chr))
@@ -763,13 +763,21 @@ write_ingested_dv_fl <- function(ds_ui_1L_chr,
                      prompt_1L_chr = prompt_1L_chr,
                      consent_1L_chr = consent_1L_chr,
                      consent_indcs_int = consent_indcs_int,
-                     consented_args_ls = list(object = dataverse::get_file(ifelse(is.na(fl_id_1L_int),
-                                                                                  paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
-                                                                                  fl_id_1L_int),
-                                                                           dataset = ds_ui_1L_chr,
-                                                                           format = save_type_1L_chr,
-                                                                           key = key_1L_chr,
-                                                                           server = server_1L_chr),
+                     consented_args_ls = list(object =
+                                                # dataverse::get_file(ifelse(is.na(fl_id_1L_int),
+                                                #                                   paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
+                                                #                                   fl_id_1L_int),
+                                                #                            dataset = ds_ui_1L_chr,
+                                                #                            format = save_type_1L_chr,
+                                                #                            key = key_1L_chr,
+                                                #                            server = server_1L_chr),
+                                              get_gracefully(ds_ui_1L_chr, fn = dataverse::get_file,
+                                                             args_ls = list(file = ifelse(is.na(fl_id_1L_int),
+                                                                                          paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr),
+                                                                                          fl_id_1L_int),
+                                                                            format = save_type_1L_chr, key = key_1L_chr, server = server_1L_chr)),
+
+
                                               con = dest_path_1L_chr),
                      consented_msg_1L_chr = paste0("New file created in ",
                                                    dest_path_1L_chr,
@@ -1149,7 +1157,7 @@ write_to_dv_from_tbl <- function (files_tb,
   fl_ids_int <- NULL
   consented_fn <- function(files_tb, consent_indcs_int, data_dir_rt_1L_chr,
                            ds_url_1L_chr, key_1L_chr, options_chr, server_1L_chr) {
-    ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+    ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
     is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
     nms_chr <- ds_ls$files$filename
     fl_ids_int <- purrr::pmap_int(files_tb, ~{
@@ -1234,9 +1242,9 @@ write_to_dv_with_wait <- function (dss_tb,
                            options_chr = options_chr,
                            server_1L_chr = server_1L_chr)
     })
-    ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+    ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
     if (make_local_copy_1L_lgl | ds_ls$versionState != "DRAFT") {
-      ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+      ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
       dv_dir_1L_chr <- paste0(parent_dv_dir_1L_chr, "/",
                               dv_nm_1L_chr)
       if (!dir.exists(dv_dir_1L_chr)) {

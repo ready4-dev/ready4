@@ -424,7 +424,7 @@ write_prototypes <- function(gh_repo_1L_chr = "ready4-dev/ready4", # Export to r
   dmt_urls_chr <- piggyback::pb_download_url(repo = a@gh_repo_1L_chr,
                                              tag = a@gh_tag_1L_chr,
                                              .token = "")
-  b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("prototype_lup.RDS")]))
+  b <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("prototype_lup.RDS")]) # readRDS(url)
   b <- b %>% dplyr::mutate(default_val_chr = dplyr::case_when(pt_ns_chr == "ready4" ~ "",
                                                               T ~ default_val_chr)) %>%
     dplyr::arrange(pt_ns_chr)

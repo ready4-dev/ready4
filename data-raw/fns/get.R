@@ -17,8 +17,8 @@ get_badges_lup <- function(ends_with_1L_chr = "ready4_badges_lup.RDS",
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
-  ready4_badges_lup <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
-                                                  endsWith(ends_with_1L_chr)]))
+  ready4_badges_lup <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
+                                                  endsWith(ends_with_1L_chr)])
   return(ready4_badges_lup)
 }
 get_cls_extensions <- function(pkg_extensions_tb,
@@ -29,8 +29,8 @@ get_cls_extensions <- function(pkg_extensions_tb,
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
-  cls_extensions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
-                                                  endsWith("classes_lup.RDS")])) %>%
+  cls_extensions_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
+                                                  endsWith("classes_lup.RDS")]) %>%
     tibble::as_tibble() %>%
     dplyr::arrange(.data$pt_ns_chr) %>%
     dplyr::filter(.data$pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
@@ -60,7 +60,7 @@ get_datasets_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                             gh_tag_1L_chr = "Documentation_0.0",
                             rds_fl_name_1L_chr = "datasets_tb"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
-  datasets_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith(paste0(rds_fl_name_1L_chr, ".RDS"))]))
+  datasets_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith(paste0(rds_fl_name_1L_chr, ".RDS"))])
   return(datasets_tb)
 }
 get_digits_from_text <- function(text_1L_chr){
@@ -77,9 +77,9 @@ get_dv_fls_urls <- function(file_nms_chr,
     dv_url_pfx_1L_chr <- paste0("https://",
                                 server_1L_chr,
                                 "/api/access/datafile/")
-  ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr,
-                                    server = server_1L_chr,
-                                    key = key_1L_chr)
+  ds_ls <- get_gracefully(dv_ds_nm_1L_chr, fn = dataverse::dataset_files,
+                          args_ls = list(server = server_1L_chr,
+                                    key = key_1L_chr))
   all_items_chr <- purrr::map_chr(ds_ls,~.x$label)
   urls_chr <- file_nms_chr %>%
     purrr::map_chr(~{
@@ -121,7 +121,7 @@ get_excluded_repos <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                                              tag = gh_tag_1L_chr,
                                              .token = "")
   if(any(dmt_urls_chr %>% endsWith("exclude_chr.RDS"))){
-    exclude_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("exclude_chr.RDS")]))
+    exclude_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("exclude_chr.RDS")])
   }else{
     exclude_chr <- character(0)
   }
@@ -226,8 +226,8 @@ get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
-  functions_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>%
-                                             endsWith("fn_types_lup.RDS")]))
+  functions_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
+                                             endsWith("fn_types_lup.RDS")])
   if(return_1L_chr == "methods"){
     functions_tb <- functions_tb %>%
       dplyr::filter(.data$is_method_lgl)
@@ -274,13 +274,51 @@ get_generics <- function(pkg_nm_1L_chr = "ready4",
   }
   return(generics_chr)
 }
+get_gh_repos <- function (org_1L_chr) {
+  if (!requireNamespace("gh", quietly = TRUE)) {
+    stop("gh package is required - please install it and rerun the last command.")
+  }
+  acknowledgement_1L_chr <- "This function is a minor rephrasing of natmanager::list_repo"
+  repositories_ls <- get_gracefully(paste0("/orgs/", org_1L_chr, "/repos"), fn = gh::gh, args_ls=list(type = "public"))
+  repositories_chr <- vapply(repositories_ls, "[[", "", "name")
+  return(repositories_chr)
+}
+get_gracefully <- function(url_1L_chr,
+                           args_ls = NULL,
+                           fn = readRDS,
+                           tests_chr = character(0)) {
+  if(identical(tests_chr, character(0))){
+    tests_chr <- c("cannot open the connection to ",
+                   "unknown input format",
+                   "Attempt to get feed was unsuccessful",
+                   "Not Found (HTTP 404)")
+  }
+  if(identical(fn, readRDS)){
+    url_xx <- url(url_1L_chr)
+  }else{
+    url_xx <- url_1L_chr
+  }
+  if (!curl::has_internet()) {
+    message("No internet connection.")
+    object_xx <- invisible(NULL)
+  }else{
+    object_xx <- suppressWarnings(tryCatch(tryCatch(rlang::exec(fn, url_xx, !!!args_ls)), error = function(e) conditionMessage(e)))
+    if(is.character(object_xx)){
+      if(any(tests_chr %>% purrr::map_lgl(~startsWith(object_xx[1], .x)))){
+        message(object_xx)
+        object_xx <- invisible(NULL)
+      }
+    }
+  }
+  return(object_xx)
+}
 get_libraries_ls <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
                                              tag = gh_tag_1L_chr,
                                              .token = "")
   if(any(dmt_urls_chr %>% endsWith("libraries_ls.RDS"))){
-    libraries_ls <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_ls.RDS")]))
+    libraries_ls <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_ls.RDS")])
   }else{
     libraries_ls <- NULL
   }
@@ -290,7 +328,7 @@ get_libraries_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
     if(any(dmt_urls_chr %>% endsWith("libraries_tb.RDS"))){
-      libraries_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")]))
+      libraries_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")])
     }else{
       libraries_tb <- NULL
     }
@@ -321,13 +359,13 @@ get_methods <- function(pkg_nm_1L_chr = "ready4",
 get_methods_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
-  methods_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("methods_tb.RDS")]))
+  methods_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("methods_tb.RDS")])
   return(methods_tb)
 }
 get_modules_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
   dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
-  modules_tb <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")]))
+  modules_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")])
   return(modules_tb)
 }
 get_mthd_titles <- function(mthd_nms_chr,
@@ -366,7 +404,7 @@ get_r4_obj_slots <- function(fn_name_1L_chr,
   return(slots_chr)
 }
 get_rds_from_dv <- function(file_nm_1L_chr,
-                            dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9",
+                            dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK",
                             dv_url_pfx_1L_chr = character(0),
                             key_1L_chr = NULL,
                             server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
@@ -374,9 +412,8 @@ get_rds_from_dv <- function(file_nm_1L_chr,
     dv_url_pfx_1L_chr <- paste0("https://",
                                 server_1L_chr,
                                 "/api/access/datafile/")
-  ds_ls <- dataverse::dataset_files(dv_ds_nm_1L_chr,
-                                    server = server_1L_chr,
-                                    key = key_1L_chr)
+  ds_ls <- get_gracefully(dv_ds_nm_1L_chr, fn = dataverse::dataset_files,
+                 args_ls = list(server = server_1L_chr, key = key_1L_chr))
   all_items_chr <- purrr::map_chr(ds_ls,~.x$label) %>%
     stringi::stri_replace_last_regex("\\.RDS","") %>%
     stringi::stri_replace_last_regex("\\.Rds","") %>%
@@ -385,17 +422,12 @@ get_rds_from_dv <- function(file_nm_1L_chr,
   if(identical(idx_1L_int, integer(0))){
     r_object_xx <- NULL
   }else{
-    r_object_xx <- readRDS(url(paste0(dv_url_pfx_1L_chr,
-                                      ds_ls[[idx_1L_int]]$dataFile$id)))
+    r_object_xx <- get_gracefully(paste0(dv_url_pfx_1L_chr,
+                                      ds_ls[[idx_1L_int]]$dataFile$id))
   }
   return(r_object_xx)
 }
-get_gh_repos <- function (org_1L_chr) {
-  acknowledgement_1L_chr <- "This function is a minor rephrasing of natmanager::list_repo"
-  repositories_ls <- gh::gh(paste0("/orgs/", org_1L_chr, "/repos"), type = "public")
-  repositories_chr <- vapply(repositories_ls, "[[", "", "name")
-  return(repositories_chr)
-}
+
 get_source_code_urls <- function(pkg_nm_1L_chr = "ready4",
                                  pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html"){
   urls_chr <- rvest::read_html(pkg_url_1L_chr) %>%
@@ -415,7 +447,7 @@ get_subroutine_repos <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                                              tag = gh_tag_1L_chr,
                                              .token = "")
   if(any(dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS"))){
-    subroutine_repos_chr <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS")]))
+    subroutine_repos_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS")])
   }else{
     subroutine_repos_chr <- character(0)
   }
@@ -440,7 +472,7 @@ get_table_from_loc_file <- function(path_1L_chr,
                csv = readr::read_csv, # read.csv,
                xls = readxl::read_excel,
                xlsx = readxl::read_xlsx, #readxl::read_excel,
-               RDS = readRDS())
+               RDS = readRDS)
   table_xx <- rlang::exec(fn,path_1L_chr)
   if(force_tb_1L_lgl)
     table_xx <- tibble::as_tibble(table_xx)
