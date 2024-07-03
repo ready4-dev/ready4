@@ -1,24 +1,32 @@
 get_badge_urls <- function(pkg_nm_1L_chr,
                            project_badges_url_1L_chr = "https://img.shields.io/badge/ready4",
                            url_stub_1L_chr = "https://ready4-dev.github.io/"){
-  images_chr <- rvest::read_html(paste0(url_stub_1L_chr, pkg_nm_1L_chr, "/index.html")) %>%
-    rvest::html_elements("img")  %>%
-    rvest::html_attr("src")
-  badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% startsWith(project_badges_url_1L_chr)],
-                        zenodo_1L_chr = images_chr[images_chr %>% startsWith("https://zenodo.org/badge/DOI/")])
-  if(identical(badge_urls_ls$ready4_1L_chr, character(0))){
-    badge_urls_ls <- get_badge_urls(paste0(pkg_nm_1L_chr, "/dev"), project_badges_url_1L_chr = project_badges_url_1L_chr, url_stub_1L_chr = url_stub_1L_chr)
+  images_xx <- get_gracefully(paste0(url_stub_1L_chr, pkg_nm_1L_chr, "/index.html"), fn=rvest::read_html)
+  if(!is.null(images_xx)){
+    images_chr <- images_xx %>%
+      rvest::html_elements("img") %>%
+      rvest::html_attr("src")
+    badge_urls_ls <- list(ready4_1L_chr = images_chr[images_chr %>% startsWith(project_badges_url_1L_chr)],
+                          zenodo_1L_chr = images_chr[images_chr %>% startsWith("https://zenodo.org/badge/DOI/")])
+    if(identical(badge_urls_ls$ready4_1L_chr, character(0))){
+      badge_urls_ls <- get_badge_urls(paste0(pkg_nm_1L_chr, "/dev"), project_badges_url_1L_chr = project_badges_url_1L_chr, url_stub_1L_chr = url_stub_1L_chr)
+    }
+  }else{
+    badge_urls_ls <- NULL
   }
   return(badge_urls_ls)
 }
 get_badges_lup <- function(ends_with_1L_chr = "ready4_badges_lup.RDS",
                            gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
-  ready4_badges_lup <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
-                                                  endsWith(ends_with_1L_chr)])
+  ready4_badges_lup <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+    dmt_urls_chr <- dmt_urls_xx
+    ready4_badges_lup <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
+                                                       endsWith(ends_with_1L_chr)])
+  }
   return(ready4_badges_lup)
 }
 get_cls_extensions <- function(pkg_extensions_tb,
@@ -26,46 +34,62 @@ get_cls_extensions <- function(pkg_extensions_tb,
                                gh_tag_1L_chr = "Documentation_0.0",
                                url_stub_1L_chr = "https://ready4-dev.github.io/",
                                validate_1L_lgl = FALSE){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
-  cls_extensions_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
-                                                  endsWith("classes_lup.RDS")]) %>%
-    tibble::as_tibble() %>%
-    dplyr::arrange(.data$pt_ns_chr) %>%
-    dplyr::filter(.data$pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
-    dplyr::arrange(.data$pt_ns_chr) %>%
-    dplyr::select("type_chr", "pt_ns_chr", "old_class_lgl")
-  if(validate_1L_lgl){
-    cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>% unique() %>%
-      purrr::map_dfr(~{
-        url_1L_chr <- paste0(url_stub_1L_chr,
-                             .x,
-                             "/reference/index",
-                             ".html")
-        allowable_chr <- rvest::read_html((url_1L_chr)) %>%
-          rvest::html_elements("a") %>%
-          rvest::html_text2()
-        allowable_chr <- allowable_chr[(allowable_chr %>% endsWith("-class") | allowable_chr %>% startsWith(.x)) & allowable_chr != .x] %>%
-          stringi::stri_replace_last_fixed("-class","") %>%
-          stringi::stri_replace_last_fixed("()","")
-        cls_extensions_tb %>%
-          dplyr::filter(.data$pt_ns_chr == .x) %>%
-          dplyr::filter(.data$type_chr %in% allowable_chr)
-      })
+  cls_extensions_tb <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+    dmt_urls_chr <- dmt_urls_xx
+    cls_extensions_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
+                                                       endsWith("classes_lup.RDS")])
+  }
+  if(!is.null(cls_extensions_tb)){
+    cls_extensions_tb <- cls_extensions_tb %>%
+      tibble::as_tibble() %>%
+      dplyr::arrange(.data$pt_ns_chr) %>%
+      dplyr::filter(.data$pt_ns_chr %in% pkg_extensions_tb$pt_ns_chr) %>%
+      dplyr::arrange(.data$pt_ns_chr) %>%
+      dplyr::select("type_chr", "pt_ns_chr", "old_class_lgl")
+    if(validate_1L_lgl){
+      cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>% unique() %>%
+        purrr::map_dfr(~{
+          url_1L_chr <- paste0(url_stub_1L_chr,
+                               .x,
+                               "/reference/index",
+                               ".html")
+          allowable_xx <- get_gracefully(url_1L_chr, fn=rvest::read_html)
+          if(!is.null(allowable_xx)){
+            allowable_chr <- allowable_xx %>%
+              rvest::html_elements("a") %>%
+              rvest::html_text2()
+            allowable_chr <- allowable_chr[(allowable_chr %>% endsWith("-class") | allowable_chr %>% startsWith(.x)) & allowable_chr != .x] %>%
+              stringi::stri_replace_last_fixed("-class","") %>%
+              stringi::stri_replace_last_fixed("()","")
+            cls_extensions_tb %>%
+              dplyr::filter(.data$pt_ns_chr == .x) %>%
+              dplyr::filter(.data$type_chr %in% allowable_chr)
+          }else{
+            NULL
+          }
+        })
+    }
   }
   return(cls_extensions_tb)
 }
 get_datasets_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                             gh_tag_1L_chr = "Documentation_0.0",
                             rds_fl_name_1L_chr = "datasets_tb"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
+  datasets_tb <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+  dmt_urls_chr <- dmt_urls_xx
   datasets_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith(paste0(rds_fl_name_1L_chr, ".RDS"))])
+  }
   return(datasets_tb)
 }
 get_digits_from_text <- function(text_1L_chr){
   fn_attribution_1L_chr <- "This function is based on: http://stla.github.io/stlapblog/posts/Numextract.html"
-  digits_chr <- unlist(regmatches(text_1L_chr,gregexpr("[[:digit:]]+\\.*[[:digit:]]*",text_1L_chr)))
+  digits_chr <- unlist(regmatches(text_1L_chr, gregexpr("[[:digit:]]+\\.*[[:digit:]]*", text_1L_chr)))
   return(digits_chr)
 }
 get_dv_fls_urls <- function(file_nms_chr,
@@ -78,18 +102,21 @@ get_dv_fls_urls <- function(file_nms_chr,
                                 server_1L_chr,
                                 "/api/access/datafile/")
   ds_ls <- get_gracefully(dv_ds_nm_1L_chr, fn = dataverse::dataset_files,
-                          args_ls = list(server = server_1L_chr,
-                                    key = key_1L_chr))
-  all_items_chr <- purrr::map_chr(ds_ls,~.x$label)
-  urls_chr <- file_nms_chr %>%
-    purrr::map_chr(~{
-      idx_1L_int <- which(all_items_chr == .x)
-      if(identical(idx_1L_int, integer(0))){
-        NA_character_
-      }else{
-        paste0(dv_url_pfx_1L_chr,ds_ls[[idx_1L_int]]$dataFile$id)
-      }
-    })
+                          args_ls = list(key = key_1L_chr, server = server_1L_chr))
+  if(!is.null(ds_ls)){
+    all_items_chr <- purrr::map_chr(ds_ls,~.x$label)
+    urls_chr <- file_nms_chr %>%
+      purrr::map_chr(~{
+        idx_1L_int <- which(all_items_chr == .x)
+        if(identical(idx_1L_int, integer(0))){
+          NA_character_
+        }else{
+          paste0(dv_url_pfx_1L_chr,ds_ls[[idx_1L_int]]$dataFile$id)
+        }
+      })
+  }else{
+    urls_chr <- NULL
+  }
   return(urls_chr)
 }
 get_examples <- function(vignettes_chr,
@@ -99,15 +126,17 @@ get_examples <- function(vignettes_chr,
   }else{
     examples_chr <- vignettes_chr %>%
       purrr::map_chr(~{
-        code_chr <- rvest::read_html((.x %>%
-                                        stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[,2]) %>%
-          rvest::html_elements(".r") %>%
-          rvest::html_text2()
-        ifelse(stringr::str_detect(paste0(code_chr, collapse = "/n"),
-                                   paste0(term_1L_chr,"\\(")),
-               .x,
-               NA_character_)
-
+        code_xx <- get_gracefully((.x %>%
+                                     stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[,2], fn=rvest::read_html)
+        if(!is.null(code_xx)){
+          code_chr <- code_xx %>%
+            rvest::html_elements(".r") %>%
+            rvest::html_text2()
+          ifelse(stringr::str_detect(paste0(code_chr, collapse = "/n"),
+                                     paste0(term_1L_chr,"\\(")),
+                 .x,
+                 NA_character_)
+        }
       }) %>%
       purrr::discard(is.na)
     if(identical(character(0),examples_chr))
@@ -117,13 +146,16 @@ get_examples <- function(vignettes_chr,
 }
 get_excluded_repos <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                                  gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
+  exclude_chr <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+  dmt_urls_chr <- dmt_urls_xx
   if(any(dmt_urls_chr %>% endsWith("exclude_chr.RDS"))){
     exclude_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("exclude_chr.RDS")])
   }else{
     exclude_chr <- character(0)
+  }
   }
   return(exclude_chr)
 }
@@ -223,21 +255,26 @@ get_from_lup_obj <- function(data_lookup_tb,
 get_functions_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0",
                              return_1L_chr = "all"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
+    functions_tb <- NULL
+   dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+  dmt_urls_chr <- dmt_urls_xx
   functions_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
                                              endsWith("fn_types_lup.RDS")])
-  if(return_1L_chr == "methods"){
+  if(!is.null(functions_tb)){
+    if(return_1L_chr == "methods"){
+      functions_tb <- functions_tb %>%
+        dplyr::filter(.data$is_method_lgl)
+    }
+    if(return_1L_chr == "types"){
+      functions_tb <- functions_tb %>%
+        dplyr::filter(!.data$is_method_lgl)
+    }
     functions_tb <- functions_tb %>%
-      dplyr::filter(.data$is_method_lgl)
+      dplyr::select("fn_type_nm_chr", "fn_type_desc_chr")
   }
-  if(return_1L_chr == "types"){
-    functions_tb <- functions_tb %>%
-      dplyr::filter(!.data$is_method_lgl)
   }
-  functions_tb <- functions_tb %>%
-    dplyr::select("fn_type_nm_chr", "fn_type_desc_chr")
   return(functions_tb)
 }
 get_generics <- function(pkg_nm_1L_chr = "ready4",
@@ -280,7 +317,11 @@ get_gh_repos <- function (org_1L_chr) {
   }
   acknowledgement_1L_chr <- "This function is a minor rephrasing of natmanager::list_repo"
   repositories_ls <- get_gracefully(paste0("/orgs/", org_1L_chr, "/repos"), fn = gh::gh, args_ls=list(type = "public"))
-  repositories_chr <- vapply(repositories_ls, "[[", "", "name")
+  if(!is.null(repositories_ls)){
+    repositories_chr <- vapply(repositories_ls, "[[", "", "name")
+  }else{
+    repositories_chr <- NULL
+  }
   return(repositories_chr)
 }
 get_gracefully <- function(url_1L_chr,
@@ -291,10 +332,20 @@ get_gracefully <- function(url_1L_chr,
     tests_chr <- c("cannot open the connection to ",
                    "unknown input format",
                    "Attempt to get feed was unsuccessful",
-                   "Not Found (HTTP 404)")
+                   "Not Found \\(HTTP 404\\)",
+                   "GitHub API error \\(404\\)",
+                   "Cannot access release data for repo",
+                   "HTTP error 404",
+                   "Could not resolve host",
+                   "Could not parse",
+                   "does not exist in current working directory",
+                   "Could not retrieve Dataset ID from persistent identifier",
+                   "Unknown HTTP verb")
   }
   if(identical(fn, readRDS)){
-    url_xx <- url(url_1L_chr)
+    url_xx <- NULL
+    if(grepl("www.|http:|https:", url_1L_chr))
+      url_xx <- url(url_1L_chr)
   }else{
     url_xx <- url_1L_chr
   }
@@ -302,49 +353,63 @@ get_gracefully <- function(url_1L_chr,
     message("No internet connection.")
     object_xx <- invisible(NULL)
   }else{
-    object_xx <- suppressWarnings(tryCatch(tryCatch(rlang::exec(fn, url_xx, !!!args_ls)), error = function(e) conditionMessage(e)))
-    if(is.character(object_xx)){
-      if(any(tests_chr %>% purrr::map_lgl(~startsWith(object_xx[1], .x)))){
-        message(object_xx)
-        object_xx <- invisible(NULL)
+    if(!is.null(url_xx)){
+      object_xx <- suppressWarnings(tryCatch(tryCatch(rlang::exec(fn, url_xx, !!!args_ls)), error = function(e) conditionMessage(e)))
+      if(is.character(object_xx)){
+        if(any(tests_chr %>% purrr::map_lgl(~stringr::str_detect(object_xx[1],.x)))){
+          message(object_xx)
+          object_xx <- invisible(NULL)
+        }
       }
+    }else{
+      object_xx <- NULL
+      message("Valid URL must be supplied if using ReadRDS method to source internet file")
     }
   }
   return(object_xx)
 }
 get_libraries_ls <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
+  libraries_ls <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+    dmt_urls_chr <- dmt_urls_xx
   if(any(dmt_urls_chr %>% endsWith("libraries_ls.RDS"))){
     libraries_ls <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_ls.RDS")])
-  }else{
-    libraries_ls <- NULL
+  }
   }
   return(libraries_ls)
 }
 get_libraries_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                              gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
+  libraries_tb <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+    dmt_urls_chr <- dmt_urls_xx
     if(any(dmt_urls_chr %>% endsWith("libraries_tb.RDS"))){
       libraries_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("libraries_tb.RDS")])
-    }else{
-      libraries_tb <- NULL
     }
+  }
   return(libraries_tb)
 }
 get_manual_urls <- function(pkg_nm_1L_chr = "ready4",
                             pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html"){
-  urls_chr <- rvest::read_html(pkg_url_1L_chr) %>%
-    rvest::html_elements(".external-link") %>%
-    rvest::html_attr("href")
-  indcs_int <- urls_chr %>%
-    purrr::map_lgl(~endsWith(.x,
-                             paste0(pkg_nm_1L_chr,"_User.pdf"))|endsWith(.x,
-                                                                         paste0(pkg_nm_1L_chr,"_Developer.pdf"))) %>%
-    which()
-  urls_chr <- sort(urls_chr[indcs_int], decreasing = TRUE)
+  urls_xx <- get_gracefully(pkg_url_1L_chr, fn=rvest::read_html)
+  if(!is.null(urls_xx)){
+    urls_chr <- urls_xx %>%
+      rvest::html_elements(".external-link") %>%
+      rvest::html_attr("href")
+    indcs_int <- urls_chr %>%
+      purrr::map_lgl(~endsWith(.x,
+                               paste0(pkg_nm_1L_chr,"_User.pdf"))|endsWith(.x,
+                                                                           paste0(pkg_nm_1L_chr,"_Developer.pdf"))) %>%
+      which()
+    urls_chr <- sort(urls_chr[indcs_int], decreasing = TRUE)
+  }else{
+    urls_chr <- NULL
+  }
   return(urls_chr)
 }
 get_methods <- function(pkg_nm_1L_chr = "ready4",
@@ -358,14 +423,24 @@ get_methods <- function(pkg_nm_1L_chr = "ready4",
 }
 get_methods_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
+  methods_tb <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+    dmt_urls_chr <- dmt_urls_xx
   methods_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("methods_tb.RDS")])
+  }
   return(methods_tb)
 }
 get_modules_tb <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                            gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = "")
-  modules_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")])
+  modules_tb <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+    dmt_urls_chr <- dmt_urls_xx
+    modules_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("modules_tb.RDS")])
+  }
   return(modules_tb)
 }
 get_mthd_titles <- function(mthd_nms_chr,
@@ -414,11 +489,15 @@ get_rds_from_dv <- function(file_nm_1L_chr,
                                 "/api/access/datafile/")
   ds_ls <- get_gracefully(dv_ds_nm_1L_chr, fn = dataverse::dataset_files,
                  args_ls = list(server = server_1L_chr, key = key_1L_chr))
-  all_items_chr <- purrr::map_chr(ds_ls,~.x$label) %>%
-    stringi::stri_replace_last_regex("\\.RDS","") %>%
-    stringi::stri_replace_last_regex("\\.Rds","") %>%
-    stringi::stri_replace_last_regex("\\.rds","")
-  idx_1L_int <- which(all_items_chr == file_nm_1L_chr) #paste0(file_nm_1L_chr,".RDS")
+  if(!is.null(ds_ls)){
+    all_items_chr <- purrr::map_chr(ds_ls,~.x$label) %>%
+      stringi::stri_replace_last_regex("\\.RDS","") %>%
+      stringi::stri_replace_last_regex("\\.Rds","") %>%
+      stringi::stri_replace_last_regex("\\.rds","")
+    idx_1L_int <- which(all_items_chr == file_nm_1L_chr) #paste0(file_nm_1L_chr,".RDS")
+  }else{
+    idx_1L_int <- integer(0)
+  }
   if(identical(idx_1L_int, integer(0))){
     r_object_xx <- NULL
   }else{
@@ -430,27 +509,35 @@ get_rds_from_dv <- function(file_nm_1L_chr,
 
 get_source_code_urls <- function(pkg_nm_1L_chr = "ready4",
                                  pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html"){
-  urls_chr <- rvest::read_html(pkg_url_1L_chr) %>%
-    rvest::html_elements(".external-link") %>%
-    rvest::html_attr("href")
-  indcs_int <- c(which((rvest::read_html(pkg_url_1L_chr) %>%
-                         rvest::html_elements(".external-link") %>%
-                         rvest::html_text()) == "Browse source code"),
-                which(startsWith(urls_chr,
-                                 "https://doi.org/10.5281/zenodo.")))
-  urls_chr <- urls_chr[indcs_int]
+  urls_xx <- get_gracefully(pkg_url_1L_chr, fn=rvest::read_html)
+  if(!is.null(urls_xx)){
+    urls_chr <- urls_xx %>%
+      rvest::html_elements(".external-link") %>%
+      rvest::html_attr("href")
+    indcs_int <- c(which((urls_xx %>%
+                            rvest::html_elements(".external-link") %>%
+                            rvest::html_text()) == "Browse source code"),
+                   which(startsWith(urls_chr,
+                                    "https://doi.org/10.5281/zenodo.")))
+    urls_chr <- urls_chr[indcs_int]
+  }else{
+    urls_chr <- NULL
+  }
   return(urls_chr)
 }
 get_subroutine_repos <- function(gh_repo_1L_chr = "ready4-dev/ready4",
                                  gh_tag_1L_chr = "Documentation_0.0"){
-  dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr,
-                                             tag = gh_tag_1L_chr,
-                                             .token = "")
-  if(any(dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS"))){
-    subroutine_repos_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS")])
-  }else{
-    subroutine_repos_chr <- character(0)
-  }
+  subroutine_repos_chr <- NULL
+  dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""))
+  if(!is.null(dmt_urls_xx)){
+    dmt_urls_chr <- dmt_urls_xx
+    if(any(dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS"))){
+      subroutine_repos_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("subroutine_repos_chr.RDS")])
+    }else{
+      subroutine_repos_chr <- character(0)
+    }
+    }
   return(subroutine_repos_chr)
 }
 get_table_from_loc_file <- function(path_1L_chr,

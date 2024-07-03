@@ -41,6 +41,7 @@ x <- x %>%
                            custom_dmt_ls = ready4fun::make_custom_dmt_ls(
                              desc_ls = list("get_datasts_tb() retrieves an RDS file (for example, a tabular summary of data collections that can be used with ready4 model modules) from a specified GitHub repository release.", #Get a table of ready4 model data collections
                                             "get_from_lup_obj() retrieves from a lookup table (a data.frame) the values in a target column for cases where values in a second column match a specified value.",
+                                            "get_gracefully() attempts to retrieve objects from the internet but returns NULL and an informative message if there is no internet connection or the specified resource could not be found.",
                                             "get_libraries_tb() retrieves a tabular summary of ready4 libraries that have been developed within a specified GitHub organisation.",
                                             "get_methods() retrieves the ready4 methods that are available for a specified ready4 model module.",
                                             "get_methods_tb() ingests 'methods_tb.RDS' (a table of methods associated with ready4 model modules) from a specified GitHub repository release.",
@@ -62,6 +63,7 @@ x <- x %>%
                              ) %>% stats::setNames(user_manual_fns_chr),#[1:7]
                              title_ls = list("Get data from the release assets of a GitHub repository",
                                              "Get a value from a lookup table",
+                                             "Get data from the internet with graceful failure",
                                              "Get a table of ready4 libraries",
                                              "Get the methods associated with a ready4 model module",
                                              "Get a table of methods associated with ready4 model modules",
