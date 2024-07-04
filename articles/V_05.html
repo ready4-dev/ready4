@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.11</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,19 +124,21 @@ stored. Note, the following command may take a couple of minutes to
 execute.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">modules_tb</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/make_modules_tb.html">make_modules_tb</a></span><span class="op">(</span>gh_repo_1L_chr <span class="op">=</span> <span class="st">"ready4-dev/ready4"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</span></span>
+<span><span class="co">## A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</span></span></code></pre>
 <p>A slightly quicker method to achieve a similar result is to use the
 <code>get_modules_tb</code> function. This function retrieves an
 archived version (and therefore potentially less up to date) of the
 modules summary table.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Not run</span></span>
 <span><span class="co"># modules_tb &lt;- get_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")</span></span></code></pre></div>
-<p>The <code>modules_tb</code> object itemises both model <a href="https://www.ready4-dev.com/docs/getting-started/implementation/modularity/" class="external-link">modules
+<p>The <code>modules_tb</code> object itemises both model <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/" class="external-link">modules
 (which always use R’s “S4” class type) and sub-modules (“S3” class
 type)</a>.</p>
 <p>To display a HTML summary of just model modules, you can use the
 <code>print_modules</code> function.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">modules_tb</span>, what_1L_chr <span class="op">=</span> <span class="st">"S4"</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -653,7 +655,7 @@ statistics and metadata
 </tbody>
 </table>
 <p>You can use the same function to display only model sub-modules.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_modules.html">print_modules</a></span><span class="op">(</span><span class="va">modules_tb</span>, what_1L_chr <span class="op">=</span> <span class="st">"S3"</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
