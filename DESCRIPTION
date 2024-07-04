@@ -1,6 +1,6 @@
 Package: ready4
 Title: Develop and Use Modular Health Economic Models
-Version: 0.1.11
+Version: 0.1.12
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton1@monash.edu", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -19,7 +19,7 @@ Description: A template model module, tools to help find model modules
     use it visit <https://www.ready4-dev.com/>. For a background to the
     methodological issues that the framework is attempting to help solve,
     see Hamilton et al. (2024) <doi:10.1007/s40273-024-01378-8>.
-License: GPL-3
+License: GPL-3 + file LICENSE
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4, https://www.ready4-dev.com/
 Encoding: UTF-8
@@ -29,6 +29,8 @@ Collate:
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Public.R'
+    'add.R'
+    'bind.R'
     'fn_add.R'
     'fn_bind.R'
     'fn_get.R'
@@ -39,9 +41,11 @@ Collate:
     'fn_transform.R'
     'fn_update.R'
     'fn_write.R'
+    'get.R'
     'grp_generics.R'
     'imp_fns.R'
     'imp_mthds.R'
+    'make.R'
     'mthd_authorSlot.R'
     'mthd_characterizeSlot.R'
     'mthd_depictSlot.R'
@@ -58,31 +62,34 @@ Collate:
     'mthd_renewSlot.R'
     'mthd_shareSlot.R'
     'pkg_ready4.R'
+    'print.R'
     'ready4-package.R'
+    'remove.R'
+    'rowbind.R'
+    'transform.R'
+    'update.R'
+    'write.R'
 Suggests: 
-    devtools,
-    Hmisc,
     knitr,
-    pkgload,
-    readr,
-    readxl,
-    rmarkdown,
-    testthat,
-    usethis,
-    zen4R
+    testthat
 VignetteBuilder: knitr
 Imports: 
     curl,
     dataverse,
+    devtools,
     dplyr,
     gh,
+    Hmisc,
     kableExtra,
     lifecycle,
     magrittr,
     methods,
     piggyback,
     purrr,
+    readr,
+    readxl,
     rlang,
+    rmarkdown,
     rvest,
     stats,
     stringi,
@@ -91,4 +98,6 @@ Imports:
     tidyRSS,
     tidyselect,
     tools,
-    utils
+    usethis,
+    utils,
+    zen4R

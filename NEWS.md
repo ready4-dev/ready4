@@ -1,3 +1,5 @@
+# ready4 0.1.12
+
 # ready4 0.1.11
 This patch introduces the get_gracefully() function to address a CRAN policy violation and to ensure that unsuccessful attempts at retrieving internet resources fail gracefully.
 
