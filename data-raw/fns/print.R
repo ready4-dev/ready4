@@ -184,7 +184,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
     pkg_extensions_kbl <- NULL
   }else{
     if(!identical(sections_chr, character(0))){
-      pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::filter(Section %in% sections_chr)
+      pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::filter(.data$Section %in% sections_chr)
     }
   if(nrow(pkg_extensions_tb) == 1){
     pkg_extensions_tb <- rbind(pkg_extensions_tb,pkg_extensions_tb)
