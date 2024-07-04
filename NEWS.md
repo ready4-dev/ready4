@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.1.11
 
 # ready4 0.1.10
 This patch fixes a documentation error under which the description of many functions referred to the wrong function.
