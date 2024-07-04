@@ -638,8 +638,9 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
         consented_fn <- function(paths_chr, piggyback_desc_1L_chr, 
             piggyback_to_1L_chr, piggyback_tag_1L_chr, prerelease_1L_lgl) {
             ids_int <- NULL
-            releases_xx <- get_gracefully(gh_repo_1L_chr, fn = piggyback::pb_list, 
-                args_ls = list(tag = gh_tag_1L_chr, .token = ""))
+            releases_xx <- get_gracefully(piggyback_to_1L_chr, 
+                fn = piggyback::pb_list, args_ls = list(tag = piggyback_tag_1L_chr, 
+                  .token = ""))
             if (!is.null(releases_xx)) {
                 releases_df <- releases_xx
                 if (!piggyback_tag_1L_chr %in% releases_df$tag) 

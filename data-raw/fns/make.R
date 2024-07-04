@@ -129,7 +129,7 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
                              what_1L_chr = "all"){
   type_1L_chr <- match.arg(type_1L_chr)
   if(is.null(dvs_tb)){
-    contents_ls <- get_gracefully(.x, fn = dataverse::dataverse_contents,
+    contents_ls <- get_gracefully(dv_nm_1L_chr, fn = dataverse::dataverse_contents,
                                   args_ls = list(key = key_1L_chr, server = server_1L_chr))
     if(!is.null(contents_ls)){
       dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == "dataverse")]

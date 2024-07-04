@@ -34,7 +34,7 @@ test_that("Kable of release history of data collection is generated",{
   expect_no_error(dataset_kbl <- make_ds_releases_tbl("10.7910/DVN/RIQTKK"))
   skip_on_cran()
   expect_true(!is.null(dataset_kbl))
-  if(!is.null(dataset_tb)){
+  if(!is.null(dataset_kbl)){
   expect_true(class(dataset_kbl)[1] == "kableExtra")
     }
 }
