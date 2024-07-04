@@ -35,7 +35,7 @@ A slightly quicker method to achieve a similar result is to use the `get_modules
 # modules_tb <- get_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 ```
 
-The `modules_tb` object itemises both model [modules (which always use R's "S4" class type) and sub-modules ("S3" class type)](https://www.ready4-dev.com/docs/getting-started/implementation/modularity/). 
+The `modules_tb` object itemises both model [modules (which always use R's "S4" class type) and sub-modules ("S3" class type)](https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/). 
 
 To display a HTML summary of just model modules, you can use the `print_modules` function. 
 

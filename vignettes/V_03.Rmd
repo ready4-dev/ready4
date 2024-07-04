@@ -24,7 +24,7 @@ The practical utility and ease of use of computational health economic models ar
 
 ## Implementation
 ### Modular Computational Models
-Two commonly noted features of OOP - encapsulation and inheritance are particularly useful when developing [modular computational health economic models](https://www.ready4-dev.com/docs/framework/implementation/modularity/).
+Two commonly noted features of OOP - encapsulation and inheritance are particularly useful when developing [modular computational health economic models](https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/).
 
 #### Encapsulation
 Encapsulation allows us to define the data structures (“classes”) used in computational modelling projects in a manner that allows them to be safely combined.  For example, assume there are two computational health economic models, one (**A**) focused on predicting the types and intensity of services used by individuals that present to health services and the other (**B**) that [predicts outcomes for recipients of these services](https://ready4-dev.github.io/youthu/articles/Prediction_With_Mdls.html). It may be desirable to develop a new model (**C**) that combines **A** and **B** to model both service use and outcomes. Using encapsulated code allows all of the features and functionality of **A** to be made available to **B** in a manner that protects the integrity of **A**. Specifically, **B** can only interact with **A** using the algorithms (“methods”) that have been already defined for **A**. 
