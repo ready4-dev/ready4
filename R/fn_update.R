@@ -64,32 +64,39 @@ update_libraries_tb <- function (libraries_tb = make_libraries_tb(), additions_t
             url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
             vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr, 
             what_chr = what_chr)
-        libraries_tb <- dplyr::bind_rows(dplyr::filter(libraries_tb, 
-            !(!!rlang::sym(ns_var_nm_1L_chr) %in% dplyr::pull(new_cases_tb, 
-                !!rlang::sym(ns_var_nm_1L_chr)))), new_cases_tb) %>% 
-            dplyr::arrange(.data$Section)
-    }
-    if (include_1L_chr %in% c("framework", "Framework")) {
-        libraries_tb <- dplyr::filter(libraries_tb, .data$Section == 
-            "Framework")
-    }
-    if (include_1L_chr %in% c("modules", "Modules")) {
-        libraries_tb <- dplyr::filter(libraries_tb, .data$Section != 
-            "Framework")
-    }
-    if (!identical(module_pkgs_chr, character(0))) {
-        libraries_tb <- dplyr::filter(libraries_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% 
-            module_pkgs_chr)
-    }
-    if (!what_chr[1] %in% c("all", "All")) {
-        libraries_ls <- make_libraries_ls(libraries_tb = libraries_tb, 
-            ns_var_nm_1L_chr = ns_var_nm_1L_chr) %>% update_libraries_ls(keep_chr = what_chr)
-        if (length(libraries_ls == 0)) {
-            libraries_tb <- dplyr::filter(libraries_tb, FALSE)
+        if (!is.null(new_cases_tb)) {
+            libraries_tb <- dplyr::bind_rows(dplyr::filter(libraries_tb, 
+                !(!!rlang::sym(ns_var_nm_1L_chr) %in% dplyr::pull(new_cases_tb, 
+                  !!rlang::sym(ns_var_nm_1L_chr)))), new_cases_tb) %>% 
+                dplyr::arrange(.data$Section)
         }
         else {
+            libraries_tb <- NULL
+        }
+    }
+    if (!is.null(libraries_tb)) {
+        if (include_1L_chr %in% c("framework", "Framework")) {
+            libraries_tb <- dplyr::filter(libraries_tb, .data$Section == 
+                "Framework")
+        }
+        if (include_1L_chr %in% c("modules", "Modules")) {
+            libraries_tb <- dplyr::filter(libraries_tb, .data$Section != 
+                "Framework")
+        }
+        if (!identical(module_pkgs_chr, character(0))) {
             libraries_tb <- dplyr::filter(libraries_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% 
-                purrr::flatten_chr(libraries_ls))
+                module_pkgs_chr)
+        }
+        if (!what_chr[1] %in% c("all", "All")) {
+            libraries_ls <- make_libraries_ls(libraries_tb = libraries_tb, 
+                ns_var_nm_1L_chr = ns_var_nm_1L_chr) %>% update_libraries_ls(keep_chr = what_chr)
+            if (length(libraries_ls == 0)) {
+                libraries_tb <- dplyr::filter(libraries_tb, FALSE)
+            }
+            else {
+                libraries_tb <- dplyr::filter(libraries_tb, !!rlang::sym(ns_var_nm_1L_chr) %in% 
+                  purrr::flatten_chr(libraries_ls))
+            }
         }
     }
     return(libraries_tb)

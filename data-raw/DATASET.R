@@ -24,7 +24,7 @@ x <- ready4fun::make_pkg_desc_ls(
                "https://github.com/ready4-dev/ready4",
                "https://www.ready4-dev.com/"))
 user_manual_fns_chr <-  c(
-  "get_datasts_tb","get_from_lup_obj","get_libraries_tb",
+  "get_datasts_tb","get_from_lup_obj","get_gracefully", "get_libraries_tb",
   "get_methods", "get_methods_tb", "get_modules_tb",
   "make_code_releases_tbl", "make_datasets_tb", "make_ds_releases_tbl",
   "make_methods_tb", "make_modules_tb",  "make_programs_tbl",

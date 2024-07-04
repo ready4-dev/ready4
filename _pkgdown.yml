@@ -23,6 +23,7 @@ reference:
 - title: "Functions"
 - contents:
   - get_from_lup_obj
+  - get_gracefully
   - get_libraries_tb
   - get_methods
   - get_methods_tb

@@ -245,27 +245,32 @@ write_dv_fl_to_loc <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L_c
     options_chr = c("Y", "N"), save_type_1L_chr = "original", 
     server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
-    ds_ls <- dataverse::get_dataset(ds_ui_1L_chr)
-    if (ds_ls$versionState != "DRAFT") {
-        if (!is.na(fl_id_1L_int)) {
-            ds_ui_1L_chr <- NULL
+    ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
+    if (!is.null(ds_ls)) {
+        if (ds_ls$versionState != "DRAFT") {
+            if (!is.na(fl_id_1L_int)) {
+                ds_ui_1L_chr <- NULL
+            }
+            write_with_consent(consented_fn = write_ingested_dv_fl, 
+                prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
+                  paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), " to ", 
+                  dest_path_1L_chr, " ?"), consent_1L_chr = consent_1L_chr, 
+                consent_indcs_int = consent_indcs_int, consented_args_ls = list(ds_ui_1L_chr = ds_ui_1L_chr, 
+                  fl_nm_1L_chr = fl_nm_1L_chr, fl_id_1L_int = fl_id_1L_int, 
+                  repo_fl_fmt_1L_chr = repo_fl_fmt_1L_chr, key_1L_chr = key_1L_chr, 
+                  server_1L_chr = server_1L_chr, save_type_1L_chr = save_type_1L_chr, 
+                  dest_path_1L_chr = dest_path_1L_chr, consent_1L_chr = options_chr[consent_indcs_int[1]]), 
+                consented_msg_1L_chr = paste0("New file created in ", 
+                  dest_path_1L_chr, " :\n", paste0(fl_nm_1L_chr, 
+                    repo_fl_fmt_1L_chr)), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+                options_chr = options_chr, return_1L_lgl = FALSE)
         }
-        write_with_consent(consented_fn = write_ingested_dv_fl, 
-            prompt_1L_chr = paste0("Do you confirm that you want to write the file ", 
-                paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), " to ", 
-                dest_path_1L_chr, " ?"), consent_1L_chr = consent_1L_chr, 
-            consent_indcs_int = consent_indcs_int, consented_args_ls = list(ds_ui_1L_chr = ds_ui_1L_chr, 
-                fl_nm_1L_chr = fl_nm_1L_chr, fl_id_1L_int = fl_id_1L_int, 
-                repo_fl_fmt_1L_chr = repo_fl_fmt_1L_chr, key_1L_chr = key_1L_chr, 
-                server_1L_chr = server_1L_chr, save_type_1L_chr = save_type_1L_chr, 
-                dest_path_1L_chr = dest_path_1L_chr, consent_1L_chr = options_chr[consent_indcs_int[1]]), 
-            consented_msg_1L_chr = paste0("New file created in ", 
-                dest_path_1L_chr, " :\n", paste0(fl_nm_1L_chr, 
-                  repo_fl_fmt_1L_chr)), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
-            options_chr = options_chr, return_1L_lgl = FALSE)
+        else {
+            warning("Cannot write local copy of files from private Dataverse repo.")
+        }
     }
     else {
-        warning("Cannot write local copy of files from private Dataverse repo.")
+        message("Write action cancelled - online resources could not be found.")
     }
 }
 #' Write environment objects to dataverse
@@ -318,7 +323,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
                 NULL
             })
             if (is.null(ds_ls)) {
-                ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
+                ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
             }
         }
     }
@@ -357,21 +362,24 @@ write_examples <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int 
     options_chr = c("Y", "N"), type_1L_chr = "fn") 
 {
     if (dir.exists(paste0(path_1L_chr, "/data-raw/examples"))) {
-        methods_chr <- get_methods_tb()$Method
-        examples_chr <- list.files(paste0(path_1L_chr, "/data-raw/examples"))
-        if (length(examples_chr) > 0) {
-            file.copy(paste0(path_1L_chr, "/data-raw/examples"), 
-                "man", recursive = TRUE)
-            fn_nms_chr <- examples_chr %>% purrr::map_chr(~stringr::str_sub(.x, 
-                end = -3))
-            fn_fls_chr <- fn_nms_chr %>% purrr::map_chr(~stringr::str_sub(.x, 
-                end = stringr::str_locate(.x, "_")[1] - 1)) %>% 
-                purrr::map_chr(~paste0(path_1L_chr, "/R/", ifelse(.x %in% 
-                  methods_chr, "mthd", "fn"), "_", .x, ".R"))
-            consented_fn <- function(examples_chr, fn_fls_chr, 
-                fn_nms_chr) {
-                purrr::pwalk(list(examples_chr, fn_nms_chr, fn_fls_chr), 
-                  ~{
+        methods_xx <- get_methods_tb()
+        if (!is.null(methods_xx)) {
+            methods_chr <- methods_xx$Method
+            examples_chr <- list.files(paste0(path_1L_chr, "/data-raw/examples"))
+            if (length(examples_chr) > 0) {
+                file.copy(paste0(path_1L_chr, "/data-raw/examples"), 
+                  "man", recursive = TRUE)
+                fn_nms_chr <- examples_chr %>% purrr::map_chr(~stringr::str_sub(.x, 
+                  end = -3))
+                fn_fls_chr <- fn_nms_chr %>% purrr::map_chr(~stringr::str_sub(.x, 
+                  end = stringr::str_locate(.x, "_")[1] - 1)) %>% 
+                  purrr::map_chr(~paste0(path_1L_chr, "/R/", 
+                    ifelse(.x %in% methods_chr, "mthd", "fn"), 
+                    "_", .x, ".R"))
+                consented_fn <- function(examples_chr, fn_fls_chr, 
+                  fn_nms_chr) {
+                  purrr::pwalk(list(examples_chr, fn_nms_chr, 
+                    fn_fls_chr), ~{
                     fn_fl_1L_chr <- ..3
                     if (startsWith(stringr::str_remove(fn_fl_1L_chr, 
                       paste0(path_1L_chr, "/R/")), "fn_")) {
@@ -417,15 +425,21 @@ write_examples <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int 
                         writeLines(fn_fl_1L_chr)
                     }
                   })
+                }
+                write_with_consent(consented_fn = consented_fn, 
+                  prompt_1L_chr = paste0("Do you confirm that you wish to write examples to ", 
+                    make_list_phrase(unique(fn_fls_chr)), "?"), 
+                  consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+                  consented_args_ls = list(examples_chr = paste0(path_1L_chr, 
+                    "/data-raw/examples/", examples_chr), fn_fls_chr = fn_fls_chr, 
+                    fn_nms_chr = fn_nms_chr), consented_msg_1L_chr = paste0("Examples have been written in ", 
+                    make_list_phrase(unique(fn_fls_chr)), "."), 
+                  declined_msg_1L_chr = "Write request cancelled - no examples have been written.", 
+                  options_chr = options_chr, return_1L_lgl = FALSE)
             }
-            write_with_consent(consented_fn = consented_fn, prompt_1L_chr = paste0("Do you confirm that you wish to write examples to ", 
-                make_list_phrase(unique(fn_fls_chr)), "?"), consent_1L_chr = consent_1L_chr, 
-                consent_indcs_int = consent_indcs_int, consented_args_ls = list(examples_chr = paste0(path_1L_chr, 
-                  "/data-raw/examples/", examples_chr), fn_fls_chr = fn_fls_chr, 
-                  fn_nms_chr = fn_nms_chr), consented_msg_1L_chr = paste0("Examples have been written in ", 
-                  make_list_phrase(unique(fn_fls_chr)), "."), 
-                declined_msg_1L_chr = "Write request cancelled - no examples have been written.", 
-                options_chr = options_chr, return_1L_lgl = FALSE)
+        }
+        else {
+            message("Write action cancelled - online resources could not be found.")
         }
     }
     if (requireNamespace("devtools", quietly = TRUE)) 
@@ -534,39 +548,45 @@ write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "",
     if (!identical(file_paths_chr, character(0))) {
         consented_fn <- function(file_paths_chr, ds_url_1L_chr, 
             descriptions_chr, ds_ls, key_1L_chr, server_1L_chr) {
+            ids_int <- NULL
             if (is.null(ds_ls)) 
-                ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
-            is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
-            nms_chr <- ds_ls$files$filename
-            if (is.null(descriptions_chr)) 
-                descriptions_chr <- purrr::map(file_paths_chr, 
-                  ~NULL)
-            ids_int <- file_paths_chr %>% purrr::map2_int(descriptions_chr, 
-                ~{
-                  fl_nm_1L_chr <- get_fl_nm_from_path(.x)
-                  if (fl_nm_1L_chr %in% nms_chr) {
-                    id_1L_int <- get_fl_id_from_dv_ls(ds_ls, 
-                      fl_nm_1L_chr = fl_nm_1L_chr, nms_chr = nms_chr)
-                    if (is_draft_1L_lgl) {
-                      id_1L_int %>% dataverse::delete_file()
+                ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
+            if (!is.null(ds_ls)) {
+                is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
+                nms_chr <- ds_ls$files$filename
+                if (is.null(descriptions_chr)) 
+                  descriptions_chr <- purrr::map(file_paths_chr, 
+                    ~NULL)
+                ids_int <- file_paths_chr %>% purrr::map2_int(descriptions_chr, 
+                  ~{
+                    fl_nm_1L_chr <- get_fl_nm_from_path(.x)
+                    if (fl_nm_1L_chr %in% nms_chr) {
+                      id_1L_int <- get_fl_id_from_dv_ls(ds_ls, 
+                        fl_nm_1L_chr = fl_nm_1L_chr, nms_chr = nms_chr)
+                      if (is_draft_1L_lgl) {
+                        id_1L_int %>% dataverse::delete_file()
+                        id_1L_int <- dataverse::add_dataset_file(file = .x, 
+                          dataset = ds_url_1L_chr, description = .y, 
+                          key = key_1L_chr, server = server_1L_chr)
+                      }
+                      else {
+                        dataverse::update_dataset_file(file = .x, 
+                          dataset = ds_url_1L_chr, id = id_1L_int, 
+                          force = TRUE, description = .y, key = key_1L_chr, 
+                          server = server_1L_chr)
+                      }
+                    }
+                    else {
                       id_1L_int <- dataverse::add_dataset_file(file = .x, 
                         dataset = ds_url_1L_chr, description = .y, 
                         key = key_1L_chr, server = server_1L_chr)
                     }
-                    else {
-                      dataverse::update_dataset_file(file = .x, 
-                        dataset = ds_url_1L_chr, id = id_1L_int, 
-                        force = TRUE, description = .y, key = key_1L_chr, 
-                        server = server_1L_chr)
-                    }
-                  }
-                  else {
-                    id_1L_int <- dataverse::add_dataset_file(file = .x, 
-                      dataset = ds_url_1L_chr, description = .y, 
-                      key = key_1L_chr, server = server_1L_chr)
-                  }
-                  id_1L_int
-                })
+                    id_1L_int
+                  })
+            }
+            else {
+                message("Write action cancelled - online resources could not be found.")
+            }
             return(ids_int)
         }
         ids_int <- write_with_consent(consented_fn = consented_fn, 
@@ -617,18 +637,25 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
     if (!identical(piggyback_to_1L_chr, character(0))) {
         consented_fn <- function(paths_chr, piggyback_desc_1L_chr, 
             piggyback_to_1L_chr, piggyback_tag_1L_chr, prerelease_1L_lgl) {
-            releases_df <- piggyback::pb_list(repo = piggyback_to_1L_chr)
-            if (!piggyback_tag_1L_chr %in% releases_df$tag) 
-                piggyback::pb_new_release(piggyback_to_1L_chr, 
-                  tag = piggyback_tag_1L_chr, body = piggyback_desc_1L_chr, 
-                  prerelease = prerelease_1L_lgl)
-            purrr::walk(paths_chr, ~{
-                if (file.exists(.x)) {
-                  piggyback::pb_upload(.x, repo = piggyback_to_1L_chr, 
-                    tag = piggyback_tag_1L_chr)
-                }
-            })
             ids_int <- NULL
+            releases_xx <- get_gracefully(gh_repo_1L_chr, fn = piggyback::pb_list, 
+                args_ls = list(tag = gh_tag_1L_chr, .token = ""))
+            if (!is.null(releases_xx)) {
+                releases_df <- releases_xx
+                if (!piggyback_tag_1L_chr %in% releases_df$tag) 
+                  piggyback::pb_new_release(piggyback_to_1L_chr, 
+                    tag = piggyback_tag_1L_chr, body = piggyback_desc_1L_chr, 
+                    prerelease = prerelease_1L_lgl)
+                purrr::walk(paths_chr, ~{
+                  if (file.exists(.x)) {
+                    piggyback::pb_upload(.x, repo = piggyback_to_1L_chr, 
+                      tag = piggyback_tag_1L_chr)
+                  }
+                })
+            }
+            else {
+                message("Write action cancelled - repository could not be found.")
+            }
             return(ids_int)
         }
         ids_int <- write_with_consent(consented_fn = consented_fn, 
@@ -724,16 +751,22 @@ write_ingested_dv_fl <- function (ds_ui_1L_chr, dest_path_1L_chr, repo_fl_fmt_1L
         consent_1L_chr <- make_prompt(prompt_1L_chr = prompt_1L_chr, 
             options_chr = c("Y", "N"), force_from_opts_1L_chr = TRUE)
     }
-    write_with_consent(consented_fn = writeBin, prompt_1L_chr = prompt_1L_chr, 
-        consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
-        consented_args_ls = list(object = dataverse::get_file(ifelse(is.na(fl_id_1L_int), 
-            paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), fl_id_1L_int), 
-            dataset = ds_ui_1L_chr, format = save_type_1L_chr, 
-            key = key_1L_chr, server = server_1L_chr), con = dest_path_1L_chr), 
-        consented_msg_1L_chr = paste0("New file created in ", 
-            dest_path_1L_chr, " :\n", paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr)), 
-        declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
-        options_chr = options_chr, return_1L_lgl = FALSE)
+    object_xx <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_file, 
+        args_ls = list(file = ifelse(is.na(fl_id_1L_int), paste0(fl_nm_1L_chr, 
+            repo_fl_fmt_1L_chr), fl_id_1L_int), format = save_type_1L_chr, 
+            key = key_1L_chr, server = server_1L_chr))
+    if (!is.null(object_xx)) {
+        write_with_consent(consented_fn = writeBin, prompt_1L_chr = prompt_1L_chr, 
+            consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+            consented_args_ls = list(object = object_xx, , con = dest_path_1L_chr), 
+            consented_msg_1L_chr = paste0("New file created in ", 
+                dest_path_1L_chr, " :\n", paste0(fl_nm_1L_chr, 
+                  repo_fl_fmt_1L_chr)), declined_msg_1L_chr = "Write request cancelled - no new files have been written.", 
+            options_chr = options_chr, return_1L_lgl = FALSE)
+    }
+    else {
+        message("Write action cancelled - online resources could not be found.")
+    }
 }
 #' Write library metadata
 #' @description write_library_metadata() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write library metadata. The function is called for its side effects and does not return a value.
@@ -776,45 +809,47 @@ write_library_metadata <- function (additions_tb = make_additions_tb(), librarie
             gh_tag_1L_chr = gh_tag_1L_chr)
         update_table_1L_lgl <- FALSE
     }
-    if (!identical(additions_tb, make_additions_tb())) {
-        update_list_1L_lgl <- update_table_1L_lgl <- TRUE
-        libraries_tb <- libraries_tb %>% update_libraries_tb(include_1L_chr = include_1L_chr, 
-            module_pkgs_chr = module_pkgs_chr, ns_var_nm_1L_chr = ns_var_nm_1L_chr, 
-            reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
-            url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
-            vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr, 
-            what_chr = what_chr)
-        libraries_ls <- make_libraries_ls(libraries_tb = libraries_tb, 
-            ns_var_nm_1L_chr = ns_var_nm_1L_chr)
-    }
-    else {
-        if (is.null(libraries_ls)) {
-            libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, 
-                gh_tag_1L_chr = gh_tag_1L_chr)
-            update_list_1L_lgl <- FALSE
+    if (!is.null(libraries_tb)) {
+        if (!identical(additions_tb, make_additions_tb())) {
+            update_list_1L_lgl <- update_table_1L_lgl <- TRUE
+            libraries_tb <- libraries_tb %>% update_libraries_tb(include_1L_chr = include_1L_chr, 
+                module_pkgs_chr = module_pkgs_chr, ns_var_nm_1L_chr = ns_var_nm_1L_chr, 
+                reference_var_nm_1L_chr = reference_var_nm_1L_chr, 
+                url_stub_1L_chr = url_stub_1L_chr, vignette_var_nm_1L_chr = vignette_var_nm_1L_chr, 
+                vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr, 
+                what_chr = what_chr)
+            libraries_ls <- make_libraries_ls(libraries_tb = libraries_tb, 
+                ns_var_nm_1L_chr = ns_var_nm_1L_chr)
         }
-    }
-    env_objects_ls <- list()
-    if (update_list_1L_lgl) {
-        env_objects_ls$libraries_ls <- libraries_ls
-    }
-    if (update_table_1L_lgl) {
-        env_objects_ls$libraries_tb <- libraries_tb
-    }
-    if (update_list_1L_lgl | update_table_1L_lgl) {
-        env_objects_ls$methods_tb <- make_methods_tb(packages_tb = libraries_tb, 
-            exclude_mthds_for_chr = exclude_mthds_for_chr, gh_repo_1L_chr = gh_repo_1L_chr, 
-            gh_tag_1L_chr = gh_tag_1L_chr, module_pkgs_chr = module_pkgs_chr, 
-            ns_var_nm_1L_chr = ns_var_nm_1L_chr, path_1L_chr = path_1L_chr, 
-            return_1L_chr = return_1L_chr)
-    }
-    if (!identical(env_objects_ls, list())) {
-        write_env_objs_to_dv(env_objects_ls = env_objects_ls, 
-            consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
-            descriptions_chr = NULL, ds_url_1L_chr = character(0), 
-            options_chr = options_chr, piggyback_desc_1L_chr = "Library metadata", 
-            piggyback_tag_1L_chr = gh_tag_1L_chr, piggyback_to_1L_chr = gh_repo_1L_chr, 
-            prerelease_1L_lgl = TRUE)
+        else {
+            if (is.null(libraries_ls)) {
+                libraries_ls <- get_libraries_ls(gh_repo_1L_chr = gh_repo_1L_chr, 
+                  gh_tag_1L_chr = gh_tag_1L_chr)
+                update_list_1L_lgl <- FALSE
+            }
+        }
+        env_objects_ls <- list()
+        if (update_list_1L_lgl) {
+            env_objects_ls$libraries_ls <- libraries_ls
+        }
+        if (update_table_1L_lgl) {
+            env_objects_ls$libraries_tb <- libraries_tb
+        }
+        if (update_list_1L_lgl | update_table_1L_lgl) {
+            env_objects_ls$methods_tb <- make_methods_tb(packages_tb = libraries_tb, 
+                exclude_mthds_for_chr = exclude_mthds_for_chr, 
+                gh_repo_1L_chr = gh_repo_1L_chr, gh_tag_1L_chr = gh_tag_1L_chr, 
+                module_pkgs_chr = module_pkgs_chr, ns_var_nm_1L_chr = ns_var_nm_1L_chr, 
+                path_1L_chr = path_1L_chr, return_1L_chr = return_1L_chr)
+        }
+        if (!identical(env_objects_ls, list())) {
+            write_env_objs_to_dv(env_objects_ls = env_objects_ls, 
+                consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+                descriptions_chr = NULL, ds_url_1L_chr = character(0), 
+                options_chr = options_chr, piggyback_desc_1L_chr = "Library metadata", 
+                piggyback_tag_1L_chr = gh_tag_1L_chr, piggyback_to_1L_chr = gh_repo_1L_chr, 
+                prerelease_1L_lgl = TRUE)
+        }
     }
 }
 #' Write new credentials
@@ -1219,24 +1254,30 @@ write_to_dv_from_tbl <- function (files_tb, ds_url_1L_chr, consent_1L_chr = "", 
     fl_ids_int <- NULL
     consented_fn <- function(files_tb, consent_indcs_int, data_dir_rt_1L_chr, 
         ds_url_1L_chr, key_1L_chr, options_chr, server_1L_chr) {
-        ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
-        is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
-        nms_chr <- ds_ls$files$filename
-        fl_ids_int <- purrr::pmap_int(files_tb, ~{
-            path_1L_chr <- paste0(ifelse(identical(character(0), 
-                data_dir_rt_1L_chr), "", paste0(data_dir_rt_1L_chr, 
-                "/")), ..1, "/", ..2, ..3)
-            fl_nm_1L_chr <- paste0(..2, ..3)
-            id_1L_int <- write_fls_to_dv(path_1L_chr, consent_1L_chr = consent_1L_chr, 
-                consent_indcs_int = consent_indcs_int, descriptions_chr = ..4, 
-                ds_url_1L_chr = ds_url_1L_chr, ds_ls = ds_ls, 
-                key_1L_chr = key_1L_chr, options_chr = options_chr, 
-                server_1L_chr = server_1L_chr)
-            if (id_1L_int) {
-                id_1L_int <- NA_integer_
-            }
-            id_1L_int
-        })
+        fl_ids_int <- NULL
+        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
+        if (!is.null(ds_ls)) {
+            is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
+            nms_chr <- ds_ls$files$filename
+            fl_ids_int <- purrr::pmap_int(files_tb, ~{
+                path_1L_chr <- paste0(ifelse(identical(character(0), 
+                  data_dir_rt_1L_chr), "", paste0(data_dir_rt_1L_chr, 
+                  "/")), ..1, "/", ..2, ..3)
+                fl_nm_1L_chr <- paste0(..2, ..3)
+                id_1L_int <- write_fls_to_dv(path_1L_chr, consent_1L_chr = consent_1L_chr, 
+                  consent_indcs_int = consent_indcs_int, descriptions_chr = ..4, 
+                  ds_url_1L_chr = ds_url_1L_chr, ds_ls = ds_ls, 
+                  key_1L_chr = key_1L_chr, options_chr = options_chr, 
+                  server_1L_chr = server_1L_chr)
+                if (id_1L_int) {
+                  id_1L_int <- NA_integer_
+                }
+                id_1L_int
+            })
+        }
+        else {
+            message("Write action cancelled - online resources could not be found.")
+        }
         return(fl_ids_int)
     }
     paths_chr <- paste0(ifelse(identical(character(0), data_dir_rt_1L_chr), 
@@ -1308,25 +1349,31 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, parent_d
                 ds_url_1L_chr = ds_url_1L_chr, key_1L_chr = key_1L_chr, 
                 options_chr = options_chr, server_1L_chr = server_1L_chr)
         })
-        ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
-        if (make_local_copy_1L_lgl | ds_ls$versionState != "DRAFT") {
-            ds_ls <- dataverse::get_dataset(ds_url_1L_chr)
-            dv_dir_1L_chr <- paste0(parent_dv_dir_1L_chr, "/", 
-                dv_nm_1L_chr)
-            if (!dir.exists(dv_dir_1L_chr)) {
-                write_new_dirs(dv_dir_1L_chr, consent_1L_chr = consent_1L_chr, 
-                  consent_indcs_int = consent_indcs_int, options_chr = options_chr)
+        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
+        if (!is.null(ds_ls)) {
+            if (make_local_copy_1L_lgl | ds_ls$versionState != 
+                "DRAFT") {
+                dv_dir_1L_chr <- paste0(parent_dv_dir_1L_chr, 
+                  "/", dv_nm_1L_chr)
+                if (!dir.exists(dv_dir_1L_chr)) {
+                  write_new_dirs(dv_dir_1L_chr, consent_1L_chr = consent_1L_chr, 
+                    consent_indcs_int = consent_indcs_int, options_chr = options_chr)
+                }
+                local_dv_dir_1L_chr <- paste0(dv_dir_1L_chr, 
+                  "/", ds_ls$metadataBlocks$citation$fields$value[[3]])
+                if (!dir.exists(local_dv_dir_1L_chr)) {
+                  write_new_dirs(local_dv_dir_1L_chr, consent_1L_chr = consent_1L_chr, 
+                    consent_indcs_int = consent_indcs_int, options_chr = options_chr)
+                }
+                write_fls_from_dv(consent_1L_chr = consent_1L_chr, 
+                  consent_indcs_int = consent_indcs_int, ds_url_1L_chr = ds_url_1L_chr, 
+                  files_tb = files_tb, fl_ids_int = fl_ids_int, 
+                  local_dv_dir_1L_chr = local_dv_dir_1L_chr, 
+                  options_chr = options_chr)
             }
-            local_dv_dir_1L_chr <- paste0(dv_dir_1L_chr, "/", 
-                ds_ls$metadataBlocks$citation$fields$value[[3]])
-            if (!dir.exists(local_dv_dir_1L_chr)) {
-                write_new_dirs(local_dv_dir_1L_chr, consent_1L_chr = consent_1L_chr, 
-                  consent_indcs_int = consent_indcs_int, options_chr = options_chr)
-            }
-            write_fls_from_dv(consent_1L_chr = consent_1L_chr, 
-                consent_indcs_int = consent_indcs_int, ds_url_1L_chr = ds_url_1L_chr, 
-                files_tb = files_tb, fl_ids_int = fl_ids_int, 
-                local_dv_dir_1L_chr = local_dv_dir_1L_chr, options_chr = options_chr)
+        }
+        else {
+            message("Write action cancelled - online resources could not be found.")
         }
         return(ds_ls)
     }
@@ -1597,16 +1644,23 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     options_chr = c("Y", "N")) 
 {
-    dmt_urls_chr <- piggyback::pb_download_url(repo = gh_repo_1L_chr, 
-        tag = gh_tag_1L_chr, .token = "")
-    b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("treat_as_words_chr.RDS")]))
-    b <- c(b, new_words_chr) %>% sort()
-    write_env_objs_to_dv(env_objects_ls = list(treat_as_words_chr = b), 
-        consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
-        descriptions_chr = NULL, ds_url_1L_chr = character(0), 
-        options_chr = options_chr, piggyback_desc_1L_chr = "Supplementary Files", 
-        piggyback_tag_1L_chr = gh_tag_1L_chr, piggyback_to_1L_chr = gh_repo_1L_chr, 
-        prerelease_1L_lgl = TRUE)
+    dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url, 
+        args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, 
+            .token = ""))
+    if (!is.null(dmt_urls_xx)) {
+        dmt_urls_chr <- dmt_urls_xx
+        b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("treat_as_words_chr.RDS")]))
+        b <- c(b, new_words_chr) %>% sort()
+        write_env_objs_to_dv(env_objects_ls = list(treat_as_words_chr = b), 
+            consent_1L_chr = consent_1L_chr, consent_indcs_int = consent_indcs_int, 
+            descriptions_chr = NULL, ds_url_1L_chr = character(0), 
+            options_chr = options_chr, piggyback_desc_1L_chr = "Supplementary Files", 
+            piggyback_tag_1L_chr = gh_tag_1L_chr, piggyback_to_1L_chr = gh_repo_1L_chr, 
+            prerelease_1L_lgl = TRUE)
+    }
+    else {
+        message("Write action cancelled - unable to retrieve repository details.")
+    }
 }
 #' Write ready4 software develoment local directories
 #' @description write_ws() creates a standardised directory structure as a local development environment for modelling projects developed with the ready4 framework.

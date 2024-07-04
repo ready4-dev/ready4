@@ -6,7 +6,7 @@
 \usage{
 get_rds_from_dv(
   file_nm_1L_chr,
-  dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/2Y9VF9",
+  dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK",
   dv_url_pfx_1L_chr = character(0),
   key_1L_chr = NULL,
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
@@ -15,7 +15,7 @@ get_rds_from_dv(
 \arguments{
 \item{file_nm_1L_chr}{File name (a character vector of length one)}
 
-\item{dv_ds_nm_1L_chr}{Dataverse dataset name (a character vector of length one), Default: 'https://doi.org/10.7910/DVN/2Y9VF9'}
+\item{dv_ds_nm_1L_chr}{Dataverse dataset name (a character vector of length one), Default: 'https://doi.org/10.7910/DVN/RIQTKK'}
 
 \item{dv_url_pfx_1L_chr}{Dataverse url prefix (a character vector of length one), Default: character(0)}
 

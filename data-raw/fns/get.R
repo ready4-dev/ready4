@@ -327,6 +327,7 @@ get_gh_repos <- function (org_1L_chr) {
 get_gracefully <- function(url_1L_chr,
                            args_ls = NULL,
                            fn = readRDS,
+                           not_chr_1L_lgl = F,
                            tests_chr = character(0)) {
   if(identical(tests_chr, character(0))){
     tests_chr <- c("cannot open the connection to ",
@@ -353,12 +354,14 @@ get_gracefully <- function(url_1L_chr,
     message("No internet connection.")
     object_xx <- invisible(NULL)
   }else{
-    if(!is.null(url_xx)){
+    if(!is.null(url_xx) | is.null(url_1L_chr) ){
       object_xx <- suppressWarnings(tryCatch(tryCatch(rlang::exec(fn, url_xx, !!!args_ls)), error = function(e) conditionMessage(e)))
       if(is.character(object_xx)){
-        if(any(tests_chr %>% purrr::map_lgl(~stringr::str_detect(object_xx[1],.x)))){
+        if(any(tests_chr %>% purrr::map_lgl(~stringr::str_detect(object_xx[1],.x))) | not_chr_1L_lgl){
           message(object_xx)
           object_xx <- invisible(NULL)
+        }else{
+          message("A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.")
         }
       }
     }else{

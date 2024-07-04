@@ -90,3 +90,4 @@
 ^CITATION\.cff$
 ^data-raw/CUT\.R$
 ^CRAN-SUBMISSION$
+^data-raw/examples/get_gracefully\.R$
