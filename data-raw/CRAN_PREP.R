@@ -32,7 +32,7 @@ spelling::spell_check_package()
 
 # check on other distributions
 # _rhub
-rhub::rhub_check() #3,4,13
+rhub::rhub_check() #2,4,13
 # devtools::check_rhub()
 # rhub::check_on_windows(check_args = "--force-multiarch")
 # rhub::check_on_fedora()

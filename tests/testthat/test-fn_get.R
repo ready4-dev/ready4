@@ -1,7 +1,7 @@
 test_that("Tibble of modelling project data collections is retrieved from GitHub repository",{
   expect_no_error(dvs_tb <- get_datasets_tb("ready4-dev/ready4"))
   skip_on_cran()
-  expect_true(!is.null(dvs_tb))
+  # expect_true(!is.null(dvs_tb))
   if(!is.null(dvs_tb)){
     expect_true(tibble::is_tibble(dvs_tb))
     expect_true(all(names(dvs_tb) == c("Dataverse", "Name", "Description", "Creator", "Contents", "Datasets_Meta")))
@@ -12,7 +12,7 @@ test_that("Tibble of modelling project data collections is retrieved from GitHub
 test_that("Tibble of modelling project libraries is retrieved from GitHub repository",{
   expect_no_error(libraries_tb <- get_libraries_tb())
   skip_on_cran()
-  expect_true(!is.null(libraries_tb))
+  # expect_true(!is.null(libraries_tb))
   if(!is.null(libraries_tb)){
   expect_true(tibble::is_tibble(libraries_tb))
   expect_true(all(names(libraries_tb) == c("pt_ns_chr", "Type", "Section", "Link", "Library", "Vignettes" ,

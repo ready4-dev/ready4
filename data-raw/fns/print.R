@@ -7,12 +7,17 @@ print_data <- function(datasets_tb,
                        toy_data_dv_1L_chr = "fakes",
                        what_1L_chr = "all",
                        ...){
-  if(by_dv_1L_lgl & ("Datasets_Meta" %in% names(datasets_tb))){
-    datasets_kbl <- print_dvs(datasets_tb, root_1L_chr = root_1L_chr, scroll_height_1L_chr = scroll_height_1L_chr,
-                              scroll_width_1L_chr = scroll_width_1L_chr, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, ...)
+  if(is.null(datasets_tb)){
+    message("datasets_tb is NULL")
+    datasets_kbl <- NULL
   }else{
-    datasets_kbl <- print_dss(datasets_tb, filter_cdns_ls = filter_cdns_ls, scroll_height_1L_chr = scroll_height_1L_chr,
-                              scroll_width_1L_chr = scroll_width_1L_chr, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, ...)
+    if(by_dv_1L_lgl & ("Datasets_Meta" %in% names(datasets_tb))){
+      datasets_kbl <- print_dvs(datasets_tb, root_1L_chr = root_1L_chr, scroll_height_1L_chr = scroll_height_1L_chr,
+                                scroll_width_1L_chr = scroll_width_1L_chr, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, ...)
+    }else{
+      datasets_kbl <- print_dss(datasets_tb, filter_cdns_ls = filter_cdns_ls, scroll_height_1L_chr = scroll_height_1L_chr,
+                                scroll_width_1L_chr = scroll_width_1L_chr, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr, ...)
+    }
   }
   return(datasets_kbl)
 }
@@ -23,6 +28,10 @@ print_dss <- function(datasets_tb,
                       toy_data_dv_1L_chr = "fakes",
                       what_1L_chr = "all",
                       ...){
+  if(is.null(datasets_tb)){
+    message("datasets_tb is NULL")
+    dss_kbl <- NULL
+  }else{
   datasets_tb <- make_dss_tb(datasets_tb, filter_cdns_ls = filter_cdns_ls, toy_data_dv_1L_chr = toy_data_dv_1L_chr, what_1L_chr = what_1L_chr)
   dss_kbl <- datasets_tb %>%
     kableExtra::kable("html", escape = FALSE) %>%
@@ -30,6 +39,7 @@ print_dss <- function(datasets_tb,
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
                    scroll_width_1L_chr = scroll_width_1L_chr,
                    ...)
+  }
 return(dss_kbl)
 }
 print_dvs <- function(dvs_tb,
@@ -40,6 +50,10 @@ print_dvs <- function(dvs_tb,
                       toy_data_dv_1L_chr = "fakes",
                       what_1L_chr = "all",
                       ...){
+  if(is.null(dvs_tb)){
+    message("dvs_tb is NULL")
+    dvs_kbl <- NULL
+  }else{
   dvs_tb <- add_references(dvs_tb, data_var_nm_1L_chr = "Contents", data_url_var_nm_1L_chr = "Datasets") %>%
     dplyr::select("Dataverse", "Name", "Description", "Creator", "Datasets") %>%
     dplyr::mutate(Datasets = .data$Datasets %>% purrr::map(~
@@ -62,6 +76,7 @@ print_dvs <- function(dvs_tb,
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
                    scroll_width_1L_chr = scroll_width_1L_chr,
                    ...)
+  }
   return(dvs_kbl)
 }
 print_methods <- function(methods_tb = NULL,
@@ -89,6 +104,10 @@ print_methods <- function(methods_tb = NULL,
   if(is.null(methods_chr))
     methods_chr <- get_generics(exclude_mthds_for_chr = exclude_mthds_for_chr,
                                 return_1L_chr = return_1L_chr)
+  if(is.null(methods_tb)){
+    message("methods_tb is NULL")
+    methods_kbl <- NULL
+  }else{
   methods_tb <- methods_tb %>%
     dplyr::filter(.data$Method %in% methods_chr)
   links_chr <- methods_tb$Method %>%
@@ -101,6 +120,7 @@ print_methods <- function(methods_tb = NULL,
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
                    scroll_width_1L_chr = scroll_width_1L_chr,
                    ...)
+  }
   return(methods_kbl)
 }
 print_modules <- function(modules_tb,
@@ -109,6 +129,10 @@ print_modules <- function(modules_tb,
                           what_1L_chr = "All",
                           ...
                           ){
+  if(is.null(modules_tb)){
+    message("modules_tb is NULL")
+    modules_kbl <- NULL
+  }else{
   if(what_1L_chr == "S4"){
     modules_tb <- modules_tb %>%
       dplyr::filter(!.data$old_class_lgl)
@@ -125,6 +149,7 @@ print_modules <- function(modules_tb,
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
                    scroll_width_1L_chr = scroll_width_1L_chr,
                    ...)
+  }
   return(modules_kbl)
 }
 print_packages <- function (pkg_extensions_tb = NULL,
@@ -153,6 +178,10 @@ print_packages <- function (pkg_extensions_tb = NULL,
                           vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
                           vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr,
                           what_chr = what_chr )
+  if(is.null(pkg_extensions_tb)){
+    message("pkg_extensions_tb is NULL")
+    pkg_extensions_kbl <- NULL
+  }else{
   if(nrow(pkg_extensions_tb) == 1){
     pkg_extensions_tb <- rbind(pkg_extensions_tb,pkg_extensions_tb)
     is_single_1L_lgl <- TRUE
@@ -247,6 +276,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
   pkg_extensions_kbl <- pkg_extensions_kbl %>%
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
                    scroll_width_1L_chr = scroll_width_1L_chr, ...)
+  }
   return(pkg_extensions_kbl)
 }
 print_vignettes <- function(pkg_extensions_tb = NULL,
@@ -274,6 +304,10 @@ print_vignettes <- function(pkg_extensions_tb = NULL,
                           vignette_var_nm_1L_chr = vignette_var_nm_1L_chr,
                           vignette_url_var_nm_1L_chr = vignette_url_var_nm_1L_chr,
                           what_chr = what_chr)
+  if(is.null(pkg_extensions_tb)){
+    message("pkg_extensions_tb is NULL")
+    vignettes_kbl <- NULL
+  }else{
   vignettes_chr <- pkg_extensions_tb$Vignettes %>% purrr::flatten_chr()
   keep_lgl <- !is.na(vignettes_chr)
   vignettes_tb <- tibble::tibble(HTML = vignettes_chr[keep_lgl]#,
@@ -302,7 +336,7 @@ print_vignettes <- function(pkg_extensions_tb = NULL,
     add_scroll_box(scroll_height_1L_chr = scroll_height_1L_chr,
                    scroll_width_1L_chr = scroll_width_1L_chr,
                    ...)
-
+}
   return(vignettes_kbl)
 }
 

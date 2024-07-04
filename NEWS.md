@@ -1,4 +1,5 @@
 # ready4 0.1.12
+This patch updates functions for printing HTML tables to return NULL values if supplied with NULL values instead of tibble objects.
 
 # ready4 0.1.11
 This patch introduces the get_gracefully() function to address a CRAN policy violation and to ensure that unsuccessful attempts at retrieving internet resources fail gracefully.

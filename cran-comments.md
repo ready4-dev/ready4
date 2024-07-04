@@ -1,16 +1,22 @@
 ## Test environments
 
 * Local Windows (mingw32), R 4.3.1 [1 NOTE generated]
-* Mac OS macos-latest (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/8684726421/job/23812843262)
-* Windows windows-latest (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/8684726421/job/23812843409)
-* Fedora Linux 38 R Under development (unstable) gcc13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/8684726421/job/23812843048) 
+* Mac OS macos-13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/XXXXXXXXXXXXXXXXXXXXX)
+* Windows windows-latest (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/XXXXXXXXXXXXXXX)
+* Fedora Linux 38 R Under development (unstable) gcc13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/XXXXXXXXXXXXXXX) 
 * Windows Server 2022 x64 (build 20348) (on winbuilder) [1 NOTE generated] 
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs. 
+There was 1 WARNING (on Local Windows).
 
-There was 1 NOTE (on Local Windows and winbuilder) relating to this being a new submission.
+- 'qpdf' is needed for checks on size reduction of PDFs
+
+There was 1 NOTE (on Local Windows):
+
+ - Examples with CPU (user + system) or elapsed time > 5s
+                  user system elapsed
+   get_gracefully 0.17   0.02    5.83
 
 
 

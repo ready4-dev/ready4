@@ -25,7 +25,7 @@ A table itemising individual model modules and sub-modules authored with `ready4
 In this example, we are going to examine modules from the [readyforwhatsnext model](https://readyforwhatsnext.org/). The value supplied to the `gh_repo_1L_chr` argument specifies the repository in which a dataset of readyforwhatsnext module libraries is stored. Note, the following command may take a couple of minutes to execute.
 
 ```{r}
-modules_tb <-  make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
+modules_tb <- make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 ```
 
 A slightly quicker method to achieve a similar result is to use the `get_modules_tb` function. This function retrieves an archived version (and therefore potentially less up to date) of the modules summary table.
