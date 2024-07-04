@@ -117,14 +117,14 @@ concepts.</p>
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
 </h2>
 <p><code>ready4</code> provides a simple syntax that can be consistently
-applied to attach algorithms (methods) to <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/" class="external-link">model
+applied to attach algorithms (methods) to <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/" class="external-link">model
 modules</a>. It does so by taking advantage of the <a href="https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/#transparent-computational-models" class="external-link">abstraction
 and polymorphism features of Object Oriented Programing</a> and R’s use
 of generic functions. Generic functions don’t implement algorithms
 themselves - their most salient features are a name and a high level
 description of the type of task that any method associated with that
 generic should perform. Whenever a developer creates a method for
-classes that use R’s S4 and S3 systems <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation" class="external-link">(the
+classes that use R’s S4 and S3 systems <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/#implementation" class="external-link">(the
 types used for model modules and sub-modules)</a>, they can associate
 that method with a generic that has a description that is a good match
 for the algorithm being implemented.</p>
@@ -138,7 +138,7 @@ These generics correspond exactly to the “core”, “slot” and “extended�
 commands described in <a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/" class="external-link">another
 article</a>.</p>
 <p>Notably, the <code>ready4</code> package does not associate any core
-or extended methods with the <code>Ready4Module</code> <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/" class="external-link">template
+or extended methods with the <code>Ready4Module</code> <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/" class="external-link">template
 module</a>. Instead, model developers need to decide which core and
 extended generics they associate with the modules they derive from the
 <code>Ready4Module</code> template. This decision is typically made when
