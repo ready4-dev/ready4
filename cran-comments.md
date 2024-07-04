@@ -12,22 +12,15 @@ There were no ERRORs or WARNINGs.
 
 There was 1 NOTE (on Local Windows and winbuilder) relating to this being a new submission.
 
-1. One NOTE related to this being a new submission.
 
-```
-    New submission
-
-```
 
 ---
 
-This version addresses the following issues flagged by a previous CRAN reviewer:
+This version addresses the following CRAN policy violation:
 
-- a call to the cat function in make_prompt has been replaced to a call to the message function to enable users to suppress messages to console; 
+- 'Packages which use Internet resources should fail gracefully with an informative message if the resource is not available or has changed (and not give a check warning nor error)'.
 
-- the reference to an arXiv pre-print in the DESCRIPTION file has been updated to adopt the format <doi:10.48550/arXiv.YYMM.NNNNN>.; and
-
-- four functions that were imported from other packages have value tags added to their .Rd files.
+To address this issue, this version introduces the get_gracefully() function and deploys it within functions that seek to retrieve internet resources.
 
 
 
