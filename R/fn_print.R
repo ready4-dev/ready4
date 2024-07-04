@@ -13,7 +13,6 @@
 #' @rdname print_data
 #' @export 
 #' @example man/examples/print_data.R
-#' @example man/examples/print_data.R
 print_data <- function (datasets_tb, by_dv_1L_lgl = FALSE, filter_cdns_ls = NULL, 
     root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
@@ -144,7 +143,6 @@ print_dvs <- function (dvs_tb, filter_cdns_ls = NULL, root_1L_chr = "https://dat
 #' @importFrom purrr map_chr
 #' @importFrom kableExtra kable kable_styling column_spec
 #' @example man/examples/print_methods.R
-#' @example man/examples/print_methods.R
 print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     methods_chr = NULL, module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
@@ -191,7 +189,6 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
 #' @importFrom dplyr filter select
 #' @importFrom kableExtra kable kable_styling
 #' @example man/examples/print_modules.R
-#' @example man/examples/print_modules.R
 print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     what_1L_chr = "All", ...) 
 {
@@ -226,6 +223,7 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
 #' @param reference_var_nm_1L_chr Reference variable name (a character vector of length one), Default: 'Reference'
 #' @param scroll_height_1L_chr Scroll height (a character vector of length one), Default: character(0)
 #' @param scroll_width_1L_chr Scroll width (a character vector of length one), Default: character(0)
+#' @param sections_chr Sections (a character vector), Default: character(0)
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param vignette_var_nm_1L_chr Vignette variable name (a character vector of length one), Default: 'Vignettes'
 #' @param vignette_url_var_nm_1L_chr Vignette url variable name (a character vector of length one), Default: 'Vignettes_URLs'
@@ -234,30 +232,10 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
 #' @return Package extensions (a kable)
 #' @rdname print_packages
 #' @export 
-#' @importFrom dplyr mutate rename select
+#' @importFrom dplyr filter mutate rename select
 #' @importFrom purrr map map_chr map2_chr pmap
 #' @importFrom stringr str_remove
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
-#' @examplesIf interactive()
-#'   # Method 1
-#'   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")
-#'   ## Print framework libraries
-#'   update_libraries_tb(libraries_tb,
-#'                       url_stub_1L_chr = "https://ready4-dev.github.io/",
-#'                       include_1L_chr = "framework") %>%
-#'     print_packages()
-#'   ## Print module libraries
-#'   update_libraries_tb(libraries_tb,
-#'                       url_stub_1L_chr = "https://ready4-dev.github.io/",
-#'                       include_1L_chr = "modules") %>%
-#'     print_packages()
-#'   # Method 2
-#'   ## Print framework libraries
-#'   print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
-#'                  include_1L_chr = "framework")
-#'   ## Print module libraries
-#'   print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
-#'                  include_1L_chr = "modules")
 #' @examplesIf interactive()
 #'   # Method 1
 #'   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")
@@ -283,9 +261,10 @@ print_packages <- function (pkg_extensions_tb = NULL, gh_repo_1L_chr = "ready4-d
     module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
     project_badges_url_1L_chr = "https://img.shields.io/badge/ready4", 
     reference_var_nm_1L_chr = "Reference", scroll_height_1L_chr = character(0), 
-    scroll_width_1L_chr = character(0), url_stub_1L_chr = "https://ready4-dev.github.io/", 
-    vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs", 
-    what_chr = "all", ...) 
+    scroll_width_1L_chr = character(0), sections_chr = character(0), 
+    url_stub_1L_chr = "https://ready4-dev.github.io/", vignette_var_nm_1L_chr = "Vignettes", 
+    vignette_url_var_nm_1L_chr = "Vignettes_URLs", what_chr = "all", 
+    ...) 
 {
     if (is.null(pkg_extensions_tb)) 
         pkg_extensions_tb <- get_libraries_tb(gh_repo_1L_chr = gh_repo_1L_chr, 
@@ -300,6 +279,10 @@ print_packages <- function (pkg_extensions_tb = NULL, gh_repo_1L_chr = "ready4-d
         pkg_extensions_kbl <- NULL
     }
     else {
+        if (!identical(sections_chr, character(0))) {
+            pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::filter(Section %in% 
+                sections_chr)
+        }
         if (nrow(pkg_extensions_tb) == 1) {
             pkg_extensions_tb <- rbind(pkg_extensions_tb, pkg_extensions_tb)
             is_single_1L_lgl <- TRUE

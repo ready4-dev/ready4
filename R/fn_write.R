@@ -1164,11 +1164,6 @@ write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_
 #'                      fl_nm_1L_chr = "RMDs",
 #'                      rmds_dir_1L_chr = system.file("MD_RMDs",
 #'                                                    package = "ready4"))
-#' @examplesIf interactive()
-#'   write_to_copy_rmds(dir_path_1L_chr = tempdir(),
-#'                      fl_nm_1L_chr = "RMDs",
-#'                      rmds_dir_1L_chr = system.file("MD_RMDs",
-#'                                                    package = "ready4"))
 write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
     rmds_dir_1L_chr = "R/RMD Templates", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), return_1L_lgl = FALSE) 
@@ -1545,33 +1540,6 @@ write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_i
 #'                        path_to_main_dir_1L_chr = tempdir(),
 #'                        is_rmd_1L_lgl = F)
 #'   }
-#' @examplesIf interactive()
-#'   # Note, In addition to rmarkdown, the non CRAN package "hugodown" is also required.
-#'   if(requireNamespace("rmarkdown", quietly = TRUE)) {
-#'   # Example 1 - RMD files
-#'   #
-#'   # Copy template RMD files
-#'   write_to_copy_rmds(dir_path_1L_chr = tempdir(),
-#'                      fl_nm_1L_chr = "RMDs",
-#'                      rmds_dir_1L_chr = system.file("MD_RMDs",
-#'                                                    package = "ready4"))
-#'   # Typically you would now edit these templates before proceeding.
-#'   # Render post from RMD files.
-#'   write_to_render_post("RMDs", path_to_main_dir_1L_chr = tempdir())
-#'   #
-#'   # Example 2 - Rmarkdown file
-#'   #
-#'   # Copy template Rmarkdown file
-#'   write_to_copy_rmds(dir_path_1L_chr = tempdir(),
-#'                      fl_nm_1L_chr = "Rmarkdown",
-#'                      rmds_dir_1L_chr = system.file("MD_Rmarkdown",
-#'                                                    package = "ready4"))
-#'   # Typically you would now edit these templates before proceeding.
-#'   # Render post from RMD files.
-#'   write_to_render_post("Rmarkdown",
-#'                        path_to_main_dir_1L_chr = tempdir(),
-#'                        is_rmd_1L_lgl = F)
-#'   }
 write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, is_rmd_1L_lgl = TRUE, options_chr = c("Y", 
         "N")) 
@@ -1723,8 +1691,6 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
 #' @rdname write_ws
 #' @export 
 #' @importFrom purrr map_chr
-#' @examplesIf interactive()
-#'   write_ws(tempdir())
 #' @examplesIf interactive()
 #'   write_ws(tempdir())
 write_ws <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 

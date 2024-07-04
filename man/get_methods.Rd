@@ -19,5 +19,4 @@ get_methods() retrieves the ready4 methods that are available for a specified re
 }
 \examples{
 get_methods()
-get_methods()
 }

@@ -59,18 +59,6 @@ make_additions_tb <- function (category_chr = character(0), library_chr = charac
 #'       make_code_releases_tbl("Subroutine",
 #'                              gh_repo_1L_chr = "ready4-dev/ready4")
 #'     }
-#' @examplesIf interactive()
-#'   # Likely to take more than one minute to execute.
-#'     if(requireNamespace("tidyRSS", quietly = TRUE)) {
-#'       make_code_releases_tbl("Framework",
-#'                              gh_repo_1L_chr = "ready4-dev/ready4")
-#'       make_code_releases_tbl("Module",
-#'                              gh_repo_1L_chr = "ready4-dev/ready4")
-#'       make_code_releases_tbl("Program",
-#'                              gh_repo_1L_chr = "ready4-dev/ready4")
-#'       make_code_releases_tbl("Subroutine",
-#'                              gh_repo_1L_chr = "ready4-dev/ready4")
-#'     }
 make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", "Package", 
     "Program", "Subroutine", "Program_and_Subroutine"), as_kbl_1L_lgl = TRUE, 
     brochure_repos_chr = character(0), exclude_chr = character(0), 
@@ -208,16 +196,6 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
 #'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets")
 #'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets", what_1L_chr = "real")
 #'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets", what_1L_chr = "fakes")
-#' @examplesIf interactive()
-#'   # Likely to take more than one minute to execute.
-#'   make_datasets_tb("ready4")
-#'   dvs_tb <- get_datasets_tb("ready4-dev/ready4")
-#'   make_datasets_tb("ready4", dvs_tb = dvs_tb)
-#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, what_1L_chr = "real")
-#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, what_1L_chr = "fakes")
-#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets")
-#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets", what_1L_chr = "real")
-#'   make_datasets_tb("ready4", dvs_tb = dvs_tb, type_1L_chr = "datasets", what_1L_chr = "fakes")
 make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdns_ls = NULL, 
     key_1L_chr = NULL, server_1L_chr = "dataverse.harvard.edu", 
     toy_data_dv_1L_chr = "fakes", type_1L_chr = c("collections", 
@@ -333,7 +311,6 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdn
 #' @importFrom tibble tibble
 #' @importFrom dplyr arrange desc mutate filter select
 #' @importFrom kableExtra cell_spec kable kable_styling
-#' @example man/examples/make_ds_releases_tbl.R
 #' @example man/examples/make_ds_releases_tbl.R
 make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", key_1L_chr = NULL, 
     server_1L_chr = "dataverse.harvard.edu", as_kbl_1L_lgl = TRUE, 
@@ -719,9 +696,6 @@ make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
 #'   make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
-#' @examplesIf interactive()
-#'   # Likely to take more than one minute to execute.
-#'   make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_character_, 
     framework_only_1L_lgl = TRUE, gh_repo_1L_chr = "ready4-dev/ready4", 
     gh_tag_1L_chr = "Documentation_0.0", module_pkgs_chr = character(0), 
@@ -794,9 +768,6 @@ make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_
 #' @importFrom kableExtra cell_spec
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringi stri_replace_last_regex
-#' @examplesIf interactive()
-#'   # Likely to take more than one minute to execute.
-#'   make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
 #'   make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
@@ -938,14 +909,6 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @importFrom purrr pluck map map_lgl map2_int map_chr map2_chr pmap
 #' @importFrom stringr str_remove_all str_remove str_equal str_detect
 #' @importFrom kableExtra cell_spec kable kable_styling
-#' @examplesIf interactive()
-#'   # Likely to take more than one minute to execute.
-#'   if(requireNamespace("zen4R", quietly = TRUE)) {
-#'     make_programs_tbl("Program",
-#'                       gh_repo_1L_chr = "ready4-dev/ready4")
-#'     make_programs_tbl("Subroutine",
-#'                       gh_repo_1L_chr = "ready4-dev/ready4")
-#'   }
 #' @examplesIf interactive()
 #'   # Likely to take more than one minute to execute.
 #'   if(requireNamespace("zen4R", quietly = TRUE)) {

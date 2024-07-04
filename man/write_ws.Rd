@@ -30,7 +30,4 @@ write_ws() creates a standardised directory structure as a local development env
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   write_ws(tempdir())
 \dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-  write_ws(tempdir())
-\dontshow{\}) # examplesIf}
 }

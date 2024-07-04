@@ -161,6 +161,7 @@ print_packages <- function (pkg_extensions_tb = NULL,
                             project_badges_url_1L_chr = "https://img.shields.io/badge/ready4", ##
                             reference_var_nm_1L_chr = "Reference",
                             scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0),
+                            sections_chr = character(0),
                             url_stub_1L_chr = "https://ready4-dev.github.io/",
                             vignette_var_nm_1L_chr = "Vignettes",
                             vignette_url_var_nm_1L_chr = "Vignettes_URLs",
@@ -182,6 +183,9 @@ print_packages <- function (pkg_extensions_tb = NULL,
     message("pkg_extensions_tb is NULL")
     pkg_extensions_kbl <- NULL
   }else{
+    if(!identical(sections_chr, character(0))){
+      pkg_extensions_tb <- pkg_extensions_tb %>% dplyr::filter(Section %in% sections_chr)
+    }
   if(nrow(pkg_extensions_tb) == 1){
     pkg_extensions_tb <- rbind(pkg_extensions_tb,pkg_extensions_tb)
     is_single_1L_lgl <- TRUE

@@ -54,15 +54,6 @@ make_programs_tbl() scrapes the GitHub organisation and Zenodo community associa
                       gh_repo_1L_chr = "ready4-dev/ready4")
   }
 \dontshow{\}) # examplesIf}
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-  # Likely to take more than one minute to execute.
-  if(requireNamespace("zen4R", quietly = TRUE)) {
-    make_programs_tbl("Program",
-                      gh_repo_1L_chr = "ready4-dev/ready4")
-    make_programs_tbl("Subroutine",
-                      gh_repo_1L_chr = "ready4-dev/ready4")
-  }
-\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[zen4R:ZenodoManager]{zen4R::ZenodoManager()}}

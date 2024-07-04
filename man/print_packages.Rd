@@ -15,6 +15,7 @@ print_packages(
   reference_var_nm_1L_chr = "Reference",
   scroll_height_1L_chr = character(0),
   scroll_width_1L_chr = character(0),
+  sections_chr = character(0),
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   vignette_var_nm_1L_chr = "Vignettes",
   vignette_url_var_nm_1L_chr = "Vignettes_URLs",
@@ -43,6 +44,8 @@ print_packages(
 
 \item{scroll_width_1L_chr}{Scroll width (a character vector of length one), Default: character(0)}
 
+\item{sections_chr}{Sections (a character vector), Default: character(0)}
+
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
 \item{vignette_var_nm_1L_chr}{Vignette variable name (a character vector of length one), Default: 'Vignettes'}
@@ -60,27 +63,6 @@ Package extensions (a kable)
 print_packages() formats the output of get_libraries_tb() as HTML.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-  # Method 1
-  libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")
-  ## Print framework libraries
-  update_libraries_tb(libraries_tb,
-                      url_stub_1L_chr = "https://ready4-dev.github.io/",
-                      include_1L_chr = "framework") \%>\%
-    print_packages()
-  ## Print module libraries
-  update_libraries_tb(libraries_tb,
-                      url_stub_1L_chr = "https://ready4-dev.github.io/",
-                      include_1L_chr = "modules") \%>\%
-    print_packages()
-  # Method 2
-  ## Print framework libraries
-  print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
-                 include_1L_chr = "framework")
-  ## Print module libraries
-  print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
-                 include_1L_chr = "modules")
-\dontshow{\}) # examplesIf}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   # Method 1
   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")

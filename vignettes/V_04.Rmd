@@ -35,15 +35,15 @@ libraries_tb$Section %>% unique()
 We can use the `print_packages` function to display a HTML summary of the module libraries currently available for each section. The resulting table summarises the types of module library (e.g. those for description, developing models or predicting with models), the name and purpose of those libraries, the locations from which development and archived library code can be downloaded and details of supporting documentation for each library (e.g. website, manuals and examples).
 
 ```{r}
-print_packages(libraries_tb %>% dplyr::filter(Section == "People"))
+print_packages(libraries_tb, sections_chr = "People")
 ```
 
 ```{r}
-print_packages(libraries_tb %>% dplyr::filter(Section == "Places"))
+print_packages(libraries_tb, sections_chr = "Places")
 ```
 
 ```{r}
-print_packages(libraries_tb %>% dplyr::filter(Section == "Programs"))
+print_packages(libraries_tb, sections_chr = "Programs")
 ```
 
 ## Related content

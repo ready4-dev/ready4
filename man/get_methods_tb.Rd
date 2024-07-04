@@ -22,5 +22,4 @@ get_methods_tb() ingests 'methods_tb.RDS' (a table of methods associated with re
 }
 \examples{
 get_methods_tb("ready4-dev/ready4")
-get_methods_tb("ready4-dev/ready4")
 }

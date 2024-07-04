@@ -22,5 +22,4 @@ get_modules_tb() ingests 'modules_tb.RDS' (a table of ready4 model modules) from
 }
 \examples{
 get_modules_tb("ready4-dev/ready4")
-get_modules_tb("ready4-dev/ready4")
 }

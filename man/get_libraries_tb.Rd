@@ -22,5 +22,4 @@ get_libraries_tb() retrieves a tabular summary of ready4 libraries that have bee
 }
 \examples{
 get_libraries_tb("ready4-dev/ready4")
-get_libraries_tb("ready4-dev/ready4")
 }

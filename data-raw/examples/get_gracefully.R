@@ -1,5 +1,5 @@
 if (interactive()) {
-  # Likely to take more than one minute to execute.
+  # Likely execution time greater than current CRAN limit.
 get_gracefully(paste0("https://github.com/ready4-dev/ready4/",
                       "releases/download/Documentation_0.0/ready4_badges_lup.RDS"))
   get_gracefully("DOES NOT EXIST")
