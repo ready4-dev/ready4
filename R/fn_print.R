@@ -13,6 +13,7 @@
 #' @rdname print_data
 #' @export 
 #' @example man/examples/print_data.R
+#' @example man/examples/print_data.R
 print_data <- function (datasets_tb, by_dv_1L_lgl = FALSE, filter_cdns_ls = NULL, 
     root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
@@ -143,6 +144,7 @@ print_dvs <- function (dvs_tb, filter_cdns_ls = NULL, root_1L_chr = "https://dat
 #' @importFrom purrr map_chr
 #' @importFrom kableExtra kable kable_styling column_spec
 #' @example man/examples/print_methods.R
+#' @example man/examples/print_methods.R
 print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_character_, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     methods_chr = NULL, module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
@@ -188,6 +190,7 @@ print_methods <- function (methods_tb = NULL, exclude_mthds_for_chr = NA_charact
 #' @export 
 #' @importFrom dplyr filter select
 #' @importFrom kableExtra kable kable_styling
+#' @example man/examples/print_modules.R
 #' @example man/examples/print_modules.R
 print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     what_1L_chr = "All", ...) 
@@ -235,6 +238,26 @@ print_modules <- function (modules_tb, scroll_height_1L_chr = character(0), scro
 #' @importFrom purrr map map_chr map2_chr pmap
 #' @importFrom stringr str_remove
 #' @importFrom kableExtra cell_spec kable kable_styling column_spec spec_image
+#' @examplesIf interactive()
+#'   # Method 1
+#'   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")
+#'   ## Print framework libraries
+#'   update_libraries_tb(libraries_tb,
+#'                       url_stub_1L_chr = "https://ready4-dev.github.io/",
+#'                       include_1L_chr = "framework") %>%
+#'     print_packages()
+#'   ## Print module libraries
+#'   update_libraries_tb(libraries_tb,
+#'                       url_stub_1L_chr = "https://ready4-dev.github.io/",
+#'                       include_1L_chr = "modules") %>%
+#'     print_packages()
+#'   # Method 2
+#'   ## Print framework libraries
+#'   print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
+#'                  include_1L_chr = "framework")
+#'   ## Print module libraries
+#'   print_packages(gh_repo_1L_chr = "ready4-dev/ready4",
+#'                  include_1L_chr = "modules")
 #' @examplesIf interactive()
 #'   # Method 1
 #'   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")

@@ -126,6 +126,7 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
 #' @importFrom piggyback pb_download_url
 #' @keywords internal
 #' @example man/examples/get_datasets_tb.R
+#' @example man/examples/get_datasets_tb.R
 get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     rds_fl_name_1L_chr = "datasets_tb") 
 {
@@ -323,6 +324,7 @@ get_fl_nm_from_path <- function (path_1L_chr)
 #' @importFrom rlang sym
 #' @importFrom stringr str_detect str_locate str_sub
 #' @example man/examples/get_from_lup_obj.R
+#' @example man/examples/get_from_lup_obj.R
 get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_chr, 
     target_var_nm_1L_chr, evaluate_1L_lgl = FALSE) 
 {
@@ -478,6 +480,44 @@ get_gh_repos <- function (org_1L_chr)
 #' @importFrom purrr map_lgl
 #' @importFrom stringr str_detect
 #' @example man/examples/get_gracefully.R
+#' @examplesIf interactive()
+#'   # Likely to take more than one minute to execute.
+#' get_gracefully(paste0("https://github.com/ready4-dev/ready4/",
+#'                       "releases/download/Documentation_0.0/ready4_badges_lup.RDS"))
+#'   get_gracefully("DOES NOT EXIST")
+#' if(requireNamespace("dataverse", quietly = TRUE)) {
+#'   get_gracefully("https://doi.org/10.7910/DVN/RIQTKK", fn = dataverse::dataset_files,
+#'                  args_ls = list(key = NULL, server = "dataverse.harvard.edu"))
+#'     get_gracefully("https://doi.org/10.7910/DVN/RIQTKK", fn = dataverse::dataset_files,
+#'                    args_ls = list(key = NULL, server = "DOES_NOT_EXIST"))
+#'     get_gracefully("DOES_NOT_EXIST", fn = dataverse::dataset_files,
+#'                    args_ls = list(key = NULL, server = "dataverse.harvard.edu"))
+#' 
+#' }
+#' if (requireNamespace("gh", quietly = TRUE)) {
+#'   get_gracefully("/orgs/ready4-dev/repos", fn = gh::gh, args_ls=list(type = "public"))
+#'       get_gracefully("DOES_NOT_EXIST", fn = gh::gh, args_ls=list(type = "public"))
+#' }
+#' if(requireNamespace("piggyback", quietly = TRUE)) {
+#'   get_gracefully(NULL, fn = piggyback::pb_download_url,
+#'                  args_ls = list(repo = "ready4-dev/ready4",
+#'                                 tag = "Documentation_0.0",
+#'                                 .token = ""))
+#'     get_gracefully(NULL, fn = piggyback::pb_download_url,
+#'                    args_ls = list(repo = "DOES_NOT_EXIST",
+#'                                   tag = "DOES_NOT_EXIST",
+#'                                   .token = ""))
+#' }
+#' if(requireNamespace("rvest", quietly = TRUE)) {
+#'   get_gracefully("https://ready4-dev.github.io/ready4/index.html", fn=rvest::read_html)
+#'     get_gracefully("DOES_NOT_EXIST", fn=rvest::read_html)
+#' }
+#' 
+#' if(requireNamespace("tidyRSS", quietly = TRUE)) {
+#'   get_gracefully("https://github.com/ready4-dev/ready4/releases.atom",
+#'                  fn = tidyRSS::tidyfeed)
+#'     get_gracefully("DOES_NOT_EXIST", fn = tidyRSS::tidyfeed)
+#' }
 get_gracefully <- function (url_1L_chr, args_ls = NULL, fn = readRDS, not_chr_1L_lgl = F, 
     tests_chr = character(0)) 
 {
@@ -556,6 +596,7 @@ get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @export 
 #' @importFrom piggyback pb_download_url
 #' @example man/examples/get_libraries_tb.R
+#' @example man/examples/get_libraries_tb.R
 get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     libraries_tb <- NULL
@@ -606,6 +647,7 @@ get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https:/
 #' @export 
 #' @importFrom stringr str_detect str_remove_all
 #' @example man/examples/get_methods.R
+#' @example man/examples/get_methods.R
 get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module") 
 {
     methods_chr <- showMethods(classes = "Ready4Module", printTo = FALSE)
@@ -625,6 +667,7 @@ get_methods <- function (pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module
 #' @rdname get_methods_tb
 #' @export 
 #' @importFrom piggyback pb_download_url
+#' @example man/examples/get_methods_tb.R
 #' @example man/examples/get_methods_tb.R
 get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
@@ -647,6 +690,7 @@ get_methods_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @rdname get_modules_tb
 #' @export 
 #' @importFrom piggyback pb_download_url
+#' @example man/examples/get_modules_tb.R
 #' @example man/examples/get_modules_tb.R
 get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {

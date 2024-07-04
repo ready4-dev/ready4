@@ -1,4 +1,5 @@
 # ready4 0.1.13
+This patch updates one of the examples files so that its execution does not breach the CRAN recommended run time limit.
 
 # ready4 0.1.12
 This patch updates functions for printing HTML tables to return NULL values if supplied with NULL values instead of tibble objects.

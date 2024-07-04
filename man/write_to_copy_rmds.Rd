@@ -42,4 +42,10 @@ write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specifie
                      rmds_dir_1L_chr = system.file("MD_RMDs",
                                                    package = "ready4"))
 \dontshow{\}) # examplesIf}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+  write_to_copy_rmds(dir_path_1L_chr = tempdir(),
+                     fl_nm_1L_chr = "RMDs",
+                     rmds_dir_1L_chr = system.file("MD_RMDs",
+                                                   package = "ready4"))
+\dontshow{\}) # examplesIf}
 }

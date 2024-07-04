@@ -25,5 +25,6 @@ get_datasets_tb() is a Get function that extracts data from an object. Specifica
 }
 \examples{
 get_datasets_tb("ready4-dev/ready4")
+get_datasets_tb("ready4-dev/ready4")
 }
 \keyword{internal}
