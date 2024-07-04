@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.9.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.10.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,9 +126,10 @@ the repository in which a dataset of readyforwhatsnext module libraries
 is stored.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libraries_tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_libraries_tb.html">get_libraries_tb</a></span><span class="op">(</span>gh_repo_1L_chr <span class="op">=</span> <span class="st">"ready4-dev/ready4"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/update_libraries_tb.html">update_libraries_tb</a></span><span class="op">(</span>include_1L_chr <span class="op">=</span> <span class="st">"modules"</span>, url_stub_1L_chr <span class="op">=</span> <span class="st">"https://ready4-dev.github.io/"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</span></span></code></pre>
 <p>In this example, module libraries have been grouped in to the
 following thematic model “sections”.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libraries_tb</span><span class="op">$</span><span class="va">Section</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "People"   "Places"   "Programs"</span></span></code></pre>
 <p>We can use the <code>print_packages</code> function to display a HTML
@@ -138,7 +139,7 @@ for description, developing models or predicting with models), the name
 and purpose of those libraries, the locations from which development and
 archived library code can be downloaded and details of supporting
 documentation for each library (e.g. website, manuals and examples).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_packages.html">print_packages</a></span><span class="op">(</span><span class="va">libraries_tb</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Section</span> <span class="op">==</span> <span class="st">"People"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -361,7 +362,7 @@ Transform Youth Outcomes to Health Utility Predictions
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_packages.html">print_packages</a></span><span class="op">(</span><span class="va">libraries_tb</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Section</span> <span class="op">==</span> <span class="st">"Places"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -442,7 +443,7 @@ Model Spatial Features of Health Systems
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_packages.html">print_packages</a></span><span class="op">(</span><span class="va">libraries_tb</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Section</span> <span class="op">==</span> <span class="st">"Programs"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -529,7 +530,7 @@ Develop, Use and Share Unit Cost Datasets for Health Economic
 <h2 id="related-content">Related content<a class="anchor" aria-label="anchor" href="#related-content"></a>
 </h2>
 <p>Details of how to search for details on individual modules is
-described in <a href="https://ready4-dev.github.io/ready4/articles/V_05.html">another
+described in <a href="https://www.ready4-dev.com/docs/tutorials/use-models/finding-modules/modules/" class="external-link">another
 article</a>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
