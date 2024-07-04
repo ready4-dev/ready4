@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.10.9004</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.10.9005</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,7 +106,8 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_gracefully</span><span class="op">(</span><span class="st">"https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/ready4_badges_lup.RDS"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_gracefully</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/ready4-dev/ready4/"</span>,</span></span>
+<span class="r-in"><span>                      <span class="st">"releases/download/Documentation_0.0/ready4_badges_lup.RDS"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   label_names_chr badges_chr                                                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                         </span>
@@ -151,7 +152,8 @@
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyRSS"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">get_gracefully</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"https://github.com/ready4-dev/ready4/releases.atom"</span><span class="op">)</span>, fn <span class="op">=</span> <span class="fu">tidyRSS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tidyRSS/man/tidyfeed.html" class="external-link">tidyfeed</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_gracefully</span><span class="op">(</span><span class="st">"https://github.com/ready4-dev/ready4/releases.atom"</span>,</span></span>
+<span class="r-in"><span>                 fn <span class="op">=</span> <span class="fu">tidyRSS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tidyRSS/man/tidyfeed.html" class="external-link">tidyfeed</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="fu">get_gracefully</span><span class="op">(</span><span class="st">"DOES_NOT_EXIST"</span>, fn <span class="op">=</span> <span class="fu">tidyRSS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tidyRSS/man/tidyfeed.html" class="external-link">tidyfeed</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
