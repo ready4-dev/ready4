@@ -81,7 +81,7 @@ x <- x %>%
                                              "Write a local copy of RMD or Rmarkdown files",
                                              #
                                              "Write ready4 model documentation website page from an RMD or Rmarkdown file",
-                                             "Write ready4 software develoment local directories"
+                                             "Write ready4 software development local directories"
                                              ) %>% stats::setNames(user_manual_fns_chr),
                              user_manual_fns_chr = user_manual_fns_chr),
                            copyright_holders_chr = "Orygen and Matthew Hamilton",

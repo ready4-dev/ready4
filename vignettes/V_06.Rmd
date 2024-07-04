@@ -25,7 +25,7 @@ The documentation website maintenance tools in the `ready4` library are designed
 
 The `write_to_render_post` is the main `ready4` function used specifically for website maintenance tasks. Importantly, the non-CRAN library [hugodown](https://github.com/r-lib/hugodown) needs to be installed to use this function.
 
-`write_to_render_post` is designed for help overcome practical challenges of rendering RMD or Rmarkdown files (pareticularly those sourced from an individual module library's documentation website) to Markdown output in an overall modelling project website. Examples of its use are in [this script](https://github.com/ready4-dev/readyforwhatsnext/blob/main/runme.R) that is run when updating the readyforwhatsnext project website. The RMD / Rmarkdown files rendered by this example script call other useful functions from the ready4 package, such as:
+`write_to_render_post` is designed for help overcome practical challenges of rendering RMD or Rmarkdown files (particularly those sourced from an individual module library's documentation website) to Markdown output in an overall modelling project website. Examples of its use are in [this script](https://github.com/ready4-dev/readyforwhatsnext/blob/main/runme.R) that is run when updating the readyforwhatsnext project website. The RMD / Rmarkdown files rendered by this example script call other useful functions from the ready4 package, such as:
 
 - `get_libraries_tb`,  `update_libraries_tb` and `print_packages` for updating details on module libraries (see [this example](https://readyforwhatsnext.org/docs/tutorials/finding/libraries/))
 
