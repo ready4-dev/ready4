@@ -4,7 +4,7 @@
 * Mac OS macos-13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/9800145754/job/27061585744)
 * Windows windows-latest (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/9800145754/job/27061585842)
 * Fedora Linux 38 R Under development (unstable) gcc13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/9800145754/job/27061585644) 
-* Windows Server 2022 x64 (build 20348) (on winbuilder) 
+* Windows Server 2022 x64 (build 20348) (on winbuilder at https://win-builder.r-project.org/9PdZ3j1vR23X/00check.log) 
 
 ## R CMD check results
 
