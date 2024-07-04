@@ -1,3 +1,5 @@
+# ready4 0.1.13
+
 # ready4 0.1.12
 This patch updates functions for printing HTML tables to return NULL values if supplied with NULL values instead of tibble objects.
 
