@@ -200,7 +200,7 @@ write_conditional_tags <- function(pkgs_chr,
     }
   }
 }
-write_dv_fl_to_loc <- function(ds_ui_1L_chr,
+write_dv_fl_to_loc <- function(ds_url_1L_chr = character(0),
                                dest_path_1L_chr,
                                repo_fl_fmt_1L_chr,
                                consent_1L_chr = "",
@@ -210,12 +210,22 @@ write_dv_fl_to_loc <- function(ds_ui_1L_chr,
                                key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
                                options_chr = c("Y", "N"),
                                save_type_1L_chr = "original",
-                               server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
-  ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
+                               server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                               ds_ui_1L_chr = deprecated()){
+  if (lifecycle::is_present(ds_ui_1L_chr)) {
+    lifecycle::deprecate_warn("0.1.10.9005",
+                              "ready4::write_dv_fl_to_loc(ds_ui_1L_chr)",
+                              details = "Please use `ready4::write_dv_fl_to_loc(ds_url_1L_chr)`."
+    )
+    if(identical(ds_url_1L_chr, character(0))){
+      ds_url_1L_chr <- ds_ui_1L_chr
+    }
+  }
+  ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
   if(!is.null(ds_ls)){
     if(ds_ls$versionState != "DRAFT"){
       if(!is.na(fl_id_1L_int)){
-        ds_ui_1L_chr <- NULL
+        ds_url_1L_chr <- NULL
       }
       write_with_consent(consented_fn = write_ingested_dv_fl,
                          prompt_1L_chr = paste0("Do you confirm that you want to write the file ",
@@ -225,7 +235,7 @@ write_dv_fl_to_loc <- function(ds_ui_1L_chr,
                                                 " ?"),
                          consent_1L_chr = consent_1L_chr,
                          consent_indcs_int = consent_indcs_int,
-                         consented_args_ls = list(ds_ui_1L_chr = ds_ui_1L_chr,
+                         consented_args_ls = list(ds_url_1L_chr = ds_url_1L_chr,
                                                   fl_nm_1L_chr = fl_nm_1L_chr,
                                                   fl_id_1L_int = fl_id_1L_int,
                                                   repo_fl_fmt_1L_chr = repo_fl_fmt_1L_chr,
@@ -281,7 +291,7 @@ write_env_objs_to_dv <- function(env_objects_ls,
     if(is.null(ds_ls)){
       ds_ls <- tryCatch(dataverse::get_dataset(ds_url_1L_chr, key = NULL), error = function(cond){NULL})
       if(is.null(ds_ls)){
-        ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
+        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
       }
     }
   } else{
@@ -439,7 +449,7 @@ write_fls_from_dv <- function(files_tb,
     purrr::walk(1:length(fl_ids_int),
                 ~{
                   if(!(files_tb$file_type_chr[.x]==".zip")){
-                    write_dv_fl_to_loc(ds_ui_1L_chr = ds_url_1L_chr,
+                    write_dv_fl_to_loc(ds_url_1L_chr = ds_url_1L_chr,
                                        fl_nm_1L_chr = files_tb$file_chr[.x],
                                        fl_id_1L_int = fl_ids_int[.x],
                                        repo_fl_fmt_1L_chr = files_tb$ds_file_ext_chr[.x],
@@ -499,7 +509,7 @@ write_fls_to_dv <- function(file_paths_chr,
                              server_1L_chr){
       ids_int <- NULL
       if(is.null(ds_ls))
-        ds_ls <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_dataset)
+        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
       if(!is.null(ds_ls)){
         is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
         nms_chr <- ds_ls$files$filename
@@ -764,7 +774,7 @@ write_from_tmp <- function(tmp_paths_chr,
                   options_chr = options_chr,
                   return_1L_lgl = FALSE)
 }
-write_ingested_dv_fl <- function(ds_ui_1L_chr,
+write_ingested_dv_fl <- function(ds_url_1L_chr = character(0),
                                  dest_path_1L_chr,
                                  repo_fl_fmt_1L_chr,
                                  consent_1L_chr = "",
@@ -774,7 +784,17 @@ write_ingested_dv_fl <- function(ds_ui_1L_chr,
                                  key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
                                  options_chr = c("Y", "N"),
                                  save_type_1L_chr = "original",
-                                 server_1L_chr = Sys.getenv("DATAVERSE_SERVER")){
+                                 server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+                                 ds_ui_1L_chr = deprecated()){
+  if (lifecycle::is_present(ds_ui_1L_chr)) {
+    lifecycle::deprecate_warn("0.1.10.9005",
+                              "ready4::write_ingested_dv_fl(ds_ui_1L_chr)",
+                              details = "Please use `ready4::write_ingested_dv_fl(ds_url_1L_chr)`."
+    )
+    if(identical(ds_url_1L_chr, character(0))){
+      ds_url_1L_chr <- ds_ui_1L_chr
+    }
+  }
   prompt_1L_chr <- paste0("Do you confirm that you want to write the file ",
                           paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr),
                           " to ",
@@ -785,7 +805,7 @@ write_ingested_dv_fl <- function(ds_ui_1L_chr,
                                   options_chr = c("Y", "N"),
                                   force_from_opts_1L_chr = TRUE)
   }
-  object_xx <- get_gracefully(ds_ui_1L_chr, fn = dataverse::get_file,
+  object_xx <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_file,
                               args_ls = list(file = ifelse(is.na(fl_id_1L_int), paste0(fl_nm_1L_chr, repo_fl_fmt_1L_chr), fl_id_1L_int),
                                              format = save_type_1L_chr, key = key_1L_chr, server = server_1L_chr))
   if(!is.null(object_xx)){
@@ -794,16 +814,6 @@ write_ingested_dv_fl <- function(ds_ui_1L_chr,
                        consent_1L_chr = consent_1L_chr,
                        consent_indcs_int = consent_indcs_int,
                        consented_args_ls = list(object = object_xx,
-                                                # dataverse::get_file(ifelse(is.na(fl_id_1L_int),
-                                                #                                   paste0(fl_nm_1L_chr,repo_fl_fmt_1L_chr),
-                                                #                                   fl_id_1L_int),
-                                                #                            dataset = ds_ui_1L_chr,
-                                                #                            format = save_type_1L_chr,
-                                                #                            key = key_1L_chr,
-                                                #                            server = server_1L_chr),
-                                                ,
-
-
                                                 con = dest_path_1L_chr),
                        consented_msg_1L_chr = paste0("New file created in ",
                                                      dest_path_1L_chr,

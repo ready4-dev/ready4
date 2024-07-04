@@ -5,7 +5,7 @@
 \title{Write dataverse file to local}
 \usage{
 write_dv_fl_to_loc(
-  ds_ui_1L_chr,
+  ds_url_1L_chr = character(0),
   dest_path_1L_chr,
   repo_fl_fmt_1L_chr,
   consent_1L_chr = "",
@@ -15,11 +15,12 @@ write_dv_fl_to_loc(
   key_1L_chr = Sys.getenv("DATAVERSE_KEY"),
   options_chr = c("Y", "N"),
   save_type_1L_chr = "original",
-  server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
+  server_1L_chr = Sys.getenv("DATAVERSE_SERVER"),
+  ds_ui_1L_chr = deprecated()
 )
 }
 \arguments{
-\item{ds_ui_1L_chr}{Dataset user interface (a character vector of length one)}
+\item{ds_url_1L_chr}{Dataset url (a character vector of length one), Default: character(0)}
 
 \item{dest_path_1L_chr}{Destination path (a character vector of length one)}
 
@@ -40,6 +41,8 @@ write_dv_fl_to_loc(
 \item{save_type_1L_chr}{Save type (a character vector of length one), Default: 'original'}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
+
+\item{ds_ui_1L_chr}{Dataset user interface (a character vector of length one), Default: deprecated()}
 }
 \value{
 No return value, called for side effects.

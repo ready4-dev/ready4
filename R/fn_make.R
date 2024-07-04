@@ -631,7 +631,8 @@ make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_ch
     if (!is.null(y_tb)) {
         y_tb <- y_tb %>% dplyr::mutate(`:=`(!!rlang::sym(ns_var_nm_1L_chr), 
             libraries_tb %>% dplyr::pull(!!rlang::sym(ns_var_nm_1L_chr)))) %>% 
-            dplyr::rename(DOI_chr = DOI, Title = TITLE, Authors = AUTHOR)
+            dplyr::rename(DOI_chr = .data$DOI, Title = .data$TITLE, 
+                Authors = .data$AUTHOR)
         libraries_tb <- dplyr::left_join(libraries_tb, y_tb, 
             by = ns_var_nm_1L_chr)
         if (empty_1L_lgl) {

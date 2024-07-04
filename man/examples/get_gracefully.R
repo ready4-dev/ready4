@@ -1,4 +1,5 @@
-get_gracefully("https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/ready4_badges_lup.RDS")
+get_gracefully(paste0("https://github.com/ready4-dev/ready4/",
+                      "releases/download/Documentation_0.0/ready4_badges_lup.RDS"))
 if (interactive())
   get_gracefully("DOES NOT EXIST")
 if(requireNamespace("dataverse", quietly = TRUE)) {
@@ -34,7 +35,8 @@ if(requireNamespace("rvest", quietly = TRUE)) {
 }
 
 if(requireNamespace("tidyRSS", quietly = TRUE)) {
-  get_gracefully(paste0("https://github.com/ready4-dev/ready4/releases.atom"), fn = tidyRSS::tidyfeed)
+  get_gracefully("https://github.com/ready4-dev/ready4/releases.atom",
+                 fn = tidyRSS::tidyfeed)
   if (interactive())
     get_gracefully("DOES_NOT_EXIST", fn = tidyRSS::tidyfeed)
 }

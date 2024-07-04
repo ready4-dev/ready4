@@ -22,7 +22,7 @@ library(ready4)
 Health economic models should ideally be both "living" (kept up to date) and "transferable" (easy to selectively modify for use in a new context) and applied in research that is reproducible. These goals [can be hard to achieve in practice](https://www.ready4-dev.com/docs/getting-started/motivation/).
 
 ## Implementation
-The `ready4` R library provides bare bones foundational elements of a [prototype software framework](https://rdcu.be/dIv8g) to: (i) develop living and transferable health economic models; and (ii) apply those models to implement reproducible health economic analyses. The framework is extended by multiple other R packages - see the framework's [project website](https://www.ready4-dev.com/) for details. 
+The `ready4` R library provides bare bones foundational elements of a [prototype software framework](https://link.springer.com/article/10.1007/s40273-024-01378-8) to: (i) develop living and transferable health economic models; and (ii) apply those models to implement reproducible health economic analyses. The framework is extended by multiple other R packages - see the framework's [project website](https://www.ready4-dev.com/) for details. 
 
 ## Use
 For most users, the main applications of the ready4 library will be to:
@@ -49,7 +49,7 @@ Developers that wish to author health economic models as R libraries with ready4
 
 - A [pre-print manuscript](https://arxiv.org/pdf/2403.17798) discussing the need for health economic models to be transparent, reusable and updatable;
 
-- An 2024 [article in Pharmacoeconomics](https://rdcu.be/dIv8g) describing the ready4 prototype software framework;
+- An 2024 [article in Pharmacoeconomics](https://link.springer.com/article/10.1007/s40273-024-01378-8) describing the ready4 prototype software framework;
 
 - The [ready4 prototype software framework website](https://www.ready4-dev.com/);
 

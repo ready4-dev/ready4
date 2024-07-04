@@ -30,7 +30,8 @@ Object (an output object of multiple potential types)
 get_gracefully() attempts to retrieve objects from the internet but returns NULL and an informative message if there is no internet connection or the specified resource could not be found.
 }
 \examples{
-get_gracefully("https://github.com/ready4-dev/ready4/releases/download/Documentation_0.0/ready4_badges_lup.RDS")
+get_gracefully(paste0("https://github.com/ready4-dev/ready4/",
+                      "releases/download/Documentation_0.0/ready4_badges_lup.RDS"))
 if (interactive())
   get_gracefully("DOES NOT EXIST")
 if(requireNamespace("dataverse", quietly = TRUE)) {
@@ -66,7 +67,8 @@ if(requireNamespace("rvest", quietly = TRUE)) {
 }
 
 if(requireNamespace("tidyRSS", quietly = TRUE)) {
-  get_gracefully(paste0("https://github.com/ready4-dev/ready4/releases.atom"), fn = tidyRSS::tidyfeed)
+  get_gracefully("https://github.com/ready4-dev/ready4/releases.atom",
+                 fn = tidyRSS::tidyfeed)
   if (interactive())
     get_gracefully("DOES_NOT_EXIST", fn = tidyRSS::tidyfeed)
 }
