@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.13</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -147,6 +147,554 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">methods_tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_methods_tb.html">get_methods_tb</a></span><span class="op">(</span><span class="st">"ready4-dev/ready4"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</span>
+<span class="r-in"><span><span class="fu">print_methods</span><span class="op">(</span><span class="va">methods_tb</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Method &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Purpose &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Examples &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/author-methods.html"&gt; author &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and save files &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     "&gt;5&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     "&gt;6&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/ready4pack/articles/V_01.html" style="     "&gt;7&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;       , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorClasses-methods.html"&gt; authorClasses &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and document classes &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorData-methods.html"&gt; authorData &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and document datasets &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorFunctions-methods.html"&gt; authorFunctions &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and document functions &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorReport-methods.html"&gt; authorReport &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and save a report &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorSlot-methods.html"&gt; authorSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the author method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/characterize-methods.html"&gt; characterize &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Characterize model module data by generating (tabular) descriptive statistics &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.html"&gt; characterizeSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the characterize method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/depict-methods.html"&gt; depict &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Depict (plot) features of model module data &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/depictSlot-methods.html"&gt; depictSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the depict method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/enhance-methods.html"&gt; enhance &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Enhance a model module by adding new elements &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.html"&gt; enhanceSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the enhance method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/exhibit-methods.html"&gt; exhibit &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Exhibit features of model module data by printing them to the R console &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     "&gt;2&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     "&gt;5&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     "&gt;6&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;       , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/youthu/articles/V_01.html" style="     "&gt;18&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.html"&gt; exhibitSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the exhibit method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ingest-methods.html"&gt; ingest &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Ingest data &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     "&gt;1&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     "&gt;2&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_03.html" style="     "&gt;3&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     "&gt;6&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;       , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/youthu/articles/V_01.html" style="     "&gt;18&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.html"&gt; ingestSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the ingest method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/investigate-methods.html"&gt; investigate &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Investigate solutions to an inverse problem &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html"&gt; investigateSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the investigate method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/manufacture-methods.html"&gt; manufacture &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Manufacture a new object &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.html"&gt; manufactureSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the manufacture method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/metamorphose-methods.html"&gt; metamorphose &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Metamorphose a model module to a model module of a different (non-inheriting) class &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.html"&gt; metamorphoseSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the metamorphose method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/procure-methods.html"&gt; procure &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Procure items from a dataset &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     "&gt;5&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html"&gt; procureSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Procure (get) data from a slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;      , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/prognosticate-methods.html"&gt; prognosticate &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Prognosticate (make predictions) by solving a forward problem &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.html"&gt; prognosticateSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the prognosticate method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ratify-methods.html"&gt; ratify &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Ratify that input or output data meet validity criteria &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.html"&gt; ratifySlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the ratify method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/reckon-methods.html"&gt; reckon &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Reckon (calculate) a value &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.html"&gt; reckonSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the reckon method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/renew-methods.html"&gt; renew &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Renew (update) values &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     "&gt;1&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     "&gt;2&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;      , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/renewSlot-methods.html"&gt; renewSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Renew (set) the values of data in a module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/share-methods.html"&gt; share &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Share data via an online repository &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     "&gt;1&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/shareSlot-methods.html"&gt; shareSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the share method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-in"><span><span class="fu">print_methods</span><span class="op">(</span><span class="va">methods_tb</span>, return_1L_chr <span class="op">=</span> <span class="st">"core"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Method &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Purpose &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Examples &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/author-methods.html"&gt; author &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and save files &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     "&gt;5&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     "&gt;6&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/ready4pack/articles/V_01.html" style="     "&gt;7&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;       , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/characterize-methods.html"&gt; characterize &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Characterize model module data by generating (tabular) descriptive statistics &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/depict-methods.html"&gt; depict &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Depict (plot) features of model module data &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/enhance-methods.html"&gt; enhance &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Enhance a model module by adding new elements &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/exhibit-methods.html"&gt; exhibit &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Exhibit features of model module data by printing them to the R console &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     "&gt;2&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     "&gt;5&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     "&gt;6&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;       , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/youthu/articles/V_01.html" style="     "&gt;18&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ingest-methods.html"&gt; ingest &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Ingest data &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     "&gt;1&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     "&gt;2&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_03.html" style="     "&gt;3&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     "&gt;6&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;       , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt;  , &lt;a href="https://ready4-dev.github.io/youthu/articles/V_01.html" style="     "&gt;18&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/investigate-methods.html"&gt; investigate &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Investigate solutions to an inverse problem &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;     , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/manufacture-methods.html"&gt; manufacture &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Manufacture a new object &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/metamorphose-methods.html"&gt; metamorphose &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Metamorphose a model module to a model module of a different (non-inheriting) class &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/procure-methods.html"&gt; procure &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Procure items from a dataset &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     "&gt;5&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/prognosticate-methods.html"&gt; prognosticate &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Prognosticate (make predictions) by solving a forward problem &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ratify-methods.html"&gt; ratify &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Ratify that input or output data meet validity criteria &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/reckon-methods.html"&gt; reckon &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Reckon (calculate) a value &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/renew-methods.html"&gt; renew &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Renew (update) values &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     "&gt;1&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     "&gt;2&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;      , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/share-methods.html"&gt; share &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Share data via an online repository &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     "&gt;1&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "&gt;13&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "&gt;15&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-in"><span><span class="fu">print_methods</span><span class="op">(</span><span class="va">methods_tb</span>, return_1L_chr <span class="op">=</span> <span class="st">"slot"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Method &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Purpose &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Examples &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorSlot-methods.html"&gt; authorSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the author method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.html"&gt; characterizeSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the characterize method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/depictSlot-methods.html"&gt; depictSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the depict method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.html"&gt; enhanceSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the enhance method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.html"&gt; exhibitSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the exhibit method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.html"&gt; ingestSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the ingest method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html"&gt; investigateSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the investigate method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.html"&gt; manufactureSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the manufacture method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.html"&gt; metamorphoseSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the metamorphose method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html"&gt; procureSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Procure (get) data from a slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;      , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.html"&gt; prognosticateSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the prognosticate method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.html"&gt; ratifySlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the ratify method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.html"&gt; reckonSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the reckon method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/renewSlot-methods.html"&gt; renewSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Renew (set) the values of data in a module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/shareSlot-methods.html"&gt; shareSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the share method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-in"><span><span class="fu">print_methods</span><span class="op">(</span><span class="va">methods_tb</span>, return_1L_chr <span class="op">=</span> <span class="st">"extended"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Method &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Purpose &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;th style="text-align:left;"&gt; Examples &lt;/th&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  &lt;/thead&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorClasses-methods.html"&gt; authorClasses &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and document classes &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorData-methods.html"&gt; authorData &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and document datasets &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorFunctions-methods.html"&gt; authorFunctions &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and document functions &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorReport-methods.html"&gt; authorReport &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Author and save a report &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/authorSlot-methods.html"&gt; authorSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the author method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.html"&gt; characterizeSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the characterize method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/depictSlot-methods.html"&gt; depictSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the depict method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.html"&gt; enhanceSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the enhance method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.html"&gt; exhibitSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the exhibit method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.html"&gt; ingestSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the ingest method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html"&gt; investigateSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the investigate method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.html"&gt; manufactureSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the manufacture method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.html"&gt; metamorphoseSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the metamorphose method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html"&gt; procureSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Procure (get) data from a slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "&gt;16&lt;/a&gt;      , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.html"&gt; prognosticateSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the prognosticate method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.html"&gt; ratifySlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the ratify method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.html"&gt; reckonSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the reckon method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/renewSlot-methods.html"&gt; renewSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Renew (set) the values of data in a module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; &lt;a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     "&gt;4&lt;/a&gt;, &lt;a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "&gt;14&lt;/a&gt;    , &lt;a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "&gt;17&lt;/a&gt; , &lt;a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "&gt;19&lt;/a&gt;   , &lt;a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "&gt;20&lt;/a&gt; &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;&lt;a href="https://ready4-dev.github.io/ready4/reference/shareSlot-methods.html"&gt; shareSlot &lt;/a&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt; Apply the share method to a model module slot &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    &lt;td style="text-align:left;"&gt;  &lt;/td&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/tr&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/tbody&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/table&gt;</span>
+<span class="r-in"><span><span class="va">methods_tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_methods_tb.html">get_methods_tb</a></span><span class="op">(</span><span class="st">"ready4-dev/ready4"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</span>
 <span class="r-in"><span><span class="fu">print_methods</span><span class="op">(</span><span class="va">methods_tb</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;"&gt;</span>
