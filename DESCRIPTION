@@ -19,7 +19,7 @@ Description: A template model module, tools to help find model modules
     use it visit <https://www.ready4-dev.com/>. For a background to the
     methodological issues that the framework is attempting to help solve,
     see Hamilton et al. (2024) <doi:10.1007/s40273-024-01378-8>.
-License: GPL-3 + file LICENSE
+License: GPL-3
 URL: https://ready4-dev.github.io/ready4/,
     https://github.com/ready4-dev/ready4, https://www.ready4-dev.com/
 Encoding: UTF-8
@@ -70,26 +70,29 @@ Collate:
     'update.R'
     'write.R'
 Suggests: 
+    devtools,
+    Hmisc,
     knitr,
-    testthat
+    pkgload,
+    readr,
+    readxl,
+    rmarkdown,
+    testthat,
+    usethis,
+    zen4R
 VignetteBuilder: knitr
 Imports: 
     curl,
     dataverse,
-    devtools,
     dplyr,
     gh,
-    Hmisc,
     kableExtra,
     lifecycle,
     magrittr,
     methods,
     piggyback,
     purrr,
-    readr,
-    readxl,
     rlang,
-    rmarkdown,
     rvest,
     stats,
     stringi,
@@ -98,6 +101,4 @@ Imports:
     tidyRSS,
     tidyselect,
     tools,
-    usethis,
-    utils,
-    zen4R
+    utils

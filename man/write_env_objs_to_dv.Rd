@@ -53,4 +53,3 @@ File identities (an integer vector)
 \description{
 write_env_objs_to_dv() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write environment objects to dataverse. The function returns File identities (an integer vector).
 }
-\keyword{internal}

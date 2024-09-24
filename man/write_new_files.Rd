@@ -41,4 +41,3 @@ Object (an output object of multiple potential types)
 \description{
 write_new_files() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write new files. The function returns Object (an output object of multiple potential types).
 }
-\keyword{internal}

@@ -20,4 +20,3 @@ Urls (a character vector)
 \description{
 get_manual_urls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get manual urls. The function returns Urls (a character vector).
 }
-\keyword{internal}

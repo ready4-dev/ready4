@@ -29,4 +29,3 @@ No return value, called for side effects.
 \description{
 write_to_publish_dv_ds() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to publish dataverse dataset. The function is called for its side effects and does not return a value.
 }
-\keyword{internal}

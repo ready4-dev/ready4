@@ -35,4 +35,3 @@ write_conditional_tags() is a Write function that writes a file to a specified l
 \seealso{
 \code{\link[usethis:use_package]{usethis::use_package()}}
 }
-\keyword{internal}

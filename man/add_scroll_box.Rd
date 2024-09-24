@@ -26,4 +26,3 @@ Table (a kable)
 \description{
 add_scroll_box() is an Add function that updates an object by adding new values to new or empty fields. Specifically, this function implements an algorithm to add scroll box. The function is called for its side effects and does not return a value.
 }
-\keyword{internal}

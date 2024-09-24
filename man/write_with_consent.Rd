@@ -50,4 +50,3 @@ Object (an output object of multiple potential types)
 \description{
 write_with_consent() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write with consent. The function returns Object (an output object of multiple potential types).
 }
-\keyword{internal}

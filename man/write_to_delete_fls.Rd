@@ -29,4 +29,3 @@ Object (an output object of multiple potential types)
 \description{
 write_to_delete_fls() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to delete files. The function returns Object (an output object of multiple potential types).
 }
-\keyword{internal}

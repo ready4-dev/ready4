@@ -15,4 +15,3 @@ Extension (a character vector of length one)
 \description{
 get_fl_extension() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get file extension. The function returns Extension (a character vector of length one).
 }
-\keyword{internal}

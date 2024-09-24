@@ -32,4 +32,3 @@ write_blog_entries() is a Write function that writes a file to a specified local
 \seealso{
 \code{\link[rmarkdown:render]{rmarkdown::render()}}
 }
-\keyword{internal}

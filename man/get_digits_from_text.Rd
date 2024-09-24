@@ -15,4 +15,3 @@ Digits (a character vector)
 \description{
 get_digits_from_text() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get digits from text. The function returns Digits (a character vector).
 }
-\keyword{internal}

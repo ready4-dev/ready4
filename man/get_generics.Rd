@@ -26,4 +26,3 @@ Generics (a character vector)
 \description{
 get_generics() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get generics. The function returns Generics (a character vector).
 }
-\keyword{internal}

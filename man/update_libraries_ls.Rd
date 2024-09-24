@@ -23,4 +23,3 @@ Libraries (a list)
 \description{
 update_libraries_ls() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries list. The function returns Libraries (a list).
 }
-\keyword{internal}

@@ -17,4 +17,3 @@ Examples (a character vector)
 \description{
 get_examples() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get examples. The function returns Examples (a character vector).
 }
-\keyword{internal}

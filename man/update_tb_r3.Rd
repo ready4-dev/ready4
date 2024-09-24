@@ -44,4 +44,3 @@ Tibble ready4 submodule (a ready4 submodule extension of tibble)
 \description{
 update_tb_r3() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update tibble ready4 submodule. The function returns Tibble ready4 submodule (a ready4 submodule extension of tibble).
 }
-\keyword{internal}

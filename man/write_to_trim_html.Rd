@@ -26,4 +26,3 @@ No return value, called for side effects.
 \description{
 write_to_trim_html() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to trim html. The function is called for its side effects and does not return a value.
 }
-\keyword{internal}

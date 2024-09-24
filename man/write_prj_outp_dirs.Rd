@@ -32,4 +32,3 @@ New paths (a list)
 \description{
 write_prj_outp_dirs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write project output directories. The function returns New paths (a list).
 }
-\keyword{internal}

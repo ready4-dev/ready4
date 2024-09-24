@@ -38,4 +38,3 @@ Dataverses (a kable)
 \description{
 print_dvs() is a Print function that prints output to console. Specifically, this function implements an algorithm to print dataverses. The function is called for its side effects and does not return a value.
 }
-\keyword{internal}

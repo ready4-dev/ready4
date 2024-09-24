@@ -7,7 +7,6 @@
 #' @rdname get_badge_urls
 #' @export 
 #' @importFrom rvest read_html html_elements html_attr
-#' @keywords internal
 get_badge_urls <- function (pkg_nm_1L_chr, project_badges_url_1L_chr = "https://img.shields.io/badge/ready4", 
     url_stub_1L_chr = "https://ready4-dev.github.io/") 
 {
@@ -39,7 +38,6 @@ get_badge_urls <- function (pkg_nm_1L_chr, project_badges_url_1L_chr = "https://
 #' @rdname get_badges_lup
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
 get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_1L_chr = "ready4-dev/ready4", 
     gh_tag_1L_chr = "Documentation_0.0") 
 {
@@ -70,7 +68,6 @@ get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_
 #' @importFrom purrr map_dfr
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringi stri_replace_last_fixed
-#' @keywords internal
 get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/ready4", 
     gh_tag_1L_chr = "Documentation_0.0", url_stub_1L_chr = "https://ready4-dev.github.io/", 
     validate_1L_lgl = FALSE) 
@@ -112,6 +109,9 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
                 }
             })
         }
+        if (nrow(cls_extensions_tb) == 0) {
+            cls_extensions_tb <- NULL
+        }
     }
     return(cls_extensions_tb)
 }
@@ -124,7 +124,6 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
 #' @rdname get_datasets_tb
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
 #' @example man/examples/get_datasets_tb.R
 get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     rds_fl_name_1L_chr = "datasets_tb") 
@@ -146,7 +145,6 @@ get_datasets_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr
 #' @return Digits (a character vector)
 #' @rdname get_digits_from_text
 #' @export 
-#' @keywords internal
 get_digits_from_text <- function (text_1L_chr) 
 {
     fn_attribution_1L_chr <- "This function is based on: http://stla.github.io/stlapblog/posts/Numextract.html"
@@ -166,7 +164,6 @@ get_digits_from_text <- function (text_1L_chr)
 #' @export 
 #' @importFrom dataverse dataset_files
 #' @importFrom purrr map_chr
-#' @keywords internal
 get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = character(0), 
     server_1L_chr = Sys.getenv("DATAVERSE_SERVER"), key_1L_chr = NULL) 
 {
@@ -202,7 +199,6 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
 #' @importFrom purrr map_chr discard
 #' @importFrom stringr str_match str_detect
 #' @importFrom rvest read_html html_elements html_text2
-#' @keywords internal
 get_examples <- function (vignettes_chr, term_1L_chr) 
 {
     if (is.na(vignettes_chr[1])) {
@@ -232,7 +228,6 @@ get_examples <- function (vignettes_chr, term_1L_chr)
 #' @rdname get_excluded_repos
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
 get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     exclude_chr <- NULL
@@ -257,7 +252,6 @@ get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_
 #' @return Extension (a character vector of length one)
 #' @rdname get_fl_extension
 #' @export 
-#' @keywords internal
 get_fl_extension <- function (path_1L_chr) 
 {
     acknowledgement_1L_chr <- "This function is a minor rephrasing of tools::file_ext"
@@ -276,7 +270,6 @@ get_fl_extension <- function (path_1L_chr)
 #' @export 
 #' @importFrom purrr map_chr
 #' @importFrom tibble as_tibble
-#' @keywords internal
 get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_) 
 {
     if (is.na(nms_chr[1])) {
@@ -300,7 +293,6 @@ get_fl_id_from_dv_ls <- function (ds_ls, fl_nm_1L_chr, nms_chr = NA_character_)
 #' @return File name (a character vector of length one)
 #' @rdname get_fl_nm_from_path
 #' @export 
-#' @keywords internal
 get_fl_nm_from_path <- function (path_1L_chr) 
 {
     acknowledgement_1L_chr <- "This function is a minor rephrasing of fs:path_file"
@@ -370,7 +362,6 @@ get_from_lup_obj <- function (data_lookup_tb, match_value_xx, match_var_nm_1L_ch
 #' @export 
 #' @importFrom piggyback pb_download_url
 #' @importFrom dplyr filter select
-#' @keywords internal
 get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     return_1L_chr = "all") 
 {
@@ -406,7 +397,6 @@ get_functions_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @export 
 #' @importFrom methods getGenerics
 #' @importFrom purrr map_lgl map flatten_chr
-#' @keywords internal
 get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclude_mthds_for_chr = NA_character_, 
     framework_only_1L_lgl = TRUE) 
 {
@@ -445,7 +435,6 @@ get_generics <- function (pkg_nm_1L_chr = "ready4", return_1L_chr = "all", exclu
 #' @rdname get_gh_repos
 #' @export 
 #' @importFrom gh gh
-#' @keywords internal
 get_gh_repos <- function (org_1L_chr) 
 {
     if (!requireNamespace("gh", quietly = TRUE)) {
@@ -568,7 +557,6 @@ get_gracefully <- function (url_1L_chr, args_ls = NULL, fn = readRDS, not_chr_1L
 #' @rdname get_libraries_ls
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
 get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     libraries_ls <- NULL
@@ -617,7 +605,6 @@ get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
 #' @export 
 #' @importFrom rvest read_html html_elements html_attr
 #' @importFrom purrr map_lgl
-#' @keywords internal
 get_manual_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html") 
 {
     urls_xx <- get_gracefully(pkg_url_1L_chr, fn = rvest::read_html)
@@ -709,7 +696,6 @@ get_modules_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr 
 #' @importFrom purrr map_chr pluck
 #' @importFrom stringr str_locate str_sub
 #' @importFrom tools Rd_db
-#' @keywords internal
 get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr = character(0)) 
 {
     mthd_titles_chr <- mthd_nms_chr %>% purrr::map_chr(~{
@@ -741,7 +727,6 @@ get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr
 #' @export 
 #' @importFrom methods className getSlots
 #' @importFrom purrr map_chr
-#' @keywords internal
 get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "") 
 {
     slots_ls <- methods::className(fn_name_1L_chr, ifelse(package_1L_chr == 
@@ -762,7 +747,6 @@ get_r4_obj_slots <- function (fn_name_1L_chr, package_1L_chr = "")
 #' @importFrom dataverse dataset_files
 #' @importFrom purrr map_chr
 #' @importFrom stringi stri_replace_last_regex
-#' @keywords internal
 get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK", 
     dv_url_pfx_1L_chr = character(0), key_1L_chr = NULL, server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
 {
@@ -798,7 +782,6 @@ get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/
 #' @rdname get_source_code_urls
 #' @export 
 #' @importFrom rvest read_html html_elements html_attr html_text
-#' @keywords internal
 get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "https://ready4-dev.github.io/ready4/index.html") 
 {
     urls_xx <- get_gracefully(pkg_url_1L_chr, fn = rvest::read_html)
@@ -823,7 +806,6 @@ get_source_code_urls <- function (pkg_nm_1L_chr = "ready4", pkg_url_1L_chr = "ht
 #' @rdname get_subroutine_repos
 #' @export 
 #' @importFrom piggyback pb_download_url
-#' @keywords internal
 get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     subroutine_repos_chr <- NULL
@@ -857,7 +839,6 @@ get_subroutine_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr slice n mutate across
 #' @importFrom tidyselect where
-#' @keywords internal
 get_table_from_loc_file <- function (path_1L_chr, force_numeric_1L_lgl = FALSE, force_tb_1L_lgl = FALSE, 
     heading_rows_1L_int = 1L) 
 {

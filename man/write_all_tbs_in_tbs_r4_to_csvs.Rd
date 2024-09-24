@@ -35,4 +35,3 @@ No return value, called for side effects.
 \description{
 write_all_tbs_in_tbs_r4_to_csvs() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write all tibbles in tibbles ready4 module to comma separated variables files. The function is called for its side effects and does not return a value.
 }
-\keyword{internal}

@@ -20,4 +20,3 @@ Libraries (a list)
 \description{
 get_libraries_ls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get libraries list. The function returns Libraries (a list).
 }
-\keyword{internal}

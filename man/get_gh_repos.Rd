@@ -15,4 +15,3 @@ Repositories (a character vector)
 \description{
 get_gh_repos() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get github repositories. The function returns Repositories (a character vector).
 }
-\keyword{internal}

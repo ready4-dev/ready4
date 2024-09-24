@@ -38,4 +38,3 @@ File identities (an integer vector)
 \description{
 write_to_dv_from_tbl() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to dataverse from table. The function returns File identities (an integer vector).
 }
-\keyword{internal}

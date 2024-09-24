@@ -19,4 +19,3 @@ Files (a tibble)
 \description{
 make_files_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make files tibble. The function returns Files (a tibble).
 }
-\keyword{internal}
