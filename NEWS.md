@@ -1,6 +1,5 @@
 # ready4 0.1.18
 
-# ready4 0.1.18
 This patch addresses a CRAN policy violation related to unsuccessful internet requests needing to fail gracefully. 
 
 # ready4 0.1.17
