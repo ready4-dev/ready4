@@ -12,6 +12,7 @@
 #' @export 
 #' @importFrom purrr walk
 #' @importFrom methods getSlots
+#' @keywords internal
 write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_chr, pfx_1L_chr, 
     consent_1L_chr = "", consent_indcs_int = 1L, options_chr = c("Y", 
         "N")) 
@@ -33,6 +34,7 @@ write_all_tbs_in_tbs_r4_to_csvs <- function (tbs_r4, r4_name_1L_chr, lup_dir_1L_
 #' @rdname write_blog_entries
 #' @export 
 #' @seealso [rmarkdown::render()]
+#' @keywords internal
 write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N")) 
 {
@@ -78,6 +80,7 @@ write_blog_entries <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
 #' @export 
 #' @importFrom stringr str_sub str_replace_all str_remove str_replace
 #' @importFrom purrr map_chr
+#' @keywords internal
 write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), publisher_1L_chr = "Zenodo") 
 {
@@ -124,6 +127,7 @@ write_citation_cff <- function (pkg_desc_ls, citation_chr, consent_1L_chr = "", 
 #' @importFrom purrr walk map_lgl reduce map_chr discard
 #' @importFrom stringr str_remove_all str_sub
 #' @seealso [usethis::use_package()]
+#' @keywords internal
 write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N"), where_1L_chr = character(0)) 
 {
@@ -236,6 +240,7 @@ write_conditional_tags <- function (pkgs_chr, path_to_pkg_root_1L_chr, consent_1
 #' @export 
 #' @importFrom lifecycle is_present deprecate_warn
 #' @importFrom dataverse get_dataset
+#' @keywords internal
 write_dv_fl_to_loc <- function (ds_url_1L_chr = character(0), dest_path_1L_chr, repo_fl_fmt_1L_chr, 
     consent_1L_chr = "", consent_indcs_int = 1L, fl_nm_1L_chr = NA_character_, 
     fl_id_1L_int = NA_integer_, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
@@ -297,6 +302,7 @@ write_dv_fl_to_loc <- function (ds_url_1L_chr = character(0), dest_path_1L_chr, 
 #' @export 
 #' @importFrom purrr map2_chr
 #' @importFrom dataverse get_dataset
+#' @keywords internal
 write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
     options_chr = c("Y", "N"), publish_dv_1L_lgl = FALSE, piggyback_desc_1L_chr = "Documentation", 
@@ -360,6 +366,7 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
 #' @importFrom purrr map_chr pwalk map_lgl
 #' @importFrom stringr str_sub str_locate str_remove str_replace
 #' @seealso [devtools::document()]
+#' @keywords internal
 write_examples <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), type_1L_chr = "fn") 
 {
@@ -458,6 +465,7 @@ write_examples <- function (path_1L_chr, consent_1L_chr = "", consent_indcs_int 
 #' @export 
 #' @importFrom purrr walk
 #' @importFrom stringr str_replace_all
+#' @keywords internal
 write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N")) 
 {
@@ -492,6 +500,7 @@ write_extra_pkgs_to_actions <- function (path_to_dir_1L_chr, consent_1L_chr = ""
 #' @rdname write_fls_from_dv
 #' @export 
 #' @importFrom purrr walk
+#' @keywords internal
 write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir_1L_chr, 
     consent_1L_chr = "", consent_indcs_int = 1L, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
     options_chr = c("Y", "N"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
@@ -539,6 +548,7 @@ write_fls_from_dv <- function (files_tb, fl_ids_int, ds_url_1L_chr, local_dv_dir
 #' @export 
 #' @importFrom dataverse get_dataset delete_file add_dataset_file update_dataset_file
 #' @importFrom purrr map map2_int map_chr
+#' @keywords internal
 write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, descriptions_chr = NULL, ds_ls = NULL, 
     key_1L_chr = Sys.getenv("DATAVERSE_KEY"), options_chr = c("Y", 
@@ -625,6 +635,7 @@ write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "",
 #' @export 
 #' @importFrom piggyback pb_list pb_new_release pb_upload
 #' @importFrom purrr walk
+#' @keywords internal
 write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     ds_url_1L_chr = character(0), ds_ls = NULL, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
     options_chr = c("Y", "N"), piggyback_desc_1L_chr = "Documentation", 
@@ -692,6 +703,7 @@ write_fls_to_repo <- function (paths_chr, descriptions_chr, consent_1L_chr = "",
 #' @export 
 #' @importFrom purrr pmap
 #' @importFrom rlang exec
+#' @keywords internal
 write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, args_ls_ls = list(NULL), 
     consent_1L_chr = "", consent_indcs_int = 1L, edit_fn_ls = list(NULL), 
     options_chr = c("Y", "N")) 
@@ -737,6 +749,7 @@ write_from_tmp <- function (tmp_paths_chr, dest_paths_chr, args_ls_ls = list(NUL
 #' @export 
 #' @importFrom lifecycle is_present deprecate_warn
 #' @importFrom dataverse get_file
+#' @keywords internal
 write_ingested_dv_fl <- function (ds_url_1L_chr = character(0), dest_path_1L_chr, repo_fl_fmt_1L_chr, 
     consent_1L_chr = "", consent_indcs_int = 1L, fl_nm_1L_chr = NA_character_, 
     fl_id_1L_int = NA_integer_, key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
@@ -798,6 +811,7 @@ write_ingested_dv_fl <- function (ds_url_1L_chr = character(0), dest_path_1L_chr
 #' @return No return value, called for side effects.
 #' @rdname write_library_metadata
 #' @export 
+#' @keywords internal
 write_library_metadata <- function (additions_tb = make_additions_tb(), libraries_ls = NULL, 
     libraries_tb = NULL, consent_1L_chr = "", consent_indcs_int = 1L, 
     exclude_mthds_for_chr = NA_character_, gh_repo_1L_chr = "ready4-dev/ready4", 
@@ -869,6 +883,7 @@ write_library_metadata <- function (additions_tb = make_additions_tb(), librarie
 #' @rdname write_new_credentials
 #' @export 
 #' @importFrom stringr str_replace
+#' @keywords internal
 write_new_credentials <- function (path_to_file_1L_chr, new_credentials_1L_chr, old_credentials_1L_chr, 
     consent_1L_chr = "", consent_indcs_int = 1L, options_chr = c("Y", 
         "N")) 
@@ -897,6 +912,7 @@ write_new_credentials <- function (path_to_file_1L_chr, new_credentials_1L_chr, 
 #' @rdname write_new_dirs
 #' @export 
 #' @importFrom purrr map_lgl walk
+#' @keywords internal
 write_new_dirs <- function (new_dirs_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N")) 
 {
@@ -934,6 +950,7 @@ write_new_dirs <- function (new_dirs_chr, consent_1L_chr = "", consent_indcs_int
 #' @export 
 #' @importFrom purrr map flatten_chr map_chr map_lgl walk2 walk
 #' @importFrom rlang exec
+#' @keywords internal
 write_new_files <- function (paths_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     custom_write_ls = NULL, fl_nm_1L_chr = NULL, options_chr = c("Y", 
         "N"), source_paths_ls = NULL, text_ls = NULL, return_1L_lgl = FALSE) 
@@ -1026,6 +1043,7 @@ write_new_files <- function (paths_chr, consent_1L_chr = "", consent_indcs_int =
 #' @rdname write_obj_with_prompt
 #' @export 
 #' @importFrom rlang exec
+#' @keywords internal
 write_obj_with_prompt <- function (object_xx, obj_nm_1L_chr, outp_dir_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N"), return_1L_lgl = FALSE) 
 {
@@ -1056,6 +1074,7 @@ write_obj_with_prompt <- function (object_xx, obj_nm_1L_chr, outp_dir_1L_chr, co
 #' @export 
 #' @importFrom purrr walk keep
 #' @importFrom stats setNames
+#' @keywords internal
 write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1L_chr = "", 
     consent_indcs_int = 1L, options_chr = c("Y", "N"), paths_ls = NULL) 
 {
@@ -1106,6 +1125,7 @@ write_prj_outp_dirs <- function (prj_dirs_chr, output_data_dir_1L_chr, consent_1
 #' @importFrom tidyselect where
 #' @importFrom stringr str_c
 #' @importFrom utils write.csv
+#' @keywords internal
 write_tb_to_csv <- function (tbs_r4, slot_nm_1L_chr, r4_name_1L_chr, lup_dir_1L_chr, 
     pfx_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N")) 
@@ -1167,6 +1187,7 @@ write_to_copy_rmds <- function (dir_path_1L_chr, fl_nm_1L_chr, consent_1L_chr = 
 #' @rdname write_to_delete_dirs
 #' @export 
 #' @importFrom purrr map_lgl map flatten_chr walk
+#' @keywords internal
 write_to_delete_dirs <- function (dir_paths_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N")) 
 {
@@ -1209,6 +1230,7 @@ write_to_delete_dirs <- function (dir_paths_chr, consent_1L_chr = "", consent_in
 #' @rdname write_to_delete_fls
 #' @export 
 #' @importFrom purrr map_lgl
+#' @keywords internal
 write_to_delete_fls <- function (file_paths_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), return_1L_lgl = FALSE) 
 {
@@ -1243,6 +1265,7 @@ write_to_delete_fls <- function (file_paths_chr, consent_1L_chr = "", consent_in
 #' @export 
 #' @importFrom dataverse get_dataset
 #' @importFrom purrr pmap_int
+#' @keywords internal
 write_to_dv_from_tbl <- function (files_tb, ds_url_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     data_dir_rt_1L_chr = ".", key_1L_chr = Sys.getenv("DATAVERSE_KEY"), 
     options_chr = c("Y", "N"), server_1L_chr = Sys.getenv("DATAVERSE_SERVER")) 
@@ -1313,6 +1336,7 @@ write_to_dv_from_tbl <- function (files_tb, ds_url_1L_chr, consent_1L_chr = "", 
 #' @importFrom stats setNames
 #' @importFrom purrr pmap map_int
 #' @importFrom dataverse get_dataset
+#' @keywords internal
 write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, parent_dv_dir_1L_chr, 
     paths_to_dirs_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     make_local_copy_1L_lgl = FALSE, options_chr = c("Y", "N"), 
@@ -1396,6 +1420,7 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, parent_d
 #' @return No return value, called for side effects.
 #' @rdname write_to_edit_workflow
 #' @export 
+#' @keywords internal
 write_to_edit_workflow <- function (fl_nm_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     dir_path_1L_chr = ".github/workflows", options_chr = c("Y", 
         "N")) 
@@ -1431,6 +1456,7 @@ write_to_edit_workflow <- function (fl_nm_1L_chr, consent_1L_chr = "", consent_i
 #' @export 
 #' @importFrom purrr map_chr
 #' @importFrom stringr str_match str_remove str_replace
+#' @keywords internal
 write_to_force_links_in <- function (path_to_mkdn_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N"), shorten_doi_1L_lgl = TRUE) 
 {
@@ -1462,6 +1488,7 @@ write_to_force_links_in <- function (path_to_mkdn_1L_chr, consent_1L_chr = "", c
 #' @rdname write_to_publish_dv_ds
 #' @export 
 #' @importFrom dataverse publish_dataset
+#' @keywords internal
 write_to_publish_dv_ds <- function (dv_ds_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     minor_1L_lgl = FALSE, options_chr = c("Y", "N")) 
 {
@@ -1554,6 +1581,7 @@ write_to_render_post <- function (included_dirs_chr, path_to_main_dir_1L_chr, co
 #' @return No return value, called for side effects.
 #' @rdname write_to_trim_html
 #' @export 
+#' @keywords internal
 write_to_trim_html <- function (path_to_html_1L_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     options_chr = c("Y", "N")) 
 {
@@ -1590,6 +1618,7 @@ write_to_trim_html <- function (path_to_html_1L_chr, consent_1L_chr = "", consen
 #' @rdname write_with_consent
 #' @export 
 #' @importFrom rlang exec
+#' @keywords internal
 write_with_consent <- function (consented_fn, prompt_1L_chr, consent_1L_chr = "", consented_args_ls = NULL, 
     consent_indcs_int = 1L, consented_msg_1L_chr = character(0), 
     declined_args_ls = NULL, declined_fn = NULL, declined_msg_1L_chr = "No files have been written.", 
@@ -1629,6 +1658,7 @@ write_with_consent <- function (consented_fn, prompt_1L_chr, consent_1L_chr = ""
 #' @rdname write_words
 #' @export 
 #' @importFrom piggyback pb_download_url
+#' @keywords internal
 write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int = 1L, 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     options_chr = c("Y", "N")) 

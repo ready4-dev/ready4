@@ -44,3 +44,4 @@ Libraries (a tibble)
 \description{
 update_libraries_tb() is an Update function that edits an object, while preserving core object attributes. Specifically, this function implements an algorithm to update libraries tibble. The function returns Libraries (a tibble).
 }
+\keyword{internal}

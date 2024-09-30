@@ -5,6 +5,7 @@
 #' @rdname remove_lbls_from_df
 #' @export 
 #' @importFrom purrr reduce
+#' @keywords internal
 remove_lbls_from_df <- function (data_df) 
 {
     acknowledgement_1L_chr <- "This function is based on: https://rdrr.io/github/dlindholm/doctoR/src/R/clear_labels.R"

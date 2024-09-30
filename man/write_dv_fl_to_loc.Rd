@@ -50,3 +50,4 @@ No return value, called for side effects.
 \description{
 write_dv_fl_to_loc() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write dataverse file to local. The function is called for its side effects and does not return a value.
 }
+\keyword{internal}

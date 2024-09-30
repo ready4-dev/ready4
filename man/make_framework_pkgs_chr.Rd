@@ -20,3 +20,4 @@ Framework packages (a character vector)
 \description{
 make_framework_pkgs_chr() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make framework packages character vector. The function returns Framework packages (a character vector).
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ Tfmd class type (a list)
 \description{
 transform_cls_type_ls() is a Transform function that edits an object in such a way that core object attributes - e.g. shape, dimensions, elements, type - are altered. Specifically, this function implements an algorithm to transform class type list. The function returns Tfmd class type (a list).
 }
+\keyword{internal}

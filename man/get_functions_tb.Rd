@@ -23,3 +23,4 @@ Functions (a tibble)
 \description{
 get_functions_tb() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get functions tibble. The function returns Functions (a tibble).
 }
+\keyword{internal}

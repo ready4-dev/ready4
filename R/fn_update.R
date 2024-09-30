@@ -9,6 +9,7 @@
 #' @importFrom purrr map map2 pluck flatten_int
 #' @importFrom stats setNames
 #' @importFrom stringr str_which regex
+#' @keywords internal
 update_libraries_ls <- function (libraries_ls = NULL, additions_tb = make_additions_tb(), 
     keep_chr = "all") 
 {
@@ -49,6 +50,7 @@ update_libraries_ls <- function (libraries_ls = NULL, additions_tb = make_additi
 #' @importFrom dplyr bind_rows filter pull arrange
 #' @importFrom rlang sym
 #' @importFrom purrr flatten_chr
+#' @keywords internal
 update_libraries_tb <- function (libraries_tb = make_libraries_tb(), additions_tb = make_additions_tb(), 
     module_pkgs_chr = character(0), include_1L_chr = "all", ns_var_nm_1L_chr = "pt_ns_chr", 
     reference_var_nm_1L_chr = "Reference", url_stub_1L_chr = "https://ready4-dev.github.io/", 
@@ -107,6 +109,7 @@ update_libraries_tb <- function (libraries_tb = make_libraries_tb(), additions_t
 #' @export 
 #' @importFrom purrr map_dbl map2
 #' @importFrom stats setNames
+#' @keywords internal
 update_pt_fn_args_ls <- function (args_ls) 
 {
     arg_lgths_dbl <- args_ls %>% purrr::map_dbl(~length(.x))
@@ -145,6 +148,7 @@ update_pt_fn_args_ls <- function (args_ls)
 #' @importFrom purrr reduce pluck map_chr
 #' @importFrom stringr str_sub str_locate str_trim
 #' @importFrom rlang sym
+#' @keywords internal
 update_tb_r3 <- function (tb_r3, case_when_false_1L_chr = NA_character_, case_when_true_1L_chr = NA_character_, 
     case_when_true_ls = NULL, case_when_var_1L_chr = NA_character_, 
     filter_cdn_1L_chr = NA_character_, fn = NULL, fn_env_ls = NULL, 

@@ -26,3 +26,4 @@ Modules packages (a character vector)
 \description{
 make_modules_pkgs_chr() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make modules packages character vector. The function returns Modules packages (a character vector).
 }
+\keyword{internal}

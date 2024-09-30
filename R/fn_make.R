@@ -9,6 +9,7 @@
 #' @export 
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate
+#' @keywords internal
 make_additions_tb <- function (category_chr = character(0), library_chr = character(0), 
     type_chr = character(0), url_stub_1L_chr = "https://ready4-dev.github.io/") 
 {
@@ -367,6 +368,7 @@ make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", key_1
 #' @importFrom dplyr filter select mutate
 #' @importFrom purrr pmap_dfr map_dfr reduce pluck
 #' @importFrom tibble tibble
+#' @keywords internal
 make_dss_tb <- function (dvs_tb, filter_cdns_ls = list(), toy_data_dv_1L_chr = "fakes", 
     what_1L_chr = "all") 
 {
@@ -426,6 +428,7 @@ make_dss_tb <- function (dvs_tb, filter_cdns_ls = list(), toy_data_dv_1L_chr = "
 #' @importFrom stringi stri_locate_last_regex
 #' @importFrom dplyr filter mutate
 #' @importFrom rlang exec
+#' @keywords internal
 make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_character_) 
 {
     files_tb <- purrr::map_dfr(paths_to_dirs_chr, ~{
@@ -466,6 +469,7 @@ make_files_tb <- function (paths_to_dirs_chr, recode_ls, inc_fl_types_chr = NA_c
 #' @rdname make_fn_defaults_ls
 #' @export 
 #' @importFrom purrr map_lgl
+#' @keywords internal
 make_fn_defaults_ls <- function (fn) 
 {
     fn_defaults_ls <- as.list(args(fn))
@@ -483,6 +487,7 @@ make_fn_defaults_ls <- function (fn)
 #' @rdname make_framework_pkgs_chr
 #' @export 
 #' @importFrom purrr flatten_chr
+#' @keywords internal
 make_framework_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0") 
 {
     framework_pkgs_chr <- NULL
@@ -503,6 +508,7 @@ make_framework_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_ta
 #' @export 
 #' @importFrom purrr map
 #' @importFrom stats setNames
+#' @keywords internal
 make_libraries_ls <- function (additions_tb = make_additions_tb(), libraries_tb = NULL, 
     ns_var_nm_1L_chr = "pt_ns_chr") 
 {
@@ -540,6 +546,7 @@ make_libraries_ls <- function (additions_tb = make_additions_tb(), libraries_tb 
 #' @importFrom rvest read_html html_elements html_text2
 #' @importFrom stringr str_match
 #' @importFrom stats setNames
+#' @keywords internal
 make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_chr = "modules", 
     module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 
     reference_var_nm_1L_chr = "Reference", url_stub_1L_chr = "https://ready4-dev.github.io/", 
@@ -653,6 +660,7 @@ make_libraries_tb <- function (additions_tb = make_additions_tb(), include_1L_ch
 #' @export 
 #' @importFrom stringr str_c
 #' @importFrom stringi stri_replace_last
+#' @keywords internal
 make_list_phrase <- function (items_chr) 
 {
     list_phrase_1L_chr <- items_chr %>% stringr::str_c(sep = "", 
@@ -668,6 +676,7 @@ make_list_phrase <- function (items_chr)
 #' @return Path (a character vector)
 #' @rdname make_local_path_to_dv_data
 #' @export 
+#' @keywords internal
 make_local_path_to_dv_data <- function (save_dir_path_1L_chr, fl_nm_1L_chr, save_fmt_1L_chr) 
 {
     path_chr <- paste0(ifelse(save_dir_path_1L_chr != "", paste0(save_dir_path_1L_chr, 
@@ -730,6 +739,7 @@ make_methods_tb <- function (packages_tb = NULL, exclude_mthds_for_chr = NA_char
 #' @rdname make_modules_pkgs_chr
 #' @export 
 #' @importFrom purrr flatten_chr
+#' @keywords internal
 make_modules_pkgs_chr <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
     sort_1L_lgl = FALSE, what_chr = "all") 
 {
@@ -993,6 +1003,7 @@ make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program
 #' @return Response (a character vector of length one)
 #' @rdname make_prompt
 #' @export 
+#' @keywords internal
 make_prompt <- function (prompt_1L_chr, options_chr = NULL, force_from_opts_1L_chr = FALSE) 
 {
     acknowledgement_1L_chr <- "This function is based on: https://debruine.github.io/posts/interactive-test/"

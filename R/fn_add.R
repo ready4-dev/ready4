@@ -10,6 +10,7 @@
 #' @importFrom dplyr filter pull bind_rows arrange
 #' @importFrom rlang sym
 #' @seealso [Hmisc::label()]
+#' @keywords internal
 add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for_dupls_1L_chr = "template") 
 {
     if (any(sort(names(template_lup)) != sort(names(new_lup)))) {
@@ -54,6 +55,7 @@ add_lups <- function (template_lup, new_lup, key_var_nm_1L_chr, priority_lup_for
 #' @importFrom rlang sym
 #' @importFrom purrr compact flatten_chr reduce pluck map2
 #' @importFrom kableExtra cell_spec
+#' @keywords internal
 add_references <- function (ds_tb, data_var_nm_1L_chr = "URL", data_url_var_nm_1L_chr = "REF_URL", 
     reference_var_nm_1L_chr = "Reference") 
 {
@@ -96,6 +98,7 @@ add_references <- function (ds_tb, data_var_nm_1L_chr = "URL", data_url_var_nm_1
 #' @importFrom tibble as_tibble
 #' @seealso [Hmisc::label()]
 #' @importFrom dplyr bind_rows
+#' @keywords internal
 add_rows_from_fn_args <- function (tbl_r3, fn, fn_env_ls) 
 {
     if (!requireNamespace("Hmisc", quietly = TRUE)) {
@@ -128,6 +131,7 @@ add_rows_from_fn_args <- function (tbl_r3, fn, fn_env_ls)
 #' @rdname add_scroll_box
 #' @export 
 #' @importFrom kableExtra scroll_box
+#' @keywords internal
 add_scroll_box <- function (table_kbl, scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     ...) 
 {
@@ -167,6 +171,7 @@ add_scroll_box <- function (table_kbl, scroll_height_1L_chr = character(0), scro
 #' @importFrom purrr map keep map2
 #' @importFrom rvest read_html html_elements html_attr
 #' @importFrom stringr str_remove
+#' @keywords internal
 add_vignette_links <- function (pkg_extensions_tb, ns_var_nm_1L_chr = "pt_ns_chr", 
     reference_var_nm_1L_chr = "Reference", url_stub_1L_chr = "https://ready4-dev.github.io/", 
     vignette_var_nm_1L_chr = "Vignettes", vignette_url_var_nm_1L_chr = "Vignettes_URLs") 

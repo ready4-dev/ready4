@@ -23,3 +23,4 @@ Method titles (a character vector)
 \description{
 get_mthd_titles() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get method titles. The function returns Method titles (a character vector).
 }
+\keyword{internal}

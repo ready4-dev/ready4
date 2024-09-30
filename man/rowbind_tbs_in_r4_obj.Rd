@@ -21,3 +21,4 @@ Tibbles (a ready4 module)
 \description{
 rowbind_tbs_in_r4_obj() is a Rowbind function that performs custom rowbind operations on table objects. Specifically, this function implements an algorithm to rowbind tibbles in ready4 module object. The function returns Tibbles (a ready4 module).
 }
+\keyword{internal}

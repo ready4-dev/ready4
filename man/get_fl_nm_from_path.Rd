@@ -15,3 +15,4 @@ File name (a character vector of length one)
 \description{
 get_fl_nm_from_path() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get file name from path. The function returns File name (a character vector of length one).
 }
+\keyword{internal}

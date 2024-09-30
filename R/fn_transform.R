@@ -4,6 +4,7 @@
 #' @return Digits (an output object of multiple potential types)
 #' @rdname transform_chr_to_num
 #' @export 
+#' @keywords internal
 transform_chr_to_num <- function (digits_chr) 
 {
     acknowledgement_1L_chr <- "This function is based on: https://stackoverflow.com/questions/24129124/how-to-determine-if-a-character-vector-is-a-valid-numeric-or-integer-vector"
@@ -23,6 +24,7 @@ transform_chr_to_num <- function (digits_chr)
 #' @rdname transform_cls_type_ls
 #' @export 
 #' @importFrom purrr map_int map
+#' @keywords internal
 transform_cls_type_ls <- function (cls_type_ls) 
 {
     max_lngth_1L_int <- purrr::map_int(cls_type_ls, ~length(.x)) %>% 

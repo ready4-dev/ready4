@@ -32,3 +32,4 @@ write_examples() is a Write function that writes a file to a specified local dir
 \seealso{
 \code{\link[devtools:document]{devtools::document()}}
 }
+\keyword{internal}

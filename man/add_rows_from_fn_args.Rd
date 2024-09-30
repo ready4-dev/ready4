@@ -22,3 +22,4 @@ add_rows_from_fn_args() is an Add function that updates an object by adding new 
 \seealso{
 \code{\link[Hmisc:label]{Hmisc::label()}}
 }
+\keyword{internal}

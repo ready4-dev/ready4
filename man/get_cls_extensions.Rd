@@ -29,3 +29,4 @@ Class extensions (a tibble)
 \description{
 get_cls_extensions() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get class extensions. The function returns Class extensions (a tibble).
 }
+\keyword{internal}

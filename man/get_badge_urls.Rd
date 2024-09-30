@@ -23,3 +23,4 @@ Badge urls (a list)
 \description{
 get_badge_urls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get badge urls. The function returns Badge urls (a list).
 }
+\keyword{internal}

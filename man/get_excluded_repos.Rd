@@ -20,3 +20,4 @@ Exclude (a character vector)
 \description{
 get_excluded_repos() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get excluded repositories. The function returns Exclude (a character vector).
 }
+\keyword{internal}

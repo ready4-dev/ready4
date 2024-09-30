@@ -23,3 +23,4 @@ Libraries (a list)
 \description{
 make_libraries_ls() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make libraries list. The function returns Libraries (a list).
 }
+\keyword{internal}

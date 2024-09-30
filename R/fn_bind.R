@@ -9,6 +9,7 @@
 #' @export 
 #' @importFrom purrr map reduce
 #' @importFrom dplyr bind_rows
+#' @keywords internal
 bind_tables_from_loc_files <- function (paths_chr, force_numeric_1L_lgl = FALSE, force_tb_1L_lgl = FALSE, 
     heading_rows_1L_int = 1L) 
 {

@@ -26,3 +26,4 @@ Additions (a tibble)
 \description{
 make_additions_tb() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make additions tibble. The function returns Additions (a tibble).
 }
+\keyword{internal}

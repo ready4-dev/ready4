@@ -17,3 +17,4 @@ Slots (a character vector)
 \description{
 get_r4_obj_slots() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get ready4 module object slots. The function returns Slots (a character vector).
 }
+\keyword{internal}

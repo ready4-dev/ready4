@@ -19,3 +19,4 @@ Path (a character vector)
 \description{
 make_local_path_to_dv_data() is a Make function that creates a new R object. Specifically, this function implements an algorithm to make local path to dataverse data. The function returns Path (a character vector).
 }
+\keyword{internal}

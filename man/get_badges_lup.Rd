@@ -23,3 +23,4 @@ Ready4 badges (a lookup table)
 \description{
 get_badges_lup() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get badges lookup table. The function returns Ready4 badges (a lookup table).
 }
+\keyword{internal}

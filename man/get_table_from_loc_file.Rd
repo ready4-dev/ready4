@@ -31,3 +31,4 @@ get_table_from_loc_file() is a Get function that extracts data from an object. S
 
 \code{\link[readxl:read_excel]{readxl::read_excel()}} and \code{\link[readxl:read_excel]{readxl::read_xlsx()}}
 }
+\keyword{internal}

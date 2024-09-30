@@ -51,6 +51,7 @@ print_data <- function (datasets_tb, by_dv_1L_lgl = FALSE, filter_cdns_ls = NULL
 #' @rdname print_dss
 #' @export 
 #' @importFrom kableExtra kable kable_styling
+#' @keywords internal
 print_dss <- function (datasets_tb, filter_cdns_ls = NULL, scroll_height_1L_chr = character(0), 
     scroll_width_1L_chr = character(0), toy_data_dv_1L_chr = "fakes", 
     what_1L_chr = "all", ...) 
@@ -85,6 +86,7 @@ print_dss <- function (datasets_tb, filter_cdns_ls = NULL, scroll_height_1L_chr 
 #' @importFrom dplyr select mutate filter
 #' @importFrom purrr map
 #' @importFrom kableExtra kable kable_styling column_spec
+#' @keywords internal
 print_dvs <- function (dvs_tb, filter_cdns_ls = NULL, root_1L_chr = "https://dataverse.harvard.edu/dataverse/", 
     scroll_height_1L_chr = character(0), scroll_width_1L_chr = character(0), 
     toy_data_dv_1L_chr = "fakes", what_1L_chr = "all", ...) 
@@ -381,6 +383,7 @@ print_packages <- function (pkg_extensions_tb = NULL, gh_repo_1L_chr = "ready4-d
 #' @importFrom dplyr mutate select
 #' @importFrom rvest read_html html_elements html_text2 html_attr
 #' @importFrom kableExtra cell_spec kable kable_styling
+#' @keywords internal
 print_vignettes <- function (pkg_extensions_tb = NULL, gh_repo_1L_chr = "ready4-dev/ready4", 
     gh_tag_1L_chr = "Documentation_0.0", include_1L_chr = "modules", 
     module_pkgs_chr = character(0), ns_var_nm_1L_chr = "pt_ns_chr", 

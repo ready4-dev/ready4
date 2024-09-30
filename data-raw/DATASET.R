@@ -97,35 +97,10 @@ write_to_edit_workflow("pkgdown.yaml", consent_1L_chr = "Y") # In other packages
 #write_conditional_tags(c("devtools", "Hmisc", "readr", "readxl", "rmarkdown","usethis", "zen4R"), consent_1L_chr = "Y")
 usethis::use_package("pkgload", type = "Suggests") # ??
 readLines("README.md") %>% # update in ready4fun
-  #stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
+  stringr::str_replace("https://app.codecov","https://codecov") %>% # port edit to ready4fun
   #gsub(pattern = "doi:10.48550/arXiv.([^&]+)", replacement = "https://arxiv.org/abs/\\1") %>%
   gsub(pattern = "doi:([^&]+)", replacement = "https://doi.org/\\1") %>% #https://doi.org/10.1007/s40273-024-01378-8
    writeLines(con = "README.md")
-# c(readLines("R/imp_fns.R"), # update in ready4fun
-#   " ",
-#   "#' NSE equals function",
-#   "#'",
-#   "#' Import of non standard evaluation equals function for use in dplyr calls.",
-#   "#'",
-#   "#' @importFrom rlang :=",
-#   "#' @name :=",
-#   "#' @rdname nseequals",
-#   "#' @export",
-#   "#' @keywords internal",
-#   "NULL",
-#   " ",
-#   "#' Dot Data function",
-#   "#'",
-#   "#' Import of .data function for use in dataset manipulation within functions.",
-#   "#'",
-#   "#' @importFrom rlang .data",
-#   "#' @name .data",
-#   "#' @rdname dotdata",
-#   "#' @export",
-#   "#' @keywords internal",
-#   "NULL"
-# ) %>%
-#   writeLines("R/imp_fns.R")
 write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1L_chr)
 write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1L_chr, type_1L_chr = "r4")
 # desc_ls <-

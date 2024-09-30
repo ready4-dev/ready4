@@ -20,3 +20,4 @@ Subroutine repositories (a character vector)
 \description{
 get_subroutine_repos() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get subroutine repositories. The function returns Subroutine repositories (a character vector).
 }
+\keyword{internal}

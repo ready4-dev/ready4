@@ -26,3 +26,4 @@ Table (an output object of multiple potential types)
 \description{
 bind_tables_from_loc_files() is a Bind function that binds two objects together to create a composite object. Specifically, this function implements an algorithm to bind tables from local files. The function returns Table (an output object of multiple potential types).
 }
+\keyword{internal}

@@ -56,3 +56,4 @@ Dataset (a list)
 \description{
 write_to_dv_with_wait() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to dataverse with wait. The function returns Dataset (a list).
 }
+\keyword{internal}

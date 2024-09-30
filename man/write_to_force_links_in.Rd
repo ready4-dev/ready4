@@ -29,3 +29,4 @@ No return value, called for side effects.
 \description{
 write_to_force_links_in() is a Write function that writes a file to a specified local directory. Specifically, this function implements an algorithm to write to force links in. The function is called for its side effects and does not return a value.
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ Digits (an output object of multiple potential types)
 \description{
 transform_chr_to_num() is a Transform function that edits an object in such a way that core object attributes - e.g. shape, dimensions, elements, type - are altered. Specifically, this function implements an algorithm to transform character vector to numeric. The function returns Digits (an output object of multiple potential types).
 }
+\keyword{internal}
