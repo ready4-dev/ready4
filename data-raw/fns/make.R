@@ -133,7 +133,7 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
   type_1L_chr <- match.arg(type_1L_chr)
   if(is.null(dvs_tb)){
     contents_ls <- get_gracefully(dv_nm_1L_chr, fn = dataverse::dataverse_contents,
-                                  args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                                  args_ls = list(key = key_1L_chr, server = server_1L_chr), not_chr_1L_lgl = TRUE)
     if(!is.null(contents_ls)){
       dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == "dataverse")]
       ds_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == "dataset")]
@@ -141,14 +141,14 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
         ds_ls <- NULL
       }else{
         extra_dv_ls <- get_gracefully(dv_nm_1L_chr, fn = dataverse::get_dataverse,
-                                      args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                                      args_ls = list(key = key_1L_chr, server = server_1L_chr), not_chr_1L_lgl = TRUE)
         dv_ls <- append(extra_dv_ls,
                         dv_ls)
       }
       dvs_tb <- dv_ls %>%
         purrr::map_dfr(~{
           dv_ls <- get_gracefully(.x, fn = dataverse::get_dataverse,
-                                  args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                                  args_ls = list(key = key_1L_chr, server = server_1L_chr), not_chr_1L_lgl = TRUE)
           tb <- tibble::tibble(Dataverse = dv_ls$alias,
                                Name = dv_ls$name,
                                Description = dv_ls$description,
@@ -157,7 +157,7 @@ make_datasets_tb <- function(dv_nm_1L_chr = "ready4",
             dplyr::mutate(Contents =  purrr::map(.data$Dataverse,
                                                  ~{
                                                    dv_all_ls <- get_gracefully(.x, fn = dataverse::dataverse_contents,
-                                                                               args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                                                                               args_ls = list(key = key_1L_chr, server = server_1L_chr), not_chr_1L_lgl = TRUE)
                                                    #dv_ls <- dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == "dataverse")]
                                                    dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == "dataset")] %>%
                                                      purrr::map_chr(~if("persistentUrl" %in% names(.x)){
@@ -248,7 +248,7 @@ make_ds_releases_tbl <- function (ds_dois_chr,
 {
   ds_releases_xx <- ds_dois_chr %>% purrr::map_dfr(~{
     meta_ls <- get_gracefully(.x, fn = dataverse::dataset_versions,
-                   args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                   args_ls = list(key = key_1L_chr, server = server_1L_chr), not_chr_1L_lgl = TRUE)
     if(is.null(meta_ls)){
       NULL
     }else{

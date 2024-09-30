@@ -1,6 +1,6 @@
 ## Test environments
 
-* Local Windows (mingw32), R 4.3.1 [1 WARNING generated]
+* Local Windows (mingw32), R version 4.4.1 (2024-06-14 ucrt) [1 WARNING generated]
 * Mac OS macos-13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/9800145754/job/27061585744)
 * Windows windows-latest (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/9800145754/job/27061585842)
 * Fedora Linux 38 R Under development (unstable) gcc13 (R-hub action at https://github.com/ready4-dev/ready4/actions/runs/9800145754/job/27061585644) 
@@ -10,7 +10,18 @@
 
 There was 1 WARNING (on Local Windows).
 
-- 'qpdf' is needed for checks on size reduction of PDFs
+  Maintainer: 'Matthew Hamilton <matthew.hamilton1@monash.edu>'
+  
+  New submission
+  
+  Package was archived on CRAN
+  
+  Version contains large components (0.1.17.9000)
+  
+  CRAN repository db overrides:
+    X-CRAN-Comment: Archived on 2024-08-20 for policy violation
+  
+    On Internet access
 
 ---
 

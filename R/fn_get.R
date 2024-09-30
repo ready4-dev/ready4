@@ -177,7 +177,8 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
         dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr, 
             "/api/access/datafile/")
     ds_ls <- get_gracefully(dv_ds_nm_1L_chr, fn = dataverse::dataset_files, 
-        args_ls = list(key = key_1L_chr, server = server_1L_chr))
+        args_ls = list(key = key_1L_chr, server = server_1L_chr), 
+        not_chr_1L_lgl = TRUE)
     if (!is.null(ds_ls)) {
         all_items_chr <- purrr::map_chr(ds_ls, ~.x$label)
         urls_chr <- file_nms_chr %>% purrr::map_chr(~{
@@ -456,7 +457,8 @@ get_gh_repos <- function (org_1L_chr)
     }
     acknowledgement_1L_chr <- "This function is a minor rephrasing of natmanager::list_repo"
     repositories_ls <- get_gracefully(paste0("/orgs/", org_1L_chr, 
-        "/repos"), fn = gh::gh, args_ls = list(type = "public"))
+        "/repos"), fn = gh::gh, args_ls = list(type = "public"), 
+        not_chr_1L_lgl = TRUE)
     if (!is.null(repositories_ls)) {
         repositories_chr <- vapply(repositories_ls, "[[", "", 
             "name")
@@ -524,9 +526,10 @@ get_gracefully <- function (url_1L_chr, args_ls = NULL, fn = readRDS, not_chr_1L
     if (identical(tests_chr, character(0))) {
         tests_chr <- c("cannot open the connection to ", "unknown input format", 
             "Attempt to get feed was unsuccessful", "Not Found \\(HTTP 404\\)", 
-            "GitHub API error \\(404\\)", "Cannot access release data for repo", 
-            "HTTP error 404", "Could not resolve host", "Could not parse", 
-            "does not exist in current working directory", "Could not retrieve Dataset ID from persistent identifier", 
+            "GitHub API error \\(404\\)", "Bad Request \\(HTTP 400\\)", 
+            "Cannot access release data for repo", "HTTP error 404", 
+            "Could not resolve host", "Could not parse", "does not exist in current working directory", 
+            "Could not retrieve Dataset ID from persistent identifier", 
             "Unknown HTTP verb")
     }
     if (identical(fn, readRDS)) {
@@ -582,7 +585,7 @@ get_libraries_ls <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
         dmt_urls_chr <- dmt_urls_xx
         if (any(dmt_urls_chr %>% endsWith("libraries_ls.RDS"))) {
             libraries_ls <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% 
-                endsWith("libraries_ls.RDS")])
+                endsWith("libraries_ls.RDS")], not_chr_1L_lgl = TRUE)
         }
     }
     return(libraries_ls)
@@ -773,7 +776,8 @@ get_rds_from_dv <- function (file_nm_1L_chr, dv_ds_nm_1L_chr = "https://doi.org/
         dv_url_pfx_1L_chr <- paste0("https://", server_1L_chr, 
             "/api/access/datafile/")
     ds_ls <- get_gracefully(dv_ds_nm_1L_chr, fn = dataverse::dataset_files, 
-        args_ls = list(server = server_1L_chr, key = key_1L_chr))
+        args_ls = list(server = server_1L_chr, key = key_1L_chr), 
+        not_chr_1L_lgl = TRUE)
     if (!is.null(ds_ls)) {
         all_items_chr <- purrr::map_chr(ds_ls, ~.x$label) %>% 
             stringi::stri_replace_last_regex("\\.RDS", "") %>% 

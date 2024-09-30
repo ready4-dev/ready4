@@ -254,7 +254,8 @@ write_dv_fl_to_loc <- function (ds_url_1L_chr = character(0), dest_path_1L_chr, 
             ds_url_1L_chr <- ds_ui_1L_chr
         }
     }
-    ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
+    ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset, 
+        not_chr_1L_lgl = TRUE)
     if (!is.null(ds_ls)) {
         if (ds_ls$versionState != "DRAFT") {
             if (!is.na(fl_id_1L_int)) {
@@ -332,7 +333,8 @@ write_env_objs_to_dv <- function (env_objects_ls, descriptions_chr, ds_url_1L_ch
                 NULL
             })
             if (is.null(ds_ls)) {
-                ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
+                ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset, 
+                  not_chr_1L_lgl = TRUE)
             }
         }
     }
@@ -559,7 +561,8 @@ write_fls_to_dv <- function (file_paths_chr, ds_url_1L_chr, consent_1L_chr = "",
             descriptions_chr, ds_ls, key_1L_chr, server_1L_chr) {
             ids_int <- NULL
             if (is.null(ds_ls)) 
-                ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
+                ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset, 
+                  not_chr_1L_lgl = TRUE)
             if (!is.null(ds_ls)) {
                 is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
                 nms_chr <- ds_ls$files$filename
@@ -1274,7 +1277,8 @@ write_to_dv_from_tbl <- function (files_tb, ds_url_1L_chr, consent_1L_chr = "", 
     consented_fn <- function(files_tb, consent_indcs_int, data_dir_rt_1L_chr, 
         ds_url_1L_chr, key_1L_chr, options_chr, server_1L_chr) {
         fl_ids_int <- NULL
-        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
+        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset, 
+            not_chr_1L_lgl = TRUE)
         if (!is.null(ds_ls)) {
             is_draft_1L_lgl <- ds_ls$versionState == "DRAFT"
             nms_chr <- ds_ls$files$filename
@@ -1368,7 +1372,8 @@ write_to_dv_with_wait <- function (dss_tb, dv_nm_1L_chr, ds_url_1L_chr, parent_d
                 ds_url_1L_chr = ds_url_1L_chr, key_1L_chr = key_1L_chr, 
                 options_chr = options_chr, server_1L_chr = server_1L_chr)
         })
-        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset)
+        ds_ls <- get_gracefully(ds_url_1L_chr, fn = dataverse::get_dataset, 
+            not_chr_1L_lgl = TRUE)
         if (!is.null(ds_ls)) {
             if (make_local_copy_1L_lgl | ds_ls$versionState != 
                 "DRAFT") {
