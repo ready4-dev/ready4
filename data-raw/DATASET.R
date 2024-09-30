@@ -105,13 +105,14 @@ write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1
 write_examples(consent_1L_chr = "Y", path_1L_chr = x$initial_ls$path_to_pkg_rt_1L_chr, type_1L_chr = "r4")
 # desc_ls <-
 # description_ls$Language = "en-AU"
+usethis::use_description(fields = list(Language = "en-AU"))
 # usethis::use_description(fields = description_ls)
 # usethis::use_description(fields = append(utils::packageDescription("ready4"), list(Language = "en-AU")))
 unlink("LICENSE")
-readLines("DESCRIPTION") %>%
+c(readLines("DESCRIPTION") %>%
   purrr::map_chr(~.x %>% stringr::str_replace("GPL-3 \\+ file LICENSE","GPL-3")
                  # %>%stringr::str_replace("\"aut\", \"cre\"", "\"aut\", \"cre\", \"cph\"")
-                   ) %>%
+                   ), "Language: en-AU") %>%
   writeLines("DESCRIPTION")
 devtools::document()
 devtools::build_vignettes()
