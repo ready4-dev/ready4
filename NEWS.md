@@ -1,10 +1,16 @@
 # ready4 (development version)
 
+# ready4 0.1.18
+This patch addresses a CRAN policy violation related to unsuccessful internet requests needing to fail gracefully. 
+
 # ready4 0.1.17
+This patch attempts (unsuccessfully) to address a CRAN policy violation related to unsuccessful internet requests needing to fail gracefully. 
 
 # ready4 0.1.16
+This patch attempts (unsuccessfully) to address a CRAN policy violation related to unsuccessful internet requests needing to fail gracefully. 
 
 # ready4 0.1.15
+This patch attempts (unsuccessfully) to address a CRAN policy violation related to unsuccessful internet requests needing to fail gracefully. 
 
 # ready4 0.1.14
 This patch modifies the print_packages() function so that it can filter output by model "section".
