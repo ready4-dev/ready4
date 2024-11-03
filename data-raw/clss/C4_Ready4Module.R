@@ -1,6 +1,6 @@
 #' Ready4Module
 #'
-#' A module, the foundational component of the ready4 representational system.
+#' A module, the foundational component of the ready4 framework.
 #'
 #' @slot dissemination_1L_chr Dissemination (a character vector of length one)
 #' @name Ready4Module-class

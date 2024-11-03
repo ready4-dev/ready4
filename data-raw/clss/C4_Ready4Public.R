@@ -1,6 +1,6 @@
 #' Ready4Public
 #'
-#' A module of the ready4 representational system hat is suitable for public dissemination in its current form.
+#' A module of the ready4 framework for storing data that is suitable for public dissemination.
 #'
 #' @include C4_Ready4Module.R
 #' @slot dissemination_1L_chr Dissemination (a character vector of length one)
