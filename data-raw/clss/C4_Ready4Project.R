@@ -3,9 +3,33 @@
 #' A module of the ready4 framework that contains details of a modelling project.
 #'
 #' @include C4_Ready4Module.R
-#' @slot ds_tb Dataset (a tibble)
-#' @slot dictionary_r3 Dictionary (a ready4 submodule)
+#' @slot badges_url_1L_chr Badges URL (a character vector of length one)
+#' @slot dv_nm_1L_chr Dataverse name (a character vector of length one)
 #' @slot dissemination_1L_chr Dissemination (a character vector of length one)
+#' @slot dv_root_1L_chr Dataverse root (a character vector of length one)
+#' @slot dv_server_1L_chr Dataverse server (a character vector of length one)
+#' @slot dv_toy_data_1L_chr Dataverse toy dataset name (a character vector of length one)
+#' @slot dvs_tb Dataverses (a tibble)
+#' @slot extensions_tb Extensions (a tibble)
+#' @slot filter_cdns_ls Filter conditions (a list)
+#' @slot gh_org_1L_chr Github organisation (a character vector of length one)
+#' @slot gh_repo_1L_chr Github repo (a character vector of length one)
+#' @slot gh_repos_brochure_chr Github brochure websites (a character vector)
+#' @slot gh_repos_exclude_chr Github repositories to exclude from GitHub organisation (a character vector)
+#' @slot gh_repos_framework_chr Github repositories from GitHub organisation that contain framework libraries (a character vector)
+#' @slot gh_repos_model_chr Github repositories from GitHub organisation that contain model libraries (a character vector)
+#' @slot gh_repos_programs_chr Github repositories from GitHub organisation that contain programs (a character vector)
+#' @slot gh_repos_subroutines_chr Github repositories from GitHub organisation that contain subroutines (a character vector)
+#' @slot gh_tag_1L_chr Github release tag (a character vector of length one)
+#' @slot gh_url_stub_1L_chr Github URL stub (a character vector of length one)
+#' @slot libraries_chr Library names (a character vector)
+#' @slot libraries_tb Library dataset (a tibble)
+#' @slot methods_tb Methods dataset (a tibble)
+#' @slot modules_tb Modules dataset (a tibble)
+#' @slot sections_chr Model section names (a character vector)
+#' @slot url_for_prj_1L_chr URL for project (a character vector  of length one)
+#' @slot zenodo_1L_chr Zenodo repository (a character vector  of length one)
+#' @slot dissemination_1L_chr Dissemination policy (a character vector  of length one)
 #' @name Ready4Project-class
 #' @rdname Ready4Project-class
 #' @export Ready4Project
