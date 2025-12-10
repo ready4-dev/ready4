@@ -128,6 +128,11 @@ paste0(".github/workflows/", c("pkgdown.yaml", "R-CMD-check.yaml")) %>%
         writeLines(path_1L_chr)
     }
   })
+## MANUAL STEP REQUIRED ##
+## Delete "Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev" and following six lines in test-coverage.yaml
+
+
+
 # Important addition:
 # rhub::rhub_setup()
 #
