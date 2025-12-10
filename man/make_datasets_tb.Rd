@@ -39,7 +39,7 @@ Datasets (a tibble)
 make_datasts_tb() scrapes metadata from a specified Dataverse collection to create a summary table of its contents. The contents table can detail either subsidiary data collections or individual datasets from those subsidiary data collections.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   # Likely to take more than one minute to execute.
   make_datasets_tb("ready4")
   dvs_tb <- get_datasets_tb("ready4-dev/ready4")

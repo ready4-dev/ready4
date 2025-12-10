@@ -33,7 +33,7 @@ No return value, called for side effects.
 write_to_render_post() is designed for help overcome practical challenges of rendering RMD or Rmarkdown files to Markdown output in a modelling project's Hugo Docsy documentation website. You must have 'hugodown' installed for this function to work.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   # Note, In addition to rmarkdown, the non CRAN package "hugodown" is also required.
   if(requireNamespace("rmarkdown", quietly = TRUE)) {
   # Example 1 - RMD files

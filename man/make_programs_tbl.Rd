@@ -45,7 +45,7 @@ Programs (an output object of multiple potential types)
 make_programs_tbl() scrapes the GitHub organisation and Zenodo community associated specified for a ready4 model implementation to create a tabular summary of programs and sub-routines associated with that implementation.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   # Likely to take more than one minute to execute.
   if(requireNamespace("zen4R", quietly = TRUE)) {
     make_programs_tbl("Program",

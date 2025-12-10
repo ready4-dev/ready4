@@ -65,7 +65,7 @@ Releases (an output object of multiple potential types)
 make_code_releases_tbl() scrapes the details of a specified GitHub repository to generate a release history of ready libraries and executables. To work all repositories without any release need to be supplied using the 'exclude_chr' argument.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   # Likely to take more than one minute to execute.
     if(requireNamespace("tidyRSS", quietly = TRUE)) {
       make_code_releases_tbl("Framework",

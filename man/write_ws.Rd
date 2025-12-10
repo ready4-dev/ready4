@@ -27,7 +27,7 @@ No return value, called for side effects.
 write_ws() creates a standardised directory structure as a local development environment for modelling projects developed with the ready4 framework.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   write_ws(tempdir())
 \dontshow{\}) # examplesIf}
 }

@@ -30,7 +30,7 @@ Object (an output object of multiple potential types)
 get_gracefully() attempts to retrieve objects from the internet but returns NULL and an informative message if there is no internet connection or the specified resource could not be found.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   # Likely execution time greater than current CRAN limit.
 get_gracefully(paste0("https://github.com/ready4-dev/ready4/",
                       "releases/download/Documentation_0.0/ready4_badges_lup.RDS"))

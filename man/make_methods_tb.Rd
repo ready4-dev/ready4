@@ -42,7 +42,7 @@ Methods (a tibble)
 make_methods_tb() scrapes the documentation websites of all libraries of ready4 modules in a specified GitHub organisation and then creates a tabular summary of vignette examples of ready4 module methods.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   # Likely to take more than one minute to execute.
   make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 \dontshow{\}) # examplesIf}

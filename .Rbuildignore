@@ -91,3 +91,4 @@
 ^data-raw/CUT\.R$
 ^CRAN-SUBMISSION$
 ^data-raw/examples/get_gracefully\.R$
+^data-raw/clss/C4_Ready4Project\.R$

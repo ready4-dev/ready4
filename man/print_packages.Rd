@@ -63,7 +63,7 @@ Package extensions (a kable)
 print_packages() formats the output of get_libraries_tb() as HTML.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   # Method 1
   libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4")
   ## Print framework libraries

@@ -36,7 +36,7 @@ No return value, called for side effects.
 write_to_copy_rmds() is used to copy template RMD or Rmarkdown files to specified sub-directories of a model documentation website. These template copies can then be manually edited before being rendered with write_to_render_post().
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   write_to_copy_rmds(dir_path_1L_chr = tempdir(),
                      fl_nm_1L_chr = "RMDs",
                      rmds_dir_1L_chr = system.file("MD_RMDs",
