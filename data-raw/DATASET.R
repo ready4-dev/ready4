@@ -118,6 +118,16 @@ devtools::document()
 devtools::build_vignettes()
 readLines("_pkgdown.yml") %>% stringr::str_replace("  - text: Model","  - text: Framework") %>%
   writeLines("_pkgdown.yml")
+paste0(".github/workflows/", c("pkgdown.yaml", "R-CMD-check.yaml")) %>%
+  purrr::walk(~{
+    path_1L_chr <- .x
+    matches_int <- which(readLines(path_1L_chr) %>% startsWith("    # Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev") | readLines(path_1L_chr) %>% startsWith("        # Addresses issue with incompatibility between libcurl4-gnutls-dev and libcurl4-openssl-dev"))
+    if(!identical(matches_int,integer(0))){
+      readLines(path_1L_chr)[- (matches_int%>%
+                                  purrr::map(~.x:(.x+6)) %>% purrr::flatten_int())] %>%
+        writeLines(path_1L_chr)
+    }
+  })
 # Important addition:
 # rhub::rhub_setup()
 #
