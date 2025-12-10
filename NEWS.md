@@ -1,4 +1,4 @@
-# ready4 (development version)
+# ready4 0.0.1
 
 # ready4 0.1.18
 
