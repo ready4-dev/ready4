@@ -1,6 +1,6 @@
 #' Ready4Private
 #'
-#' A module of the ready4 representational system that contains data not intended for public dissemination.
+#' A module of the ready4 framework tfor storing data that is not intended for public dissemination.
 #'
 #' @include C4_Ready4Module.R
 #' @slot dissemination_1L_chr Dissemination (a character vector of length one)

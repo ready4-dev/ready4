@@ -1,3 +1,4 @@
+## NOTE reorder modules table - TTU at top currently.
 library(ready4)
 library(ready4use)
 library(ready4fun)
@@ -17,7 +18,7 @@ Z <- Ready4useRepos(dv_nm_1L_chr = "ready4fw",
 additions_tb <- make_additions_tb("Framework",
                                   make_framework_pkgs_chr(),
                                   c("Foundation","Authoring (module functions)","Authoring (module classes)","Authoring (module libraries)","Authoring (model datasets)","Authoring (analysis programs)"))
-module_libraries_ls <- list(People = list(names_chr = c("youthvars", "scorz", "specific","TTU", "youthu", "mychoice","heterodox"),
+module_libraries_ls <- list(People = list(names_chr = c("youthvars", "scorz", "specific","TTU", "youthu", "mychoice", "heterodox"),
                                           descriptions_chr = c("Description (datasets)", "Description (variable scoring)", "Modelling (inverse problems)", "Modelling (health utility)", "Prediction (health utility)", "Modelling (choice)", "Modelling (heterogeneity)")),
                             Places = list(names_chr = c("aus", "vicinity"),
                                           descriptions_chr = c("Modelling (Australian spatial)", "Modelling (spatial)")),
