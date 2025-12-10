@@ -8,7 +8,7 @@ get_gracefully(
   url_1L_chr,
   args_ls = NULL,
   fn = readRDS,
-  not_chr_1L_lgl = F,
+  not_chr_1L_lgl = NA_character_,
   tests_chr = character(0)
 )
 }
@@ -19,7 +19,7 @@ get_gracefully(
 
 \item{fn}{Function (a function), Default: readRDS}
 
-\item{not_chr_1L_lgl}{Not character vector (a logical vector of length one), Default: F}
+\item{not_chr_1L_lgl}{Not character vector (a logical vector of length one), Default: 'NA'}
 
 \item{tests_chr}{Tests (a character vector), Default: character(0)}
 }

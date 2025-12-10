@@ -1670,7 +1670,7 @@ write_words <- function (new_words_chr, consent_1L_chr = "", consent_indcs_int =
 {
     dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url, 
         args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, 
-            .token = ""))
+            .token = ""), not_chr_1L_lgl = TRUE)
     if (!is.null(dmt_urls_xx)) {
         dmt_urls_chr <- dmt_urls_xx
         b <- readRDS(url(dmt_urls_chr[dmt_urls_chr %>% endsWith("treat_as_words_chr.RDS")]))

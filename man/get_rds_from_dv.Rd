@@ -9,6 +9,7 @@ get_rds_from_dv(
   dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK",
   dv_url_pfx_1L_chr = character(0),
   key_1L_chr = NULL,
+  not_chr_1L_lgl = NA,
   server_1L_chr = Sys.getenv("DATAVERSE_SERVER")
 )
 }
@@ -20,6 +21,8 @@ get_rds_from_dv(
 \item{dv_url_pfx_1L_chr}{Dataverse url prefix (a character vector of length one), Default: character(0)}
 
 \item{key_1L_chr}{Key (a character vector of length one), Default: NULL}
+
+\item{not_chr_1L_lgl}{Not character vector (a logical vector of length one), Default: NA}
 
 \item{server_1L_chr}{Server (a character vector of length one), Default: Sys.getenv("DATAVERSE_SERVER")}
 }

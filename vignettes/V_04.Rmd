@@ -29,20 +29,20 @@ libraries_tb <- get_libraries_tb(gh_repo_1L_chr = "ready4-dev/ready4") %>% updat
 
 In this example, module libraries have been grouped in to the following thematic model “sections”.
 
-```{r}
+```{r eval = !is.null(libraries_tb)}
 libraries_tb$Section %>% unique()
 ```
 We can use the `print_packages` function to display a HTML summary of the module libraries currently available for each section. The resulting table summarises the types of module library (e.g. those for description, developing models or predicting with models), the name and purpose of those libraries, the locations from which development and archived library code can be downloaded and details of supporting documentation for each library (e.g. website, manuals and examples).
 
-```{r}
+```{r }
 print_packages(libraries_tb, sections_chr = "People")
 ```
 
-```{r}
+```{r eval = !is.null(libraries_tb)}
 print_packages(libraries_tb, sections_chr = "Places")
 ```
 
-```{r}
+```{r }
 print_packages(libraries_tb, sections_chr = "Programs")
 ```
 

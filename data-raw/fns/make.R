@@ -74,7 +74,7 @@ make_code_releases_tbl <- function(repo_type_1L_chr = c("Framework","Module","Pa
       }
     }
     releases_xx <- repos_chr %>%
-      purrr::map_dfr(~get_gracefully(paste0("https://github.com/",org_1L_chr,"/",.x,"/releases.atom"), fn = tidyRSS::tidyfeed))
+      purrr::map_dfr(~get_gracefully(paste0("https://github.com/",org_1L_chr,"/",.x,"/releases.atom"), fn = tidyRSS::tidyfeed, not_chr_1L_lgl = TRUE))
     if(nrow(releases_xx)==0){
       releases_xx <- NULL
     }
@@ -471,7 +471,7 @@ make_libraries_tb <- function(additions_tb = make_additions_tb(),
     dplyr::mutate(code_urls_ls = purrr::map2(!!rlang::sym(ns_var_nm_1L_chr), .data$Link,
                                              ~get_source_code_urls(.x, pkg_url_1L_chr = .y)))
   y_tb <- purrr::map_dfr(libraries_tb$Citation, ~{
-    scraped_xx <- get_gracefully(.x, fn=rvest::read_html)
+    scraped_xx <- get_gracefully(.x, fn=rvest::read_html, not_chr_1L_lgl = TRUE)
     if(!is.null(scraped_xx)){
       scraped_1L_chr <- scraped_xx %>% rvest::html_elements("pre") %>% rvest::html_text2()
       details_chr <- strsplit(scraped_1L_chr, split = "\n") %>% purrr::flatten_chr() %>% purrr::map_chr(~{
@@ -656,7 +656,9 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
       modules_tb <- modules_tb %>% dplyr::mutate(Description = purrr::map2_chr(.data$Class,
                                                                                .data$old_class_lgl, ~{
                                                                                  scraped_xx <- get_gracefully((.x %>% stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[,
-                                                                                                                                                                          2], fn=rvest::read_html)
+                                                                                                                                                                          2],
+                                                                                                              fn=rvest::read_html,
+                                                                                                              not_chr_1L_lgl = TRUE)
                                                                                  if(!is.null(scraped_xx)){
                                                                                    scraped_xx %>% rvest::html_elements(ifelse(.y, "h1", "p")) %>% rvest::html_text2() %>% purrr::pluck(1)
                                                                                  }else{
