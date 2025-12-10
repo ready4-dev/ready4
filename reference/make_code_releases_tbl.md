@@ -1,0 +1,123 @@
+# Make a tabular summary of release history of ready4 code libraries and executables
+
+make_code_releases_tbl() scrapes the details of a specified GitHub
+repository to generate a release history of ready libraries and
+executables. To work all repositories without any release need to be
+supplied using the 'exclude_chr' argument.
+
+## Usage
+
+``` r
+make_code_releases_tbl(
+  repo_type_1L_chr = c("Framework", "Module", "Package", "Program", "Subroutine",
+    "Program_and_Subroutine"),
+  as_kbl_1L_lgl = TRUE,
+  brochure_repos_chr = character(0),
+  exclude_chr = character(0),
+  format_1L_chr = "%d-%b-%Y",
+  framework_repos_chr = character(0),
+  gh_repo_1L_chr = "ready4-dev/ready4",
+  gh_tag_1L_chr = "Documentation_0.0",
+  model_repos_chr = character(0),
+  program_repos_chr = character(0),
+  org_1L_chr = "ready4-dev",
+  repos_chr = character(0),
+  subroutine_repos_chr = character(0),
+  tidy_desc_1L_lgl = TRUE,
+  url_stub_1L_chr = "https://ready4-dev.github.io/",
+  ...
+)
+```
+
+## Arguments
+
+- repo_type_1L_chr:
+
+  Repository type (a character vector of length one), Default:
+  c("Framework", "Module", "Package", "Program", "Subroutine",
+  "Program_and_Subroutine")
+
+- as_kbl_1L_lgl:
+
+  As kable (a logical vector of length one), Default: TRUE
+
+- brochure_repos_chr:
+
+  Brochure repositories (a character vector), Default: character(0)
+
+- exclude_chr:
+
+  Exclude (a character vector), Default: character(0)
+
+- format_1L_chr:
+
+  Format (a character vector of length one), Default: '%d-%b-%Y'
+
+- framework_repos_chr:
+
+  Framework repositories (a character vector), Default: character(0)
+
+- gh_repo_1L_chr:
+
+  Github repository (a character vector of length one), Default:
+  'ready4-dev/ready4'
+
+- gh_tag_1L_chr:
+
+  Github tag (a character vector of length one), Default:
+  'Documentation_0.0'
+
+- model_repos_chr:
+
+  Model repositories (a character vector), Default: character(0)
+
+- program_repos_chr:
+
+  Program repositories (a character vector), Default: character(0)
+
+- org_1L_chr:
+
+  Organisation (a character vector of length one), Default: 'ready4-dev'
+
+- repos_chr:
+
+  Repositories (a character vector), Default: character(0)
+
+- subroutine_repos_chr:
+
+  Subroutine repositories (a character vector), Default: character(0)
+
+- tidy_desc_1L_lgl:
+
+  Tidy description (a logical vector of length one), Default: TRUE
+
+- url_stub_1L_chr:
+
+  Url stub (a character vector of length one), Default:
+  'https://ready4-dev.github.io/'
+
+- ...:
+
+  Additional arguments
+
+## Value
+
+Releases (an output object of multiple potential types)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+  # Likely to take more than one minute to execute.
+    if(requireNamespace("tidyRSS", quietly = TRUE)) {
+      make_code_releases_tbl("Framework",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+      make_code_releases_tbl("Module",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+      make_code_releases_tbl("Program",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+      make_code_releases_tbl("Subroutine",
+                             gh_repo_1L_chr = "ready4-dev/ready4")
+    }
+}
+```

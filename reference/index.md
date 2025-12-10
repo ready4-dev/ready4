@@ -1,0 +1,168 @@
+# Package index
+
+## S4 Classes
+
+- [`Ready4Module-class`](https://ready4-dev.github.io/ready4/reference/Ready4Module-class.md)
+  [`Ready4Module`](https://ready4-dev.github.io/ready4/reference/Ready4Module-class.md)
+  : Ready4Module
+- [`Ready4Private-class`](https://ready4-dev.github.io/ready4/reference/Ready4Private-class.md)
+  [`Ready4Private`](https://ready4-dev.github.io/ready4/reference/Ready4Private-class.md)
+  : Ready4Private
+- [`Ready4Project-class`](https://ready4-dev.github.io/ready4/reference/Ready4Project-class.md)
+  [`Ready4Project`](https://ready4-dev.github.io/ready4/reference/Ready4Project-class.md)
+  : Ready4Project
+- [`Ready4Public-class`](https://ready4-dev.github.io/ready4/reference/Ready4Public-class.md)
+  [`Ready4Public`](https://ready4-dev.github.io/ready4/reference/Ready4Public-class.md)
+  : Ready4Public
+
+## Functions
+
+- [`get_from_lup_obj()`](https://ready4-dev.github.io/ready4/reference/get_from_lup_obj.md)
+  : Get a value from a lookup table
+- [`get_gracefully()`](https://ready4-dev.github.io/ready4/reference/get_gracefully.md)
+  : Get data from the internet with graceful failure
+- [`get_libraries_tb()`](https://ready4-dev.github.io/ready4/reference/get_libraries_tb.md)
+  : Get a table of ready4 libraries
+- [`get_methods()`](https://ready4-dev.github.io/ready4/reference/get_methods.md)
+  : Get the methods associated with a ready4 model module
+- [`get_methods_tb()`](https://ready4-dev.github.io/ready4/reference/get_methods_tb.md)
+  : Get a table of methods associated with ready4 model modules
+- [`get_modules_tb()`](https://ready4-dev.github.io/ready4/reference/get_modules_tb.md)
+  : Get a table of ready4 model modules
+- [`make_code_releases_tbl()`](https://ready4-dev.github.io/ready4/reference/make_code_releases_tbl.md)
+  : Make a tabular summary of release history of ready4 code libraries
+  and executables
+- [`make_datasets_tb()`](https://ready4-dev.github.io/ready4/reference/make_datasets_tb.md)
+  : Make a tabular summary of ready4 model data collections
+- [`make_ds_releases_tbl()`](https://ready4-dev.github.io/ready4/reference/make_ds_releases_tbl.md)
+  : Make a tabular summary of release history of ready4 model data
+  collections
+- [`make_methods_tb()`](https://ready4-dev.github.io/ready4/reference/make_methods_tb.md)
+  : Make a tabular summary of methods associated with ready model
+  modules
+- [`make_modules_tb()`](https://ready4-dev.github.io/ready4/reference/make_modules_tb.md)
+  : Make a tabular summary of ready4 model modules and sub-modules
+- [`make_programs_tbl()`](https://ready4-dev.github.io/ready4/reference/make_programs_tbl.md)
+  : Make a tabular summary of programs using ready4 model modules
+- [`print_data()`](https://ready4-dev.github.io/ready4/reference/print_data.md)
+  : Print a table of ready4 model data collections
+- [`print_methods()`](https://ready4-dev.github.io/ready4/reference/print_methods.md)
+  : Print a table of methods associated with ready4 model modules
+- [`print_modules()`](https://ready4-dev.github.io/ready4/reference/print_modules.md)
+  : Print a table of ready4 model modules
+- [`print_packages()`](https://ready4-dev.github.io/ready4/reference/print_packages.md)
+  : Print a table of ready4 libraries
+- [`write_to_copy_rmds()`](https://ready4-dev.github.io/ready4/reference/write_to_copy_rmds.md)
+  : Write a local copy of RMD or Rmarkdown files
+- [`write_to_render_post()`](https://ready4-dev.github.io/ready4/reference/write_to_render_post.md)
+  : Write ready4 model documentation website page from an RMD or
+  Rmarkdown file
+- [`write_ws()`](https://ready4-dev.github.io/ready4/reference/write_ws.md)
+  : Write ready4 software development local directories
+
+## Generics
+
+- [`author()`](https://ready4-dev.github.io/ready4/reference/author-methods.md)
+  : Author and save files
+- [`authorClasses()`](https://ready4-dev.github.io/ready4/reference/authorClasses-methods.md)
+  : Author and document classes
+- [`authorData()`](https://ready4-dev.github.io/ready4/reference/authorData-methods.md)
+  : Author and document datasets
+- [`authorFunctions()`](https://ready4-dev.github.io/ready4/reference/authorFunctions-methods.md)
+  : Author and document functions
+- [`authorReport()`](https://ready4-dev.github.io/ready4/reference/authorReport-methods.md)
+  : Author and save a report
+- [`authorSlot()`](https://ready4-dev.github.io/ready4/reference/authorSlot-methods.md)
+  : Apply the author method to a model module slot
+- [`characterize()`](https://ready4-dev.github.io/ready4/reference/characterize-methods.md)
+  : Characterize model module data by generating (tabular) descriptive
+  statistics
+- [`characterizeSlot()`](https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.md)
+  : Apply the characterize method to a model module slot
+- [`depict()`](https://ready4-dev.github.io/ready4/reference/depict-methods.md)
+  : Depict (plot) features of model module data
+- [`depictSlot()`](https://ready4-dev.github.io/ready4/reference/depictSlot-methods.md)
+  : Apply the depict method to a model module slot
+- [`enhance()`](https://ready4-dev.github.io/ready4/reference/enhance-methods.md)
+  : Enhance a model module by adding new elements
+- [`enhanceSlot()`](https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.md)
+  : Apply the enhance method to a model module slot
+- [`exhibit()`](https://ready4-dev.github.io/ready4/reference/exhibit-methods.md)
+  : Exhibit features of model module data by printing them to the R
+  console
+- [`exhibitSlot()`](https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.md)
+  : Apply the exhibit method to a model module slot
+- [`ingest()`](https://ready4-dev.github.io/ready4/reference/ingest-methods.md)
+  : Ingest data
+- [`ingestSlot()`](https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.md)
+  : Apply the ingest method to a model module slot
+- [`investigate()`](https://ready4-dev.github.io/ready4/reference/investigate-methods.md)
+  : Investigate solutions to an inverse problem
+- [`investigateSlot()`](https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.md)
+  : Apply the investigate method to a model module slot
+- [`manufacture()`](https://ready4-dev.github.io/ready4/reference/manufacture-methods.md)
+  : Manufacture a new object
+- [`manufactureSlot()`](https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.md)
+  : Apply the manufacture method to a model module slot
+- [`metamorphose()`](https://ready4-dev.github.io/ready4/reference/metamorphose-methods.md)
+  : Metamorphose a model module to a model module of a different
+  (non-inheriting) class
+- [`metamorphoseSlot()`](https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.md)
+  : Apply the metamorphose method to a model module slot
+- [`procure()`](https://ready4-dev.github.io/ready4/reference/procure-methods.md)
+  : Procure data from a model module
+- [`procureSlot()`](https://ready4-dev.github.io/ready4/reference/procureSlot-methods.md)
+  : Procure (get) data from a slot
+- [`prognosticate()`](https://ready4-dev.github.io/ready4/reference/prognosticate-methods.md)
+  : Prognosticate (make predictions) by solving a forward problem
+- [`prognosticateSlot()`](https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.md)
+  : Apply the prognosticate method to a model module slot
+- [`ratify()`](https://ready4-dev.github.io/ready4/reference/ratify-methods.md)
+  : Ratify that input or output data meet validity criteria
+- [`ratifySlot()`](https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.md)
+  : Apply the ratify method to a model module slot
+- [`reckon()`](https://ready4-dev.github.io/ready4/reference/reckon-methods.md)
+  : Reckon (calculate) a value
+- [`reckonSlot()`](https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.md)
+  : Apply the reckon method to a model module slot
+- [`renew()`](https://ready4-dev.github.io/ready4/reference/renew-methods.md)
+  : Renew (update) values
+- [`renewSlot()`](https://ready4-dev.github.io/ready4/reference/renewSlot-methods.md)
+  : Renew (set) the values of data in a module slot
+- [`share()`](https://ready4-dev.github.io/ready4/reference/share-methods.md)
+  : Share data via an online repository
+- [`shareSlot()`](https://ready4-dev.github.io/ready4/reference/shareSlot-methods.md)
+  : Apply the share method to a model module slot
+
+## Methods
+
+- [`authorSlot()`](https://ready4-dev.github.io/ready4/reference/authorSlot-methods.md)
+  : Apply the author method to a model module slot
+- [`characterizeSlot()`](https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.md)
+  : Apply the characterize method to a model module slot
+- [`depictSlot()`](https://ready4-dev.github.io/ready4/reference/depictSlot-methods.md)
+  : Apply the depict method to a model module slot
+- [`enhanceSlot()`](https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.md)
+  : Apply the enhance method to a model module slot
+- [`exhibitSlot()`](https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.md)
+  : Apply the exhibit method to a model module slot
+- [`ingestSlot()`](https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.md)
+  : Apply the ingest method to a model module slot
+- [`investigateSlot()`](https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.md)
+  : Apply the investigate method to a model module slot
+- [`manufactureSlot()`](https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.md)
+  : Apply the manufacture method to a model module slot
+- [`metamorphoseSlot()`](https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.md)
+  : Apply the metamorphose method to a model module slot
+- [`procureSlot()`](https://ready4-dev.github.io/ready4/reference/procureSlot-methods.md)
+  : Procure (get) data from a slot
+- [`prognosticateSlot()`](https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.md)
+  : Apply the prognosticate method to a model module slot
+- [`ratifySlot()`](https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.md)
+  : Apply the ratify method to a model module slot
+- [`reckonSlot()`](https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.md)
+  : Apply the reckon method to a model module slot
+- [`renewSlot()`](https://ready4-dev.github.io/ready4/reference/renewSlot-methods.md)
+  : Renew (set) the values of data in a module slot
+- [`shareSlot()`](https://ready4-dev.github.io/ready4/reference/shareSlot-methods.md)
+  : Apply the share method to a model module slot
