@@ -13,6 +13,13 @@ documentation about the framework and how to use it visit
 issues that the framework is attempting to help solve, see Hamilton et
 al. (2024) <https://doi.org/10.1007/s40273-024-01378-8>.
 
+To install the latest CRAN release, run the following command in your R
+console:
+
+``` r
+utils::install.packages("ready4")
+```
+
 To install a development version of this software, run the following
 commands in your R console:
 

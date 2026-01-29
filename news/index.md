@@ -2,6 +2,9 @@
 
 ## ready4 0.1.20
 
+This patch makes minor updates to some vignettes and addresses bugs in
+some of the functions used to help document modelling projects.
+
 ## ready4 0.1.19
 
 CRAN release: 2025-12-10
