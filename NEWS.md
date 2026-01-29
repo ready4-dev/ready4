@@ -1,3 +1,5 @@
+# ready4 0.1.20
+
 # ready4 0.1.19
 
 This patch addresses a CRAN policy violation related to unsuccessful internet requests needing to fail gracefully by updating the get_gracefully function and its calls by other functions as well as updating one of the vignettes. A new S4 class Ready4Project has also been created.
