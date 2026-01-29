@@ -911,6 +911,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 #' @param format_1L_chr Format (a character vector of length one), Default: '%d-%b-%Y'
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param org_1L_chr Organisation (a character vector of length one), Default: 'ready4-dev'
 #' @param tidy_desc_1L_lgl Tidy description (a logical vector of length one), Default: TRUE
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param zenodo_1L_chr Zenodo (a character vector of length one), Default: 'ready4'
@@ -935,7 +936,7 @@ make_modules_tb <- function (pkg_extensions_tb = NULL, cls_extensions_tb = NULL,
 make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program_and_Subroutine"), 
     as_kbl_1L_lgl = FALSE, exclude_chr = character(0), format_1L_chr = "%d-%b-%Y", 
     gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0", 
-    tidy_desc_1L_lgl = TRUE, url_stub_1L_chr = "https://ready4-dev.github.io/", 
+    org_1L_chr = "ready4-dev", tidy_desc_1L_lgl = TRUE, url_stub_1L_chr = "https://ready4-dev.github.io/", 
     zenodo_1L_chr = "ready4", ...) 
 {
     if (!requireNamespace("zen4R", quietly = TRUE)) {
@@ -944,8 +945,8 @@ make_programs_tbl <- function (what_1L_chr = c("Program", "Subroutine", "Program
     what_1L_chr <- match.arg(what_1L_chr)
     programs_xx <- make_code_releases_tbl(what_1L_chr, as_kbl_1L_lgl = FALSE, 
         exclude_chr = exclude_chr, gh_repo_1L_chr = gh_repo_1L_chr, 
-        gh_tag_1L_chr = gh_tag_1L_chr, tidy_desc_1L_lgl = FALSE, 
-        url_stub_1L_chr = url_stub_1L_chr)
+        gh_tag_1L_chr = gh_tag_1L_chr, org_1L_chr = org_1L_chr, 
+        tidy_desc_1L_lgl = FALSE, url_stub_1L_chr = url_stub_1L_chr)
     if (!is.null(programs_xx)) {
         programs_xx <- programs_xx %>% dplyr::group_by(!!rlang::sym(what_1L_chr)) %>% 
             dplyr::filter(dplyr::row_number() == 1) %>% dplyr::arrange(!!rlang::sym(what_1L_chr)) %>% 

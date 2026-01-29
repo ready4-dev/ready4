@@ -22,9 +22,16 @@ module_libraries_ls <- list(People = list(names_chr = c("youthvars", "scorz", "s
                                           descriptions_chr = c("Description (datasets)", "Description (variable scoring)", "Modelling (inverse problems)", "Modelling (health utility)", "Prediction (health utility)", "Modelling (choice)", "Modelling (heterogeneity)")),
                             Places = list(names_chr = c("aus", "vicinity"),
                                           descriptions_chr = c("Modelling (Australian spatial)", "Modelling (spatial)")),
-                            #Platforms = ,
-                            Programs = list(names_chr = c("bimp", "costly"),
-                                            descriptions_chr = c("Modelling (budget impact)", "Modelling (costs)")))
+                            Platforms = list(names_chr = c("mimic"),
+                                             descriptions_chr = c("Modelling (microsimulation)")),
+                            Programs = list(names_chr = c(
+                              # "bimp",
+                                                          "costly",
+                                                          "serious"),
+                                            descriptions_chr = c(
+                                              # "Modelling (budget impact)",
+                                                                 "Modelling (costs)",
+                                                                 "Modelling (time series)")))
 extras_tb <- module_libraries_ls  %>% # c("people", "places","platforms","programs")
   purrr::map2_dfr(names(module_libraries_ls),
                   ~make_additions_tb(library_chr = .x$names_chr,#make_modules_pkgs_chr(.x),
@@ -63,11 +70,11 @@ Y <- renewSlot(Y,
                  #classes_bup_lup =  Y@b_Ready4useIngest@objects_ls$bup_classes_lup
                  #classes_lup = Z@b_Ready4useIngest@objects_ls$framework_metadata_ls$classes_lup
                  #abbreviations_lup = abbreviations_lup,
-                 #libraries_tb = libraries_tb
+                 libraries_tb = libraries_tb,
                  #exclude_chr = c("aus_09_synth","dce_sa_cards","fakefolk","rebuild")
-                 #libraries_ls = libraries_ls
-                 methods_tb = methods_tb
-                 #modules_tb = modules_tb
+                 libraries_ls = libraries_ls,
+                 # methods_tb = methods_tb
+                 modules_tb = modules_tb
                  #treat_as_words_chr = Y@b_Ready4useIngest@objects_ls$treat_as_words_chr
                  )),
                slot_nm_1L_chr = "b_Ready4useIngest")

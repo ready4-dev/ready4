@@ -248,7 +248,7 @@ get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_
         dmt_urls_chr <- dmt_urls_xx
         if (any(dmt_urls_chr %>% endsWith("exclude_chr.RDS"))) {
             exclude_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% 
-                endsWith("exclude_chr.RDS")], not_chr_1L_lgl = TRUE)
+                endsWith("exclude_chr.RDS")], not_chr_1L_lgl = FALSE)
         }
         else {
             exclude_chr <- character(0)

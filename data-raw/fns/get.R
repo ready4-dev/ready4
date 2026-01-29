@@ -153,19 +153,19 @@ get_examples <- function(vignettes_chr,
   }
   return(examples_chr)
 }
-get_excluded_repos <- function(gh_repo_1L_chr = "ready4-dev/ready4",
-                                 gh_tag_1L_chr = "Documentation_0.0"){
+get_excluded_repos <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_chr = "Documentation_0.0"){
   exclude_chr <- NULL
   dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
-                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr, .token = ""),
-                                not_chr_1L_lgl = FALSE)
-  if(!is.null(dmt_urls_xx)){
-  dmt_urls_chr <- dmt_urls_xx
-  if(any(dmt_urls_chr %>% endsWith("exclude_chr.RDS"))){
-    exclude_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>% endsWith("exclude_chr.RDS")], not_chr_1L_lgl = TRUE)
-  }else{
-    exclude_chr <- character(0)
-  }
+                                args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr,
+                                               .token = ""), not_chr_1L_lgl = FALSE)
+  if (!is.null(dmt_urls_xx)) {
+    dmt_urls_chr <- dmt_urls_xx
+    if (any(dmt_urls_chr %>% endsWith("exclude_chr.RDS"))) {
+      exclude_chr <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
+                                                   endsWith("exclude_chr.RDS")], not_chr_1L_lgl = FALSE)
+    } else {
+      exclude_chr <- character(0)
+    }
   }
   return(exclude_chr)
 }

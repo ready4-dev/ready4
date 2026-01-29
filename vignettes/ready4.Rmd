@@ -53,6 +53,6 @@ Developers that wish to author health economic models as R libraries with ready4
 
 - The [ready4 prototype software framework website](https://www.ready4-dev.com/);
 
-- The [project website of the readyforwhatsnext model](https://readyforwhatsnext.org/) that is being developed with the ready4 software framework; and
+- The [project website of the readyforwhatsnext model](https://readyforwhatsnext.com/) that is being developed with the ready4 software framework; and
 
 - A [pre-print manuscript](https://www.medrxiv.org/content/10.1101/2021.07.07.21260129v4) describing a utility mapping study implemented with modules of the readyforwhatsnext model.
