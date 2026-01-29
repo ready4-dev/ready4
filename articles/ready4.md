@@ -84,7 +84,7 @@ R library development with ready4.
   website](https://www.ready4-dev.com/);
 
 - The [project website of the readyforwhatsnext
-  model](https://readyforwhatsnext.org/) that is being developed with
+  model](https://readyforwhatsnext.com/) that is being developed with
   the ready4 software framework; and
 
 - A [pre-print

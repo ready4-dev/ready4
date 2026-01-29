@@ -15,6 +15,7 @@ make_programs_tbl(
   format_1L_chr = "%d-%b-%Y",
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
+  org_1L_chr = "ready4-dev",
   tidy_desc_1L_lgl = TRUE,
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   zenodo_1L_chr = "ready4",
@@ -50,6 +51,10 @@ make_programs_tbl(
 
   Github tag (a character vector of length one), Default:
   'Documentation_0.0'
+
+- org_1L_chr:
+
+  Organisation (a character vector of length one), Default: 'ready4-dev'
 
 - tidy_desc_1L_lgl:
 

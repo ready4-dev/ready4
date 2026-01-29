@@ -19,13 +19,13 @@ Source:
 [`inst/CITATION`](https://github.com/ready4-dev/ready4/blob/main/inst/CITATION)
 
 Matthew P Hamilton (2024). ready4: Develop and Use Modular Health
-Economic Models. Version 0.1.19. https://doi.org/10.5281/zenodo.5606250
+Economic Models. Version 0.1.20. https://doi.org/10.5281/zenodo.5606250
 
     @Manual{,
       doi = {10.5281/zenodo.5606250},
       title = {ready4: Develop and Use Modular Health Economic Models},
       author = {Matthew P Hamilton},
       year = {2024},
-      note = {R package version 0.1.19},
+      note = {R package version 0.1.20},
       url = {https://ready4-dev.github.io/ready4/},
     }

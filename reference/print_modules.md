@@ -69,113 +69,113 @@ print_modules(modules_tb, what_1L_chr = "S3")
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_abbreviations.html" style="     ">vicinity_abbreviations</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object lookup table for spatial data abbreviations </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object lookup table for spatial data abbreviations </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_identifiers.html" style="     ">vicinity_identifiers</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object lookup table of unique feature identifiers used for different spatial objects </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object lookup table of unique feature identifiers used for different spatial objects </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_mapes.html" style="     ">vicinity_mapes</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object that stores spatial simulation parameters relating to Mean Absolute Prediction Errors </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object that stores spatial simulation parameters relating to Mean Absolute Prediction Errors </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_parameters.html" style="     ">vicinity_parameters</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object that stores simulation structural parameters relating to the spatial environment </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object that stores simulation structural parameters relating to the spatial environment </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_points.html" style="     ">vicinity_points</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object lookup table of the longitude and latitude cordinates of sites of services / homes </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object lookup table of the longitude and latitude cordinates of sites of services / homes </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_processed.html" style="     ">vicinity_processed</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object lookup table of meta-data for spatial data packs (imported and pre-processed data) </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object lookup table of meta-data for spatial data packs (imported and pre-processed data) </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_raw.html" style="     ">vicinity_raw</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object lookup table of metadata about raw (un-processed) spatial data to import </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object lookup table of metadata about raw (un-processed) spatial data to import </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_resolutions.html" style="     ">vicinity_resolutions</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object lookup table of the relative resolutions of different spatial objects </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object lookup table of the relative resolutions of different spatial objects </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_templates.html" style="     ">vicinity_templates</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object lookup table for base file used in creation of certain spatial objects </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object lookup table for base file used in creation of certain spatial objects </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/vicinity/reference/vicinity_values.html" style="     ">vicinity_values</a> </td>
-#>    <td style="text-align:left;"> ready4 S3 class for tibble object that stores simulation parameter values for each iteration </td>
+#>    <td style="text-align:left;"> ready4 submodule class for tibble object that stores simulation parameter values for each iteration </td>
 #>    <td style="text-align:left;">  </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_aqol6d_adol.html" style="     ">youthvars_aqol6d_adol</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Assessment of Quality of Life Six Dimension Health Utility - Adolescent Version (AQoL6d Adolescent) </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_bads.html" style="     ">youthvars_bads</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Behavioural Activation for Depression Scale (BADS) scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_chu9d_adolaus.html" style="     ">youthvars_chu9d_adolaus</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Child Health Utility Nine Dimension Health Utility - Australian Adolescent Scoring (CHU-9D Australian Adolescent) </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_gad7.html" style="     ">youthvars_gad7</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Generalised Anxiety Disorder Scale (GAD-7) scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k10.html" style="     ">youthvars_k10</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Kessler Psychological Distress Scale (K10) - US Scoring System scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k10_aus.html" style="     ">youthvars_k10_aus</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Kessler Psychological Distress Scale (K10) - Australian Scoring System scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k6.html" style="     ">youthvars_k6</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Kessler Psychological Distress Scale (K6) - US Scoring System scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k6_aus.html" style="     ">youthvars_k6_aus</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class)for Kessler Psychological Distress Scale (K6) - Australian Scoring System scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_oasis.html" style="     ">youthvars_oasis</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Overall Anxiety Severity and Impairment Scale (OASIS) scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_phq9.html" style="     ">youthvars_phq9</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Patient Health Questionnaire (PHQ-9) scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_scared.html" style="     ">youthvars_scared</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Screen for Child Anxiety Related Disorders (SCARED) scores </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/youthvars_sofas.html" style="     ">youthvars_sofas</a> </td>
 #>    <td style="text-align:left;"> youthvars ready4 sub-module (S3 class) for Social and Occupational Functioning Assessment Scale (SOFAS) </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a> </td>
 #>   </tr>
 #> </tbody>
 #> </table>
@@ -223,22 +223,22 @@ print_modules(modules_tb, what_1L_chr = "S4")
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/reference/CostlyCorrespondences-class.html" style="     ">CostlyCorrespondences</a> </td>
 #>    <td style="text-align:left;"> Collection of input, standards definition and results datasets for projects to generate standardised costing datasets </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "></a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/reference/CostlyCountries-class.html" style="     ">CostlyCountries</a> </td>
 #>    <td style="text-align:left;"> Collection of input, standards definition and results datasets for projects to generate standardised country data for use in costing datasets </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "></a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/reference/CostlyCurrencies-class.html" style="     ">CostlyCurrencies</a> </td>
 #>    <td style="text-align:left;"> Collection of input, standards definition and results datasets for projects to generate standardised currency data for use in costing datasets </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/reference/CostlySeed-class.html" style="     ">CostlySeed</a> </td>
 #>    <td style="text-align:left;"> Original (non-standardised) dataset (and metadata) </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "></a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/reference/CostlySource-class.html" style="     ">CostlySource</a> </td>
@@ -248,7 +248,7 @@ print_modules(modules_tb, what_1L_chr = "S4")
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/reference/CostlyStandards-class.html" style="     ">CostlyStandards</a> </td>
 #>    <td style="text-align:left;"> Dataset (and metadata) defining the allowable values of specified variables </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     "></a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>, <a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/reference/ScorzAqol6-class.html" style="     ">ScorzAqol6</a> </td>
@@ -258,7 +258,7 @@ print_modules(modules_tb, what_1L_chr = "S4")
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/reference/ScorzAqol6Adol-class.html" style="     ">ScorzAqol6Adol</a> </td>
 #>    <td style="text-align:left;"> A dataset and metadata to support implementation of a scoring algorithm for the adolescent version of AQoL-6D </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">3</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/reference/ScorzAqol6Adult-class.html" style="     ">ScorzAqol6Adult</a> </td>
@@ -268,7 +268,7 @@ print_modules(modules_tb, what_1L_chr = "S4")
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/reference/ScorzEuroQol5-class.html" style="     ">ScorzEuroQol5</a> </td>
 #>    <td style="text-align:left;"> A dataset and metadata to support implementation of an EQ-5D scoring algorithm </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     ">4</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/scorz/reference/ScorzProfile-class.html" style="     ">ScorzProfile</a> </td>
@@ -278,7 +278,7 @@ print_modules(modules_tb, what_1L_chr = "S4")
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/specific/reference/SpecificConverter-class.html" style="     ">SpecificConverter</a> </td>
 #>    <td style="text-align:left;"> Container for seed objects used for creating SpecificModels modules </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">5</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/specific/reference/SpecificFixed-class.html" style="     ">SpecificFixed</a> </td>
@@ -338,7 +338,7 @@ print_modules(modules_tb, what_1L_chr = "S4")
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/TTU/reference/TTUProject-class.html" style="     ">TTUProject</a> </td>
 #>    <td style="text-align:left;"> Input And Output Data For Undertaking and Reporting Utility Mapping Studies </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">6</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/TTU/reference/TTUReports-class.html" style="     ">TTUReports</a> </td>
@@ -413,12 +413,12 @@ print_modules(modules_tb, what_1L_chr = "S4")
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/YouthvarsProfile-class.html" style="     ">YouthvarsProfile</a> </td>
 #>    <td style="text-align:left;"> A dataset and its associated dictionary, descriptive statistics and metadata </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">8</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/reference/YouthvarsSeries-class.html" style="     ">YouthvarsSeries</a> </td>
 #>    <td style="text-align:left;"> A longitudinal dataset and its associated dictionary, descriptive statistics and metadata </td>
-#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     "></a> </td>
+#>    <td style="text-align:left;"> <a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">8</a> </td>
 #>   </tr>
 #> </tbody>
 #> </table>

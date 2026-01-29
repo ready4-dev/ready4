@@ -1,6 +1,10 @@
 # Changelog
 
+## ready4 0.1.20
+
 ## ready4 0.1.19
+
+CRAN release: 2025-12-10
 
 This patch addresses a CRAN policy violation related to unsuccessful
 internet requests needing to fail gracefully by updating the
