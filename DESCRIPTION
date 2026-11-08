@@ -1,6 +1,6 @@
 Package: ready4
 Title: Develop and Use Modular Health Economic Models
-Version: 0.1.20
+Version: 0.2.0
 Authors@R: c(
     person("Matthew", "Hamilton", , "matthew.hamilton1@monash.edu", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-7407-9194")),
@@ -26,6 +26,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Collate: 
+    'C4_Ready4.R'
     'C4_Ready4Module.R'
     'C4_Ready4Private.R'
     'C4_Ready4Project.R'
