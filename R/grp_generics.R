@@ -565,7 +565,6 @@ methods::setGeneric("reckonSlot")
 #' @param new_val_xx New value to assign to the specified slot.
 #' @param ... Additional arguments.
 #' @return An updated version of the supplied object.
-#' @export model module (an instance of a class that inherits from Ready4) of the same class as that supplied to the method.
 #' @export
 renewSlot <- function (x,
                        slot_nm_1L_chr,
