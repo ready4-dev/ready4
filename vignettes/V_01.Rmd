@@ -35,10 +35,14 @@ As we use the term, a "model module" is comprised of both a data-structure (an S
 We can create an object (`X`) from the `Ready4` template using the following command.
 
 ```{r}
-X <- Ready4()
+X <- setClass(
+  "Ready4Object",
+  contains = "Ready4",
+  slots = c(test = "character")
+)
 ```
 
-However, if we inspect `X` we can see it is of limited use as it contains no data other than an empty element called `dissemination_1L_chr`.
+However, if we inspect `X` we can see it is of limited use as it contains no data other than an empty element called `test`.
 
 ```{r}
 str(X)
