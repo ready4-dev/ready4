@@ -13,8 +13,6 @@ get_gracefully(
 )
 }
 \arguments{
-\item{url_1L_chr}{Url (a character vector of length one)}
-
 \item{args_ls}{Arguments (a list), Default: NULL}
 
 \item{fn}{Function (a function), Default: readRDS}
@@ -27,7 +25,13 @@ get_gracefully(
 Object (an output object of multiple potential types)
 }
 \description{
-get_gracefully() attempts to retrieve objects from the internet but returns NULL and an informative message if there is no internet connection or the specified resource could not be found.
+get_gracefully() attempts to retrieve objects from the
+internet but returns NULL and an informative message if there is no
+internet connection or the specified resource could not be found.
+
+When fn is readRDS, files are first downloaded to a temporary file
+before being read. This approach is more robust for resources hosted
+on services such as GitHub releases.#' @param url_1L_chr Url (a character vector of length one)
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}

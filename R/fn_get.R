@@ -470,8 +470,14 @@ get_gh_repos <- function (org_1L_chr)
     return(repositories_chr)
 }
 #' Get data from the internet with graceful failure
-#' @description get_gracefully() attempts to retrieve objects from the internet but returns NULL and an informative message if there is no internet connection or the specified resource could not be found.
-#' @param url_1L_chr Url (a character vector of length one)
+#'
+#' @description get_gracefully() attempts to retrieve objects from the
+#' internet but returns NULL and an informative message if there is no
+#' internet connection or the specified resource could not be found.
+#'
+#' When fn is readRDS, files are first downloaded to a temporary file
+#' before being read. This approach is more robust for resources hosted
+#' on services such as GitHub releases.#' @param url_1L_chr Url (a character vector of length one)
 #' @param args_ls Arguments (a list), Default: NULL
 #' @param fn Function (a function), Default: readRDS
 #' @param not_chr_1L_lgl Not character vector (a logical vector of length one), Default: 'NA'
@@ -521,60 +527,136 @@ get_gh_repos <- function (org_1L_chr)
 #'                  fn = tidyRSS::tidyfeed)
 #'     get_gracefully("DOES_NOT_EXIST", fn = tidyRSS::tidyfeed)
 #' }
-get_gracefully <- function (url_1L_chr, args_ls = NULL, fn = readRDS, not_chr_1L_lgl = NA_character_,
-    tests_chr = character(0))
+get_gracefully <- function(url_1L_chr,
+                           args_ls = NULL,
+                           fn = readRDS,
+                           not_chr_1L_lgl = NA_character_,
+                           tests_chr = character(0))
 {
-    if (is.na(not_chr_1L_lgl)) {
-        is_chr_1L_lgl <- NA
-        not_chr_1L_lgl <- FALSE
-    }
-    else {
-        is_chr_1L_lgl <- !not_chr_1L_lgl
-    }
-    if (identical(tests_chr, character(0))) {
-        tests_chr <- c("cannot open the connection to ", "unknown input format",
-            "Attempt to get feed was unsuccessful", "Not Found \\(HTTP 404\\)",
-            "GitHub API error \\(404\\)", "Bad Request \\(HTTP 400\\)",
-            "Cannot access release data for repo", "HTTP error 404",
-            "Could not resolve host", "Could not parse", "does not exist in current working directory",
-            "Could not retrieve Dataset ID from persistent identifier",
-            "Unknown HTTP verb")
-    }
-    if (identical(fn, readRDS)) {
-        url_xx <- NULL
-        if (grepl("www.|http:|https:", url_1L_chr))
-            url_xx <- url(url_1L_chr)
-    }
-    else {
-        url_xx <- url_1L_chr
-    }
-    if (!curl::has_internet()) {
-        message("No internet connection.")
+
+  if (is.na(not_chr_1L_lgl)) {
+    is_chr_1L_lgl <- NA
+    not_chr_1L_lgl <- FALSE
+  } else {
+    is_chr_1L_lgl <- !not_chr_1L_lgl
+  }
+
+  if (identical(tests_chr, character(0))) {
+
+    tests_chr <- c(
+      "504 Gateway Time-out",
+      "HTTP status was '504",
+      "cannot open the connection to ",
+      "unknown input format",
+      "Attempt to get feed was unsuccessful",
+      "Not Found \\(HTTP 404\\)",
+      "GitHub API error \\(404\\)",
+      "Bad Request \\(HTTP 400\\)",
+      "Cannot access release data for repo",
+      "HTTP error 404",
+      "Could not resolve host",
+      "Could not parse",
+      "does not exist in current working directory",
+      "Could not retrieve Dataset ID from persistent identifier",
+      "Unknown HTTP verb"
+    )
+
+  }
+
+  if (!curl::has_internet()) {
+
+    message("No internet connection.")
+
+    object_xx <- invisible(NULL)
+
+  } else {
+
+    object_xx <- tryCatch({
+
+      if (identical(fn, readRDS)) {
+
+        if (!grepl("www.|http:|https:", url_1L_chr)) {
+
+          stop(
+            "Valid URL must be supplied if using readRDS to source an internet file."
+          )
+
+        }
+
+        tmp_f <- tempfile(fileext = ".RDS")
+
+        on.exit(
+          unlink(tmp_f),
+          add = TRUE
+        )
+        utils::download.file(
+          url = url_1L_chr,
+          destfile = tmp_f,
+          mode = "wb",
+          quiet = TRUE
+        )
+
+        readRDS(tmp_f)
+
+      } else {
+
+        rlang::exec(
+          fn,
+          url_1L_chr,
+          !!!args_ls
+        )
+
+      }
+
+    },
+    error = function(e) {
+
+      conditionMessage(e)
+
+    })
+
+    if (is.character(object_xx)) {
+
+      if (any(
+        tests_chr %>%
+        purrr::map_lgl(
+          ~ stringr::str_detect(
+            object_xx[1],
+            .x
+          )
+        )
+      ) | not_chr_1L_lgl) {
+
+        message(object_xx)
+
         object_xx <- invisible(NULL)
-    }
-    else {
-        if (!is.null(url_xx) | is.null(url_1L_chr)) {
-            object_xx <- suppressWarnings(tryCatch(tryCatch(rlang::exec(fn,
-                url_xx, !!!args_ls)), error = function(e) conditionMessage(e)))
-            if (is.character(object_xx)) {
-                if (any(tests_chr %>% purrr::map_lgl(~stringr::str_detect(object_xx[1],
-                  .x))) | not_chr_1L_lgl) {
-                  message(object_xx)
-                  object_xx <- invisible(NULL)
-                }
-                else {
-                  if (is.na(is_chr_1L_lgl)) {
-                    message("A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.")
-                  }
-                }
-            }
+
+      } else {
+
+        if (is.na(is_chr_1L_lgl)) {
+
+          message(
+            paste0(
+              "A character string is being returned. ",
+              "If this is not what you expected, it is likely ",
+              "to be the error message produced when the ",
+              "requested online resource has not been found. ",
+              "Set the not_chr_1L_lgl argument to TRUE to ",
+              "force a NULL return value when an internet ",
+              "resource is not found."
+            )
+          )
+
         }
-        else {
-            object_xx <- NULL
-            message("Valid URL must be supplied if using ReadRDS method to source internet file")
-        }
+
+      }
+
     }
-    return(object_xx)
+
+  }
+
+  return(object_xx)
+
 }
 #' Get libraries list
 #' @description get_libraries_ls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get libraries list. The function returns Libraries (a list).
