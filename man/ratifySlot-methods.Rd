@@ -2,28 +2,41 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_ratifySlot.R
 \name{ratifySlot}
 \alias{ratifySlot}
-\alias{ratifySlot-Ready4Module}
-\alias{ratifySlot,Ready4Module-method}
-\title{Apply the ratify method to a model module slot}
+\alias{ratifySlot-Ready4}
+\alias{ratifySlot,Ready4-method}
+\title{Apply the ratify method to a specified slot}
 \usage{
 ratifySlot(x, slot_nm_1L_chr, ...)
 
-\S4method{ratifySlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
+\S4method{ratifySlot}{Ready4}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Module}
+\item{x}{An object that inherits from Ready4.}
 
-\item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+\item{slot_nm_1L_chr}{Name of the slot to which the ratify method
+should be applied (a character vector of length one).}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments passed to ratify.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+An updated version of the supplied object.
 
-A ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+An updated version of the supplied object.
 }
 \description{
-ratifySlot() is a convenience method that applies the ratify method to a specified slot of a model module.
+ratifySlot() is a convenience method that applies the
+ratify method to a specified slot of a Ready4 object and updates the
+object with the result.
 
-ratifySlot method applied to Ready4Module
+Apply the ratify method to the value stored in a
+specified slot of a Ready4 object and assign the resulting value
+back to that slot.
+}
+\details{
+Apply the ratify method to a specified slot of a Ready4 object and
+update the object with the result.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.
 }

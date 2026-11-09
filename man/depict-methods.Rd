@@ -2,18 +2,18 @@
 % Please edit documentation in R/grp_generics.R
 \name{depict}
 \alias{depict}
-\title{Depict (plot) features of model module data}
+\title{Visualise object features}
 \usage{
 depict(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A ggplot, gg or other plot type class.
+The object returned by the applicable depict method.
 }
 \description{
-depict() is a method that plots features of data contained in a model module (or sub-module).
+depict() visualises selected features of an object.
 }

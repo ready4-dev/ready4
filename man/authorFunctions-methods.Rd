@@ -2,18 +2,23 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorFunctions}
 \alias{authorFunctions}
-\title{Author and document functions}
+\title{Create and document functions}
 \usage{
 authorFunctions(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A Ready4 object or other object for which an appropriate
+authorFunctions method exists.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+The object returned by the applicable authorFunctions method.
 }
 \description{
-authorFunctions() is a method that authors and saves R package files files necessary for creating and documenting functions that implement model module algorithms.
+authorFunctions() creates, documents and saves function
+definitions.
+
+This generic is primarily maintained for compatibility with legacy
+ready4 package development workflows.
 }

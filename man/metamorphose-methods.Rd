@@ -2,18 +2,22 @@
 % Please edit documentation in R/grp_generics.R
 \name{metamorphose}
 \alias{metamorphose}
-\title{Metamorphose a model module to a model module of a different (non-inheriting) class}
+\title{Transform a Ready4 object into another Ready4 object}
 \usage{
 metamorphose(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module)}
+\item{x}{A Ready4 object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module) of a different class to that supplied to the method.
+A Ready4 object representing a transformed version of the
+supplied object.
 }
 \description{
-metamorphose() is a method that transforms a model module into a model module of a different (non-inheriting) class.
+metamorphose() converts a Ready4 object into a different
+Ready4 object representation. The resulting object will typically
+belong to a different class that is not an inheriting class of the
+input object.
 }

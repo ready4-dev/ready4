@@ -2,28 +2,39 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_characterizeSlot.R
 \name{characterizeSlot}
 \alias{characterizeSlot}
-\alias{characterizeSlot-Ready4Module}
-\alias{characterizeSlot,Ready4Module-method}
-\title{Apply the characterize method to a model module slot}
+\alias{characterizeSlot-Ready4}
+\alias{characterizeSlot,Ready4-method}
+\title{Apply the characterize method to a specified slot}
 \usage{
 characterizeSlot(x, slot_nm_1L_chr, ...)
 
-\S4method{characterizeSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
+\S4method{characterizeSlot}{Ready4}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Module}
+\item{x}{An object that inherits from Ready4.}
 
-\item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+\item{slot_nm_1L_chr}{Name of the slot to which the characterize method
+should be applied (a character vector of length one).}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments passed to characterize.}
 }
 \value{
-Either a model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or a data.frame, tibble or other table class.
+The object returned by applying characterize to the specified
+slot.
 
-Either a ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or a data.frame, tibble or other table class.
+The object returned by applying characterize to the specified slot.
 }
 \description{
-characterizeSlot() is a convenience method that applies the characterize method to a specified slot of a model module.
+characterizeSlot() is a convenience method that applies
+the characterize method to a specified slot of a Ready4 object.
 
-characterizeSlot method applied to Ready4Module
+Apply the characterize method to the value stored in a
+specified slot of a Ready4 object.
+}
+\details{
+Apply the characterize method to a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.
 }

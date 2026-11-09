@@ -2,18 +2,18 @@
 % Please edit documentation in R/grp_generics.R
 \name{ingest}
 \alias{ingest}
-\title{Ingest data}
+\title{Import external data}
 \usage{
 ingest(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
+The object returned by the applicable ingest method.
 }
 \description{
-ingest() is a method that ingests data saved in external files into a model module or submodule.
+ingest() reads data from external sources into an object.
 }

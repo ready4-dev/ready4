@@ -1,4 +1,13 @@
 # ready4 0.2.0
+Added new slotless Ready4 root class.
+
+Ready4Module now extends Ready4 and is retained for backwards compatibility.
+
+Framework methods now dispatch on Ready4.
+
+New development should generally inherit directly from Ready4.
+
+Improved internal slot access infrastructure and documentation.
 
 # ready4 0.1.20
 This patch makes minor updates to some vignettes and addresses bugs in some of the functions used to help document modelling projects.

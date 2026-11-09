@@ -17,6 +17,7 @@ development:
 reference:
 - title: "S4 Classes"
 - contents:
+  - Ready4
   - Ready4Module
   - Ready4Private
   - Ready4Project
@@ -80,18 +81,18 @@ reference:
   - shareSlot
 - title: "Methods"
 - contents:
-  - authorSlot-Ready4Module
-  - characterizeSlot-Ready4Module
-  - depictSlot-Ready4Module
-  - enhanceSlot-Ready4Module
-  - exhibitSlot-Ready4Module
-  - ingestSlot-Ready4Module
-  - investigateSlot-Ready4Module
-  - manufactureSlot-Ready4Module
-  - metamorphoseSlot-Ready4Module
-  - procureSlot-Ready4Module
-  - prognosticateSlot-Ready4Module
-  - ratifySlot-Ready4Module
-  - reckonSlot-Ready4Module
-  - renewSlot-Ready4Module
-  - shareSlot-Ready4Module
+  - authorSlot-Ready4
+  - characterizeSlot-Ready4
+  - depictSlot-Ready4
+  - enhanceSlot-Ready4
+  - exhibitSlot-Ready4
+  - ingestSlot-Ready4
+  - investigateSlot-Ready4
+  - manufactureSlot-Ready4
+  - metamorphoseSlot-Ready4
+  - procureSlot-Ready4
+  - prognosticateSlot-Ready4
+  - ratifySlot-Ready4
+  - reckonSlot-Ready4
+  - renewSlot-Ready4
+  - shareSlot-Ready4

@@ -2,28 +2,38 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_reckonSlot.R
 \name{reckonSlot}
 \alias{reckonSlot}
-\alias{reckonSlot-Ready4Module}
-\alias{reckonSlot,Ready4Module-method}
-\title{Apply the reckon method to a model module slot}
+\alias{reckonSlot-Ready4}
+\alias{reckonSlot,Ready4-method}
+\title{Apply the reckon method to a specified slot}
 \usage{
 reckonSlot(x, slot_nm_1L_chr, ...)
 
-\S4method{reckonSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
+\S4method{reckonSlot}{Ready4}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Module}
+\item{x}{An object that inherits from Ready4.}
 
-\item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+\item{slot_nm_1L_chr}{Name of the slot to which the reckon method
+should be applied (a character vector of length one).}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments passed to reckon.}
 }
 \value{
-A numeric class.
+The object returned by applying reckon to the specified slot.
 
-A numeric class.
+The object returned by applying reckon to the specified slot.
 }
 \description{
-reckonSlot() is a convenience method that applies the reckon method to a specified slot of a model module.
+reckonSlot() is a convenience method that applies the
+reckon method to a specified slot of a Ready4 object.
 
-reckonSlot method applied to Ready4Module
+Apply the reckon method to the value stored in a
+specified slot of a Ready4 object.
+}
+\details{
+Apply the reckon method to a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.
 }

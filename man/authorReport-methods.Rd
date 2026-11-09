@@ -2,18 +2,20 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorReport}
 \alias{authorReport}
-\title{Author and save a report}
+\title{Create reports}
 \usage{
 authorReport(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A Ready4 object or other object for which an appropriate
+authorReport method exists.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+The object returned by the applicable authorReport method.
 }
 \description{
-authorReport() is a method that authors and saves a report.
+authorReport() generates and saves reports derived from
+an object.
 }

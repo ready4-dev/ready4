@@ -1,19 +1,43 @@
 #'
 #' metamorphoseSlot
-#' @name metamorphoseSlot-Ready4Module
-#' @description metamorphoseSlot method applied to Ready4Module
-#' @param x An object of class Ready4Module
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A ready4 model module (an instance of a class that inherits from Ready4Module).
+#'
+#' Apply the metamorphose method to a specified slot of a Ready4 object.
+#'
+#' @name metamorphoseSlot-Ready4
+#' @description Apply the metamorphose method to the value stored in a
+#' specified slot of a Ready4 object.
+#'
+#' @param x An object that inherits from Ready4.
+#' @param slot_nm_1L_chr Name of the slot to which the metamorphose method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments passed to metamorphose.
+#'
+#' @return The object returned by applying metamorphose to the specified slot.
+#'
+#' @details
+#' The Ready4 class itself is slotless. This method is therefore intended
+#' primarily for classes that inherit from Ready4 and define one or more
+#' slots.
+#'
 #' @rdname metamorphoseSlot-methods
-#' @aliases metamorphoseSlot,Ready4Module-method
+#' @aliases metamorphoseSlot,Ready4-method
 #' @export
+methods::setMethod(
+  "metamorphoseSlot",
+  "Ready4",
+  function(x,
+           slot_nm_1L_chr,
+           ...) {
 
-methods::setMethod("metamorphoseSlot", "Ready4Module", function(x,
-                                                                slot_nm_1L_chr,
-                                                                ...){
-  slot_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))
-  y_xx <- metamorphose(slot_xx,...)
-  return(y_xx)
-})
+    y_xx <- metamorphose(
+      procureSlot(
+        x,
+        slot_nm_1L_chr = slot_nm_1L_chr
+      ),
+      ...
+    )
+
+    return(y_xx)
+
+  }
+)

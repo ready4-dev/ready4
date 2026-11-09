@@ -2,28 +2,39 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_metamorphoseSlot.R
 \name{metamorphoseSlot}
 \alias{metamorphoseSlot}
-\alias{metamorphoseSlot-Ready4Module}
-\alias{metamorphoseSlot,Ready4Module-method}
-\title{Apply the metamorphose method to a model module slot}
+\alias{metamorphoseSlot-Ready4}
+\alias{metamorphoseSlot,Ready4-method}
+\title{Apply the metamorphose method to a specified slot}
 \usage{
 metamorphoseSlot(x, slot_nm_1L_chr, ...)
 
-\S4method{metamorphoseSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
+\S4method{metamorphoseSlot}{Ready4}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Module}
+\item{x}{An object that inherits from Ready4.}
 
-\item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+\item{slot_nm_1L_chr}{Name of the slot to which the metamorphose method
+should be applied (a character vector of length one).}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments passed to metamorphose.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module).
+The object returned by applying metamorphose to the specified
+slot.
 
-A ready4 model module (an instance of a class that inherits from Ready4Module).
+The object returned by applying metamorphose to the specified slot.
 }
 \description{
-metamorphoseSlot() is a convenience method that applies the metamorphose method to a specified slot of a model module.
+metamorphoseSlot() is a convenience method that applies
+the metamorphose method to a specified slot of a Ready4 object.
 
-metamorphoseSlot method applied to Ready4Module
+Apply the metamorphose method to the value stored in a
+specified slot of a Ready4 object.
+}
+\details{
+Apply the metamorphose method to a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.
 }

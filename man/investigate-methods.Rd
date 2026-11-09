@@ -2,18 +2,19 @@
 % Please edit documentation in R/grp_generics.R
 \name{investigate}
 \alias{investigate}
-\title{Investigate solutions to an inverse problem}
+\title{Investigate inverse problems}
 \usage{
 investigate(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
+The object returned by the applicable investigate method.
 }
 \description{
-investigate() is a method that applies an algorithm to data contained in a model module in order to solve an inverse problem (ie, identify a statistical model that can generate approximations of that data).
+investigate() applies methods for inferring models,
+structures or generating mechanisms from observed data.
 }

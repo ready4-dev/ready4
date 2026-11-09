@@ -12,7 +12,7 @@
 methods::setMethod("characterizeSlot", "Ready4Module", function (x,
                                                                  slot_nm_1L_chr,
                                                                  ...){
-  slot_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))
+   slot_xx <- methods::slot(x, slot_nm_1L_chr)
   y_xx<- characterize(slot_xx,...)
   return(y_xx)
 })

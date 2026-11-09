@@ -30,12 +30,12 @@ The `ready4` facilitates modular model development by supplying a template modul
 ## Use
 
 ### ready4 Model Modules
-As we use the term, a "model module" is comprised of both a data-structure (an S4 class) and the algorithms (or "methods") that are associated with that data-structure. Model modules can be created from a template - the `ready4` package's `Ready4Module` class. 
+As we use the term, a "model module" is comprised of both a data-structure (an S4 class) and the algorithms (or "methods") that are associated with that data-structure. Model modules can be created from a template - the `ready4` package's `Ready4` class. 
 
-We can create an object (`X`) from the `Ready4Module` template using the following command.
+We can create an object (`X`) from the `Ready4` template using the following command.
 
 ```{r}
-X <- Ready4Module()
+X <- Ready4()
 ```
 
 However, if we inspect `X` we can see it is of limited use as it contains no data other than an empty element called `dissemination_1L_chr`.
@@ -44,7 +44,7 @@ However, if we inspect `X` we can see it is of limited use as it contains no dat
 str(X)
 ```
 
-The `Ready4Module` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4Module` is to be the parent class of other model modules. Prototype tools for authoring modules from this template are described [here](https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/).
+The `Ready4` class is therefore not intended to be called directly. Instead, the  purpose of `Ready4` is to be the parent class of other model modules. Prototype tools for authoring modules from this template are described [here](https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/).
 
 ::: {.card .border-primary .mb-3 style="max-width: 20rem;"}
 
@@ -56,7 +56,7 @@ The `Ready4Module` class is therefore not intended to be called directly. Instea
 ::: {.card-title}
 #### Module
 :::
-An instance of `Ready4Module` (or classes that inherit from `Ready4Module`) and its associated methods.
+An instance of `Ready4` (or classes that inherit from `Ready4`) and its associated methods.
 :::
 :::
 

@@ -23,9 +23,9 @@ Transparency is one of the underpinning principles of ethical modelling practice
 ## Use
 `ready4` includes a number of core generic functions which describe the main types of method to be implemented by model modules. These generics correspond exactly to the "core", "slot" and "extended" commands described in [another article](https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/).
 
-Notably, the `ready4` package does not associate any core or extended methods with the `Ready4Module` [template module](https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/). Instead, model developers need to decide which core and extended generics they associate with the modules they derive from the `Ready4Module` template. This decision is typically made when authoring the methods associated with model modules.
+Notably, the `ready4` package does not associate any core or extended methods with the `Ready4` [template module](https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/). Instead, model developers need to decide which core and extended generics they associate with the modules they derive from the `Ready4` template. This decision is typically made when authoring the methods associated with model modules.
 
-Currently, the only methods defined for `Ready4Module` are [slot-methods](https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/). By default, these slot methods are inherited by all modules derived from the `Ready4Module` template.  These methods can be itemised using the `get_methods` function. 
+Currently, the only methods defined for `Ready4` are [slot-methods](https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/). By default, these slot methods are inherited by all modules derived from the `Ready4` template.  These methods can be itemised using the `get_methods` function. 
 
 ```{r}
 get_methods()

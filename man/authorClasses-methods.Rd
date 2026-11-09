@@ -2,18 +2,22 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorClasses}
 \alias{authorClasses}
-\title{Author and document classes}
+\title{Create and document classes}
 \usage{
 authorClasses(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A Ready4 object or other object for which an appropriate
+authorClasses method exists.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+The object returned by the applicable authorClasses method.
 }
 \description{
-authorClasses() is a method that authors and saves R package files for creating and documenting classes to describe the data structures of model modules.
+authorClasses() creates and documents class definitions.
+
+This generic is primarily maintained for compatibility with legacy
+ready4 package development workflows.
 }

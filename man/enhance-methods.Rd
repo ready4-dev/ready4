@@ -2,18 +2,20 @@
 % Please edit documentation in R/grp_generics.R
 \name{enhance}
 \alias{enhance}
-\title{Enhance a model module by adding new elements}
+\title{Extend an object's structure}
 \usage{
 enhance(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method.
+An enhanced version of the supplied object.
 }
 \description{
-enhance() is a method that adds new data fields (columns for tabular data, elements for arrays) and values to a model module by transforming it into a module of an inheriting class.
+enhance() augments an object by adding new data,
+properties, components or functionality. The resulting object will
+typically belong to the same class or an inheriting class.
 }

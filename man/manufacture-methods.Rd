@@ -2,18 +2,19 @@
 % Please edit documentation in R/grp_generics.R
 \name{manufacture}
 \alias{manufacture}
-\title{Manufacture a new object}
+\title{Create a derived object}
 \usage{
 manufacture(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-An object other than a model module (an instance of a class that inherits from Ready4Module).
+A derived object that is not required to inherit from Ready4.
 }
 \description{
-manufacture() is a method that used data contained in a model module or submodule to create a new object (other than a model module).
+manufacture() uses an object to create a new derived
+object that is not itself required to inherit from Ready4.
 }

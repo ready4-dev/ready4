@@ -2,18 +2,19 @@
 % Please edit documentation in R/grp_generics.R
 \name{procure}
 \alias{procure}
-\title{Procure data from a model module}
+\title{Retrieve information from an object}
 \usage{
 procure(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-An object of the same class as that supplied to the method or of one of the same classes that constitute the input object's slots or elements.
+The object returned by the applicable procure method.
 }
 \description{
-procure() is a "getter"  method that retrieves data contained within a model module or sub-module.
+procure() retrieves data, components or metadata from
+an object.
 }

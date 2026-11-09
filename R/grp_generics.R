@@ -1,93 +1,125 @@
-#' Author and save files
+#' Create and save reusable artefacts
+#'
 #' @rdname author-methods
-#' @description author() is a method that authors and saves files.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+#' @description author() creates, documents and/or saves artefacts
+#' associated with an object.
+#' @param x A Ready4 object or other object for which an appropriate
+#' author method exists.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable author method.
 #' @export
 author <- function (x, ...)
 {
   UseMethod("author", x)
 }
 methods::setGeneric("author")
-#' Author and document classes
+
+#' Create and document classes
+#'
 #' @rdname authorClasses-methods
-#' @description authorClasses() is a method that authors and saves R package files for creating and documenting classes to describe the data structures of model modules.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+#' @description authorClasses() creates and documents class definitions.
+#'
+#' This generic is primarily maintained for compatibility with legacy
+#' ready4 package development workflows.
+#' @param x A Ready4 object or other object for which an appropriate
+#' authorClasses method exists.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable authorClasses method.
 #' @export
 authorClasses <- function (x, ...)
 {
   UseMethod("authorClasses", x)
 }
 methods::setGeneric("authorClasses")
-#' Author and document datasets
+
+#' Create and document datasets
+#'
 #' @rdname authorData-methods
-#' @description authorData() is a method that authors, documents and saves model module datasets.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+#' @description authorData() creates, documents and saves datasets.
+#' @param x A Ready4 object or other object for which an appropriate
+#' authorData method exists.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable authorData method.
 #' @export
 authorData <- function (x, ...)
 {
   UseMethod("authorData", x)
 }
 methods::setGeneric("authorData")
-#' Author and document functions
+
+#' Create and document functions
+#'
 #' @rdname authorFunctions-methods
-#' @description authorFunctions() is a method that authors and saves R package files files necessary for creating and documenting functions that implement model module algorithms.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+#' @description authorFunctions() creates, documents and saves function
+#' definitions.
+#'
+#' This generic is primarily maintained for compatibility with legacy
+#' ready4 package development workflows.
+#' @param x A Ready4 object or other object for which an appropriate
+#' authorFunctions method exists.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable authorFunctions method.
 #' @export
 authorFunctions <- function (x, ...)
 {
   UseMethod("authorFunctions", x)
 }
 methods::setGeneric("authorFunctions")
-#' Author and save a report
+
+#' Create reports
+#'
 #' @rdname authorReport-methods
-#' @description authorReport() is a method that authors and saves a report.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+#' @description authorReport() generates and saves reports derived from
+#' an object.
+#' @param x A Ready4 object or other object for which an appropriate
+#' authorReport method exists.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable authorReport method.
 #' @export
 authorReport <- function (x, ...)
 {
   UseMethod("authorReport", x)
 }
 methods::setGeneric("authorReport")
-#' Characterize model module data by generating (tabular) descriptive statistics
+
+#' Generate descriptive summaries
+#'
 #' @rdname characterize-methods
-#' @description characterize() is a method that generates descriptive tabular summaries about data contained in a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A data.frame, tibble or other table based class.
+#' @description characterize() generates descriptive summaries of an
+#' object's contents.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable characterize method.
 #' @export
 characterize <- function (x, ...)
 {
   UseMethod("characterize", x)
 }
 methods::setGeneric("characterize")
-#' Depict (plot) features of model module data
+
+#' Visualise object features
+#'
 #' @rdname depict-methods
-#' @description depict() is a method that plots features of data contained in a model module (or sub-module).
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A ggplot, gg or other plot type class.
+#' @description depict() visualises selected features of an object.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable depict method.
 #' @export
 depict <- function (x, ...)
 {
   UseMethod("depict", x)
 }
 methods::setGeneric("depict")
-#' Enhance a model module by adding new elements
+
+#' Extend an object's structure
+#'
 #' @rdname enhance-methods
-#' @description enhance() is a method that adds new data fields (columns for tabular data, elements for arrays) and values to a model module by transforming it into a module of an inheriting class.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method.
+#' @description enhance() augments an object by adding new data,
+#' properties, components or functionality. The resulting object will
+#' typically belong to the same class or an inheriting class.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return An enhanced version of the supplied object.
 #' @export
 enhance <- function (x, ...)
 {
@@ -95,60 +127,75 @@ enhance <- function (x, ...)
 }
 methods::setGeneric("enhance")
 
-#' Exhibit features of model module data by printing them to the R console
+#' Display object contents
+#'
 #' @rdname exhibit-methods
-#' @description exhibit() is a method that prints to console selected features of data contained in a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+#' @description exhibit() displays selected features of an object.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable exhibit method.
 #' @export
 exhibit <- function (x, ...)
 {
   UseMethod("exhibit", x)
 }
 methods::setGeneric("exhibit")
-#' Ingest data
+
+#' Import external data
+#'
 #' @rdname ingest-methods
-#' @description ingest() is a method that ingests data saved in external files into a model module or submodule.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
+#' @description ingest() reads data from external sources into an object.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable ingest method.
 #' @export
 ingest <- function (x, ...)
 {
   UseMethod("ingest", x)
 }
 methods::setGeneric("ingest")
-#' Investigate solutions to an inverse problem
+
+#' Investigate inverse problems
+#'
 #' @rdname investigate-methods
-#' @description investigate() is a method that applies an algorithm to data contained in a model module in order to solve an inverse problem (ie, identify a statistical model that can generate approximations of that data).
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance).
+#' @description investigate() applies methods for inferring models,
+#' structures or generating mechanisms from observed data.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable investigate method.
 #' @export
 investigate <- function (x, ...)
 {
   UseMethod("investigate", x)
 }
 methods::setGeneric("investigate")
-#' Manufacture a new object
+
+#' Create a derived object
+#'
 #' @rdname manufacture-methods
-#' @description manufacture() is a method that used data contained in a model module or submodule to create a new object (other than a model module).
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return An object other than a model module (an instance of a class that inherits from Ready4Module).
+#' @description manufacture() uses an object to create a new derived
+#' object that is not itself required to inherit from Ready4.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return A derived object that is not required to inherit from Ready4.
 #' @export
 manufacture <- function (x, ...)
 {
   UseMethod("manufacture", x)
 }
 methods::setGeneric("manufacture")
-#' Metamorphose a model module to a model module of a different (non-inheriting) class
+
+#' Transform a Ready4 object into another Ready4 object
+#'
 #' @rdname metamorphose-methods
-#' @description metamorphose() is a method that transforms a model module into a model module of a different (non-inheriting) class.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) of a different class to that supplied to the method.
+#' @description metamorphose() converts a Ready4 object into a different
+#' Ready4 object representation. The resulting object will typically
+#' belong to a different class that is not an inheriting class of the
+#' input object.
+#' @param x A Ready4 object.
+#' @param ... Additional arguments.
+#' @return A Ready4 object representing a transformed version of the
+#' supplied object.
 #' @export
 metamorphose <- function (x, ...)
 {
@@ -156,71 +203,90 @@ metamorphose <- function (x, ...)
 }
 methods::setGeneric("metamorphose")
 
-#' Procure data from a model module
+#' Retrieve information from an object
+#'
 #' @rdname procure-methods
-#' @description procure() is a "getter"  method that retrieves data contained within a model module or sub-module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return An object of the same class as that supplied to the method or of one of the same classes that constitute the input object's slots or elements.
+#' @description procure() retrieves data, components or metadata from
+#' an object.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable procure method.
 #' @export
 procure <- function (x, ...)
 {
   UseMethod("procure", x)
 }
-#' Prognosticate (make predictions) by solving a forward problem
+methods::setGeneric("procure")
+
+#' Generate predictions
+#'
 #' @rdname prognosticate-methods
-#' @description prognosticate() is a method that applies an algorithm to data contained in a model module to solve a forward problem (i.e., use simulation and statistical methods to make predictions).
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module).
+#' @description prognosticate() generates predictions by applying
+#' forecasting, simulation or statistical methods.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable prognosticate method.
 #' @export
 prognosticate <- function (x, ...)
 {
   UseMethod("prognosticate", x)
 }
 methods::setGeneric("prognosticate")
-#' Ratify that input or output data meet validity criteria
+
+#' Validate and reconcile object contents
+#'
 #' @rdname ratify-methods
-#' @description ratify() is a method that validates that a model module or submodule conforms to specified internal consistency criteria, potentially updating the invalid values in the model module so that these criteria are met.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method.
+#' @description ratify() assesses whether an object satisfies specified
+#' validity criteria and may update the object so that those criteria are
+#' met.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return An updated version of the supplied object.
 #' @export
 ratify <- function (x, ...)
 {
   UseMethod("ratify", x)
 }
 methods::setGeneric("ratify")
-#' Reckon (calculate) a value
+
+#' Compute derived quantities
+#'
 #' @rdname reckon-methods
-#' @description reckon() is a method that performs a calculation using data contained in a model module (or sub-module).
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A numeric class.
+#' @description reckon() performs calculations using the contents of an
+#' object.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable reckon method.
 #' @export
 reckon <- function (x, ...)
 {
   UseMethod("reckon", x)
 }
 methods::setGeneric("reckon")
-#' Renew (update) values
+
+#' Update object contents
+#'
 #' @rdname renew-methods
-#' @description renew() is a "setter" method that updates values of selected data contained in a model module or sub-module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module)  or submodule (any S3 class instance) of the same class as that supplied to the method.
+#' @description renew() updates values contained in an object without
+#' changing its structure.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return An updated version of the supplied object.
 #' @export
 renew <- function (x, ...)
 {
   UseMethod("renew", x)
 }
 methods::setGeneric("renew")
-#' Share data via an online repository
+
+#' Share data or outputs
+#'
 #' @rdname share-methods
-#' @description share() is a method that uploads data contained in a model module to an online repository. If requested, the method will also publish the updated repository.
-#' @param x A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+#' @description share() disseminates data, results or other outputs
+#' through repositories, reports, publications or other channels.
+#' @param x An object.
+#' @param ... Additional arguments.
+#' @return The object returned by the applicable share method.
 #' @export
 share <- function (x, ...)
 {
@@ -228,12 +294,16 @@ share <- function (x, ...)
 }
 methods::setGeneric("share")
 
-#' Apply the author method to a model module slot
+#' Apply the author method to a specified slot
+#'
 #' @rdname authorSlot-methods
-#' @description authorSlot() is a convenience method that applies the author method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no value (when called for side effects only).
+#' @description authorSlot() is a convenience method that applies the
+#' author method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the author method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying author to the specified slot.
 #' @export
 authorSlot <- function (x,
                         slot_nm_1L_chr,
@@ -243,13 +313,17 @@ authorSlot <- function (x,
 }
 methods::setGeneric("authorSlot")
 
-#' Apply the characterize method to a model module slot
+#' Apply the characterize method to a specified slot
+#'
 #' @rdname characterizeSlot-methods
-#' @description characterizeSlot() is a convenience method that applies the characterize method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or a data.frame, tibble or other table class.
+#' @description characterizeSlot() is a convenience method that applies
+#' the characterize method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the characterize
+#' method should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying characterize to the specified
+#' slot.
 #' @export
 characterizeSlot <- function (x,
                               slot_nm_1L_chr,
@@ -259,13 +333,16 @@ characterizeSlot <- function (x,
 }
 methods::setGeneric("characterizeSlot")
 
-#' Apply the depict method to a model module slot
+#' Apply the depict method to a specified slot
+#'
 #' @rdname depictSlot-methods
-#' @description depictSlot() is a convenience method that applies the depict method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no value (when called for side effects only).
+#' @description depictSlot() is a convenience method that applies the
+#' depict method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the depict method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying depict to the specified slot.
 #' @export
 depictSlot <- function (x,
                         slot_nm_1L_chr,
@@ -275,13 +352,17 @@ depictSlot <- function (x,
 }
 methods::setGeneric("depictSlot")
 
-#' Apply the enhance method to a model module slot
+#' Apply the enhance method to a specified slot
+#'
 #' @rdname enhanceSlot-methods
-#' @description enhanceSlot() is a convenience method that applies the enhance method to a specified slot a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+#' @description enhanceSlot() is a convenience method that applies the
+#' enhance method to a specified slot of a Ready4 object and updates the
+#' object with the result.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the enhance method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return An updated version of the supplied object.
 #' @export
 enhanceSlot <- function (x,
                          slot_nm_1L_chr,
@@ -292,13 +373,16 @@ enhanceSlot <- function (x,
 methods::setGeneric("enhanceSlot")
 
 
-#' Apply the exhibit method to a model module slot
+#' Apply the exhibit method to a specified slot
+#'
 #' @rdname exhibitSlot-methods
-#' @description exhibitSlot() is a convenience method that applies the exhibit method to a specified slot a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no return value (when called purely for side effects).
+#' @description exhibitSlot() is a convenience method that applies the
+#' exhibit method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the exhibit method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying exhibit to the specified slot.
 #' @export
 exhibitSlot <- function (x,
                          slot_nm_1L_chr,
@@ -308,13 +392,16 @@ exhibitSlot <- function (x,
 }
 methods::setGeneric("exhibitSlot")
 
-#' Apply the ingest method to a model module slot
+#' Apply the ingest method to a specified slot
+#'
 #' @rdname ingestSlot-methods
-#' @description ingestSlot() is a convenience method that applies the ingest method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+#' @description ingestSlot() is a convenience method that applies the
+#' ingest method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the ingest method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying ingest to the specified slot.
 #' @export
 ingestSlot <- function (x,
                         slot_nm_1L_chr,
@@ -324,13 +411,17 @@ ingestSlot <- function (x,
 }
 methods::setGeneric("ingestSlot")
 
-#' Apply the investigate method to a model module slot
+#' Apply the investigate method to a specified slot
+#'
 #' @rdname investigateSlot-methods
-#' @description investigateSlot() is a convenience method that applies the investigate method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module).
+#' @description investigateSlot() is a convenience method that applies
+#' the investigate method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the investigate
+#' method should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying investigate to the specified
+#' slot.
 #' @export
 investigateSlot <- function (x,
                              slot_nm_1L_chr,
@@ -340,13 +431,17 @@ investigateSlot <- function (x,
 }
 methods::setGeneric("investigateSlot")
 
-#' Apply the manufacture method to a model module slot
+#' Apply the manufacture method to a specified slot
+#'
 #' @rdname manufactureSlot-methods
-#' @description manufactureSlot() is a convenience method that applies the manufacture method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return An object that is not the the same class as that supplied to the method.
+#' @description manufactureSlot() is a convenience method that applies
+#' the manufacture method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the manufacture method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying manufacture to the specified
+#' slot.
 #' @export
 manufactureSlot <- function (x,
                              slot_nm_1L_chr,
@@ -355,13 +450,18 @@ manufactureSlot <- function (x,
   UseMethod("manufactureSlot", x)
 }
 methods::setGeneric("manufactureSlot")
-#' Apply the metamorphose method to a model module slot
+
+#' Apply the metamorphose method to a specified slot
+#'
 #' @rdname metamorphoseSlot-methods
-#' @description metamorphoseSlot() is a convenience method that applies the metamorphose method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module).
+#' @description metamorphoseSlot() is a convenience method that applies
+#' the metamorphose method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the metamorphose
+#' method should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying metamorphose to the specified
+#' slot.
 #' @export
 metamorphoseSlot <- function (x,
                               slot_nm_1L_chr,
@@ -370,14 +470,20 @@ metamorphoseSlot <- function (x,
   UseMethod("metamorphoseSlot", x)
 }
 methods::setGeneric("metamorphoseSlot")
-methods::setGeneric("procure")
-#' Procure (get) data from a slot
+
+
+#' Retrieve the value stored in a specified slot
+#'
 #' @rdname procureSlot-methods
-#' @description procureSlot() is a "getter" method that, depending on input arguments, retrieves either data contained in a specified model module slot (the default behaviour) or the value returned by applying the procure method to the specified slot.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or an instance of a class contained in that Ready4Module's slots.
+#' @description procureSlot() retrieves the value stored in a specified
+#' slot of a Ready4 object. Optionally, the procure method can be applied
+#' to the retrieved value before it is returned.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to retrieve
+#' (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The value stored in the specified slot, or the object returned
+#' by applying procure to that value.
 #' @export
 procureSlot <- function (x,
                          slot_nm_1L_chr,
@@ -386,13 +492,18 @@ procureSlot <- function (x,
   UseMethod("procureSlot", x)
 }
 methods::setGeneric("procureSlot")
-#' Apply the prognosticate method to a model module slot
+
+#' Apply the prognosticate method to a specified slot
+#'
 #' @rdname prognosticateSlot-methods
-#' @description prognosticateSlot() is a convenience method that applies the prognosticate method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module).
+#' @description prognosticateSlot() is a convenience method that applies
+#' the prognosticate method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the prognosticate
+#' method should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying prognosticate to the specified
+#' slot.
 #' @export
 prognosticateSlot <- function (x,
                                slot_nm_1L_chr,
@@ -401,13 +512,18 @@ prognosticateSlot <- function (x,
   UseMethod("prognosticateSlot", x)
 }
 methods::setGeneric("prognosticateSlot")
-#' Apply the ratify method to a model module slot
+
+#' Apply the ratify method to a specified slot
+#'
 #' @rdname ratifySlot-methods
-#' @description ratifySlot() is a convenience method that applies the ratify method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+#' @description ratifySlot() is a convenience method that applies the
+#' ratify method to a specified slot of a Ready4 object and updates the
+#' object with the result.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the ratify method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return An updated version of the supplied object.
 #' @export
 ratifySlot <- function (x,
                         slot_nm_1L_chr,
@@ -416,13 +532,17 @@ ratifySlot <- function (x,
   UseMethod("ratifySlot", x)
 }
 methods::setGeneric("ratifySlot")
-#' Apply the reckon method to a model module slot
+
+#' Apply the reckon method to a specified slot
+#'
 #' @rdname reckonSlot-methods
-#' @description reckonSlot() is a convenience method that applies the reckon method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A numeric class.
+#' @description reckonSlot() is a convenience method that applies the
+#' reckon method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the reckon method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying reckon to the specified slot.
 #' @export
 reckonSlot <- function (x,
                         slot_nm_1L_chr,
@@ -431,14 +551,21 @@ reckonSlot <- function (x,
   UseMethod("reckonSlot", x)
 }
 methods::setGeneric("reckonSlot")
-#' Renew (set) the values of data in a module slot
+
+#' Update the value stored in a specified slot
+#'
 #' @rdname renewSlot-methods
-#' @description renewSlot() is a "setter" method that renews (sets) the value of a specified model module slot with either the value returned by applying the renew method to that slot (the default behaviour) or a supplied new value.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param new_val_xx New value (slot dependent object type), Default 'use_renew_mthd'
-#' @param ... Additional arguments
-#' @return A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+#' @description renewSlot() updates the value stored in a specified slot
+#' of a Ready4 object. If no replacement value is supplied, the renew
+#' method is first applied to the current slot value and the result is
+#' written back to the slot.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to update
+#' (a character vector of length one).
+#' @param new_val_xx New value to assign to the specified slot.
+#' @param ... Additional arguments.
+#' @return An updated version of the supplied object.
+#' @export model module (an instance of a class that inherits from Ready4) of the same class as that supplied to the method.
 #' @export
 renewSlot <- function (x,
                        slot_nm_1L_chr,
@@ -448,13 +575,17 @@ renewSlot <- function (x,
   UseMethod("renewSlot", x)
 }
 methods::setGeneric("renewSlot")
-#' Apply the share method to a model module slot
+
+#' Apply the share method to a specified slot
+#'
 #' @rdname shareSlot-methods
-#' @description shareSlot() is a convenience method that applies the share method to a specified slot of a model module.
-#' @param x A model module (an instance of a class that inherits from Ready4Module)
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return Either a model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no value (when called purely for side effects).
+#' @description shareSlot() is a convenience method that applies the
+#' share method to a specified slot of a Ready4 object.
+#' @param x A Ready4 object.
+#' @param slot_nm_1L_chr Name of the slot to which the share method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments.
+#' @return The object returned by applying share to the specified slot.
 #' @export
 shareSlot <- function (x,
                        slot_nm_1L_chr,

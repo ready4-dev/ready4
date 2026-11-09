@@ -2,18 +2,19 @@
 % Please edit documentation in R/grp_generics.R
 \name{reckon}
 \alias{reckon}
-\title{Reckon (calculate) a value}
+\title{Compute derived quantities}
 \usage{
 reckon(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A numeric class.
+The object returned by the applicable reckon method.
 }
 \description{
-reckon() is a method that performs a calculation using data contained in a model module (or sub-module).
+reckon() performs calculations using the contents of an
+object.
 }

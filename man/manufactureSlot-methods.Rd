@@ -2,28 +2,39 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_manufactureSlot.R
 \name{manufactureSlot}
 \alias{manufactureSlot}
-\alias{manufactureSlot-Ready4Module}
-\alias{manufactureSlot,Ready4Module-method}
-\title{Apply the manufacture method to a model module slot}
+\alias{manufactureSlot-Ready4}
+\alias{manufactureSlot,Ready4-method}
+\title{Apply the manufacture method to a specified slot}
 \usage{
 manufactureSlot(x, slot_nm_1L_chr, ...)
 
-\S4method{manufactureSlot}{Ready4Module}(x, slot_nm_1L_chr, ...)
+\S4method{manufactureSlot}{Ready4}(x, slot_nm_1L_chr, ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Module}
+\item{x}{An object that inherits from Ready4.}
 
-\item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+\item{slot_nm_1L_chr}{Name of the slot to which the manufacture method
+should be applied (a character vector of length one).}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments passed to manufacture.}
 }
 \value{
-An object that is not the the same class as that supplied to the method.
+The object returned by applying manufacture to the specified
+slot.
 
-An object that is not the the same class as that supplied to the method.
+The object returned by applying manufacture to the specified slot.
 }
 \description{
-manufactureSlot() is a convenience method that applies the manufacture method to a specified slot of a model module.
+manufactureSlot() is a convenience method that applies
+the manufacture method to a specified slot of a Ready4 object.
 
-manufactureSlot method applied to Ready4Module
+Apply the manufacture method to the value stored in a
+specified slot of a Ready4 object.
+}
+\details{
+Apply the manufacture method to a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.
 }

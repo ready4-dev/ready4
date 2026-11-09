@@ -2,18 +2,19 @@
 % Please edit documentation in R/grp_generics.R
 \name{prognosticate}
 \alias{prognosticate}
-\title{Prognosticate (make predictions) by solving a forward problem}
+\title{Generate predictions}
 \usage{
 prognosticate(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module).
+The object returned by the applicable prognosticate method.
 }
 \description{
-prognosticate() is a method that applies an algorithm to data contained in a model module to solve a forward problem (i.e., use simulation and statistical methods to make predictions).
+prognosticate() generates predictions by applying
+forecasting, simulation or statistical methods.
 }

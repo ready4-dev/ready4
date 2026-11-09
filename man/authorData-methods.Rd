@@ -2,18 +2,19 @@
 % Please edit documentation in R/grp_generics.R
 \name{authorData}
 \alias{authorData}
-\title{Author and document datasets}
+\title{Create and document datasets}
 \usage{
 authorData(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{A Ready4 object or other object for which an appropriate
+authorData method exists.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-Either a model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+The object returned by the applicable authorData method.
 }
 \description{
-authorData() is a method that authors, documents and saves model module datasets.
+authorData() creates, documents and saves datasets.
 }

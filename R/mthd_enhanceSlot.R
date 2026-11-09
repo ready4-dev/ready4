@@ -1,22 +1,51 @@
 #'
 #' enhanceSlot
-#' @name enhanceSlot-Ready4Module
-#' @description enhanceSlot method applied to Ready4Module
-#' @param x An object of class Ready4Module
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return A ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+#'
+#' Apply the enhance method to a specified slot of a Ready4 object and
+#' update the object with the result.
+#'
+#' @name enhanceSlot-Ready4
+#' @description Apply the enhance method to the value stored in a
+#' specified slot of a Ready4 object and assign the resulting value
+#' back to that slot.
+#'
+#' @param x An object that inherits from Ready4.
+#' @param slot_nm_1L_chr Name of the slot to which the enhance method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments passed to enhance.
+#'
+#' @return An updated version of the supplied object.
+#'
+#' @details
+#' The Ready4 class itself is slotless. This method is therefore intended
+#' primarily for classes that inherit from Ready4 and define one or more
+#' slots.
+#'
 #' @rdname enhanceSlot-methods
-#' @aliases enhanceSlot,Ready4Module-method
+#' @aliases enhanceSlot,Ready4-method
 #' @export
+methods::setMethod(
+  "enhanceSlot",
+  "Ready4",
+  function(x,
+           slot_nm_1L_chr,
+           ...) {
 
-methods::setMethod("enhanceSlot", "Ready4Module", function(x,
-                                                                slot_nm_1L_chr,
-                                                                ...){
-  slot_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))
-  y_xx<- enhance(slot_xx,...)
-  x <- renewSlot(x,
-                 new_val_xx = y_xx,
-                 slot_nm_1L_chr = slot_nm_1L_chr)
-  return(x)
-})
+    y_xx <- enhance(
+      procureSlot(
+        x,
+        slot_nm_1L_chr = slot_nm_1L_chr
+      ),
+      ...
+    )
+
+    x <- renewSlot(
+      x,
+      slot_nm_1L_chr = slot_nm_1L_chr,
+      new_val_xx = y_xx
+    )
+
+    return(x)
+
+  }
+)

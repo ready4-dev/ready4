@@ -2,34 +2,50 @@
 % Please edit documentation in R/grp_generics.R, R/mthd_renewSlot.R
 \name{renewSlot}
 \alias{renewSlot}
-\alias{renewSlot-Ready4Module}
-\alias{renewSlot,Ready4Module-method}
-\title{Renew (set) the values of data in a module slot}
+\alias{renewSlot-Ready4}
+\alias{renewSlot,Ready4-method}
+\title{Update the value stored in a specified slot}
 \usage{
 renewSlot(x, slot_nm_1L_chr, new_val_xx = "use_renew_mthd", ...)
 
-\S4method{renewSlot}{Ready4Module}(x, slot_nm_1L_chr, new_val_xx = "use_renew_mthd", ...)
+\S4method{renewSlot}{Ready4}(x, slot_nm_1L_chr, new_val_xx = "use_renew_mthd", ...)
 }
 \arguments{
-\item{x}{An object of class Ready4Module}
+\item{x}{An object that inherits from Ready4.}
 
-\item{slot_nm_1L_chr}{Slot name (a length one character vector)}
+\item{slot_nm_1L_chr}{Name of the slot to update
+(a character vector of length one).}
 
-\item{new_val_xx}{New value (slot dependent object type), Default 'use_renew_mthd'}
+\item{new_val_xx}{New value to assign to the specified slot.
+If equal to "use_renew_mthd", the renew method is applied to
+the current slot value and the result is assigned to the slot.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments passed to renew when
+new_val_xx is "use_renew_mthd".}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+An updated version of the supplied object.
 
-A ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method.
+An updated version of the supplied object.
 }
 \description{
-renewSlot() is a "setter" method that renews (sets) the value of a specified model module slot with either the value returned by applying the renew method to that slot (the default behaviour) or a supplied new value.
+renewSlot() updates the value stored in a specified slot
+of a Ready4 object. If no replacement value is supplied, the renew
+method is first applied to the current slot value and the result is
+written back to the slot.
 
-renewSlot method applied to Ready4Module
+Update the value stored in a specified slot of a
+Ready4 object. If no replacement value is supplied, the renew
+method is first applied to the slot value and the result is
+written back to the slot.
 }
-\examples{
-X <- Ready4Module()
-X <- renewSlot(X, "dissemination_1L_chr", new_val_xx = "Some new text.")
+\details{
+Update the value stored in a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.
+
+procureSlot and renewSlot provide the core slot access mechanisms used
+by many Ready4 slot methods.
 }

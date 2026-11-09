@@ -1,19 +1,43 @@
 #'
 #' authorSlot
-#' @name authorSlot-Ready4Module
-#' @description authorSlot method applied to Ready4Module
-#' @param x An object of class Ready4Module
-#' @param slot_nm_1L_chr Slot name (a length one character vector)
-#' @param ... Additional arguments
-#' @return Either a ready4 model module (an instance of a class that inherits from Ready4Module) of the same class as that supplied to the method or no value (when called for side effects only).
+#'
+#' Apply the author method to a specified slot of a Ready4 object.
+#'
+#' @name authorSlot-Ready4
+#' @description Apply the author method to the value stored in a
+#' specified slot of a Ready4 object.
+#'
+#' @param x An object that inherits from Ready4.
+#' @param slot_nm_1L_chr Name of the slot to which the author method
+#' should be applied (a character vector of length one).
+#' @param ... Additional arguments passed to author.
+#'
+#' @return The object returned by applying author to the specified slot.
+#'
+#' @details
+#' The Ready4 class itself is slotless. This method is therefore intended
+#' primarily for classes that inherit from Ready4 and define one or more
+#' slots.
+#'
 #' @rdname authorSlot-methods
-#' @aliases authorSlot,Ready4Module-method
+#' @aliases authorSlot,Ready4-method
 #' @export
-methods::setMethod("authorSlot", "Ready4Module", function (x,
-                                                                 slot_nm_1L_chr,
-                                                                 ...){
-  slot_xx <- eval(parse(text = paste0("x@",slot_nm_1L_chr)))
-  y_xx<- author(slot_xx,...)
-  return(y_xx)
-})
+methods::setMethod(
+  "authorSlot",
+  "Ready4",
+  function(x,
+           slot_nm_1L_chr,
+           ...) {
 
+    y_xx <- author(
+      procureSlot(
+        x,
+        slot_nm_1L_chr = slot_nm_1L_chr
+      ),
+      ...
+    )
+
+    return(y_xx)
+
+  }
+)

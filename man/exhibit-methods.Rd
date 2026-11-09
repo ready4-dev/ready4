@@ -2,18 +2,18 @@
 % Please edit documentation in R/grp_generics.R
 \name{exhibit}
 \alias{exhibit}
-\title{Exhibit features of model module data by printing them to the R console}
+\title{Display object contents}
 \usage{
 exhibit(x, ...)
 }
 \arguments{
-\item{x}{A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance)}
+\item{x}{An object.}
 
-\item{...}{Additional arguments}
+\item{...}{Additional arguments.}
 }
 \value{
-A model module (an instance of a class that inherits from Ready4Module) or submodule (any S3 class instance) of the same class as that supplied to the method or no return value (when called for side-effects only).
+The object returned by the applicable exhibit method.
 }
 \description{
-exhibit() is a method that prints to console selected features of data contained in a model module.
+exhibit() displays selected features of an object.
 }

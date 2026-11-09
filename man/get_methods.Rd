@@ -4,12 +4,12 @@
 \alias{get_methods}
 \title{Get the methods associated with a ready4 model module}
 \usage{
-get_methods(pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module")
+get_methods(pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4")
 }
 \arguments{
 \item{pkg_nm_1L_chr}{Package name (a character vector of length one), Default: 'ready4'}
 
-\item{cls_nm_1L_chr}{Class name (a character vector of length one), Default: 'Ready4Module'}
+\item{cls_nm_1L_chr}{Class name (a character vector of length one), Default: 'Ready4'}
 }
 \value{
 Methods (a character vector)
