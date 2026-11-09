@@ -17,6 +17,7 @@ To install the latest CRAN release, run the following command in your R
 console:
 
 ``` r
+
 utils::install.packages("ready4")
 ```
 
@@ -24,6 +25,7 @@ To install a development version of this software, run the following
 commands in your R console:
 
 ``` r
+
 utils::install.packages("devtools")
 
 devtools::install_github("ready4-dev/ready4")

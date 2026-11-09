@@ -1,16 +1,17 @@
-# Apply the reckon method to a model module slot
+# Apply the reckon method to a specified slot
 
 reckonSlot() is a convenience method that applies the reckon method to a
-specified slot of a model module.
+specified slot of a Ready4 object.
 
-reckonSlot method applied to Ready4Module
+Apply the reckon method to the value stored in a specified slot of a
+Ready4 object.
 
 ## Usage
 
 ``` r
 reckonSlot(x, slot_nm_1L_chr, ...)
 
-# S4 method for class 'Ready4Module'
+# S4 method for class 'Ready4'
 reckonSlot(x, slot_nm_1L_chr, ...)
 ```
 
@@ -18,18 +19,27 @@ reckonSlot(x, slot_nm_1L_chr, ...)
 
 - x:
 
-  An object of class Ready4Module
+  An object that inherits from Ready4.
 
 - slot_nm_1L_chr:
 
-  Slot name (a length one character vector)
+  Name of the slot to which the reckon method should be applied (a
+  character vector of length one).
 
 - ...:
 
-  Additional arguments
+  Additional arguments passed to reckon.
 
 ## Value
 
-A numeric class.
+The object returned by applying reckon to the specified slot.
 
-A numeric class.
+The object returned by applying reckon to the specified slot.
+
+## Details
+
+Apply the reckon method to a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.

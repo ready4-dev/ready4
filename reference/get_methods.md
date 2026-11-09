@@ -6,7 +6,7 @@ specified ready4 model module.
 ## Usage
 
 ``` r
-get_methods(pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module")
+get_methods(pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4")
 ```
 
 ## Arguments
@@ -17,7 +17,7 @@ get_methods(pkg_nm_1L_chr = "ready4", cls_nm_1L_chr = "Ready4Module")
 
 - cls_nm_1L_chr:
 
-  Class name (a character vector of length one), Default: 'Ready4Module'
+  Class name (a character vector of length one), Default: 'Ready4'
 
 ## Value
 

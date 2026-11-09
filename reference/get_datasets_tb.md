@@ -39,6 +39,7 @@ Datasets (a tibble)
 
 ``` r
 get_datasets_tb("ready4-dev/ready4")
+#> ⠙ 10 items, page 1 | 2ms
 #> # A tibble: 7 × 6
 #>   Dataverse         Name              Description Creator Contents Datasets_Meta
 #>   <chr>             <chr>             <chr>       <chr>   <list>   <list>       

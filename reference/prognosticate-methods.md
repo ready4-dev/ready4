@@ -1,8 +1,7 @@
-# Prognosticate (make predictions) by solving a forward problem
+# Generate predictions
 
-prognosticate() is a method that applies an algorithm to data contained
-in a model module to solve a forward problem (i.e., use simulation and
-statistical methods to make predictions).
+prognosticate() generates predictions by applying forecasting,
+simulation or statistical methods.
 
 ## Usage
 
@@ -14,13 +13,12 @@ prognosticate(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  An object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module).
+The object returned by the applicable prognosticate method.

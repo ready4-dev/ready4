@@ -1,7 +1,6 @@
-# Reckon (calculate) a value
+# Compute derived quantities
 
-reckon() is a method that performs a calculation using data contained in
-a model module (or sub-module).
+reckon() performs calculations using the contents of an object.
 
 ## Usage
 
@@ -13,13 +12,12 @@ reckon(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  An object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-A numeric class.
+The object returned by the applicable reckon method.

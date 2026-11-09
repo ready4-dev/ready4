@@ -1,6 +1,6 @@
-# Author and save a report
+# Create reports
 
-authorReport() is a method that authors and saves a report.
+authorReport() generates and saves reports derived from an object.
 
 ## Usage
 
@@ -12,16 +12,13 @@ authorReport(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  A Ready4 object or other object for which an appropriate authorReport
+  method exists.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-Either a model module (an instance of a class that inherits from
-Ready4Module) or submodule (any S3 class instance) of the same class as
-that supplied to the method or no return value (when called for
-side-effects only).
+The object returned by the applicable authorReport method.

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Finding Libraries Of Ready4 Modules">
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.20</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,9 +105,10 @@ the repository in which a dataset of readyforwhatsnext module libraries
 is stored.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libraries_tb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_libraries_tb.html">get_libraries_tb</a></span><span class="op">(</span>gh_repo_1L_chr <span class="op">=</span> <span class="st">"ready4-dev/ready4"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/update_libraries_tb.html">update_libraries_tb</a></span><span class="op">(</span>include_1L_chr <span class="op">=</span> <span class="st">"modules"</span>, url_stub_1L_chr <span class="op">=</span> <span class="st">"https://ready4-dev.github.io/"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ⠙ 10 items, page 1 | 3ms</span></span></code></pre>
 <p>In this example, module libraries have been grouped in to the
 following thematic model “sections”.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">libraries_tb</span><span class="op">$</span><span class="va">Section</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "People"    "Places"    "Platforms" "Programs"</span></span></code></pre>
 <p>We can use the <code>print_packages</code> function to display a HTML
@@ -117,7 +118,7 @@ for description, developing models or predicting with models), the name
 and purpose of those libraries, the locations from which development and
 archived library code can be downloaded and details of supporting
 documentation for each library (e.g. website, manuals and examples).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_packages.html">print_packages</a></span><span class="op">(</span><span class="va">libraries_tb</span>, sections_chr <span class="op">=</span> <span class="st">"People"</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -152,19 +153,18 @@ Examples
 Describe and Validate Youth Mental Health Economic Datasets
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/youthvars/authors.html" style="     " class="external-link">Citation</a>
+<a href="https://ready4-dev.github.io/youthvars/authors.html" class="external-link">Citation</a>
 ,
-<a href="https://ready4-dev.github.io/youthvars/index.html" style="     " class="external-link">Website</a>
+<a href="https://ready4-dev.github.io/youthvars/index.html" class="external-link">Website</a>
 ,
-<a href="https://github.com/ready4-dev/youthvars/releases/download/Documentation_0.0/youthvars_User.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/youthvars/releases/download/Documentation_0.0/youthvars_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/youthvars/releases/download/Documentation_0.0/youthvars_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/youthvars/releases/download/Documentation_0.0/youthvars_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/youthvars/" style="     " class="external-link">Dev</a>
-,
-<a href="https://doi.org/10.5281/zenodo.5646550" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/youthvars/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.5646550" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 <a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     " class="external-link">16</a>,
@@ -182,18 +182,16 @@ Describe and Validate Youth Mental Health Economic Datasets
 Score Multi-Attribute Utility Instruments
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/scorz/authors.html" style="     " class="external-link">Citation</a>
-,
-<a href="https://ready4-dev.github.io/scorz/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/scorz/releases/download/Documentation_0.0/scorz_User.pdf" style="     " class="external-link">Manual
+<a href="https://ready4-dev.github.io/scorz/authors.html" class="external-link">Citation</a> ,
+<a href="https://ready4-dev.github.io/scorz/index.html" class="external-link">Website</a> ,
+<a href="https://github.com/ready4-dev/scorz/releases/download/Documentation_0.0/scorz_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/scorz/releases/download/Documentation_0.0/scorz_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/scorz/releases/download/Documentation_0.0/scorz_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/scorz/" style="     " class="external-link">Dev</a> ,
-<a href="https://doi.org/10.5281/zenodo.5722708" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/scorz/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.5722708" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 <a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     " class="external-link">18</a>,
@@ -211,16 +209,14 @@ Score Multi-Attribute Utility Instruments
 Model Youth Choice Behaviours
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/mychoice/authors.html" style="     " class="external-link">Citation</a>
+<a href="https://ready4-dev.github.io/mychoice/authors.html" class="external-link">Citation</a>
+, <a href="https://ready4-dev.github.io/mychoice/index.html" class="external-link">Website</a>
 ,
-<a href="https://ready4-dev.github.io/mychoice/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/mychoice/releases/download/Documentation_0.0/mychoice_Developer.pdf" style="     " class="external-link">Citation</a>
+<a href="https://github.com/ready4-dev/mychoice/releases/download/Documentation_0.0/mychoice_Developer.pdf" class="external-link">Citation</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/mychoice/" style="     " class="external-link">Dev</a>
-,
-<a href="https://doi.org/10.5281/zenodo.7213799" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/mychoice/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.7213799" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -236,18 +232,16 @@ Model Youth Choice Behaviours
 Implement Transfer to Utility Mapping Algorithms
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/TTU/authors.html" style="     " class="external-link">Citation</a>
-,
-<a href="https://ready4-dev.github.io/TTU/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/TTU/releases/download/Documentation_0.0/TTU_User.pdf" style="     " class="external-link">Manual
+<a href="https://ready4-dev.github.io/TTU/authors.html" class="external-link">Citation</a> ,
+<a href="https://ready4-dev.github.io/TTU/index.html" class="external-link">Website</a> ,
+<a href="https://github.com/ready4-dev/TTU/releases/download/Documentation_0.0/TTU_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/TTU/releases/download/Documentation_0.0/TTU_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/TTU/releases/download/Documentation_0.0/TTU_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/TTU/" style="     " class="external-link">Dev</a> ,
-<a href="https://doi.org/10.5281/zenodo.5646593" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/TTU/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.5646593" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 <a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     " class="external-link">20</a>
@@ -264,19 +258,18 @@ Implement Transfer to Utility Mapping Algorithms
 Explore and Characterise Heterogeneity in Quality of Life Data
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/heterodox/authors.html" style="     " class="external-link">Citation</a>
+<a href="https://ready4-dev.github.io/heterodox/authors.html" class="external-link">Citation</a>
 ,
-<a href="https://ready4-dev.github.io/heterodox/index.html" style="     " class="external-link">Website</a>
+<a href="https://ready4-dev.github.io/heterodox/index.html" class="external-link">Website</a>
 ,
-<a href="https://github.com/ready4-dev/heterodox/releases/download/Documentation_0.0/heterodox_User.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/heterodox/releases/download/Documentation_0.0/heterodox_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/heterodox/releases/download/Documentation_0.0/heterodox_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/heterodox/releases/download/Documentation_0.0/heterodox_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/heterodox/" style="     " class="external-link">Dev</a>
-,
-<a href="https://doi.org/10.5281/zenodo.5751193" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/heterodox/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.5751193" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -292,19 +285,17 @@ Explore and Characterise Heterogeneity in Quality of Life Data
 Specify Models to Solve Inverse Problems
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/specific/authors.html" style="     " class="external-link">Citation</a>
+<a href="https://ready4-dev.github.io/specific/authors.html" class="external-link">Citation</a>
+, <a href="https://ready4-dev.github.io/specific/index.html" class="external-link">Website</a>
 ,
-<a href="https://ready4-dev.github.io/specific/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/specific/releases/download/Documentation_0.0/specific_User.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/specific/releases/download/Documentation_0.0/specific_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/specific/releases/download/Documentation_0.0/specific_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/specific/releases/download/Documentation_0.0/specific_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/specific/" style="     " class="external-link">Dev</a>
-,
-<a href="https://doi.org/10.5281/zenodo.5768689" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/specific/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.5768689" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 <a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     " class="external-link">21</a>
@@ -321,18 +312,16 @@ Specify Models to Solve Inverse Problems
 Transform Youth Outcomes to Health Utility Predictions
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/youthu/authors.html" style="     " class="external-link">Citation</a>
-,
-<a href="https://ready4-dev.github.io/youthu/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/youthu/releases/download/Documentation_0.0/youthu_User.pdf" style="     " class="external-link">Manual
+<a href="https://ready4-dev.github.io/youthu/authors.html" class="external-link">Citation</a>
+, <a href="https://ready4-dev.github.io/youthu/index.html" class="external-link">Website</a> ,
+<a href="https://github.com/ready4-dev/youthu/releases/download/Documentation_0.0/youthu_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/youthu/releases/download/Documentation_0.0/youthu_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/youthu/releases/download/Documentation_0.0/youthu_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/youthu/" style="     " class="external-link">Dev</a> ,
-<a href="https://doi.org/10.5281/zenodo.5646668" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/youthu/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.5646668" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 <a href="https://ready4-dev.github.io/youthu/articles/V_01.html" style="     " class="external-link">22</a>
@@ -340,7 +329,7 @@ Transform Youth Outcomes to Health Utility Predictions
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_packages.html">print_packages</a></span><span class="op">(</span><span class="va">libraries_tb</span>, sections_chr <span class="op">=</span> <span class="st">"Places"</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -375,18 +364,16 @@ Examples
 Model Australian Spatial Data
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/aus/authors.html" style="     " class="external-link">Citation</a>
-,
-<a href="https://ready4-dev.github.io/aus/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/aus/releases/download/Documentation_0.0/aus_User.pdf" style="     " class="external-link">Manual
+<a href="https://ready4-dev.github.io/aus/authors.html" class="external-link">Citation</a> ,
+<a href="https://ready4-dev.github.io/aus/index.html" class="external-link">Website</a> ,
+<a href="https://github.com/ready4-dev/aus/releases/download/Documentation_0.0/aus_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/aus/releases/download/Documentation_0.0/aus_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/aus/releases/download/Documentation_0.0/aus_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/aus/" style="     " class="external-link">Dev</a> ,
-<a href="https://doi.org/10.5281/zenodo.7687126" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/aus/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.7687126" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -402,26 +389,24 @@ Model Australian Spatial Data
 Model Spatial Features of Health Systems
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/vicinity/authors.html" style="     " class="external-link">Citation</a>
+<a href="https://ready4-dev.github.io/vicinity/authors.html" class="external-link">Citation</a>
+, <a href="https://ready4-dev.github.io/vicinity/index.html" class="external-link">Website</a>
 ,
-<a href="https://ready4-dev.github.io/vicinity/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/vicinity/releases/download/Documentation_0.0/vicinity_User.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/vicinity/releases/download/Documentation_0.0/vicinity_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/vicinity/releases/download/Documentation_0.0/vicinity_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/vicinity/releases/download/Documentation_0.0/vicinity_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/vicinity/" style="     " class="external-link">Dev</a>
-,
-<a href="https://doi.org/10.5281/zenodo.7623630" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/vicinity/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.7623630" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_packages.html">print_packages</a></span><span class="op">(</span><span class="va">libraries_tb</span>, sections_chr <span class="op">=</span> <span class="st">"Platforms"</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -457,25 +442,23 @@ Implement Simple Microsimulation to Economically Evaluate Mental Health
 Services
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/mimic/authors.html" style="     " class="external-link">Citation</a>
-,
-<a href="https://ready4-dev.github.io/mimic/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/mimic/releases/download/Documentation_0.0/mimic_User.pdf" style="     " class="external-link">Manual
+<a href="https://ready4-dev.github.io/mimic/authors.html" class="external-link">Citation</a> ,
+<a href="https://ready4-dev.github.io/mimic/index.html" class="external-link">Website</a> ,
+<a href="https://github.com/ready4-dev/mimic/releases/download/Documentation_0.0/mimic_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/mimic/releases/download/Documentation_0.0/mimic_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/mimic/releases/download/Documentation_0.0/mimic_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/mimic/" style="     " class="external-link">Dev</a> ,
-<a href="https://github.com/ready4-dev/mimic/" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/mimic/" class="external-link">Dev</a> ,
+<a href="https://github.com/ready4-dev/mimic/" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 </td>
 
 </tbody>
 </table>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/print_packages.html">print_packages</a></span><span class="op">(</span><span class="va">libraries_tb</span>, sections_chr <span class="op">=</span> <span class="st">"Programs"</span><span class="op">)</span></span></code></pre></div>
 <table class="table table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -510,18 +493,16 @@ Examples
 Develop, Use and Share Unit Cost Datasets for Health Economic Analysis
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/costly/authors.html" style="     " class="external-link">Citation</a>
-,
-<a href="https://ready4-dev.github.io/costly/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/costly/releases/download/Documentation_0.0/costly_User.pdf" style="     " class="external-link">Manual
+<a href="https://ready4-dev.github.io/costly/authors.html" class="external-link">Citation</a>
+, <a href="https://ready4-dev.github.io/costly/index.html" class="external-link">Website</a> ,
+<a href="https://github.com/ready4-dev/costly/releases/download/Documentation_0.0/costly_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/costly/releases/download/Documentation_0.0/costly_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/costly/releases/download/Documentation_0.0/costly_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/costly/" style="     " class="external-link">Dev</a> ,
-<a href="https://github.com/ready4-dev/costly/" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/costly/" class="external-link">Dev</a> ,
+<a href="https://github.com/ready4-dev/costly/" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 <a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     " class="external-link">23</a>,
@@ -540,18 +521,17 @@ Develop, Test and Apply Time Series Models for Mental Health Economic
 Analyses
 </td>
 <td style="text-align:left;">
-<a href="https://ready4-dev.github.io/serious/authors.html" style="     " class="external-link">Citation</a>
+<a href="https://ready4-dev.github.io/serious/authors.html" class="external-link">Citation</a>
+, <a href="https://ready4-dev.github.io/serious/index.html" class="external-link">Website</a>
 ,
-<a href="https://ready4-dev.github.io/serious/index.html" style="     " class="external-link">Website</a>
-,
-<a href="https://github.com/ready4-dev/serious/releases/download/Documentation_0.0/serious_User.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/serious/releases/download/Documentation_0.0/serious_User.pdf" class="external-link">Manual
 - Short (PDF)</a> ,
-<a href="https://github.com/ready4-dev/serious/releases/download/Documentation_0.0/serious_Developer.pdf" style="     " class="external-link">Manual
+<a href="https://github.com/ready4-dev/serious/releases/download/Documentation_0.0/serious_Developer.pdf" class="external-link">Manual
 - Full (PDF)</a>
 </td>
 <td style="text-align:left;">
-<a href="https://github.com/ready4-dev/serious/" style="     " class="external-link">Dev</a> ,
-<a href="https://doi.org/10.5281/zenodo.1389431" style="     " class="external-link">Archive</a>
+<a href="https://github.com/ready4-dev/serious/" class="external-link">Dev</a> ,
+<a href="https://doi.org/10.5281/zenodo.1389431" class="external-link">Archive</a>
 </td>
 <td style="text-align:left;">
 </td>
@@ -577,7 +557,7 @@ article</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -88,7 +88,7 @@ print_data(datasets_tb, by_dv_1L_lgl = TRUE)
 #>    <td style="text-align:left;"> Fake Data For Instruction And Illustration </td>
 #>    <td style="text-align:left;"> Fake data used to illustrate toolkits developed with the ready4 open science framework. </td>
 #>    <td style="text-align:left;"> Orygen </td>
-#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/D74QMP" style="     ">1</a>, <a href="https://doi.org/10.7910/DVN/612HDC" style="     ">2</a>, <a href="https://doi.org/10.7910/DVN/HJXYKQ" style="     ">3</a>, <a href="https://doi.org/10.7910/DVN/W95KED" style="     ">4</a>, <a href="https://doi.org/10.7910/DVN/GW7ZKC" style="     ">5</a> </td>
+#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/D74QMP">1</a>, <a href="https://doi.org/10.7910/DVN/612HDC">2</a>, <a href="https://doi.org/10.7910/DVN/HJXYKQ">3</a>, <a href="https://doi.org/10.7910/DVN/W95KED">4</a>, <a href="https://doi.org/10.7910/DVN/GW7ZKC">5</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"><a href="https://dataverse.harvard.edu/dataverse/firstbounce"> firstbounce </a>
@@ -104,7 +104,7 @@ print_data(datasets_tb, by_dv_1L_lgl = TRUE)
 #>    <td style="text-align:left;"> ready4 Framework </td>
 #>    <td style="text-align:left;"> A collection of datasets that support implementation of the ready4 framework for open science computational models of mental health systems. </td>
 #>    <td style="text-align:left;"> Orygen </td>
-#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/RIQTKK" style="     ">6</a> </td>
+#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/RIQTKK">6</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"><a href="https://dataverse.harvard.edu/dataverse/readyforwhatsnext"> readyforwhatsnext </a>
@@ -112,7 +112,7 @@ print_data(datasets_tb, by_dv_1L_lgl = TRUE)
 #>    <td style="text-align:left;"> readyforwhatsnext </td>
 #>    <td style="text-align:left;"> Data collections for the readyforwhatsnext mental health systems model. </td>
 #>    <td style="text-align:left;"> Orygen </td>
-#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/QBZFQV" style="     ">7</a>, <a href="https://doi.org/10.7910/DVN/JHSCDJ" style="     ">8</a> </td>
+#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/QBZFQV">7</a>, <a href="https://doi.org/10.7910/DVN/JHSCDJ">8</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"><a href="https://dataverse.harvard.edu/dataverse/springtides"> springtides </a>
@@ -120,7 +120,7 @@ print_data(datasets_tb, by_dv_1L_lgl = TRUE)
 #>    <td style="text-align:left;"> Springtides </td>
 #>    <td style="text-align:left;"> A ready4 framework model of places. Synthesises geometry (boundary, coordinate) and spatial attribute (e.g. population counts, environmental characteristics, service identifier and model coefficients associated with areas) data. </td>
 #>    <td style="text-align:left;"> Orygen </td>
-#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/V3OKZV" style="     ">9</a> </td>
+#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/V3OKZV">9</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"><a href="https://dataverse.harvard.edu/dataverse/springtolife"> springtolife </a>
@@ -128,7 +128,7 @@ print_data(datasets_tb, by_dv_1L_lgl = TRUE)
 #>    <td style="text-align:left;"> Spring To Life </td>
 #>    <td style="text-align:left;"> A ready4 framework model of people. Models the characteristics, behaviours, relationships and outcomes of groups of individuals relevant to policymakers and service planners aiming to improve population mental health. </td>
 #>    <td style="text-align:left;"> Orygen </td>
-#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/VGPIPS" style="     ">10</a> </td>
+#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/VGPIPS">10</a> </td>
 #>   </tr>
 #>   <tr>
 #>    <td style="text-align:left;"><a href="https://dataverse.harvard.edu/dataverse/TTU"> TTU </a>
@@ -136,7 +136,7 @@ print_data(datasets_tb, by_dv_1L_lgl = TRUE)
 #>    <td style="text-align:left;"> Transfer to Utility </td>
 #>    <td style="text-align:left;"> A collection of transfer to utility datasets developed with the ready4 open science framework. </td>
 #>    <td style="text-align:left;"> Orygen </td>
-#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/DKDIB0" style="     ">11</a> </td>
+#>    <td style="text-align:left;"> <a href="https://doi.org/10.7910/DVN/DKDIB0">11</a> </td>
 #>   </tr>
 #> </tbody>
 #> </table>

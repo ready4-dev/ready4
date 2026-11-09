@@ -1,8 +1,8 @@
-# Enhance a model module by adding new elements
+# Extend an object's structure
 
-enhance() is a method that adds new data fields (columns for tabular
-data, elements for arrays) and values to a model module by transforming
-it into a module of an inheriting class.
+enhance() augments an object by adding new data, properties, components
+or functionality. The resulting object will typically belong to the same
+class or an inheriting class.
 
 ## Usage
 
@@ -14,15 +14,12 @@ enhance(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  An object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module)
-or submodule (any S3 class instance) of the same class as that supplied
-to the method.
+An enhanced version of the supplied object.

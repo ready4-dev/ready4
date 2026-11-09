@@ -1,7 +1,6 @@
-# Procure data from a model module
+# Retrieve information from an object
 
-procure() is a "getter" method that retrieves data contained within a
-model module or sub-module.
+procure() retrieves data, components or metadata from an object.
 
 ## Usage
 
@@ -13,14 +12,12 @@ procure(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  An object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-An object of the same class as that supplied to the method or of one of
-the same classes that constitute the input object's slots or elements.
+The object returned by the applicable procure method.

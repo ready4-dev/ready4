@@ -1,16 +1,18 @@
-# Apply the ratify method to a model module slot
+# Apply the ratify method to a specified slot
 
 ratifySlot() is a convenience method that applies the ratify method to a
-specified slot of a model module.
+specified slot of a Ready4 object and updates the object with the
+result.
 
-ratifySlot method applied to Ready4Module
+Apply the ratify method to the value stored in a specified slot of a
+Ready4 object and assign the resulting value back to that slot.
 
 ## Usage
 
 ``` r
 ratifySlot(x, slot_nm_1L_chr, ...)
 
-# S4 method for class 'Ready4Module'
+# S4 method for class 'Ready4'
 ratifySlot(x, slot_nm_1L_chr, ...)
 ```
 
@@ -18,20 +20,28 @@ ratifySlot(x, slot_nm_1L_chr, ...)
 
 - x:
 
-  An object of class Ready4Module
+  An object that inherits from Ready4.
 
 - slot_nm_1L_chr:
 
-  Slot name (a length one character vector)
+  Name of the slot to which the ratify method should be applied (a
+  character vector of length one).
 
 - ...:
 
-  Additional arguments
+  Additional arguments passed to ratify.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module)
-of the same class as that supplied to the method.
+An updated version of the supplied object.
 
-A ready4 model module (an instance of a class that inherits from
-Ready4Module) of the same class as that supplied to the method.
+An updated version of the supplied object.
+
+## Details
+
+Apply the ratify method to a specified slot of a Ready4 object and
+update the object with the result.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.

@@ -1,7 +1,6 @@
-# Author and document datasets
+# Create and document datasets
 
-authorData() is a method that authors, documents and saves model module
-datasets.
+authorData() creates, documents and saves datasets.
 
 ## Usage
 
@@ -13,16 +12,13 @@ authorData(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  A Ready4 object or other object for which an appropriate authorData
+  method exists.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-Either a model module (an instance of a class that inherits from
-Ready4Module) or submodule (any S3 class instance) of the same class as
-that supplied to the method or no return value (when called for
-side-effects only).
+The object returned by the applicable authorData method.

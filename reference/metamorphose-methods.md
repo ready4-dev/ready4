@@ -1,7 +1,8 @@
-# Metamorphose a model module to a model module of a different (non-inheriting) class
+# Transform a Ready4 object into another Ready4 object
 
-metamorphose() is a method that transforms a model module into a model
-module of a different (non-inheriting) class.
+metamorphose() converts a Ready4 object into a different Ready4 object
+representation. The resulting object will typically belong to a
+different class that is not an inheriting class of the input object.
 
 ## Usage
 
@@ -13,14 +14,13 @@ metamorphose(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module)
+  A Ready4 object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module)
-of a different class to that supplied to the method.
+A Ready4 object representing a transformed version of the supplied
+object.

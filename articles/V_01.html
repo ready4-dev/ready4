@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Implement Modular Computational Health Economic Models">
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.20</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,23 +125,30 @@ to work out what methods should be applied to the class.</p></li>
 <p>As we use the term, a “model module” is comprised of both a
 data-structure (an S4 class) and the algorithms (or “methods”) that are
 associated with that data-structure. Model modules can be created from a
-template - the <code>ready4</code> package’s <code>Ready4Module</code>
+template - the <code>ready4</code> package’s <code>Ready4</code>
 class.</p>
-<p>We can create an object (<code>X</code>) from the
-<code>Ready4Module</code> template using the following command.</p>
+<p>We can create an object (<code>X</code>) from the <code>Ready4</code>
+template using the following command.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Ready4Module-class.html">Ready4Module</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="kw">setClass</span><span class="op">(</span></span>
+<span>  <span class="st">"Ready4Object"</span>,</span>
+<span>  contains <span class="op">=</span> <span class="st">"Ready4"</span>,</span>
+<span>  slots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"character"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>However, if we inspect <code>X</code> we can see it is of limited use
 as it contains no data other than an empty element called
-<code>dissemination_1L_chr</code>.</p>
+<code>test</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Formal class 'Ready4Module' [package "ready4"] with 1 slot</span></span>
-<span><span class="co">##   ..@ dissemination_1L_chr: chr NA</span></span></code></pre>
-<p>The <code>Ready4Module</code> class is therefore not intended to be
-called directly. Instead, the purpose of <code>Ready4Module</code> is to
-be the parent class of other model modules. Prototype tools for
-authoring modules from this template are described <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/" class="external-link">here</a>.</p>
+<pre><code><span><span class="co">## Formal class 'classGeneratorFunction' [package "methods"] with 3 slots</span></span>
+<span><span class="co">##   ..@ .Data    :function (...)  </span></span>
+<span><span class="co">##   ..@ className: chr "Ready4Object"</span></span>
+<span><span class="co">##   .. ..- attr(*, "package")= chr ".GlobalEnv"</span></span>
+<span><span class="co">##   ..@ package  : chr ".GlobalEnv"</span></span></code></pre>
+<p>The <code>Ready4</code> class is therefore not intended to be called
+directly. Instead, the purpose of <code>Ready4</code> is to be the
+parent class of other model modules. Prototype tools for authoring
+modules from this template are described <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/" class="external-link">here</a>.</p>
 <div class="card border-primary mb-3" style="max-width: 20rem;">
 <div class="card-header">
 <p><strong>ready4 Concept</strong></p>
@@ -151,8 +158,8 @@ authoring modules from this template are described <a href="https://www.ready4-d
 <h4 id="module">Module<a class="anchor" aria-label="anchor" href="#module"></a>
 </h4>
 </div>
-<p>An instance of <code>Ready4Module</code> (or classes that inherit
-from <code>Ready4Module</code>) and its associated methods.</p>
+<p>An instance of <code>Ready4</code> (or classes that inherit from
+<code>Ready4</code>) and its associated methods.</p>
 </div>
 </div>
 </div>
@@ -189,7 +196,7 @@ describes, validates and applies algorithms to a slot of a Module.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

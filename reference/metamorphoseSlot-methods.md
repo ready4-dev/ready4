@@ -1,16 +1,17 @@
-# Apply the metamorphose method to a model module slot
+# Apply the metamorphose method to a specified slot
 
 metamorphoseSlot() is a convenience method that applies the metamorphose
-method to a specified slot of a model module.
+method to a specified slot of a Ready4 object.
 
-metamorphoseSlot method applied to Ready4Module
+Apply the metamorphose method to the value stored in a specified slot of
+a Ready4 object.
 
 ## Usage
 
 ``` r
 metamorphoseSlot(x, slot_nm_1L_chr, ...)
 
-# S4 method for class 'Ready4Module'
+# S4 method for class 'Ready4'
 metamorphoseSlot(x, slot_nm_1L_chr, ...)
 ```
 
@@ -18,19 +19,27 @@ metamorphoseSlot(x, slot_nm_1L_chr, ...)
 
 - x:
 
-  An object of class Ready4Module
+  An object that inherits from Ready4.
 
 - slot_nm_1L_chr:
 
-  Slot name (a length one character vector)
+  Name of the slot to which the metamorphose method should be applied (a
+  character vector of length one).
 
 - ...:
 
-  Additional arguments
+  Additional arguments passed to metamorphose.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module).
+The object returned by applying metamorphose to the specified slot.
 
-A ready4 model module (an instance of a class that inherits from
-Ready4Module).
+The object returned by applying metamorphose to the specified slot.
+
+## Details
+
+Apply the metamorphose method to a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.

@@ -1,8 +1,9 @@
-# Author and document classes
+# Create and document classes
 
-authorClasses() is a method that authors and saves R package files for
-creating and documenting classes to describe the data structures of
-model modules.
+authorClasses() creates and documents class definitions.
+
+This generic is primarily maintained for compatibility with legacy
+ready4 package development workflows.
 
 ## Usage
 
@@ -14,16 +15,13 @@ authorClasses(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  A Ready4 object or other object for which an appropriate authorClasses
+  method exists.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-Either a model module (an instance of a class that inherits from
-Ready4Module) or submodule (any S3 class instance) of the same class as
-that supplied to the method or no return value (when called for
-side-effects only).
+The object returned by the applicable authorClasses method.

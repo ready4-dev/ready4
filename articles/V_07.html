@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Provide End Users With A Simple And Consistent Syntax">
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ready4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.20</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,16 +117,15 @@ These generics correspond exactly to the “core”, “slot” and “extended�
 commands described in <a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/" class="external-link">another
 article</a>.</p>
 <p>Notably, the <code>ready4</code> package does not associate any core
-or extended methods with the <code>Ready4Module</code> <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/" class="external-link">template
+or extended methods with the <code>Ready4</code> <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/" class="external-link">template
 module</a>. Instead, model developers need to decide which core and
 extended generics they associate with the modules they derive from the
-<code>Ready4Module</code> template. This decision is typically made when
+<code>Ready4</code> template. This decision is typically made when
 authoring the methods associated with model modules.</p>
-<p>Currently, the only methods defined for <code>Ready4Module</code> are
-<a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/" class="external-link">slot-methods</a>.
+<p>Currently, the only methods defined for <code>Ready4</code> are <a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/" class="external-link">slot-methods</a>.
 By default, these slot methods are inherited by all modules derived from
-the <code>Ready4Module</code> template. These methods can be itemised
-using the <code>get_methods</code> function.</p>
+the <code>Ready4</code> template. These methods can be itemised using
+the <code>get_methods</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_methods.html">get_methods</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "authorSlot"        "characterizeSlot"  "depictSlot"       </span></span>
@@ -146,7 +145,7 @@ using the <code>get_methods</code> function.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -1,7 +1,6 @@
-# Ingest data
+# Import external data
 
-ingest() is a method that ingests data saved in external files into a
-model module or submodule.
+ingest() reads data from external sources into an object.
 
 ## Usage
 
@@ -13,14 +12,12 @@ ingest(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  An object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module)
-or submodule (any S3 class instance).
+The object returned by the applicable ingest method.

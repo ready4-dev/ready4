@@ -1,18 +1,19 @@
-# Procure (get) data from a slot
+# Retrieve the value stored in a specified slot
 
-procureSlot() is a "getter" method that, depending on input arguments,
-retrieves either data contained in a specified model module slot (the
-default behaviour) or the value returned by applying the procure method
-to the specified slot.
+procureSlot() retrieves the value stored in a specified slot of a Ready4
+object. Optionally, the procure method can be applied to the retrieved
+value before it is returned.
 
-procureSlot method applied to Ready4Module
+Retrieve the value stored in a specified slot of a Ready4 object.
+Optionally apply the procure method to the retrieved value before
+returning it.
 
 ## Usage
 
 ``` r
 procureSlot(x, slot_nm_1L_chr, ...)
 
-# S4 method for class 'Ready4Module'
+# S4 method for class 'Ready4'
 procureSlot(x, slot_nm_1L_chr, use_procure_mthd_1L_lgl = FALSE, ...)
 ```
 
@@ -20,34 +21,37 @@ procureSlot(x, slot_nm_1L_chr, use_procure_mthd_1L_lgl = FALSE, ...)
 
 - x:
 
-  An object of class Ready4Module
+  An object that inherits from Ready4.
 
 - slot_nm_1L_chr:
 
-  Slot name (a length one character vector)
+  Name of the slot to retrieve (a character vector of length one).
 
 - ...:
 
-  Additional arguments
+  Additional arguments passed to procure when use_procure_mthd_1L_lgl is
+  TRUE.
 
 - use_procure_mthd_1L_lgl:
 
-  Use procure method (a length one logical vector)
+  Logical indicating whether the procure method should be applied to the
+  slot value before it is returned.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module)
-of the same class as that supplied to the method or an instance of a
-class contained in that Ready4Module's slots.
+The value stored in the specified slot, or the object returned by
+applying procure to that value.
 
-A ready4 model module (an instance of a class that inherits from
-Ready4Module) of the same class as that supplied to the method or an
-instance of a class contained in that Ready4Module's slots.
+The value stored in the specified slot, or the object returned by
+applying procure to that value.
 
-## Examples
+## Details
 
-``` r
-X <- Ready4Module()
-procureSlot(X, "dissemination_1L_chr")
-#> [1] NA
-```
+Retrieve the value stored in a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.
+
+procureSlot and renewSlot provide the core slot access mechanisms used
+by many Ready4 slot methods.

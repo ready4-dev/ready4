@@ -1,16 +1,17 @@
-# Apply the author method to a model module slot
+# Apply the author method to a specified slot
 
 authorSlot() is a convenience method that applies the author method to a
-specified slot of a model module.
+specified slot of a Ready4 object.
 
-authorSlot method applied to Ready4Module
+Apply the author method to the value stored in a specified slot of a
+Ready4 object.
 
 ## Usage
 
 ``` r
 authorSlot(x, slot_nm_1L_chr, ...)
 
-# S4 method for class 'Ready4Module'
+# S4 method for class 'Ready4'
 authorSlot(x, slot_nm_1L_chr, ...)
 ```
 
@@ -18,22 +19,27 @@ authorSlot(x, slot_nm_1L_chr, ...)
 
 - x:
 
-  An object of class Ready4Module
+  An object that inherits from Ready4.
 
 - slot_nm_1L_chr:
 
-  Slot name (a length one character vector)
+  Name of the slot to which the author method should be applied (a
+  character vector of length one).
 
 - ...:
 
-  Additional arguments
+  Additional arguments passed to author.
 
 ## Value
 
-Either a model module (an instance of a class that inherits from
-Ready4Module) of the same class as that supplied to the method or no
-value (when called for side effects only).
+The object returned by applying author to the specified slot.
 
-Either a ready4 model module (an instance of a class that inherits from
-Ready4Module) of the same class as that supplied to the method or no
-value (when called for side effects only).
+The object returned by applying author to the specified slot.
+
+## Details
+
+Apply the author method to a specified slot of a Ready4 object.
+
+The Ready4 class itself is slotless. This method is therefore intended
+primarily for classes that inherit from Ready4 and define one or more
+slots.

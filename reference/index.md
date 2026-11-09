@@ -2,6 +2,9 @@
 
 ## S4 Classes
 
+- [`Ready4-class`](https://ready4-dev.github.io/ready4/reference/Ready4-class.md)
+  [`Ready4`](https://ready4-dev.github.io/ready4/reference/Ready4-class.md)
+  : Ready4 Class
 - [`Ready4Module-class`](https://ready4-dev.github.io/ready4/reference/Ready4Module-class.md)
   [`Ready4Module`](https://ready4-dev.github.io/ready4/reference/Ready4Module-class.md)
   : Ready4Module
@@ -63,106 +66,103 @@
 ## Generics
 
 - [`author()`](https://ready4-dev.github.io/ready4/reference/author-methods.md)
-  : Author and save files
+  : Create and save reusable artefacts
 - [`authorClasses()`](https://ready4-dev.github.io/ready4/reference/authorClasses-methods.md)
-  : Author and document classes
+  : Create and document classes
 - [`authorData()`](https://ready4-dev.github.io/ready4/reference/authorData-methods.md)
-  : Author and document datasets
+  : Create and document datasets
 - [`authorFunctions()`](https://ready4-dev.github.io/ready4/reference/authorFunctions-methods.md)
-  : Author and document functions
+  : Create and document functions
 - [`authorReport()`](https://ready4-dev.github.io/ready4/reference/authorReport-methods.md)
-  : Author and save a report
+  : Create reports
 - [`authorSlot()`](https://ready4-dev.github.io/ready4/reference/authorSlot-methods.md)
-  : Apply the author method to a model module slot
+  : Apply the author method to a specified slot
 - [`characterize()`](https://ready4-dev.github.io/ready4/reference/characterize-methods.md)
-  : Characterize model module data by generating (tabular) descriptive
-  statistics
+  : Generate descriptive summaries
 - [`characterizeSlot()`](https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.md)
-  : Apply the characterize method to a model module slot
+  : Apply the characterize method to a specified slot
 - [`depict()`](https://ready4-dev.github.io/ready4/reference/depict-methods.md)
-  : Depict (plot) features of model module data
+  : Visualise object features
 - [`depictSlot()`](https://ready4-dev.github.io/ready4/reference/depictSlot-methods.md)
-  : Apply the depict method to a model module slot
+  : Apply the depict method to a specified slot
 - [`enhance()`](https://ready4-dev.github.io/ready4/reference/enhance-methods.md)
-  : Enhance a model module by adding new elements
+  : Extend an object's structure
 - [`enhanceSlot()`](https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.md)
-  : Apply the enhance method to a model module slot
+  : Apply the enhance method to a specified slot
 - [`exhibit()`](https://ready4-dev.github.io/ready4/reference/exhibit-methods.md)
-  : Exhibit features of model module data by printing them to the R
-  console
+  : Display object contents
 - [`exhibitSlot()`](https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.md)
-  : Apply the exhibit method to a model module slot
+  : Apply the exhibit method to a specified slot
 - [`ingest()`](https://ready4-dev.github.io/ready4/reference/ingest-methods.md)
-  : Ingest data
+  : Import external data
 - [`ingestSlot()`](https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.md)
-  : Apply the ingest method to a model module slot
+  : Apply the ingest method to a specified slot
 - [`investigate()`](https://ready4-dev.github.io/ready4/reference/investigate-methods.md)
-  : Investigate solutions to an inverse problem
+  : Investigate inverse problems
 - [`investigateSlot()`](https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.md)
-  : Apply the investigate method to a model module slot
+  : Apply the investigate method to a specified slot
 - [`manufacture()`](https://ready4-dev.github.io/ready4/reference/manufacture-methods.md)
-  : Manufacture a new object
+  : Create a derived object
 - [`manufactureSlot()`](https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.md)
-  : Apply the manufacture method to a model module slot
+  : Apply the manufacture method to a specified slot
 - [`metamorphose()`](https://ready4-dev.github.io/ready4/reference/metamorphose-methods.md)
-  : Metamorphose a model module to a model module of a different
-  (non-inheriting) class
+  : Transform a Ready4 object into another Ready4 object
 - [`metamorphoseSlot()`](https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.md)
-  : Apply the metamorphose method to a model module slot
+  : Apply the metamorphose method to a specified slot
 - [`procure()`](https://ready4-dev.github.io/ready4/reference/procure-methods.md)
-  : Procure data from a model module
+  : Retrieve information from an object
 - [`procureSlot()`](https://ready4-dev.github.io/ready4/reference/procureSlot-methods.md)
-  : Procure (get) data from a slot
+  : Retrieve the value stored in a specified slot
 - [`prognosticate()`](https://ready4-dev.github.io/ready4/reference/prognosticate-methods.md)
-  : Prognosticate (make predictions) by solving a forward problem
+  : Generate predictions
 - [`prognosticateSlot()`](https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.md)
-  : Apply the prognosticate method to a model module slot
+  : Apply the prognosticate method to a specified slot
 - [`ratify()`](https://ready4-dev.github.io/ready4/reference/ratify-methods.md)
-  : Ratify that input or output data meet validity criteria
+  : Validate and reconcile object contents
 - [`ratifySlot()`](https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.md)
-  : Apply the ratify method to a model module slot
+  : Apply the ratify method to a specified slot
 - [`reckon()`](https://ready4-dev.github.io/ready4/reference/reckon-methods.md)
-  : Reckon (calculate) a value
+  : Compute derived quantities
 - [`reckonSlot()`](https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.md)
-  : Apply the reckon method to a model module slot
+  : Apply the reckon method to a specified slot
 - [`renew()`](https://ready4-dev.github.io/ready4/reference/renew-methods.md)
-  : Renew (update) values
+  : Update object contents
 - [`renewSlot()`](https://ready4-dev.github.io/ready4/reference/renewSlot-methods.md)
-  : Renew (set) the values of data in a module slot
+  : Update the value stored in a specified slot
 - [`share()`](https://ready4-dev.github.io/ready4/reference/share-methods.md)
-  : Share data via an online repository
+  : Share data or outputs
 - [`shareSlot()`](https://ready4-dev.github.io/ready4/reference/shareSlot-methods.md)
-  : Apply the share method to a model module slot
+  : Apply the share method to a specified slot
 
 ## Methods
 
 - [`authorSlot()`](https://ready4-dev.github.io/ready4/reference/authorSlot-methods.md)
-  : Apply the author method to a model module slot
+  : Apply the author method to a specified slot
 - [`characterizeSlot()`](https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.md)
-  : Apply the characterize method to a model module slot
+  : Apply the characterize method to a specified slot
 - [`depictSlot()`](https://ready4-dev.github.io/ready4/reference/depictSlot-methods.md)
-  : Apply the depict method to a model module slot
+  : Apply the depict method to a specified slot
 - [`enhanceSlot()`](https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.md)
-  : Apply the enhance method to a model module slot
+  : Apply the enhance method to a specified slot
 - [`exhibitSlot()`](https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.md)
-  : Apply the exhibit method to a model module slot
+  : Apply the exhibit method to a specified slot
 - [`ingestSlot()`](https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.md)
-  : Apply the ingest method to a model module slot
+  : Apply the ingest method to a specified slot
 - [`investigateSlot()`](https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.md)
-  : Apply the investigate method to a model module slot
+  : Apply the investigate method to a specified slot
 - [`manufactureSlot()`](https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.md)
-  : Apply the manufacture method to a model module slot
+  : Apply the manufacture method to a specified slot
 - [`metamorphoseSlot()`](https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.md)
-  : Apply the metamorphose method to a model module slot
+  : Apply the metamorphose method to a specified slot
 - [`procureSlot()`](https://ready4-dev.github.io/ready4/reference/procureSlot-methods.md)
-  : Procure (get) data from a slot
+  : Retrieve the value stored in a specified slot
 - [`prognosticateSlot()`](https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.md)
-  : Apply the prognosticate method to a model module slot
+  : Apply the prognosticate method to a specified slot
 - [`ratifySlot()`](https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.md)
-  : Apply the ratify method to a model module slot
+  : Apply the ratify method to a specified slot
 - [`reckonSlot()`](https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.md)
-  : Apply the reckon method to a model module slot
+  : Apply the reckon method to a specified slot
 - [`renewSlot()`](https://ready4-dev.github.io/ready4/reference/renewSlot-methods.md)
-  : Renew (set) the values of data in a module slot
+  : Update the value stored in a specified slot
 - [`shareSlot()`](https://ready4-dev.github.io/ready4/reference/shareSlot-methods.md)
-  : Apply the share method to a model module slot
+  : Apply the share method to a specified slot

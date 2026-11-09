@@ -1,9 +1,7 @@
-# Ratify that input or output data meet validity criteria
+# Validate and reconcile object contents
 
-ratify() is a method that validates that a model module or submodule
-conforms to specified internal consistency criteria, potentially
-updating the invalid values in the model module so that these criteria
-are met.
+ratify() assesses whether an object satisfies specified validity
+criteria and may update the object so that those criteria are met.
 
 ## Usage
 
@@ -15,15 +13,12 @@ ratify(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  An object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module)
-or submodule (any S3 class instance) of the same class as that supplied
-to the method.
+An updated version of the supplied object.

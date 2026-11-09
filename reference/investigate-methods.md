@@ -1,8 +1,7 @@
-# Investigate solutions to an inverse problem
+# Investigate inverse problems
 
-investigate() is a method that applies an algorithm to data contained in
-a model module in order to solve an inverse problem (ie, identify a
-statistical model that can generate approximations of that data).
+investigate() applies methods for inferring models, structures or
+generating mechanisms from observed data.
 
 ## Usage
 
@@ -14,14 +13,12 @@ investigate(x, ...)
 
 - x:
 
-  A model module (an instance of a class that inherits from
-  Ready4Module) or submodule (any S3 class instance)
+  An object.
 
 - ...:
 
-  Additional arguments
+  Additional arguments.
 
 ## Value
 
-A model module (an instance of a class that inherits from Ready4Module)
-or submodule (any S3 class instance).
+The object returned by the applicable investigate method.
