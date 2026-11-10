@@ -4,6 +4,11 @@ get_gracefully() attempts to retrieve objects from the internet but
 returns NULL and an informative message if there is no internet
 connection or the specified resource could not be found.
 
+When fn is readRDS, files are first downloaded to a temporary file
+before being read. This approach is more robust for resources hosted on
+services such as GitHub releases.#' @param url_1L_chr Url (a character
+vector of length one)
+
 ## Usage
 
 ``` r
@@ -17,10 +22,6 @@ get_gracefully(
 ```
 
 ## Arguments
-
-- url_1L_chr:
-
-  Url (a character vector of length one)
 
 - args_ls:
 
