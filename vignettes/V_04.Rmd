@@ -39,7 +39,7 @@ We can use the `print_packages` function to display a HTML summary of the module
 print_packages(libraries_tb, sections_chr = "People")
 ```
 
-```{r eval = !is.null(libraries_tb) echo = FALSE}
+```{r eval = !is.null(libraries_tb), echo = FALSE}
 # print_packages(libraries_tb, sections_chr = "Places")
 ```
 
