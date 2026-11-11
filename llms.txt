@@ -57,14 +57,20 @@ devtools::install_github("ready4-dev/ready4")
   : Get a value from a lookup table
 - [`get_gracefully()`](https://ready4-dev.github.io/ready4/reference/get_gracefully.md)
   : Get data from the internet with graceful failure
+- [`get_href()`](https://ready4-dev.github.io/ready4/reference/get_href.md)
+  : Get hyperlink URL
 - [`get_libraries_tb()`](https://ready4-dev.github.io/ready4/reference/get_libraries_tb.md)
   : Get a table of ready4 libraries
+- [`get_link_text()`](https://ready4-dev.github.io/ready4/reference/get_link_text.md)
+  : Get hyperlink text
 - [`get_methods()`](https://ready4-dev.github.io/ready4/reference/get_methods.md)
   : Get the methods associated with a ready4 model module
 - [`get_methods_tb()`](https://ready4-dev.github.io/ready4/reference/get_methods_tb.md)
   : Get a table of methods associated with ready4 model modules
 - [`get_modules_tb()`](https://ready4-dev.github.io/ready4/reference/get_modules_tb.md)
   : Get a table of ready4 model modules
+- [`get_pkgdown_classes_tb()`](https://ready4-dev.github.io/ready4/reference/get_pkgdown_classes_tb.md)
+  : Extract class metadata from a pkgdown reference index
 - [`make_code_releases_tbl()`](https://ready4-dev.github.io/ready4/reference/make_code_releases_tbl.md)
   : Make a tabular summary of release history of ready4 code libraries
   and executables

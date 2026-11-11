@@ -32,27 +32,17 @@ Libraries (a tibble)
 
 ``` r
 get_libraries_tb("ready4-dev/ready4")
-#> # A tibble: 18 × 14
-#>    pt_ns_chr   Type     Section Link  Library Vignettes Reference Vignettes_URLs
-#>    <chr>       <chr>    <chr>   <chr> <chr>   <list>    <list>    <list>        
-#>  1 ready4use   Authori… Framew… http… "<a hr… <chr [4]> <int [2]> <chr [4]>     
-#>  2 ready4show  Authori… Framew… http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
-#>  3 ready4fun   Authori… Framew… http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
-#>  4 ready4class Authori… Framew… http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
-#>  5 ready4pack  Authori… Framew… http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
-#>  6 ready4      Foundat… Framew… http… "<a hr… <chr [7]> <int [2]> <chr [7]>     
-#>  7 youthvars   Descrip… People  http… "<a hr… <chr [2]> <int [2]> <chr [2]>     
-#>  8 scorz       Descrip… People  http… "<a hr… <chr [2]> <int [2]> <chr [2]>     
-#>  9 mychoice    Modelli… People  http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
-#> 10 TTU         Modelli… People  http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
-#> 11 heterodox   Modelli… People  http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
-#> 12 specific    Modelli… People  http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
-#> 13 youthu      Predict… People  http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
-#> 14 aus         Modelli… Places  http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
-#> 15 vicinity    Modelli… Places  http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
-#> 16 mimic       Modelli… Platfo… http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
-#> 17 costly      Modelli… Progra… http… "<a hr… <chr [2]> <int [2]> <chr [2]>     
-#> 18 serious     Modelli… Progra… http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
+#> # A tibble: 8 × 14
+#>   pt_ns_chr  Type       Section Link  Library Vignettes Reference Vignettes_URLs
+#>   <chr>      <chr>      <chr>   <chr> <chr>   <list>    <list>    <list>        
+#> 1 ready4show Authoring… Framew… http… "<a hr… <chr [1]> <int [2]> <chr [1]>     
+#> 2 ready4use  Authoring… Framew… http… "<a hr… <chr [4]> <int [2]> <chr [4]>     
+#> 3 ready4     Foundation Framew… http… "<a hr… <chr [7]> <int [2]> <chr [7]>     
+#> 4 scorz      Descripti… People  http… "<a hr… <chr [2]> <int [2]> <chr [2]>     
+#> 5 youthvars  Descripti… People  http… "<a hr… <chr [2]> <int [2]> <chr [2]>     
+#> 6 replica    Modelling… People  http… "<a hr… <chr [4]> <int [2]> <chr [4]>     
+#> 7 mimic      Modelling… Progra… http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
+#> 8 serious    Modelling… Progra… http… "<a hr… <chr [1]> <int [1]> <chr [1]>     
 #> # ℹ 6 more variables: Citation <chr>, manual_urls_ls <list>,
 #> #   code_urls_ls <list>, Authors <chr>, Title <chr>, DOI_chr <chr>
 ```

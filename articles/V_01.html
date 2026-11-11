@@ -125,30 +125,31 @@ to work out what methods should be applied to the class.</p></li>
 <p>As we use the term, a “model module” is comprised of both a
 data-structure (an S4 class) and the algorithms (or “methods”) that are
 associated with that data-structure. Model modules can be created from a
-template - the <code>ready4</code> package’s <code>Ready4</code>
-class.</p>
-<p>We can create an object (<code>X</code>) from the <code>Ready4</code>
-template using the following command.</p>
+template - the <code>ready4</code> package’s <code>Ready4</code> class.
+<code>Ready4</code> is a virtual class - it cannot be used directly to
+create objects. However, it can be used to create other classes that
+inherit the syntax defined for <code>Ready4</code>.</p>
+<p>In the below example, we create a new inheriting class
+(<code>ExampleClass</code>) from <code>Ready4</code> using the following
+command.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="kw">setClass</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">ExampleClass</span> <span class="op">&lt;-</span> <span class="kw">setClass</span><span class="op">(</span></span>
 <span>  <span class="st">"Ready4Object"</span>,</span>
 <span>  contains <span class="op">=</span> <span class="st">"Ready4"</span>,</span>
-<span>  slots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"character"</span><span class="op">)</span></span>
+<span>  slots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>data <span class="op">=</span> <span class="st">"character"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>However, if we inspect <code>X</code> we can see it is of limited use
-as it contains no data other than an empty element called
-<code>test</code>.</p>
+<p>The new class we have created can be used to create objects, for
+example <code>X</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Formal class 'classGeneratorFunction' [package "methods"] with 3 slots</span></span>
-<span><span class="co">##   ..@ .Data    :function (...)  </span></span>
-<span><span class="co">##   ..@ className: chr "Ready4Object"</span></span>
-<span><span class="co">##   .. ..- attr(*, "package")= chr ".GlobalEnv"</span></span>
-<span><span class="co">##   ..@ package  : chr ".GlobalEnv"</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">ExampleClass</span><span class="op">(</span>data <span class="op">=</span> <span class="st">"Some data"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">X</span><span class="op">@</span><span class="va">data</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "Some data"</span></span></code></pre>
 <p>The <code>Ready4</code> class is therefore not intended to be called
 directly. Instead, the purpose of <code>Ready4</code> is to be the
-parent class of other model modules. Prototype tools for authoring
-modules from this template are described <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/" class="external-link">here</a>.</p>
+parent class of model modules developed with the ready4 framework.
+Prototype tools for authoring modules from this template are described
+<a href="https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/" class="external-link">here</a>.</p>
 <div class="card border-primary mb-3" style="max-width: 20rem;">
 <div class="card-header">
 <p><strong>ready4 Concept</strong></p>

@@ -11,6 +11,7 @@ get_cls_extensions(
   pkg_extensions_tb,
   gh_repo_1L_chr = "ready4-dev/ready4",
   gh_tag_1L_chr = "Documentation_0.0",
+  source_1L_chr = c("pkgdown", "rds"),
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   validate_1L_lgl = FALSE
 )
@@ -31,6 +32,11 @@ get_cls_extensions(
 
   Github tag (a character vector of length one), Default:
   'Documentation_0.0'
+
+- source_1L_chr:
+
+  Source (a character vector of length one), Default: c('pkgdown',
+  'rds')
 
 - url_stub_1L_chr:
 

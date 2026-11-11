@@ -33,17 +33,17 @@ Methods (a tibble)
 ``` r
 get_methods_tb("ready4-dev/ready4")
 #> # A tibble: 34 × 3
-#>    Method           Purpose                                             Examples
-#>    <chr>            <chr>                                               <list>  
-#>  1 author           Author and save files                               <chr>   
-#>  2 authorClasses    Author and document classes                         <chr>   
-#>  3 authorData       Author and document datasets                        <chr>   
-#>  4 authorFunctions  Author and document functions                       <chr>   
-#>  5 authorReport     Author and save a report                            <chr>   
-#>  6 authorSlot       Apply the author method to a model module slot      <chr>   
-#>  7 characterize     Characterize model module data by generating (tabu… <chr>   
-#>  8 characterizeSlot Apply the characterize method to a model module sl… <chr>   
-#>  9 depict           Depict (plot) features of model module data         <chr>   
-#> 10 depictSlot       Apply the depict method to a model module slot      <chr>   
+#>    Method           Purpose                                           Examples 
+#>    <chr>            <chr>                                             <list>   
+#>  1 author           Create and save reusable artefacts                <chr [1]>
+#>  2 authorClasses    Create and document classes                       <chr [1]>
+#>  3 authorData       Create and document datasets                      <chr [1]>
+#>  4 authorFunctions  Create and document functions                     <chr [1]>
+#>  5 authorReport     Create reports                                    <chr [1]>
+#>  6 authorSlot       Apply the author method to a specified slot       <chr [1]>
+#>  7 characterize     Generate descriptive summaries                    <chr [1]>
+#>  8 characterizeSlot Apply the characterize method to a specified slot <chr [1]>
+#>  9 depict           Visualise object features                         <chr [6]>
+#> 10 depictSlot       Apply the depict method to a specified slot       <chr [1]>
 #> # ℹ 24 more rows
 ```

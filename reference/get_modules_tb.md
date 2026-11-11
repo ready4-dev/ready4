@@ -32,18 +32,15 @@ Modules (a tibble)
 
 ``` r
 get_modules_tb("ready4-dev/ready4")
-#> # A tibble: 70 × 5
-#>    Class     Description                          Library Examples old_class_lgl
-#>    <list>    <chr>                                <chr>   <list>   <lgl>        
-#>  1 <chr [1]> Meta data for processing ACT popula… "<a hr… <chr>    FALSE        
-#>  2 <chr [1]> Meta data for constructing Headspac… "<a hr… <chr>    FALSE        
-#>  3 <chr [1]> Lookup tables for Australian geomet… "<a hr… <chr>    FALSE        
-#>  4 <chr [1]> Meta data for constructing OYH Spec… "<a hr… <chr>    FALSE        
-#>  5 <chr [1]> Meta data for constructing custom A… "<a hr… <chr>    FALSE        
-#>  6 <chr [1]> Meta data for processing Tasmanian … "<a hr… <chr>    FALSE        
-#>  7 <chr [1]> Collection of input, standards defi… "<a hr… <chr>    FALSE        
-#>  8 <chr [1]> Collection of input, standards defi… "<a hr… <chr>    FALSE        
-#>  9 <chr [1]> Collection of input, standards defi… "<a hr… <chr>    FALSE        
-#> 10 <chr [1]> Original (non-standardised) dataset… "<a hr… <chr>    FALSE        
-#> # ℹ 60 more rows
+#> # A tibble: 8 × 5
+#>   Class     Description                           Library Examples old_class_lgl
+#>   <list>    <chr>                                 <chr>   <list>   <lgl>        
+#> 1 <chr [1]> An S4 class for assigning attributes… "<a hr… <chr>    FALSE        
+#> 2 <chr [1]> Coordinates the generation of synthe… "<a hr… <chr>    FALSE        
+#> 3 <chr [1]> Represents a household structure use… "<a hr… <chr>    FALSE        
+#> 4 <chr [1]> A dataset and metadata to support im… "<a hr… <chr>    FALSE        
+#> 5 <chr [1]> A dataset and metadata to support im… "<a hr… <chr>    FALSE        
+#> 6 <chr [1]> A dataset and metadata to support im… "<a hr… <chr>    FALSE        
+#> 7 <chr [1]> A dataset and metadata to support im… "<a hr… <chr>    FALSE        
+#> 8 <chr [1]> A dataset to be scored, its associat… "<a hr… <chr>    FALSE        
 ```
