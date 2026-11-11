@@ -60,7 +60,7 @@ Finally, there are a small number of other commands that are more general extens
 
 ```{r}
 print_methods(x,
-              exclude_mthds_for_chr = "Ready4Module",
+              exclude_mthds_for_chr = "Ready4",
               return_1L_chr = "extended",
               scroll_width_1L_chr = "100%")
 ```

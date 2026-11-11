@@ -59,6 +59,7 @@ get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_
 #' @param pkg_extensions_tb Package extensions (a tibble)
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
 #' @param gh_tag_1L_chr Github tag (a character vector of length one), Default: 'Documentation_0.0'
+#' @param source_1L_chr Source (a character vector of length one), Default: c('pkgdown', 'rds')
 #' @param url_stub_1L_chr Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'
 #' @param validate_1L_lgl Validate (a logical vector of length one), Default: FALSE
 #' @return Class extensions (a tibble)
@@ -72,24 +73,60 @@ get_badges_lup <- function (ends_with_1L_chr = "ready4_badges_lup.RDS", gh_repo_
 #' @importFrom stringi stri_replace_last_fixed
 #' @keywords internal
 get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/ready4",
-    gh_tag_1L_chr = "Documentation_0.0", url_stub_1L_chr = "https://ready4-dev.github.io/",
+    gh_tag_1L_chr = "Documentation_0.0",
+    source_1L_chr = c("pkgdown", "rds"),
+    url_stub_1L_chr = "https://ready4-dev.github.io/",
     validate_1L_lgl = FALSE)
 {
-    cls_extensions_tb <- NULL
-    dmt_urls_xx <- get_gracefully(NULL, fn = piggyback::pb_download_url,
-        args_ls = list(repo = gh_repo_1L_chr, tag = gh_tag_1L_chr,
-            .token = ""), not_chr_1L_lgl = FALSE)
+  source_1L_chr <- match.arg(source_1L_chr)
+  cls_extensions_tb <- NULL
+
+  if (source_1L_chr == "pkgdown") {
+
+    cls_extensions_tb <- pkg_extensions_tb$pt_ns_chr %>%
+      unique() %>%
+      purrr::map_dfr(
+        ~ get_pkgdown_classes_tb(
+          pkg_nm_1L_chr = .x,
+          url_stub_1L_chr = url_stub_1L_chr
+        )
+      )
+
+  } else {
+
+    dmt_urls_xx <- get_gracefully(
+      NULL,
+      fn = piggyback::pb_download_url,
+      args_ls = list(
+        repo = gh_repo_1L_chr,
+        tag = gh_tag_1L_chr,
+        .token = ""
+      ),
+      not_chr_1L_lgl = FALSE
+    )
+
     if (!is.null(dmt_urls_xx)) {
-        dmt_urls_chr <- dmt_urls_xx
-        cls_extensions_tb <- get_gracefully(dmt_urls_chr[dmt_urls_chr %>%
-            endsWith("classes_lup.RDS")], not_chr_1L_lgl = TRUE)
+
+      dmt_urls_chr <- dmt_urls_xx
+
+      cls_extensions_tb <- get_gracefully(
+        dmt_urls_chr[
+          endsWith(
+            dmt_urls_chr,
+            "classes_lup.RDS"
+          )
+        ],
+        not_chr_1L_lgl = TRUE
+      )
+
     }
+    cls_extensions_tb <- cls_extensions_tb %>% tibble::as_tibble() %>%
+      dplyr::filter(.data$pt_ns_chr %in%  pkg_extensions_tb$pt_ns_chr) %>%
+      dplyr::select("type_chr", "pt_ns_chr", "old_class_lgl")
+  }
     if (!is.null(cls_extensions_tb)) {
-        cls_extensions_tb <- cls_extensions_tb %>% tibble::as_tibble() %>%
-            dplyr::arrange(.data$pt_ns_chr) %>% dplyr::filter(.data$pt_ns_chr %in%
-            pkg_extensions_tb$pt_ns_chr) %>% dplyr::arrange(.data$pt_ns_chr) %>%
-            dplyr::select("type_chr", "pt_ns_chr", "old_class_lgl")
-        if (validate_1L_lgl) {
+        cls_extensions_tb <- cls_extensions_tb %>% dplyr::arrange(.data$pt_ns_chr)
+        if (source_1L_chr != "pkgdown" & validate_1L_lgl) {
             cls_extensions_tb <- cls_extensions_tb$pt_ns_chr %>%
                 unique() %>% purrr::map_dfr(~{
                 url_1L_chr <- paste0(url_stub_1L_chr, .x, "/reference/index",
@@ -97,8 +134,14 @@ get_cls_extensions <- function (pkg_extensions_tb, gh_repo_1L_chr = "ready4-dev/
                 allowable_xx <- get_gracefully(url_1L_chr, fn = rvest::read_html,
                   not_chr_1L_lgl = TRUE)
                 if (!is.null(allowable_xx)) {
-                  allowable_chr <- allowable_xx %>% rvest::html_elements("a") %>%
+                  # allowable_chr <- allowable_xx %>% rvest::html_elements("a") %>%
+                  #   rvest::html_text2()
+                  allowable_chr <- allowable_xx %>%
+                    rvest::html_elements(
+                      "a[href*='reference/']"
+                    ) %>%
                     rvest::html_text2()
+
                   allowable_chr <- allowable_chr[(allowable_chr %>%
                     endsWith("-class") | allowable_chr %>% startsWith(.x)) &
                     allowable_chr != .x] %>% stringi::stri_replace_last_fixed("-class",
@@ -208,27 +251,64 @@ get_dv_fls_urls <- function (file_nms_chr, dv_ds_nm_1L_chr, dv_url_pfx_1L_chr = 
 #' @importFrom stringr str_match str_detect
 #' @importFrom rvest read_html html_elements html_text2
 #' @keywords internal
-get_examples <- function (vignettes_chr, term_1L_chr)
+get_examples <- function(vignettes_chr,
+                         term_1L_chr)
 {
-    if (is.na(vignettes_chr[1])) {
-        examples_chr <- ""
-    }
-    else {
-        examples_chr <- vignettes_chr %>% purrr::map_chr(~{
-            code_xx <- get_gracefully((.x %>% stringr::str_match("href=\"\\s*(.*?)\\s*\" style"))[,
-                2], fn = rvest::read_html, not_chr_1L_lgl = TRUE)
-            if (!is.null(code_xx)) {
-                code_chr <- code_xx %>% rvest::html_elements(".r") %>%
-                  rvest::html_text2()
-                ifelse(stringr::str_detect(paste0(code_chr, collapse = "/n"),
-                  paste0(term_1L_chr, "\\(")), .x, NA_character_)
-            }
-        }) %>% purrr::discard(is.na)
-        if (identical(character(0), examples_chr))
-            examples_chr <- ""
-    }
-    return(examples_chr)
+  if (is.na(vignettes_chr[1])) {
+
+    examples_chr <- ""
+
+  } else {
+
+    examples_chr <- vignettes_chr %>%
+      purrr::map_chr(~{
+
+        vignette_url <- stringr::str_match(
+          .x,
+          'href="([^"]+)"'
+        )[, 2]
+
+        code_xx <- get_gracefully(
+          vignette_url,
+          fn = rvest::read_html,
+          not_chr_1L_lgl = TRUE
+        )
+
+        if (!is.null(code_xx)) {
+
+          code_chr <- code_xx %>%
+            rvest::html_elements( "pre code, .sourceCode code") %>%
+            rvest::html_text2()
+
+          ifelse(
+            stringr::str_detect(
+              paste(code_chr,
+                    collapse = "\n"),
+              paste0(term_1L_chr,
+                     "\\(")
+            ),
+            .x,
+            NA_character_
+          )
+
+        } else {
+
+          NA_character_
+
+        }
+
+      }) %>%
+      purrr::discard(is.na)
+
+    if (identical(character(0),
+                  examples_chr))
+      examples_chr <- ""
+
+  }
+
+  return(examples_chr)
 }
+
 #' Get excluded repositories
 #' @description get_excluded_repos() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get excluded repositories. The function returns Exclude (a character vector).
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
@@ -658,6 +738,26 @@ get_gracefully <- function(url_1L_chr,
   return(object_xx)
 
 }
+
+#'
+#' Get hyperlink URL
+#'
+#' @description Extract the URL from an HTML anchor tag.
+#'
+#' @param x A character vector of length one containing an HTML anchor tag.
+#'
+#' @return A character vector of length one.
+#'
+#' @rdname get_href
+#' @export
+get_href <- function(x)
+{
+  stringr::str_match(
+    x,
+    'href="([^"]+)"'
+  )[, 2]
+}
+
 #' Get libraries list
 #' @description get_libraries_ls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get libraries list. The function returns Libraries (a list).
 #' @param gh_repo_1L_chr Github repository (a character vector of length one), Default: 'ready4-dev/ready4'
@@ -706,6 +806,26 @@ get_libraries_tb <- function (gh_repo_1L_chr = "ready4-dev/ready4", gh_tag_1L_ch
     }
     return(libraries_tb)
 }
+
+#'
+#' Get hyperlink text
+#'
+#' @description Extract the displayed text from an HTML anchor tag.
+#'
+#' @param x A character vector of length one containing an HTML anchor tag.
+#'
+#' @return A character vector of length one.
+#'
+#' @rdname get_link_text
+#' @export
+get_link_text <- function(x)
+{
+  stringr::str_match(
+    x,
+    ">([^<]+)</a>"
+  )[, 2]
+}
+
 #' Get manual urls
 #' @description get_manual_urls() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get manual urls. The function returns Urls (a character vector).
 #' @param pkg_nm_1L_chr Package name (a character vector of length one), Default: 'ready4'
@@ -831,6 +951,139 @@ get_mthd_titles <- function (mthd_nms_chr, pkg_nm_1L_chr = "ready4", path_1L_chr
     })
     return(mthd_titles_chr)
 }
+
+#'
+#' Extract class metadata from a pkgdown reference index
+#'
+#' @description
+#' get_pkgdown_classes_tb() extracts S3 and S4 class names from a pkgdown
+#' reference index page and returns the results in a standardised tibble.
+#'
+#' S3 classes are identified from entries listed under the "S3 Classes"
+#' heading and are recorded with old_class_lgl set to TRUE. S4 classes
+#' are identified from entries listed under the "S4 Classes" heading
+#' and are recorded with old_class_lgl set to FALSE.
+#'
+#' @param pkg_nm_1L_chr Package name (a character vector of length one).
+#' @param url_stub_1L_chr URL stub (a character vector of length one),
+#' Default: "https://ready4-dev.github.io/".
+#'
+#' @return A tibble with three columns:
+#' \describe{
+#'   \item{type_chr}{Class name.}
+#'   \item{pt_ns_chr}{Package name.}
+#'   \item{old_class_lgl}{Logical indicator of class type. TRUE denotes
+#'   an S3 class and FALSE denotes an S4 class.}
+#' }
+#'
+#' @details
+#' The function constructs a pkgdown reference index URL of the form:
+#'
+#' \code{paste0(url_stub_1L_chr, pkg_nm_1L_chr, "/reference/index.html")}
+#'
+#' and extracts class metadata from the "S3 Classes" and "S4 Classes"
+#' sections of that page.
+#'
+#' @rdname get_pkgdown_classes_tb
+#' @export
+#'
+#' @importFrom rvest read_html html_elements html_text2
+#' @importFrom stringr str_remove
+#' @importFrom tibble tibble
+#' @examples
+#' \dontrun{
+#' get_pkgdown_classes_tb("ready4use")
+#' get_pkgdown_classes_tb("replica")
+#' }
+#'
+get_pkgdown_classes_tb <- function(pkg_nm_1L_chr,
+                                   url_stub_1L_chr =
+                                     "https://ready4-dev.github.io/")
+{
+
+  url_1L_chr <- paste0(
+    url_stub_1L_chr,
+    pkg_nm_1L_chr,
+    "/reference/index.html"
+  )
+
+  html_xx <- get_gracefully(
+    url_1L_chr,
+    fn = rvest::read_html,
+    not_chr_1L_lgl = TRUE
+  )
+
+  if (is.null(html_xx))
+    return(NULL)
+
+  h2_nodes <- html_xx %>%
+    rvest::html_elements("h2")
+
+  h2_titles_chr <- h2_nodes %>%
+    rvest::html_text2()
+
+  s3_idx <- which(
+    h2_titles_chr == "S3 Classes"
+  )
+
+  s4_idx <- which(
+    h2_titles_chr == "S4 Classes"
+  )
+
+  s3_chr <- character(0)
+
+  s4_chr <- character(0)
+
+  if (length(s3_idx) == 1) {
+
+    s3_chr <- xml2::xml_parent(
+      h2_nodes[s3_idx]
+    ) %>%
+      xml2::xml_siblings() %>%
+      .[2] %>%
+      rvest::html_elements("dt") %>%
+      purrr::map_chr(
+        ~ .x %>%
+          rvest::html_element("a") %>%
+          rvest::html_text2()
+      ) %>%
+      stringr::str_remove("\\(\\)$")
+
+
+  }
+
+  if (length(s4_idx) == 1) {
+
+    s4_chr <- xml2::xml_parent(
+      h2_nodes[s4_idx]
+    ) %>%
+      xml2::xml_siblings() %>%
+      .[4] %>%
+      rvest::html_elements("a") %>%
+      rvest::html_text2() %>%
+      stringr::str_subset("-class$") %>%
+      stringr::str_remove("-class$")
+
+  }
+
+  dplyr::bind_rows(
+
+    tibble::tibble(
+      type_chr = s3_chr,
+      pt_ns_chr = pkg_nm_1L_chr,
+      old_class_lgl = TRUE
+    ),
+
+    tibble::tibble(
+      type_chr = s4_chr,
+      pt_ns_chr = pkg_nm_1L_chr,
+      old_class_lgl = FALSE
+    )
+
+  )
+
+}
+
 #' Get ready4 module object slots
 #' @description get_r4_obj_slots() is a Get function that extracts data from an object. Specifically, this function implements an algorithm to get ready4 module object slots. The function returns Slots (a character vector).
 #' @param fn_name_1L_chr Function name (a character vector of length one)

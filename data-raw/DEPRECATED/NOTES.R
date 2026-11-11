@@ -10,6 +10,57 @@ Z <- Ready4useRepos(dv_nm_1L_chr = "ready4fw",
                     dv_server_1L_chr = "dataverse.harvard.edu",
                     dv_ds_nm_1L_chr = "https://doi.org/10.7910/DVN/RIQTKK") %>%
   ingest()
+################### VERSION 2 ############################
+
+additions_tb <- make_additions_tb(category_chr = "Framework",
+                                  library_chr = Y@b_Ready4useIngest@objects_ls$libraries_ls$Framework[c(1,5:6)],
+                                  type_chr = c("Foundation",
+                                               "Authoring (analysis reports)","Authoring (model datasets)"),
+                                  url_stub_1L_chr = "https://ready4-dev.github.io/")
+module_libraries_ls <- list(People = list(names_chr = c("replica", "youthvars", "scorz"
+                                                        # , "specific","TTU", "youthu", "mychoice", "heterodox"
+                                                        ),
+                                          descriptions_chr = c("Modelling (synthetic populations)", "Description (variable validation)", "Description (variable scoring)"
+                                                               # ,"Modelling (inverse problems)", "Modelling (health utility)", "Prediction (health utility)", "Modelling (choice)", "Modelling (heterogeneity)"
+                                                               )),
+                            # Places = list(names_chr = c("vicinity", "aus"),
+                            #               descriptions_chr = c("Modelling (spatial data)", "Modelling (Australian data)")),
+                            # Platforms = list(names_chr = c("mimic"),
+                            #                  descriptions_chr = c("Modelling (microsimulation)")),
+                            Programs = list(names_chr = c(# "bimp",
+                              # "costly",
+                              "mimic",
+                              "serious"),
+                              descriptions_chr = c(
+                                # "Modelling (budget impact)",
+                                # "Modelling (costs)",
+                                "Modelling (microsimulation)",
+                                "Modelling (time series)")))
+extras_tb <- module_libraries_ls  %>%
+  purrr::map2_dfr(names(module_libraries_ls),
+                  ~make_additions_tb(library_chr = .x$names_chr,
+                                     category_chr = .y,
+                                     type_chr = .x$descriptions_chr))
+additions_tb <- dplyr::bind_rows(additions_tb, extras_tb)
+libraries_tb <- make_libraries_tb(additions_tb, include_1L_chr = "all")
+methods_tb <- make_methods_tb(libraries_tb, path_1L_chr = ".")
+modules_tb <- make_modules_tb(libraries_tb,
+                              url_stub_1L_chr = "https://ready4-dev.github.io/")
+
+write_env_objs_to_dv(env_objects_ls = list(libraries_tb = libraries_tb,
+                                           methods_tb = methods_tb,
+                                           modules_tb = modules_tb),
+                     consent_1L_chr = "Y",
+                     consent_indcs_int = 1L,
+                     descriptions_chr = NULL,
+                     ds_url_1L_chr = character(0),
+                     options_chr = c("Y", "N"),
+                     piggyback_desc_1L_chr = "Supplementary Files",
+                     piggyback_tag_1L_chr = Y@a_Ready4usePointer@b_Ready4useRepos@gh_tag_1L_chr,
+                     piggyback_to_1L_chr = Y@a_Ready4usePointer@b_Ready4useRepos@gh_repo_1L_chr,
+                     prerelease_1L_lgl = T)
+
+################### DEPRECATED VERSION 1 ############################
 #subroutine_repos_chr <- c("mychoice_results" ,"ttu_mdl_ctlg","ms_tmpl","ttu_lng_ss")
 #exclude_chr <- "rebuild"
 #libraries_tb <- Y@b_Ready4useIngest@objects_ls$libraries_tb
@@ -17,9 +68,11 @@ Z <- Ready4useRepos(dv_nm_1L_chr = "ready4fw",
 #modules_tb <- make_modules_tb()
 additions_tb <- make_additions_tb("Framework",
                                   make_framework_pkgs_chr(),
-                                  c("Foundation","Authoring (module functions)","Authoring (module classes)","Authoring (module libraries)","Authoring (model datasets)","Authoring (analysis programs)"))
-module_libraries_ls <- list(People = list(names_chr = c("youthvars", "scorz", "specific","TTU", "youthu", "mychoice", "heterodox"),
-                                          descriptions_chr = c("Description (datasets)", "Description (variable scoring)", "Modelling (inverse problems)", "Modelling (health utility)", "Prediction (health utility)", "Modelling (choice)", "Modelling (heterogeneity)")),
+                                  c("Foundation", "Authoring (module functions)","Authoring (module classes)","Authoring (module libraries)","Authoring (model datasets)","Authoring (analysis programs)"))
+module_libraries_ls <- list(People = list(names_chr = c( "youthvars", "scorz" , "specific","TTU", "youthu", "mychoice", "heterodox"
+                                                        ),
+                                          descriptions_chr = c("Description (variables)", "Description (variable scoring)","Modelling (inverse problems)", "Modelling (health utility)", "Prediction (health utility)", "Modelling (choice)", "Modelling (heterogeneity)"
+                                                               )),
                             Places = list(names_chr = c("aus", "vicinity"),
                                           descriptions_chr = c("Modelling (Australian spatial)", "Modelling (spatial)")),
                             Platforms = list(names_chr = c("mimic"),
