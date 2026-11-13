@@ -39,44 +39,18 @@ methods::setMethod(
            use_procure_mthd_1L_lgl = FALSE,
            ...) {
 
-    slot_nms_chr <- methods::slotNames(x)
+    # 1. Validate the complete path
+    validate_slot_path(x, slot_nm_1L_chr)
 
-    if (length(slot_nms_chr) == 0) {
+    # 2. Extract the nested slot value
+    slot_path_chr <- strsplit(slot_nm_1L_chr, "@", fixed = TRUE)[[1]]
+    y_xx <- x
 
-      stop(
-        paste0(
-          class(x)[1],
-          " does not define any slots. ",
-          "procureSlot can only be used on classes that inherit from ",
-          "Ready4 and define one or more slots."
-        ),
-        call. = FALSE
-      )
-
+    for (current_slot_chr in slot_path_chr) {
+      y_xx <- methods::slot(y_xx, current_slot_chr)
     }
 
-    if (!slot_nm_1L_chr %in% slot_nms_chr) {
-
-      stop(
-        paste0(
-          "'",
-          slot_nm_1L_chr,
-          "' is not a slot of class ",
-          class(x)[1],
-          ". Available slots are: ",
-          paste(slot_nms_chr,
-                collapse = ", ")
-        ),
-        call. = FALSE
-      )
-
-    }
-
-    y_xx <- methods::slot(
-      x,
-      slot_nm_1L_chr
-    )
-
+    # 3. Optionally procure
     if (use_procure_mthd_1L_lgl) {
 
       y_xx <- procure(

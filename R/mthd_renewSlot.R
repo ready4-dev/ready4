@@ -39,41 +39,10 @@ methods::setMethod(
            new_val_xx = "use_renew_mthd",
            ...) {
 
-    slot_nms_chr <- methods::slotNames(x)
+    # 1. Validate the complete path
+    validate_slot_path(x, slot_nm_1L_chr)
 
-    if (length(slot_nms_chr) == 0) {
-
-      stop(
-        paste0(
-          class(x)[1],
-          " does not define any slots. ",
-          "renewSlot can only be used on classes that inherit from ",
-          "Ready4 and define one or more slots."
-        ),
-        call. = FALSE
-      )
-
-    }
-
-    if (!slot_nm_1L_chr %in% slot_nms_chr) {
-
-      stop(
-        paste0(
-          "'",
-          slot_nm_1L_chr,
-          "' is not a slot of class ",
-          class(x)[1],
-          ". Available slots are: ",
-          paste(
-            slot_nms_chr,
-            collapse = ", "
-          )
-        ),
-        call. = FALSE
-      )
-
-    }
-
+    # 2. Determine the new value to assign
     if (identical(
       new_val_xx,
       "use_renew_mthd"
@@ -89,10 +58,33 @@ methods::setMethod(
 
     }
 
-    methods::slot(
-      x,
-      slot_nm_1L_chr
-    ) <- new_val_xx
+    # 3. Handle single vs nested slot assignment
+    slot_path_chr <- strsplit(slot_nm_1L_chr, "@", fixed = TRUE)[[1]]
+    n_slots <- length(slot_path_chr)
+
+    if (n_slots == 1) {
+
+      methods::slot(x, slot_path_chr[1]) <- new_val_xx
+
+    } else {
+
+      # Walk down the tree and store intermediate objects
+      objs <- list(x)
+      for (i in 1:(n_slots - 1)) {
+        objs[[i + 1]] <- methods::slot(objs[[i]], slot_path_chr[i])
+      }
+
+      # Assign the new value to the deepest slot
+      methods::slot(objs[[n_slots]], slot_path_chr[n_slots]) <- new_val_xx
+
+      # Walk backwards up the tree to re-insert the modified objects
+      for (i in (n_slots - 1):1) {
+        methods::slot(objs[[i]], slot_path_chr[i]) <- objs[[i + 1]]
+      }
+
+      x <- objs[[1]]
+
+    }
 
     return(x)
 

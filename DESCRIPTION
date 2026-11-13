@@ -40,6 +40,7 @@ Collate:
     'fn_rowbind.R'
     'fn_transform.R'
     'fn_update.R'
+    'fn_validate.R'
     'fn_write.R'
     'grp_generics.R'
     'imp_fns.R'
